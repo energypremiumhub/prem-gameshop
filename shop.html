@@ -11,17 +11,20 @@
             box-sizing: border-box;
             font-family: Arial, Helvetica, sans-serif;
         }
+
         body {
             background: #0b0e1a;
             color: #fff;
-            padding: 10px;
+            padding: 16px;
             padding-bottom: 80px;
         }
+
         .container {
             max-width: 500px;
             margin: 0 auto;
         }
 
+        /* Top Bar */
         .topbar {
             display: flex;
             align-items: center;
@@ -44,66 +47,86 @@
             width: 50px;
         }
 
-        .grid {
+        /* Section Title */
+        .section-title {
+            font-size: 1.2rem;
+            color: #f5c842;
+            margin-bottom: 15px;
+            border-left: 4px solid #f5c842;
+            padding-left: 12px;
+        }
+
+        /* ===== LIST STYLE (ပုံထဲကပုံစံ) ===== */
+        .package-list {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 10px;
             margin-bottom: 25px;
         }
 
-        .grid .card {
-            flex: 0 0 calc(33.333% - 10px);
+        .package-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             background: #141b2b;
-            border-radius: 10px;
-            padding: 12px 8px;
-            text-align: center;
+            border-radius: 12px;
+            padding: 14px 16px;
             border: 1px solid #1f2a3f;
             transition: 0.2s;
             cursor: pointer;
         }
 
-        @media (max-width: 420px) {
-            .grid .card {
-                flex: 0 0 calc(50% - 10px);
-            }
+        .package-item:active {
+            transform: scale(0.98);
+            border-color: #f5c842;
         }
 
-        .grid .card:active {
-            transform: scale(0.96);
+        .package-item .info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
         }
 
-        .card .name {
-            font-size: 0.7rem;
+        .package-item .info .name {
+            font-size: 0.8rem;
             font-weight: 600;
             color: #fff;
         }
-        .card .bonus {
-            font-size: 0.55rem;
+
+        .package-item .info .badge {
+            font-size: 0.6rem;
             color: #64ffda;
         }
-        .card .price {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: #f5c842;
-            margin: 4px 0;
+
+        .package-item .right {
+            text-align: right;
         }
 
-        .btn {
+        .package-item .right .price {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #f5c842;
+        }
+
+        .package-item .right .btn {
             background: #f5c842;
             color: #0b0e1a;
             border: none;
-            padding: 4px 12px;
+            padding: 4px 14px;
             border-radius: 20px;
             font-weight: 700;
-            font-size: 0.55rem;
+            font-size: 0.6rem;
             cursor: pointer;
             transition: 0.15s;
+            margin-top: 4px;
         }
-        .btn:active {
+
+        .package-item .right .btn:active {
             transform: scale(0.90);
             background: #dbaa2a;
         }
 
+        /* Footer */
         .footer {
             text-align: center;
             margin-top: 25px;
@@ -155,33 +178,111 @@
 
 <div class="container">
 
+    <!-- Top Bar -->
     <div class="topbar">
         <a href="index.html" class="back-btn">← Home</a>
-        <span class="shop-title">🛒 Shop</span>
+        <span class="shop-title">💎 Shop</span>
         <span class="spacer"></span>
     </div>
 
-    <!-- Bundles -->
-    <div class="grid">
-        <div class="card"><div class="name">Monthly Epic</div><div class="bonus">275+★180</div><div class="price">17,200 Ks</div><button class="btn">Buy</button></div>
-        <div class="card"><div class="name">Weekly Elite</div><div class="bonus">55+★20</div><div class="price">3,350 Ks</div><button class="btn">Buy</button></div>
-        <div class="card"><div class="name">Weekly Pass</div><div class="price">6,500 Ks</div><button class="btn">Buy</button></div>
-        <div class="card"><div class="name">11 Dia</div><div class="price">1,000 Ks</div><button class="btn">Buy</button></div>
-        <div class="card"><div class="name">22 Dia</div><div class="price">1,750 Ks</div><button class="btn">Buy</button></div>
+    <!-- ===== BUNDLES ===== -->
+    <div class="section-title">🎁 Bundles</div>
+    <div class="package-list">
+        <div class="package-item">
+            <div class="info">
+                <div class="name">Monthly Epic</div>
+                <div class="badge">+ ★180 Bonus</div>
+            </div>
+            <div class="right">
+                <div class="price">17,200 Ks</div>
+                <button class="btn">Buy</button>
+            </div>
+        </div>
+
+        <div class="package-item">
+            <div class="info">
+                <div class="name">Weekly Elite</div>
+                <div class="badge">+ ★20 Bonus</div>
+            </div>
+            <div class="right">
+                <div class="price">3,350 Ks</div>
+                <button class="btn">Buy</button>
+            </div>
+        </div>
+
+        <div class="package-item">
+            <div class="info">
+                <div class="name">Weekly Pass</div>
+            </div>
+            <div class="right">
+                <div class="price">6,500 Ks</div>
+                <button class="btn">Buy</button>
+            </div>
+        </div>
     </div>
 
-    <!-- Diamonds -->
-    <div class="grid">
-        <div class="card"><div class="name">33 Dia</div><div class="price">2,500 Ks</div><button class="btn">Buy</button></div>
-        <div class="card"><div class="name">44 Dia</div><div class="price">3,300 Ks</div><button class="btn">Buy</button></div>
-        <div class="card"><div class="name">56 Dia</div><div class="price">4,000 Ks</div><button class="btn">Buy</button></div>
-        <div class="card"><div class="name">86 Dia</div><div class="price">5,500 Ks</div><button class="btn">Buy</button></div>
-        <div class="card"><div class="name">112 Dia</div><div class="price">7,800 Ks</div><button class="btn">Buy</button></div>
-        <div class="card"><div class="name">172 Dia</div><div class="price">10,700 Ks</div><button class="btn">Buy</button></div>
-        <div class="card"><div class="name">257 Dia</div><div class="price">15,900 Ks</div><button class="btn">Buy</button></div>
-        <div class="card"><div class="name">343 Dia</div><div class="price">21,100 Ks</div><button class="btn">Buy</button></div>
-        <div class="card"><div class="name">429 Dia</div><div class="price">26,600 Ks</div><button class="btn">Buy</button></div>
-        <div class="card"><div class="name">514 Dia</div><div class="price">31,200 Ks</div><button class="btn">Buy</button></div>
+    <!-- ===== DIAMONDS ===== -->
+    <div class="section-title">💎 Diamonds</div>
+    <div class="package-list">
+        <div class="package-item">
+            <div class="info"><div class="name">11 Diamonds</div></div>
+            <div class="right"><div class="price">1,000 Ks</div><button class="btn">Buy</button></div>
+        </div>
+
+        <div class="package-item">
+            <div class="info"><div class="name">22 Diamonds</div></div>
+            <div class="right"><div class="price">1,750 Ks</div><button class="btn">Buy</button></div>
+        </div>
+
+        <div class="package-item">
+            <div class="info"><div class="name">33 Diamonds</div></div>
+            <div class="right"><div class="price">2,500 Ks</div><button class="btn">Buy</button></div>
+        </div>
+
+        <div class="package-item">
+            <div class="info"><div class="name">44 Diamonds</div></div>
+            <div class="right"><div class="price">3,300 Ks</div><button class="btn">Buy</button></div>
+        </div>
+
+        <div class="package-item">
+            <div class="info"><div class="name">56 Diamonds</div></div>
+            <div class="right"><div class="price">4,000 Ks</div><button class="btn">Buy</button></div>
+        </div>
+
+        <div class="package-item">
+            <div class="info"><div class="name">86 Diamonds</div></div>
+            <div class="right"><div class="price">5,500 Ks</div><button class="btn">Buy</button></div>
+        </div>
+
+        <div class="package-item">
+            <div class="info"><div class="name">112 Diamonds</div></div>
+            <div class="right"><div class="price">7,800 Ks</div><button class="btn">Buy</button></div>
+        </div>
+
+        <div class="package-item">
+            <div class="info"><div class="name">172 Diamonds</div></div>
+            <div class="right"><div class="price">10,700 Ks</div><button class="btn">Buy</button></div>
+        </div>
+
+        <div class="package-item">
+            <div class="info"><div class="name">257 Diamonds</div></div>
+            <div class="right"><div class="price">15,900 Ks</div><button class="btn">Buy</button></div>
+        </div>
+
+        <div class="package-item">
+            <div class="info"><div class="name">343 Diamonds</div></div>
+            <div class="right"><div class="price">21,100 Ks</div><button class="btn">Buy</button></div>
+        </div>
+
+        <div class="package-item">
+            <div class="info"><div class="name">429 Diamonds</div></div>
+            <div class="right"><div class="price">26,600 Ks</div><button class="btn">Buy</button></div>
+        </div>
+
+        <div class="package-item">
+            <div class="info"><div class="name">514 Diamonds</div></div>
+            <div class="right"><div class="price">31,200 Ks</div><button class="btn">Buy</button></div>
+        </div>
     </div>
 
     <div class="footer">
@@ -189,7 +290,7 @@
     </div>
 </div>
 
-<!-- Bottom Navigation -->
+<!-- Bottom Nav -->
 <div class="bottom-nav">
     <a href="index.html" class="nav-item">
         <span class="icon">🏠</span>
