@@ -19,8 +19,6 @@
             --gold: #f5c842;
             --orange: #f97316;
             --green: #22d3ee;
-            --wave: #0066cc;
-            --kpay: #00a651;
         }
 
         body.light {
@@ -59,22 +57,19 @@
         .page-header p{color:var(--text2);font-size:0.8rem;margin-top:2px}
 
         .glass-card{background:var(--bg3);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:0 4px 25px var(--shadow)}
-        .glass-card .label{font-size:0.7rem;color:var(--text2);font-weight:600;display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px}
+        .glass-card .label{font-size:0.7rem;color:var(--text2);font-weight:600;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
 
+        /* ===== Payment Account - 🏦 Icon ===== */
         .payment-account{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:12px;border:1px solid var(--border);margin-bottom:10px;transition:all 0.3s ease;background:var(--bg)}
         .payment-account:active{transform:scale(0.97)}
-        .payment-account .icon-box{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;font-weight:700;border:1px solid var(--border)}
-        .payment-account .icon-box.wave{background:rgba(0,102,204,0.12);color:#0066cc;border-color:rgba(0,102,204,0.15)}
-        .payment-account .icon-box.kpay{background:rgba(0,166,81,0.12);color:#00a651;border-color:rgba(0,166,81,0.15)}
-        .payment-account .icon-box .wave-text{font-size:1rem}
-        .payment-account .icon-box .kpay-text{font-size:0.8rem;font-weight:800}
+        .payment-account .icon-box{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;background:var(--bg3);border:1px solid var(--border)}
         .payment-account .info{flex:1}
-        .payment-account .info .name{font-size:0.85rem;font-weight:600;color:var(--text)}
-        .payment-account .info .number{font-size:0.75rem;color:var(--text2);margin-top:2px}
-        .payment-account .info .number i{margin-right:4px;color:var(--green)}
-        .payment-account .info .holder{font-size:0.65rem;color:var(--green);margin-top:2px;opacity:0.8}
+        .payment-account .info .name{font-size:1rem;font-weight:700;color:var(--text)}
+        .payment-account .info .name .badge{font-size:0.55rem;color:var(--green);background:rgba(34,211,238,0.08);padding:2px 10px;border-radius:12px;margin-left:8px;font-weight:500}
+        .payment-account .info .number{font-size:0.8rem;color:var(--text2);margin-top:3px}
+        .payment-account .info .number i{margin-right:6px;color:var(--green)}
 
-        .copy-btn{background:var(--bg);border:1px solid var(--border);color:var(--text2);padding:4px 12px;border-radius:16px;font-size:0.55rem;cursor:pointer;transition:all 0.3s ease;font-weight:600}
+        .copy-btn{background:var(--bg);border:1px solid var(--border);color:var(--text2);padding:5px 14px;border-radius:16px;font-size:0.6rem;cursor:pointer;transition:all 0.3s ease;font-weight:600}
         .copy-btn:active{transform:scale(0.90);background:var(--gold);color:#0a0e1a}
         .copy-btn.copied{background:rgba(34,211,238,0.15);border-color:var(--green);color:var(--green)}
 
@@ -85,19 +80,20 @@
         .instruction-item .text strong{color:var(--text)}
 
         .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:8px 0 12px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -4px 25px var(--shadow)}
-        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text2);transition:all 0.3s ease;padding:4px 10px;border-radius:10px;position:relative}
-        .bottom-nav .nav-item:active{transform:scale(0.88)}
-        .bottom-nav .nav-item .icon{font-size:1.3rem;display:block}
-        .bottom-nav .nav-item .label{font-size:0.45rem;margin-top:2px;font-weight:600;letter-spacing:0.5px}
+        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text2);transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);padding:4px 10px;border-radius:10px;position:relative}
+        .bottom-nav .nav-item:active{transform:scale(0.85)}
+        .bottom-nav .nav-item .icon{font-size:1.3rem;display:block;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)}
+        .bottom-nav .nav-item .label{font-size:0.45rem;margin-top:2px;font-weight:600;letter-spacing:0.5px;transition:all 0.3s ease}
         .bottom-nav .nav-item.active{color:var(--gold)}
-        .bottom-nav .nav-item.active .icon{transform:translateY(-2px)}
+        .bottom-nav .nav-item.active .icon{transform:translateY(-4px) scale(1.1)}
+        .bottom-nav .nav-item.active .label{color:var(--gold)}
         .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:20px;height:2px;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:10px}
+        .bottom-nav .nav-item:hover .icon{transform:translateY(-2px)}
 
         .footer-text{text-align:center;color:var(--text2);font-size:0.55rem;margin-top:16px;opacity:0.5}
-        @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-        .payment-account{animation:fadeUp 0.4s ease}
-        .payment-account:nth-child(1){animation-delay:0.05s}
-        .payment-account:nth-child(2){animation-delay:0.10s}
+        .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--bg3);padding:12px 24px;border-radius:14px;border:1px solid var(--border);color:var(--gold);font-weight:600;font-size:0.8rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 4px 30px var(--shadow);animation:fadeUp 0.4s ease}
+        .toast.show{display:block}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
     </style>
 </head>
 <body>
@@ -113,32 +109,33 @@
         <p>Send payment to one of the following accounts</p>
     </div>
 
+    <!-- Wave Pay -->
     <div class="glass-card">
         <span class="label">📱 Mobile Money</span>
         <div class="payment-account">
-            <div class="icon-box wave"><span class="wave-text"><i class="fas fa-wifi"></i></span></div>
+            <div class="icon-box">🏦</div>
             <div class="info">
-                <div class="name">Wave Pay</div>
+                <div class="name">Wave Pay <span class="badge">Recommended</span></div>
                 <div class="number"><i class="fas fa-phone"></i> 09682506493</div>
-                <div class="holder">👤 Thein Zaw Oo</div>
             </div>
             <button class="copy-btn" onclick="copyNumber('09682506493', this)">Copy</button>
         </div>
     </div>
 
+    <!-- KBZ Pay -->
     <div class="glass-card">
         <span class="label">🏦 KBZ Bank</span>
         <div class="payment-account">
-            <div class="icon-box kpay"><span class="kpay-text">KBZ</span></div>
+            <div class="icon-box">🏦</div>
             <div class="info">
                 <div class="name">KBZ Pay (Kpay)</div>
                 <div class="number"><i class="fas fa-phone"></i> 09682506493</div>
-                <div class="holder">👤 DAW THIN WUTT YEE</div>
             </div>
             <button class="copy-btn" onclick="copyNumber('09682506493', this)">Copy</button>
         </div>
     </div>
 
+    <!-- How to Pay -->
     <div class="glass-card">
         <span class="label">📋 How to Pay</span>
         <div class="instruction-list">
@@ -158,6 +155,7 @@
     <a href="payment.html" class="nav-item active"><span class="icon">💳</span><span class="label">Payment</span></a>
     <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label">Profile</span></a>
 </div>
+<div class="toast" id="toast"></div>
 
 <script>
     function copyNumber(number, btn) {
@@ -177,6 +175,14 @@
             setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2500);
         });
     }
+
+    function showToast(msg) {
+        const toast = document.getElementById('toast');
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
     if (localStorage.getItem('theme') === 'light') {
         document.body.classList.add('light');
     }
