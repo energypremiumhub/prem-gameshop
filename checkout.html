@@ -121,7 +121,6 @@
         @keyframes shimmer{0%,100%{transform:translate(0,0)}50%{transform:translate(-20%,-20%)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
-        /* ===== ORDER SUCCESS OVERLAY ===== */
         .order-success{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(15px);display:none;z-index:500;align-items:center;justify-content:center;padding:20px;flex-direction:column;text-align:center}
         .order-success.show{display:flex;animation:fadeIn 0.5s ease}
         .order-success .icon{font-size:4rem;color:var(--green);margin-bottom:16px;animation:scaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)}
@@ -215,7 +214,6 @@
     </div>
 </div>
 
-<!-- ===== ORDER SUCCESS OVERLAY ===== -->
 <div class="order-success" id="orderSuccess">
     <div class="icon">✅</div>
     <h2 id="successTitle">Order Submitted!</h2>
@@ -337,7 +335,6 @@
         t._timer = setTimeout(() => t.classList.remove('show'), 3000);
     }
 
-    // ===== COPY =====
     function copyNumber(number, btn) {
         navigator.clipboard.writeText(number).then(() => {
             btn.textContent = getText('copied');
@@ -356,12 +353,10 @@
         });
     }
 
-    // ===== GET PACKAGE FROM URL =====
     const urlParams = new URLSearchParams(window.location.search);
     document.getElementById('selectedPackage').textContent = urlParams.get('package') || 'Monthly Epic Bundle';
     document.getElementById('selectedPrice').textContent = urlParams.get('price') || '17,200 Ks';
 
-    // ===== PAYMENT SELECTION =====
     let selectedPayment = null;
     document.querySelectorAll('.payment-option').forEach(el => {
         el.addEventListener('click', function() {
@@ -375,7 +370,6 @@
         });
     });
 
-    // ===== FILE UPLOAD =====
     const fileInput = document.getElementById('fileInput');
     const fileUpload = document.getElementById('fileUpload');
     const fileName = document.getElementById('fileName');
@@ -386,6 +380,15 @@
             fileName.classList.add('show');
         }
     });
+
+    function readFileAsBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
+    }
 
     // ===== SUBMIT ORDER =====
     document.getElementById('submitBtn').addEventListener('click', async function() {
@@ -409,37 +412,11 @@
         const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
         const userName = currentUser.username || 'Guest';
 
-        // Read image as base64
         let imageBase64 = '';
         if (hasFile) {
             imageBase64 = await readFileAsBase64(fileInput.files[0]);
         }
 
-        // Save order to localStorage
-        const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
-        orders.unshift({
-            id: orderId,
-            userId: currentUser.username || 'guest',
-            package: pkg,
-            price: price,
-            gameId: gameId,
-            serverId: serverId,
-            payment: paymentName,
-            date: new Date().toISOString(),
-            status: 'pending'
-        });
-        localStorage.setItem('orderHistory', JSON.stringify(orders));
-
-        // ===== SEND NOTIFICATION TO OTHER PAGES =====
-        localStorage.setItem('newOrderNotification', JSON.stringify({
-            show: true,
-            orderId: orderId,
-            message: d.notiNewOrder
-        }));
-        // Trigger storage event for other tabs
-        window.dispatchEvent(new Event('storage'));
-
-        // ===== SEND TO TELEGRAM =====
         const message = `
 🛒 **NEW ORDER!**
 
@@ -454,7 +431,8 @@
         `;
 
         try {
-            await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            // 1. Send message to Telegram
+            const msgResponse = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -464,9 +442,13 @@
                 })
             });
 
-            // Send photo to Telegram (with caption)
+            if (!msgResponse.ok) {
+                throw new Error('Telegram message failed');
+            }
+
+            // 2. Send photo to Telegram
             if (imageBase64) {
-                await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`, {
+                const photoResponse = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -475,29 +457,46 @@
                         caption: `📸 Payment Slip for Order #${orderId}`
                     })
                 });
+
+                if (!photoResponse.ok) {
+                    throw new Error('Telegram photo failed');
+                }
             }
 
-            // Show success
+            // 3. ONLY SAVE ORDER IF TELEGRAM SUCCEEDED
+            const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+            orders.unshift({
+                id: orderId,
+                userId: currentUser.username || 'guest',
+                package: pkg,
+                price: price,
+                gameId: gameId,
+                serverId: serverId,
+                payment: paymentName,
+                date: new Date().toISOString(),
+                status: 'pending'
+            });
+            localStorage.setItem('orderHistory', JSON.stringify(orders));
+
+            // 4. Send notification
+            localStorage.setItem('newOrderNotification', JSON.stringify({
+                show: true,
+                orderId: orderId,
+                message: d.notiNewOrder
+            }));
+            window.dispatchEvent(new Event('storage'));
+
+            // 5. Show success
             document.getElementById('orderIdDisplay').textContent = '📋 Order #' + orderId;
             document.getElementById('orderSuccess').classList.add('show');
 
         } catch (error) {
-            console.error('Telegram send error:', error);
+            console.error('Order error:', error);
             showToast(d.sendError);
             this.disabled = false;
             this.innerHTML = '✅ ' + d.submit;
         }
     });
-
-    // ===== READ FILE AS BASE64 =====
-    function readFileAsBase64(file) {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = reject;
-            reader.readAsDataURL(file);
-        });
-    }
 
     // ===== AUTH =====
     let currentUser = null;
