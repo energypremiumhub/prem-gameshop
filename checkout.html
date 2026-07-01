@@ -3,152 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Game Shop - Checkout</title>
+    <title>⚡ Premium Game Shop - Checkout</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
         
         :root {
-            --bg: #0a0e1a;
-            --bg2: #111827;
-            --bg3: #1a2332;
-            --text: #ffffff;
-            --text2: #94a3b8;
-            --border: rgba(255,255,255,0.06);
-            --shadow: rgba(0,0,0,0.4);
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #111927;
+            --bg-card: #141c2b;
+            --bg-input: #1a2438;
+            --text-primary: #ffffff;
+            --text-secondary: #8899bb;
+            --border-color: rgba(255,255,255,0.06);
+            --shadow: rgba(0,0,0,0.5);
             --gold: #f5c842;
+            --gold-glow: rgba(245,200,66,0.3);
+            --cyan: #00d4ff;
+            --cyan-glow: rgba(0,212,255,0.2);
+            --pink: #ff6b9d;
             --orange: #f97316;
+            --orange-glow: rgba(249,115,22,0.2);
             --green: #22d3ee;
-        }
-
-        body.light {
-            --bg: #f0f2f5;
-            --bg2: #ffffff;
-            --bg3: #e8eaed;
-            --text: #1a1a2e;
-            --text2: #555770;
-            --border: rgba(0,0,0,0.08);
-            --shadow: rgba(0,0,0,0.08);
-            --gold: #d4a020;
-            --orange: #e8850a;
-            --green: #0f9d58;
+            --green-glow: rgba(34,211,238,0.2);
+            --red: #ef4444;
         }
 
         body {
-            background: var(--bg);
-            color: var(--text);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
             padding: 16px;
-            padding-bottom: 30px;
-            transition: background 0.15s ease, color 0.15s ease;
+            padding-bottom: 90px;
+            background-image: 
+                radial-gradient(ellipse at 20% 50%, rgba(245,200,66,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(0,212,255,0.04) 0%, transparent 50%);
         }
+
+        ::-webkit-scrollbar{width:4px}
+        ::-webkit-scrollbar-track{background:var(--bg-primary)}
+        ::-webkit-scrollbar-thumb{background:var(--gold);border-radius:10px}
 
         .container{max-width:500px;margin:0 auto}
 
-        .topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 0 16px;border-bottom:1px solid var(--border);margin-bottom:20px}
-        .topbar .back-btn{color:var(--gold);text-decoration:none;font-size:0.8rem;font-weight:600;padding:6px 14px;border-radius:20px;background:var(--bg3);border:1px solid var(--border);transition:all 0.15s ease}
-        .topbar .back-btn:active{transform:scale(0.92)}
-        .topbar .page-title{font-size:1.1rem;font-weight:700;color:var(--gold)}
-        .topbar .spacer{width:70px}
+        .header{display:flex;justify-content:space-between;align-items:center;padding:6px 0 14px;flex-wrap:wrap;gap:6px}
+        .header .logo{font-size:1rem;font-weight:800;color:var(--gold);text-shadow:0 0 20px var(--gold-glow);letter-spacing:0.5px}
+        .header .logo i{color:var(--cyan);margin-right:6px;text-shadow:0 0 20px var(--cyan-glow)}
+        .header .right{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
 
-        .glass-card{background:var(--bg3);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:0 4px 25px var(--shadow)}
-        .glass-card .label{font-size:0.7rem;color:var(--text2);font-weight:600;display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px}
+        .lang-switcher{display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:8px;border:1px solid var(--border-color)}
+        .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 8px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;text-transform:uppercase}
+        .lang-switcher .lang-btn.active{background:var(--gold);color:#0a0e1a;box-shadow:0 0 20px var(--gold-glow)}
+        .lang-switcher .lang-btn:active{transform:scale(0.85)}
 
-        /* ===== Selected Package ===== */
-        .selected-row{display:flex;justify-content:space-between;align-items:center}
-        .selected-row .pkg{font-size:1rem;font-weight:600;color:var(--text)}
-        .selected-row .price{font-size:1.1rem;font-weight:700;color:var(--gold)}
+        .auth-btn{background:transparent;border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 12px;border-radius:8px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
+        .auth-btn:active{transform:scale(0.90)}
+        .auth-btn:hover{border-color:var(--gold);color:var(--gold)}
+        .auth-btn.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 25px var(--gold-glow);padding:4px 14px}
+        .auth-btn.logged-in:active{transform:scale(0.90)}
+        .auth-btn.logged-in i{color:#0a0e1a}
+        .auth-btn.logged-in img{width:20px;height:20px;border-radius:50%;object-fit:cover;margin-right:4px}
 
-        /* ===== Form ===== */
-        .form-group{margin-bottom:14px}
-        .form-group label{font-size:0.75rem;color:var(--text2);font-weight:500;display:block;margin-bottom:4px}
-        .form-group input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:0.9rem;outline:none;transition:all 0.15s ease}
-        .form-group input:focus{border-color:rgba(245,200,66,0.30)}
-        .form-group input::placeholder{color:var(--text2);font-size:0.8rem}
+        .page-header{margin-bottom:20px;animation:slideUp 0.6s ease}
+        .page-header h1{font-size:1.3rem;font-weight:800;color:var(--text-primary)}
+        .page-header h1 span{background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 40px var(--gold-glow)}
+        .page-header h1 i{color:var(--cyan);-webkit-text-fill-color:initial;margin-right:6px}
+        .page-header p{color:var(--text-secondary);font-size:0.75rem;margin-top:2px}
 
-        /* ===== Payment ===== */
-        .payment-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
-        .payment-option{background:var(--bg);border:2px solid var(--border);border-radius:12px;padding:12px;text-align:center;cursor:pointer;transition:all 0.15s ease}
+        .glass-card{background:var(--bg-card);backdrop-filter:blur(10px);border:1px solid var(--border-color);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:0 4px 25px var(--shadow);animation:slideUp 0.7s ease}
+        .glass-card .label{font-size:0.6rem;color:var(--text-secondary);font-weight:600;display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px}
+        .glass-card .label i{color:var(--cyan);margin-right:4px}
+
+        .selected-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0}
+        .selected-row .pkg{font-size:0.9rem;font-weight:600;color:var(--text-primary)}
+        .selected-row .price{font-size:1rem;font-weight:700;color:var(--gold);text-shadow:0 0 20px var(--gold-glow)}
+
+        .form-group{margin-bottom:12px}
+        .form-group label{font-size:0.6rem;color:var(--text-secondary);font-weight:600;display:block;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px}
+        .form-group input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border-color);background:var(--bg-input);color:var(--text-primary);font-size:0.85rem;outline:none;transition:all 0.3s ease}
+        .form-group input:focus{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
+        .form-group input::placeholder{color:var(--text-secondary);font-size:0.7rem}
+
+        .payment-options{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
+        .payment-option{background:var(--bg-input);border:2px solid var(--border-color);border-radius:10px;padding:10px;text-align:center;cursor:pointer;transition:all 0.3s ease}
         .payment-option:active{transform:scale(0.95)}
-        .payment-option.selected{border-color:var(--gold);background:rgba(245,200,66,0.06)}
-        .payment-option .icon{font-size:1.4rem;display:block;margin-bottom:2px}
-        .payment-option .name{font-size:0.8rem;font-weight:600;color:var(--text)}
-        .payment-option .detail{font-size:0.5rem;color:var(--text2)}
+        .payment-option.selected{border-color:var(--gold);background:rgba(245,200,66,0.06);box-shadow:0 0 30px var(--gold-glow)}
+        .payment-option .icon{font-size:1.2rem;display:block;margin-bottom:2px}
+        .payment-option .name{font-size:0.7rem;font-weight:600;color:var(--text-primary)}
+        .payment-option .detail{font-size:0.45rem;color:var(--text-secondary)}
 
-        /* ===== Account Info ===== */
-        .account-info{background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.08);border-radius:12px;padding:12px 14px;margin-top:10px;display:none}
-        .account-info.show{display:block;animation:fadeUp 0.3s ease}
-        .account-info .acc-name{font-size:0.85rem;font-weight:600;color:var(--text)}
-        .account-info .acc-number{font-size:0.8rem;color:var(--green);font-weight:500;margin-top:2px;display:flex;align-items:center;gap:8px}
-        .account-info .acc-number .copy-btn{background:var(--bg);border:1px solid var(--border);color:var(--text2);padding:2px 10px;border-radius:12px;font-size:0.5rem;cursor:pointer;transition:all 0.15s ease;font-weight:600}
+        .account-info{background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.08);border-radius:10px;padding:10px 14px;margin-top:8px;display:none}
+        .account-info.show{display:block;animation:fadeIn 0.3s ease}
+        .account-info .acc-name{font-size:0.8rem;font-weight:600;color:var(--text-primary)}
+        .account-info .acc-number{font-size:0.75rem;color:var(--green);font-weight:500;margin-top:2px;display:flex;align-items:center;gap:8px}
+        .account-info .acc-number .copy-btn{background:var(--bg-card);border:1px solid var(--border-color);color:var(--text-secondary);padding:2px 10px;border-radius:10px;font-size:0.45rem;cursor:pointer;transition:all 0.3s ease;font-weight:600}
         .account-info .acc-number .copy-btn:active{transform:scale(0.85);background:var(--gold);color:#0a0e1a}
         .account-info .acc-number .copy-btn.copied{background:rgba(34,211,238,0.15);border-color:var(--green);color:var(--green)}
 
-        /* ===== File Upload ===== */
-        .file-upload{border:2px dashed var(--border);border-radius:12px;padding:18px;text-align:center;cursor:pointer;transition:all 0.15s ease;position:relative}
+        .file-upload{border:2px dashed var(--border-color);border-radius:10px;padding:16px;text-align:center;cursor:pointer;transition:all 0.3s ease;position:relative}
         .file-upload:active{transform:scale(0.97)}
         .file-upload.has-file{border-color:var(--green);background:rgba(34,211,238,0.04)}
-        .file-upload .icon{font-size:2rem;display:block;margin-bottom:4px;color:var(--text2)}
-        .file-upload .text{font-size:0.75rem;color:var(--text2)}
+        .file-upload .icon{font-size:1.8rem;display:block;margin-bottom:4px;color:var(--text-secondary)}
+        .file-upload .text{font-size:0.65rem;color:var(--text-secondary)}
         .file-upload .text strong{color:var(--gold)}
         .file-upload input[type="file"]{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}
-        .file-upload .file-name{font-size:0.65rem;color:var(--green);margin-top:4px;display:none}
+        .file-upload .file-name{font-size:0.55rem;color:var(--green);margin-top:4px;display:none}
         .file-upload .file-name.show{display:block}
 
-        .btn-submit{width:100%;padding:14px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:12px;font-size:0.95rem;font-weight:700;cursor:pointer;transition:all 0.15s ease;margin-top:6px}
+        .btn-submit{width:100%;padding:12px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:10px;font-size:0.9rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;margin-top:4px;box-shadow:0 0 20px var(--gold-glow)}
         .btn-submit:active{transform:scale(0.96)}
 
-        .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--bg3);padding:12px 24px;border-radius:14px;border:1px solid var(--border);color:var(--gold);font-weight:600;font-size:0.8rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 4px 30px var(--shadow);animation:toastPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)}
+        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);border-top:1px solid var(--border-color);display:flex;justify-content:space-around;padding:6px 0 10px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px var(--shadow)}
+        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);padding:4px 8px;border-radius:10px;position:relative}
+        .bottom-nav .nav-item:active{transform:scale(0.75)}
+        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
+        .bottom-nav .nav-item .label{font-size:0.4rem;margin-top:1px;font-weight:700;letter-spacing:0.5px;transition:all 0.4s ease}
+        .bottom-nav .nav-item.active{color:var(--gold)}
+        .bottom-nav .nav-item.active .icon{transform:translateY(-6px) scale(1.15);text-shadow:0 0 30px var(--gold-glow)}
+        .bottom-nav .nav-item.active .label{color:var(--gold)}
+        .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:24px;height:2.5px;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:10px;box-shadow:0 0 20px var(--gold-glow)}
+
+        .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-card);padding:10px 20px;border-radius:12px;border:1px solid rgba(245,200,66,0.15);color:var(--gold);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 8px 40px var(--shadow);animation:toastPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
         .toast.show{display:block}
         @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
-        @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes shimmer{0%,100%{transform:translate(0,0)}50%{transform:translate(-20%,-20%)}}
+        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="topbar">
-        <a href="shop.html" class="back-btn">← Shop</a>
-        <span class="page-title">📋 Checkout</span>
-        <span class="spacer"></span>
+    <div class="header">
+        <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Game Shop</div>
+        <div class="right">
+            <div class="lang-switcher">
+                <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" data-lang="my" onclick="setLang('my')">MY</button>
+            </div>
+            <div class="auth-btn" id="authBtn" onclick="handleAuthClick()">🔑 Login</div>
+        </div>
     </div>
 
-    <!-- Selected Package -->
+    <div class="page-header">
+        <h1 id="checkoutTitle"><i class="fas fa-shopping-cart"></i> <span>Checkout</span></h1>
+        <p id="checkoutSub">Complete your order</p>
+    </div>
+
     <div class="glass-card">
-        <span class="label">📦 Selected Package</span>
+        <span class="label"><i class="fas fa-box"></i> <span id="selectedLabel">Selected Package</span></span>
         <div class="selected-row">
             <span class="pkg" id="selectedPackage">Loading...</span>
             <span class="price" id="selectedPrice">0 Ks</span>
         </div>
     </div>
 
-    <!-- Form -->
     <div class="glass-card">
         <div class="form-group">
-            <label>🎮 Game ID</label>
-            <input type="text" id="gameId" placeholder="Enter your Game ID (e.g. 12345678)" />
+            <label id="gameIdLabel">🎮 Game ID</label>
+            <input type="text" id="gameId" placeholder="Enter your Game ID (e.g. 12345678)">
         </div>
         <div class="form-group">
-            <label>🌐 Server ID</label>
-            <input type="text" id="serverId" placeholder="Enter your Server ID (e.g. 9876)" />
+            <label id="serverIdLabel">🌐 Server ID</label>
+            <input type="text" id="serverId" placeholder="Enter your Server ID (e.g. 9876)">
         </div>
 
-        <!-- Payment -->
         <div class="form-group">
-            <label>💳 Payment Method</label>
+            <label id="paymentLabel">💳 Payment Method</label>
             <div class="payment-options" id="paymentOptions">
                 <div class="payment-option" data-payment="wave">
                     <span class="icon">🏦</span>
-                    <span class="name">Wave Pay</span>
-                    <span class="detail">Mobile Money</span>
+                    <span class="name" id="waveName">Wave Pay</span>
+                    <span class="detail" id="waveDetail">Mobile Money</span>
                 </div>
                 <div class="payment-option" data-payment="kpay">
                     <span class="icon">🏦</span>
-                    <span class="name">KBZ Pay</span>
-                    <span class="detail">KBZ Bank</span>
+                    <span class="name" id="kpayName">KBZ Pay</span>
+                    <span class="detail" id="kpayDetail">KBZ Bank</span>
                 </div>
             </div>
         </div>
 
-        <!-- Wave Pay Info -->
         <div class="account-info" id="waveInfo">
             <div class="acc-name">🏦 Wave Pay</div>
             <div class="acc-number">
@@ -157,7 +191,6 @@
             </div>
         </div>
 
-        <!-- KBZ Pay Info -->
         <div class="account-info" id="kpayInfo">
             <div class="acc-name">🏦 KBZ Pay</div>
             <div class="acc-number">
@@ -166,29 +199,223 @@
             </div>
         </div>
 
-        <!-- Upload -->
         <div class="form-group">
-            <label>📤 Upload Payment Slip</label>
+            <label id="uploadLabel">📤 Upload Payment Slip</label>
             <div class="file-upload" id="fileUpload">
                 <span class="icon">📁</span>
-                <span class="text">Tap to upload <strong>screenshot</strong></span>
+                <span class="text" id="uploadText">Tap to upload <strong>screenshot</strong></span>
                 <span class="file-name" id="fileName">✅ image.png</span>
-                <input type="file" id="fileInput" accept="image/*" />
+                <input type="file" id="fileInput" accept="image/*">
             </div>
         </div>
 
         <button class="btn-submit" id="submitBtn">✅ Submit Order</button>
     </div>
 </div>
+
+<div class="bottom-nav">
+    <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label" id="navHome">Home</span></a>
+    <a href="shop.html" class="nav-item"><span class="icon">🛒</span><span class="label" id="navShop">Shop</span></a>
+    <a href="payment.html" class="nav-item"><span class="icon">💳</span><span class="label" id="navPayment">Payment</span></a>
+    <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label" id="navProfile">Profile</span></a>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
-    // ===== Get package from URL =====
+    const LANG_DATA = {
+        en: {
+            appName: 'Premium Game Shop',
+            checkoutTitle: 'Checkout',
+            checkoutSub: 'Complete your order',
+            selectedLabel: 'Selected Package',
+            gameIdLabel: '🎮 Game ID',
+            serverIdLabel: '🌐 Server ID',
+            paymentLabel: '💳 Payment Method',
+            waveName: 'Wave Pay',
+            waveDetail: 'Mobile Money',
+            kpayName: 'KBZ Pay',
+            kpayDetail: 'KBZ Bank',
+            uploadLabel: '📤 Upload Payment Slip',
+            uploadText: 'Tap to upload screenshot',
+            submit: 'Submit Order',
+            orderSuccess: '✅ Order submitted successfully!',
+            copy: 'Copy',
+            copied: '✅ Copied!',
+            home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
+            login: 'Login',
+            register: 'Register',
+            modalLogin: '⚔️ Login',
+            modalRegister: '🛡️ Register',
+            modalLoginSub: 'Welcome back, warrior!',
+            modalRegisterSub: 'Create your account, champion!',
+            email: '📧 Email or Username',
+            password: '🔑 Password',
+            switchLogin: "Don't have an account? Register",
+            switchRegister: 'Already have an account? Login',
+            loginSuccess: '✅ Welcome back, Champion!',
+            registerSuccess: '✅ Account created! Welcome!',
+            logoutSuccess: '🚪 Logged out successfully!',
+            logoutConfirm: 'Are you sure you want to logout?',
+            enterEmail: 'Please enter your email or username',
+            enterPassword: 'Please enter your password',
+            enterUsername: 'Please enter your username',
+            enterValidEmail: 'Please enter a valid email',
+            passwordMin: 'Password must be at least 4 characters',
+            passwordMatch: 'Passwords do not match',
+            userExists: '❌ Username or email already exists',
+            enterGameId: 'Please enter your Game ID',
+            enterServerId: 'Please enter your Server ID',
+            selectPayment: 'Please select a payment method',
+            uploadSlip: 'Please upload your payment slip'
+        },
+        my: {
+            appName: 'ပရီမီယံ ဂိမ်းဆိုင်',
+            checkoutTitle: 'စစ်ဆေးရန်',
+            checkoutSub: 'သင့်အော်ဒါကိုအပြီးသတ်ပါ',
+            selectedLabel: 'ရွေးထားသောအထုပ်',
+            gameIdLabel: '🎮 ဂိမ်း ID',
+            serverIdLabel: '🌐 ဆာဗာ ID',
+            paymentLabel: '💳 ငွေပေးချေနည်း',
+            waveName: 'Wave Pay',
+            waveDetail: 'မိုဘိုင်းငွေကြေး',
+            kpayName: 'KBZ Pay',
+            kpayDetail: 'KBZ ဘဏ်',
+            uploadLabel: '📤 ငွေလွှဲပြေစာတင်ရန်',
+            uploadText: 'စခရင်ရိုက်ပုံတင်ရန်နှိပ်ပါ',
+            submit: 'အော်ဒါတင်ရန်',
+            orderSuccess: '✅ အော်ဒါတင်ခြင်းအောင်မြင်ပါပြီ!',
+            copy: 'ကူးယူရန်',
+            copied: '✅ ကူးယူပြီး!',
+            home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
+            login: 'ဝင်ရန်',
+            register: 'မှတ်ပုံတင်ရန်',
+            modalLogin: '⚔️ ဝင်ရန်',
+            modalRegister: '🛡️ မှတ်ပုံတင်ရန်',
+            modalLoginSub: 'ပြန်လည်ကြိုဆိုပါတယ် စစ်သည်တော်!',
+            modalRegisterSub: 'အကောင့်ဖွင့်ပါ ချန်ပီယံ!',
+            email: '📧 အီးမေးလ် သို့မဟုတ် အသုံးပြုသူအမည်',
+            password: '🔑 စကားဝှက်',
+            switchLogin: 'အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်',
+            switchRegister: 'အကောင့်ရှိပြီးသား? ဝင်ရန်',
+            loginSuccess: '✅ ကြိုဆိုပါတယ် ချန်ပီယံ!',
+            registerSuccess: '✅ အကောင့်ဖွင့်ခြင်းအောင်မြင်ပါပြီ!',
+            logoutSuccess: '🚪 ထွက်ခြင်းအောင်မြင်ပါပြီ!',
+            logoutConfirm: 'ထွက်မှာသေချာလား?',
+            enterEmail: 'ကျေးဇူးပြု၍ အီးမေးလ် သို့မဟုတ် အသုံးပြုသူအမည်ထည့်ပါ',
+            enterPassword: 'ကျေးဇူးပြု၍ စကားဝှက်ထည့်ပါ',
+            enterUsername: 'ကျေးဇူးပြု၍ အသုံးပြုသူအမည်ထည့်ပါ',
+            enterValidEmail: 'ကျေးဇူးပြု၍ မှန်ကန်တဲ့ အီးမေးလ်ထည့်ပါ',
+            passwordMin: 'စကားဝှက်သည် အနည်းဆုံး ၄ လုံးရှိရမယ်',
+            passwordMatch: 'စကားဝှက်များ မတူညီပါ',
+            userExists: '❌ အသုံးပြုသူအမည် သို့မဟုတ် အီးမေးလ် ရှိပြီးသားပါ',
+            enterGameId: 'ကျေးဇူးပြု၍ သင့်ဂိမ်း ID ထည့်ပါ',
+            enterServerId: 'ကျေးဇူးပြု၍ သင့်ဆာဗာ ID ထည့်ပါ',
+            selectPayment: 'ကျေးဇူးပြု၍ ငွေပေးချေနည်းကိုရွေးပါ',
+            uploadSlip: 'ကျေးဇူးပြု၍ သင့်ငွေလွှဲပြေစာကိုတင်ပါ'
+        }
+    };
+
+    let currentLang = localStorage.getItem('lang') || 'en';
+
+    function getText(key) { return LANG_DATA[currentLang][key] || key; }
+
+    function setLang(lang) {
+        currentLang = lang;
+        localStorage.setItem('lang', lang);
+        updateLanguage();
+        document.querySelectorAll('.lang-btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.lang === lang);
+        });
+    }
+
+    function updateLanguage() {
+        const d = LANG_DATA[currentLang];
+        document.getElementById('appName').innerHTML = '<i class="fas fa-gamepad"></i> ' + d.appName;
+        document.getElementById('checkoutTitle').innerHTML = '<i class="fas fa-shopping-cart"></i> <span>' + d.checkoutTitle + '</span>';
+        document.getElementById('checkoutSub').textContent = d.checkoutSub;
+        document.getElementById('selectedLabel').innerHTML = '<i class="fas fa-box"></i> ' + d.selectedLabel;
+        document.getElementById('gameIdLabel').textContent = d.gameIdLabel;
+        document.getElementById('serverIdLabel').textContent = d.serverIdLabel;
+        document.getElementById('paymentLabel').textContent = d.paymentLabel;
+        document.getElementById('waveName').textContent = d.waveName;
+        document.getElementById('waveDetail').textContent = d.waveDetail;
+        document.getElementById('kpayName').textContent = d.kpayName;
+        document.getElementById('kpayDetail').textContent = d.kpayDetail;
+        document.getElementById('uploadLabel').textContent = d.uploadLabel;
+        document.getElementById('uploadText').innerHTML = 'Tap to upload <strong>screenshot</strong>';
+        document.getElementById('submitBtn').innerHTML = '✅ ' + d.submit;
+        document.getElementById('navHome').textContent = d.home;
+        document.getElementById('navShop').textContent = d.shop;
+        document.getElementById('navPayment').textContent = d.payment;
+        document.getElementById('navProfile').textContent = d.profile;
+        updateAuthUI();
+    }
+
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        clearTimeout(t._timer);
+        t._timer = setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    function copyNumber(number, btn) {
+        navigator.clipboard.writeText(number).then(() => {
+            btn.textContent = getText('copied');
+            btn.classList.add('copied');
+            setTimeout(() => { btn.textContent = getText('copy'); btn.classList.remove('copied'); }, 2500);
+        }).catch(() => {
+            const input = document.createElement('input');
+            input.value = number;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+            btn.textContent = getText('copied');
+            btn.classList.add('copied');
+            setTimeout(() => { btn.textContent = getText('copy'); btn.classList.remove('copied'); }, 2500);
+        });
+    }
+
+    let currentUser = null;
+    const savedUser = localStorage.getItem('currentUser');
+    if (savedUser) currentUser = JSON.parse(savedUser);
+
+    function isLoggedIn() { return currentUser !== null; }
+
+    function updateAuthUI() {
+        const authBtn = document.getElementById('authBtn');
+        if (currentUser) {
+            const savedAvatar = localStorage.getItem('userAvatar_' + currentUser.username);
+            if (savedAvatar) {
+                authBtn.innerHTML = '<img src="' + savedAvatar + '" alt="avatar"> ' + currentUser.username;
+            } else {
+                authBtn.innerHTML = '👤 ' + currentUser.username;
+            }
+            authBtn.className = 'auth-btn logged-in';
+            authBtn.title = 'Go to Profile';
+        } else {
+            authBtn.innerHTML = '🔑 ' + getText('login');
+            authBtn.className = 'auth-btn';
+            authBtn.title = 'Login';
+        }
+    }
+
+    function handleAuthClick() {
+        if (isLoggedIn()) {
+            window.location.href = 'profile.html';
+        } else {
+            window.location.href = 'index.html';
+        }
+    }
+
+    // ===== GET PACKAGE FROM URL =====
     const urlParams = new URLSearchParams(window.location.search);
     document.getElementById('selectedPackage').textContent = urlParams.get('package') || 'Monthly Epic Bundle';
     document.getElementById('selectedPrice').textContent = urlParams.get('price') || '17,200 Ks';
 
-    // ===== Payment Selection =====
+    // ===== PAYMENT SELECTION =====
     let selectedPayment = null;
     document.querySelectorAll('.payment-option').forEach(el => {
         el.addEventListener('click', function() {
@@ -202,26 +429,7 @@
         });
     });
 
-    // ===== Copy Number =====
-    function copyNumber(number, btn) {
-        navigator.clipboard.writeText(number).then(() => {
-            btn.textContent = '✅ Copied!';
-            btn.classList.add('copied');
-            setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2500);
-        }).catch(() => {
-            const input = document.createElement('input');
-            input.value = number;
-            document.body.appendChild(input);
-            input.select();
-            document.execCommand('copy');
-            document.body.removeChild(input);
-            btn.textContent = '✅ Copied!';
-            btn.classList.add('copied');
-            setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2500);
-        });
-    }
-
-    // ===== File Upload =====
+    // ===== FILE UPLOAD =====
     const fileInput = document.getElementById('fileInput');
     const fileUpload = document.getElementById('fileUpload');
     const fileName = document.getElementById('fileName');
@@ -233,30 +441,26 @@
         }
     });
 
-    // ===== Submit =====
+    // ===== SUBMIT =====
     document.getElementById('submitBtn').addEventListener('click', function() {
+        const d = LANG_DATA[currentLang];
         const gameId = document.getElementById('gameId').value.trim();
         const serverId = document.getElementById('serverId').value.trim();
         const hasFile = fileInput.files && fileInput.files[0];
-        if (!gameId) { showToast('❌ Please enter your Game ID'); return; }
-        if (!serverId) { showToast('❌ Please enter your Server ID'); return; }
-        if (!selectedPayment) { showToast('❌ Please select a payment method'); return; }
-        if (!hasFile) { showToast('❌ Please upload your payment slip'); return; }
-        showToast('✅ Order submitted successfully!');
+
+        if (!gameId) { showToast(d.enterGameId); return; }
+        if (!serverId) { showToast(d.enterServerId); return; }
+        if (!selectedPayment) { showToast(d.selectPayment); return; }
+        if (!hasFile) { showToast(d.uploadSlip); return; }
+
+        showToast(d.orderSuccess);
     });
 
-    function showToast(msg) {
-        const t = document.getElementById('toast');
-        t.textContent = msg;
-        t.classList.add('show');
-        clearTimeout(t._timer);
-        t._timer = setTimeout(() => t.classList.remove('show'), 2500);
-    }
-
-    // ===== Theme =====
-    if (localStorage.getItem('theme') === 'light') {
-        document.body.classList.add('light');
-    }
+    document.addEventListener('DOMContentLoaded', function() {
+        const savedLang = localStorage.getItem('lang') || 'en';
+        setLang(savedLang);
+        updateAuthUI();
+    });
 </script>
 </body>
 </html>
