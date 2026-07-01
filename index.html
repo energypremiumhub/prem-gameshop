@@ -45,7 +45,7 @@
             flex-wrap: wrap;
         }
 
-        /* ====== Language Switcher ====== */
+        /* ====== Language Switcher (ညာဘက်အပေါ်) ====== */
         .language-switcher {
             display: flex;
             gap: 5px;
@@ -159,7 +159,7 @@
             display: block;
         }
 
-        /* ====== Hero Section ====== */
+        /* ====== Hero Section (မူလပုံစံ) ====== */
         .hero {
             text-align: center;
             padding: 80px 20px 60px;
@@ -213,7 +213,7 @@
             background: #e94560;
         }
 
-        /* ====== Game List ====== */
+        /* ====== Game List (မူလပုံစံ) ====== */
         .game-list {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -431,7 +431,7 @@
     <nav class="navbar">
         <div class="logo">🎮 Premium <span>Game Shop</span></div>
         <div class="navbar-right">
-            <!-- Language Switcher -->
+            <!-- Language Switcher (ညာဘက်အပေါ်) -->
             <div class="language-switcher">
                 <button class="lang-btn" data-lang="en" onclick="switchLanguage('en')">EN</button>
                 <button class="lang-btn active" data-lang="my" onclick="switchLanguage('my')">မြန်မာ</button>
@@ -439,31 +439,31 @@
 
             <!-- Auth Section -->
             <div id="authSection">
-                <button class="btn-login" id="loginBtn" onclick="showLogin()" data-i18n="login">ဝင်ရန်</button>
-                <button class="btn-register" id="registerBtn" onclick="showRegister()" data-i18n="register">စာရင်းသွင်းရန်</button>
+                <button class="btn-login" id="loginBtn" onclick="showLogin()">ဝင်ရန်</button>
+                <button class="btn-register" id="registerBtn" onclick="showRegister()">စာရင်းသွင်းရန်</button>
                 <div class="profile-dropdown" id="profileDropdown">
                     <img src="default-avatar.png" alt="Profile" class="profile-avatar small" id="profileAvatar">
                     <span class="username-display" id="usernameDisplay">အသုံးပြုသူ</span>
                     <div class="dropdown-menu">
-                        <a href="#" onclick="viewProfile()" data-i18n="profile">ပရိုဖိုင်</a>
-                        <a href="#" onclick="logoutUser()" data-i18n="logout">ထွက်ရန်</a>
+                        <a href="#" onclick="viewProfile()">ပရိုဖိုင်</a>
+                        <a href="#" onclick="logoutUser()">ထွက်ရန်</a>
                     </div>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- ====== HERO ====== -->
+    <!-- ====== HERO (မူလပုံစံ) ====== -->
     <section class="hero">
         <h1>Premium Game Shop</h1>
-        <p data-i18n="heroText">ဂိမ်းအကောင့်များ၊ ယူစာနိမ်းများနှင့် ပရီမီယံပစ္စည်းများကို အကောင်းဆုံးဈေးနှုန်းဖြင့် ဝယ်ယူပါ။</p>
+        <p>ဂိမ်းအကောင့်များ၊ ယူစာနိမ်းများနှင့် ပရီမီယံပစ္စည်းများကို အကောင်းဆုံးဈေးနှုန်းဖြင့် ဝယ်ယူပါ။</p>
         <div class="cta-buttons">
-            <button class="btn-primary" onclick="showLogin()" data-i18n="shopNow">ဈေးဝယ်မယ်</button>
-            <button class="btn-secondary" onclick="showRegister()" data-i18n="joinNow">အကောင့်ဖွင့်မယ်</button>
+            <button class="btn-primary" onclick="showLogin()">ဈေးဝယ်မယ်</button>
+            <button class="btn-secondary" onclick="showRegister()">အကောင့်ဖွင့်မယ်</button>
         </div>
     </section>
 
-    <!-- ====== GAME LIST ====== -->
+    <!-- ====== GAME LIST (မူလပုံစံ) ====== -->
     <div class="game-list">
         <div class="game-card">
             <div class="game-icon">⚔️</div>
@@ -495,15 +495,15 @@
     <div class="modal" id="loginModal">
         <div class="modal-content">
             <span class="modal-close" onclick="closeModal('loginModal')">&times;</span>
-            <h2 data-i18n="loginTitle">🔐 ဝင်ရန်</h2>
-            <label data-i18n="usernameLabel">အသုံးပြုသူအမည်</label>
+            <h2>🔐 ဝင်ရန်</h2>
+            <label>အသုံးပြုသူအမည်</label>
             <input type="text" id="loginUsername" placeholder="သင့်အသုံးပြုသူအမည်">
-            <label data-i18n="passwordLabel">စကားဝှက်</label>
+            <label>စကားဝှက်</label>
             <input type="password" id="loginPassword" placeholder="စကားဝှက်">
-            <button class="submit-btn" onclick="loginUser()" data-i18n="loginBtnText">ဝင်ရန်</button>
+            <button class="submit-btn" onclick="loginUser()">ဝင်ရန်</button>
             <div class="switch-link">
-                <span data-i18n="noAccount">အကောင့်မရှိသေးဘူးလား</span>
-                <a onclick="switchToRegister()" data-i18n="registerNow">စာရင်းသွင်းမယ်</a>
+                <span>အကောင့်မရှိသေးဘူးလား</span>
+                <a onclick="switchToRegister()">စာရင်းသွင်းမယ်</a>
             </div>
         </div>
     </div>
@@ -512,17 +512,17 @@
     <div class="modal" id="registerModal">
         <div class="modal-content">
             <span class="modal-close" onclick="closeModal('registerModal')">&times;</span>
-            <h2 data-i18n="registerTitle">📝 စာရင်းသွင်းရန်</h2>
-            <label data-i18n="usernameLabel">အသုံးပြုသူအမည်</label>
+            <h2>📝 စာရင်းသွင်းရန်</h2>
+            <label>အသုံးပြုသူအမည်</label>
             <input type="text" id="regUsername" placeholder="အသုံးပြုသူအမည်">
-            <label data-i18n="emailLabel">အီးမေးလ်</label>
+            <label>အီးမေးလ်</label>
             <input type="email" id="regEmail" placeholder="your@email.com">
-            <label data-i18n="passwordLabel">စကားဝှက်</label>
+            <label>စကားဝှက်</label>
             <input type="password" id="regPassword" placeholder="စကားဝှက် (အနည်းဆုံး ၆ လုံး)">
-            <button class="submit-btn" onclick="registerUser()" data-i18n="registerBtnText">စာရင်းသွင်းမယ်</button>
+            <button class="submit-btn" onclick="registerUser()">စာရင်းသွင်းမယ်</button>
             <div class="switch-link">
-                <span data-i18n="haveAccount">အကောင့်ရှိပြီးသားလား</span>
-                <a onclick="switchToLogin()" data-i18n="loginNow">ဝင်မယ်</a>
+                <span>အကောင့်ရှိပြီးသားလား</span>
+                <a onclick="switchToLogin()">ဝင်မယ်</a>
             </div>
         </div>
     </div>
@@ -535,73 +535,64 @@
     <!-- ====== JAVASCRIPT ====== -->
     <script>
         // ============================================================
-        //  1. TRANSLATIONS
-        // ============================================================
-        const translations = {
-            en: {
-                login: 'Login',
-                register: 'Register',
-                profile: 'Profile',
-                logout: 'Logout',
-                heroText: 'Buy game accounts, game points and premium items at the best prices.',
-                shopNow: 'Shop Now',
-                joinNow: 'Join Now',
-                loginTitle: '🔐 Login',
-                registerTitle: '📝 Register',
-                usernameLabel: 'Username',
-                passwordLabel: 'Password',
-                emailLabel: 'Email',
-                loginBtnText: 'Login',
-                registerBtnText: 'Register',
-                noAccount: "Don't have an account?",
-                haveAccount: 'Already have an account?',
-                registerNow: 'Register',
-                loginNow: 'Login'
-            },
-            my: {
-                login: 'ဝင်ရန်',
-                register: 'စာရင်းသွင်းရန်',
-                profile: 'ပရိုဖိုင်',
-                logout: 'ထွက်ရန်',
-                heroText: 'ဂိမ်းအကောင့်များ၊ ယူစာနိမ်းများနှင့် ပရီမီယံပစ္စည်းများကို အကောင်းဆုံးဈေးနှုန်းဖြင့် ဝယ်ယူပါ။',
-                shopNow: 'ဈေးဝယ်မယ်',
-                joinNow: 'အကောင့်ဖွင့်မယ်',
-                loginTitle: '🔐 ဝင်ရန်',
-                registerTitle: '📝 စာရင်းသွင်းရန်',
-                usernameLabel: 'အသုံးပြုသူအမည်',
-                passwordLabel: 'စကားဝှက်',
-                emailLabel: 'အီးမေးလ်',
-                loginBtnText: 'ဝင်ရန်',
-                registerBtnText: 'စာရင်းသွင်းမယ်',
-                noAccount: 'အကောင့်မရှိသေးဘူးလား',
-                haveAccount: 'အကောင့်ရှိပြီးသားလား',
-                registerNow: 'စာရင်းသွင်းမယ်',
-                loginNow: 'ဝင်မယ်'
-            }
-        };
-
-        // ============================================================
-        //  2. LANGUAGE FUNCTIONS
+        //  1. LANGUAGE FUNCTIONS
         // ============================================================
         function switchLanguage(lang) {
             localStorage.setItem('selectedLang', lang);
-            applyLanguage(lang);
-        }
-
-        function applyLanguage(lang) {
-            const t = translations[lang] || translations.my;
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (t[key]) el.textContent = t[key];
-            });
+            // ဘာသာပြောင်းတာကို ပြရန် (ခလုတ် active ပြောင်းဖို့)
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.lang === lang);
             });
-            document.documentElement.lang = lang;
+            // စာသားတွေကို ပြောင်းမယ် (လိုအပ်ရင် ထပ်ထည့်)
+            if (lang === 'en') {
+                document.querySelector('.hero h1').textContent = 'Premium Game Shop';
+                document.querySelector('.hero p').textContent = 'Buy game accounts, game points and premium items at the best prices.';
+                document.querySelector('.hero .btn-primary').textContent = 'Shop Now';
+                document.querySelector('.hero .btn-secondary').textContent = 'Join Now';
+                document.getElementById('loginBtn').textContent = 'Login';
+                document.getElementById('registerBtn').textContent = 'Register';
+                document.querySelector('#loginModal h2').textContent = '🔐 Login';
+                document.querySelector('#registerModal h2').textContent = '📝 Register';
+                document.querySelector('#loginModal .submit-btn').textContent = 'Login';
+                document.querySelector('#registerModal .submit-btn').textContent = 'Register';
+                document.querySelector('#loginModal .switch-link span').textContent = "Don't have an account?";
+                document.querySelector('#registerModal .switch-link span').textContent = 'Already have an account?';
+                document.querySelector('#loginModal .switch-link a').textContent = 'Register';
+                document.querySelector('#registerModal .switch-link a').textContent = 'Login';
+                document.querySelectorAll('#loginModal label')[0].textContent = 'Username';
+                document.querySelectorAll('#loginModal label')[1].textContent = 'Password';
+                document.querySelectorAll('#registerModal label')[0].textContent = 'Username';
+                document.querySelectorAll('#registerModal label')[1].textContent = 'Email';
+                document.querySelectorAll('#registerModal label')[2].textContent = 'Password';
+                document.querySelector('.profile-dropdown .dropdown-menu a:first-child').textContent = 'Profile';
+                document.querySelector('.profile-dropdown .dropdown-menu a:last-child').textContent = 'Logout';
+            } else {
+                document.querySelector('.hero h1').textContent = 'Premium Game Shop';
+                document.querySelector('.hero p').textContent = 'ဂိမ်းအကောင့်များ၊ ယူစာနိမ်းများနှင့် ပရီမီယံပစ္စည်းများကို အကောင်းဆုံးဈေးနှုန်းဖြင့် ဝယ်ယူပါ။';
+                document.querySelector('.hero .btn-primary').textContent = 'ဈေးဝယ်မယ်';
+                document.querySelector('.hero .btn-secondary').textContent = 'အကောင့်ဖွင့်မယ်';
+                document.getElementById('loginBtn').textContent = 'ဝင်ရန်';
+                document.getElementById('registerBtn').textContent = 'စာရင်းသွင်းရန်';
+                document.querySelector('#loginModal h2').textContent = '🔐 ဝင်ရန်';
+                document.querySelector('#registerModal h2').textContent = '📝 စာရင်းသွင်းရန်';
+                document.querySelector('#loginModal .submit-btn').textContent = 'ဝင်ရန်';
+                document.querySelector('#registerModal .submit-btn').textContent = 'စာရင်းသွင်းမယ်';
+                document.querySelector('#loginModal .switch-link span').textContent = 'အကောင့်မရှိသေးဘူးလား';
+                document.querySelector('#registerModal .switch-link span').textContent = 'အကောင့်ရှိပြီးသားလား';
+                document.querySelector('#loginModal .switch-link a').textContent = 'စာရင်းသွင်းမယ်';
+                document.querySelector('#registerModal .switch-link a').textContent = 'ဝင်မယ်';
+                document.querySelectorAll('#loginModal label')[0].textContent = 'အသုံးပြုသူအမည်';
+                document.querySelectorAll('#loginModal label')[1].textContent = 'စကားဝှက်';
+                document.querySelectorAll('#registerModal label')[0].textContent = 'အသုံးပြုသူအမည်';
+                document.querySelectorAll('#registerModal label')[1].textContent = 'အီးမေးလ်';
+                document.querySelectorAll('#registerModal label')[2].textContent = 'စကားဝှက်';
+                document.querySelector('.profile-dropdown .dropdown-menu a:first-child').textContent = 'ပရိုဖိုင်';
+                document.querySelector('.profile-dropdown .dropdown-menu a:last-child').textContent = 'ထွက်ရန်';
+            }
         }
 
         // ============================================================
-        //  3. AUTH FUNCTIONS
+        //  2. AUTH FUNCTIONS
         // ============================================================
         function showLogin() {
             document.getElementById('loginModal').classList.add('show');
@@ -625,7 +616,6 @@
             showLogin();
         }
 
-        // ----- Login -----
         function loginUser() {
             const username = document.getElementById('loginUsername').value.trim();
             const password = document.getElementById('loginPassword').value.trim();
@@ -634,10 +624,8 @@
                 showNotification('အသုံးပြုသူအမည်နှင့် စကားဝှက် ထည့်ပါ။', 'error');
                 return;
             }
-            // --- Simulate login (replace with real API later) ---
             localStorage.setItem('isLoggedIn', 'true');
             localStorage.setItem('username', username);
-            // Default points
             if (!localStorage.getItem('gamePoints')) {
                 localStorage.setItem('gamePoints', '1250');
             }
@@ -648,7 +636,6 @@
             document.getElementById('loginPassword').value = '';
         }
 
-        // ----- Register -----
         function registerUser() {
             const username = document.getElementById('regUsername').value.trim();
             const email = document.getElementById('regEmail').value.trim();
@@ -662,10 +649,9 @@
                 showNotification('စကားဝှက် အနည်းဆုံး ၆ လုံးထည့်ပါ။', 'error');
                 return;
             }
-            // --- Simulate register (replace with real API later) ---
             localStorage.setItem('isLoggedIn', 'true');
             localStorage.setItem('username', username);
-            localStorage.setItem('gamePoints', '1000'); // Starting points
+            localStorage.setItem('gamePoints', '1000');
             closeModal('registerModal');
             updateAuthUI();
             showNotification('စာရင်းသွင်းခြင်း အောင်မြင်ပါသည်။ ကြိုဆိုပါတယ် ' + username + '!', 'success');
@@ -674,16 +660,13 @@
             document.getElementById('regPassword').value = '';
         }
 
-        // ----- Logout -----
         function logoutUser() {
             localStorage.removeItem('isLoggedIn');
             localStorage.removeItem('username');
-            // Keep profile image and points if you want
             updateAuthUI();
             showNotification('ထွက်ခြင်း အောင်မြင်ပါသည်။', 'success');
         }
 
-        // ----- View Profile -----
         function viewProfile() {
             if (localStorage.getItem('isLoggedIn') !== 'true') {
                 showNotification('ကျေးဇူးပြု၍ အကောင့်ဝင်ပါ။', 'error');
@@ -693,7 +676,7 @@
         }
 
         // ============================================================
-        //  4. UI UPDATE
+        //  3. UI UPDATE
         // ============================================================
         function updateAuthUI() {
             const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
@@ -710,7 +693,6 @@
                 registerBtn.style.display = 'none';
                 profileDropdown.classList.add('show');
                 usernameDisplay.textContent = username;
-
                 const savedImage = localStorage.getItem('profileImage');
                 if (savedImage) {
                     profileAvatar.src = savedImage;
@@ -725,7 +707,7 @@
         }
 
         // ============================================================
-        //  5. NOTIFICATION
+        //  4. NOTIFICATION
         // ============================================================
         function showNotification(msg, type = 'success') {
             const existing = document.querySelector('.notification');
@@ -742,7 +724,7 @@
         }
 
         // ============================================================
-        //  6. CLOSE MODAL ON OUTSIDE CLICK
+        //  5. CLOSE MODAL ON OUTSIDE CLICK
         // ============================================================
         document.querySelectorAll('.modal').forEach(modal => {
             modal.addEventListener('click', function(e) {
@@ -753,7 +735,7 @@
         });
 
         // ============================================================
-        //  7. ENTER KEY SUPPORT
+        //  6. ENTER KEY SUPPORT
         // ============================================================
         document.getElementById('loginPassword').addEventListener('keydown', function(e) {
             if (e.key === 'Enter') loginUser();
@@ -763,11 +745,11 @@
         });
 
         // ============================================================
-        //  8. INIT ON PAGE LOAD
+        //  7. INIT ON PAGE LOAD
         // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
             const savedLang = localStorage.getItem('selectedLang') || 'my';
-            applyLanguage(savedLang);
+            switchLanguage(savedLang);
             updateAuthUI();
         });
     </script>
