@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Premium Game Shop</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <script src="lang.js"></script>
-    <script src="auth.js"></script>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
         
@@ -54,6 +52,11 @@
         .header .right .icon-btn:active{transform:scale(0.88)}
         .header .right .icon-btn.theme-btn{font-size:1rem;width:44px;height:44px}
         .header .right .icon-btn.auth-btn{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;font-weight:700;font-size:0.65rem;width:auto;padding:0 14px;border-radius:20px}
+        
+        /* ===== Profile Avatar in Header ===== */
+        .header .right .profile-avatar{width:40px;height:40px;border-radius:50%;background:var(--bg3);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--text2);cursor:pointer;transition:all 0.12s ease;overflow:hidden;text-decoration:none}
+        .header .right .profile-avatar:active{transform:scale(0.88)}
+        .header .right .profile-avatar img{width:100%;height:100%;object-fit:cover}
 
         /* ===== Language Switcher ===== */
         .lang-switcher{display:flex;gap:3px;background:var(--bg3);padding:3px;border-radius:10px;border:1px solid var(--border)}
@@ -97,9 +100,7 @@
         .bottom-nav .nav-item.active{color:var(--gold)}
         .bottom-nav .nav-item.active .icon{transform:translateY(-6px) scale(1.15)}
         .bottom-nav .nav-item.active .label{color:var(--gold)}
-        /* ===== Active Bar (အလျားလိုက်အချောင်း) ===== */
         .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:28px;height:3px;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:10px;transition:all 0.3s ease}
-        .bottom-nav .nav-item:not(.active):hover .icon{transform:translateY(-2px)}
 
         .footer-text{text-align:center;color:var(--text2);font-size:0.5rem;margin-top:12px;opacity:0.4}
 
@@ -138,8 +139,7 @@
             </div>
             <div class="icon-btn theme-btn" onclick="toggleTheme()">🌙</div>
             <div class="icon-btn" onclick="showToast(getText('noti'))">🔔</div>
-            <div class="icon-btn auth-btn" id="authBtn">Login</div>
-            <a href="profile.html" class="icon-btn" id="profileBtn" style="display:none;">👤</a>
+            <a href="profile.html" class="profile-avatar" id="profileAvatar">👤</a>
         </div>
     </div>
 
@@ -157,6 +157,14 @@
         <h4 id="bannerTitle">20% Bonus Diamonds!</h4>
         <p id="bannerDesc">Limited time offer • Shop now</p>
     </div>
+
+    <!-- Shop Button -->
+    <a href="shop.html" style="text-decoration:none;display:block;margin-bottom:18px;">
+        <div class="glass-card" style="text-align:center;padding:14px;cursor:pointer;transition:all 0.12s ease;">
+            <span style="font-size:1.5rem;display:block;">🛒</span>
+            <span style="font-weight:600;color:var(--gold);" id="goToShop">Go to Shop →</span>
+        </div>
+    </a>
 
     <!-- Services -->
     <div class="section-title" id="servicesTitle">⚡ Premium Services</div>
@@ -187,7 +195,7 @@
         <button class="close-btn" onclick="closeModal()">✕</button>
         <h2 id="modalTitle">Login</h2>
         <p id="modalSub">Welcome back! Login to your account</p>
-        <div id="modalBody">
+        <div>
             <div class="form-group">
                 <label id="emailLabel">Email</label>
                 <input type="text" id="emailInput" placeholder="Enter your email">
@@ -203,8 +211,88 @@
 </div>
 
 <script>
-    // ===== Language Update =====
-    window.updateLanguage = function() {
+    // ===== LANGUAGE DATA =====
+    const LANG_DATA = {
+        en: {
+            appName: 'Premium Game Shop',
+            greeting: '👋 Hey dear, Welcome',
+            title: 'Level Up Your <span>Game!</span>',
+            subtitle: 'Top up diamonds and dominate the battlefield',
+            bannerTag: 'HOT',
+            bannerTitle: '20% Bonus Diamonds!',
+            bannerDesc: 'Limited time offer • Shop now',
+            servicesTitle: '⚡ Premium Services',
+            s1: 'Instant', s2: 'Secure', s3: 'Best Price',
+            s4: '24/7', s5: 'Mobile', s6: 'Top Rated',
+            goToShop: 'Go to Shop →',
+            home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
+            noti: '🔔 No new notifications',
+            modalLogin: 'Login',
+            modalRegister: 'Register',
+            modalLoginSub: 'Welcome back! Login to your account',
+            modalRegisterSub: 'Create your account to get started',
+            email: 'Email',
+            password: 'Password',
+            username: 'Username',
+            switchLogin: "Don't have an account? Register",
+            switchRegister: 'Already have an account? Login',
+            loginSuccess: '✅ Login successful!',
+            registerSuccess: '✅ Account created successfully!',
+            logoutSuccess: '🚪 Logged out successfully!',
+            logoutConfirm: 'Are you sure you want to logout?',
+            enterEmail: 'Please enter your email',
+            enterPassword: 'Please enter your password',
+            enterUsername: 'Please enter your username'
+        },
+        my: {
+            appName: 'ပရီမီယံ ဂိမ်းဆိုင်',
+            greeting: '👋 ဟေ့ကောင်လေး၊ ကြိုဆိုပါတယ်',
+            title: 'ဂိမ်းကို <span>မြှင့်တင်လိုက်ပါ!</span>',
+            subtitle: 'စိန်တွေဖြည့်ပြီး စစ်မြေပြင်ကို အနိုင်ယူလိုက်ပါ',
+            bannerTag: 'ပူပူ',
+            bannerTitle: 'စိန် ၂၀% အပိုရယူလိုက်ပါ!',
+            bannerDesc: 'အချိန်အကန့်အသတ်နဲ့ • အခုပဲဝယ်ယူပါ',
+            servicesTitle: '⚡ ထိပ်တန်းဝန်ဆောင်မှုများ',
+            s1: 'ချက်ချင်း', s2: 'လုံခြုံ', s3: 'ဈေးအကောင်းဆုံး',
+            s4: '၂၄/၇', s5: 'မိုဘိုင်း', s6: 'ထိပ်တန်း',
+            goToShop: 'ဆိုင်သို့သွားရန် →',
+            home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
+            noti: '🔔 အသိပေးချက်အသစ်မရှိပါ',
+            modalLogin: 'ဝင်ရန်',
+            modalRegister: 'မှတ်ပုံတင်ရန်',
+            modalLoginSub: 'ပြန်လည်ကြိုဆိုပါတယ်! သင့်အကောင့်သို့ဝင်ရန်',
+            modalRegisterSub: 'စတင်ရန် အကောင့်ဖွင့်ပါ',
+            email: 'အီးမေးလ်',
+            password: 'စကားဝှက်',
+            username: 'အသုံးပြုသူအမည်',
+            switchLogin: 'အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်',
+            switchRegister: 'အကောင့်ရှိပြီးသား? ဝင်ရန်',
+            loginSuccess: '✅ အကောင့်ဝင်ခြင်းအောင်မြင်ပါပြီ!',
+            registerSuccess: '✅ အကောင့်ဖွင့်ခြင်းအောင်မြင်ပါပြီ!',
+            logoutSuccess: '🚪 ထွက်ခြင်းအောင်မြင်ပါပြီ!',
+            logoutConfirm: 'ထွက်မှာသေချာလား?',
+            enterEmail: 'ကျေးဇူးပြု၍ အီးမေးလ်ထည့်ပါ',
+            enterPassword: 'ကျေးဇူးပြု၍ စကားဝှက်ထည့်ပါ',
+            enterUsername: 'ကျေးဇူးပြု၍ အသုံးပြုသူအမည်ထည့်ပါ'
+        }
+    };
+
+    let currentLang = localStorage.getItem('lang') || 'en';
+
+    function getText(key) {
+        return LANG_DATA[currentLang][key] || key;
+    }
+
+    function setLang(lang) {
+        currentLang = lang;
+        localStorage.setItem('lang', lang);
+        updateLanguage();
+        document.querySelectorAll('.lang-btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.lang === lang);
+        });
+    }
+
+    function updateLanguage() {
         const d = LANG_DATA[currentLang];
         document.getElementById('appName').textContent = d.appName;
         document.getElementById('greeting').textContent = d.greeting;
@@ -220,15 +308,15 @@
         document.getElementById('s4').textContent = d.s4;
         document.getElementById('s5').textContent = d.s5;
         document.getElementById('s6').textContent = d.s6;
+        document.getElementById('goToShop').textContent = d.goToShop;
         document.getElementById('navHome').textContent = d.home;
         document.getElementById('navShop').textContent = d.shop;
         document.getElementById('navPayment').textContent = d.payment;
         document.getElementById('navProfile').textContent = d.profile;
-        // Update auth UI
         updateAuthUI();
-    };
+    }
 
-    // ===== Theme =====
+    // ===== THEME =====
     function toggleTheme() {
         const isLight = document.body.classList.toggle('light');
         document.querySelector('.theme-btn').textContent = isLight ? '🌙' : '☀️';
@@ -239,10 +327,157 @@
         document.querySelector('.theme-btn').textContent = '🌙';
     }
 
-    // ===== Toast =====
+    // ===== TOAST =====
     function showToast(msg) {
         const t = document.getElementById('toast');
         t.textContent = msg;
         t.classList.add('show');
         clearTimeout(t._timer);
-        t._timer = setTimeout(() => t.classList.remove('show
+        t._timer = setTimeout(() => t.classList.remove('show'), 2500);
+    }
+
+    // ===== AUTH SYSTEM =====
+    let currentUser = null;
+    const savedUser = localStorage.getItem('currentUser');
+    if (savedUser) currentUser = JSON.parse(savedUser);
+
+    function isLoggedIn() { return currentUser !== null; }
+
+    function updateAuthUI() {
+        const avatar = document.getElementById('profileAvatar');
+        if (currentUser) {
+            const savedAvatar = localStorage.getItem('userAvatar');
+            if (savedAvatar) {
+                avatar.innerHTML = '<img src="' + savedAvatar + '" alt="avatar">';
+            } else {
+                avatar.textContent = '👤';
+                avatar.style.background = 'linear-gradient(135deg, var(--gold), var(--orange))';
+                avatar.style.color = '#0a0e1a';
+            }
+        } else {
+            avatar.textContent = '👤';
+            avatar.style.background = 'var(--bg3)';
+            avatar.style.color = 'var(--text2)';
+        }
+        // Update modal texts
+        const modal = document.getElementById('authModal');
+        if (modal && modal._mode) updateModalUI();
+    }
+
+    function loginUser(email, password) {
+        const users = JSON.parse(localStorage.getItem('users') || '{}');
+        if (users[email] && users[email].password === password) {
+            currentUser = { username: email, email: email };
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            updateAuthUI();
+            return true;
+        }
+        return false;
+    }
+
+    function registerUser(username, password) {
+        const users = JSON.parse(localStorage.getItem('users') || '{}');
+        if (users[username]) return false;
+        users[username] = { username: username, password: password };
+        localStorage.setItem('users', JSON.stringify(users));
+        currentUser = { username: username, email: username };
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        updateAuthUI();
+        return true;
+    }
+
+    function logoutUser() {
+        currentUser = null;
+        localStorage.removeItem('currentUser');
+        updateAuthUI();
+    }
+
+    // ===== AUTH MODAL =====
+    function openModal(mode) {
+        const modal = document.getElementById('authModal');
+        modal._mode = mode || 'login';
+        modal.classList.add('show');
+        updateModalUI();
+    }
+
+    function closeModal() {
+        document.getElementById('authModal').classList.remove('show');
+    }
+
+    function switchAuthMode() {
+        const modal = document.getElementById('authModal');
+        modal._mode = modal._mode === 'login' ? 'register' : 'login';
+        updateModalUI();
+    }
+
+    function updateModalUI() {
+        const modal = document.getElementById('authModal');
+        const isLogin = modal._mode === 'login';
+        document.getElementById('modalTitle').textContent = getText(isLogin ? 'modalLogin' : 'modalRegister');
+        document.getElementById('modalSub').textContent = getText(isLogin ? 'modalLoginSub' : 'modalRegisterSub');
+        document.getElementById('modalAction').textContent = getText(isLogin ? 'login' : 'register');
+        document.getElementById('switchLink').textContent = getText(isLogin ? 'switchLogin' : 'switchRegister');
+        document.getElementById('emailLabel').textContent = getText(isLogin ? 'email' : 'username');
+        document.getElementById('emailInput').placeholder = isLogin ? 'Enter your email' : 'Enter your username';
+        document.getElementById('passLabel').textContent = getText('password');
+    }
+
+    function handleAuth() {
+        const modal = document.getElementById('authModal');
+        const isLogin = modal._mode === 'login';
+        const email = document.getElementById('emailInput').value.trim();
+        const password = document.getElementById('passInput').value.trim();
+
+        if (!email) { showToast(getText('enterEmail')); return; }
+        if (!password) { showToast(getText('enterPassword')); return; }
+
+        if (isLogin) {
+            if (loginUser(email, password)) {
+                closeModal();
+                showToast(getText('loginSuccess'));
+            } else {
+                showToast('❌ Invalid email or password');
+            }
+        } else {
+            if (password.length < 4) {
+                showToast('❌ Password must be at least 4 characters');
+                return;
+            }
+            if (registerUser(email, password)) {
+                closeModal();
+                showToast(getText('registerSuccess'));
+            } else {
+                showToast('❌ Username already exists');
+            }
+        }
+    }
+
+    // ===== PROFILE AVATAR CLICK =====
+    document.getElementById('profileAvatar').addEventListener('click', function(e) {
+        if (!isLoggedIn()) {
+            e.preventDefault();
+            openModal('login');
+        }
+    });
+
+    // ===== CLOSE MODAL =====
+    document.getElementById('authModal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && document.getElementById('authModal').classList.contains('show')) {
+            handleAuth();
+        }
+    });
+
+    // ===== INIT =====
+    document.addEventListener('DOMContentLoaded', function() {
+        const savedLang = localStorage.getItem('lang') || 'en';
+        setLang(savedLang);
+        updateAuthUI();
+    });
+</script>
+
+</body>
+</html>
