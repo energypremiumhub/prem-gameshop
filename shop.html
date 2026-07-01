@@ -39,12 +39,12 @@
             color: var(--text);
             padding: 16px;
             padding-bottom: 90px;
-            transition: all 0.3s ease;
+            transition: background 0.15s ease, color 0.15s ease;
         }
 
         .container{max-width:500px;margin:0 auto}
         .topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 0 16px;border-bottom:1px solid var(--border);margin-bottom:20px}
-        .topbar .back-btn{color:var(--gold);text-decoration:none;font-size:0.8rem;font-weight:600;padding:6px 14px;border-radius:20px;background:var(--bg3);border:1px solid var(--border);transition:all 0.3s ease}
+        .topbar .back-btn{color:var(--gold);text-decoration:none;font-size:0.8rem;font-weight:600;padding:6px 14px;border-radius:20px;background:var(--bg3);border:1px solid var(--border);transition:all 0.15s ease}
         .topbar .back-btn:active{transform:scale(0.92);background:var(--gold);color:#0a0e1a}
         .topbar .shop-title{font-size:1.2rem;font-weight:700;color:var(--gold)}
         .topbar .spacer{width:70px}
@@ -58,26 +58,27 @@
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
 
         .package-list{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
-        .package-item{display:flex;align-items:center;justify-content:space-between;background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:12px 14px;transition:all 0.3s ease;cursor:pointer;box-shadow:0 2px 15px var(--shadow)}
+        .package-item{display:flex;align-items:center;justify-content:space-between;background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:12px 14px;transition:all 0.15s ease;cursor:pointer;box-shadow:0 2px 15px var(--shadow)}
         .package-item:active{transform:scale(0.97);border-color:var(--gold)}
         .package-item .info{display:flex;flex-direction:column;gap:2px;flex:1}
         .package-item .info .name{font-size:0.8rem;font-weight:600;color:var(--text)}
+        .package-item .info .name .dia-icon{color:var(--gold);margin-right:4px}
         .package-item .info .badge{display:inline-block;font-size:0.5rem;color:var(--green);background:rgba(34,211,238,0.08);padding:2px 10px;border-radius:16px;border:1px solid rgba(34,211,238,0.10);width:fit-content;font-weight:500}
         .package-item .right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:4px}
         .package-item .right .price{font-size:1rem;font-weight:700;color:var(--gold)}
-        .package-item .right .price .diamond-icon{color:var(--gold);margin-right:4px}
-        .package-item .right .btn{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;padding:4px 14px;border-radius:16px;font-weight:700;font-size:0.55rem;cursor:pointer;transition:all 0.3s ease}
+        .package-item .right .btn{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;padding:4px 14px;border-radius:16px;font-weight:700;font-size:0.55rem;cursor:pointer;transition:all 0.15s ease}
         .package-item .right .btn:active{transform:scale(0.88)}
 
         .footer{text-align:center;margin-top:16px;padding:12px;border-top:1px solid var(--border);color:var(--text2);font-size:0.55rem;opacity:0.5}
 
         .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:8px 0 12px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -4px 25px var(--shadow)}
-        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text2);transition:all 0.3s ease;padding:4px 10px;border-radius:10px;position:relative}
-        .bottom-nav .nav-item:active{transform:scale(0.88)}
-        .bottom-nav .nav-item .icon{font-size:1.3rem;display:block}
-        .bottom-nav .nav-item .label{font-size:0.45rem;margin-top:2px;font-weight:600;letter-spacing:0.5px}
+        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text2);transition:all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);padding:4px 10px;border-radius:10px;position:relative}
+        .bottom-nav .nav-item:active{transform:scale(0.85)}
+        .bottom-nav .nav-item .icon{font-size:1.3rem;display:block;transition:all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)}
+        .bottom-nav .nav-item .label{font-size:0.45rem;margin-top:2px;font-weight:600;letter-spacing:0.5px;transition:all 0.2s ease}
         .bottom-nav .nav-item.active{color:var(--gold)}
-        .bottom-nav .nav-item.active .icon{transform:translateY(-2px)}
+        .bottom-nav .nav-item.active .icon{transform:translateY(-4px) scale(1.1)}
+        .bottom-nav .nav-item.active .label{color:var(--gold)}
         .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:20px;height:2px;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:10px}
     </style>
 </head>
@@ -95,25 +96,25 @@
 
     <div class="section-title">🎁 Bundles</div>
     <div class="package-list">
-        <div class="package-item"><div class="info"><div class="name">Monthly Epic Bundle</div><span class="badge">⚡ + ★180 Bonus</span></div><div class="right"><div class="price"><span class="diamond-icon">💎</span>17,200 Ks</div><button class="btn" onclick="goToCheckout('Monthly Epic Bundle','17,200 Ks')">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name">Weekly Elite Bundle</div><span class="badge">⚡ + ★20 Bonus</span></div><div class="right"><div class="price"><span class="diamond-icon">💎</span>3,350 Ks</div><button class="btn" onclick="goToCheckout('Weekly Elite Bundle','3,350 Ks')">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name">Weekly Pass</div></div><div class="right"><div class="price"><span class="diamond-icon">💎</span>6,500 Ks</div><button class="btn" onclick="goToCheckout('Weekly Pass','6,500 Ks')">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name">Monthly Epic Bundle</div><span class="badge">⚡ + ★180 Bonus</span></div><div class="right"><div class="price">17,200 Ks</div><button class="btn" onclick="goToCheckout('Monthly Epic Bundle','17,200 Ks')">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name">Weekly Elite Bundle</div><span class="badge">⚡ + ★20 Bonus</span></div><div class="right"><div class="price">3,350 Ks</div><button class="btn" onclick="goToCheckout('Weekly Elite Bundle','3,350 Ks')">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name">Weekly Pass</div></div><div class="right"><div class="price">6,500 Ks</div><button class="btn" onclick="goToCheckout('Weekly Pass','6,500 Ks')">Buy</button></div></div>
     </div>
 
     <div class="section-title">💎 Diamonds</div>
     <div class="package-list">
-        <div class="package-item"><div class="info"><div class="name">11 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price"><span class="diamond-icon">💎</span>1,000 Ks</div><button class="btn" onclick="goToCheckout('11 Diamonds','1,000 Ks')">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name">22 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price"><span class="diamond-icon">💎</span>1,750 Ks</div><button class="btn" onclick="goToCheckout('22 Diamonds','1,750 Ks')">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name">33 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price"><span class="diamond-icon">💎</span>2,500 Ks</div><button class="btn" onclick="goToCheckout('33 Diamonds','2,500 Ks')">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name">44 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price"><span class="diamond-icon">💎</span>3,300 Ks</div><button class="btn" onclick="goToCheckout('44 Diamonds','3,300 Ks')">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name">56 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price"><span class="diamond-icon">💎</span>4,000 Ks</div><button class="btn" onclick="goToCheckout('56 Diamonds','4,000 Ks')">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name">86 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price"><span class="diamond-icon">💎</span>5,500 Ks</div><button class="btn" onclick="goToCheckout('86 Diamonds','5,500 Ks')">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name">112 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price"><span class="diamond-icon">💎</span>7,800 Ks</div><button class="btn" onclick="goToCheckout('112 Diamonds','7,800 Ks')">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name">172 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price"><span class="diamond-icon">💎</span>10,700 Ks</div><button class="btn" onclick="goToCheckout('172 Diamonds','10,700 Ks')">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name">257 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price"><span class="diamond-icon">💎</span>15,900 Ks</div><button class="btn" onclick="goToCheckout('257 Diamonds','15,900 Ks')">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name">343 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price"><span class="diamond-icon">💎</span>21,100 Ks</div><button class="btn" onclick="goToCheckout('343 Diamonds','21,100 Ks')">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name">429 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price"><span class="diamond-icon">💎</span>26,600 Ks</div><button class="btn" onclick="goToCheckout('429 Diamonds','26,600 Ks')">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name">514 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price"><span class="diamond-icon">💎</span>31,200 Ks</div><button class="btn" onclick="goToCheckout('514 Diamonds','31,200 Ks')">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>11 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">1,000 Ks</div><button class="btn" onclick="goToCheckout('11 Diamonds','1,000 Ks')">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>22 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">1,750 Ks</div><button class="btn" onclick="goToCheckout('22 Diamonds','1,750 Ks')">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>33 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">2,500 Ks</div><button class="btn" onclick="goToCheckout('33 Diamonds','2,500 Ks')">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>44 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">3,300 Ks</div><button class="btn" onclick="goToCheckout('44 Diamonds','3,300 Ks')">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>56 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">4,000 Ks</div><button class="btn" onclick="goToCheckout('56 Diamonds','4,000 Ks')">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>86 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">5,500 Ks</div><button class="btn" onclick="goToCheckout('86 Diamonds','5,500 Ks')">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>112 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">7,800 Ks</div><button class="btn" onclick="goToCheckout('112 Diamonds','7,800 Ks')">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>172 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">10,700 Ks</div><button class="btn" onclick="goToCheckout('172 Diamonds','10,700 Ks')">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>257 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">15,900 Ks</div><button class="btn" onclick="goToCheckout('257 Diamonds','15,900 Ks')">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>343 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">21,100 Ks</div><button class="btn" onclick="goToCheckout('343 Diamonds','21,100 Ks')">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>429 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">26,600 Ks</div><button class="btn" onclick="goToCheckout('429 Diamonds','26,600 Ks')">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>514 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">31,200 Ks</div><button class="btn" onclick="goToCheckout('514 Diamonds','31,200 Ks')">Buy</button></div></div>
     </div>
 
     <div class="footer">&copy; 2026 Prem-Game Shop • Made with ❤️</div>
