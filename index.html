@@ -25,7 +25,7 @@
             padding: 16px;
         }
 
-        /* ===== Header ===== */
+        /* Header */
         .header {
             display: flex;
             justify-content: space-between;
@@ -34,17 +34,14 @@
             border-bottom: 1px solid #1f2a3f;
             margin-bottom: 20px;
         }
-
         .header .logo {
             font-size: 1.5rem;
             font-weight: 700;
             color: #f5c842;
         }
-
         .header .logo span {
             font-size: 1.8rem;
         }
-
         .header .icons {
             display: flex;
             gap: 16px;
@@ -52,26 +49,23 @@
             color: #8892b0;
         }
 
-        /* ===== Welcome ===== */
+        /* Welcome */
         .welcome {
             margin-bottom: 20px;
         }
-
         .welcome h2 {
             font-size: 1.4rem;
         }
-
         .welcome h2 span {
             color: #f5c842;
         }
-
         .welcome p {
             color: #8892b0;
             font-size: 0.85rem;
             margin-top: 4px;
         }
 
-        /* ===== Quick Menu (အိုင်ကွန်တွေ) ===== */
+        /* Quick Menu */
         .quick-menu {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -82,29 +76,25 @@
             margin-bottom: 25px;
             border: 1px solid #1f2a3f;
         }
-
         .quick-menu .item {
             text-align: center;
             cursor: pointer;
             transition: 0.2s;
         }
-
         .quick-menu .item:active {
             transform: scale(0.92);
         }
-
         .quick-menu .item .icon {
             font-size: 1.8rem;
             display: block;
             margin-bottom: 4px;
         }
-
         .quick-menu .item .label {
             font-size: 0.6rem;
             color: #8892b0;
         }
 
-        /* ===== Card / Banner ===== */
+        /* Banner */
         .banner {
             background: linear-gradient(135deg, #1f2a3f, #141b2b);
             border-radius: 16px;
@@ -113,19 +103,50 @@
             margin-bottom: 25px;
             text-align: center;
         }
-
         .banner h3 {
             color: #f5c842;
             font-size: 1.2rem;
             margin-bottom: 4px;
         }
-
         .banner p {
             color: #8892b0;
             font-size: 0.8rem;
         }
 
-        /* ===== Bottom Navigation ===== */
+        /* Features */
+        .section-title {
+            font-size: 1rem;
+            color: #f5c842;
+            margin-bottom: 12px;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        .features-grid .feat {
+            background: #141b2b;
+            border-radius: 12px;
+            padding: 16px 8px;
+            text-align: center;
+            border: 1px solid #1f2a3f;
+            transition: 0.2s;
+        }
+        .features-grid .feat:active {
+            transform: scale(0.95);
+        }
+        .features-grid .feat .icon {
+            font-size: 1.6rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .features-grid .feat .label {
+            font-size: 0.65rem;
+            color: #8892b0;
+        }
+
+        /* Bottom Nav */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -140,73 +161,28 @@
             margin: 0 auto;
             z-index: 100;
         }
-
         .bottom-nav .nav-item {
             text-align: center;
             cursor: pointer;
-            transition: 0.2s;
             text-decoration: none;
             color: #8892b0;
+            transition: 0.2s;
         }
-
         .bottom-nav .nav-item:active {
             transform: scale(0.90);
         }
-
         .bottom-nav .nav-item .icon {
             font-size: 1.4rem;
             display: block;
         }
-
         .bottom-nav .nav-item .label {
             font-size: 0.55rem;
             margin-top: 2px;
         }
-
         .bottom-nav .nav-item.active {
             color: #f5c842;
         }
 
-        /* ===== Section Title ===== */
-        .section-title {
-            font-size: 1rem;
-            color: #f5c842;
-            margin-bottom: 12px;
-        }
-
-        /* ===== Features Grid ===== */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 25px;
-        }
-
-        .features-grid .feat {
-            background: #141b2b;
-            border-radius: 12px;
-            padding: 16px 8px;
-            text-align: center;
-            border: 1px solid #1f2a3f;
-            transition: 0.2s;
-        }
-
-        .features-grid .feat:active {
-            transform: scale(0.95);
-        }
-
-        .features-grid .feat .icon {
-            font-size: 1.6rem;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .features-grid .feat .label {
-            font-size: 0.65rem;
-            color: #8892b0;
-        }
-
-        /* ===== Footer ===== */
         .footer-text {
             text-align: center;
             color: #8892b0;
@@ -220,7 +196,7 @@
 
 <div class="container">
 
-    <!-- ===== Header ===== -->
+    <!-- Header -->
     <div class="header">
         <div class="logo"><span>⚡</span> Prem-Game</div>
         <div class="icons">
@@ -229,13 +205,13 @@
         </div>
     </div>
 
-    <!-- ===== Welcome ===== -->
+    <!-- Welcome -->
     <div class="welcome">
         <h2>Hello, <span>Gamer!</span> 👋</h2>
         <p>Top up your Mobile Legends diamonds now.</p>
     </div>
 
-    <!-- ===== Quick Menu (အိုင်ကွန်တွေ) ===== -->
+    <!-- Quick Menu -->
     <div class="quick-menu">
         <div class="item">
             <span class="icon">💎</span>
@@ -255,50 +231,30 @@
         </div>
     </div>
 
-    <!-- ===== Banner ===== -->
+    <!-- Banner -->
     <div class="banner">
         <h3>🔥 Welcome to Prem-Game Shop</h3>
         <p>Fast • Safe • Trusted</p>
         <p style="margin-top:6px; font-size:0.7rem; color:#f5c842;">👇 Scroll down to shop</p>
     </div>
 
-    <!-- ===== Features ===== -->
+    <!-- Features -->
     <div class="section-title">⚡ Services</div>
     <div class="features-grid">
-        <div class="feat">
-            <span class="icon">⚡</span>
-            <span class="label">Fast</span>
-        </div>
-        <div class="feat">
-            <span class="icon">🔒</span>
-            <span class="label">Safe</span>
-        </div>
-        <div class="feat">
-            <span class="icon">💎</span>
-            <span class="label">Best Price</span>
-        </div>
-        <div class="feat">
-            <span class="icon">🕒</span>
-            <span class="label">24/7</span>
-        </div>
-        <div class="feat">
-            <span class="icon">📱</span>
-            <span class="label">Mobile</span>
-        </div>
-        <div class="feat">
-            <span class="icon">🤝</span>
-            <span class="label">Trusted</span>
-        </div>
+        <div class="feat"><span class="icon">⚡</span><span class="label">Fast</span></div>
+        <div class="feat"><span class="icon">🔒</span><span class="label">Safe</span></div>
+        <div class="feat"><span class="icon">💎</span><span class="label">Best Price</span></div>
+        <div class="feat"><span class="icon">🕒</span><span class="label">24/7</span></div>
+        <div class="feat"><span class="icon">📱</span><span class="label">Mobile</span></div>
+        <div class="feat"><span class="icon">🤝</span><span class="label">Trusted</span></div>
     </div>
 
-    <!-- ===== Footer ===== -->
     <div class="footer-text">
         &copy; 2026 Prem-Game Shop
     </div>
-
 </div>
 
-<!-- ===== Bottom Navigation ===== -->
+<!-- Bottom Nav -->
 <div class="bottom-nav">
     <a href="index.html" class="nav-item active">
         <span class="icon">🏠</span>
