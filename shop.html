@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prem-Game Shop - Shop</title>
+    <title>Premium Game Shop - Shop</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
@@ -39,17 +39,27 @@
             color: var(--text);
             padding: 16px;
             padding-bottom: 90px;
-            transition: background 0.15s ease, color 0.15s ease;
+            transition: background 0.12s ease, color 0.12s ease;
         }
 
         .container{max-width:500px;margin:0 auto}
-        .topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 0 16px;border-bottom:1px solid var(--border);margin-bottom:20px}
-        .topbar .back-btn{color:var(--gold);text-decoration:none;font-size:0.8rem;font-weight:600;padding:6px 14px;border-radius:20px;background:var(--bg3);border:1px solid var(--border);transition:all 0.15s ease}
-        .topbar .back-btn:active{transform:scale(0.92);background:var(--gold);color:#0a0e1a}
-        .topbar .shop-title{font-size:1.2rem;font-weight:700;color:var(--gold)}
-        .topbar .spacer{width:70px}
 
-        .page-header{margin-bottom:24px}
+        /* ===== Header ===== */
+        .header{display:flex;justify-content:space-between;align-items:center;padding:8px 0 16px;flex-wrap:wrap;gap:8px}
+        .header .logo{font-size:1.1rem;font-weight:800;color:var(--gold)}
+        .header .right{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+        
+        .lang-switcher{display:flex;gap:3px;background:var(--bg3);padding:3px;border-radius:10px;border:1px solid var(--border)}
+        .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text2);padding:4px 10px;border-radius:8px;font-size:0.55rem;font-weight:600;cursor:pointer;transition:all 0.12s ease}
+        .lang-switcher .lang-btn.active{background:var(--gold);color:#0a0e1a}
+        .lang-switcher .lang-btn:active{transform:scale(0.88)}
+
+        .header .right .profile-avatar{width:40px;height:40px;border-radius:50%;background:var(--bg3);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--text2);cursor:pointer;transition:all 0.12s ease;overflow:hidden;text-decoration:none}
+        .header .right .profile-avatar:active{transform:scale(0.88)}
+        .header .right .profile-avatar img{width:100%;height:100%;object-fit:cover}
+        .header .right .profile-avatar.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a}
+
+        .page-header{margin-bottom:24px;animation:fadeUp 0.6s ease}
         .page-header h1{font-size:1.4rem;font-weight:700;color:var(--text)}
         .page-header h1 span{background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
         .page-header p{color:var(--text2);font-size:0.8rem;margin-top:2px}
@@ -57,8 +67,8 @@
         .section-title{font-size:0.7rem;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;display:flex;align-items:center;gap:10px}
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
 
-        .package-list{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
-        .package-item{display:flex;align-items:center;justify-content:space-between;background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:12px 14px;transition:all 0.15s ease;cursor:pointer;box-shadow:0 2px 15px var(--shadow)}
+        .package-list{display:flex;flex-direction:column;gap:8px;margin-bottom:24px;animation:fadeUp 0.8s ease}
+        .package-item{display:flex;align-items:center;justify-content:space-between;background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:12px 14px;transition:all 0.12s ease;cursor:pointer;box-shadow:0 2px 15px var(--shadow)}
         .package-item:active{transform:scale(0.97);border-color:var(--gold)}
         .package-item .info{display:flex;flex-direction:column;gap:2px;flex:1}
         .package-item .info .name{font-size:0.8rem;font-weight:600;color:var(--text)}
@@ -66,74 +76,355 @@
         .package-item .info .badge{display:inline-block;font-size:0.5rem;color:var(--green);background:rgba(34,211,238,0.08);padding:2px 10px;border-radius:16px;border:1px solid rgba(34,211,238,0.10);width:fit-content;font-weight:500}
         .package-item .right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:4px}
         .package-item .right .price{font-size:1rem;font-weight:700;color:var(--gold)}
-        .package-item .right .btn{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;padding:4px 14px;border-radius:16px;font-weight:700;font-size:0.55rem;cursor:pointer;transition:all 0.15s ease}
+        .package-item .right .btn{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;padding:4px 14px;border-radius:16px;font-weight:700;font-size:0.55rem;cursor:pointer;transition:all 0.12s ease}
         .package-item .right .btn:active{transform:scale(0.88)}
 
         .footer{text-align:center;margin-top:16px;padding:12px;border-top:1px solid var(--border);color:var(--text2);font-size:0.55rem;opacity:0.5}
 
+        /* ===== Bottom Nav ===== */
         .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:8px 0 12px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -4px 25px var(--shadow)}
-        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text2);transition:all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);padding:4px 10px;border-radius:10px;position:relative}
-        .bottom-nav .nav-item:active{transform:scale(0.85)}
-        .bottom-nav .nav-item .icon{font-size:1.3rem;display:block;transition:all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)}
-        .bottom-nav .nav-item .label{font-size:0.45rem;margin-top:2px;font-weight:600;letter-spacing:0.5px;transition:all 0.2s ease}
+        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text2);transition:all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);padding:4px 10px;border-radius:10px;position:relative}
+        .bottom-nav .nav-item:active{transform:scale(0.80)}
+        .bottom-nav .nav-item .icon{font-size:1.3rem;display:block;transition:all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)}
+        .bottom-nav .nav-item .label{font-size:0.45rem;margin-top:2px;font-weight:600;letter-spacing:0.5px;transition:all 0.35s ease}
         .bottom-nav .nav-item.active{color:var(--gold)}
-        .bottom-nav .nav-item.active .icon{transform:translateY(-4px) scale(1.1)}
+        .bottom-nav .nav-item.active .icon{transform:translateY(-6px) scale(1.15)}
         .bottom-nav .nav-item.active .label{color:var(--gold)}
-        .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:20px;height:2px;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:10px}
+        .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:28px;height:3px;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:10px}
+
+        .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--bg3);padding:12px 24px;border-radius:14px;border:1px solid var(--border);color:var(--gold);font-weight:600;font-size:0.8rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 4px 30px var(--shadow);animation:toastPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)}
+        .toast.show{display:block}
+        @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+
+        /* ===== Auth Modal ===== */
+        .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(10px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px}
+        .modal-overlay.show{display:flex;animation:fadeIn 0.25s ease}
+        .modal{background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:28px 24px;max-width:400px;width:100%;box-shadow:0 10px 50px var(--shadow);position:relative}
+        .modal h2{font-size:1.3rem;color:var(--gold);margin-bottom:6px;text-align:center}
+        .modal p{color:var(--text2);font-size:0.8rem;text-align:center;margin-bottom:20px}
+        .modal .form-group{margin-bottom:14px}
+        .modal .form-group label{font-size:0.7rem;color:var(--text2);font-weight:500;display:block;margin-bottom:4px}
+        .modal .form-group input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:0.9rem;outline:none;transition:all 0.12s ease}
+        .modal .form-group input:focus{border-color:rgba(245,200,66,0.30)}
+        .modal .btn-primary{width:100%;padding:12px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:12px;font-size:0.9rem;font-weight:700;cursor:pointer;transition:all 0.12s ease}
+        .modal .btn-primary:active{transform:scale(0.96)}
+        .modal .switch-link{color:var(--gold);cursor:pointer;font-weight:600;text-align:center;display:block;margin-top:12px;font-size:0.8rem}
+        .modal .switch-link:active{opacity:0.7}
+        .modal .close-btn{position:absolute;top:12px;right:16px;background:none;border:none;color:var(--text2);font-size:1.2rem;cursor:pointer}
+        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="topbar">
-        <a href="index.html" class="back-btn">← Home</a>
-        <span class="shop-title">💎 Shop</span>
-        <span class="spacer"></span>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo" id="appName">Premium Game Shop</div>
+        <div class="right">
+            <div class="lang-switcher">
+                <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" data-lang="my" onclick="setLang('my')">MY</button>
+            </div>
+            <a href="profile.html" class="profile-avatar" id="profileAvatar">👤</a>
+        </div>
     </div>
+
+    <!-- Page Header -->
     <div class="page-header">
-        <h1>Diamonds <span>Package</span></h1>
-        <p>Choose your package and top up instantly</p>
+        <h1 id="shopTitle">Diamonds <span>Package</span></h1>
+        <p id="shopSub">Choose your package and top up instantly</p>
     </div>
 
-    <div class="section-title">🎁 Bundles</div>
+    <!-- Bundles -->
+    <div class="section-title" id="bundlesTitle">🎁 Bundles</div>
     <div class="package-list">
-        <div class="package-item"><div class="info"><div class="name">Monthly Epic Bundle</div><span class="badge">⚡ + ★180 Bonus</span></div><div class="right"><div class="price">17,200 Ks</div><button class="btn" onclick="goToCheckout('Monthly Epic Bundle','17,200 Ks')">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name">Weekly Elite Bundle</div><span class="badge">⚡ + ★20 Bonus</span></div><div class="right"><div class="price">3,350 Ks</div><button class="btn" onclick="goToCheckout('Weekly Elite Bundle','3,350 Ks')">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name">Weekly Pass</div></div><div class="right"><div class="price">6,500 Ks</div><button class="btn" onclick="goToCheckout('Weekly Pass','6,500 Ks')">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name">Monthly Epic Bundle</div><span class="badge">⚡ + ★180 Bonus</span></div><div class="right"><div class="price">17,200 Ks</div><button class="btn" onclick="goToCheckout('Monthly Epic Bundle','17,200 Ks')" id="buyBtn">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name">Weekly Elite Bundle</div><span class="badge">⚡ + ★20 Bonus</span></div><div class="right"><div class="price">3,350 Ks</div><button class="btn" onclick="goToCheckout('Weekly Elite Bundle','3,350 Ks')" id="buyBtn2">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name">Weekly Pass</div></div><div class="right"><div class="price">6,500 Ks</div><button class="btn" onclick="goToCheckout('Weekly Pass','6,500 Ks')" id="buyBtn3">Buy</button></div></div>
     </div>
 
-    <div class="section-title">💎 Diamonds</div>
+    <!-- Diamonds -->
+    <div class="section-title" id="diamondsTitle">💎 Diamonds</div>
     <div class="package-list">
-        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>11 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">1,000 Ks</div><button class="btn" onclick="goToCheckout('11 Diamonds','1,000 Ks')">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>22 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">1,750 Ks</div><button class="btn" onclick="goToCheckout('22 Diamonds','1,750 Ks')">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>33 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">2,500 Ks</div><button class="btn" onclick="goToCheckout('33 Diamonds','2,500 Ks')">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>44 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">3,300 Ks</div><button class="btn" onclick="goToCheckout('44 Diamonds','3,300 Ks')">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>56 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">4,000 Ks</div><button class="btn" onclick="goToCheckout('56 Diamonds','4,000 Ks')">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>86 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">5,500 Ks</div><button class="btn" onclick="goToCheckout('86 Diamonds','5,500 Ks')">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>112 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">7,800 Ks</div><button class="btn" onclick="goToCheckout('112 Diamonds','7,800 Ks')">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>172 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">10,700 Ks</div><button class="btn" onclick="goToCheckout('172 Diamonds','10,700 Ks')">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>257 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">15,900 Ks</div><button class="btn" onclick="goToCheckout('257 Diamonds','15,900 Ks')">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>343 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">21,100 Ks</div><button class="btn" onclick="goToCheckout('343 Diamonds','21,100 Ks')">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>429 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">26,600 Ks</div><button class="btn" onclick="goToCheckout('429 Diamonds','26,600 Ks')">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>514 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">31,200 Ks</div><button class="btn" onclick="goToCheckout('514 Diamonds','31,200 Ks')">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>11 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">1,000 Ks</div><button class="btn" onclick="goToCheckout('11 Diamonds','1,000 Ks')" id="buyBtn4">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>22 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">1,750 Ks</div><button class="btn" onclick="goToCheckout('22 Diamonds','1,750 Ks')" id="buyBtn5">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>33 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">2,500 Ks</div><button class="btn" onclick="goToCheckout('33 Diamonds','2,500 Ks')" id="buyBtn6">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>44 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">3,300 Ks</div><button class="btn" onclick="goToCheckout('44 Diamonds','3,300 Ks')" id="buyBtn7">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>56 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">4,000 Ks</div><button class="btn" onclick="goToCheckout('56 Diamonds','4,000 Ks')" id="buyBtn8">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>86 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">5,500 Ks</div><button class="btn" onclick="goToCheckout('86 Diamonds','5,500 Ks')" id="buyBtn9">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>112 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">7,800 Ks</div><button class="btn" onclick="goToCheckout('112 Diamonds','7,800 Ks')" id="buyBtn10">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>172 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">10,700 Ks</div><button class="btn" onclick="goToCheckout('172 Diamonds','10,700 Ks')" id="buyBtn11">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>257 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">15,900 Ks</div><button class="btn" onclick="goToCheckout('257 Diamonds','15,900 Ks')" id="buyBtn12">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>343 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">21,100 Ks</div><button class="btn" onclick="goToCheckout('343 Diamonds','21,100 Ks')" id="buyBtn13">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>429 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">26,600 Ks</div><button class="btn" onclick="goToCheckout('429 Diamonds','26,600 Ks')" id="buyBtn14">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>514 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">31,200 Ks</div><button class="btn" onclick="goToCheckout('514 Diamonds','31,200 Ks')" id="buyBtn15">Buy</button></div></div>
     </div>
 
-    <div class="footer">&copy; 2026 Prem-Game Shop • Made with ❤️</div>
+    <div class="footer">&copy; 2026 Premium Game Shop</div>
 </div>
 
+<!-- Bottom Nav -->
 <div class="bottom-nav">
-    <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label">Home</span></a>
-    <a href="shop.html" class="nav-item active"><span class="icon">🛒</span><span class="label">Shop</span></a>
-    <a href="payment.html" class="nav-item"><span class="icon">💳</span><span class="label">Payment</span></a>
-    <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label">Profile</span></a>
+    <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label" id="navHome">Home</span></a>
+    <a href="shop.html" class="nav-item active"><span class="icon">🛒</span><span class="label" id="navShop">Shop</span></a>
+    <a href="payment.html" class="nav-item"><span class="icon">💳</span><span class="label" id="navPayment">Payment</span></a>
+    <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label" id="navProfile">Profile</span></a>
+</div>
+<div class="toast" id="toast"></div>
+
+<!-- Auth Modal -->
+<div class="modal-overlay" id="authModal">
+    <div class="modal">
+        <button class="close-btn" onclick="closeModal()">✕</button>
+        <h2 id="modalTitle">Login</h2>
+        <p id="modalSub">Welcome back! Login to your account</p>
+        <div>
+            <div class="form-group">
+                <label id="emailLabel">Email</label>
+                <input type="text" id="emailInput" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label id="passLabel">Password</label>
+                <input type="password" id="passInput" placeholder="Enter your password">
+            </div>
+            <button class="btn-primary" id="modalAction" onclick="handleAuth()">Login</button>
+            <span class="switch-link" id="switchLink" onclick="switchAuthMode()">Don't have an account? Register</span>
+        </div>
+    </div>
 </div>
 
 <script>
+    // ===== LANGUAGE DATA =====
+    const LANG_DATA = {
+        en: {
+            appName: 'Premium Game Shop',
+            shopTitle: 'Diamonds Package',
+            shopSub: 'Choose your package and top up instantly',
+            bundlesTitle: '🎁 Bundles',
+            diamondsTitle: '💎 Diamonds',
+            buy: 'Buy',
+            home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
+            modalLogin: 'Login',
+            modalRegister: 'Register',
+            modalLoginSub: 'Welcome back! Login to your account',
+            modalRegisterSub: 'Create your account to get started',
+            email: 'Email',
+            password: 'Password',
+            username: 'Username',
+            switchLogin: "Don't have an account? Register",
+            switchRegister: 'Already have an account? Login',
+            loginSuccess: '✅ Login successful!',
+            registerSuccess: '✅ Account created successfully!',
+            logoutSuccess: '🚪 Logged out successfully!',
+            logoutConfirm: 'Are you sure you want to logout?',
+            enterEmail: 'Please enter your email',
+            enterPassword: 'Please enter your password',
+            enterUsername: 'Please enter your username',
+            noti: '🔔 No new notifications'
+        },
+        my: {
+            appName: 'ပရီမီယံ ဂိမ်းဆိုင်',
+            shopTitle: 'စိန်အထုပ်များ',
+            shopSub: 'သင့်အထုပ်ကိုရွေးပြီး ချက်ချင်းဖြည့်ပါ',
+            bundlesTitle: '🎁 အထုပ်များ',
+            diamondsTitle: '💎 စိန်များ',
+            buy: 'ဝယ်ရန်',
+            home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
+            modalLogin: 'ဝင်ရန်',
+            modalRegister: 'မှတ်ပုံတင်ရန်',
+            modalLoginSub: 'ပြန်လည်ကြိုဆိုပါတယ်! သင့်အကောင့်သို့ဝင်ရန်',
+            modalRegisterSub: 'စတင်ရန် အကောင့်ဖွင့်ပါ',
+            email: 'အီးမေးလ်',
+            password: 'စကားဝှက်',
+            username: 'အသုံးပြုသူအမည်',
+            switchLogin: 'အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်',
+            switchRegister: 'အကောင့်ရှိပြီးသား? ဝင်ရန်',
+            loginSuccess: '✅ အကောင့်ဝင်ခြင်းအောင်မြင်ပါပြီ!',
+            registerSuccess: '✅ အကောင့်ဖွင့်ခြင်းအောင်မြင်ပါပြီ!',
+            logoutSuccess: '🚪 ထွက်ခြင်းအောင်မြင်ပါပြီ!',
+            logoutConfirm: 'ထွက်မှာသေချာလား?',
+            enterEmail: 'ကျေးဇူးပြု၍ အီးမေးလ်ထည့်ပါ',
+            enterPassword: 'ကျေးဇူးပြု၍ စကားဝှက်ထည့်ပါ',
+            enterUsername: 'ကျေးဇူးပြု၍ အသုံးပြုသူအမည်ထည့်ပါ',
+            noti: '🔔 အသိပေးချက်အသစ်မရှိပါ'
+        }
+    };
+
+    let currentLang = localStorage.getItem('lang') || 'en';
+
+    function getText(key) {
+        return LANG_DATA[currentLang][key] || key;
+    }
+
+    function setLang(lang) {
+        currentLang = lang;
+        localStorage.setItem('lang', lang);
+        updateLanguage();
+        document.querySelectorAll('.lang-btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.lang === lang);
+        });
+    }
+
+    function updateLanguage() {
+        const d = LANG_DATA[currentLang];
+        document.getElementById('appName').textContent = d.appName;
+        document.getElementById('shopTitle').innerHTML = d.shopTitle;
+        document.getElementById('shopSub').textContent = d.shopSub;
+        document.getElementById('bundlesTitle').textContent = d.bundlesTitle;
+        document.getElementById('diamondsTitle').textContent = d.diamondsTitle;
+        document.getElementById('navHome').textContent = d.home;
+        document.getElementById('navShop').textContent = d.shop;
+        document.getElementById('navPayment').textContent = d.payment;
+        document.getElementById('navProfile').textContent = d.profile;
+        // Update buy buttons
+        document.querySelectorAll('#buyBtn, #buyBtn2, #buyBtn3, #buyBtn4, #buyBtn5, #buyBtn6, #buyBtn7, #buyBtn8, #buyBtn9, #buyBtn10, #buyBtn11, #buyBtn12, #buyBtn13, #buyBtn14, #buyBtn15').forEach(btn => {
+            btn.textContent = d.buy;
+        });
+        updateAuthUI();
+    }
+
+    // ===== TOAST =====
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        clearTimeout(t._timer);
+        t._timer = setTimeout(() => t.classList.remove('show'), 2500);
+    }
+
+    // ===== AUTH SYSTEM =====
+    let currentUser = null;
+    const savedUser = localStorage.getItem('currentUser');
+    if (savedUser) currentUser = JSON.parse(savedUser);
+
+    function isLoggedIn() { return currentUser !== null; }
+
+    function updateAuthUI() {
+        const avatar = document.getElementById('profileAvatar');
+        if (currentUser) {
+            avatar.classList.add('logged-in');
+            const savedAvatar = localStorage.getItem('userAvatar');
+            if (savedAvatar) {
+                avatar.innerHTML = '<img src="' + savedAvatar + '" alt="avatar">';
+            } else {
+                avatar.textContent = '👤';
+            }
+        } else {
+            avatar.classList.remove('logged-in');
+            avatar.textContent = '👤';
+        }
+        const modal = document.getElementById('authModal');
+        if (modal && modal._mode) updateModalUI();
+    }
+
+    function loginUser(email, password) {
+        const users = JSON.parse(localStorage.getItem('users') || '{}');
+        if (users[email] && users[email].password === password) {
+            currentUser = { username: email, email: email };
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            updateAuthUI();
+            return true;
+        }
+        return false;
+    }
+
+    function registerUser(username, password) {
+        const users = JSON.parse(localStorage.getItem('users') || '{}');
+        if (users[username]) return false;
+        users[username] = { username: username, password: password };
+        localStorage.setItem('users', JSON.stringify(users));
+        currentUser = { username: username, email: username };
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        updateAuthUI();
+        return true;
+    }
+
+    function openModal(mode) {
+        const modal = document.getElementById('authModal');
+        modal._mode = mode || 'login';
+        modal.classList.add('show');
+        updateModalUI();
+    }
+
+    function closeModal() {
+        document.getElementById('authModal').classList.remove('show');
+    }
+
+    function switchAuthMode() {
+        const modal = document.getElementById('authModal');
+        modal._mode = modal._mode === 'login' ? 'register' : 'login';
+        updateModalUI();
+    }
+
+    function updateModalUI() {
+        const modal = document.getElementById('authModal');
+        const isLogin = modal._mode === 'login';
+        document.getElementById('modalTitle').textContent = getText(isLogin ? 'modalLogin' : 'modalRegister');
+        document.getElementById('modalSub').textContent = getText(isLogin ? 'modalLoginSub' : 'modalRegisterSub');
+        document.getElementById('modalAction').textContent = getText(isLogin ? 'login' : 'register');
+        document.getElementById('switchLink').textContent = getText(isLogin ? 'switchLogin' : 'switchRegister');
+        document.getElementById('emailLabel').textContent = getText(isLogin ? 'email' : 'username');
+        document.getElementById('emailInput').placeholder = isLogin ? 'Enter your email' : 'Enter your username';
+        document.getElementById('passLabel').textContent = getText('password');
+    }
+
+    function handleAuth() {
+        const modal = document.getElementById('authModal');
+        const isLogin = modal._mode === 'login';
+        const email = document.getElementById('emailInput').value.trim();
+        const password = document.getElementById('passInput').value.trim();
+
+        if (!email) { showToast(getText('enterEmail')); return; }
+        if (!password) { showToast(getText('enterPassword')); return; }
+
+        if (isLogin) {
+            if (loginUser(email, password)) {
+                closeModal();
+                showToast(getText('loginSuccess'));
+            } else {
+                showToast('❌ Invalid email or password');
+            }
+        } else {
+            if (password.length < 4) {
+                showToast('❌ Password must be at least 4 characters');
+                return;
+            }
+            if (registerUser(email, password)) {
+                closeModal();
+                showToast(getText('registerSuccess'));
+            } else {
+                showToast('❌ Username already exists');
+            }
+        }
+    }
+
+    document.getElementById('profileAvatar').addEventListener('click', function(e) {
+        if (!isLoggedIn()) {
+            e.preventDefault();
+            openModal('login');
+        }
+    });
+
+    document.getElementById('authModal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && document.getElementById('authModal').classList.contains('show')) {
+            handleAuth();
+        }
+    });
+
     function goToCheckout(pkg, price) {
         window.location.href = 'checkout.html?package=' + encodeURIComponent(pkg) + '&price=' + encodeURIComponent(price);
     }
-    if (localStorage.getItem('theme') === 'light') {
-        document.body.classList.add('light');
-    }
+
+    // ===== INIT =====
+    document.addEventListener('DOMContentLoaded', function() {
+        const savedLang = localStorage.getItem('lang') || 'en';
+        setLang(savedLang);
+        updateAuthUI();
+    });
 </script>
 </body>
 </html>
