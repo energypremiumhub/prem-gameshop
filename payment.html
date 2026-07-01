@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prem-Game Shop - Payment Info</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+        
+        :root {
+            --bg: #0a0e1a;
+            --bg2: #111827;
+            --bg3: #1a2332;
+            --text: #ffffff;
+            --text2: #94a3b8;
+            --card: rgba(255,255,255,0.04);
+            --border: rgba(255,255,255,0.06);
+            --shadow: rgba(0,0,0,0.4);
+            --gold: #f5c842;
+            --gold2: #dbaa2a;
+            --green: #22d3ee;
+            --wave: #0066cc;
+            --kpay: #00a651;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 16px;
+            padding-bottom: 90px;
+            background-image: 
+                radial-gradient(ellipse at 20% 50%, rgba(245,200,66,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(59,130,246,0.04) 0%, transparent 50%);
+        }
+
+        .container{max-width:500px;margin:0 auto}
+
+        .topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 0 16px;border-bottom:1px solid var(--border);margin-bottom:20px}
+        .topbar .back-btn{color:var(--gold);text-decoration:none;font-size:0.8rem;font-weight:600;padding:6px 14px;border-radius:20px;background:var(--bg3);border:1px solid var(--border);transition:all 0.3s ease}
+        .topbar .back-btn:active{transform:scale(0.92);background:var(--gold);color:#0a0e1a}
+        .topbar .page-title{font-size:1.1rem;font-weight:700;color:var(--gold)}
+        .topbar .spacer{width:70px}
+
+        .page-header{margin-bottom:24px}
+        .page-header h1{font-size:1.4rem;font-weight:700;color:var(--text)}
+        .page-header h1 span{background:linear-gradient(135deg,var(--gold),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .page-header p{color:var(--text2);font-size:0.8rem;margin-top:2px}
+
+        .glass-card{background:var(--bg3);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:0 4px 25px var(--shadow)}
+        .glass-card .label{font-size:0.7rem;color:var(--text2);font-weight:600;display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px}
+
+        /* ===== Payment Account Cards ===== */
+        .payment-account{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:12px;border:1px solid var(--border);margin-bottom:10px;transition:all 0.3s ease;background:var(--bg)}
+        .payment-account:active{transform:scale(0.97)}
+        .payment-account .icon-box{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;font-weight:700;border:1px solid var(--border)}
+        .payment-account .icon-box.wave{background:rgba(0,102,204,0.12);color:#0066cc;border-color:rgba(0,102,204,0.15)}
+        .payment-account .icon-box.kpay{background:rgba(0,166,81,0.12);color:#00a651;border-color:rgba(0,166,81,0.15)}
+        .payment-account .icon-box .wave-text{font-size:0.6rem;font-weight:700}
+        .payment-account .icon-box .kpay-text{font-size:0.55rem;font-weight:700}
+        .payment-account .info{flex:1}
+        .payment-account .info .name{font-size:0.85rem;font-weight:600;color:var(--text)}
+        .payment-account .info .number{font-size:0.75rem;color:var(--text2);margin-top:2px}
+        .payment-account .info .number i{margin-right:4px;color:var(--green)}
+        .payment-account .info .holder{font-size:0.65rem;color:var(--green);margin-top:2px;opacity:0.8}
+
+        .copy-btn{background:var(--bg);border:1px solid var(--border);color:var(--text2);padding:4px 12px;border-radius:16px;font-size:0.55rem;cursor:pointer;transition:all 0.3s ease;font-weight:600}
+        .copy-btn:active{transform:scale(0.90);background:var(--gold);color:#0a0e1a}
+        .copy-btn.copied{background:rgba(34,211,238,0.15);border-color:var(--green);color:var(--green)}
+
+        /* ===== Instructions ===== */
+        .instruction-list{display:flex;flex-direction:column;gap:8px}
+        .instruction-item{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--bg);border-radius:10px;border:1px solid var(--border)}
+        .instruction-item .step{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.65rem;flex-shrink:0}
+        .instruction-item .text{font-size:0.75rem;color:var(--text2)}
+        .instruction-item .text strong{color:var(--text)}
+
+        /* ===== Bottom Nav ===== */
+        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:8px 0 12px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -4px 25px var(--shadow)}
+        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text2);transition:all 0.3s ease;padding:4px 10px;border-radius:10px;position:relative}
+        .bottom-nav .nav-item:active{transform:scale(0.88)}
+        .bottom-nav .nav-item .icon{font-size:1.3rem;display:block}
+        .bottom-nav .nav-item .label{font-size:0.45rem;margin-top:2px;font-weight:600;letter-spacing:0.5px}
+        .bottom-nav .nav-item.active{color:var(--gold)}
+        .bottom-nav .nav-item.active .icon{transform:translateY(-2px)}
+        .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:20px;height:2px;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:10px}
+
+        .footer-text{text-align:center;color:var(--text2);font-size:0.55rem;margin-top:16px;opacity:0.5}
+
+        @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+        .payment-account{animation:fadeUp 0.4s ease}
+        .payment-account:nth-child(1){animation-delay:0.05s}
+        .payment-account:nth-child(2){animation-delay:0.10s}
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="topbar">
+        <a href="index.html" class="back-btn">← Home</a>
+        <span class="page-title">💳 Payment Info</span>
+        <span class="spacer"></span>
+    </div>
+
+    <div class="page-header">
+        <h1>Payment <span>Accounts</span></h1>
+        <p>Send payment to one of the following accounts</p>
+    </div>
+
+    <!-- Wave Pay -->
+    <div class="glass-card">
+        <span class="label">📱 Mobile Money</span>
+        <div class="payment-account" id="waveAccount">
+            <div class="icon-box wave">
+                <span class="wave-text"><i class="fas fa-wifi"></i></span>
+            </div>
+            <div class="info">
+                <div class="name">Wave Pay</div>
+                <div class="number"><i class="fas fa-phone"></i> 09682506493</div>
+                <div class="holder">👤 Thein Zaw Oo</div>
+            </div>
+            <button class="copy-btn" onclick="copyNumber('09682506493', this)">Copy</button>
+        </div>
+    </div>
+
+    <!-- KBZ Pay -->
+    <div class="glass-card">
+        <span class="label">🏦 KBZ Bank</span>
+        <div class="payment-account" id="kpayAccount">
+            <div class="icon-box kpay">
+                <span class="kpay-text">K<i class="fas fa-paypal" style="font-size:0.5rem;"></i></span>
+            </div>
+            <div class="info">
+                <div class="name">KBZ Pay (Kpay)</div>
+                <div class="number"><i class="fas fa-phone"></i> 09682506493</div>
+                <div class="holder">👤 DAW THIN WUTT YEE</div>
+            </div>
+            <button class="copy-btn" onclick="copyNumber('09682506493', this)">Copy</button>
+        </div>
+    </div>
+
+    <!-- How to Pay -->
+    <div class="glass-card">
+        <span class="label">📋 How to Pay</span>
+        <div class="instruction-list">
+            <div class="instruction-item">
+                <span class="step">1</span>
+                <span class="text">Choose <strong>Wave Pay</strong> or <strong>KBZ Pay</strong></span>
+            </div>
+            <div class="instruction-item">
+                <span class="step">2</span>
+                <span class="text">Copy the <strong>phone number</strong> above</span>
+            </div>
+            <div class="instruction-item">
+                <span class="step">3</span>
+                <span class="text">Send the exact amount and <strong>take a screenshot</strong></span>
+            </div>
+            <div class="instruction-item">
+                <span class="step">4</span>
+                <span class="text">Go to <strong>Shop</strong> and complete your order</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-text">&copy; 2026 Prem-Game Shop • Made with ❤️</div>
+</div>
+
+<!-- Bottom Navigation -->
+<div class="bottom-nav">
+    <a href="index.html" class="nav-item">
+        <span class="icon">🏠</span>
+        <span class="label">Home</span>
+    </a>
+    <a href="shop.html" class="nav-item">
+        <span class="icon">🛒</span>
+        <span class="label">Shop</span>
+    </a>
+    <a href="payment.html" class="nav-item active">
+        <span class="icon">💳</span>
+        <span class="label">Payment</span>
+    </a>
+    <a href="#" class="nav-item">
+        <span class="icon">👤</span>
+        <span class="label">Profile</span>
+    </a>
+</div>
+
+<script>
+    function copyNumber(number, btn) {
+        navigator.clipboard.writeText(number).then(() => {
+            btn.textContent = '✅ Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = 'Copy';
+                btn.classList.remove('copied');
+            }, 2500);
+        }).catch(() => {
+            const input = document.createElement('input');
+            input.value = number;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+            btn.textContent = '✅ Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = 'Copy';
+                btn.classList.remove('copied');
+            }, 2500);
+        });
+    }
+
+    if (localStorage.getItem('theme') === 'light') {
+        document.body.classList.add('light');
+        document.body.style.backgroundImage = 'none';
+    }
+</script>
+</body>
+</html>
