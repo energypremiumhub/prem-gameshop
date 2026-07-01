@@ -2,391 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prem-Game Shop</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background: #0a0e1a;
-            color: #fff;
-            min-height: 100vh;
-            padding-bottom: 80px;
-            background-image: 
-                radial-gradient(ellipse at 10% 20%, rgba(245, 200, 66, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 90% 80%, rgba(245, 200, 66, 0.05) 0%, transparent 50%);
-        }
-
-        .container {
-            max-width: 480px;
-            margin: 0 auto;
-            padding: 20px 16px;
-        }
-
-        /* ===== Header ===== */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0 16px;
-        }
-
-        .header .logo {
-            font-size: 1.4rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #f5c842, #f7d96a);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .header .logo span {
-            font-size: 1.8rem;
-            -webkit-text-fill-color: initial;
-            color: #f5c842;
-        }
-
-        .header .icons {
-            display: flex;
-            gap: 18px;
-            font-size: 1.3rem;
-        }
-
-        .header .icons .icon-btn {
-            background: rgba(255,255,255,0.06);
-            padding: 8px;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.06);
-            color: #8892b0;
-        }
-
-        .header .icons .icon-btn:active {
-            transform: scale(0.90);
-            background: rgba(245, 200, 66, 0.15);
-            border-color: rgba(245, 200, 66, 0.3);
-        }
-
-        /* ===== Welcome ===== */
-        .welcome {
-            margin-bottom: 28px;
-            animation: fadeUp 0.8s ease;
-        }
-
-        .welcome .greeting {
-            font-size: 0.75rem;
-            color: #8892b0;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .welcome h2 {
-            font-size: 1.8rem;
-            margin-top: 4px;
-            font-weight: 700;
-        }
-
-        .welcome h2 span {
-            background: linear-gradient(135deg, #f5c842, #f7d96a);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .welcome p {
-            color: #8892b0;
-            font-size: 0.85rem;
-            margin-top: 4px;
-        }
-
-        /* ===== Glass Card (Quick Menu) ===== */
-        .glass-card {
-            background: rgba(255,255,255,0.04);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .quick-menu {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-        }
-
-        .quick-menu .item {
-            text-align: center;
-            padding: 12px 4px;
-            border-radius: 14px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .quick-menu .item:active {
-            transform: scale(0.92);
-            background: rgba(245, 200, 66, 0.10);
-        }
-
-        .quick-menu .item .icon {
-            font-size: 2rem;
-            display: block;
-            margin-bottom: 4px;
-            transition: transform 0.3s ease;
-        }
-
-        .quick-menu .item:active .icon {
-            transform: scale(1.2);
-        }
-
-        .quick-menu .item .label {
-            font-size: 0.6rem;
-            color: #8892b0;
-            font-weight: 500;
-        }
-
-        /* ===== Banner ===== */
-        .banner {
-            background: linear-gradient(135deg, rgba(245, 200, 66, 0.12), rgba(245, 200, 66, 0.04));
-            border-radius: 20px;
-            padding: 24px 20px;
-            border: 1px solid rgba(245, 200, 66, 0.10);
-            margin-bottom: 24px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .banner::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(245, 200, 66, 0.06) 0%, transparent 70%);
-            animation: shimmer 6s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(-20%, -20%); }
-        }
-
-        .banner h3 {
-            font-size: 1.3rem;
-            color: #f5c842;
-            position: relative;
-            z-index: 1;
-        }
-
-        .banner p {
-            color: #8892b0;
-            font-size: 0.85rem;
-            position: relative;
-            z-index: 1;
-            margin-top: 4px;
-        }
-
-        .banner .btn-shop {
-            display: inline-block;
-            margin-top: 14px;
-            padding: 12px 36px;
-            background: linear-gradient(135deg, #f5c842, #e6b33a);
-            color: #0a0e1a;
-            border: none;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .banner .btn-shop:hover {
-            transform: scale(1.04);
-            box-shadow: 0 8px 30px rgba(245, 200, 66, 0.25);
-        }
-
-        .banner .btn-shop:active {
-            transform: scale(0.94);
-        }
-
-        /* Ripple Effect for Button */
-        .banner .btn-shop .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.4);
-            transform: scale(0);
-            animation: rippleAnim 0.6s ease-out;
-            pointer-events: none;
-        }
-
-        @keyframes rippleAnim {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
-
-        /* ===== Services (Glass) ===== */
-        .section-title {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #8892b0;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 14px;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
-
-        .services-grid .service {
-            background: rgba(255,255,255,0.04);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 14px;
-            padding: 16px 8px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .services-grid .service:active {
-            transform: scale(0.92);
-            background: rgba(245, 200, 66, 0.08);
-            border-color: rgba(245, 200, 66, 0.15);
-        }
-
-        .services-grid .service .icon {
-            font-size: 1.8rem;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .services-grid .service .label {
-            font-size: 0.65rem;
-            color: #8892b0;
-            font-weight: 500;
-        }
-
-        /* ===== Bottom Nav ===== */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(20, 27, 43, 0.92);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-top: 1px solid rgba(255,255,255,0.06);
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0 14px;
-            max-width: 480px;
-            margin: 0 auto;
-            z-index: 100;
-            border-radius: 20px 20px 0 0;
-        }
-
-        .bottom-nav .nav-item {
-            text-align: center;
-            cursor: pointer;
-            text-decoration: none;
-            color: #8892b0;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            padding: 4px 12px;
-            border-radius: 12px;
-            position: relative;
-        }
-
-        .bottom-nav .nav-item:active {
-            transform: scale(0.88);
-        }
-
-        .bottom-nav .nav-item .icon {
-            font-size: 1.4rem;
-            display: block;
-            transition: all 0.3s ease;
-        }
-
-        .bottom-nav .nav-item .label {
-            font-size: 0.5rem;
-            margin-top: 2px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-
-        .bottom-nav .nav-item.active {
-            color: #f5c842;
-        }
-
-        .bottom-nav .nav-item.active .icon {
-            transform: translateY(-2px);
-        }
-
-        .bottom-nav .nav-item.active::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 3px;
-            background: linear-gradient(90deg, #f5c842, #f7d96a);
-            border-radius: 10px;
-        }
-
-        /* ===== Animations ===== */
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .footer-text {
-            text-align: center;
-            color: #8892b0;
-            font-size: 0.6rem;
-            margin-top: 20px;
-            opacity: 0.6;
-        }
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+        body{background:#0a0e1a;color:#fff;min-height:100vh;padding-bottom:80px}
+        .container{max-width:480px;margin:0 auto;padding:20px 16px}
+        .header{display:flex;justify-content:space-between;align-items:center;padding:8px 0 16px}
+        .header .logo{font-size:1.4rem;font-weight:800;color:#f5c842}
+        .header .logo span{font-size:1.8rem}
+        .header .icons{display:flex;gap:18px;font-size:1.3rem}
+        .header .icons .icon-btn{background:rgba(255,255,255,0.06);padding:8px;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid rgba(255,255,255,0.06);color:#8892b0}
+        .header .icons .icon-btn:active{transform:scale(0.90)}
+        .welcome{margin-bottom:28px}
+        .welcome .greeting{font-size:0.75rem;color:#8892b0;text-transform:uppercase;letter-spacing:2px}
+        .welcome h2{font-size:1.8rem;margin-top:4px;font-weight:700}
+        .welcome h2 span{color:#f5c842}
+        .welcome p{color:#8892b0;font-size:0.85rem;margin-top:4px}
+        .glass-card{background:rgba(255,255,255,0.04);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:20px;margin-bottom:20px}
+        .quick-menu{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+        .quick-menu .item{text-align:center;padding:12px 4px;border-radius:14px;cursor:pointer;transition:all 0.3s ease}
+        .quick-menu .item:active{transform:scale(0.92);background:rgba(245,200,66,0.10)}
+        .quick-menu .item .icon{font-size:2rem;display:block;margin-bottom:4px}
+        .quick-menu .item .label{font-size:0.6rem;color:#8892b0;font-weight:500}
+        .banner{background:linear-gradient(135deg,rgba(245,200,66,0.12),rgba(245,200,66,0.04));border-radius:20px;padding:24px 20px;border:1px solid rgba(245,200,66,0.10);margin-bottom:24px;text-align:center}
+        .banner h3{font-size:1.3rem;color:#f5c842}
+        .banner p{color:#8892b0;font-size:0.85rem;margin-top:4px}
+        .banner .btn-shop{display:inline-block;margin-top:14px;padding:12px 36px;background:linear-gradient(135deg,#f5c842,#e6b33a);color:#0a0e1a;border:none;border-radius:30px;font-weight:700;font-size:0.9rem;cursor:pointer;text-decoration:none;transition:all 0.3s ease}
+        .banner .btn-shop:active{transform:scale(0.94)}
+        .section-title{font-size:0.9rem;font-weight:600;color:#8892b0;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px}
+        .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+        .services-grid .service{background:rgba(255,255,255,0.04);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:16px 8px;text-align:center;cursor:pointer;transition:all 0.3s ease}
+        .services-grid .service:active{transform:scale(0.92);background:rgba(245,200,66,0.08)}
+        .services-grid .service .icon{font-size:1.8rem;display:block;margin-bottom:4px}
+        .services-grid .service .label{font-size:0.65rem;color:#8892b0;font-weight:500}
+        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(20,27,43,0.92);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-around;padding:10px 0 14px;max-width:480px;margin:0 auto;z-index:100;border-radius:20px 20px 0 0}
+        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:#8892b0;transition:all 0.3s ease;padding:4px 12px;border-radius:12px;position:relative}
+        .bottom-nav .nav-item:active{transform:scale(0.88)}
+        .bottom-nav .nav-item .icon{font-size:1.4rem;display:block}
+        .bottom-nav .nav-item .label{font-size:0.5rem;margin-top:2px;font-weight:500;letter-spacing:0.5px}
+        .bottom-nav .nav-item.active{color:#f5c842}
+        .bottom-nav .nav-item.active .icon{transform:translateY(-2px)}
+        .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:20px;height:3px;background:linear-gradient(90deg,#f5c842,#f7d96a);border-radius:10px}
+        .footer-text{text-align:center;color:#8892b0;font-size:0.6rem;margin-top:20px;opacity:0.6}
     </style>
 </head>
 <body>
-
 <div class="container">
-
-    <!-- ===== Header ===== -->
     <div class="header">
         <div class="logo"><span>⚡</span> Prem-Game</div>
         <div class="icons">
@@ -394,44 +56,24 @@
             <div class="icon-btn">👤</div>
         </div>
     </div>
-
-    <!-- ===== Welcome ===== -->
     <div class="welcome">
         <div class="greeting">👋 Welcome back</div>
         <h2>Hello, <span>Gamer!</span></h2>
         <p>Top up your Mobile Legends diamonds instantly</p>
     </div>
-
-    <!-- ===== Quick Menu (Glass) ===== -->
     <div class="glass-card">
         <div class="quick-menu">
-            <div class="item">
-                <span class="icon">💎</span>
-                <span class="label">Diamonds</span>
-            </div>
-            <div class="item">
-                <span class="icon">🎁</span>
-                <span class="label">Bundles</span>
-            </div>
-            <div class="item">
-                <span class="icon">🏆</span>
-                <span class="label">Rank</span>
-            </div>
-            <div class="item">
-                <span class="icon">📊</span>
-                <span class="label">History</span>
-            </div>
+            <div class="item"><span class="icon">💎</span><span class="label">Diamonds</span></div>
+            <div class="item"><span class="icon">🎁</span><span class="label">Bundles</span></div>
+            <div class="item"><span class="icon">🏆</span><span class="label">Rank</span></div>
+            <div class="item"><span class="icon">📊</span><span class="label">History</span></div>
         </div>
     </div>
-
-    <!-- ===== Banner ===== -->
     <div class="banner">
         <h3>🔥 Premium Top-Up</h3>
         <p>Fast • Safe • Trusted • 24/7</p>
-        <a href="shop.html" class="btn-shop" id="shopBtn">🛒 Start Shopping</a>
+        <a href="shop.html" class="btn-shop">🛒 Start Shopping</a>
     </div>
-
-    <!-- ===== Services ===== -->
     <div class="section-title">⚡ Premium Services</div>
     <div class="services-grid glass-card" style="padding:16px;">
         <div class="service"><span class="icon">⚡</span><span class="label">Instant</span></div>
@@ -441,46 +83,13 @@
         <div class="service"><span class="icon">📱</span><span class="label">Mobile</span></div>
         <div class="service"><span class="icon">⭐</span><span class="label">Top Rated</span></div>
     </div>
-
-    <div class="footer-text">
-        &copy; 2026 Prem-Game Shop • Made with ❤️
-    </div>
+    <div class="footer-text">&copy; 2026 Prem-Game Shop • Made with ❤️</div>
 </div>
-
-<!-- ===== Bottom Navigation ===== -->
 <div class="bottom-nav">
-    <a href="index.html" class="nav-item active">
-        <span class="icon">🏠</span>
-        <span class="label">Home</span>
-    </a>
-    <a href="shop.html" class="nav-item">
-        <span class="icon">🛒</span>
-        <span class="label">Shop</span>
-    </a>
-    <a href="#" class="nav-item">
-        <span class="icon">👛</span>
-        <span class="label">Wallet</span>
-    </a>
-    <a href="#" class="nav-item">
-        <span class="icon">👤</span>
-        <span class="label">Profile</span>
-    </a>
+    <a href="index.html" class="nav-item active"><span class="icon">🏠</span><span class="label">Home</span></a>
+    <a href="shop.html" class="nav-item"><span class="icon">🛒</span><span class="label">Shop</span></a>
+    <a href="#" class="nav-item"><span class="icon">👛</span><span class="label">Wallet</span></a>
+    <a href="#" class="nav-item"><span class="icon">👤</span><span class="label">Profile</span></a>
 </div>
-
-<script>
-    // Ripple Effect for Shop Button
-    document.getElementById('shopBtn').addEventListener('click', function(e) {
-        const rect = this.getBoundingClientRect();
-        const ripple = document.createElement('span');
-        ripple.className = 'ripple';
-        const size = Math.max(rect.width, rect.height);
-        ripple.style.width = ripple.style.height = size + 'px';
-        ripple.style.left = (e.clientX - rect.left - size/2) + 'px';
-        ripple.style.top = (e.clientY - rect.top - size/2) + 'px';
-        this.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 600);
-    });
-</script>
-
 </body>
 </html>
