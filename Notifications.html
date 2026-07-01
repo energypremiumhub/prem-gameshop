@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>⚡ Premium Game Shop - Notifications</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
+        :root {
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #111927;
+            --bg-card: #141c2b;
+            --text-primary: #ffffff;
+            --text-secondary: #8899bb;
+            --border-color: rgba(255,255,255,0.06);
+            --shadow: rgba(0,0,0,0.5);
+            --gold: #f5c842;
+            --gold-glow: rgba(245,200,66,0.3);
+            --cyan: #00d4ff;
+            --cyan-glow: rgba(0,212,255,0.2);
+            --orange: #f97316;
+        }
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 16px;
+            padding-bottom: 90px;
+            background-image: 
+                radial-gradient(ellipse at 20% 50%, rgba(245,200,66,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(0,212,255,0.04) 0%, transparent 50%);
+        }
+        .container{max-width:500px;margin:0 auto}
+        .header{display:flex;justify-content:space-between;align-items:center;padding:6px 0 14px}
+        .header .logo{font-size:1rem;font-weight:800;color:var(--gold);text-shadow:0 0 20px var(--gold-glow);letter-spacing:0.5px}
+        .header .logo i{color:var(--cyan);margin-right:6px;text-shadow:0 0 20px var(--cyan-glow)}
+        .header .back-btn{color:var(--gold);text-decoration:none;font-size:0.8rem;font-weight:600;padding:6px 14px;border-radius:20px;background:rgba(255,255,255,0.04);border:1px solid var(--border-color)}
+        .header .back-btn:active{transform:scale(0.90)}
+        .page-header{margin-bottom:20px;animation:slideUp 0.6s ease}
+        .page-header h1{font-size:1.3rem;font-weight:800;color:var(--text-primary)}
+        .page-header h1 span{background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .page-header p{color:var(--text-secondary);font-size:0.75rem;margin-top:2px}
+        .noti-item{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:14px 16px;margin-bottom:10px;animation:slideUp 0.5s ease;display:flex;gap:12px;align-items:flex-start}
+        .noti-item .icon{font-size:1.5rem;flex-shrink:0;margin-top:2px}
+        .noti-item .content{flex:1}
+        .noti-item .content .title{font-size:0.85rem;font-weight:600;color:var(--text-primary)}
+        .noti-item .content .desc{font-size:0.7rem;color:var(--text-secondary);margin-top:2px}
+        .noti-item .content .time{font-size:0.5rem;color:var(--text-secondary);margin-top:4px;opacity:0.5}
+        .noti-item .status-badge{font-size:0.45rem;font-weight:700;padding:2px 10px;border-radius:20px;text-transform:uppercase}
+        .noti-item .status-badge.pending{background:rgba(245,158,11,0.12);color:#f59e0b}
+        .noti-item .status-badge.completed{background:rgba(34,211,238,0.12);color:#22d3ee}
+        .empty-state{text-align:center;padding:40px 20px;color:var(--text-secondary)}
+        .empty-state .icon{font-size:3rem;display:block;margin-bottom:12px;opacity:0.3}
+        .empty-state h3{font-size:1rem;color:var(--text-primary);margin-bottom:4px}
+        .empty-state p{font-size:0.75rem}
+        @keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="logo"><i class="fas fa-gamepad"></i> Premium Game Shop</div>
+        <a href="index.html" class="back-btn">← Back</a>
+    </div>
+
+    <div class="page-header">
+        <h1>🔔 <span>Notifications</span></h1>
+        <p id="subText">Stay updated with your orders</p>
+    </div>
+
+    <div id="notiContainer">
+        <!-- Notifications will be rendered here -->
+    </div>
+</div>
+
+<script>
+    function renderNotifications() {
+        const container = document.getElementById('notiContainer');
+        const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+        const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+        const userOrders = orders.filter(o => o.userId === currentUser.username);
+
+        if (userOrders.length === 0) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <span class="icon">📭</span>
+                    <h3>No notifications yet</h3>
+                    <p>Your notifications will appear here</p>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = userOrders.map(order => {
+            const statusClass = order.status === 'completed' ? 'completed' : 'pending';
+            const statusText = order.status === 'completed' ? 'Completed' : 'Pending';
+            return `
+                <div class="noti-item">
+                    <span class="icon">🛒</span>
+                    <div class="content">
+                        <div class="title">Order #${order.id}</div>
+                        <div class="desc">${order.package} - ${order.price}</div>
+                        <div style="display:flex;gap:8px;align-items:center;margin-top:4px;">
+                            <span class="status-badge ${statusClass}">${statusText}</span>
+                            <span class="time">${new Date(order.date).toLocaleString()}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        renderNotifications();
+    });
+</script>
+</body>
+</html>
