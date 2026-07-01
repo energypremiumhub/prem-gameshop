@@ -650,6 +650,45 @@ window.addEventListener('storage', function(e) {
 document.addEventListener('DOMContentLoaded', function() {
     checkNotifications();
 });
+
+    // ===== NOTIFICATION SYSTEM =====
+function checkNotifications() {
+    const notiData = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
+    const badge = document.getElementById('notiBadge');
+    if (notiData.show) {
+        badge.style.display = 'block';
+        badge.textContent = '1';
+        setTimeout(() => {
+            badge.style.display = 'none';
+            localStorage.setItem('newOrderNotification', JSON.stringify({show: false}));
+        }, 5000);
+    } else {
+        badge.style.display = 'none';
+    }
+}
+
+function showNotification() {
+    const notiData = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
+    if (notiData.show) {
+        showToast('🛒 ' + notiData.message + ' #' + notiData.orderId);
+        localStorage.setItem('newOrderNotification', JSON.stringify({show: false}));
+        document.getElementById('notiBadge').style.display = 'none';
+    } else {
+        showToast('🔔 No new notifications');
+    }
+}
+
+// Listen for storage changes
+window.addEventListener('storage', function(e) {
+    if (e.key === 'newOrderNotification') {
+        checkNotifications();
+    }
+});
+
+// Check on page load
+document.addEventListener('DOMContentLoaded', function() {
+    checkNotifications();
+});
     
 </script>
 </body>
