@@ -152,7 +152,6 @@
             background: #e74c3c;
             color: #fff;
         }
-        /* Notification */
         .notification {
             position: fixed;
             top: 20px;
@@ -182,7 +181,6 @@
                 opacity: 1;
             }
         }
-        /* Responsive */
         @media (max-width: 500px) {
             .profile-container {
                 padding: 25px 18px;
@@ -204,4 +202,82 @@
 <body>
 
     <div class="profile-container">
-        <h1>👤 ပရိုဖိုင်
+        <h1>👤 ပရိုဖိုင်</h1>
+
+        <div class="profile-avatar-wrapper">
+            <img src="default-avatar.png" alt="Profile" class="profile-avatar" id="profileAvatar">
+            <div class="camera-icon" onclick="document.getElementById('profilePicInput').click()">📷</div>
+            <input type="file" id="profilePicInput" accept="image/*" onchange="uploadProfilePicture()">
+        </div>
+
+        <div class="profile-name" id="profileName">အသုံးပြုသူ</div>
+        <div class="profile-email" id="profileEmail">user@example.com</div>
+
+        <div class="points-box">
+            <div class="label">🎮 ယူစာနိမ်း</div>
+            <div class="points-value" id="gamePoints">1,250 <span>Pts</span></div>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn-primary" onclick="window.location.href='index.html'">🏠 နောက်သို့</button>
+            <button class="btn-danger" onclick="logoutUser()">🚪 ထွက်ရန်</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Login မဝင်ရသေးရင် Home သို့ ပြန်ပို့
+            if (localStorage.getItem('isLoggedIn') !== 'true') {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            const username = localStorage.getItem('username') || 'အသုံးပြုသူ';
+            document.getElementById('profileName').textContent = username;
+
+            const savedImage = localStorage.getItem('profileImage');
+            if (savedImage) {
+                document.getElementById('profileAvatar').src = savedImage;
+            }
+
+            const points = localStorage.getItem('gamePoints') || '1000';
+            document.getElementById('gamePoints').innerHTML = parseInt(points).toLocaleString() + ' <span>Pts</span>';
+        });
+
+        function uploadProfilePicture() {
+            const fileInput = document.getElementById('profilePicInput');
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    localStorage.setItem('profileImage', e.target.result);
+                    document.getElementById('profileAvatar').src = e.target.result;
+                    showNotification('ပရိုဖိုင်ပုံ ပြောင်းလဲပြီးပါပြီ။', 'success');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function logoutUser() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('username');
+            window.location.href = 'index.html';
+        }
+
+        function showNotification(msg, type = 'success') {
+            const existing = document.querySelector('.notification');
+            if (existing) existing.remove();
+
+            const notif = document.createElement('div');
+            notif.className = 'notification ' + type;
+            notif.textContent = msg;
+            document.body.appendChild(notif);
+
+            setTimeout(() => {
+                if (notif.parentNode) notif.remove();
+            }, 3500);
+        }
+    </script>
+
+</body>
+</html>
