@@ -22,7 +22,6 @@
             --cyan: #00d4ff;
             --cyan-glow: rgba(0,212,255,0.2);
             --pink: #ff6b9d;
-            --pink-glow: rgba(255,107,157,0.2);
             --orange: #f97316;
             --orange-glow: rgba(249,115,22,0.2);
             --green: #22d3ee;
@@ -30,6 +29,7 @@
             --red: #ef4444;
             --purple: #8b5cf6;
             --purple-glow: rgba(139,92,246,0.2);
+            --warning: #f59e0b;
         }
 
         body {
@@ -78,7 +78,6 @@
         .profile-section .name i{color:var(--gold);margin-right:6px}
         .profile-section .username{font-size:0.75rem;color:var(--text-secondary);margin-top:2px}
         .profile-section .status{font-size:0.6rem;color:var(--green);margin-top:4px;display:inline-flex;align-items:center;gap:4px;background:rgba(34,211,238,0.08);padding:3px 14px;border-radius:20px;border:1px solid rgba(34,211,238,0.1)}
-        .profile-section .status i{font-size:0.4rem}
 
         /* ===== STATS GRID ===== */
         .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px;animation:slideUp 0.7s ease}
@@ -87,10 +86,6 @@
         .stats-grid .stat .number{font-size:1.1rem;font-weight:700;color:var(--gold);text-shadow:0 0 20px var(--gold-glow)}
         .stats-grid .stat .label{font-size:0.45rem;color:var(--text-secondary);margin-top:2px;text-transform:uppercase;letter-spacing:0.5px}
         .stats-grid .stat .icon{font-size:0.8rem;display:block;margin-bottom:2px}
-        .stats-grid .stat:nth-child(1) .icon{color:var(--gold)}
-        .stats-grid .stat:nth-child(2) .icon{color:var(--cyan)}
-        .stats-grid .stat:nth-child(3) .icon{color:var(--purple)}
-        .stats-grid .stat:nth-child(4) .icon{color:var(--pink)}
 
         /* ===== GLASS CARD ===== */
         .glass-card{background:var(--bg-card);backdrop-filter:blur(10px);border:1px solid var(--border-color);border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:0 4px 25px var(--shadow);animation:slideUp 0.8s ease}
@@ -108,6 +103,23 @@
         .menu-item .badge{font-size:0.45rem;background:rgba(245,200,66,0.12);color:var(--gold);padding:2px 10px;border-radius:10px;font-weight:600}
         .menu-item .badge.danger{background:rgba(239,68,68,0.12);color:var(--red)}
         .menu-item .badge.success{background:rgba(34,211,238,0.12);color:var(--green)}
+        .menu-item .badge.warning{background:rgba(245,158,11,0.12);color:var(--warning)}
+
+        /* ===== ORDER HISTORY ===== */
+        .order-list{display:flex;flex-direction:column;gap:8px}
+        .order-item{display:flex;align-items:center;justify-content:space-between;background:var(--bg-input);border:1px solid var(--border-color);border-radius:10px;padding:10px 12px;transition:all 0.3s ease}
+        .order-item:active{transform:scale(0.97)}
+        .order-item .order-info{display:flex;flex-direction:column;gap:2px}
+        .order-item .order-info .order-id{font-size:0.65rem;font-weight:600;color:var(--gold)}
+        .order-item .order-info .order-pkg{font-size:0.7rem;color:var(--text-primary)}
+        .order-item .order-info .order-date{font-size:0.5rem;color:var(--text-secondary)}
+        .order-item .order-status{font-size:0.5rem;font-weight:700;padding:3px 12px;border-radius:20px;text-transform:uppercase}
+        .order-item .order-status.pending{background:rgba(245,158,11,0.12);color:var(--warning)}
+        .order-item .order-status.completed{background:rgba(34,211,238,0.12);color:var(--green)}
+        .order-item .order-status.cancelled{background:rgba(239,68,68,0.12);color:var(--red)}
+
+        .empty-orders{text-align:center;padding:20px;color:var(--text-secondary);font-size:0.75rem}
+        .empty-orders .icon{font-size:2rem;display:block;margin-bottom:8px;opacity:0.3}
 
         /* ===== BOTTOM NAV ===== */
         .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);border-top:1px solid var(--border-color);display:flex;justify-content:space-around;padding:6px 0 10px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px var(--shadow)}
@@ -122,7 +134,6 @@
 
         .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.3;letter-spacing:1px}
 
-        /* ===== TOAST ===== */
         .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-card);padding:10px 20px;border-radius:12px;border:1px solid rgba(245,200,66,0.15);color:var(--gold);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 8px 40px var(--shadow);animation:toastPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
         .toast.show{display:block}
         @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
@@ -130,7 +141,7 @@
         @keyframes shimmer{0%,100%{transform:translate(0,0)}50%{transform:translate(-20%,-20%)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
-        /* ===== EDIT PROFILE MODAL ===== */
+        /* ===== EDIT MODAL ===== */
         .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(12px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px}
         .modal-overlay.show{display:flex;animation:fadeIn 0.3s ease}
         .modal{background:linear-gradient(145deg,var(--bg-card),var(--bg-secondary));border:1px solid var(--border-color);border-radius:18px;padding:24px 20px;max-width:380px;width:100%;box-shadow:0 20px 60px var(--shadow);position:relative;overflow:hidden;max-height:90vh;overflow-y:auto}
@@ -147,9 +158,7 @@
         .modal .btn-primary:hover{box-shadow:0 0 40px var(--gold-glow)}
         .modal .close-btn{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--text-secondary);font-size:1.1rem;cursor:pointer;z-index:2}
 
-        /* ===== AVATAR UPLOAD IN MODAL ===== */
-        .avatar-upload{display:flex;flex-direction:column;align-items:center;margin-bottom:12px;position:relative;z-index:1}
-        .avatar-upload .preview{width:70px;height:70px;border-radius:50%;background:var(--bg-input);border:2px solid var(--border-color);display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--text-secondary);cursor:pointer;transition:all 0.3s ease;overflow:hidden;position:relative;margin:0 auto 6px}
+        .avatar-upload .preview{width:70px;height:70px;border-radius:50%;background:var(--bg-input);border:2px solid var(--border-color);display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--text-secondary);cursor:pointer;transition:all 0.3s ease;overflow:hidden;position:relative;margin:0 auto 8px}
         .avatar-upload .preview:hover{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
         .avatar-upload .preview img{width:100%;height:100%;object-fit:cover}
         .avatar-upload .preview input{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}
@@ -160,7 +169,6 @@
 </head>
 <body>
 <div class="container">
-    <!-- ===== HEADER ===== -->
     <div class="header">
         <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Game Shop</div>
         <div class="right">
@@ -172,7 +180,6 @@
         </div>
     </div>
 
-    <!-- ===== PROFILE SECTION ===== -->
     <div class="profile-section">
         <div class="avatar-wrap">
             <div class="avatar" id="avatarDisplay">⚔️</div>
@@ -183,7 +190,6 @@
         <div class="status" id="statusDisplay"><i class="fas fa-circle"></i> <span id="statusText">Offline</span></div>
     </div>
 
-    <!-- ===== STATS ===== -->
     <div class="stats-grid">
         <div class="stat"><span class="icon">💎</span><div class="number" id="diamondCount">0</div><div class="label" id="diamondLabel">Diamonds</div></div>
         <div class="stat"><span class="icon">📦</span><div class="number" id="orderCount">0</div><div class="label" id="orderLabel">Orders</div></div>
@@ -191,7 +197,14 @@
         <div class="stat"><span class="icon">🏆</span><div class="number" id="rankCount">0</div><div class="label" id="rankLabel">Rank</div></div>
     </div>
 
-    <!-- ===== MENU ===== -->
+    <!-- ===== ORDER HISTORY ===== -->
+    <div class="glass-card">
+        <span class="label"><i class="fas fa-list"></i> <span id="orderHistoryLabel">Order History</span></span>
+        <div id="orderHistoryContainer">
+            <!-- Orders will be rendered here -->
+        </div>
+    </div>
+
     <div class="glass-card">
         <span class="label"><i class="fas fa-cog"></i> <span id="settingsLabel">Settings</span></span>
         <div class="menu-item" onclick="openEditModal()">
@@ -199,13 +212,7 @@
             <span class="text" id="editProfileText">Edit Profile</span>
             <span class="arrow">›</span>
         </div>
-        <div class="menu-item" onclick="showToast(getText('orderEmpty'))">
-            <span class="icon">📜</span>
-            <span class="text" id="orderHistoryText">Order History</span>
-            <span class="badge" id="orderBadge">0</span>
-            <span class="arrow">›</span>
-        </div>
-        <div class="menu-item" onclick="showToast(getText('notiEmpty'))">
+        <div class="menu-item" onclick="showToast('🔔 No notifications')">
             <span class="icon">🔔</span>
             <span class="text" id="notiText">Notifications</span>
             <span class="badge success">New</span>
@@ -225,7 +232,6 @@
         </div>
     </div>
 
-    <!-- ===== ABOUT ===== -->
     <div class="glass-card">
         <span class="label"><i class="fas fa-info-circle"></i> <span id="aboutLabel">About</span></span>
         <div class="menu-item"><span class="icon">📱</span><span class="text" id="versionText">App Version 1.0.0</span><span class="arrow">›</span></div>
@@ -236,7 +242,6 @@
     <div class="footer-text">&copy; 2026 Premium Game Shop</div>
 </div>
 
-<!-- ===== BOTTOM NAV ===== -->
 <div class="bottom-nav">
     <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label" id="navHome">Home</span></a>
     <a href="shop.html" class="nav-item"><span class="icon">🛒</span><span class="label" id="navShop">Shop</span></a>
@@ -244,7 +249,6 @@
     <a href="profile.html" class="nav-item active"><span class="icon">👤</span><span class="label" id="navProfile">Profile</span></a>
 </div>
 
-<!-- ===== TOAST ===== -->
 <div class="toast" id="toast"></div>
 
 <!-- ===== EDIT PROFILE MODAL ===== -->
@@ -286,9 +290,9 @@
             orderLabel: 'Orders',
             xpLabel: 'XP',
             rankLabel: 'Rank',
+            orderHistoryLabel: 'Order History',
             settingsLabel: 'Settings',
             editProfileText: 'Edit Profile',
-            orderHistoryText: 'Order History',
             notiText: 'Notifications',
             achieveText: 'Achievements',
             logoutText: 'Logout',
@@ -296,8 +300,10 @@
             versionText: 'App Version 1.0.0',
             helpText: 'Help & Support',
             termsText: 'Terms & Privacy',
-            orderEmpty: '📜 Order history is empty',
-            notiEmpty: '🔔 No notifications',
+            noOrders: 'No orders yet',
+            orderStatusPending: 'Pending',
+            orderStatusCompleted: 'Completed',
+            orderStatusCancelled: 'Cancelled',
             home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
             login: 'Login'
         },
@@ -309,9 +315,9 @@
             orderLabel: 'အော်ဒါများ',
             xpLabel: 'အတွေ့အကြုံ',
             rankLabel: 'အဆင့်',
+            orderHistoryLabel: 'အော်ဒါမှတ်တမ်း',
             settingsLabel: 'ပြင်ဆင်မှုများ',
             editProfileText: 'ပရိုဖိုင်ပြင်ရန်',
-            orderHistoryText: 'အော်ဒါမှတ်တမ်း',
             notiText: 'အသိပေးချက်များ',
             achieveText: 'အောင်မြင်မှုများ',
             logoutText: 'ထွက်ရန်',
@@ -319,8 +325,10 @@
             versionText: 'App ဗားရှင်း 1.0.0',
             helpText: 'အကူအညီနှင့် ပံ့ပိုးမှု',
             termsText: 'စည်းကမ်းနှင့် ကိုယ်ရေးအချက်အလက်',
-            orderEmpty: '📜 အော်ဒါမှတ်တမ်းမရှိပါ',
-            notiEmpty: '🔔 အသိပေးချက်မရှိပါ',
+            noOrders: 'အော်ဒါမရှိသေးပါ',
+            orderStatusPending: 'ဆောင်ရွက်ဆဲ',
+            orderStatusCompleted: 'ပြီးဆုံး',
+            orderStatusCancelled: 'ပယ်ဖျက်',
             home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
             login: 'ဝင်ရန်'
         }
@@ -346,9 +354,9 @@
         document.getElementById('orderLabel').textContent = d.orderLabel;
         document.getElementById('xpLabel').textContent = d.xpLabel;
         document.getElementById('rankLabel').textContent = d.rankLabel;
+        document.getElementById('orderHistoryLabel').textContent = d.orderHistoryLabel;
         document.getElementById('settingsLabel').innerHTML = '<i class="fas fa-cog"></i> ' + d.settingsLabel;
         document.getElementById('editProfileText').textContent = d.editProfileText;
-        document.getElementById('orderHistoryText').textContent = d.orderHistoryText;
         document.getElementById('notiText').textContent = d.notiText;
         document.getElementById('achieveText').textContent = d.achieveText;
         document.getElementById('logoutText').textContent = d.logoutText;
@@ -361,9 +369,9 @@
         document.getElementById('navPayment').textContent = d.payment;
         document.getElementById('navProfile').textContent = d.profile;
         updateAuthUI();
+        renderOrders();
     }
 
-    // ===== TOAST =====
     function showToast(msg) {
         const t = document.getElementById('toast');
         t.textContent = msg;
@@ -404,12 +412,9 @@
             authBtn.className = 'auth-btn logged-in';
             authBtn.title = 'Go to Profile';
             
-            // Update stats
-            document.getElementById('diamondCount').textContent = currentUser.diamonds || 0;
-            document.getElementById('orderCount').textContent = currentUser.orders || 0;
-            document.getElementById('xpCount').textContent = currentUser.xp || 0;
-            document.getElementById('rankCount').textContent = currentUser.rank || 'N/A';
-            document.getElementById('orderBadge').textContent = currentUser.orders || 0;
+            const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+            const userOrders = orders.filter(o => o.userId === currentUser.username);
+            document.getElementById('orderCount').textContent = userOrders.length;
         } else {
             avatarEl.textContent = '⚔️';
             nameEl.innerHTML = '<i class="fas fa-crown"></i> Guest';
@@ -421,12 +426,9 @@
             authBtn.innerHTML = '🔑 ' + getText('login');
             authBtn.className = 'auth-btn';
             authBtn.title = 'Login';
-            document.getElementById('diamondCount').textContent = '0';
             document.getElementById('orderCount').textContent = '0';
-            document.getElementById('xpCount').textContent = '0';
-            document.getElementById('rankCount').textContent = 'N/A';
-            document.getElementById('orderBadge').textContent = '0';
         }
+        renderOrders();
     }
 
     function handleAuthClick() {
@@ -435,6 +437,47 @@
         } else {
             window.location.href = 'index.html';
         }
+    }
+
+    // ===== RENDER ORDERS =====
+    function renderOrders() {
+        const container = document.getElementById('orderHistoryContainer');
+        const d = LANG_DATA[currentLang];
+        
+        if (!isLoggedIn()) {
+            container.innerHTML = `<div class="empty-orders"><span class="icon">🔒</span>Please login to view your orders</div>`;
+            return;
+        }
+
+        const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+        const userOrders = orders.filter(o => o.userId === currentUser.username);
+
+        if (userOrders.length === 0) {
+            container.innerHTML = `<div class="empty-orders"><span class="icon">📭</span>${d.noOrders}</div>`;
+            return;
+        }
+
+        const statusMap = {
+            'pending': { class: 'pending', text: d.orderStatusPending },
+            'completed': { class: 'completed', text: d.orderStatusCompleted },
+            'cancelled': { class: 'cancelled', text: d.orderStatusCancelled }
+        };
+
+        container.innerHTML = `<div class="order-list">` + userOrders.map(order => {
+            const status = statusMap[order.status] || statusMap.pending;
+            return `
+                <div class="order-item">
+                    <div class="order-info">
+                        <span class="order-id">📋 #${order.id}</span>
+                        <span class="order-pkg">${order.package}</span>
+                        <span class="order-date">${new Date(order.date).toLocaleString()}</span>
+                    </div>
+                    <div>
+                        <span class="order-status ${status.class}">${status.text}</span>
+                    </div>
+                </div>
+            `;
+        }).join('') + `</div>`;
     }
 
     // ===== EDIT PROFILE =====
@@ -486,7 +529,6 @@
 
         const users = JSON.parse(localStorage.getItem('users') || '{}');
         
-        // Check if username already taken (except current user)
         for (const key in users) {
             if (key !== currentUser.username && users[key].username === username) {
                 showToast('❌ Username already taken');
@@ -494,16 +536,13 @@
             }
         }
 
-        // Update user data
         const oldUsername = currentUser.username;
         if (oldUsername !== username) {
-            // Rename user key
             users[username] = users[oldUsername];
             users[username].username = username;
             delete users[oldUsername];
             localStorage.setItem('users', JSON.stringify(users));
             
-            // Move avatar
             const oldAvatar = localStorage.getItem('userAvatar_' + oldUsername);
             if (oldAvatar) {
                 localStorage.setItem('userAvatar_' + username, oldAvatar);
@@ -511,7 +550,6 @@
             }
         }
 
-        // Update current user
         currentUser.displayName = name;
         currentUser.username = username;
         if (editAvatarData) {
@@ -535,7 +573,6 @@
         }
     }
 
-    // ===== CLOSE MODAL ON OVERLAY =====
     document.getElementById('editModal').addEventListener('click', function(e) {
         if (e.target === this) closeEditModal();
     });
