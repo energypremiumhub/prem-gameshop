@@ -3,34 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prem-Game Shop - Checkout</title>
+    <title>Premium Game Shop - Checkout</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
         
         :root {
             --bg: #0a0e1a;
-            --bg2: #141b2b;
+            --bg2: #111827;
+            --bg3: #1a2332;
             --text: #ffffff;
-            --text2: #8892b0;
-            --card: rgba(255,255,255,0.03);
+            --text2: #94a3b8;
             --border: rgba(255,255,255,0.06);
-            --shadow: rgba(0,0,0,0.3);
+            --shadow: rgba(0,0,0,0.4);
             --gold: #f5c842;
-            --gold2: #e6b33a;
-            --green: #64ffda;
+            --orange: #f97316;
+            --green: #22d3ee;
         }
 
         body.light {
             --bg: #f0f2f5;
             --bg2: #ffffff;
+            --bg3: #e8eaed;
             --text: #1a1a2e;
             --text2: #555770;
-            --card: rgba(0,0,0,0.03);
             --border: rgba(0,0,0,0.08);
             --shadow: rgba(0,0,0,0.08);
             --gold: #d4a020;
-            --gold2: #b8891a;
+            --orange: #e8850a;
             --green: #0f9d58;
         }
 
@@ -39,67 +39,67 @@
             color: var(--text);
             padding: 16px;
             padding-bottom: 30px;
-            transition: all 0.3s ease;
+            transition: background 0.15s ease, color 0.15s ease;
         }
 
         .container{max-width:500px;margin:0 auto}
+
         .topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 0 16px;border-bottom:1px solid var(--border);margin-bottom:20px}
-        .topbar .back-btn{color:var(--gold);text-decoration:none;font-size:0.85rem;font-weight:600;padding:6px 14px;border-radius:20px;background:rgba(245,200,66,0.08);border:1px solid rgba(245,200,66,0.10)}
+        .topbar .back-btn{color:var(--gold);text-decoration:none;font-size:0.8rem;font-weight:600;padding:6px 14px;border-radius:20px;background:var(--bg3);border:1px solid var(--border);transition:all 0.15s ease}
         .topbar .back-btn:active{transform:scale(0.92)}
         .topbar .page-title{font-size:1.1rem;font-weight:700;color:var(--gold)}
         .topbar .spacer{width:70px}
 
-        .glass-card{background:var(--card);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 4px 20px var(--shadow)}
-        .glass-card .label{font-size:0.75rem;color:var(--text2);font-weight:500;display:block;margin-bottom:6px}
-        .glass-card .value{font-size:1rem;font-weight:600;color:var(--text)}
-        .glass-card .value .diamond-icon{color:var(--gold);margin-right:6px}
+        .glass-card{background:var(--bg3);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:0 4px 25px var(--shadow)}
+        .glass-card .label{font-size:0.7rem;color:var(--text2);font-weight:600;display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px}
 
-        .form-group{margin-bottom:16px}
-        .form-group label{font-size:0.8rem;color:var(--text2);font-weight:500;display:block;margin-bottom:6px}
-        .form-group input{width:100%;padding:12px 16px;border-radius:12px;border:1px solid var(--border);background:var(--card);color:var(--text);font-size:0.95rem;outline:none;transition:all 0.3s ease}
+        /* ===== Selected Package ===== */
+        .selected-row{display:flex;justify-content:space-between;align-items:center}
+        .selected-row .pkg{font-size:1rem;font-weight:600;color:var(--text)}
+        .selected-row .price{font-size:1.1rem;font-weight:700;color:var(--gold)}
+
+        /* ===== Form ===== */
+        .form-group{margin-bottom:14px}
+        .form-group label{font-size:0.75rem;color:var(--text2);font-weight:500;display:block;margin-bottom:4px}
+        .form-group input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:0.9rem;outline:none;transition:all 0.15s ease}
         .form-group input:focus{border-color:rgba(245,200,66,0.30)}
-        .form-group input::placeholder{color:var(--text2)}
+        .form-group input::placeholder{color:var(--text2);font-size:0.8rem}
 
-        /* ===== Payment Options ===== */
-        .payment-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
-        .payment-option{background:var(--card);border:2px solid var(--border);border-radius:12px;padding:16px 12px;text-align:center;cursor:pointer;transition:all 0.3s ease}
+        /* ===== Payment ===== */
+        .payment-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+        .payment-option{background:var(--bg);border:2px solid var(--border);border-radius:12px;padding:12px;text-align:center;cursor:pointer;transition:all 0.15s ease}
         .payment-option:active{transform:scale(0.95)}
-        .payment-option.selected{border-color:var(--gold);background:rgba(245,200,66,0.08)}
-        .payment-option .icon{font-size:2.2rem;display:block;margin-bottom:4px}
-        .payment-option .icon.wave{color:#0066cc}
-        .payment-option .icon.kpay{color:#00a651}
-        .payment-option .name{font-size:0.75rem;font-weight:600;color:var(--text)}
-        .payment-option .detail{font-size:0.55rem;color:var(--text2);margin-top:2px}
+        .payment-option.selected{border-color:var(--gold);background:rgba(245,200,66,0.06)}
+        .payment-option .icon{font-size:1.4rem;display:block;margin-bottom:2px}
+        .payment-option .name{font-size:0.8rem;font-weight:600;color:var(--text)}
+        .payment-option .detail{font-size:0.5rem;color:var(--text2)}
 
         /* ===== Account Info ===== */
-        .account-info{background:rgba(100,255,218,0.04);border:1px solid rgba(100,255,218,0.08);border-radius:12px;padding:14px 16px;margin-top:12px;display:none}
-        .account-info.show{display:block;animation:fadeUp 0.4s ease}
-        .account-info .acc-name{font-size:0.9rem;font-weight:600;color:var(--text)}
-        .account-info .acc-number{font-size:0.8rem;color:var(--green);font-weight:500}
-        .account-info .acc-holder{font-size:0.7rem;color:var(--text2)}
+        .account-info{background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.08);border-radius:12px;padding:12px 14px;margin-top:10px;display:none}
+        .account-info.show{display:block;animation:fadeUp 0.3s ease}
+        .account-info .acc-name{font-size:0.85rem;font-weight:600;color:var(--text)}
+        .account-info .acc-number{font-size:0.8rem;color:var(--green);font-weight:500;margin-top:2px;display:flex;align-items:center;gap:8px}
+        .account-info .acc-number .copy-btn{background:var(--bg);border:1px solid var(--border);color:var(--text2);padding:2px 10px;border-radius:12px;font-size:0.5rem;cursor:pointer;transition:all 0.15s ease;font-weight:600}
+        .account-info .acc-number .copy-btn:active{transform:scale(0.85);background:var(--gold);color:#0a0e1a}
+        .account-info .acc-number .copy-btn.copied{background:rgba(34,211,238,0.15);border-color:var(--green);color:var(--green)}
 
         /* ===== File Upload ===== */
-        .file-upload{border:2px dashed var(--border);border-radius:12px;padding:24px;text-align:center;cursor:pointer;transition:all 0.3s ease;position:relative}
+        .file-upload{border:2px dashed var(--border);border-radius:12px;padding:18px;text-align:center;cursor:pointer;transition:all 0.15s ease;position:relative}
         .file-upload:active{transform:scale(0.97)}
-        .file-upload.has-file{border-color:var(--green);background:rgba(100,255,218,0.04)}
-        .file-upload .icon{font-size:2.5rem;display:block;margin-bottom:6px;color:var(--text2)}
-        .file-upload .text{font-size:0.8rem;color:var(--text2)}
+        .file-upload.has-file{border-color:var(--green);background:rgba(34,211,238,0.04)}
+        .file-upload .icon{font-size:2rem;display:block;margin-bottom:4px;color:var(--text2)}
+        .file-upload .text{font-size:0.75rem;color:var(--text2)}
         .file-upload .text strong{color:var(--gold)}
         .file-upload input[type="file"]{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}
-        .file-upload .file-name{font-size:0.7rem;color:var(--green);margin-top:6px;display:none}
+        .file-upload .file-name{font-size:0.65rem;color:var(--green);margin-top:4px;display:none}
         .file-upload .file-name.show{display:block}
 
-        /* ===== Submit ===== */
-        .btn-submit{width:100%;padding:16px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0e1a;border:none;border-radius:14px;font-size:1rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;margin-top:8px}
+        .btn-submit{width:100%;padding:14px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:12px;font-size:0.95rem;font-weight:700;cursor:pointer;transition:all 0.15s ease;margin-top:6px}
         .btn-submit:active{transform:scale(0.96)}
-        body.light .btn-submit{color:#fff}
 
-        /* ===== Toast ===== */
-        .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--bg2);padding:14px 24px;border-radius:14px;border:1px solid var(--border);color:var(--gold);font-weight:600;font-size:0.85rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 4px 30px var(--shadow)}
-        .toast.show{display:block;animation:fadeUp 0.4s ease}
-
-        .footer{text-align:center;margin-top:20px;padding:16px;border-top:1px solid var(--border);color:var(--text2);font-size:0.6rem;opacity:0.6}
-
+        .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--bg3);padding:12px 24px;border-radius:14px;border:1px solid var(--border);color:var(--gold);font-weight:600;font-size:0.8rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 4px 30px var(--shadow);animation:toastPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)}
+        .toast.show{display:block}
+        @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
         @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
     </style>
 </head>
@@ -111,21 +111,21 @@
         <span class="spacer"></span>
     </div>
 
-    <!-- Package Info -->
+    <!-- Selected Package -->
     <div class="glass-card">
         <span class="label">📦 Selected Package</span>
-        <div class="value" id="selectedPackage"><span class="diamond-icon">💎</span>Loading...</div>
-        <div style="margin-top:4px;font-size:0.85rem;color:var(--gold);font-weight:600;" id="selectedPrice"></div>
+        <div class="selected-row">
+            <span class="pkg" id="selectedPackage">Loading...</span>
+            <span class="price" id="selectedPrice">0 Ks</span>
+        </div>
     </div>
 
+    <!-- Form -->
     <div class="glass-card">
-        <!-- Game ID -->
         <div class="form-group">
             <label>🎮 Game ID</label>
             <input type="text" id="gameId" placeholder="Enter your Game ID (e.g. 12345678)" />
         </div>
-
-        <!-- Server ID -->
         <div class="form-group">
             <label>🌐 Server ID</label>
             <input type="text" id="serverId" placeholder="Enter your Server ID (e.g. 9876)" />
@@ -136,12 +136,12 @@
             <label>💳 Payment Method</label>
             <div class="payment-options" id="paymentOptions">
                 <div class="payment-option" data-payment="wave">
-                    <span class="icon wave"><i class="fas fa-wifi"></i></span>
+                    <span class="icon">🏦</span>
                     <span class="name">Wave Pay</span>
                     <span class="detail">Mobile Money</span>
                 </div>
                 <div class="payment-option" data-payment="kpay">
-                    <span class="icon kpay"><i class="fas fa-university"></i></span>
+                    <span class="icon">🏦</span>
                     <span class="name">KBZ Pay</span>
                     <span class="detail">KBZ Bank</span>
                 </div>
@@ -150,23 +150,27 @@
 
         <!-- Wave Pay Info -->
         <div class="account-info" id="waveInfo">
-            <div class="acc-name"><i class="fas fa-wifi" style="color:#0066cc;margin-right:8px;"></i>Wave Pay</div>
-            <div class="acc-number">📞 09682506493</div>
-            <div class="acc-holder">👤 Thein Zaw Oo</div>
+            <div class="acc-name">🏦 Wave Pay</div>
+            <div class="acc-number">
+                📞 09682506493
+                <button class="copy-btn" onclick="copyNumber('09682506493', this)">Copy</button>
+            </div>
         </div>
 
         <!-- KBZ Pay Info -->
         <div class="account-info" id="kpayInfo">
-            <div class="acc-name"><i class="fas fa-university" style="color:#00a651;margin-right:8px;"></i>KBZ Pay</div>
-            <div class="acc-number">📞 09682506493</div>
-            <div class="acc-holder">👤 DAW THIN WUTT YEE</div>
+            <div class="acc-name">🏦 KBZ Pay</div>
+            <div class="acc-number">
+                📞 09682506493
+                <button class="copy-btn" onclick="copyNumber('09682506493', this)">Copy</button>
+            </div>
         </div>
 
         <!-- Upload -->
         <div class="form-group">
             <label>📤 Upload Payment Slip</label>
             <div class="file-upload" id="fileUpload">
-                <span class="icon"><i class="fas fa-cloud-upload-alt"></i></span>
+                <span class="icon">📁</span>
                 <span class="text">Tap to upload <strong>screenshot</strong></span>
                 <span class="file-name" id="fileName">✅ image.png</span>
                 <input type="file" id="fileInput" accept="image/*" />
@@ -175,21 +179,16 @@
 
         <button class="btn-submit" id="submitBtn">✅ Submit Order</button>
     </div>
-
-    <div class="footer">&copy; 2026 Prem-Game Shop • Made with ❤️</div>
 </div>
-
 <div class="toast" id="toast"></div>
 
 <script>
-    // Get package from URL
+    // ===== Get package from URL =====
     const urlParams = new URLSearchParams(window.location.search);
-    const pkg = urlParams.get('package') || 'Monthly Epic Bundle';
-    const price = urlParams.get('price') || '17,200 Ks';
-    document.getElementById('selectedPackage').innerHTML = '<span class="diamond-icon">💎</span> ' + pkg;
-    document.getElementById('selectedPrice').textContent = price;
+    document.getElementById('selectedPackage').textContent = urlParams.get('package') || 'Monthly Epic Bundle';
+    document.getElementById('selectedPrice').textContent = urlParams.get('price') || '17,200 Ks';
 
-    // Payment selection
+    // ===== Payment Selection =====
     let selectedPayment = null;
     document.querySelectorAll('.payment-option').forEach(el => {
         el.addEventListener('click', function() {
@@ -203,7 +202,26 @@
         });
     });
 
-    // File upload
+    // ===== Copy Number =====
+    function copyNumber(number, btn) {
+        navigator.clipboard.writeText(number).then(() => {
+            btn.textContent = '✅ Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2500);
+        }).catch(() => {
+            const input = document.createElement('input');
+            input.value = number;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+            btn.textContent = '✅ Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2500);
+        });
+    }
+
+    // ===== File Upload =====
     const fileInput = document.getElementById('fileInput');
     const fileUpload = document.getElementById('fileUpload');
     const fileName = document.getElementById('fileName');
@@ -215,7 +233,7 @@
         }
     });
 
-    // Submit
+    // ===== Submit =====
     document.getElementById('submitBtn').addEventListener('click', function() {
         const gameId = document.getElementById('gameId').value.trim();
         const serverId = document.getElementById('serverId').value.trim();
@@ -224,20 +242,18 @@
         if (!serverId) { showToast('❌ Please enter your Server ID'); return; }
         if (!selectedPayment) { showToast('❌ Please select a payment method'); return; }
         if (!hasFile) { showToast('❌ Please upload your payment slip'); return; }
-        showToast('Order submitted successfully! We will process it shortly.');
+        showToast('✅ Order submitted successfully!');
     });
 
-    function showToast(message) {
-        const toast = document.getElementById('toast');
-        toast.textContent = message;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 4000);
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        clearTimeout(t._timer);
+        t._timer = setTimeout(() => t.classList.remove('show'), 2500);
     }
 
-    // Theme toggle (keep in sync with index)
-    function toggleTheme() {
-        document.body.classList.toggle('light');
-    }
+    // ===== Theme =====
     if (localStorage.getItem('theme') === 'light') {
         document.body.classList.add('light');
     }
