@@ -46,11 +46,11 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            transition: all 0.3s ease;
             padding: 6px 14px;
             border-radius: 20px;
             background: rgba(245, 200, 66, 0.08);
             border: 1px solid rgba(245, 200, 66, 0.10);
+            transition: all 0.3s ease;
         }
 
         .topbar .back-btn:active {
@@ -115,7 +115,7 @@
             background: linear-gradient(90deg, rgba(255,255,255,0.06), transparent);
         }
 
-        /* ===== Package List (ပုံထဲကပုံစံ) ===== */
+        /* ===== Package List ===== */
         .package-list {
             display: flex;
             flex-direction: column;
@@ -145,7 +145,6 @@
             background: rgba(245, 200, 66, 0.05);
         }
 
-        /* Ripple Effect for Package Item */
         .package-item .ripple {
             position: absolute;
             border-radius: 50%;
@@ -357,35 +356,35 @@
     <!-- ===== BUNDLES ===== -->
     <div class="section-title">🎁 Bundles</div>
     <div class="package-list">
-        <div class="package-item" data-ripple>
+        <div class="package-item" data-name="Monthly Epic Bundle" data-price="17,200 Ks" data-bonus="+ ★180 Bonus">
             <div class="info">
                 <div class="name">Monthly Epic Bundle</div>
                 <span class="badge">⚡ + ★180 Bonus</span>
             </div>
             <div class="right">
                 <div class="price">17,200 Ks</div>
-                <button class="btn" data-ripple>Buy</button>
+                <button class="btn" onclick="goToCheckout('Monthly Epic Bundle', '17,200 Ks')">Buy</button>
             </div>
         </div>
 
-        <div class="package-item" data-ripple>
+        <div class="package-item" data-name="Weekly Elite Bundle" data-price="3,350 Ks" data-bonus="+ ★20 Bonus">
             <div class="info">
                 <div class="name">Weekly Elite Bundle</div>
                 <span class="badge">⚡ + ★20 Bonus</span>
             </div>
             <div class="right">
                 <div class="price">3,350 Ks</div>
-                <button class="btn" data-ripple>Buy</button>
+                <button class="btn" onclick="goToCheckout('Weekly Elite Bundle', '3,350 Ks')">Buy</button>
             </div>
         </div>
 
-        <div class="package-item" data-ripple>
+        <div class="package-item" data-name="Weekly Pass" data-price="6,500 Ks">
             <div class="info">
                 <div class="name">Weekly Pass</div>
             </div>
             <div class="right">
                 <div class="price">6,500 Ks</div>
-                <button class="btn" data-ripple>Buy</button>
+                <button class="btn" onclick="goToCheckout('Weekly Pass', '6,500 Ks')">Buy</button>
             </div>
         </div>
     </div>
@@ -393,135 +392,135 @@
     <!-- ===== DIAMONDS ===== -->
     <div class="section-title">💎 Diamonds</div>
     <div class="package-list">
-        <div class="package-item" data-ripple>
+        <div class="package-item" data-name="11 Diamonds" data-price="1,000 Ks">
             <div class="info">
                 <div class="name">11 Diamonds</div>
                 <span class="badge">⚡ Instant Delivery</span>
             </div>
             <div class="right">
                 <div class="price">1,000 Ks</div>
-                <button class="btn" data-ripple>Buy</button>
+                <button class="btn" onclick="goToCheckout('11 Diamonds', '1,000 Ks')">Buy</button>
             </div>
         </div>
 
-        <div class="package-item" data-ripple>
+        <div class="package-item" data-name="22 Diamonds" data-price="1,750 Ks">
             <div class="info">
                 <div class="name">22 Diamonds</div>
                 <span class="badge">⚡ Instant Delivery</span>
             </div>
             <div class="right">
                 <div class="price">1,750 Ks</div>
-                <button class="btn" data-ripple>Buy</button>
+                <button class="btn" onclick="goToCheckout('22 Diamonds', '1,750 Ks')">Buy</button>
             </div>
         </div>
 
-        <div class="package-item" data-ripple>
+        <div class="package-item" data-name="33 Diamonds" data-price="2,500 Ks">
             <div class="info">
                 <div class="name">33 Diamonds</div>
                 <span class="badge">⚡ Instant Delivery</span>
             </div>
             <div class="right">
                 <div class="price">2,500 Ks</div>
-                <button class="btn" data-ripple>Buy</button>
+                <button class="btn" onclick="goToCheckout('33 Diamonds', '2,500 Ks')">Buy</button>
             </div>
         </div>
 
-        <div class="package-item" data-ripple>
+        <div class="package-item" data-name="44 Diamonds" data-price="3,300 Ks">
             <div class="info">
                 <div class="name">44 Diamonds</div>
                 <span class="badge">⚡ Instant Delivery</span>
             </div>
             <div class="right">
                 <div class="price">3,300 Ks</div>
-                <button class="btn" data-ripple>Buy</button>
+                <button class="btn" onclick="goToCheckout('44 Diamonds', '3,300 Ks')">Buy</button>
             </div>
         </div>
 
-        <div class="package-item" data-ripple>
+        <div class="package-item" data-name="56 Diamonds" data-price="4,000 Ks">
             <div class="info">
                 <div class="name">56 Diamonds</div>
                 <span class="badge">⚡ Instant Delivery</span>
             </div>
             <div class="right">
                 <div class="price">4,000 Ks</div>
-                <button class="btn" data-ripple>Buy</button>
+                <button class="btn" onclick="goToCheckout('56 Diamonds', '4,000 Ks')">Buy</button>
             </div>
         </div>
 
-        <div class="package-item" data-ripple>
+        <div class="package-item" data-name="86 Diamonds" data-price="5,500 Ks">
             <div class="info">
                 <div class="name">86 Diamonds</div>
                 <span class="badge">⚡ Instant Delivery</span>
             </div>
             <div class="right">
                 <div class="price">5,500 Ks</div>
-                <button class="btn" data-ripple>Buy</button>
+                <button class="btn" onclick="goToCheckout('86 Diamonds', '5,500 Ks')">Buy</button>
             </div>
         </div>
 
-        <div class="package-item" data-ripple>
+        <div class="package-item" data-name="112 Diamonds" data-price="7,800 Ks">
             <div class="info">
                 <div class="name">112 Diamonds</div>
                 <span class="badge">⚡ Instant Delivery</span>
             </div>
             <div class="right">
                 <div class="price">7,800 Ks</div>
-                <button class="btn" data-ripple>Buy</button>
+                <button class="btn" onclick="goToCheckout('112 Diamonds', '7,800 Ks')">Buy</button>
             </div>
         </div>
 
-        <div class="package-item" data-ripple>
+        <div class="package-item" data-name="172 Diamonds" data-price="10,700 Ks">
             <div class="info">
                 <div class="name">172 Diamonds</div>
                 <span class="badge">⚡ Instant Delivery</span>
             </div>
             <div class="right">
                 <div class="price">10,700 Ks</div>
-                <button class="btn" data-ripple>Buy</button>
+                <button class="btn" onclick="goToCheckout('172 Diamonds', '10,700 Ks')">Buy</button>
             </div>
         </div>
 
-        <div class="package-item" data-ripple>
+        <div class="package-item" data-name="257 Diamonds" data-price="15,900 Ks">
             <div class="info">
                 <div class="name">257 Diamonds</div>
                 <span class="badge">⚡ Instant Delivery</span>
             </div>
             <div class="right">
                 <div class="price">15,900 Ks</div>
-                <button class="btn" data-ripple>Buy</button>
+                <button class="btn" onclick="goToCheckout('257 Diamonds', '15,900 Ks')">Buy</button>
             </div>
         </div>
 
-        <div class="package-item" data-ripple>
+        <div class="package-item" data-name="343 Diamonds" data-price="21,100 Ks">
             <div class="info">
                 <div class="name">343 Diamonds</div>
                 <span class="badge">⚡ Instant Delivery</span>
             </div>
             <div class="right">
                 <div class="price">21,100 Ks</div>
-                <button class="btn" data-ripple>Buy</button>
+                <button class="btn" onclick="goToCheckout('343 Diamonds', '21,100 Ks')">Buy</button>
             </div>
         </div>
 
-        <div class="package-item" data-ripple>
+        <div class="package-item" data-name="429 Diamonds" data-price="26,600 Ks">
             <div class="info">
                 <div class="name">429 Diamonds</div>
                 <span class="badge">⚡ Instant Delivery</span>
             </div>
             <div class="right">
                 <div class="price">26,600 Ks</div>
-                <button class="btn" data-ripple>Buy</button>
+                <button class="btn" onclick="goToCheckout('429 Diamonds', '26,600 Ks')">Buy</button>
             </div>
         </div>
 
-        <div class="package-item" data-ripple>
+        <div class="package-item" data-name="514 Diamonds" data-price="31,200 Ks">
             <div class="info">
                 <div class="name">514 Diamonds</div>
                 <span class="badge">⚡ Instant Delivery</span>
             </div>
             <div class="right">
                 <div class="price">31,200 Ks</div>
-                <button class="btn" data-ripple>Buy</button>
+                <button class="btn" onclick="goToCheckout('514 Diamonds', '31,200 Ks')">Buy</button>
             </div>
         </div>
     </div>
@@ -552,7 +551,12 @@
 </div>
 
 <script>
-    // Ripple Effect for all elements with data-ripple attribute
+    // ===== Go to Checkout =====
+    function goToCheckout(pkg, price) {
+        window.location.href = 'checkout.html?package=' + encodeURIComponent(pkg) + '&price=' + encodeURIComponent(price);
+    }
+
+    // ===== Ripple Effect =====
     document.querySelectorAll('[data-ripple]').forEach(el => {
         el.addEventListener('click', function(e) {
             const rect = this.getBoundingClientRect();
