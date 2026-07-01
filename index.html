@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Premium Game Shop</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="lang.js"></script>
+    <script src="auth.js"></script>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
         
@@ -39,24 +41,25 @@
             color: var(--text);
             min-height: 100vh;
             padding-bottom: 80px;
-            transition: background 0.15s ease, color 0.15s ease;
+            transition: background 0.12s ease, color 0.12s ease;
         }
 
         .container{max-width:480px;margin:0 auto;padding:20px 16px}
         
         /* ===== Header ===== */
-        .header{display:flex;justify-content:space-between;align-items:center;padding:8px 0 16px}
+        .header{display:flex;justify-content:space-between;align-items:center;padding:8px 0 16px;flex-wrap:wrap;gap:8px}
         .header .logo{font-size:1.1rem;font-weight:800;color:var(--gold)}
-        .header .icons{display:flex;gap:10px;align-items:center}
-        .header .icons .icon-btn{background:var(--bg3);padding:8px;border-radius:12px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid var(--border);color:var(--text2);transition:all 0.15s ease;font-size:1.1rem;text-decoration:none}
-        .header .icons .icon-btn:active{transform:scale(0.90)}
-        .header .icons .icon-btn.theme-btn{font-size:1rem;width:44px;height:44px}
+        .header .right{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+        .header .right .icon-btn{background:var(--bg3);padding:8px;border-radius:12px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid var(--border);color:var(--text2);transition:all 0.12s ease;font-size:1.1rem;text-decoration:none}
+        .header .right .icon-btn:active{transform:scale(0.88)}
+        .header .right .icon-btn.theme-btn{font-size:1rem;width:44px;height:44px}
+        .header .right .icon-btn.auth-btn{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;font-weight:700;font-size:0.65rem;width:auto;padding:0 14px;border-radius:20px}
 
         /* ===== Language Switcher ===== */
-        .lang-switcher{display:flex;gap:4px;background:var(--bg3);padding:3px;border-radius:10px;border:1px solid var(--border)}
-        .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text2);padding:4px 10px;border-radius:8px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.15s ease}
+        .lang-switcher{display:flex;gap:3px;background:var(--bg3);padding:3px;border-radius:10px;border:1px solid var(--border)}
+        .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text2);padding:4px 10px;border-radius:8px;font-size:0.55rem;font-weight:600;cursor:pointer;transition:all 0.12s ease}
         .lang-switcher .lang-btn.active{background:var(--gold);color:#0a0e1a}
-        .lang-switcher .lang-btn:active{transform:scale(0.90)}
+        .lang-switcher .lang-btn:active{transform:scale(0.88)}
 
         /* ===== Welcome ===== */
         .welcome{margin-bottom:20px}
@@ -65,9 +68,9 @@
         .welcome h2 span{background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
         .welcome p{color:var(--text2);font-size:0.8rem;margin-top:2px}
 
-        /* ===== Banner (ကြော်ငြာ) ===== */
-        .banner{background:linear-gradient(135deg,rgba(245,200,66,0.12),rgba(59,130,246,0.08));border-radius:16px;padding:18px 16px;border:1px solid rgba(245,200,66,0.10);margin-bottom:18px;text-align:center;position:relative;overflow:hidden;cursor:pointer;transition:all 0.15s ease}
-        .banner:active{transform:scale(0.97)}
+        /* ===== Banner ===== */
+        .banner{background:linear-gradient(135deg,rgba(245,200,66,0.12),rgba(59,130,246,0.08));border-radius:16px;padding:18px 16px;border:1px solid rgba(245,200,66,0.10);margin-bottom:18px;text-align:center;position:relative;overflow:hidden;cursor:pointer;transition:all 0.12s ease}
+        .banner:active{transform:scale(0.96)}
         .banner .banner-icon{font-size:1.8rem;display:block;margin-bottom:4px}
         .banner h4{font-size:0.95rem;color:var(--gold);font-weight:700}
         .banner p{font-size:0.7rem;color:var(--text2);margin-top:2px}
@@ -80,8 +83,8 @@
         .section-title{font-size:0.8rem;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;display:flex;align-items:center;gap:10px}
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
         .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-        .services-grid .service{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px 8px;text-align:center;cursor:pointer;transition:all 0.15s ease}
-        .services-grid .service:active{transform:scale(0.92);border-color:var(--gold)}
+        .services-grid .service{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px 8px;text-align:center;cursor:pointer;transition:all 0.12s ease}
+        .services-grid .service:active{transform:scale(0.90);border-color:var(--gold)}
         .services-grid .service .icon{font-size:1.6rem;display:block;margin-bottom:4px}
         .services-grid .service .label{font-size:0.6rem;color:var(--text2);font-weight:500}
 
@@ -93,30 +96,50 @@
         .bottom-nav .nav-item .label{font-size:0.45rem;margin-top:2px;font-weight:600;letter-spacing:0.5px;transition:all 0.35s ease}
         .bottom-nav .nav-item.active{color:var(--gold)}
         .bottom-nav .nav-item.active .icon{transform:translateY(-6px) scale(1.15)}
-        .bottom-nav .nav-item.active .label{color:var(--gold);transform:translateY(-2px)}
-        .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:22px;height:2.5px;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:10px}
+        .bottom-nav .nav-item.active .label{color:var(--gold)}
+        /* ===== Active Bar (အလျားလိုက်အချောင်း) ===== */
+        .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:28px;height:3px;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:10px;transition:all 0.3s ease}
         .bottom-nav .nav-item:not(.active):hover .icon{transform:translateY(-2px)}
 
         .footer-text{text-align:center;color:var(--text2);font-size:0.5rem;margin-top:12px;opacity:0.4}
 
+        /* ===== Toast ===== */
         .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--bg3);padding:12px 24px;border-radius:14px;border:1px solid var(--border);color:var(--gold);font-weight:600;font-size:0.8rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 4px 30px var(--shadow);animation:toastPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)}
         .toast.show{display:block}
         @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
+
+        /* ===== Auth Modal ===== */
+        .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(10px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px}
+        .modal-overlay.show{display:flex;animation:fadeIn 0.25s ease}
+        .modal{background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:28px 24px;max-width:400px;width:100%;box-shadow:0 10px 50px var(--shadow);position:relative}
+        .modal h2{font-size:1.3rem;color:var(--gold);margin-bottom:6px;text-align:center}
+        .modal p{color:var(--text2);font-size:0.8rem;text-align:center;margin-bottom:20px}
+        .modal .form-group{margin-bottom:14px}
+        .modal .form-group label{font-size:0.7rem;color:var(--text2);font-weight:500;display:block;margin-bottom:4px}
+        .modal .form-group input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:0.9rem;outline:none;transition:all 0.12s ease}
+        .modal .form-group input:focus{border-color:rgba(245,200,66,0.30)}
+        .modal .btn-primary{width:100%;padding:12px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:12px;font-size:0.9rem;font-weight:700;cursor:pointer;transition:all 0.12s ease}
+        .modal .btn-primary:active{transform:scale(0.96)}
+        .modal .switch-link{color:var(--gold);cursor:pointer;font-weight:600;text-align:center;display:block;margin-top:12px;font-size:0.8rem}
+        .modal .switch-link:active{opacity:0.7}
+        .modal .close-btn{position:absolute;top:12px;right:16px;background:none;border:none;color:var(--text2);font-size:1.2rem;cursor:pointer}
+        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
     </style>
 </head>
 <body>
 <div class="container">
     <!-- Header -->
     <div class="header">
-        <div class="logo">Premium Game Shop</div>
-        <div class="icons">
+        <div class="logo" id="appName">Premium Game Shop</div>
+        <div class="right">
             <div class="lang-switcher">
-                <button class="lang-btn active" onclick="switchLang('en')">EN</button>
-                <button class="lang-btn" onclick="switchLang('my')">MY</button>
+                <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" data-lang="my" onclick="setLang('my')">MY</button>
             </div>
             <div class="icon-btn theme-btn" onclick="toggleTheme()">🌙</div>
-            <div class="icon-btn" onclick="showToast(lang.noti)">🔔</div>
-            <a href="profile.html" class="icon-btn">👤</a>
+            <div class="icon-btn" onclick="showToast(getText('noti'))">🔔</div>
+            <div class="icon-btn auth-btn" id="authBtn">Login</div>
+            <a href="profile.html" class="icon-btn" id="profileBtn" style="display:none;">👤</a>
         </div>
     </div>
 
@@ -127,9 +150,9 @@
         <p id="subtitle">Top up diamonds and dominate the battlefield</p>
     </div>
 
-    <!-- Banner (ကြော်ငြာ) -->
-    <div class="banner" onclick="showToast('🔥 New promo: 20% bonus diamonds!')">
-        <span class="banner-tag">HOT</span>
+    <!-- Banner -->
+    <div class="banner" onclick="showToast(getText('bannerTitle'))">
+        <span class="banner-tag" id="bannerTag">HOT</span>
         <span class="banner-icon">🔥</span>
         <h4 id="bannerTitle">20% Bonus Diamonds!</h4>
         <p id="bannerDesc">Limited time offer • Shop now</p>
@@ -158,43 +181,36 @@
 </div>
 <div class="toast" id="toast"></div>
 
+<!-- Auth Modal -->
+<div class="modal-overlay" id="authModal">
+    <div class="modal">
+        <button class="close-btn" onclick="closeModal()">✕</button>
+        <h2 id="modalTitle">Login</h2>
+        <p id="modalSub">Welcome back! Login to your account</p>
+        <div id="modalBody">
+            <div class="form-group">
+                <label id="emailLabel">Email</label>
+                <input type="text" id="emailInput" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label id="passLabel">Password</label>
+                <input type="password" id="passInput" placeholder="Enter your password">
+            </div>
+            <button class="btn-primary" id="modalAction" onclick="handleAuth()">Login</button>
+            <span class="switch-link" id="switchLink" onclick="switchAuthMode()">Don't have an account? Register</span>
+        </div>
+    </div>
+</div>
+
 <script>
-    // ===== Language =====
-    const langData = {
-        en: {
-            greeting: '👋 Hey dear, Welcome',
-            title: 'Level Up Your <span>Game!</span>',
-            subtitle: 'Top up diamonds and dominate the battlefield',
-            bannerTitle: '20% Bonus Diamonds!',
-            bannerDesc: 'Limited time offer • Shop now',
-            servicesTitle: '⚡ Premium Services',
-            s1: 'Instant', s2: 'Secure', s3: 'Best Price',
-            s4: '24/7', s5: 'Mobile', s6: 'Top Rated',
-            navHome: 'Home', navShop: 'Shop', navPayment: 'Payment', navProfile: 'Profile',
-            noti: '🔔 No new notifications'
-        },
-        my: {
-            greeting: '👋 ဟေ့ကောင်လေး၊ ကြိုဆိုပါတယ်',
-            title: 'ဂိမ်းကို <span>မြှင့်တင်လိုက်ပါ!</span>',
-            subtitle: 'စိန်တွေဖြည့်ပြီး စစ်မြေပြင်ကို အနိုင်ယူလိုက်ပါ',
-            bannerTitle: 'စိန် ၂၀% အပိုရယူလိုက်ပါ!',
-            bannerDesc: 'အချိန်အကန့်အသတ်နဲ့ • အခုပဲဝယ်ယူပါ',
-            servicesTitle: '⚡ ထိပ်တန်းဝန်ဆောင်မှုများ',
-            s1: 'ချက်ချင်း', s2: 'လုံခြုံ', s3: 'ဈေးအကောင်းဆုံး',
-            s4: '၂၄/၇', s5: 'မိုဘိုင်း', s6: 'ထိပ်တန်း',
-            navHome: 'ပင်မ', navShop: 'ဆိုင်', navPayment: 'ငွေပေးချေ', navProfile: 'ပရိုဖိုင်',
-            noti: '🔔 အသိပေးချက်အသစ်မရှိပါ'
-        }
-    };
-
-    let currentLang = 'en';
-
-    function switchLang(lang) {
-        currentLang = lang;
-        const d = langData[lang];
+    // ===== Language Update =====
+    window.updateLanguage = function() {
+        const d = LANG_DATA[currentLang];
+        document.getElementById('appName').textContent = d.appName;
         document.getElementById('greeting').textContent = d.greeting;
         document.getElementById('title').innerHTML = d.title;
         document.getElementById('subtitle').textContent = d.subtitle;
+        document.getElementById('bannerTag').textContent = d.bannerTag;
         document.getElementById('bannerTitle').textContent = d.bannerTitle;
         document.getElementById('bannerDesc').textContent = d.bannerDesc;
         document.getElementById('servicesTitle').textContent = d.servicesTitle;
@@ -204,17 +220,13 @@
         document.getElementById('s4').textContent = d.s4;
         document.getElementById('s5').textContent = d.s5;
         document.getElementById('s6').textContent = d.s6;
-        document.getElementById('navHome').textContent = d.navHome;
-        document.getElementById('navShop').textContent = d.navShop;
-        document.getElementById('navPayment').textContent = d.navPayment;
-        document.getElementById('navProfile').textContent = d.navProfile;
-        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-        document.querySelector(`.lang-btn[onclick="switchLang('${lang}')"]`).classList.add('active');
-        localStorage.setItem('lang', lang);
-    }
-
-    const savedLang = localStorage.getItem('lang') || 'en';
-    switchLang(savedLang);
+        document.getElementById('navHome').textContent = d.home;
+        document.getElementById('navShop').textContent = d.shop;
+        document.getElementById('navPayment').textContent = d.payment;
+        document.getElementById('navProfile').textContent = d.profile;
+        // Update auth UI
+        updateAuthUI();
+    };
 
     // ===== Theme =====
     function toggleTheme() {
@@ -233,14 +245,4 @@
         t.textContent = msg;
         t.classList.add('show');
         clearTimeout(t._timer);
-        t._timer = setTimeout(() => t.classList.remove('show'), 2500);
-    }
-
-    // ===== Banner Click =====
-    document.querySelector('.banner').addEventListener('click', function() {
-        this.style.transform = 'scale(0.96)';
-        setTimeout(() => this.style.transform = 'scale(1)', 200);
-    });
-</script>
-</body>
-</html>
+        t._timer = setTimeout(() => t.classList.remove('show
