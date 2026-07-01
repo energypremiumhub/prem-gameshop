@@ -28,8 +28,6 @@
             --green-glow: rgba(34,211,238,0.2);
             --red: #ef4444;
             --warning: #f59e0b;
-            --selected: #f5c842;
-            --selected-glow: rgba(245,200,66,0.15);
         }
 
         body {
@@ -37,7 +35,7 @@
             color: var(--text-primary);
             min-height: 100vh;
             padding: 16px;
-            padding-bottom: 90px;
+            padding-bottom: 150px;
             background-image: 
                 radial-gradient(ellipse at 20% 50%, rgba(245,200,66,0.04) 0%, transparent 60%),
                 radial-gradient(ellipse at 80% 20%, rgba(0,212,255,0.04) 0%, transparent 50%);
@@ -76,22 +74,12 @@
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
         .section-title i{color:var(--cyan);text-shadow:0 0 20px var(--cyan-glow)}
 
-        /* ===== WARNING BOX ===== */
         .warning-box{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.15);border-radius:12px;padding:12px 14px;margin-bottom:16px;display:flex;gap:10px;align-items:flex-start;animation:slideUp 0.7s ease}
         .warning-box .icon{color:var(--warning);font-size:1.1rem;margin-top:2px;flex-shrink:0}
         .warning-box .text{font-size:0.65rem;color:var(--text-secondary);line-height:1.5}
         .warning-box .text strong{color:var(--warning)}
         .warning-box .text .highlight{color:var(--gold);font-weight:600}
 
-        /* ===== SELECTED PACKAGE INFO ===== */
-        .selected-info{background:rgba(245,200,66,0.06);border:1px solid rgba(245,200,66,0.15);border-radius:12px;padding:10px 14px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;animation:slideUp 0.6s ease}
-        .selected-info .label{font-size:0.55rem;color:var(--text-secondary)}
-        .selected-info .label i{color:var(--gold);margin-right:4px}
-        .selected-info .pkg-name{font-size:0.8rem;font-weight:600;color:var(--gold)}
-        .selected-info .pkg-price{font-size:0.8rem;font-weight:700;color:var(--gold);text-shadow:0 0 20px var(--gold-glow)}
-        .selected-info .empty{font-size:0.7rem;color:var(--text-secondary);font-weight:400}
-
-        /* ===== PACKAGE LIST ===== */
         .package-list{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;animation:slideUp 0.8s ease}
         .package-item{display:flex;align-items:center;justify-content:space-between;background:var(--bg-card);border:2px solid var(--border-color);border-radius:10px;padding:10px 12px;transition:all 0.3s ease;cursor:pointer;box-shadow:0 4px 20px var(--shadow);position:relative;overflow:hidden}
         .package-item::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--gold),var(--orange));opacity:0;transition:all 0.3s ease}
@@ -99,7 +87,6 @@
         .package-item:hover::before{opacity:1}
         .package-item:hover{border-color:rgba(245,200,66,0.2)}
         
-        /* ===== SELECTED STATE ===== */
         .package-item.selected{border-color:var(--gold);background:rgba(245,200,66,0.06);box-shadow:0 0 30px var(--gold-glow), inset 0 0 30px rgba(245,200,66,0.03)}
         .package-item.selected::before{opacity:1}
         .package-item.selected .check-mark{display:inline-block}
@@ -115,20 +102,26 @@
         .package-item .right .btn{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;padding:3px 12px;border-radius:10px;font-weight:700;font-size:0.5rem;cursor:pointer;transition:all 0.3s ease;box-shadow:0 0 20px var(--gold-glow)}
         .package-item .right .btn:active{transform:scale(0.85)}
         .package-item .right .btn:hover{box-shadow:0 0 40px var(--gold-glow)}
-        .package-item .right .btn:disabled{opacity:0.3;cursor:not-allowed;box-shadow:none}
 
-        /* ===== FIXED BUY BUTTON ===== */
-        .fixed-buy{position:fixed;bottom:70px;left:0;right:0;padding:10px 16px;background:var(--bg-secondary);border-top:1px solid var(--border-color);border-bottom:1px solid var(--border-color);z-index:50;display:flex;justify-content:space-between;align-items:center;max-width:500px;margin:0 auto}
+        /* ===== FIXED BUY BUTTON with Quantity ===== */
+        .fixed-buy{position:fixed;bottom:65px;left:0;right:0;padding:10px 16px;background:var(--bg-secondary);border-top:1px solid var(--border-color);border-bottom:1px solid var(--border-color);z-index:50;display:flex;justify-content:space-between;align-items:center;max-width:500px;margin:0 auto}
         .fixed-buy .info{display:flex;flex-direction:column;gap:2px}
         .fixed-buy .info .label{font-size:0.5rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px}
-        .fixed-buy .info .name{font-size:0.8rem;font-weight:600;color:var(--text-primary)}
-        .fixed-buy .info .price{font-size:0.9rem;font-weight:700;color:var(--gold)}
-        .fixed-buy .btn-buy-now{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;padding:10px 28px;border-radius:12px;font-weight:700;font-size:0.8rem;cursor:pointer;transition:all 0.3s ease;box-shadow:0 0 30px var(--gold-glow)}
+        .fixed-buy .info .name{font-size:0.75rem;font-weight:600;color:var(--text-primary)}
+        .fixed-buy .info .price{font-size:0.85rem;font-weight:700;color:var(--gold)}
+        
+        .fixed-buy .qty-section{display:flex;align-items:center;gap:8px}
+        .fixed-buy .qty-section .qty-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--border-color);background:var(--bg-card);color:var(--text-primary);font-size:0.9rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;display:flex;align-items:center;justify-content:center}
+        .fixed-buy .qty-section .qty-btn:active{transform:scale(0.85);background:var(--gold);color:#0a0e1a}
+        .fixed-buy .qty-section .qty-btn:disabled{opacity:0.2;cursor:not-allowed}
+        .fixed-buy .qty-section .qty-num{font-size:1rem;font-weight:700;color:var(--gold);min-width:24px;text-align:center}
+        .fixed-buy .qty-section .total-price{font-size:0.9rem;font-weight:700;color:var(--gold);margin-left:4px}
+        
+        .fixed-buy .btn-buy-now{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;padding:10px 20px;border-radius:12px;font-weight:700;font-size:0.75rem;cursor:pointer;transition:all 0.3s ease;box-shadow:0 0 30px var(--gold-glow);margin-left:8px}
         .fixed-buy .btn-buy-now:active{transform:scale(0.92)}
         .fixed-buy .btn-buy-now:disabled{opacity:0.3;cursor:not-allowed;box-shadow:none}
-        .fixed-buy .btn-buy-now i{margin-right:6px}
+        .fixed-buy .btn-buy-now i{margin-right:4px}
 
-        /* ===== BOTTOM NAV ===== */
         .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);border-top:1px solid var(--border-color);display:flex;justify-content:space-around;padding:6px 0 10px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px var(--shadow)}
         .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);padding:4px 8px;border-radius:10px;position:relative}
         .bottom-nav .nav-item:active{transform:scale(0.75)}
@@ -141,14 +134,13 @@
 
         .footer{text-align:center;margin-top:10px;padding:10px;border-top:1px solid var(--border-color);color:var(--text-secondary);font-size:0.45rem;opacity:0.3;letter-spacing:1px}
 
-        .toast{position:fixed;bottom:130px;left:50%;transform:translateX(-50%);background:var(--bg-card);padding:10px 20px;border-radius:12px;border:1px solid rgba(245,200,66,0.15);color:var(--gold);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 8px 40px var(--shadow);animation:toastPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
+        .toast{position:fixed;bottom:140px;left:50%;transform:translateX(-50%);background:var(--bg-card);padding:10px 20px;border-radius:12px;border:1px solid rgba(245,200,66,0.15);color:var(--gold);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 8px 40px var(--shadow);animation:toastPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
         .toast.show{display:block}
         @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
         @keyframes shimmer{0%,100%{transform:translate(0,0)}50%{transform:translate(-20%,-20%)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
-        /* ===== MODAL ===== */
         .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(12px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px}
         .modal-overlay.show{display:flex;animation:fadeIn 0.3s ease}
         .modal{background:linear-gradient(145deg,var(--bg-card),var(--bg-secondary));border:1px solid var(--border-color);border-radius:18px;padding:24px 20px;max-width:380px;width:100%;box-shadow:0 20px 60px var(--shadow);position:relative;overflow:hidden;max-height:90vh;overflow-y:auto}
@@ -177,7 +169,6 @@
 </head>
 <body>
 <div class="container">
-    <!-- HEADER -->
     <div class="header">
         <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Game Shop</div>
         <div class="right">
@@ -189,37 +180,17 @@
         </div>
     </div>
 
-    <!-- PAGE HEADER -->
     <div class="page-header">
         <h1 id="shopTitle"><i class="fas fa-gem"></i> Diamonds <span>Package</span></h1>
         <p id="shopSub">Select a package, then tap Buy</p>
     </div>
 
-    <!-- SELECTED INFO -->
-    <div class="selected-info" id="selectedInfo">
-        <div class="label"><i class="fas fa-check-circle"></i> <span id="selectedLabel">Selected</span></div>
-        <div id="selectedDisplay">
-            <span class="empty" id="noSelection">❌ No package selected</span>
-            <span style="display:none;" id="hasSelection">
-                <span class="pkg-name" id="selectedPkgName">-</span>
-                <span class="pkg-price" id="selectedPkgPrice">-</span>
-            </span>
-        </div>
-    </div>
-
-    <!-- BUNDLES -->
     <div class="section-title" id="bundlesTitle"><i class="fas fa-gift"></i> Bundles</div>
-    <div class="package-list" id="bundlesList">
-        <!-- Bundles will be rendered by JS -->
-    </div>
+    <div class="package-list" id="bundlesList"></div>
 
-    <!-- DIAMONDS -->
     <div class="section-title" id="diamondsTitle"><i class="fas fa-diamond"></i> Diamonds</div>
-    <div class="package-list" id="diamondsList">
-        <!-- Diamonds will be rendered by JS -->
-    </div>
+    <div class="package-list" id="diamondsList"></div>
 
-    <!-- DOUBLE TOP UP -->
     <div class="section-title" id="doubleTitle"><i class="fas fa-star"></i> Double Top Up</div>
     <div class="warning-box">
         <span class="icon">⚠️</span>
@@ -228,26 +199,29 @@
             <span class="highlight">ဥပမာ</span> - ၅၀ နှစ်ဆဖြည့်ပြီးရင် ကျန်တဲ့ သုံးခုပဲ နှစ်ဆ ဖြည့်လို့ရပါတော့မယ်။
         </div>
     </div>
-    <div class="package-list" id="doubleList">
-        <!-- Double packages will be rendered by JS -->
-    </div>
+    <div class="package-list" id="doubleList"></div>
 
     <div class="footer">&copy; 2026 Premium Game Shop</div>
 </div>
 
-<!-- FIXED BUY BUTTON -->
+<!-- FIXED BUY BUTTON with Quantity -->
 <div class="fixed-buy" id="fixedBuy">
     <div class="info">
         <span class="label" id="buyLabel">Selected Package</span>
         <span class="name" id="buyName">None</span>
         <span class="price" id="buyPrice">0 Ks</span>
     </div>
-    <button class="btn-buy-now" id="buyNowBtn" disabled onclick="proceedToCheckout()">
-        <i class="fas fa-shopping-cart"></i> <span id="buyNowText">Buy Now</span>
-    </button>
+    <div class="qty-section" id="qtySection" style="display:none;">
+        <button class="qty-btn" id="qtyMinus" onclick="changeQty(-1)">−</button>
+        <span class="qty-num" id="qtyNum">1</span>
+        <button class="qty-btn" id="qtyPlus" onclick="changeQty(1)">+</button>
+        <span class="total-price" id="totalPrice">0 Ks</span>
+        <button class="btn-buy-now" id="buyNowBtn" onclick="proceedToCheckout()">
+            <i class="fas fa-shopping-cart"></i> <span id="buyNowText">Buy</span>
+        </button>
+    </div>
 </div>
 
-<!-- BOTTOM NAV -->
 <div class="bottom-nav">
     <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label" id="navHome">Home</span></a>
     <a href="shop.html" class="nav-item active"><span class="icon">🛒</span><span class="label" id="navShop">Shop</span></a>
@@ -257,7 +231,6 @@
 
 <div class="toast" id="toast"></div>
 
-<!-- AUTH MODAL -->
 <div class="modal-overlay" id="authModal">
     <div class="modal">
         <button class="close-btn" onclick="closeModal()">✕</button>
@@ -313,65 +286,62 @@
 </div>
 
 <script>
-    // ===== DATA =====
     const PACKAGES = {
         bundles: [
-            { id: 'b1', name: 'Monthly Epic Bundle', price: '17,200 Ks', badge: '⚡ + ★180 Bonus' },
-            { id: 'b2', name: 'Weekly Elite Bundle', price: '3,350 Ks', badge: '⚡ + ★20 Bonus' },
-            { id: 'b3', name: 'Weekly Pass', price: '6,500 Ks', badge: '' }
+            { id: 'b1', name: 'Monthly Epic Bundle', price: 17200 },
+            { id: 'b2', name: 'Weekly Elite Bundle', price: 3350 },
+            { id: 'b3', name: 'Weekly Pass', price: 6500 }
         ],
         diamonds: [
-            { id: 'd1', name: '11 Diamonds', price: '1,000 Ks' },
-            { id: 'd2', name: '22 Diamonds', price: '1,750 Ks' },
-            { id: 'd3', name: '33 Diamonds', price: '2,500 Ks' },
-            { id: 'd4', name: '44 Diamonds', price: '3,300 Ks' },
-            { id: 'd5', name: '56 Diamonds', price: '4,000 Ks' },
-            { id: 'd6', name: '86 Diamonds', price: '5,500 Ks' },
-            { id: 'd7', name: '112 Diamonds', price: '7,800 Ks' },
-            { id: 'd8', name: '172 Diamonds', price: '10,700 Ks' },
-            { id: 'd9', name: '257 Diamonds', price: '15,900 Ks' },
-            { id: 'd10', name: '343 Diamonds', price: '21,100 Ks' },
-            { id: 'd11', name: '429 Diamonds', price: '26,600 Ks' },
-            { id: 'd12', name: '514 Diamonds', price: '31,200 Ks' },
-            { id: 'd13', name: '600 Diamonds', price: '36,700 Ks' },
-            { id: 'd14', name: '706 Diamonds', price: '42,800 Ks' },
-            { id: 'd15', name: '878 Diamonds', price: '53,100 Ks' },
-            { id: 'd16', name: '963 Diamonds', price: '58,500 Ks' },
-            { id: 'd17', name: '1,049 Diamonds', price: '63,800 Ks' },
-            { id: 'd18', name: '1,135 Diamonds', price: '69,300 Ks' },
-            { id: 'd19', name: '1,412 Diamonds', price: '84,900 Ks' },
-            { id: 'd20', name: '2,195 Diamonds', price: '126,000 Ks' },
-            { id: 'd21', name: '2,901 Diamonds', price: '166,300 Ks' },
-            { id: 'd22', name: '3,688 Diamonds', price: '207,500 Ks' },
-            { id: 'd23', name: '5,532 Diamonds', price: '312,000 Ks' },
-            { id: 'd24', name: '9,288 Diamonds', price: '522,000 Ks' }
+            { id: 'd1', name: '11 Diamonds', price: 1000 },
+            { id: 'd2', name: '22 Diamonds', price: 1750 },
+            { id: 'd3', name: '33 Diamonds', price: 2500 },
+            { id: 'd4', name: '44 Diamonds', price: 3300 },
+            { id: 'd5', name: '56 Diamonds', price: 4000 },
+            { id: 'd6', name: '86 Diamonds', price: 5500 },
+            { id: 'd7', name: '112 Diamonds', price: 7800 },
+            { id: 'd8', name: '172 Diamonds', price: 10700 },
+            { id: 'd9', name: '257 Diamonds', price: 15900 },
+            { id: 'd10', name: '343 Diamonds', price: 21100 },
+            { id: 'd11', name: '429 Diamonds', price: 26600 },
+            { id: 'd12', name: '514 Diamonds', price: 31200 },
+            { id: 'd13', name: '600 Diamonds', price: 36700 },
+            { id: 'd14', name: '706 Diamonds', price: 42800 },
+            { id: 'd15', name: '878 Diamonds', price: 53100 },
+            { id: 'd16', name: '963 Diamonds', price: 58500 },
+            { id: 'd17', name: '1,049 Diamonds', price: 63800 },
+            { id: 'd18', name: '1,135 Diamonds', price: 69300 },
+            { id: 'd19', name: '1,412 Diamonds', price: 84900 },
+            { id: 'd20', name: '2,195 Diamonds', price: 126000 },
+            { id: 'd21', name: '2,901 Diamonds', price: 166300 },
+            { id: 'd22', name: '3,688 Diamonds', price: 207500 },
+            { id: 'd23', name: '5,532 Diamonds', price: 312000 },
+            { id: 'd24', name: '9,288 Diamonds', price: 522000 }
         ],
         double: [
-            { id: 'x1', name: '50 + 50 (Double)', price: '3,800 Ks', badge: '⭐ 2x Bonus' },
-            { id: 'x2', name: '150 + 150 (Double)', price: '10,300 Ks', badge: '⭐ 2x Bonus' },
-            { id: 'x3', name: '250 + 250 (Double)', price: '16,000 Ks', badge: '⭐ 2x Bonus' },
-            { id: 'x4', name: '500 + 500 (Double)', price: '32,400 Ks', badge: '⭐ 2x Bonus' }
+            { id: 'x1', name: '50 + 50 (Double)', price: 3800, badge: '⭐ 2x Bonus' },
+            { id: 'x2', name: '150 + 150 (Double)', price: 10300, badge: '⭐ 2x Bonus' },
+            { id: 'x3', name: '250 + 250 (Double)', price: 16000, badge: '⭐ 2x Bonus' },
+            { id: 'x4', name: '500 + 500 (Double)', price: 32400, badge: '⭐ 2x Bonus' }
         ]
     };
 
-    // ===== STATE =====
-    let selectedPackage = null; // { id, name, price, type }
+    let selectedPackage = null;
+    let quantity = 1;
+    const MAX_QTY = 10;
 
-    // ===== LANGUAGE DATA =====
     const LANG_DATA = {
         en: {
             appName: 'Premium Game Shop',
             shopTitle: 'Diamonds Package',
             shopSub: 'Select a package, then tap Buy',
-            selectedLabel: 'Selected',
-            noSelection: '❌ No package selected',
             bundlesTitle: 'Bundles',
             diamondsTitle: 'Diamonds',
             doubleTitle: 'Double Top Up',
             warningText: '⚠️ Double Dia can only be claimed once per account per package 🤠 Example - After buying 50+50, you can still buy the other 3 double packages.',
             buyLabel: 'Selected Package',
-            buyNow: 'Buy Now',
-            buy: 'Select',
+            buyNow: 'Buy',
+            select: 'Select',
             home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
             login: 'Login',
             register: 'Register',
@@ -396,15 +366,13 @@
             appName: 'ပရီမီယံ ဂိမ်းဆိုင်',
             shopTitle: 'စိန်အထုပ်များ',
             shopSub: 'အထုပ်တစ်ခုရွေးပြီး Buy နှိပ်ပါ',
-            selectedLabel: 'ရွေးထားသည်',
-            noSelection: '❌ အထုပ်မရွေးရသေးပါ',
             bundlesTitle: 'အထုပ်များ',
             diamondsTitle: 'စိန်များ',
             doubleTitle: 'နှစ်ဆဖြည့်မှု',
             warningText: '⚠️ နှစ်ဆစိန်ကို အကောင့်တစ်ကောင့်မှာ တစ်ခုကို တစ်ခါပဲ ရယူနိုင်ပါတယ် 🤠 ဥပမာ - ၅၀ နှစ်ဆဖြည့်ပြီးရင် ကျန်တဲ့ သုံးခုကို ဆက်ဖြည့်လို့ရပါတယ်။',
             buyLabel: 'ရွေးထားသောအထုပ်',
-            buyNow: 'အခုဝယ်မယ်',
-            buy: 'ရွေးရန်',
+            buyNow: 'ဝယ်မည်',
+            select: 'ရွေးရန်',
             home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
             login: 'ဝင်ရန်',
             register: 'မှတ်ပုံတင်ရန်',
@@ -446,7 +414,6 @@
         document.getElementById('appName').innerHTML = '<i class="fas fa-gamepad"></i> ' + d.appName;
         document.getElementById('shopTitle').innerHTML = '<i class="fas fa-gem"></i> ' + d.shopTitle;
         document.getElementById('shopSub').textContent = d.shopSub;
-        document.getElementById('selectedLabel').textContent = d.selectedLabel;
         document.getElementById('bundlesTitle').innerHTML = '<i class="fas fa-gift"></i> ' + d.bundlesTitle;
         document.getElementById('diamondsTitle').innerHTML = '<i class="fas fa-diamond"></i> ' + d.diamondsTitle;
         document.getElementById('doubleTitle').innerHTML = '<i class="fas fa-star"></i> ' + d.doubleTitle;
@@ -457,60 +424,39 @@
         document.getElementById('navShop').textContent = d.shop;
         document.getElementById('navPayment').textContent = d.payment;
         document.getElementById('navProfile').textContent = d.profile;
-        updateSelectedDisplay();
+        updateBuyUI();
         updateAuthUI();
         updateModalUI();
     }
 
-    // ===== RENDER PACKAGES =====
     function renderPackages() {
-        const buyText = getText('buy');
+        const selectText = getText('select');
         
-        // Bundles
-        const bundlesList = document.getElementById('bundlesList');
-        bundlesList.innerHTML = PACKAGES.bundles.map(pkg => `
-            <div class="package-item" data-id="${pkg.id}" data-name="${pkg.name}" data-price="${pkg.price}" data-type="bundle" onclick="selectPackage('${pkg.id}', '${pkg.name}', '${pkg.price}', 'bundle')">
-                <div class="info">
-                    <div class="name"><span class="check-mark">✅ </span>${pkg.name}</div>
-                    ${pkg.badge ? `<span class="badge">${pkg.badge}</span>` : ''}
-                </div>
-                <div class="right">
-                    <div class="price">${pkg.price}</div>
-                    <button class="btn" onclick="event.stopPropagation(); selectPackage('${pkg.id}', '${pkg.name}', '${pkg.price}', 'bundle')">${buyText}</button>
-                </div>
-            </div>
-        `).join('');
+        const renderItems = (items, type) => {
+            return items.map(pkg => {
+                let badgeHtml = '';
+                if (type === 'double' && pkg.badge) {
+                    badgeHtml = `<span class="badge double-badge">${pkg.badge}</span>`;
+                }
+                return `
+                    <div class="package-item" data-id="${pkg.id}" data-name="${pkg.name}" data-price="${pkg.price}" data-type="${type}" onclick="selectPackage('${pkg.id}', '${pkg.name}', '${pkg.price}', '${type}')">
+                        <div class="info">
+                            <div class="name"><span class="check-mark">✅ </span>${pkg.name}</div>
+                            ${badgeHtml}
+                        </div>
+                        <div class="right">
+                            <div class="price">${formatPrice(pkg.price)}</div>
+                            <button class="btn" onclick="event.stopPropagation(); selectPackage('${pkg.id}', '${pkg.name}', '${pkg.price}', '${type}')">${selectText}</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        };
 
-        // Diamonds
-        const diamondsList = document.getElementById('diamondsList');
-        diamondsList.innerHTML = PACKAGES.diamonds.map(pkg => `
-            <div class="package-item" data-id="${pkg.id}" data-name="${pkg.name}" data-price="${pkg.price}" data-type="diamond" onclick="selectPackage('${pkg.id}', '${pkg.name}', '${pkg.price}', 'diamond')">
-                <div class="info">
-                    <div class="name"><span class="check-mark">✅ </span><span class="dia-icon">💎</span> ${pkg.name}</div>
-                </div>
-                <div class="right">
-                    <div class="price">${pkg.price}</div>
-                    <button class="btn" onclick="event.stopPropagation(); selectPackage('${pkg.id}', '${pkg.name}', '${pkg.price}', 'diamond')">${buyText}</button>
-                </div>
-            </div>
-        `).join('');
+        document.getElementById('bundlesList').innerHTML = renderItems(PACKAGES.bundles, 'bundle');
+        document.getElementById('diamondsList').innerHTML = renderItems(PACKAGES.diamonds, 'diamond');
+        document.getElementById('doubleList').innerHTML = renderItems(PACKAGES.double, 'double');
 
-        // Double
-        const doubleList = document.getElementById('doubleList');
-        doubleList.innerHTML = PACKAGES.double.map(pkg => `
-            <div class="package-item" data-id="${pkg.id}" data-name="${pkg.name}" data-price="${pkg.price}" data-type="double" onclick="selectPackage('${pkg.id}', '${pkg.name}', '${pkg.price}', 'double')">
-                <div class="info">
-                    <div class="name"><span class="check-mark">✅ </span><span class="dia-icon">💎</span> ${pkg.name}</div>
-                    <span class="badge double-badge">${pkg.badge}</span>
-                </div>
-                <div class="right">
-                    <div class="price">${pkg.price}</div>
-                    <button class="btn" onclick="event.stopPropagation(); selectPackage('${pkg.id}', '${pkg.name}', '${pkg.price}', 'double')">${buyText}</button>
-                </div>
-            </div>
-        `).join('');
-
-        // Highlight selected if exists
         if (selectedPackage) {
             document.querySelectorAll('.package-item').forEach(el => {
                 if (el.dataset.id === selectedPackage.id) {
@@ -518,68 +464,67 @@
                 }
             });
         }
-        updateSelectedDisplay();
+        updateBuyUI();
     }
 
-    // ===== SELECT PACKAGE =====
+    function formatPrice(price) {
+        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' Ks';
+    }
+
     function selectPackage(id, name, price, type) {
-        // Deselect all
         document.querySelectorAll('.package-item').forEach(el => el.classList.remove('selected'));
-        
-        // Select this one
         const item = document.querySelector(`.package-item[data-id="${id}"]`);
         if (item) item.classList.add('selected');
-        
         selectedPackage = { id, name, price, type };
-        updateSelectedDisplay();
-        updateBuyButton();
-        showToast(`✅ Selected: ${name}`);
+        quantity = 1;
+        document.getElementById('qtyNum').textContent = quantity;
+        updateBuyUI();
+        showToast(`✅ ${getText('select')}: ${name}`);
     }
 
-    // ===== UPDATE SELECTED DISPLAY =====
-    function updateSelectedDisplay() {
-        const noSelection = document.getElementById('noSelection');
-        const hasSelection = document.getElementById('hasSelection');
-        const pkgName = document.getElementById('selectedPkgName');
-        const pkgPrice = document.getElementById('selectedPkgPrice');
+    function changeQty(delta) {
+        let newQty = quantity + delta;
+        if (newQty < 1) newQty = 1;
+        if (newQty > MAX_QTY) newQty = MAX_QTY;
+        quantity = newQty;
+        document.getElementById('qtyNum').textContent = quantity;
+        updateBuyUI();
+    }
+
+    function updateBuyUI() {
+        const qtySection = document.getElementById('qtySection');
         const buyName = document.getElementById('buyName');
         const buyPrice = document.getElementById('buyPrice');
+        const totalPrice = document.getElementById('totalPrice');
+        const btn = document.getElementById('buyNowBtn');
 
         if (selectedPackage) {
-            noSelection.style.display = 'none';
-            hasSelection.style.display = 'inline';
-            pkgName.textContent = selectedPackage.name;
-            pkgPrice.textContent = selectedPackage.price;
+            qtySection.style.display = 'flex';
             buyName.textContent = selectedPackage.name;
-            buyPrice.textContent = selectedPackage.price;
+            const total = selectedPackage.price * quantity;
+            buyPrice.textContent = formatPrice(selectedPackage.price);
+            totalPrice.textContent = formatPrice(total);
+            btn.disabled = false;
+            document.getElementById('qtyMinus').disabled = (quantity <= 1);
+            document.getElementById('qtyPlus').disabled = (quantity >= MAX_QTY);
         } else {
-            noSelection.style.display = 'inline';
-            hasSelection.style.display = 'none';
+            qtySection.style.display = 'none';
             buyName.textContent = 'None';
             buyPrice.textContent = '0 Ks';
-        }
-    }
-
-    // ===== UPDATE BUY BUTTON =====
-    function updateBuyButton() {
-        const btn = document.getElementById('buyNowBtn');
-        if (selectedPackage) {
-            btn.disabled = false;
-        } else {
             btn.disabled = true;
         }
     }
 
-    // ===== PROCEED TO CHECKOUT =====
     function proceedToCheckout() {
         if (!selectedPackage) {
             showToast(getText('selectFirst'));
             return;
         }
-        window.location.href = 'checkout.html?package=' + encodeURIComponent(selectedPackage.name) + '&price=' + encodeURIComponent(selectedPackage.price);
+        const total = selectedPackage.price * quantity;
+        const nameWithQty = selectedPackage.name + ' × ' + quantity;
+        window.location.href = 'checkout.html?package=' + encodeURIComponent(nameWithQty) + '&price=' + encodeURIComponent(formatPrice(total));
     }
 
-    // ===== TOAST =====
     function showToast(msg) {
         const t = document.getElementById('toast');
         t.textContent = msg;
@@ -622,7 +567,6 @@
         }
     }
 
-    // ===== AVATAR UPLOAD =====
     let tempAvatar = null;
 
     function handleAvatarUpload(event) {
@@ -638,7 +582,6 @@
         }
     }
 
-    // ===== AUTH MODAL =====
     let isLoginMode = true;
 
     function openModal(mode) {
@@ -762,7 +705,6 @@
         if (e.key === 'Escape') closeModal();
     });
 
-    // ===== INIT =====
     document.addEventListener('DOMContentLoaded', function() {
         const savedLang = localStorage.getItem('lang') || 'en';
         setLang(savedLang);
