@@ -2,396 +2,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prem-Game Shop - Checkout</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background: #0a0e1a;
-            color: #fff;
-            min-height: 100vh;
-            padding: 16px;
-            padding-bottom: 30px;
-            background-image: 
-                radial-gradient(ellipse at 10% 20%, rgba(245, 200, 66, 0.06) 0%, transparent 50%),
-                radial-gradient(ellipse at 90% 80%, rgba(245, 200, 66, 0.04) 0%, transparent 50%);
-        }
-
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        /* ===== Top Bar ===== */
-        .topbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 0 16px;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-            margin-bottom: 20px;
-        }
-
-        .topbar .back-btn {
-            color: #f5c842;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 14px;
-            border-radius: 20px;
-            background: rgba(245, 200, 66, 0.08);
-            border: 1px solid rgba(245, 200, 66, 0.10);
-            transition: all 0.3s ease;
-        }
-
-        .topbar .back-btn:active {
-            transform: scale(0.92);
-        }
-
-        .topbar .page-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #f5c842, #f7d96a);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .topbar .spacer {
-            width: 70px;
-        }
-
-        /* ===== Glass Card ===== */
-        .glass-card {
-            background: rgba(255,255,255,0.03);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 16px;
-            transition: all 0.3s ease;
-        }
-
-        .glass-card .label {
-            font-size: 0.75rem;
-            color: #8892b0;
-            font-weight: 500;
-            margin-bottom: 6px;
-            display: block;
-        }
-
-        .glass-card .value {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #fff;
-        }
-
-        /* ===== Form ===== */
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-group label {
-            font-size: 0.8rem;
-            color: #8892b0;
-            font-weight: 500;
-            display: block;
-            margin-bottom: 6px;
-        }
-
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 12px 16px;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.08);
-            background: rgba(255,255,255,0.04);
-            color: #fff;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            outline: none;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus {
-            border-color: rgba(245, 200, 66, 0.30);
-            background: rgba(255,255,255,0.06);
-            box-shadow: 0 0 20px rgba(245, 200, 66, 0.05);
-        }
-
-        .form-group input::placeholder {
-            color: #8892b0;
-            font-size: 0.85rem;
-        }
-
-        .form-group select option {
-            background: #141b2b;
-            color: #fff;
-        }
-
-        /* ===== Payment Options ===== */
-        .payment-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 4px;
-        }
-
-        .payment-option {
-            background: rgba(255,255,255,0.03);
-            border: 2px solid rgba(255,255,255,0.06);
-            border-radius: 12px;
-            padding: 14px 12px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .payment-option:active {
-            transform: scale(0.95);
-        }
-
-        .payment-option.selected {
-            border-color: #f5c842;
-            background: rgba(245, 200, 66, 0.08);
-        }
-
-        .payment-option .icon {
-            font-size: 1.8rem;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .payment-option .name {
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: #fff;
-        }
-
-        .payment-option .detail {
-            font-size: 0.55rem;
-            color: #8892b0;
-            margin-top: 2px;
-        }
-
-        /* ===== Account Info (Wave Pay / Kpay) ===== */
-        .account-info {
-            background: rgba(100, 255, 218, 0.04);
-            border: 1px solid rgba(100, 255, 218, 0.08);
-            border-radius: 12px;
-            padding: 14px 16px;
-            margin-top: 12px;
-            display: none;
-        }
-
-        .account-info.show {
-            display: block;
-            animation: fadeUp 0.4s ease;
-        }
-
-        .account-info .acc-name {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #fff;
-        }
-
-        .account-info .acc-number {
-            font-size: 0.8rem;
-            color: #64ffda;
-            font-weight: 500;
-        }
-
-        .account-info .acc-holder {
-            font-size: 0.7rem;
-            color: #8892b0;
-        }
-
-        /* ===== File Upload ===== */
-        .file-upload {
-            border: 2px dashed rgba(255,255,255,0.10);
-            border-radius: 12px;
-            padding: 24px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .file-upload:active {
-            transform: scale(0.97);
-        }
-
-        .file-upload.has-file {
-            border-color: #64ffda;
-            background: rgba(100, 255, 218, 0.04);
-        }
-
-        .file-upload .icon {
-            font-size: 2.5rem;
-            display: block;
-            margin-bottom: 6px;
-        }
-
-        .file-upload .text {
-            font-size: 0.8rem;
-            color: #8892b0;
-        }
-
-        .file-upload .text strong {
-            color: #f5c842;
-        }
-
-        .file-upload input[type="file"] {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .file-upload .file-name {
-            font-size: 0.7rem;
-            color: #64ffda;
-            margin-top: 6px;
-            display: none;
-        }
-
-        .file-upload .file-name.show {
-            display: block;
-        }
-
-        /* ===== Submit Button ===== */
-        .btn-submit {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #f5c842, #e6b33a);
-            color: #0a0e1a;
-            border: none;
-            border-radius: 14px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            margin-top: 8px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-submit:active {
-            transform: scale(0.96);
-        }
-
-        .btn-submit .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.3);
-            transform: scale(0);
-            animation: rippleAnim 0.6s ease-out;
-            pointer-events: none;
-        }
-
-        @keyframes rippleAnim {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
-
-        /* ===== Animations ===== */
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* ===== Footer ===== */
-        .footer {
-            text-align: center;
-            margin-top: 20px;
-            padding: 16px;
-            border-top: 1px solid rgba(255,255,255,0.04);
-            color: #8892b0;
-            font-size: 0.6rem;
-            opacity: 0.6;
-        }
-
-        /* ===== Toast / Notification ===== */
-        .toast {
-            position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(20, 27, 43, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 14px 24px;
-            border-radius: 14px;
-            border: 1px solid rgba(245, 200, 66, 0.15);
-            color: #f5c842;
-            font-weight: 600;
-            font-size: 0.85rem;
-            display: none;
-            z-index: 200;
-            text-align: center;
-            max-width: 90%;
-            animation: fadeUp 0.4s ease;
-        }
-
-        .toast.show {
-            display: block;
-        }
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+        body{background:#0a0e1a;color:#fff;padding:16px;padding-bottom:30px}
+        .container{max-width:500px;margin:0 auto}
+        .topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 0 16px;border-bottom:1px solid rgba(255,255,255,0.06);margin-bottom:20px}
+        .topbar .back-btn{color:#f5c842;text-decoration:none;font-size:0.85rem;font-weight:600;padding:6px 14px;border-radius:20px;background:rgba(245,200,66,0.08);border:1px solid rgba(245,200,66,0.10)}
+        .topbar .back-btn:active{transform:scale(0.92)}
+        .topbar .page-title{font-size:1.1rem;font-weight:700;color:#f5c842}
+        .topbar .spacer{width:70px}
+        .glass-card{background:rgba(255,255,255,0.03);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:20px;margin-bottom:16px}
+        .glass-card .label{font-size:0.75rem;color:#8892b0;font-weight:500;display:block;margin-bottom:6px}
+        .glass-card .value{font-size:1rem;font-weight:600;color:#fff}
+        .form-group{margin-bottom:16px}
+        .form-group label{font-size:0.8rem;color:#8892b0;font-weight:500;display:block;margin-bottom:6px}
+        .form-group input,.form-group select{width:100%;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#fff;font-size:0.95rem;outline:none}
+        .form-group input:focus,.form-group select:focus{border-color:rgba(245,200,66,0.30)}
+        .form-group input::placeholder{color:#8892b0}
+        .form-group select option{background:#141b2b;color:#fff}
+        .payment-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
+        .payment-option{background:rgba(255,255,255,0.03);border:2px solid rgba(255,255,255,0.06);border-radius:12px;padding:14px 12px;text-align:center;cursor:pointer;transition:all 0.3s ease}
+        .payment-option:active{transform:scale(0.95)}
+        .payment-option.selected{border-color:#f5c842;background:rgba(245,200,66,0.08)}
+        .payment-option .icon{font-size:1.8rem;display:block;margin-bottom:4px}
+        .payment-option .name{font-size:0.7rem;font-weight:600;color:#fff}
+        .payment-option .detail{font-size:0.55rem;color:#8892b0;margin-top:2px}
+        .account-info{background:rgba(100,255,218,0.04);border:1px solid rgba(100,255,218,0.08);border-radius:12px;padding:14px 16px;margin-top:12px;display:none}
+        .account-info.show{display:block}
+        .account-info .acc-name{font-size:0.9rem;font-weight:600;color:#fff}
+        .account-info .acc-number{font-size:0.8rem;color:#64ffda;font-weight:500}
+        .account-info .acc-holder{font-size:0.7rem;color:#8892b0}
+        .file-upload{border:2px dashed rgba(255,255,255,0.10);border-radius:12px;padding:24px;text-align:center;cursor:pointer;transition:all 0.3s ease;position:relative}
+        .file-upload:active{transform:scale(0.97)}
+        .file-upload.has-file{border-color:#64ffda;background:rgba(100,255,218,0.04)}
+        .file-upload .icon{font-size:2.5rem;display:block;margin-bottom:6px}
+        .file-upload .text{font-size:0.8rem;color:#8892b0}
+        .file-upload .text strong{color:#f5c842}
+        .file-upload input[type="file"]{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}
+        .file-upload .file-name{font-size:0.7rem;color:#64ffda;margin-top:6px;display:none}
+        .file-upload .file-name.show{display:block}
+        .btn-submit{width:100%;padding:16px;background:linear-gradient(135deg,#f5c842,#e6b33a);color:#0a0e1a;border:none;border-radius:14px;font-size:1rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;margin-top:8px}
+        .btn-submit:active{transform:scale(0.96)}
+        .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:rgba(20,27,43,0.95);padding:14px 24px;border-radius:14px;border:1px solid rgba(245,200,66,0.15);color:#f5c842;font-weight:600;font-size:0.85rem;display:none;z-index:200;text-align:center;max-width:90%}
+        .toast.show{display:block}
+        .footer{text-align:center;margin-top:20px;padding:16px;border-top:1px solid rgba(255,255,255,0.04);color:#8892b0;font-size:0.6rem;opacity:0.6}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+        .account-info.show{animation:fadeUp 0.4s ease}
     </style>
 </head>
 <body>
-
 <div class="container">
-
-    <!-- ===== Top Bar ===== -->
     <div class="topbar">
         <a href="shop.html" class="back-btn">← Shop</a>
         <span class="page-title">📋 Checkout</span>
         <span class="spacer"></span>
     </div>
 
-    <!-- ===== Package Info ===== -->
-    <div class="glass-card" id="packageInfo">
+    <div class="glass-card">
         <span class="label">📦 Selected Package</span>
-        <div class="value" id="selectedPackage">Monthly Epic Bundle</div>
-        <div style="margin-top:4px; font-size:0.85rem; color:#f5c842; font-weight:600;" id="selectedPrice">17,200 Ks</div>
+        <div class="value" id="selectedPackage">Loading...</div>
+        <div style="margin-top:4px;font-size:0.85rem;color:#f5c842;font-weight:600;" id="selectedPrice"></div>
     </div>
 
-    <!-- ===== Form ===== -->
     <div class="glass-card">
-
-        <!-- Game ID -->
         <div class="form-group">
             <label>🎮 Game ID</label>
             <input type="text" id="gameId" placeholder="Enter your Game ID (e.g. 12345678)" />
         </div>
-
-        <!-- Server ID -->
         <div class="form-group">
             <label>🌐 Server ID</label>
             <input type="text" id="serverId" placeholder="Enter your Server ID (e.g. 9876)" />
         </div>
-
-        <!-- Payment Method -->
         <div class="form-group">
             <label>💳 Payment Method</label>
             <div class="payment-options" id="paymentOptions">
@@ -407,22 +90,16 @@
                 </div>
             </div>
         </div>
-
-        <!-- Account Info (Wave Pay) -->
         <div class="account-info" id="waveInfo">
             <div class="acc-name">🏦 Wave Pay</div>
             <div class="acc-number">📞 09682506493</div>
             <div class="acc-holder">👤 Thein Zaw Oo</div>
         </div>
-
-        <!-- Account Info (Kpay) -->
         <div class="account-info" id="kpayInfo">
             <div class="acc-name">🏦 KBZ Pay (Kpay)</div>
             <div class="acc-number">📞 09682506493</div>
             <div class="acc-holder">👤 DAW THIN WUTT YEE</div>
         </div>
-
-        <!-- Upload Slip -->
         <div class="form-group">
             <label>📤 Upload Payment Slip</label>
             <div class="file-upload" id="fileUpload">
@@ -432,54 +109,38 @@
                 <input type="file" id="fileInput" accept="image/*" />
             </div>
         </div>
-
-        <!-- Submit -->
         <button class="btn-submit" id="submitBtn">✅ Submit Order</button>
     </div>
-
-    <div class="footer">
-        &copy; 2026 Prem-Game Shop • Made with ❤️
-    </div>
+    <div class="footer">&copy; 2026 Prem-Game Shop • Made with ❤️</div>
 </div>
-
-<!-- ===== Toast ===== -->
 <div class="toast" id="toast"></div>
 
 <script>
-    // ===== Get package from URL =====
+    // Get package from URL
     const urlParams = new URLSearchParams(window.location.search);
     const pkg = urlParams.get('package') || 'Monthly Epic Bundle';
     const price = urlParams.get('price') || '17,200 Ks';
-
     document.getElementById('selectedPackage').textContent = pkg;
     document.getElementById('selectedPrice').textContent = price;
 
-    // ===== Payment Selection =====
+    // Payment selection
     let selectedPayment = null;
-
     document.querySelectorAll('.payment-option').forEach(el => {
         el.addEventListener('click', function() {
             document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
             this.classList.add('selected');
             selectedPayment = this.dataset.payment;
-
-            // Show account info
             document.getElementById('waveInfo').classList.remove('show');
             document.getElementById('kpayInfo').classList.remove('show');
-
-            if (selectedPayment === 'wave') {
-                document.getElementById('waveInfo').classList.add('show');
-            } else if (selectedPayment === 'kpay') {
-                document.getElementById('kpayInfo').classList.add('show');
-            }
+            if (selectedPayment === 'wave') document.getElementById('waveInfo').classList.add('show');
+            else if (selectedPayment === 'kpay') document.getElementById('kpayInfo').classList.add('show');
         });
     });
 
-    // ===== File Upload =====
+    // File upload
     const fileInput = document.getElementById('fileInput');
     const fileUpload = document.getElementById('fileUpload');
     const fileName = document.getElementById('fileName');
-
     fileInput.addEventListener('change', function() {
         if (this.files && this.files[0]) {
             fileUpload.classList.add('has-file');
@@ -488,58 +149,24 @@
         }
     });
 
-    // ===== Submit =====
-    document.getElementById('submitBtn').addEventListener('click', function(e) {
-        // Ripple
-        const rect = this.getBoundingClientRect();
-        const ripple = document.createElement('span');
-        ripple.className = 'ripple';
-        const size = Math.max(rect.width, rect.height);
-        ripple.style.width = ripple.style.height = size + 'px';
-        ripple.style.left = (e.clientX - rect.left - size/2) + 'px';
-        ripple.style.top = (e.clientY - rect.top - size/2) + 'px';
-        this.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 600);
-
-        // Validation
+    // Submit
+    document.getElementById('submitBtn').addEventListener('click', function() {
         const gameId = document.getElementById('gameId').value.trim();
         const serverId = document.getElementById('serverId').value.trim();
         const hasFile = fileInput.files && fileInput.files[0];
-
-        if (!gameId) {
-            showToast('❌ Please enter your Game ID');
-            return;
-        }
-
-        if (!serverId) {
-            showToast('❌ Please enter your Server ID');
-            return;
-        }
-
-        if (!selectedPayment) {
-            showToast('❌ Please select a payment method');
-            return;
-        }
-
-        if (!hasFile) {
-            showToast('❌ Please upload your payment slip');
-            return;
-        }
-
-        // Success
+        if (!gameId) { showToast('❌ Please enter your Game ID'); return; }
+        if (!serverId) { showToast('❌ Please enter your Server ID'); return; }
+        if (!selectedPayment) { showToast('❌ Please select a payment method'); return; }
+        if (!hasFile) { showToast('❌ Please upload your payment slip'); return; }
         showToast('✅ Order submitted successfully! We will process it shortly.');
     });
 
-    // ===== Toast =====
     function showToast(message) {
         const toast = document.getElementById('toast');
         toast.textContent = message;
         toast.classList.add('show');
-        setTimeout(() => {
-            toast.classList.remove('show');
-        }, 4000);
+        setTimeout(() => toast.classList.remove('show'), 4000);
     }
 </script>
-
 </body>
 </html>
