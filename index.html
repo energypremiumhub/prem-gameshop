@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prem-Game Shop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
         
@@ -144,7 +145,6 @@
 </div>
 
 <script>
-    // Theme Toggle
     function toggleTheme() {
         document.body.classList.toggle('light');
         const btn = document.querySelector('.theme-btn');
@@ -154,14 +154,10 @@
             btn.textContent = '☀️';
         }
     }
-
-    // Check saved theme
     if (localStorage.getItem('theme') === 'light') {
         document.body.classList.add('light');
         document.querySelector('.theme-btn').textContent = '🌙';
     }
-
-    // Save theme on toggle
     document.addEventListener('DOMContentLoaded', function() {
         const observer = new MutationObserver(function() {
             if (document.body.classList.contains('light')) {
