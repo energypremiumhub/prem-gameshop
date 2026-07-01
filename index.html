@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prem-Game Shop</title>
+    <title>Premium Game Shop</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
@@ -44,34 +44,39 @@
 
         .container{max-width:480px;margin:0 auto;padding:20px 16px}
         
+        /* ===== Header ===== */
         .header{display:flex;justify-content:space-between;align-items:center;padding:8px 0 16px}
-        .header .logo{font-size:1.3rem;font-weight:800;color:var(--gold);display:flex;align-items:center;gap:8px}
-        .header .logo span{font-size:1.6rem}
+        .header .logo{font-size:1.1rem;font-weight:800;color:var(--gold)}
         .header .icons{display:flex;gap:10px;align-items:center}
         .header .icons .icon-btn{background:var(--bg3);padding:8px;border-radius:12px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid var(--border);color:var(--text2);transition:all 0.15s ease;font-size:1.1rem;text-decoration:none}
         .header .icons .icon-btn:active{transform:scale(0.90)}
         .header .icons .icon-btn.theme-btn{font-size:1rem;width:44px;height:44px}
 
-        .welcome{margin-bottom:24px}
-        .welcome .greeting{font-size:0.7rem;color:var(--text2);text-transform:uppercase;letter-spacing:2px;font-weight:600}
+        /* ===== Language Switcher ===== */
+        .lang-switcher{display:flex;gap:4px;background:var(--bg3);padding:3px;border-radius:10px;border:1px solid var(--border)}
+        .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text2);padding:4px 10px;border-radius:8px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.15s ease}
+        .lang-switcher .lang-btn.active{background:var(--gold);color:#0a0e1a}
+        .lang-switcher .lang-btn:active{transform:scale(0.90)}
+
+        /* ===== Welcome ===== */
+        .welcome{margin-bottom:20px}
+        .welcome .greeting{font-size:0.75rem;color:var(--text2);font-weight:500}
         .welcome h2{font-size:1.6rem;margin-top:2px;font-weight:700;color:var(--text)}
         .welcome h2 span{background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
         .welcome p{color:var(--text2);font-size:0.8rem;margin-top:2px}
 
+        /* ===== Banner (ကြော်ငြာ) ===== */
+        .banner{background:linear-gradient(135deg,rgba(245,200,66,0.12),rgba(59,130,246,0.08));border-radius:16px;padding:18px 16px;border:1px solid rgba(245,200,66,0.10);margin-bottom:18px;text-align:center;position:relative;overflow:hidden;cursor:pointer;transition:all 0.15s ease}
+        .banner:active{transform:scale(0.97)}
+        .banner .banner-icon{font-size:1.8rem;display:block;margin-bottom:4px}
+        .banner h4{font-size:0.95rem;color:var(--gold);font-weight:700}
+        .banner p{font-size:0.7rem;color:var(--text2);margin-top:2px}
+        .banner .banner-tag{position:absolute;top:6px;right:10px;font-size:0.45rem;background:rgba(239,68,68,0.15);color:#ef4444;padding:2px 10px;border-radius:12px;font-weight:600}
+
+        /* ===== Glass Card ===== */
         .glass-card{background:var(--bg3);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:18px;box-shadow:0 4px 25px var(--shadow)}
-        .quick-menu{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-        .quick-menu .item{text-align:center;padding:12px 4px;border-radius:12px;cursor:pointer;transition:all 0.15s ease;background:var(--bg);border:1px solid transparent}
-        .quick-menu .item:active{transform:scale(0.92);border-color:var(--gold);background:rgba(245,200,66,0.06)}
-        .quick-menu .item .icon{font-size:1.8rem;display:block;margin-bottom:4px}
-        .quick-menu .item .label{font-size:0.55rem;color:var(--text2);font-weight:600}
 
-        .banner{background:linear-gradient(135deg,rgba(245,200,66,0.10),rgba(59,130,246,0.08));border-radius:16px;padding:22px 18px;border:1px solid rgba(245,200,66,0.10);margin-bottom:20px;text-align:center;position:relative;overflow:hidden}
-        .banner::before{content:'⚔️';position:absolute;right:-20px;top:-20px;font-size:80px;opacity:0.05}
-        .banner h3{font-size:1.2rem;color:var(--gold);font-weight:700}
-        .banner p{color:var(--text2);font-size:0.8rem;margin-top:4px}
-        .banner .btn-shop{display:inline-block;margin-top:12px;padding:10px 32px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:25px;font-weight:700;font-size:0.85rem;cursor:pointer;text-decoration:none;transition:all 0.15s ease}
-        .banner .btn-shop:active{transform:scale(0.94)}
-
+        /* ===== Services ===== */
         .section-title{font-size:0.8rem;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;display:flex;align-items:center;gap:10px}
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
         .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
@@ -80,70 +85,138 @@
         .services-grid .service .icon{font-size:1.6rem;display:block;margin-bottom:4px}
         .services-grid .service .label{font-size:0.6rem;color:var(--text2);font-weight:500}
 
+        /* ===== Bottom Nav ===== */
         .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:8px 0 12px;max-width:480px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -4px 25px var(--shadow)}
-        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text2);transition:all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);padding:4px 10px;border-radius:10px;position:relative}
-        .bottom-nav .nav-item:active{transform:scale(0.85)}
-        .bottom-nav .nav-item .icon{font-size:1.3rem;display:block;transition:all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)}
-        .bottom-nav .nav-item .label{font-size:0.45rem;margin-top:2px;font-weight:600;letter-spacing:0.5px;transition:all 0.2s ease}
+        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text2);transition:all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);padding:4px 10px;border-radius:10px;position:relative}
+        .bottom-nav .nav-item:active{transform:scale(0.80)}
+        .bottom-nav .nav-item .icon{font-size:1.3rem;display:block;transition:all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)}
+        .bottom-nav .nav-item .label{font-size:0.45rem;margin-top:2px;font-weight:600;letter-spacing:0.5px;transition:all 0.35s ease}
         .bottom-nav .nav-item.active{color:var(--gold)}
-        .bottom-nav .nav-item.active .icon{transform:translateY(-4px) scale(1.1)}
-        .bottom-nav .nav-item.active .label{color:var(--gold)}
-        .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:20px;height:2px;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:10px}
-        .footer-text{text-align:center;color:var(--text2);font-size:0.55rem;margin-top:16px;opacity:0.5}
+        .bottom-nav .nav-item.active .icon{transform:translateY(-6px) scale(1.15)}
+        .bottom-nav .nav-item.active .label{color:var(--gold);transform:translateY(-2px)}
+        .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:22px;height:2.5px;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:10px}
+        .bottom-nav .nav-item:not(.active):hover .icon{transform:translateY(-2px)}
 
-        .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--bg3);padding:12px 24px;border-radius:14px;border:1px solid var(--border);color:var(--gold);font-weight:600;font-size:0.8rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 4px 30px var(--shadow);animation:toastPop 0.3s ease}
+        .footer-text{text-align:center;color:var(--text2);font-size:0.5rem;margin-top:12px;opacity:0.4}
+
+        .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--bg3);padding:12px 24px;border-radius:14px;border:1px solid var(--border);color:var(--gold);font-weight:600;font-size:0.8rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 4px 30px var(--shadow);animation:toastPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)}
         .toast.show{display:block}
-        @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(20px) scale(0.9)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
+        @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
     </style>
 </head>
 <body>
 <div class="container">
+    <!-- Header -->
     <div class="header">
-        <div class="logo"><span>⚡</span> Prem-Game</div>
+        <div class="logo">Premium Game Shop</div>
         <div class="icons">
+            <div class="lang-switcher">
+                <button class="lang-btn active" onclick="switchLang('en')">EN</button>
+                <button class="lang-btn" onclick="switchLang('my')">MY</button>
+            </div>
             <div class="icon-btn theme-btn" onclick="toggleTheme()">🌙</div>
-            <div class="icon-btn" onclick="showToast('🔔 No new notifications')">🔔</div>
+            <div class="icon-btn" onclick="showToast(lang.noti)">🔔</div>
             <a href="profile.html" class="icon-btn">👤</a>
         </div>
     </div>
+
+    <!-- Welcome -->
     <div class="welcome">
-        <div class="greeting">👋 Welcome, Warrior!</div>
-        <h2>Ready to <span>Battle?</span></h2>
-        <p>Top up your diamonds and dominate the game</p>
+        <div class="greeting" id="greeting">👋 Hey dear, Welcome</div>
+        <h2 id="title">Level Up Your <span>Game!</span></h2>
+        <p id="subtitle">Top up diamonds and dominate the battlefield</p>
     </div>
-    <div class="glass-card">
-        <div class="quick-menu">
-            <div class="item"><span class="icon">💎</span><span class="label">Diamonds</span></div>
-            <div class="item"><span class="icon">🎁</span><span class="label">Bundles</span></div>
-            <div class="item"><span class="icon">🏆</span><span class="label">Rank</span></div>
-            <div class="item"><span class="icon">📊</span><span class="label">History</span></div>
-        </div>
+
+    <!-- Banner (ကြော်ငြာ) -->
+    <div class="banner" onclick="showToast('🔥 New promo: 20% bonus diamonds!')">
+        <span class="banner-tag">HOT</span>
+        <span class="banner-icon">🔥</span>
+        <h4 id="bannerTitle">20% Bonus Diamonds!</h4>
+        <p id="bannerDesc">Limited time offer • Shop now</p>
     </div>
-    <div class="banner">
-        <h3>⚔️ Premium Top-Up</h3>
-        <p>Fast • Safe • Trusted • 24/7</p>
-        <a href="shop.html" class="btn-shop">🛒 Shop Now</a>
-    </div>
-    <div class="section-title">⚡ Premium Services</div>
+
+    <!-- Services -->
+    <div class="section-title" id="servicesTitle">⚡ Premium Services</div>
     <div class="services-grid glass-card" style="padding:14px;">
-        <div class="service"><span class="icon">⚡</span><span class="label">Instant</span></div>
-        <div class="service"><span class="icon">🔒</span><span class="label">Secure</span></div>
-        <div class="service"><span class="icon">💎</span><span class="label">Best Price</span></div>
-        <div class="service"><span class="icon">🕒</span><span class="label">24/7</span></div>
-        <div class="service"><span class="icon">📱</span><span class="label">Mobile</span></div>
-        <div class="service"><span class="icon">⭐</span><span class="label">Top Rated</span></div>
+        <div class="service"><span class="icon">⚡</span><span class="label" id="s1">Instant</span></div>
+        <div class="service"><span class="icon">🔒</span><span class="label" id="s2">Secure</span></div>
+        <div class="service"><span class="icon">💎</span><span class="label" id="s3">Best Price</span></div>
+        <div class="service"><span class="icon">🕒</span><span class="label" id="s4">24/7</span></div>
+        <div class="service"><span class="icon">📱</span><span class="label" id="s5">Mobile</span></div>
+        <div class="service"><span class="icon">⭐</span><span class="label" id="s6">Top Rated</span></div>
     </div>
-    <div class="footer-text">&copy; 2026 Prem-Game Shop • Made with ❤️</div>
+
+    <div class="footer-text">&copy; 2026 Premium Game Shop</div>
 </div>
+
+<!-- Bottom Nav -->
 <div class="bottom-nav">
-    <a href="index.html" class="nav-item active"><span class="icon">🏠</span><span class="label">Home</span></a>
-    <a href="shop.html" class="nav-item"><span class="icon">🛒</span><span class="label">Shop</span></a>
-    <a href="payment.html" class="nav-item"><span class="icon">💳</span><span class="label">Payment</span></a>
-    <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label">Profile</span></a>
+    <a href="index.html" class="nav-item active"><span class="icon">🏠</span><span class="label" id="navHome">Home</span></a>
+    <a href="shop.html" class="nav-item"><span class="icon">🛒</span><span class="label" id="navShop">Shop</span></a>
+    <a href="payment.html" class="nav-item"><span class="icon">💳</span><span class="label" id="navPayment">Payment</span></a>
+    <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label" id="navProfile">Profile</span></a>
 </div>
 <div class="toast" id="toast"></div>
 
 <script>
+    // ===== Language =====
+    const langData = {
+        en: {
+            greeting: '👋 Hey dear, Welcome',
+            title: 'Level Up Your <span>Game!</span>',
+            subtitle: 'Top up diamonds and dominate the battlefield',
+            bannerTitle: '20% Bonus Diamonds!',
+            bannerDesc: 'Limited time offer • Shop now',
+            servicesTitle: '⚡ Premium Services',
+            s1: 'Instant', s2: 'Secure', s3: 'Best Price',
+            s4: '24/7', s5: 'Mobile', s6: 'Top Rated',
+            navHome: 'Home', navShop: 'Shop', navPayment: 'Payment', navProfile: 'Profile',
+            noti: '🔔 No new notifications'
+        },
+        my: {
+            greeting: '👋 ဟေ့ကောင်လေး၊ ကြိုဆိုပါတယ်',
+            title: 'ဂိမ်းကို <span>မြှင့်တင်လိုက်ပါ!</span>',
+            subtitle: 'စိန်တွေဖြည့်ပြီး စစ်မြေပြင်ကို အနိုင်ယူလိုက်ပါ',
+            bannerTitle: 'စိန် ၂၀% အပိုရယူလိုက်ပါ!',
+            bannerDesc: 'အချိန်အကန့်အသတ်နဲ့ • အခုပဲဝယ်ယူပါ',
+            servicesTitle: '⚡ ထိပ်တန်းဝန်ဆောင်မှုများ',
+            s1: 'ချက်ချင်း', s2: 'လုံခြုံ', s3: 'ဈေးအကောင်းဆုံး',
+            s4: '၂၄/၇', s5: 'မိုဘိုင်း', s6: 'ထိပ်တန်း',
+            navHome: 'ပင်မ', navShop: 'ဆိုင်', navPayment: 'ငွေပေးချေ', navProfile: 'ပရိုဖိုင်',
+            noti: '🔔 အသိပေးချက်အသစ်မရှိပါ'
+        }
+    };
+
+    let currentLang = 'en';
+
+    function switchLang(lang) {
+        currentLang = lang;
+        const d = langData[lang];
+        document.getElementById('greeting').textContent = d.greeting;
+        document.getElementById('title').innerHTML = d.title;
+        document.getElementById('subtitle').textContent = d.subtitle;
+        document.getElementById('bannerTitle').textContent = d.bannerTitle;
+        document.getElementById('bannerDesc').textContent = d.bannerDesc;
+        document.getElementById('servicesTitle').textContent = d.servicesTitle;
+        document.getElementById('s1').textContent = d.s1;
+        document.getElementById('s2').textContent = d.s2;
+        document.getElementById('s3').textContent = d.s3;
+        document.getElementById('s4').textContent = d.s4;
+        document.getElementById('s5').textContent = d.s5;
+        document.getElementById('s6').textContent = d.s6;
+        document.getElementById('navHome').textContent = d.navHome;
+        document.getElementById('navShop').textContent = d.navShop;
+        document.getElementById('navPayment').textContent = d.navPayment;
+        document.getElementById('navProfile').textContent = d.navProfile;
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector(`.lang-btn[onclick="switchLang('${lang}')"]`).classList.add('active');
+        localStorage.setItem('lang', lang);
+    }
+
+    const savedLang = localStorage.getItem('lang') || 'en';
+    switchLang(savedLang);
+
+    // ===== Theme =====
     function toggleTheme() {
         const isLight = document.body.classList.toggle('light');
         document.querySelector('.theme-btn').textContent = isLight ? '🌙' : '☀️';
@@ -153,6 +226,8 @@
         document.body.classList.add('light');
         document.querySelector('.theme-btn').textContent = '🌙';
     }
+
+    // ===== Toast =====
     function showToast(msg) {
         const t = document.getElementById('toast');
         t.textContent = msg;
@@ -160,6 +235,12 @@
         clearTimeout(t._timer);
         t._timer = setTimeout(() => t.classList.remove('show'), 2500);
     }
+
+    // ===== Banner Click =====
+    document.querySelector('.banner').addEventListener('click', function() {
+        this.style.transform = 'scale(0.96)';
+        setTimeout(() => this.style.transform = 'scale(1)', 200);
+    });
 </script>
 </body>
 </html>
