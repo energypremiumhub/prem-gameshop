@@ -27,6 +27,7 @@
             --green: #22d3ee;
             --green-glow: rgba(34,211,238,0.2);
             --red: #ef4444;
+            --warning: #f59e0b;
         }
 
         body {
@@ -61,7 +62,6 @@
         .auth-btn:hover{border-color:var(--gold);color:var(--gold)}
         .auth-btn.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 25px var(--gold-glow);padding:4px 14px}
         .auth-btn.logged-in:active{transform:scale(0.90)}
-        .auth-btn.logged-in i{color:#0a0e1a}
         .auth-btn.logged-in img{width:20px;height:20px;border-radius:50%;object-fit:cover;margin-right:4px}
 
         .page-header{margin-bottom:20px;animation:slideUp 0.6s ease}
@@ -74,19 +74,27 @@
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
         .section-title i{color:var(--cyan);text-shadow:0 0 20px var(--cyan-glow)}
 
-        .package-list{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;animation:slideUp 0.8s ease}
-        .package-item{display:flex;align-items:center;justify-content:space-between;background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:12px 14px;transition:all 0.3s ease;cursor:pointer;box-shadow:0 4px 20px var(--shadow);position:relative;overflow:hidden}
+        /* ===== WARNING BOX ===== */
+        .warning-box{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.15);border-radius:12px;padding:12px 14px;margin-bottom:16px;display:flex;gap:10px;align-items:flex-start;animation:slideUp 0.7s ease}
+        .warning-box .icon{color:var(--warning);font-size:1.1rem;margin-top:2px;flex-shrink:0}
+        .warning-box .text{font-size:0.65rem;color:var(--text-secondary);line-height:1.5}
+        .warning-box .text strong{color:var(--warning)}
+        .warning-box .text .highlight{color:var(--gold);font-weight:600}
+
+        .package-list{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;animation:slideUp 0.8s ease}
+        .package-item{display:flex;align-items:center;justify-content:space-between;background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;padding:10px 12px;transition:all 0.3s ease;cursor:pointer;box-shadow:0 4px 20px var(--shadow);position:relative;overflow:hidden}
         .package-item::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--gold),var(--orange));opacity:0;transition:all 0.3s ease}
         .package-item:active{transform:scale(0.96)}
         .package-item:hover::before{opacity:1}
         .package-item:hover{border-color:rgba(245,200,66,0.2);box-shadow:0 4px 30px var(--gold-glow)}
         .package-item .info{display:flex;flex-direction:column;gap:2px;flex:1;position:relative;z-index:1}
-        .package-item .info .name{font-size:0.8rem;font-weight:600;color:var(--text-primary)}
+        .package-item .info .name{font-size:0.75rem;font-weight:600;color:var(--text-primary)}
         .package-item .info .name .dia-icon{color:var(--gold);margin-right:4px;text-shadow:0 0 10px var(--gold-glow)}
-        .package-item .info .badge{display:inline-block;font-size:0.45rem;color:var(--green);background:rgba(34,211,238,0.08);padding:2px 10px;border-radius:12px;border:1px solid rgba(34,211,238,0.1);width:fit-content;font-weight:600}
-        .package-item .right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:4px;position:relative;z-index:1}
-        .package-item .right .price{font-size:0.95rem;font-weight:700;color:var(--gold);text-shadow:0 0 20px var(--gold-glow)}
-        .package-item .right .btn{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;padding:4px 14px;border-radius:12px;font-weight:700;font-size:0.55rem;cursor:pointer;transition:all 0.3s ease;box-shadow:0 0 20px var(--gold-glow)}
+        .package-item .info .badge{display:inline-block;font-size:0.4rem;color:var(--green);background:rgba(34,211,238,0.08);padding:1px 8px;border-radius:10px;border:1px solid rgba(34,211,238,0.1);width:fit-content;font-weight:600}
+        .package-item .info .double-badge{background:rgba(245,158,11,0.12);color:var(--warning);border-color:rgba(245,158,11,0.1)}
+        .package-item .right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:3px;position:relative;z-index:1}
+        .package-item .right .price{font-size:0.85rem;font-weight:700;color:var(--gold);text-shadow:0 0 20px var(--gold-glow)}
+        .package-item .right .btn{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;padding:3px 12px;border-radius:10px;font-weight:700;font-size:0.5rem;cursor:pointer;transition:all 0.3s ease;box-shadow:0 0 20px var(--gold-glow)}
         .package-item .right .btn:active{transform:scale(0.85)}
         .package-item .right .btn:hover{box-shadow:0 0 40px var(--gold-glow)}
 
@@ -117,19 +125,22 @@
         .modal p{color:var(--text-secondary);font-size:0.75rem;text-align:center;margin-bottom:16px;position:relative;z-index:1}
         .modal .form-group{margin-bottom:12px;position:relative;z-index:1}
         .modal .form-group label{font-size:0.6rem;color:var(--text-secondary);font-weight:600;display:block;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px}
-        .modal .form-group label .required{color:var(--red);margin-left:2px}
         .modal .form-group input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border-color);background:var(--bg-input);color:var(--text-primary);font-size:0.85rem;outline:none;transition:all 0.3s ease}
         .modal .form-group input:focus{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
         .modal .form-group input::placeholder{color:var(--text-secondary);font-size:0.7rem}
-        .modal .form-group input.error{border-color:var(--red);box-shadow:0 0 20px rgba(239,68,68,0.2)}
-        .modal .form-group .error-text{font-size:0.55rem;color:var(--red);margin-top:3px;display:none}
-        .modal .form-group .error-text.show{display:block}
         .modal .btn-primary{width:100%;padding:11px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:10px;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;position:relative;z-index:1}
         .modal .btn-primary:active{transform:scale(0.96)}
-        .modal .btn-primary:hover{box-shadow:0 0 40px var(--gold-glow)}
         .modal .switch-link{color:var(--cyan);cursor:pointer;font-weight:600;text-align:center;display:block;margin-top:10px;font-size:0.7rem;position:relative;z-index:1}
-        .modal .switch-link:active{opacity:0.7}
         .modal .close-btn{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--text-secondary);font-size:1.1rem;cursor:pointer;z-index:2}
+        .avatar-upload .preview{width:70px;height:70px;border-radius:50%;background:var(--bg-input);border:2px solid var(--border-color);display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--text-secondary);cursor:pointer;transition:all 0.3s ease;overflow:hidden;position:relative;margin:0 auto 8px}
+        .avatar-upload .preview img{width:100%;height:100%;object-fit:cover}
+        .avatar-upload .preview input{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}
+        .avatar-upload .preview .upload-hint{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.7);padding:2px;font-size:0.4rem;color:var(--text-secondary);text-align:center;display:none}
+        .avatar-upload .preview:hover .upload-hint{display:block}
+        .avatar-upload .label{font-size:0.55rem;color:var(--text-secondary);text-align:center;display:block}
+        .error-text{font-size:0.55rem;color:var(--red);margin-top:3px;display:none}
+        .error-text.show{display:block}
+        .form-group input.error{border-color:var(--red);box-shadow:0 0 20px rgba(239,68,68,0.2)}
     </style>
 </head>
 <body>
@@ -150,6 +161,7 @@
         <p id="shopSub">Choose your package and top up instantly</p>
     </div>
 
+    <!-- ===== BUNDLES ===== -->
     <div class="section-title" id="bundlesTitle"><i class="fas fa-gift"></i> Bundles</div>
     <div class="package-list">
         <div class="package-item">
@@ -183,20 +195,88 @@
         </div>
     </div>
 
+    <!-- ===== DIAMONDS ===== -->
     <div class="section-title" id="diamondsTitle"><i class="fas fa-diamond"></i> Diamonds</div>
     <div class="package-list">
-        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>11 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">1,000 Ks</div><button class="btn" onclick="goToCheckout('11 Diamonds','1,000 Ks')" id="buyBtn4">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>22 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">1,750 Ks</div><button class="btn" onclick="goToCheckout('22 Diamonds','1,750 Ks')" id="buyBtn5">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>33 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">2,500 Ks</div><button class="btn" onclick="goToCheckout('33 Diamonds','2,500 Ks')" id="buyBtn6">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>44 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">3,300 Ks</div><button class="btn" onclick="goToCheckout('44 Diamonds','3,300 Ks')" id="buyBtn7">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>56 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">4,000 Ks</div><button class="btn" onclick="goToCheckout('56 Diamonds','4,000 Ks')" id="buyBtn8">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>86 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">5,500 Ks</div><button class="btn" onclick="goToCheckout('86 Diamonds','5,500 Ks')" id="buyBtn9">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>112 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">7,800 Ks</div><button class="btn" onclick="goToCheckout('112 Diamonds','7,800 Ks')" id="buyBtn10">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>172 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">10,700 Ks</div><button class="btn" onclick="goToCheckout('172 Diamonds','10,700 Ks')" id="buyBtn11">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>257 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">15,900 Ks</div><button class="btn" onclick="goToCheckout('257 Diamonds','15,900 Ks')" id="buyBtn12">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>343 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">21,100 Ks</div><button class="btn" onclick="goToCheckout('343 Diamonds','21,100 Ks')" id="buyBtn13">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>429 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">26,600 Ks</div><button class="btn" onclick="goToCheckout('429 Diamonds','26,600 Ks')" id="buyBtn14">Buy</button></div></div>
-        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>514 Diamonds</div><span class="badge">⚡ Instant Delivery</span></div><div class="right"><div class="price">31,200 Ks</div><button class="btn" onclick="goToCheckout('514 Diamonds','31,200 Ks')" id="buyBtn15">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>11 Diamonds</div></div><div class="right"><div class="price">1,000 Ks</div><button class="btn" onclick="goToCheckout('11 Diamonds','1,000 Ks')" id="buyBtn4">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>22 Diamonds</div></div><div class="right"><div class="price">1,750 Ks</div><button class="btn" onclick="goToCheckout('22 Diamonds','1,750 Ks')" id="buyBtn5">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>33 Diamonds</div></div><div class="right"><div class="price">2,500 Ks</div><button class="btn" onclick="goToCheckout('33 Diamonds','2,500 Ks')" id="buyBtn6">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>44 Diamonds</div></div><div class="right"><div class="price">3,300 Ks</div><button class="btn" onclick="goToCheckout('44 Diamonds','3,300 Ks')" id="buyBtn7">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>56 Diamonds</div></div><div class="right"><div class="price">4,000 Ks</div><button class="btn" onclick="goToCheckout('56 Diamonds','4,000 Ks')" id="buyBtn8">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>86 Diamonds</div></div><div class="right"><div class="price">5,500 Ks</div><button class="btn" onclick="goToCheckout('86 Diamonds','5,500 Ks')" id="buyBtn9">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>112 Diamonds</div></div><div class="right"><div class="price">7,800 Ks</div><button class="btn" onclick="goToCheckout('112 Diamonds','7,800 Ks')" id="buyBtn10">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>172 Diamonds</div></div><div class="right"><div class="price">10,700 Ks</div><button class="btn" onclick="goToCheckout('172 Diamonds','10,700 Ks')" id="buyBtn11">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>257 Diamonds</div></div><div class="right"><div class="price">15,900 Ks</div><button class="btn" onclick="goToCheckout('257 Diamonds','15,900 Ks')" id="buyBtn12">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>343 Diamonds</div></div><div class="right"><div class="price">21,100 Ks</div><button class="btn" onclick="goToCheckout('343 Diamonds','21,100 Ks')" id="buyBtn13">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>429 Diamonds</div></div><div class="right"><div class="price">26,600 Ks</div><button class="btn" onclick="goToCheckout('429 Diamonds','26,600 Ks')" id="buyBtn14">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>514 Diamonds</div></div><div class="right"><div class="price">31,200 Ks</div><button class="btn" onclick="goToCheckout('514 Diamonds','31,200 Ks')" id="buyBtn15">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>600 Diamonds</div></div><div class="right"><div class="price">36,700 Ks</div><button class="btn" onclick="goToCheckout('600 Diamonds','36,700 Ks')" id="buyBtn16">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>706 Diamonds</div></div><div class="right"><div class="price">42,800 Ks</div><button class="btn" onclick="goToCheckout('706 Diamonds','42,800 Ks')" id="buyBtn17">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>878 Diamonds</div></div><div class="right"><div class="price">53,100 Ks</div><button class="btn" onclick="goToCheckout('878 Diamonds','53,100 Ks')" id="buyBtn18">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>963 Diamonds</div></div><div class="right"><div class="price">58,500 Ks</div><button class="btn" onclick="goToCheckout('963 Diamonds','58,500 Ks')" id="buyBtn19">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>1,049 Diamonds</div></div><div class="right"><div class="price">63,800 Ks</div><button class="btn" onclick="goToCheckout('1049 Diamonds','63,800 Ks')" id="buyBtn20">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>1,135 Diamonds</div></div><div class="right"><div class="price">69,300 Ks</div><button class="btn" onclick="goToCheckout('1135 Diamonds','69,300 Ks')" id="buyBtn21">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>1,412 Diamonds</div></div><div class="right"><div class="price">84,900 Ks</div><button class="btn" onclick="goToCheckout('1412 Diamonds','84,900 Ks')" id="buyBtn22">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>2,195 Diamonds</div></div><div class="right"><div class="price">126,000 Ks</div><button class="btn" onclick="goToCheckout('2195 Diamonds','126,000 Ks')" id="buyBtn23">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>2,901 Diamonds</div></div><div class="right"><div class="price">166,300 Ks</div><button class="btn" onclick="goToCheckout('2901 Diamonds','166,300 Ks')" id="buyBtn24">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>3,688 Diamonds</div></div><div class="right"><div class="price">207,500 Ks</div><button class="btn" onclick="goToCheckout('3688 Diamonds','207,500 Ks')" id="buyBtn25">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>5,532 Diamonds</div></div><div class="right"><div class="price">312,000 Ks</div><button class="btn" onclick="goToCheckout('5532 Diamonds','312,000 Ks')" id="buyBtn26">Buy</button></div></div>
+        <div class="package-item"><div class="info"><div class="name"><span class="dia-icon">💎</span>9,288 Diamonds</div></div><div class="right"><div class="price">522,000 Ks</div><button class="btn" onclick="goToCheckout('9288 Diamonds','522,000 Ks')" id="buyBtn27">Buy</button></div></div>
+    </div>
+
+    <!-- ===== DOUBLE TOP UP ===== -->
+    <div class="section-title" id="doubleTitle"><i class="fas fa-star"></i> Double Top Up</div>
+    
+    <!-- Warning Box -->
+    <div class="warning-box">
+        <span class="icon">⚠️</span>
+        <div class="text" id="warningText">
+            <strong>⚠️ Double Dia</strong> က အကောင့်တစ်ကောင့်မှာ တစ်ခုကို တစ်ခါပဲ နှစ်ဆရပါမယ် 🤠<br>
+            <span class="highlight">ဥပမာ</span> - ၅၀ နှစ်ဆဖြည့်ပြီးရင် ကျန်တဲ့ သုံးခုပဲ နှစ်ဆ ဖြည့်လို့ရပါတော့မယ်။
+        </div>
+    </div>
+
+    <div class="package-list">
+        <div class="package-item">
+            <div class="info">
+                <div class="name"><span class="dia-icon">💎</span>50 + 50 (Double)</div>
+                <span class="badge double-badge">⭐ 2x Bonus</span>
+            </div>
+            <div class="right">
+                <div class="price">3,800 Ks</div>
+                <button class="btn" onclick="goToCheckout('50+50 Double','3,800 Ks')" id="buyBtn28">Buy</button>
+            </div>
+        </div>
+        <div class="package-item">
+            <div class="info">
+                <div class="name"><span class="dia-icon">💎</span>150 + 150 (Double)</div>
+                <span class="badge double-badge">⭐ 2x Bonus</span>
+            </div>
+            <div class="right">
+                <div class="price">10,300 Ks</div>
+                <button class="btn" onclick="goToCheckout('150+150 Double','10,300 Ks')" id="buyBtn29">Buy</button>
+            </div>
+        </div>
+        <div class="package-item">
+            <div class="info">
+                <div class="name"><span class="dia-icon">💎</span>250 + 250 (Double)</div>
+                <span class="badge double-badge">⭐ 2x Bonus</span>
+            </div>
+            <div class="right">
+                <div class="price">16,000 Ks</div>
+                <button class="btn" onclick="goToCheckout('250+250 Double','16,000 Ks')" id="buyBtn30">Buy</button>
+            </div>
+        </div>
+        <div class="package-item">
+            <div class="info">
+                <div class="name"><span class="dia-icon">💎</span>500 + 500 (Double)</div>
+                <span class="badge double-badge">⭐ 2x Bonus</span>
+            </div>
+            <div class="right">
+                <div class="price">32,400 Ks</div>
+                <button class="btn" onclick="goToCheckout('500+500 Double','32,400 Ks')" id="buyBtn31">Buy</button>
+            </div>
+        </div>
     </div>
 
     <div class="footer">&copy; 2026 Premium Game Shop</div>
@@ -259,4 +339,299 @@
                     <input type="password" id="regConfirmPassword" placeholder="Re-enter password">
                     <div class="error-text" id="confirmError">Passwords do not match</div>
                 </div>
-                <button
+                <button class="btn-primary" onclick="handleRegister()">🛡️ Register</button>
+                <span class="switch-link" id="switchToLogin" onclick="switchAuthMode()">Already have an account? Login</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ===== LANGUAGE DATA =====
+    const LANG_DATA = {
+        en: {
+            appName: 'Premium Game Shop',
+            shopTitle: 'Diamonds Package',
+            shopSub: 'Choose your package and top up instantly',
+            bundlesTitle: 'Bundles',
+            diamondsTitle: 'Diamonds',
+            doubleTitle: 'Double Top Up',
+            warningText: '⚠️ Double Dia can only be claimed once per account per package 🤠 Example - After buying 50+50, you can still buy the other 3 double packages.',
+            buy: 'Buy',
+            home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
+            login: 'Login',
+            register: 'Register',
+            modalLogin: '⚔️ Login',
+            modalRegister: '🛡️ Register',
+            modalLoginSub: 'Welcome back, warrior!',
+            modalRegisterSub: 'Create your account, champion!',
+            email: '📧 Email or Username',
+            password: '🔑 Password',
+            switchLogin: "Don't have an account? Register",
+            switchRegister: 'Already have an account? Login',
+            loginSuccess: '✅ Welcome back, Champion!',
+            registerSuccess: '✅ Account created! Welcome!',
+            logoutSuccess: '🚪 Logged out successfully!',
+            logoutConfirm: 'Are you sure you want to logout?',
+            enterEmail: 'Please enter your email or username',
+            enterPassword: 'Please enter your password',
+            enterUsername: 'Please enter your username'
+        },
+        my: {
+            appName: 'ပရီမီယံ ဂိမ်းဆိုင်',
+            shopTitle: 'စိန်အထုပ်များ',
+            shopSub: 'သင့်အထုပ်ကိုရွေးပြီး ချက်ချင်းဖြည့်ပါ',
+            bundlesTitle: 'အထုပ်များ',
+            diamondsTitle: 'စိန်များ',
+            doubleTitle: 'နှစ်ဆဖြည့်မှု',
+            warningText: '⚠️ နှစ်ဆစိန်ကို အကောင့်တစ်ကောင့်မှာ တစ်ခုကို တစ်ခါပဲ ရယူနိုင်ပါတယ် 🤠 ဥပမာ - ၅၀ နှစ်ဆဖြည့်ပြီးရင် ကျန်တဲ့ သုံးခုကို ဆက်ဖြည့်လို့ရပါတယ်။',
+            buy: 'ဝယ်ရန်',
+            home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
+            login: 'ဝင်ရန်',
+            register: 'မှတ်ပုံတင်ရန်',
+            modalLogin: '⚔️ ဝင်ရန်',
+            modalRegister: '🛡️ မှတ်ပုံတင်ရန်',
+            modalLoginSub: 'ပြန်လည်ကြိုဆိုပါတယ် စစ်သည်တော်!',
+            modalRegisterSub: 'အကောင့်ဖွင့်ပါ ချန်ပီယံ!',
+            email: '📧 အီးမေးလ် သို့မဟုတ် အသုံးပြုသူအမည်',
+            password: '🔑 စကားဝှက်',
+            switchLogin: 'အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်',
+            switchRegister: 'အကောင့်ရှိပြီးသား? ဝင်ရန်',
+            loginSuccess: '✅ ကြိုဆိုပါတယ် ချန်ပီယံ!',
+            registerSuccess: '✅ အကောင့်ဖွင့်ခြင်းအောင်မြင်ပါပြီ!',
+            logoutSuccess: '🚪 ထွက်ခြင်းအောင်မြင်ပါပြီ!',
+            logoutConfirm: 'ထွက်မှာသေချာလား?',
+            enterEmail: 'ကျေးဇူးပြု၍ အီးမေးလ် သို့မဟုတ် အသုံးပြုသူအမည်ထည့်ပါ',
+            enterPassword: 'ကျေးဇူးပြု၍ စကားဝှက်ထည့်ပါ',
+            enterUsername: 'ကျေးဇူးပြု၍ အသုံးပြုသူအမည်ထည့်ပါ'
+        }
+    };
+
+    let currentLang = localStorage.getItem('lang') || 'en';
+
+    function getText(key) { return LANG_DATA[currentLang][key] || key; }
+
+    function setLang(lang) {
+        currentLang = lang;
+        localStorage.setItem('lang', lang);
+        updateLanguage();
+        document.querySelectorAll('.lang-btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.lang === lang);
+        });
+    }
+
+    function updateLanguage() {
+        const d = LANG_DATA[currentLang];
+        document.getElementById('appName').innerHTML = '<i class="fas fa-gamepad"></i> ' + d.appName;
+        document.getElementById('shopTitle').innerHTML = '<i class="fas fa-gem"></i> ' + d.shopTitle;
+        document.getElementById('shopSub').textContent = d.shopSub;
+        document.getElementById('bundlesTitle').innerHTML = '<i class="fas fa-gift"></i> ' + d.bundlesTitle;
+        document.getElementById('diamondsTitle').innerHTML = '<i class="fas fa-diamond"></i> ' + d.diamondsTitle;
+        document.getElementById('doubleTitle').innerHTML = '<i class="fas fa-star"></i> ' + d.doubleTitle;
+        document.getElementById('warningText').innerHTML = d.warningText;
+        document.getElementById('navHome').textContent = d.home;
+        document.getElementById('navShop').textContent = d.shop;
+        document.getElementById('navPayment').textContent = d.payment;
+        document.getElementById('navProfile').textContent = d.profile;
+        document.querySelectorAll('#buyBtn1, #buyBtn2, #buyBtn3, #buyBtn4, #buyBtn5, #buyBtn6, #buyBtn7, #buyBtn8, #buyBtn9, #buyBtn10, #buyBtn11, #buyBtn12, #buyBtn13, #buyBtn14, #buyBtn15, #buyBtn16, #buyBtn17, #buyBtn18, #buyBtn19, #buyBtn20, #buyBtn21, #buyBtn22, #buyBtn23, #buyBtn24, #buyBtn25, #buyBtn26, #buyBtn27, #buyBtn28, #buyBtn29, #buyBtn30, #buyBtn31').forEach(btn => {
+            if (btn) btn.textContent = d.buy;
+        });
+        updateAuthUI();
+        updateModalUI();
+    }
+
+    // ===== TOAST =====
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        clearTimeout(t._timer);
+        t._timer = setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    // ===== AUTH SYSTEM =====
+    let currentUser = null;
+    const savedUser = localStorage.getItem('currentUser');
+    if (savedUser) currentUser = JSON.parse(savedUser);
+
+    function isLoggedIn() { return currentUser !== null; }
+
+    function updateAuthUI() {
+        const authBtn = document.getElementById('authBtn');
+        if (currentUser) {
+            const savedAvatar = localStorage.getItem('userAvatar_' + currentUser.username);
+            if (savedAvatar) {
+                authBtn.innerHTML = '<img src="' + savedAvatar + '" alt="avatar"> ' + currentUser.username;
+            } else {
+                authBtn.innerHTML = '👤 ' + currentUser.username;
+            }
+            authBtn.className = 'auth-btn logged-in';
+            authBtn.title = 'Go to Profile';
+        } else {
+            authBtn.innerHTML = '🔑 ' + getText('login');
+            authBtn.className = 'auth-btn';
+            authBtn.title = 'Login';
+        }
+        if (window.updateProfileUI) window.updateProfileUI();
+    }
+
+    // ===== AVATAR UPLOAD =====
+    let tempAvatar = null;
+
+    function handleAvatarUpload(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                tempAvatar = e.target.result;
+                document.getElementById('avatarPreview').innerHTML = 
+                    '<img src="' + e.target.result + '" alt="avatar"><input type="file" accept="image/*" onchange="handleAvatarUpload(event)"><span class="upload-hint">Tap to change</span>';
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function handleAuthClick() {
+        if (isLoggedIn()) {
+            window.location.href = 'profile.html';
+        } else {
+            openModal('login');
+        }
+    }
+
+    // ===== AUTH MODAL =====
+    let isLoginMode = true;
+
+    function openModal(mode) {
+        isLoginMode = mode !== 'register';
+        const modal = document.getElementById('authModal');
+        modal.classList.add('show');
+        updateModalUI();
+        document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
+        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
+        if (!isLoginMode) {
+            document.getElementById('avatarPreview').innerHTML = 
+                '👤<input type="file" accept="image/*" onchange="handleAvatarUpload(event)"><span class="upload-hint">Tap to change</span>';
+            tempAvatar = null;
+        }
+    }
+
+    function closeModal() {
+        document.getElementById('authModal').classList.remove('show');
+    }
+
+    function switchAuthMode() {
+        isLoginMode = !isLoginMode;
+        updateModalUI();
+        document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
+        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
+    }
+
+    function updateModalUI() {
+        const d = LANG_DATA[currentLang];
+        if (isLoginMode) {
+            document.getElementById('modalTitle').textContent = d.modalLogin;
+            document.getElementById('modalSub').textContent = d.modalLoginSub;
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('loginBtn').innerHTML = '⚡ ' + d.login;
+            document.getElementById('emailLabel').textContent = d.email;
+            document.getElementById('passLabel').textContent = d.password;
+            document.getElementById('switchToRegister').textContent = d.switchLogin;
+        } else {
+            document.getElementById('modalTitle').textContent = d.modalRegister;
+            document.getElementById('modalSub').textContent = d.modalRegisterSub;
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'block';
+            document.getElementById('switchToLogin').textContent = d.switchRegister;
+        }
+    }
+
+    function handleLogin() {
+        const email = document.getElementById('loginEmail').value.trim();
+        const password = document.getElementById('loginPassword').value.trim();
+        if (!email) { showToast(getText('enterEmail')); return; }
+        if (!password) { showToast(getText('enterPassword')); return; }
+        const users = JSON.parse(localStorage.getItem('users') || '{}');
+        let foundUser = null;
+        for (const key in users) {
+            if (key === email || users[key].email === email || users[key].username === email) {
+                if (users[key].password === password) {
+                    foundUser = users[key];
+                    break;
+                }
+            }
+        }
+        if (foundUser) {
+            currentUser = foundUser;
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            closeModal();
+            showToast(getText('loginSuccess'));
+            updateAuthUI();
+        } else {
+            showToast('❌ Invalid email/username or password');
+        }
+    }
+
+    function handleRegister() {
+        const username = document.getElementById('regUsername').value.trim();
+        const email = document.getElementById('regEmail').value.trim();
+        const password = document.getElementById('regPassword').value.trim();
+        const confirmPassword = document.getElementById('regConfirmPassword').value.trim();
+
+        document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
+        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
+
+        let hasError = false;
+        if (!username) { document.getElementById('usernameError').classList.add('show'); document.getElementById('regUsername').classList.add('error'); hasError = true; }
+        if (!email || !email.includes('@') || !email.includes('.')) { document.getElementById('emailError').classList.add('show'); document.getElementById('regEmail').classList.add('error'); hasError = true; }
+        if (!password || password.length < 4) { document.getElementById('passwordError').classList.add('show'); document.getElementById('regPassword').classList.add('error'); hasError = true; }
+        if (password !== confirmPassword) { document.getElementById('confirmError').classList.add('show'); document.getElementById('regConfirmPassword').classList.add('error'); hasError = true; }
+        if (hasError) return;
+
+        const users = JSON.parse(localStorage.getItem('users') || '{}');
+        for (const key in users) {
+            if (key === username || users[key].email === email || users[key].username === username) {
+                showToast(getText('userExists'));
+                return;
+            }
+        }
+
+        const newUser = { username, email, password, createdAt: new Date().toISOString() };
+        users[username] = newUser;
+        localStorage.setItem('users', JSON.stringify(users));
+        if (tempAvatar) localStorage.setItem('userAvatar_' + username, tempAvatar);
+        currentUser = newUser;
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        closeModal();
+        showToast(getText('registerSuccess'));
+        updateAuthUI();
+    }
+
+    document.getElementById('authModal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            const modal = document.getElementById('authModal');
+            if (modal.classList.contains('show')) {
+                if (isLoginMode) handleLogin();
+                else handleRegister();
+            }
+        }
+        if (e.key === 'Escape') closeModal();
+    });
+
+    function goToCheckout(pkg, price) {
+        window.location.href = 'checkout.html?package=' + encodeURIComponent(pkg) + '&price=' + encodeURIComponent(price);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const savedLang = localStorage.getItem('lang') || 'en';
+        setLang(savedLang);
+        updateAuthUI();
+    });
+</script>
+</body>
+</html>
