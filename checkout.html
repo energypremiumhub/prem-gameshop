@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>⚡ Premium Game Shop - Checkout</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
@@ -34,7 +34,7 @@
             color: var(--text-primary);
             min-height: 100vh;
             padding: 16px;
-            padding-bottom: 90px;
+            padding-bottom: 30px;
             background-image: 
                 radial-gradient(ellipse at 20% 50%, rgba(245,200,66,0.04) 0%, transparent 60%),
                 radial-gradient(ellipse at 80% 20%, rgba(0,212,255,0.04) 0%, transparent 50%);
@@ -61,7 +61,6 @@
         .auth-btn:hover{border-color:var(--gold);color:var(--gold)}
         .auth-btn.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 25px var(--gold-glow);padding:4px 14px}
         .auth-btn.logged-in:active{transform:scale(0.90)}
-        .auth-btn.logged-in i{color:#0a0e1a}
         .auth-btn.logged-in img{width:20px;height:20px;border-radius:50%;object-fit:cover;margin-right:4px}
 
         .page-header{margin-bottom:20px;animation:slideUp 0.6s ease}
@@ -112,16 +111,7 @@
 
         .btn-submit{width:100%;padding:12px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:10px;font-size:0.9rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;margin-top:4px;box-shadow:0 0 20px var(--gold-glow)}
         .btn-submit:active{transform:scale(0.96)}
-
-        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);border-top:1px solid var(--border-color);display:flex;justify-content:space-around;padding:6px 0 10px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px var(--shadow)}
-        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);padding:4px 8px;border-radius:10px;position:relative}
-        .bottom-nav .nav-item:active{transform:scale(0.75)}
-        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
-        .bottom-nav .nav-item .label{font-size:0.4rem;margin-top:1px;font-weight:700;letter-spacing:0.5px;transition:all 0.4s ease}
-        .bottom-nav .nav-item.active{color:var(--gold)}
-        .bottom-nav .nav-item.active .icon{transform:translateY(-6px) scale(1.15);text-shadow:0 0 30px var(--gold-glow)}
-        .bottom-nav .nav-item.active .label{color:var(--gold)}
-        .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:24px;height:2.5px;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:10px;box-shadow:0 0 20px var(--gold-glow)}
+        .btn-submit:disabled{opacity:0.4;cursor:not-allowed}
 
         .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-card);padding:10px 20px;border-radius:12px;border:1px solid rgba(245,200,66,0.15);color:var(--gold);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 8px 40px var(--shadow);animation:toastPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
         .toast.show{display:block}
@@ -129,6 +119,17 @@
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
         @keyframes shimmer{0%,100%{transform:translate(0,0)}50%{transform:translate(-20%,-20%)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+        /* ===== ORDER SUCCESS OVERLAY ===== */
+        .order-success{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(15px);display:none;z-index:500;align-items:center;justify-content:center;padding:20px;flex-direction:column;text-align:center}
+        .order-success.show{display:flex;animation:fadeIn 0.5s ease}
+        .order-success .icon{font-size:4rem;color:var(--green);margin-bottom:16px;animation:scaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)}
+        .order-success h2{font-size:1.5rem;color:var(--gold);margin-bottom:8px}
+        .order-success p{color:var(--text-secondary);font-size:0.85rem;max-width:320px;line-height:1.6}
+        .order-success .order-id{background:var(--bg-card);padding:8px 20px;border-radius:10px;border:1px solid var(--border-color);color:var(--gold);font-size:0.8rem;font-weight:600;margin:12px 0}
+        .order-success .btn-home{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;padding:12px 40px;border-radius:12px;font-weight:700;font-size:0.9rem;cursor:pointer;transition:all 0.3s ease;margin-top:8px;text-decoration:none}
+        .order-success .btn-home:active{transform:scale(0.95)}
+        @keyframes scaleIn{from{transform:scale(0)}to{transform:scale(1)}}
     </style>
 </head>
 <body>
@@ -213,16 +214,26 @@
     </div>
 </div>
 
-<div class="bottom-nav">
-    <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label" id="navHome">Home</span></a>
-    <a href="shop.html" class="nav-item"><span class="icon">🛒</span><span class="label" id="navShop">Shop</span></a>
-    <a href="payment.html" class="nav-item"><span class="icon">💳</span><span class="label" id="navPayment">Payment</span></a>
-    <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label" id="navProfile">Profile</span></a>
+<!-- ===== ORDER SUCCESS OVERLAY ===== -->
+<div class="order-success" id="orderSuccess">
+    <div class="icon">✅</div>
+    <h2 id="successTitle">Order Submitted!</h2>
+    <p id="successDesc">Your order has been sent to our Telegram. We will process it shortly.</p>
+    <div class="order-id" id="orderIdDisplay">📋 Order #123456</div>
+    <a href="index.html" class="btn-home" id="homeBtn">🏠 Back to Home</a>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
+    // ============================================================
+    //  🔧 CONFIG - မင်းရဲ့ Telegram Bot Token နဲ့ Chat ID ထည့်ပါ
+    // ============================================================
+    const TELEGRAM_BOT_TOKEN = '8751360822:AAFQNiWhfGWgUsjD7Bd5DzfHMfpkR4COHY8';  // ← မင်း BotFather ကရတဲ့ Token ထည့်
+    const TELEGRAM_CHAT_ID = '8745522082';      // ← မင်း userinfobot ကရတဲ့ Chat ID ထည့်
+    // ============================================================
+
+    // ===== LANGUAGE DATA =====
     const LANG_DATA = {
         en: {
             appName: 'Premium Game Shop',
@@ -239,35 +250,17 @@
             uploadLabel: '📤 Upload Payment Slip',
             uploadText: 'Tap to upload screenshot',
             submit: 'Submit Order',
-            orderSuccess: '✅ Order submitted successfully!',
+            orderSuccess: '✅ Order Submitted!',
+            orderDesc: 'Your order has been sent to our Telegram. We will process it shortly.',
+            homeBtn: '🏠 Back to Home',
             copy: 'Copy',
             copied: '✅ Copied!',
-            home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
-            login: 'Login',
-            register: 'Register',
-            modalLogin: '⚔️ Login',
-            modalRegister: '🛡️ Register',
-            modalLoginSub: 'Welcome back, warrior!',
-            modalRegisterSub: 'Create your account, champion!',
-            email: '📧 Email or Username',
-            password: '🔑 Password',
-            switchLogin: "Don't have an account? Register",
-            switchRegister: 'Already have an account? Login',
-            loginSuccess: '✅ Welcome back, Champion!',
-            registerSuccess: '✅ Account created! Welcome!',
-            logoutSuccess: '🚪 Logged out successfully!',
-            logoutConfirm: 'Are you sure you want to logout?',
-            enterEmail: 'Please enter your email or username',
-            enterPassword: 'Please enter your password',
-            enterUsername: 'Please enter your username',
-            enterValidEmail: 'Please enter a valid email',
-            passwordMin: 'Password must be at least 4 characters',
-            passwordMatch: 'Passwords do not match',
-            userExists: '❌ Username or email already exists',
             enterGameId: 'Please enter your Game ID',
             enterServerId: 'Please enter your Server ID',
             selectPayment: 'Please select a payment method',
-            uploadSlip: 'Please upload your payment slip'
+            uploadSlip: 'Please upload your payment slip',
+            sending: '⏳ Sending order...',
+            sendError: '❌ Failed to send order. Please try again.'
         },
         my: {
             appName: 'ပရီမီယံ ဂိမ်းဆိုင်',
@@ -285,34 +278,16 @@
             uploadText: 'စခရင်ရိုက်ပုံတင်ရန်နှိပ်ပါ',
             submit: 'အော်ဒါတင်ရန်',
             orderSuccess: '✅ အော်ဒါတင်ခြင်းအောင်မြင်ပါပြီ!',
+            orderDesc: 'သင့်အော်ဒါကို Telegram သို့ပို့ထားပါသည်။ ကျွန်ုပ်တို့ အမြန်ဆုံးဆောင်ရွက်ပေးပါမည်။',
+            homeBtn: '🏠 ပင်မစာမျက်နှာသို့',
             copy: 'ကူးယူရန်',
             copied: '✅ ကူးယူပြီး!',
-            home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
-            login: 'ဝင်ရန်',
-            register: 'မှတ်ပုံတင်ရန်',
-            modalLogin: '⚔️ ဝင်ရန်',
-            modalRegister: '🛡️ မှတ်ပုံတင်ရန်',
-            modalLoginSub: 'ပြန်လည်ကြိုဆိုပါတယ် စစ်သည်တော်!',
-            modalRegisterSub: 'အကောင့်ဖွင့်ပါ ချန်ပီယံ!',
-            email: '📧 အီးမေးလ် သို့မဟုတ် အသုံးပြုသူအမည်',
-            password: '🔑 စကားဝှက်',
-            switchLogin: 'အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်',
-            switchRegister: 'အကောင့်ရှိပြီးသား? ဝင်ရန်',
-            loginSuccess: '✅ ကြိုဆိုပါတယ် ချန်ပီယံ!',
-            registerSuccess: '✅ အကောင့်ဖွင့်ခြင်းအောင်မြင်ပါပြီ!',
-            logoutSuccess: '🚪 ထွက်ခြင်းအောင်မြင်ပါပြီ!',
-            logoutConfirm: 'ထွက်မှာသေချာလား?',
-            enterEmail: 'ကျေးဇူးပြု၍ အီးမေးလ် သို့မဟုတ် အသုံးပြုသူအမည်ထည့်ပါ',
-            enterPassword: 'ကျေးဇူးပြု၍ စကားဝှက်ထည့်ပါ',
-            enterUsername: 'ကျေးဇူးပြု၍ အသုံးပြုသူအမည်ထည့်ပါ',
-            enterValidEmail: 'ကျေးဇူးပြု၍ မှန်ကန်တဲ့ အီးမေးလ်ထည့်ပါ',
-            passwordMin: 'စကားဝှက်သည် အနည်းဆုံး ၄ လုံးရှိရမယ်',
-            passwordMatch: 'စကားဝှက်များ မတူညီပါ',
-            userExists: '❌ အသုံးပြုသူအမည် သို့မဟုတ် အီးမေးလ် ရှိပြီးသားပါ',
             enterGameId: 'ကျေးဇူးပြု၍ သင့်ဂိမ်း ID ထည့်ပါ',
             enterServerId: 'ကျေးဇူးပြု၍ သင့်ဆာဗာ ID ထည့်ပါ',
             selectPayment: 'ကျေးဇူးပြု၍ ငွေပေးချေနည်းကိုရွေးပါ',
-            uploadSlip: 'ကျေးဇူးပြု၍ သင့်ငွေလွှဲပြေစာကိုတင်ပါ'
+            uploadSlip: 'ကျေးဇူးပြု၍ သင့်ငွေလွှဲပြေစာကိုတင်ပါ',
+            sending: '⏳ အော်ဒါပို့နေပါသည်...',
+            sendError: '❌ အော်ဒါပို့ရန်မအောင်မြင်ပါ။ ကျေးဇူးပြု၍ ပြန်စမ်းပါ။'
         }
     };
 
@@ -345,10 +320,9 @@
         document.getElementById('uploadLabel').textContent = d.uploadLabel;
         document.getElementById('uploadText').innerHTML = 'Tap to upload <strong>screenshot</strong>';
         document.getElementById('submitBtn').innerHTML = '✅ ' + d.submit;
-        document.getElementById('navHome').textContent = d.home;
-        document.getElementById('navShop').textContent = d.shop;
-        document.getElementById('navPayment').textContent = d.payment;
-        document.getElementById('navProfile').textContent = d.profile;
+        document.getElementById('successTitle').textContent = d.orderSuccess;
+        document.getElementById('successDesc').textContent = d.orderDesc;
+        document.getElementById('homeBtn').textContent = d.homeBtn;
         updateAuthUI();
     }
 
@@ -360,6 +334,7 @@
         t._timer = setTimeout(() => t.classList.remove('show'), 3000);
     }
 
+    // ===== COPY =====
     function copyNumber(number, btn) {
         navigator.clipboard.writeText(number).then(() => {
             btn.textContent = getText('copied');
@@ -376,38 +351,6 @@
             btn.classList.add('copied');
             setTimeout(() => { btn.textContent = getText('copy'); btn.classList.remove('copied'); }, 2500);
         });
-    }
-
-    let currentUser = null;
-    const savedUser = localStorage.getItem('currentUser');
-    if (savedUser) currentUser = JSON.parse(savedUser);
-
-    function isLoggedIn() { return currentUser !== null; }
-
-    function updateAuthUI() {
-        const authBtn = document.getElementById('authBtn');
-        if (currentUser) {
-            const savedAvatar = localStorage.getItem('userAvatar_' + currentUser.username);
-            if (savedAvatar) {
-                authBtn.innerHTML = '<img src="' + savedAvatar + '" alt="avatar"> ' + currentUser.username;
-            } else {
-                authBtn.innerHTML = '👤 ' + currentUser.username;
-            }
-            authBtn.className = 'auth-btn logged-in';
-            authBtn.title = 'Go to Profile';
-        } else {
-            authBtn.innerHTML = '🔑 ' + getText('login');
-            authBtn.className = 'auth-btn';
-            authBtn.title = 'Login';
-        }
-    }
-
-    function handleAuthClick() {
-        if (isLoggedIn()) {
-            window.location.href = 'profile.html';
-        } else {
-            window.location.href = 'index.html';
-        }
     }
 
     // ===== GET PACKAGE FROM URL =====
@@ -441,8 +384,8 @@
         }
     });
 
-    // ===== SUBMIT =====
-    document.getElementById('submitBtn').addEventListener('click', function() {
+    // ===== SUBMIT ORDER TO TELEGRAM =====
+    document.getElementById('submitBtn').addEventListener('click', async function() {
         const d = LANG_DATA[currentLang];
         const gameId = document.getElementById('gameId').value.trim();
         const serverId = document.getElementById('serverId').value.trim();
@@ -453,8 +396,133 @@
         if (!selectedPayment) { showToast(d.selectPayment); return; }
         if (!hasFile) { showToast(d.uploadSlip); return; }
 
-        showToast(d.orderSuccess);
+        // Disable button
+        this.disabled = true;
+        this.innerHTML = '⏳ ' + d.sending;
+
+        // Build order message
+        const orderId = 'ORD-' + Date.now().toString().slice(-6);
+        const pkg = document.getElementById('selectedPackage').textContent;
+        const price = document.getElementById('selectedPrice').textContent;
+        const paymentName = selectedPayment === 'wave' ? 'Wave Pay' : 'KBZ Pay';
+        const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+        const userName = currentUser.username || 'Guest';
+
+        // Read image as base64
+        let imageBase64 = '';
+        if (hasFile) {
+            imageBase64 = await readFileAsBase64(fileInput.files[0]);
+        }
+
+        const message = `
+🛒 **NEW ORDER!**
+
+📋 **Order ID:** #${orderId}
+👤 **Customer:** ${userName}
+📦 **Package:** ${pkg}
+💰 **Price:** ${price}
+🎮 **Game ID:** ${gameId}
+🌐 **Server ID:** ${serverId}
+💳 **Payment:** ${paymentName}
+📅 **Time:** ${new Date().toLocaleString()}
+        `;
+
+        // Send to Telegram
+        try {
+            const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CHAT_ID,
+                    text: message,
+                    parse_mode: 'Markdown'
+                })
+            });
+
+            // Send photo if available
+            if (imageBase64) {
+                await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        photo: imageBase64,
+                        caption: `📸 Payment Slip for Order #${orderId}`
+                    })
+                });
+            }
+
+            // Show success
+            document.getElementById('orderIdDisplay').textContent = '📋 Order #' + orderId;
+            document.getElementById('orderSuccess').classList.add('show');
+            
+            // Save to order history
+            saveOrderHistory(orderId, pkg, price, gameId, serverId, paymentName);
+
+        } catch (error) {
+            console.error('Telegram send error:', error);
+            showToast(d.sendError);
+            this.disabled = false;
+            this.innerHTML = '✅ ' + d.submit;
+        }
     });
+
+    // ===== READ FILE AS BASE64 =====
+    function readFileAsBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
+    }
+
+    // ===== SAVE ORDER HISTORY =====
+    function saveOrderHistory(orderId, pkg, price, gameId, serverId, payment) {
+        const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+        orders.unshift({
+            id: orderId,
+            package: pkg,
+            price: price,
+            gameId: gameId,
+            serverId: serverId,
+            payment: payment,
+            date: new Date().toISOString(),
+            status: 'Pending'
+        });
+        localStorage.setItem('orderHistory', JSON.stringify(orders));
+    }
+
+    // ===== AUTH =====
+    let currentUser = null;
+    const savedUser = localStorage.getItem('currentUser');
+    if (savedUser) currentUser = JSON.parse(savedUser);
+
+    function updateAuthUI() {
+        const authBtn = document.getElementById('authBtn');
+        if (currentUser) {
+            const savedAvatar = localStorage.getItem('userAvatar_' + currentUser.username);
+            if (savedAvatar) {
+                authBtn.innerHTML = '<img src="' + savedAvatar + '" alt="avatar"> ' + currentUser.username;
+            } else {
+                authBtn.innerHTML = '👤 ' + currentUser.username;
+            }
+            authBtn.className = 'auth-btn logged-in';
+            authBtn.title = 'Go to Profile';
+        } else {
+            authBtn.innerHTML = '🔑 ' + getText('login');
+            authBtn.className = 'auth-btn';
+            authBtn.title = 'Login';
+        }
+    }
+
+    function handleAuthClick() {
+        if (currentUser) {
+            window.location.href = 'profile.html';
+        } else {
+            window.location.href = 'index.html';
+        }
+    }
 
     document.addEventListener('DOMContentLoaded', function() {
         const savedLang = localStorage.getItem('lang') || 'en';
