@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prem-Game Shop - Account</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+        
+        :root {
+            --bg: #0a0e1a;
+            --bg2: #111827;
+            --bg3: #1a2332;
+            --text: #ffffff;
+            --text2: #94a3b8;
+            --card: rgba(255,255,255,0.04);
+            --border: rgba(255,255,255,0.06);
+            --shadow: rgba(0,0,0,0.4);
+            --gold: #f5c842;
+            --gold2: #dbaa2a;
+            --green: #22d3ee;
+            --red: #ef4444;
+            --orange: #f97316;
+        }
+
+        body.light {
+            --bg: #f0f2f5;
+            --bg2: #ffffff;
+            --bg3: #e8eaed;
+            --text: #1a1a2e;
+            --text2: #555770;
+            --card: rgba(0,0,0,0.03);
+            --border: rgba(0,0,0,0.08);
+            --shadow: rgba(0,0,0,0.08);
+            --gold: #d4a020;
+            --gold2: #b8891a;
+            --green: #0f9d58;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 16px;
+            padding-bottom: 90px;
+            background-image: 
+                radial-gradient(ellipse at 20% 50%, rgba(245,200,66,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(59,130,246,0.04) 0%, transparent 50%);
+            transition: all 0.3s ease;
+        }
+
+        .container{max-width:500px;margin:0 auto}
+
+        /* ===== Top Bar ===== */
+        .topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 0 16px;border-bottom:1px solid var(--border);margin-bottom:20px}
+        .topbar .back-btn{color:var(--gold);text-decoration:none;font-size:0.8rem;font-weight:600;padding:6px 14px;border-radius:20px;background:var(--bg3);border:1px solid var(--border);transition:all 0.3s ease}
+        .topbar .back-btn:active{transform:scale(0.92);background:var(--gold);color:#0a0e1a}
+        .topbar .page-title{font-size:1.1rem;font-weight:700;color:var(--gold)}
+        .topbar .spacer{width:70px}
+
+        /* ===== Profile Header ===== */
+        .profile-header{text-align:center;padding:20px 0;margin-bottom:20px}
+        .profile-header .avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--orange));display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:2.5rem;color:#0a0e1a;border:3px solid var(--gold);box-shadow:0 0 30px rgba(245,200,66,0.15)}
+        .profile-header .name{font-size:1.2rem;font-weight:700;color:var(--text)}
+        .profile-header .name span{color:var(--gold)}
+        .profile-header .id{font-size:0.75rem;color:var(--text2);margin-top:2px}
+
+        /* ===== Glass Card ===== */
+        .glass-card{background:var(--bg3);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 4px 25px var(--shadow)}
+        .glass-card .label{font-size:0.7rem;color:var(--text2);font-weight:600;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
+
+        /* ===== Info Row ===== */
+        .info-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
+        .info-row:last-child{border-bottom:none}
+        .info-row .icon{width:32px;font-size:1rem;color:var(--text2)}
+        .info-row .detail{flex:1}
+        .info-row .detail .title{font-size:0.7rem;color:var(--text2)}
+        .info-row .detail .value{font-size:0.85rem;font-weight:500;color:var(--text)}
+
+        /* ===== Menu Item ===== */
+        .menu-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:all 0.3s ease}
+        .menu-item:last-child{border-bottom:none}
+        .menu-item:active{transform:scale(0.97);background:rgba(245,200,66,0.04);margin:0 -10px;padding:12px 10px;border-radius:10px}
+        .menu-item .icon{width:32px;font-size:1.1rem;color:var(--text2)}
+        .menu-item .text{flex:1;font-size:0.85rem;color:var(--text)}
+        .menu-item .arrow{color:var(--text2);font-size:0.7rem}
+        .menu-item .badge{background:var(--gold);color:#0a0e1a;padding:2px 8px;border-radius:12px;font-size:0.55rem;font-weight:700}
+        .menu-item.danger .text{color:var(--red)}
+        .menu-item.danger .icon{color:var(--red)}
+
+        /* ===== Bottom Nav ===== */
+        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:8px 0 12px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -4px 25px var(--shadow)}
+        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text2);transition:all 0.3s ease;padding:4px 10px;border-radius:10px;position:relative}
+        .bottom-nav .nav-item:active{transform:scale(0.88)}
+        .bottom-nav .nav-item .icon{font-size:1.3rem;display:block}
+        .bottom-nav .nav-item .label{font-size:0.45rem;margin-top:2px;font-weight:600;letter-spacing:0.5px}
+        .bottom-nav .nav-item.active{color:var(--gold)}
+        .bottom-nav .nav-item.active .icon{transform:translateY(-2px)}
+        .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:20px;height:2px;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:10px}
+
+        .footer-text{text-align:center;color:var(--text2);font-size:0.55rem;margin-top:16px;opacity:0.5}
+
+        /* ===== Modal (Logout) ===== */
+        .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;z-index:200}
+        .modal-overlay.show{display:flex}
+        .modal-box{background:var(--bg2);border-radius:20px;padding:28px 24px;max-width:340px;width:90%;text-align:center;border:1px solid var(--border);box-shadow:0 20px 60px var(--shadow)}
+        .modal-box .icon{font-size:3rem;color:var(--red);margin-bottom:12px}
+        .modal-box h3{font-size:1.2rem;color:var(--text);margin-bottom:6px}
+        .modal-box p{font-size:0.8rem;color:var(--text2);margin-bottom:20px}
+        .modal-box .btn-group{display:flex;gap:12px}
+        .modal-box .btn-group button{flex:1;padding:10px;border-radius:12px;border:none;font-weight:600;font-size:0.85rem;cursor:pointer;transition:all 0.3s ease}
+        .modal-box .btn-group button:active{transform:scale(0.95)}
+        .modal-box .btn-group .btn-cancel{background:var(--bg3);color:var(--text);border:1px solid var(--border)}
+        .modal-box .btn-group .btn-logout{background:var(--red);color:#fff}
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- Top Bar -->
+    <div class="topbar">
+        <a href="index.html" class="back-btn">← Home</a>
+        <span class="page-title">👤 Account</span>
+        <span class="spacer"></span>
+    </div>
+
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <div class="avatar">🎮</div>
+        <div class="name">Welcome, <span>Gamer!</span></div>
+        <div class="id">🆔 #PREMIUM_001</div>
+    </div>
+
+    <!-- Profile Info -->
+    <div class="glass-card">
+        <span class="label">📋 Personal Info</span>
+        <div class="info-row">
+            <div class="icon"><i class="fas fa-user"></i></div>
+            <div class="detail">
+                <div class="title">Full Name</div>
+                <div class="value">Prem-Game User</div>
+            </div>
+        </div>
+        <div class="info-row">
+            <div class="icon"><i class="fas fa-phone"></i></div>
+            <div class="detail">
+                <div class="title">Phone</div>
+                <div class="value">09682506493</div>
+            </div>
+        </div>
+        <div class="info-row">
+            <div class="icon"><i class="fas fa-envelope"></i></div>
+            <div class="detail">
+                <div class="title">Email</div>
+                <div class="value">premgame@gmail.com</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order History -->
+    <div class="glass-card">
+        <span class="label">📦 Order History</span>
+        <div class="menu-item" onclick="showToast('📋 No orders yet. Start shopping!')">
+            <div class="icon"><i class="fas fa-clock"></i></div>
+            <div class="text">Recent Orders</div>
+            <div class="badge">0</div>
+            <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+        </div>
+        <div class="menu-item" onclick="showToast('📊 View your purchase history')">
+            <div class="icon"><i class="fas fa-history"></i></div>
+            <div class="text">Transaction History</div>
+            <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+        </div>
+    </div>
+
+    <!-- Settings -->
+    <div class="glass-card">
+        <span class="label">⚙️ Settings</span>
+        <div class="menu-item" onclick="toggleTheme()">
+            <div class="icon"><i class="fas fa-moon"></i></div>
+            <div class="text">Dark / Light Mode</div>
+            <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+        </div>
+        <div class="menu-item" onclick="showToast('🌍 Language: English')">
+            <div class="icon"><i class="fas fa-globe"></i></div>
+            <div class="text">Language</div>
+            <div class="badge">EN</div>
+            <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+        </div>
+        <div class="menu-item" onclick="showToast('🔔 Notifications are on')">
+            <div class="icon"><i class="fas fa-bell"></i></div>
+            <div class="text">Notifications</div>
+            <div class="badge">On</div>
+            <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+        </div>
+    </div>
+
+    <!-- Logout -->
+    <div class="glass-card" style="border-color:rgba(239,68,68,0.2);">
+        <div class="menu-item danger" onclick="showLogoutModal()">
+            <div class="icon"><i class="fas fa-sign-out-alt"></i></div>
+            <div class="text">Logout</div>
+            <div class="arrow"><i class="fas fa-chevron-right"></i></div>
+        </div>
+    </div>
+
+    <div class="footer-text">&copy; 2026 Prem-Game Shop • Made with ❤️</div>
+</div>
+
+<!-- Bottom Navigation -->
+<div class="bottom-nav">
+    <a href="index.html" class="nav-item">
+        <span class="icon">🏠</span>
+        <span class="label">Home</span>
+    </a>
+    <a href="shop.html" class="nav-item">
+        <span class="icon">🛒</span>
+        <span class="label">Shop</span>
+    </a>
+    <a href="payment.html" class="nav-item">
+        <span class="icon">💳</span>
+        <span class="label">Payment</span>
+    </a>
+    <a href="account.html" class="nav-item active">
+        <span class="icon">👤</span>
+        <span class="label">Account</span>
+    </a>
+</div>
+
+<!-- Logout Modal -->
+<div class="modal-overlay" id="logoutModal">
+    <div class="modal-box">
+        <div class="icon">🚪</div>
+        <h3>Logout</h3>
+        <p>Are you sure you want to logout from your account?</p>
+        <div class="btn-group">
+            <button class="btn-cancel" onclick="hideLogoutModal()">Cancel</button>
+            <button class="btn-logout" onclick="logout()">Logout</button>
+        </div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div style="position:fixed;bottom:110px;left:50%;transform:translateX(-50%);background:var(--bg2);padding:12px 24px;border-radius:14px;border:1px solid var(--border);color:var(--gold);font-weight:600;font-size:0.8rem;display:none;z-index:300;text-align:center;max-width:90%;box-shadow:0 4px 30px var(--shadow);" id="toast"></div>
+
+<script>
+    // ===== Toast =====
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.style.display = 'block';
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, 2500);
+    }
+
+    // ===== Logout Modal =====
+    function showLogoutModal() {
+        document.getElementById('logoutModal').classList.add('show');
+    }
+
+    function hideLogoutModal() {
+        document.getElementById('logoutModal').classList.remove('show');
+    }
+
+    function logout() {
+        hideLogoutModal();
+        showToast('👋 Logged out successfully!');
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 1500);
+    }
+
+    // ===== Theme Toggle =====
+    function toggleTheme() {
+        document.body.classList.toggle('light');
+        const btn = document.querySelector('.theme-btn');
+        if (document.body.classList.contains('light')) {
+            document.body.style.backgroundImage = 'none';
+            showToast('🌙 Dark Mode');
+        } else {
+            document.body.style.backgroundImage = 'radial-gradient(ellipse at 20% 50%, rgba(245,200,66,0.04) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(59,130,246,0.04) 0%, transparent 50%)';
+            showToast('☀️ Light Mode');
+        }
+    }
+
+    // ===== Load saved theme =====
+    if (localStorage.getItem('theme') === 'light') {
+        document.body.classList.add('light');
+        document.body.style.backgroundImage = 'none';
+    }
+
+    // ===== Save theme on change =====
+    document.addEventListener('DOMContentLoaded', function() {
+        const observer = new MutationObserver(function() {
+            if (document.body.classList.contains('light')) {
+                localStorage.setItem('theme', 'light');
+            } else {
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+        observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    });
+
+    // ===== Close modal on background click =====
+    document.getElementById('logoutModal').addEventListener('click', function(e) {
+        if (e.target === this) hideLogoutModal();
+    });
+</script>
+</body>
+</html>
