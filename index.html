@@ -48,44 +48,44 @@
         .header{display:flex;justify-content:space-between;align-items:center;padding:8px 0 16px;flex-wrap:wrap;gap:8px}
         .header .logo{font-size:1.1rem;font-weight:800;color:var(--gold)}
         .header .right{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-        .header .right .icon-btn{background:var(--bg3);padding:8px;border-radius:12px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid var(--border);color:var(--text2);transition:all 0.12s ease;font-size:1.1rem;text-decoration:none}
-        .header .right .icon-btn:active{transform:scale(0.88)}
-        .header .right .icon-btn.theme-btn{font-size:1rem;width:44px;height:44px}
-        .header .right .icon-btn.auth-btn{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;font-weight:700;font-size:0.65rem;width:auto;padding:0 14px;border-radius:20px}
         
-        /* ===== Profile Avatar in Header ===== */
-        .header .right .profile-avatar{width:40px;height:40px;border-radius:50%;background:var(--bg3);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--text2);cursor:pointer;transition:all 0.12s ease;overflow:hidden;text-decoration:none}
-        .header .right .profile-avatar:active{transform:scale(0.88)}
-        .header .right .profile-avatar img{width:100%;height:100%;object-fit:cover}
-
         /* ===== Language Switcher ===== */
         .lang-switcher{display:flex;gap:3px;background:var(--bg3);padding:3px;border-radius:10px;border:1px solid var(--border)}
         .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text2);padding:4px 10px;border-radius:8px;font-size:0.55rem;font-weight:600;cursor:pointer;transition:all 0.12s ease}
         .lang-switcher .lang-btn.active{background:var(--gold);color:#0a0e1a}
         .lang-switcher .lang-btn:active{transform:scale(0.88)}
 
+        /* ===== Profile Avatar in Header ===== */
+        .header .right .profile-avatar{width:40px;height:40px;border-radius:50%;background:var(--bg3);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--text2);cursor:pointer;transition:all 0.12s ease;overflow:hidden;text-decoration:none}
+        .header .right .profile-avatar:active{transform:scale(0.88)}
+        .header .right .profile-avatar img{width:100%;height:100%;object-fit:cover}
+        .header .right .profile-avatar.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a}
+
         /* ===== Welcome ===== */
-        .welcome{margin-bottom:20px}
+        .welcome{margin-bottom:20px;animation:fadeUp 0.6s ease}
         .welcome .greeting{font-size:0.75rem;color:var(--text2);font-weight:500}
         .welcome h2{font-size:1.6rem;margin-top:2px;font-weight:700;color:var(--text)}
         .welcome h2 span{background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
         .welcome p{color:var(--text2);font-size:0.8rem;margin-top:2px}
 
         /* ===== Banner ===== */
-        .banner{background:linear-gradient(135deg,rgba(245,200,66,0.12),rgba(59,130,246,0.08));border-radius:16px;padding:18px 16px;border:1px solid rgba(245,200,66,0.10);margin-bottom:18px;text-align:center;position:relative;overflow:hidden;cursor:pointer;transition:all 0.12s ease}
+        .banner{background:linear-gradient(135deg,rgba(245,200,66,0.12),rgba(59,130,246,0.08));border-radius:16px;padding:18px 16px;border:1px solid rgba(245,200,66,0.10);margin-bottom:18px;text-align:center;position:relative;overflow:hidden;cursor:pointer;transition:all 0.12s ease;animation:fadeUp 0.7s ease}
         .banner:active{transform:scale(0.96)}
         .banner .banner-icon{font-size:1.8rem;display:block;margin-bottom:4px}
         .banner h4{font-size:0.95rem;color:var(--gold);font-weight:700}
         .banner p{font-size:0.7rem;color:var(--text2);margin-top:2px}
         .banner .banner-tag{position:absolute;top:6px;right:10px;font-size:0.45rem;background:rgba(239,68,68,0.15);color:#ef4444;padding:2px 10px;border-radius:12px;font-weight:600}
 
-        /* ===== Glass Card ===== */
-        .glass-card{background:var(--bg3);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:18px;box-shadow:0 4px 25px var(--shadow)}
+        /* ===== Shop Button ===== */
+        .shop-card{background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:14px;text-align:center;cursor:pointer;transition:all 0.12s ease;margin-bottom:18px;box-shadow:0 4px 25px var(--shadow);animation:fadeUp 0.8s ease}
+        .shop-card:active{transform:scale(0.96)}
+        .shop-card span{font-size:1.5rem;display:block}
+        .shop-card .label{font-weight:600;color:var(--gold);font-size:0.95rem}
 
         /* ===== Services ===== */
         .section-title{font-size:0.8rem;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;display:flex;align-items:center;gap:10px}
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
-        .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+        .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;animation:fadeUp 0.9s ease}
         .services-grid .service{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px 8px;text-align:center;cursor:pointer;transition:all 0.12s ease}
         .services-grid .service:active{transform:scale(0.90);border-color:var(--gold)}
         .services-grid .service .icon{font-size:1.6rem;display:block;margin-bottom:4px}
@@ -125,6 +125,7 @@
         .modal .switch-link:active{opacity:0.7}
         .modal .close-btn{position:absolute;top:12px;right:16px;background:none;border:none;color:var(--text2);font-size:1.2rem;cursor:pointer}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
     </style>
 </head>
 <body>
@@ -137,8 +138,6 @@
                 <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
                 <button class="lang-btn" data-lang="my" onclick="setLang('my')">MY</button>
             </div>
-            <div class="icon-btn theme-btn" onclick="toggleTheme()">🌙</div>
-            <div class="icon-btn" onclick="showToast(getText('noti'))">🔔</div>
             <a href="profile.html" class="profile-avatar" id="profileAvatar">👤</a>
         </div>
     </div>
@@ -159,10 +158,10 @@
     </div>
 
     <!-- Shop Button -->
-    <a href="shop.html" style="text-decoration:none;display:block;margin-bottom:18px;">
-        <div class="glass-card" style="text-align:center;padding:14px;cursor:pointer;transition:all 0.12s ease;">
-            <span style="font-size:1.5rem;display:block;">🛒</span>
-            <span style="font-weight:600;color:var(--gold);" id="goToShop">Go to Shop →</span>
+    <a href="shop.html" style="text-decoration:none;">
+        <div class="shop-card">
+            <span>🛒</span>
+            <div class="label" id="goToShop">Go to Shop →</div>
         </div>
     </a>
 
@@ -316,17 +315,6 @@
         updateAuthUI();
     }
 
-    // ===== THEME =====
-    function toggleTheme() {
-        const isLight = document.body.classList.toggle('light');
-        document.querySelector('.theme-btn').textContent = isLight ? '🌙' : '☀️';
-        localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    }
-    if (localStorage.getItem('theme') === 'light') {
-        document.body.classList.add('light');
-        document.querySelector('.theme-btn').textContent = '🌙';
-    }
-
     // ===== TOAST =====
     function showToast(msg) {
         const t = document.getElementById('toast');
@@ -346,18 +334,18 @@
     function updateAuthUI() {
         const avatar = document.getElementById('profileAvatar');
         if (currentUser) {
+            avatar.classList.add('logged-in');
             const savedAvatar = localStorage.getItem('userAvatar');
             if (savedAvatar) {
                 avatar.innerHTML = '<img src="' + savedAvatar + '" alt="avatar">';
             } else {
                 avatar.textContent = '👤';
-                avatar.style.background = 'linear-gradient(135deg, var(--gold), var(--orange))';
-                avatar.style.color = '#0a0e1a';
             }
+            avatar.title = currentUser.username;
         } else {
+            avatar.classList.remove('logged-in');
             avatar.textContent = '👤';
-            avatar.style.background = 'var(--bg3)';
-            avatar.style.color = 'var(--text2)';
+            avatar.title = 'Login';
         }
         // Update modal texts
         const modal = document.getElementById('authModal');
