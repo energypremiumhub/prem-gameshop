@@ -40,87 +40,21 @@
             min-height: 100vh;
             padding: 16px;
             padding-bottom: 90px;
-            transition: all 0.3s ease;
+            transition: background 0.15s ease, color 0.15s ease;
         }
 
         .container{max-width:500px;margin:0 auto}
 
         .topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 0 16px;border-bottom:1px solid var(--border);margin-bottom:20px}
-        .topbar .back-btn{color:var(--gold);text-decoration:none;font-size:0.8rem;font-weight:600;padding:6px 14px;border-radius:20px;background:var(--bg3);border:1px solid var(--border);transition:all 0.3s ease}
+        .topbar .back-btn{color:var(--gold);text-decoration:none;font-size:0.8rem;font-weight:600;padding:6px 14px;border-radius:20px;background:var(--bg3);border:1px solid var(--border);transition:all 0.15s ease}
         .topbar .back-btn:active{transform:scale(0.92);background:var(--gold);color:#0a0e1a}
         .topbar .page-title{font-size:1.1rem;font-weight:700;color:var(--gold)}
         .topbar .spacer{width:70px}
 
-        .profile-avatar{text-align:center;margin-bottom:24px}
-        .profile-avatar .avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--orange));display:flex;align-items:center;justify-content:center;font-size:2.5rem;margin:0 auto 8px;color:#0a0e1a;border:3px solid var(--border)}
-        .profile-avatar .name{font-size:1.2rem;font-weight:700;color:var(--text)}
-        .profile-avatar .status{font-size:0.7rem;color:var(--green)}
-
-        .glass-card{background:var(--bg3);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 4px 25px var(--shadow)}
-        .glass-card .label{font-size:0.7rem;color:var(--text2);font-weight:600;display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px}
-
-        .menu-item{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:all 0.3s ease}
-        .menu-item:last-child{border-bottom:none}
-        .menu-item:active{transform:scale(0.97);color:var(--gold)}
-        .menu-item .icon{font-size:1.2rem;color:var(--text2);width:30px;text-align:center}
-        .menu-item .text{font-size:0.85rem;color:var(--text);flex:1}
-        .menu-item .arrow{color:var(--text2);font-size:0.7rem}
-
-        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:8px 0 12px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -4px 25px var(--shadow)}
-        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text2);transition:all 0.3s ease;padding:4px 10px;border-radius:10px;position:relative}
-        .bottom-nav .nav-item:active{transform:scale(0.88)}
-        .bottom-nav .nav-item .icon{font-size:1.3rem;display:block}
-        .bottom-nav .nav-item .label{font-size:0.45rem;margin-top:2px;font-weight:600;letter-spacing:0.5px}
-        .bottom-nav .nav-item.active{color:var(--gold)}
-        .bottom-nav .nav-item.active .icon{transform:translateY(-2px)}
-        .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:20px;height:2px;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:10px}
-
-        .footer-text{text-align:center;color:var(--text2);font-size:0.55rem;margin-top:16px;opacity:0.5}
-    </style>
-</head>
-<body>
-<div class="container">
-    <div class="topbar">
-        <a href="index.html" class="back-btn">← Home</a>
-        <span class="page-title">👤 Profile</span>
-        <span class="spacer"></span>
-    </div>
-
-    <div class="profile-avatar">
-        <div class="avatar">⚔️</div>
-        <div class="name">Prem-Game Shop</div>
-        <div class="status">🟢 Online • Premium Member</div>
-    </div>
-
-    <div class="glass-card">
-        <span class="label">⚙️ Settings</span>
-        <div class="menu-item"><span class="icon">👤</span><span class="text">Account</span><span class="arrow">›</span></div>
-        <div class="menu-item"><span class="icon">🛒</span><span class="text">Order History</span><span class="arrow">›</span></div>
-        <div class="menu-item"><span class="icon">💎</span><span class="text">My Diamonds</span><span class="arrow">›</span></div>
-        <div class="menu-item"><span class="icon">🔔</span><span class="text">Notifications</span><span class="arrow">›</span></div>
-    </div>
-
-    <div class="glass-card">
-        <span class="label">ℹ️ About</span>
-        <div class="menu-item"><span class="icon">📱</span><span class="text">App Version 1.0.0</span><span class="arrow">›</span></div>
-        <div class="menu-item"><span class="icon">❓</span><span class="text">Help & Support</span><span class="arrow">›</span></div>
-        <div class="menu-item"><span class="icon">📄</span><span class="text">Terms & Privacy</span><span class="arrow">›</span></div>
-    </div>
-
-    <div class="footer-text">&copy; 2026 Prem-Game Shop • Made with ❤️</div>
-</div>
-
-<div class="bottom-nav">
-    <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label">Home</span></a>
-    <a href="shop.html" class="nav-item"><span class="icon">🛒</span><span class="label">Shop</span></a>
-    <a href="payment.html" class="nav-item"><span class="icon">💳</span><span class="label">Payment</span></a>
-    <a href="profile.html" class="nav-item active"><span class="icon">👤</span><span class="label">Profile</span></a>
-</div>
-
-<script>
-    if (localStorage.getItem('theme') === 'light') {
-        document.body.classList.add('light');
-    }
-</script>
-</body>
-</html>
+        /* ===== Profile Avatar ===== */
+        .profile-section{text-align:center;margin-bottom:24px}
+        .profile-section .avatar-wrap{position:relative;width:90px;height:90px;margin:0 auto 10px}
+        .profile-section .avatar-wrap .avatar{width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--orange));display:flex;align-items:center;justify-content:center;font-size:2.8rem;color:#0a0e1a;border:3px solid var(--border);cursor:pointer;transition:all 0.15s ease;overflow:hidden}
+        .profile-section .avatar-wrap .avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+        .profile-section .avatar-wrap .avatar:active{transform:scale(0.95)}
+        .profile-section .avatar-wrap .upload-label{position:absolute;bottom:0;right:0;background:var(--gold);color:#0a0e1a;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.7rem;cursor:pointer;border:2px solid var(--bg
