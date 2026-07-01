@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prem-Game Shop - Payment</title>
+    <title>Premium Game Shop - Payment</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
@@ -40,36 +40,43 @@
             min-height: 100vh;
             padding: 16px;
             padding-bottom: 90px;
-            transition: all 0.3s ease;
+            transition: background 0.12s ease, color 0.12s ease;
         }
 
         .container{max-width:500px;margin:0 auto}
 
-        .topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 0 16px;border-bottom:1px solid var(--border);margin-bottom:20px}
-        .topbar .back-btn{color:var(--gold);text-decoration:none;font-size:0.8rem;font-weight:600;padding:6px 14px;border-radius:20px;background:var(--bg3);border:1px solid var(--border);transition:all 0.3s ease}
-        .topbar .back-btn:active{transform:scale(0.92);background:var(--gold);color:#0a0e1a}
-        .topbar .page-title{font-size:1.1rem;font-weight:700;color:var(--gold)}
-        .topbar .spacer{width:70px}
+        /* ===== Header ===== */
+        .header{display:flex;justify-content:space-between;align-items:center;padding:8px 0 16px;flex-wrap:wrap;gap:8px}
+        .header .logo{font-size:1.1rem;font-weight:800;color:var(--gold)}
+        .header .right{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+        
+        .lang-switcher{display:flex;gap:3px;background:var(--bg3);padding:3px;border-radius:10px;border:1px solid var(--border)}
+        .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text2);padding:4px 10px;border-radius:8px;font-size:0.55rem;font-weight:600;cursor:pointer;transition:all 0.12s ease}
+        .lang-switcher .lang-btn.active{background:var(--gold);color:#0a0e1a}
+        .lang-switcher .lang-btn:active{transform:scale(0.88)}
 
-        .page-header{margin-bottom:24px}
+        .header .right .profile-avatar{width:40px;height:40px;border-radius:50%;background:var(--bg3);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--text2);cursor:pointer;transition:all 0.12s ease;overflow:hidden;text-decoration:none}
+        .header .right .profile-avatar:active{transform:scale(0.88)}
+        .header .right .profile-avatar img{width:100%;height:100%;object-fit:cover}
+        .header .right .profile-avatar.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a}
+
+        .page-header{margin-bottom:24px;animation:fadeUp 0.6s ease}
         .page-header h1{font-size:1.4rem;font-weight:700;color:var(--text)}
         .page-header h1 span{background:linear-gradient(135deg,var(--gold),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
         .page-header p{color:var(--text2);font-size:0.8rem;margin-top:2px}
 
-        .glass-card{background:var(--bg3);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:0 4px 25px var(--shadow)}
+        .glass-card{background:var(--bg3);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:0 4px 25px var(--shadow);animation:fadeUp 0.7s ease}
         .glass-card .label{font-size:0.7rem;color:var(--text2);font-weight:600;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
 
-        /* ===== Payment Account - 🏦 Icon ===== */
-        .payment-account{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:12px;border:1px solid var(--border);margin-bottom:10px;transition:all 0.3s ease;background:var(--bg)}
+        .payment-account{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:12px;border:1px solid var(--border);margin-bottom:10px;transition:all 0.12s ease;background:var(--bg)}
         .payment-account:active{transform:scale(0.97)}
         .payment-account .icon-box{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;background:var(--bg3);border:1px solid var(--border)}
         .payment-account .info{flex:1}
         .payment-account .info .name{font-size:1rem;font-weight:700;color:var(--text)}
-        .payment-account .info .name .badge{font-size:0.55rem;color:var(--green);background:rgba(34,211,238,0.08);padding:2px 10px;border-radius:12px;margin-left:8px;font-weight:500}
         .payment-account .info .number{font-size:0.8rem;color:var(--text2);margin-top:3px}
         .payment-account .info .number i{margin-right:6px;color:var(--green)}
 
-        .copy-btn{background:var(--bg);border:1px solid var(--border);color:var(--text2);padding:5px 14px;border-radius:16px;font-size:0.6rem;cursor:pointer;transition:all 0.3s ease;font-weight:600}
+        .copy-btn{background:var(--bg);border:1px solid var(--border);color:var(--text2);padding:5px 14px;border-radius:16px;font-size:0.6rem;cursor:pointer;transition:all 0.12s ease;font-weight:600}
         .copy-btn:active{transform:scale(0.90);background:var(--gold);color:#0a0e1a}
         .copy-btn.copied{background:rgba(34,211,238,0.15);border-color:var(--green);color:var(--green)}
 
@@ -79,90 +86,247 @@
         .instruction-item .text{font-size:0.75rem;color:var(--text2)}
         .instruction-item .text strong{color:var(--text)}
 
-        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:8px 0 12px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -4px 25px var(--shadow)}
-        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text2);transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);padding:4px 10px;border-radius:10px;position:relative}
-        .bottom-nav .nav-item:active{transform:scale(0.85)}
-        .bottom-nav .nav-item .icon{font-size:1.3rem;display:block;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)}
-        .bottom-nav .nav-item .label{font-size:0.45rem;margin-top:2px;font-weight:600;letter-spacing:0.5px;transition:all 0.3s ease}
-        .bottom-nav .nav-item.active{color:var(--gold)}
-        .bottom-nav .nav-item.active .icon{transform:translateY(-4px) scale(1.1)}
-        .bottom-nav .nav-item.active .label{color:var(--gold)}
-        .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:20px;height:2px;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:10px}
-        .bottom-nav .nav-item:hover .icon{transform:translateY(-2px)}
-
         .footer-text{text-align:center;color:var(--text2);font-size:0.55rem;margin-top:16px;opacity:0.5}
-        .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--bg3);padding:12px 24px;border-radius:14px;border:1px solid var(--border);color:var(--gold);font-weight:600;font-size:0.8rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 4px 30px var(--shadow);animation:fadeUp 0.4s ease}
+
+        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:8px 0 12px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -4px 25px var(--shadow)}
+        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text2);transition:all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);padding:4px 10px;border-radius:10px;position:relative}
+        .bottom-nav .nav-item:active{transform:scale(0.80)}
+        .bottom-nav .nav-item .icon{font-size:1.3rem;display:block;transition:all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)}
+        .bottom-nav .nav-item .label{font-size:0.45rem;margin-top:2px;font-weight:600;letter-spacing:0.5px;transition:all 0.35s ease}
+        .bottom-nav .nav-item.active{color:var(--gold)}
+        .bottom-nav .nav-item.active .icon{transform:translateY(-6px) scale(1.15)}
+        .bottom-nav .nav-item.active .label{color:var(--gold)}
+        .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:28px;height:3px;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:10px}
+
+        .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--bg3);padding:12px 24px;border-radius:14px;border:1px solid var(--border);color:var(--gold);font-weight:600;font-size:0.8rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 4px 30px var(--shadow);animation:toastPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)}
         .toast.show{display:block}
-        @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+        @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+
+        .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(10px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px}
+        .modal-overlay.show{display:flex;animation:fadeIn 0.25s ease}
+        .modal{background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:28px 24px;max-width:400px;width:100%;box-shadow:0 10px 50px var(--shadow);position:relative}
+        .modal h2{font-size:1.3rem;color:var(--gold);margin-bottom:6px;text-align:center}
+        .modal p{color:var(--text2);font-size:0.8rem;text-align:center;margin-bottom:20px}
+        .modal .form-group{margin-bottom:14px}
+        .modal .form-group label{font-size:0.7rem;color:var(--text2);font-weight:500;display:block;margin-bottom:4px}
+        .modal .form-group input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:0.9rem;outline:none;transition:all 0.12s ease}
+        .modal .form-group input:focus{border-color:rgba(245,200,66,0.30)}
+        .modal .btn-primary{width:100%;padding:12px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:12px;font-size:0.9rem;font-weight:700;cursor:pointer;transition:all 0.12s ease}
+        .modal .btn-primary:active{transform:scale(0.96)}
+        .modal .switch-link{color:var(--gold);cursor:pointer;font-weight:600;text-align:center;display:block;margin-top:12px;font-size:0.8rem}
+        .modal .switch-link:active{opacity:0.7}
+        .modal .close-btn{position:absolute;top:12px;right:16px;background:none;border:none;color:var(--text2);font-size:1.2rem;cursor:pointer}
+        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="topbar">
-        <a href="index.html" class="back-btn">← Home</a>
-        <span class="page-title">💳 Payment Info</span>
-        <span class="spacer"></span>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo" id="appName">Premium Game Shop</div>
+        <div class="right">
+            <div class="lang-switcher">
+                <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" data-lang="my" onclick="setLang('my')">MY</button>
+            </div>
+            <a href="profile.html" class="profile-avatar" id="profileAvatar">👤</a>
+        </div>
     </div>
 
+    <!-- Page Header -->
     <div class="page-header">
-        <h1>Payment <span>Accounts</span></h1>
-        <p>Send payment to one of the following accounts</p>
+        <h1 id="paymentTitle">Payment <span>Accounts</span></h1>
+        <p id="paymentSub">Send payment to one of the following accounts</p>
     </div>
 
     <!-- Wave Pay -->
     <div class="glass-card">
-        <span class="label">📱 Mobile Money</span>
+        <span class="label" id="waveLabel">📱 Mobile Money</span>
         <div class="payment-account">
             <div class="icon-box">🏦</div>
             <div class="info">
-                <div class="name">Wave Pay <span class="badge">Recommended</span></div>
+                <div class="name" id="waveName">Wave Pay</div>
                 <div class="number"><i class="fas fa-phone"></i> 09682506493</div>
             </div>
-            <button class="copy-btn" onclick="copyNumber('09682506493', this)">Copy</button>
+            <button class="copy-btn" onclick="copyNumber('09682506493', this)" id="copyBtn1">Copy</button>
         </div>
     </div>
 
     <!-- KBZ Pay -->
     <div class="glass-card">
-        <span class="label">🏦 KBZ Bank</span>
+        <span class="label" id="kpayLabel">🏦 KBZ Bank</span>
         <div class="payment-account">
             <div class="icon-box">🏦</div>
             <div class="info">
-                <div class="name">KBZ Pay (Kpay)</div>
+                <div class="name" id="kpayName">KBZ Pay (Kpay)</div>
                 <div class="number"><i class="fas fa-phone"></i> 09682506493</div>
             </div>
-            <button class="copy-btn" onclick="copyNumber('09682506493', this)">Copy</button>
+            <button class="copy-btn" onclick="copyNumber('09682506493', this)" id="copyBtn2">Copy</button>
         </div>
     </div>
 
     <!-- How to Pay -->
     <div class="glass-card">
-        <span class="label">📋 How to Pay</span>
+        <span class="label" id="howToLabel">📋 How to Pay</span>
         <div class="instruction-list">
-            <div class="instruction-item"><span class="step">1</span><span class="text">Choose <strong>Wave Pay</strong> or <strong>KBZ Pay</strong></span></div>
-            <div class="instruction-item"><span class="step">2</span><span class="text">Copy the <strong>phone number</strong> above</span></div>
-            <div class="instruction-item"><span class="step">3</span><span class="text">Send the exact amount and <strong>take a screenshot</strong></span></div>
-            <div class="instruction-item"><span class="step">4</span><span class="text">Go to <strong>Shop</strong> and complete your order</span></div>
+            <div class="instruction-item"><span class="step">1</span><span class="text" id="step1">Choose <strong>Wave Pay</strong> or <strong>KBZ Pay</strong></span></div>
+            <div class="instruction-item"><span class="step">2</span><span class="text" id="step2">Copy the <strong>phone number</strong> above</span></div>
+            <div class="instruction-item"><span class="step">3</span><span class="text" id="step3">Send the exact amount and <strong>take a screenshot</strong></span></div>
+            <div class="instruction-item"><span class="step">4</span><span class="text" id="step4">Go to <strong>Shop</strong> and complete your order</span></div>
         </div>
     </div>
 
-    <div class="footer-text">&copy; 2026 Prem-Game Shop • Made with ❤️</div>
+    <div class="footer-text">&copy; 2026 Premium Game Shop</div>
 </div>
 
+<!-- Bottom Nav -->
 <div class="bottom-nav">
-    <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label">Home</span></a>
-    <a href="shop.html" class="nav-item"><span class="icon">🛒</span><span class="label">Shop</span></a>
-    <a href="payment.html" class="nav-item active"><span class="icon">💳</span><span class="label">Payment</span></a>
-    <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label">Profile</span></a>
+    <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label" id="navHome">Home</span></a>
+    <a href="shop.html" class="nav-item"><span class="icon">🛒</span><span class="label" id="navShop">Shop</span></a>
+    <a href="payment.html" class="nav-item active"><span class="icon">💳</span><span class="label" id="navPayment">Payment</span></a>
+    <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label" id="navProfile">Profile</span></a>
 </div>
 <div class="toast" id="toast"></div>
 
+<!-- Auth Modal -->
+<div class="modal-overlay" id="authModal">
+    <div class="modal">
+        <button class="close-btn" onclick="closeModal()">✕</button>
+        <h2 id="modalTitle">Login</h2>
+        <p id="modalSub">Welcome back! Login to your account</p>
+        <div>
+            <div class="form-group">
+                <label id="emailLabel">Email</label>
+                <input type="text" id="emailInput" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label id="passLabel">Password</label>
+                <input type="password" id="passInput" placeholder="Enter your password">
+            </div>
+            <button class="btn-primary" id="modalAction" onclick="handleAuth()">Login</button>
+            <span class="switch-link" id="switchLink" onclick="switchAuthMode()">Don't have an account? Register</span>
+        </div>
+    </div>
+</div>
+
 <script>
+    // ===== LANGUAGE DATA =====
+    const LANG_DATA = {
+        en: {
+            appName: 'Premium Game Shop',
+            paymentTitle: 'Payment Accounts',
+            paymentSub: 'Send payment to one of the following accounts',
+            waveLabel: '📱 Mobile Money',
+            waveName: 'Wave Pay',
+            kpayLabel: '🏦 KBZ Bank',
+            kpayName: 'KBZ Pay (Kpay)',
+            howToLabel: '📋 How to Pay',
+            step1: 'Choose <strong>Wave Pay</strong> or <strong>KBZ Pay</strong>',
+            step2: 'Copy the <strong>phone number</strong> above',
+            step3: 'Send the exact amount and <strong>take a screenshot</strong>',
+            step4: 'Go to <strong>Shop</strong> and complete your order',
+            copy: 'Copy',
+            copied: '✅ Copied!',
+            home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
+            modalLogin: 'Login',
+            modalRegister: 'Register',
+            modalLoginSub: 'Welcome back! Login to your account',
+            modalRegisterSub: 'Create your account to get started',
+            email: 'Email',
+            password: 'Password',
+            username: 'Username',
+            switchLogin: "Don't have an account? Register",
+            switchRegister: 'Already have an account? Login',
+            loginSuccess: '✅ Login successful!',
+            registerSuccess: '✅ Account created successfully!',
+            logoutSuccess: '🚪 Logged out successfully!',
+            logoutConfirm: 'Are you sure you want to logout?',
+            enterEmail: 'Please enter your email',
+            enterPassword: 'Please enter your password',
+            enterUsername: 'Please enter your username',
+            noti: '🔔 No new notifications'
+        },
+        my: {
+            appName: 'ပရီမီယံ ဂိမ်းဆိုင်',
+            paymentTitle: 'ငွေပေးချေအကောင့်များ',
+            paymentSub: 'အောက်ပါအကောင့်များထဲမှ တစ်ခုသို့ ငွေလွှဲပါ',
+            waveLabel: '📱 မိုဘိုင်းငွေကြေး',
+            waveName: 'Wave Pay',
+            kpayLabel: '🏦 KBZ ဘဏ်',
+            kpayName: 'KBZ Pay (Kpay)',
+            howToLabel: '📋 ငွေပေးချေနည်း',
+            step1: '<strong>Wave Pay</strong> သို့မဟုတ် <strong>KBZ Pay</strong> ကိုရွေးပါ',
+            step2: 'အပေါ်က <strong>ဖုန်းနံပါတ်</strong> ကိုကူးယူပါ',
+            step3: 'ငွေအတိအကျလွှဲပြီး <strong>စခရင်ရိုက်ပုံ</strong> ရိုက်ပါ',
+            step4: '<strong>ဆိုင်</strong> သို့သွားပြီး အော်ဒါအပြီးသတ်ပါ',
+            copy: 'ကူးယူရန်',
+            copied: '✅ ကူးယူပြီး!',
+            home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
+            modalLogin: 'ဝင်ရန်',
+            modalRegister: 'မှတ်ပုံတင်ရန်',
+            modalLoginSub: 'ပြန်လည်ကြိုဆိုပါတယ်! သင့်အကောင့်သို့ဝင်ရန်',
+            modalRegisterSub: 'စတင်ရန် အကောင့်ဖွင့်ပါ',
+            email: 'အီးမေးလ်',
+            password: 'စကားဝှက်',
+            username: 'အသုံးပြုသူအမည်',
+            switchLogin: 'အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်',
+            switchRegister: 'အကောင့်ရှိပြီးသား? ဝင်ရန်',
+            loginSuccess: '✅ အကောင့်ဝင်ခြင်းအောင်မြင်ပါပြီ!',
+            registerSuccess: '✅ အကောင့်ဖွင့်ခြင်းအောင်မြင်ပါပြီ!',
+            logoutSuccess: '🚪 ထွက်ခြင်းအောင်မြင်ပါပြီ!',
+            logoutConfirm: 'ထွက်မှာသေချာလား?',
+            enterEmail: 'ကျေးဇူးပြု၍ အီးမေးလ်ထည့်ပါ',
+            enterPassword: 'ကျေးဇူးပြု၍ စကားဝှက်ထည့်ပါ',
+            enterUsername: 'ကျေးဇူးပြု၍ အသုံးပြုသူအမည်ထည့်ပါ',
+            noti: '🔔 အသိပေးချက်အသစ်မရှိပါ'
+        }
+    };
+
+    let currentLang = localStorage.getItem('lang') || 'en';
+
+    function getText(key) {
+        return LANG_DATA[currentLang][key] || key;
+    }
+
+    function setLang(lang) {
+        currentLang = lang;
+        localStorage.setItem('lang', lang);
+        updateLanguage();
+        document.querySelectorAll('.lang-btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.lang === lang);
+        });
+    }
+
+    function updateLanguage() {
+        const d = LANG_DATA[currentLang];
+        document.getElementById('appName').textContent = d.appName;
+        document.getElementById('paymentTitle').innerHTML = d.paymentTitle;
+        document.getElementById('paymentSub').textContent = d.paymentSub;
+        document.getElementById('waveLabel').textContent = d.waveLabel;
+        document.getElementById('waveName').textContent = d.waveName;
+        document.getElementById('kpayLabel').textContent = d.kpayLabel;
+        document.getElementById('kpayName').textContent = d.kpayName;
+        document.getElementById('howToLabel').textContent = d.howToLabel;
+        document.getElementById('step1').innerHTML = d.step1;
+        document.getElementById('step2').innerHTML = d.step2;
+        document.getElementById('step3').innerHTML = d.step3;
+        document.getElementById('step4').innerHTML = d.step4;
+        document.getElementById('copyBtn1').textContent = d.copy;
+        document.getElementById('copyBtn2').textContent = d.copy;
+        document.getElementById('navHome').textContent = d.home;
+        document.getElementById('navShop').textContent = d.shop;
+        document.getElementById('navPayment').textContent = d.payment;
+        document.getElementById('navProfile').textContent = d.profile;
+        updateAuthUI();
+    }
+
+    // ===== COPY =====
     function copyNumber(number, btn) {
         navigator.clipboard.writeText(number).then(() => {
-            btn.textContent = '✅ Copied!';
+            btn.textContent = getText('copied');
             btn.classList.add('copied');
-            setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2500);
+            setTimeout(() => { btn.textContent = getText('copy'); btn.classList.remove('copied'); }, 2500);
         }).catch(() => {
             const input = document.createElement('input');
             input.value = number;
@@ -170,22 +334,133 @@
             input.select();
             document.execCommand('copy');
             document.body.removeChild(input);
-            btn.textContent = '✅ Copied!';
+            btn.textContent = getText('copied');
             btn.classList.add('copied');
-            setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2500);
+            setTimeout(() => { btn.textContent = getText('copy'); btn.classList.remove('copied'); }, 2500);
         });
     }
 
+    // ===== TOAST =====
     function showToast(msg) {
-        const toast = document.getElementById('toast');
-        toast.textContent = msg;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 2500);
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        clearTimeout(t._timer);
+        t._timer = setTimeout(() => t.classList.remove('show'), 2500);
     }
 
-    if (localStorage.getItem('theme') === 'light') {
-        document.body.classList.add('light');
+    // ===== AUTH SYSTEM =====
+    let currentUser = null;
+    const savedUser = localStorage.getItem('currentUser');
+    if (savedUser) currentUser = JSON.parse(savedUser);
+
+    function isLoggedIn() { return currentUser !== null; }
+
+    function updateAuthUI() {
+        const avatar = document.getElementById('profileAvatar');
+        if (currentUser) {
+            avatar.classList.add('logged-in');
+            const savedAvatar = localStorage.getItem('userAvatar');
+            if (savedAvatar) avatar.innerHTML = '<img src="' + savedAvatar + '" alt="avatar">';
+            else avatar.textContent = '👤';
+        } else {
+            avatar.classList.remove('logged-in');
+            avatar.textContent = '👤';
+        }
+        const modal = document.getElementById('authModal');
+        if (modal && modal._mode) updateModalUI();
     }
+
+    function loginUser(email, password) {
+        const users = JSON.parse(localStorage.getItem('users') || '{}');
+        if (users[email] && users[email].password === password) {
+            currentUser = { username: email, email: email };
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            updateAuthUI();
+            return true;
+        }
+        return false;
+    }
+
+    function registerUser(username, password) {
+        const users = JSON.parse(localStorage.getItem('users') || '{}');
+        if (users[username]) return false;
+        users[username] = { username: username, password: password };
+        localStorage.setItem('users', JSON.stringify(users));
+        currentUser = { username: username, email: username };
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        updateAuthUI();
+        return true;
+    }
+
+    function openModal(mode) {
+        const modal = document.getElementById('authModal');
+        modal._mode = mode || 'login';
+        modal.classList.add('show');
+        updateModalUI();
+    }
+
+    function closeModal() {
+        document.getElementById('authModal').classList.remove('show');
+    }
+
+    function switchAuthMode() {
+        const modal = document.getElementById('authModal');
+        modal._mode = modal._mode === 'login' ? 'register' : 'login';
+        updateModalUI();
+    }
+
+    function updateModalUI() {
+        const modal = document.getElementById('authModal');
+        const isLogin = modal._mode === 'login';
+        document.getElementById('modalTitle').textContent = getText(isLogin ? 'modalLogin' : 'modalRegister');
+        document.getElementById('modalSub').textContent = getText(isLogin ? 'modalLoginSub' : 'modalRegisterSub');
+        document.getElementById('modalAction').textContent = getText(isLogin ? 'login' : 'register');
+        document.getElementById('switchLink').textContent = getText(isLogin ? 'switchLogin' : 'switchRegister');
+        document.getElementById('emailLabel').textContent = getText(isLogin ? 'email' : 'username');
+        document.getElementById('emailInput').placeholder = isLogin ? 'Enter your email' : 'Enter your username';
+        document.getElementById('passLabel').textContent = getText('password');
+    }
+
+    function handleAuth() {
+        const modal = document.getElementById('authModal');
+        const isLogin = modal._mode === 'login';
+        const email = document.getElementById('emailInput').value.trim();
+        const password = document.getElementById('passInput').value.trim();
+
+        if (!email) { showToast(getText('enterEmail')); return; }
+        if (!password) { showToast(getText('enterPassword')); return; }
+
+        if (isLogin) {
+            if (loginUser(email, password)) { closeModal(); showToast(getText('loginSuccess')); } 
+            else { showToast('❌ Invalid email or password'); }
+        } else {
+            if (password.length < 4) { showToast('❌ Password must be at least 4 characters'); return; }
+            if (registerUser(email, password)) { closeModal(); showToast(getText('registerSuccess')); } 
+            else { showToast('❌ Username already exists'); }
+        }
+    }
+
+    document.getElementById('profileAvatar').addEventListener('click', function(e) {
+        if (!isLoggedIn()) { e.preventDefault(); openModal('login'); }
+    });
+
+    document.getElementById('authModal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && document.getElementById('authModal').classList.contains('show')) {
+            handleAuth();
+        }
+    });
+
+    // ===== INIT =====
+    document.addEventListener('DOMContentLoaded', function() {
+        const savedLang = localStorage.getItem('lang') || 'en';
+        setLang(savedLang);
+        updateAuthUI();
+    });
 </script>
 </body>
 </html>
