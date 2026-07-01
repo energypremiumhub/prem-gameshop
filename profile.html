@@ -57,4 +57,170 @@
         .profile-section .avatar-wrap .avatar{width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--orange));display:flex;align-items:center;justify-content:center;font-size:2.8rem;color:#0a0e1a;border:3px solid var(--border);cursor:pointer;transition:all 0.15s ease;overflow:hidden}
         .profile-section .avatar-wrap .avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
         .profile-section .avatar-wrap .avatar:active{transform:scale(0.95)}
-        .profile-section .avatar-wrap .upload-label{position:absolute;bottom:0;right:0;background:var(--gold);color:#0a0e1a;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.7rem;cursor:pointer;border:2px solid var(--bg
+        .profile-section .avatar-wrap .upload-label{position:absolute;bottom:0;right:0;background:var(--gold);color:#0a0e1a;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.7rem;cursor:pointer;border:2px solid var(--bg);transition:all 0.15s ease}
+        .profile-section .avatar-wrap .upload-label:active{transform:scale(0.85)}
+        .profile-section .avatar-wrap .upload-label input{display:none}
+        .profile-section .name{font-size:1.2rem;font-weight:700;color:var(--text)}
+        .profile-section .username{font-size:0.8rem;color:var(--text2);margin-top:2px}
+        .profile-section .status{font-size:0.7rem;color:var(--green);margin-top:4px}
+
+        /* ===== Stats ===== */
+        .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+        .stats-grid .stat{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center}
+        .stats-grid .stat .number{font-size:1.3rem;font-weight:700;color:var(--gold)}
+        .stats-grid .stat .label{font-size:0.55rem;color:var(--text2);margin-top:2px;text-transform:uppercase;letter-spacing:0.5px}
+
+        .glass-card{background:var(--bg3);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 4px 25px var(--shadow)}
+        .glass-card .label{font-size:0.7rem;color:var(--text2);font-weight:600;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
+
+        .menu-item{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:all 0.15s ease}
+        .menu-item:last-child{border-bottom:none}
+        .menu-item:active{transform:scale(0.97);color:var(--gold)}
+        .menu-item .icon{font-size:1.1rem;color:var(--text2);width:28px;text-align:center}
+        .menu-item .text{font-size:0.85rem;color:var(--text);flex:1}
+        .menu-item .arrow{color:var(--text2);font-size:0.7rem}
+        .menu-item .badge{font-size:0.5rem;background:rgba(245,200,66,0.12);color:var(--gold);padding:2px 10px;border-radius:12px;font-weight:600}
+
+        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:8px 0 12px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -4px 25px var(--shadow)}
+        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text2);transition:all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);padding:4px 10px;border-radius:10px;position:relative}
+        .bottom-nav .nav-item:active{transform:scale(0.85)}
+        .bottom-nav .nav-item .icon{font-size:1.3rem;display:block;transition:all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)}
+        .bottom-nav .nav-item .label{font-size:0.45rem;margin-top:2px;font-weight:600;letter-spacing:0.5px;transition:all 0.2s ease}
+        .bottom-nav .nav-item.active{color:var(--gold)}
+        .bottom-nav .nav-item.active .icon{transform:translateY(-4px) scale(1.1)}
+        .bottom-nav .nav-item.active .label{color:var(--gold)}
+        .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:20px;height:2px;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:10px}
+
+        .footer-text{text-align:center;color:var(--text2);font-size:0.55rem;margin-top:16px;opacity:0.5}
+        .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--bg3);padding:12px 24px;border-radius:14px;border:1px solid var(--border);color:var(--gold);font-weight:600;font-size:0.8rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 4px 30px var(--shadow);animation:toastPop 0.3s ease}
+        .toast.show{display:block}
+        @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(20px) scale(0.9)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="topbar">
+        <a href="index.html" class="back-btn">← Home</a>
+        <span class="page-title">👤 Profile</span>
+        <span class="spacer"></span>
+    </div>
+
+    <!-- Profile Section -->
+    <div class="profile-section">
+        <div class="avatar-wrap">
+            <div class="avatar" id="avatarDisplay">⚔️</div>
+            <label class="upload-label" id="uploadLabel">
+                <i class="fas fa-camera"></i>
+                <input type="file" id="avatarInput" accept="image/*">
+            </label>
+        </div>
+        <div class="name" id="displayName">Prem-Game Shop</div>
+        <div class="username" id="displayUsername">@premgame</div>
+        <div class="status">🟢 Online • Premium Member</div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+        <div class="stat"><div class="number" id="diamondCount">0</div><div class="label">💎 My Diamonds</div></div>
+        <div class="stat"><div class="number" id="orderCount">0</div><div class="label">📦 Orders</div></div>
+    </div>
+
+    <!-- Settings -->
+    <div class="glass-card">
+        <span class="label">⚙️ Account</span>
+        <div class="menu-item" onclick="editProfile()"><span class="icon">✏️</span><span class="text">Edit Profile</span><span class="arrow">›</span></div>
+        <div class="menu-item" onclick="showToast('📜 Order history is empty')"><span class="icon">📜</span><span class="text">Order History</span><span class="badge">0</span><span class="arrow">›</span></div>
+        <div class="menu-item" onclick="showToast('🔔 No notifications')"><span class="icon">🔔</span><span class="text">Notifications</span><span class="arrow">›</span></div>
+        <div class="menu-item" onclick="logout()" style="border-bottom:none;"><span class="icon">🚪</span><span class="text" style="color:#ef4444;">Logout</span><span class="arrow">›</span></div>
+    </div>
+
+    <div class="glass-card">
+        <span class="label">ℹ️ About</span>
+        <div class="menu-item"><span class="icon">📱</span><span class="text">App Version 1.0.0</span><span class="arrow">›</span></div>
+        <div class="menu-item"><span class="icon">❓</span><span class="text">Help & Support</span><span class="arrow">›</span></div>
+        <div class="menu-item" style="border-bottom:none;"><span class="icon">📄</span><span class="text">Terms & Privacy</span><span class="arrow">›</span></div>
+    </div>
+
+    <div class="footer-text">&copy; 2026 Prem-Game Shop • Made with ❤️</div>
+</div>
+
+<div class="bottom-nav">
+    <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label">Home</span></a>
+    <a href="shop.html" class="nav-item"><span class="icon">🛒</span><span class="label">Shop</span></a>
+    <a href="payment.html" class="nav-item"><span class="icon">💳</span><span class="label">Payment</span></a>
+    <a href="profile.html" class="nav-item active"><span class="icon">👤</span><span class="label">Profile</span></a>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+    // ===== Avatar Upload =====
+    document.getElementById('avatarInput').addEventListener('change', function(e) {
+        if (this.files && this.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const avatar = document.getElementById('avatarDisplay');
+                avatar.innerHTML = '<img src="' + ev.target.result + '" alt="avatar">';
+                localStorage.setItem('avatar', ev.target.result);
+                showToast('✅ Avatar updated!');
+            };
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+
+    // Load saved avatar
+    const savedAvatar = localStorage.getItem('avatar');
+    if (savedAvatar) {
+        document.getElementById('avatarDisplay').innerHTML = '<img src="' + savedAvatar + '" alt="avatar">';
+    }
+
+    // ===== Edit Profile =====
+    function editProfile() {
+        const newName = prompt('Enter your name:', document.getElementById('displayName').textContent);
+        if (newName !== null && newName.trim() !== '') {
+            document.getElementById('displayName').textContent = newName.trim();
+            localStorage.setItem('profileName', newName.trim());
+            showToast('✅ Name updated!');
+        }
+        const newUsername = prompt('Enter your username:', document.getElementById('displayUsername').textContent);
+        if (newUsername !== null && newUsername.trim() !== '') {
+            document.getElementById('displayUsername').textContent = newUsername.trim();
+            localStorage.setItem('profileUsername', newUsername.trim());
+            showToast('✅ Username updated!');
+        }
+    }
+
+    // Load saved name/username
+    const savedName = localStorage.getItem('profileName');
+    if (savedName) document.getElementById('displayName').textContent = savedName;
+    const savedUsername = localStorage.getItem('profileUsername');
+    if (savedUsername) document.getElementById('displayUsername').textContent = savedUsername;
+
+    // ===== Logout =====
+    function logout() {
+        if (confirm('Are you sure you want to logout?')) {
+            localStorage.clear();
+            document.getElementById('displayName').textContent = 'Prem-Game Shop';
+            document.getElementById('displayUsername').textContent = '@premgame';
+            document.getElementById('avatarDisplay').innerHTML = '⚔️';
+            document.getElementById('diamondCount').textContent = '0';
+            document.getElementById('orderCount').textContent = '0';
+            showToast('🚪 Logged out successfully!');
+        }
+    }
+
+    // ===== Toast =====
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        clearTimeout(t._timer);
+        t._timer = setTimeout(() => t.classList.remove('show'), 2500);
+    }
+
+    // ===== Theme =====
+    if (localStorage.getItem('theme') === 'light') {
+        document.body.classList.add('light');
+    }
+</script>
+</body>
+</html>
