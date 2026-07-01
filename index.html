@@ -39,7 +39,7 @@
             color: var(--text);
             min-height: 100vh;
             padding-bottom: 80px;
-            transition: all 0.3s ease;
+            transition: background 0.15s ease, color 0.15s ease;
         }
 
         .container{max-width:480px;margin:0 auto;padding:20px 16px}
@@ -48,7 +48,7 @@
         .header .logo{font-size:1.3rem;font-weight:800;color:var(--gold);display:flex;align-items:center;gap:8px}
         .header .logo span{font-size:1.6rem}
         .header .icons{display:flex;gap:10px;align-items:center}
-        .header .icons .icon-btn{background:var(--bg3);padding:8px;border-radius:12px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid var(--border);color:var(--text2);transition:all 0.3s ease;font-size:1.1rem}
+        .header .icons .icon-btn{background:var(--bg3);padding:8px;border-radius:12px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid var(--border);color:var(--text2);transition:all 0.15s ease;font-size:1.1rem;text-decoration:none}
         .header .icons .icon-btn:active{transform:scale(0.90)}
         .header .icons .icon-btn.theme-btn{font-size:1rem;width:44px;height:44px}
 
@@ -60,7 +60,7 @@
 
         .glass-card{background:var(--bg3);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:18px;box-shadow:0 4px 25px var(--shadow)}
         .quick-menu{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-        .quick-menu .item{text-align:center;padding:12px 4px;border-radius:12px;cursor:pointer;transition:all 0.3s ease;background:var(--bg);border:1px solid transparent}
+        .quick-menu .item{text-align:center;padding:12px 4px;border-radius:12px;cursor:pointer;transition:all 0.15s ease;background:var(--bg);border:1px solid transparent}
         .quick-menu .item:active{transform:scale(0.92);border-color:var(--gold);background:rgba(245,200,66,0.06)}
         .quick-menu .item .icon{font-size:1.8rem;display:block;margin-bottom:4px}
         .quick-menu .item .label{font-size:0.55rem;color:var(--text2);font-weight:600}
@@ -69,34 +69,31 @@
         .banner::before{content:'⚔️';position:absolute;right:-20px;top:-20px;font-size:80px;opacity:0.05}
         .banner h3{font-size:1.2rem;color:var(--gold);font-weight:700}
         .banner p{color:var(--text2);font-size:0.8rem;margin-top:4px}
-        .banner .btn-shop{display:inline-block;margin-top:12px;padding:10px 32px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:25px;font-weight:700;font-size:0.85rem;cursor:pointer;text-decoration:none;transition:all 0.3s ease}
+        .banner .btn-shop{display:inline-block;margin-top:12px;padding:10px 32px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:25px;font-weight:700;font-size:0.85rem;cursor:pointer;text-decoration:none;transition:all 0.15s ease}
         .banner .btn-shop:active{transform:scale(0.94)}
 
         .section-title{font-size:0.8rem;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;display:flex;align-items:center;gap:10px}
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
         .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-        .services-grid .service{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px 8px;text-align:center;cursor:pointer;transition:all 0.3s ease}
+        .services-grid .service{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px 8px;text-align:center;cursor:pointer;transition:all 0.15s ease}
         .services-grid .service:active{transform:scale(0.92);border-color:var(--gold)}
         .services-grid .service .icon{font-size:1.6rem;display:block;margin-bottom:4px}
         .services-grid .service .label{font-size:0.6rem;color:var(--text2);font-weight:500}
 
-        /* ===== Bottom Nav with Animation ===== */
         .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:8px 0 12px;max-width:480px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -4px 25px var(--shadow)}
-        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text2);transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);padding:4px 10px;border-radius:10px;position:relative}
+        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text2);transition:all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);padding:4px 10px;border-radius:10px;position:relative}
         .bottom-nav .nav-item:active{transform:scale(0.85)}
-        .bottom-nav .nav-item .icon{font-size:1.3rem;display:block;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)}
-        .bottom-nav .nav-item .label{font-size:0.45rem;margin-top:2px;font-weight:600;letter-spacing:0.5px;transition:all 0.3s ease}
+        .bottom-nav .nav-item .icon{font-size:1.3rem;display:block;transition:all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)}
+        .bottom-nav .nav-item .label{font-size:0.45rem;margin-top:2px;font-weight:600;letter-spacing:0.5px;transition:all 0.2s ease}
         .bottom-nav .nav-item.active{color:var(--gold)}
         .bottom-nav .nav-item.active .icon{transform:translateY(-4px) scale(1.1)}
         .bottom-nav .nav-item.active .label{color:var(--gold)}
         .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:20px;height:2px;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:10px}
-        .bottom-nav .nav-item:hover .icon{transform:translateY(-2px)}
         .footer-text{text-align:center;color:var(--text2);font-size:0.55rem;margin-top:16px;opacity:0.5}
 
-        /* ===== Toast ===== */
-        .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--bg3);padding:12px 24px;border-radius:14px;border:1px solid var(--border);color:var(--gold);font-weight:600;font-size:0.8rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 4px 30px var(--shadow);animation:fadeUp 0.4s ease}
+        .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--bg3);padding:12px 24px;border-radius:14px;border:1px solid var(--border);color:var(--gold);font-weight:600;font-size:0.8rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 4px 30px var(--shadow);animation:toastPop 0.3s ease}
         .toast.show{display:block}
-        @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+        @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(20px) scale(0.9)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
     </style>
 </head>
 <body>
@@ -106,7 +103,7 @@
         <div class="icons">
             <div class="icon-btn theme-btn" onclick="toggleTheme()">🌙</div>
             <div class="icon-btn" onclick="showToast('🔔 No new notifications')">🔔</div>
-            <a href="profile.html" class="icon-btn" style="text-decoration:none;">👤</a>
+            <a href="profile.html" class="icon-btn">👤</a>
         </div>
     </div>
     <div class="welcome">
@@ -148,21 +145,20 @@
 
 <script>
     function toggleTheme() {
-        document.body.classList.toggle('light');
-        const btn = document.querySelector('.theme-btn');
-        btn.textContent = document.body.classList.contains('light') ? '🌙' : '☀️';
-        localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+        const isLight = document.body.classList.toggle('light');
+        document.querySelector('.theme-btn').textContent = isLight ? '🌙' : '☀️';
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
     }
     if (localStorage.getItem('theme') === 'light') {
         document.body.classList.add('light');
         document.querySelector('.theme-btn').textContent = '🌙';
     }
-
     function showToast(msg) {
-        const toast = document.getElementById('toast');
-        toast.textContent = msg;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 2500);
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        clearTimeout(t._timer);
+        t._timer = setTimeout(() => t.classList.remove('show'), 2500);
     }
 </script>
 </body>
