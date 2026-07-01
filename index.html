@@ -1,758 +1,607 @@
 <!DOCTYPE html>
-<html lang="my">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Game Shop</title>
+    <title>⚡ Premium Game Shop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        /* ====== Global Reset ====== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
+        
+        :root {
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #111927;
+            --bg-card: #141c2b;
+            --bg-input: #1a2438;
+            --text-primary: #ffffff;
+            --text-secondary: #8899bb;
+            --border-color: rgba(255,255,255,0.06);
+            --shadow: rgba(0,0,0,0.5);
+            --gold: #f5c842;
+            --gold-glow: rgba(245,200,66,0.3);
+            --cyan: #00d4ff;
+            --cyan-glow: rgba(0,212,255,0.2);
+            --pink: #ff6b9d;
+            --orange: #f97316;
+            --orange-glow: rgba(249,115,22,0.2);
+            --green: #22d3ee;
+            --green-glow: rgba(34,211,238,0.2);
+            --red: #ef4444;
         }
+
         body {
-            font-family: 'Myanmar Text', 'Pyidaungsu', sans-serif;
-            background: #0f0f1a;
-            color: #fff;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             min-height: 100vh;
+            padding-bottom: 80px;
+            background-image: 
+                radial-gradient(ellipse at 20% 50%, rgba(245,200,66,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(0,212,255,0.04) 0%, transparent 50%);
         }
 
-        /* ====== Navbar ====== */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            padding: 15px 30px;
-            border-bottom: 2px solid #e94560;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .navbar .logo {
-            font-size: 26px;
-            font-weight: bold;
-            color: #e94560;
-            text-shadow: 0 0 10px rgba(233, 69, 96, 0.3);
-        }
-        .navbar .logo span {
-            color: #f5c842;
-        }
-        .navbar-right {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
+        ::-webkit-scrollbar{width:4px}
+        ::-webkit-scrollbar-track{background:var(--bg-primary)}
+        ::-webkit-scrollbar-thumb{background:var(--gold);border-radius:10px}
 
-        /* ====== Language Switcher (ညာဘက်အပေါ်) ====== */
-        .language-switcher {
-            display: flex;
-            gap: 5px;
-            background: #0f0f1a;
-            padding: 4px;
-            border-radius: 8px;
-            border: 1px solid #333;
-        }
-        .lang-btn {
-            background: transparent;
-            color: #aaa;
-            border: none;
-            padding: 5px 14px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-        .lang-btn.active {
-            background: #e94560;
-            color: #fff;
-        }
-        .lang-btn:hover:not(.active) {
-            color: #fff;
-        }
+        .container{max-width:480px;margin:0 auto;padding:16px 16px 0}
+        
+        .header{display:flex;justify-content:space-between;align-items:center;padding:6px 0 14px;flex-wrap:wrap;gap:6px}
+        .header .logo{font-size:1rem;font-weight:800;color:var(--gold);text-shadow:0 0 20px var(--gold-glow);letter-spacing:0.5px}
+        .header .logo i{color:var(--cyan);margin-right:6px;text-shadow:0 0 20px var(--cyan-glow)}
+        .header .right{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
 
-        /* ====== Auth Buttons ====== */
-        .btn-login,
-        .btn-register {
-            padding: 8px 22px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 14px;
-            transition: 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .btn-login {
-            background: transparent;
-            color: #fff;
-            border: 1px solid #e94560;
-        }
-        .btn-login:hover {
-            background: #e94560;
-        }
-        .btn-register {
-            background: #e94560;
-            color: #fff;
-        }
-        .btn-register:hover {
-            background: #c73652;
-            transform: scale(1.03);
-        }
+        .lang-switcher{display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:8px;border:1px solid var(--border-color)}
+        .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 8px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;text-transform:uppercase}
+        .lang-switcher .lang-btn.active{background:var(--gold);color:#0a0e1a;box-shadow:0 0 20px var(--gold-glow)}
+        .lang-switcher .lang-btn:active{transform:scale(0.85)}
 
-        /* ====== Profile Dropdown ====== */
-        .profile-dropdown {
-            display: none;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            position: relative;
-        }
-        .profile-dropdown.show {
-            display: flex;
-        }
-        .profile-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 2px solid #e94560;
-            object-fit: cover;
-        }
-        .profile-avatar.small {
-            width: 35px;
-            height: 35px;
-        }
-        .username-display {
-            font-size: 14px;
-            font-weight: 500;
-            color: #fff;
-        }
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 48px;
-            right: 0;
-            background: #1a1a2e;
-            border: 1px solid #333;
-            border-radius: 10px;
-            padding: 8px 0;
-            min-width: 150px;
-            z-index: 999;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-        }
-        .dropdown-menu a {
-            display: block;
-            padding: 10px 20px;
-            color: #ddd;
-            text-decoration: none;
-            font-size: 14px;
-            transition: 0.2s;
-        }
-        .dropdown-menu a:hover {
-            background: #e94560;
-            color: #fff;
-        }
-        .profile-dropdown:hover .dropdown-menu {
-            display: block;
-        }
+        .auth-btn{background:transparent;border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 12px;border-radius:8px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
+        .auth-btn:active{transform:scale(0.90)}
+        .auth-btn:hover{border-color:var(--gold);color:var(--gold)}
+        .auth-btn.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 25px var(--gold-glow);padding:4px 14px}
+        .auth-btn.logged-in:active{transform:scale(0.90)}
+        .auth-btn.logged-in i{color:#0a0e1a}
+        .auth-btn.logged-in img{width:20px;height:20px;border-radius:50%;object-fit:cover;margin-right:4px}
 
-        /* ====== Hero Section (မူလပုံစံ) ====== */
-        .hero {
-            text-align: center;
-            padding: 80px 20px 60px;
-            background: radial-gradient(ellipse at center, #1a1a2e, #0f0f1a);
-        }
-        .hero h1 {
-            font-size: 48px;
-            background: linear-gradient(135deg, #e94560, #f5c842);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-        }
-        .hero p {
-            font-size: 18px;
-            color: #aaa;
-            margin-top: 15px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .hero .cta-buttons {
-            margin-top: 30px;
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .hero .cta-buttons button {
-            padding: 12px 35px;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .hero .cta-buttons .btn-primary {
-            background: #e94560;
-            color: #fff;
-        }
-        .hero .cta-buttons .btn-primary:hover {
-            background: #c73652;
-            transform: translateY(-2px);
-        }
-        .hero .cta-buttons .btn-secondary {
-            background: transparent;
-            color: #fff;
-            border: 2px solid #e94560;
-        }
-        .hero .cta-buttons .btn-secondary:hover {
-            background: #e94560;
-        }
+        .welcome{margin-bottom:16px;animation:slideUp 0.6s ease}
+        .welcome .greeting{font-size:0.65rem;color:var(--text-secondary);font-weight:600;letter-spacing:1px;text-transform:uppercase}
+        .welcome .greeting i{color:var(--pink);margin-right:4px}
+        .welcome h2{font-size:1.5rem;margin-top:2px;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 40px var(--gold-glow)}
+        .welcome h2 i{color:var(--cyan);-webkit-text-fill-color:initial}
+        .welcome p{color:var(--text-secondary);font-size:0.75rem;margin-top:2px;font-weight:400}
 
-        /* ====== Game List (မူလပုံစံ) ====== */
-        .game-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            padding: 40px 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .game-card {
-            background: #1a1a2e;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            border: 1px solid #222;
-            transition: 0.3s;
-        }
-        .game-card:hover {
-            border-color: #e94560;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.15);
-        }
-        .game-card .game-icon {
-            font-size: 48px;
-            margin-bottom: 10px;
-        }
-        .game-card h3 {
-            font-size: 18px;
-            margin-bottom: 5px;
-        }
-        .game-card p {
-            color: #aaa;
-            font-size: 14px;
-        }
-        .game-card .price {
-            color: #f5c842;
-            font-weight: bold;
-            font-size: 18px;
-            margin-top: 8px;
-        }
+        .banner{background:linear-gradient(135deg,rgba(245,200,66,0.08),rgba(0,212,255,0.06));border-radius:14px;padding:16px;border:1px solid rgba(245,200,66,0.08);margin-bottom:16px;text-align:center;position:relative;overflow:hidden;cursor:pointer;transition:all 0.2s ease;animation:slideUp 0.7s ease}
+        .banner:active{transform:scale(0.96)}
+        .banner::before{content:'';position:absolute;top:-50%;right:-30%;width:150%;height:150%;background:radial-gradient(circle,rgba(245,200,66,0.04) 0%,transparent 70%);animation:shimmer 6s ease-in-out infinite}
+        .banner .banner-icon{font-size:1.6rem;display:block;margin-bottom:4px;position:relative;z-index:1}
+        .banner h4{font-size:0.9rem;color:var(--gold);font-weight:700;position:relative;z-index:1;text-shadow:0 0 30px var(--gold-glow)}
+        .banner p{font-size:0.65rem;color:var(--text-secondary);margin-top:2px;position:relative;z-index:1}
+        .banner .banner-tag{position:absolute;top:6px;right:10px;font-size:0.4rem;background:rgba(255,107,157,0.15);color:var(--pink);padding:2px 10px;border-radius:10px;font-weight:700;z-index:1;border:1px solid rgba(255,107,157,0.1)}
 
-        /* ====== Modal ====== */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-        .modal.show {
-            display: flex;
-        }
-        .modal-content {
-            background: #1a1a2e;
-            padding: 40px 35px;
-            border-radius: 16px;
-            width: 100%;
-            max-width: 400px;
-            border: 1px solid #333;
-            position: relative;
-            animation: modalIn 0.3s ease;
-        }
-        @keyframes modalIn {
-            from {
-                transform: scale(0.9);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-        .modal-content h2 {
-            color: #e94560;
-            margin-bottom: 25px;
-            text-align: center;
-        }
-        .modal-content label {
-            display: block;
-            font-size: 14px;
-            color: #aaa;
-            margin-bottom: 5px;
-        }
-        .modal-content input {
-            width: 100%;
-            padding: 12px 15px;
-            border-radius: 8px;
-            border: 1px solid #333;
-            background: #0f0f1a;
-            color: #fff;
-            margin-bottom: 18px;
-            font-size: 15px;
-        }
-        .modal-content input:focus {
-            outline: none;
-            border-color: #e94560;
-        }
-        .modal-content .submit-btn {
-            width: 100%;
-            padding: 12px;
-            background: #e94560;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .modal-content .submit-btn:hover {
-            background: #c73652;
-        }
-        .modal-close {
-            position: absolute;
-            top: 12px;
-            right: 18px;
-            font-size: 28px;
-            color: #aaa;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .modal-close:hover {
-            color: #fff;
-            transform: rotate(90deg);
-        }
-        .modal .switch-link {
-            text-align: center;
-            margin-top: 15px;
-            color: #aaa;
-            font-size: 14px;
-        }
-        .modal .switch-link a {
-            color: #e94560;
-            cursor: pointer;
-            text-decoration: none;
-        }
-        .modal .switch-link a:hover {
-            text-decoration: underline;
-        }
+        .shop-card{background:linear-gradient(135deg,var(--bg-card),var(--bg-secondary));border:1px solid var(--border-color);border-radius:14px;padding:14px;text-align:center;cursor:pointer;transition:all 0.3s ease;margin-bottom:16px;box-shadow:0 4px 25px var(--shadow);animation:slideUp 0.8s ease;position:relative;overflow:hidden}
+        .shop-card:active{transform:scale(0.96)}
+        .shop-card::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(from 0deg,transparent,rgba(245,200,66,0.03),transparent,rgba(0,212,255,0.03),transparent);animation:spin 8s linear infinite}
+        .shop-card .icon{font-size:1.5rem;display:block;position:relative;z-index:1}
+        .shop-card .label{font-weight:700;color:var(--gold);font-size:0.9rem;position:relative;z-index:1;text-shadow:0 0 20px var(--gold-glow)}
+        .shop-card .sub{font-size:0.6rem;color:var(--text-secondary);position:relative;z-index:1}
 
-        /* ====== Notification ====== */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 14px 28px;
-            border-radius: 10px;
-            color: #fff;
-            font-weight: 500;
-            z-index: 99999;
-            animation: slideIn 0.4s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-            max-width: 350px;
-        }
-        .notification.success {
-            background: #2ecc71;
-        }
-        .notification.error {
-            background: #e74c3c;
-        }
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
+        @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 
-        /* ====== Footer ====== */
-        .footer {
-            text-align: center;
-            padding: 30px;
-            color: #555;
-            font-size: 14px;
-            border-top: 1px solid #222;
-            margin-top: 40px;
-        }
+        .section-title{font-size:0.7rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+        .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
+        .section-title i{color:var(--cyan);text-shadow:0 0 20px var(--cyan-glow)}
 
-        /* ====== Responsive ====== */
-        @media (max-width: 600px) {
-            .navbar {
-                flex-direction: column;
-                align-items: stretch;
-                padding: 15px;
-            }
-            .navbar-right {
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-            .hero h1 {
-                font-size: 30px;
-            }
-            .game-list {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-                padding: 20px 15px;
-            }
-            .modal-content {
-                margin: 20px;
-                padding: 30px 20px;
-            }
-        }
+        .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;animation:slideUp 0.9s ease}
+        .services-grid .service{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:12px 6px;text-align:center;cursor:pointer;transition:all 0.3s ease;position:relative;overflow:hidden}
+        .services-grid .service:active{transform:scale(0.90)}
+        .services-grid .service:hover{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
+        .services-grid .service .icon{font-size:1.5rem;display:block;margin-bottom:3px}
+        .services-grid .service .label{font-size:0.55rem;color:var(--text-secondary);font-weight:600}
+
+        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);border-top:1px solid var(--border-color);display:flex;justify-content:space-around;padding:6px 0 10px;max-width:480px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px var(--shadow)}
+        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);padding:4px 8px;border-radius:10px;position:relative}
+        .bottom-nav .nav-item:active{transform:scale(0.75)}
+        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
+        .bottom-nav .nav-item .label{font-size:0.4rem;margin-top:1px;font-weight:700;letter-spacing:0.5px;transition:all 0.4s ease}
+        .bottom-nav .nav-item.active{color:var(--gold)}
+        .bottom-nav .nav-item.active .icon{transform:translateY(-6px) scale(1.15);text-shadow:0 0 30px var(--gold-glow)}
+        .bottom-nav .nav-item.active .label{color:var(--gold)}
+        .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:24px;height:2.5px;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:10px;box-shadow:0 0 20px var(--gold-glow)}
+
+        .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.3;letter-spacing:1px}
+
+        .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-card);padding:10px 20px;border-radius:12px;border:1px solid rgba(245,200,66,0.15);color:var(--gold);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 8px 40px var(--shadow);animation:toastPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
+        .toast.show{display:block}
+        @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
+        @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes shimmer{0%,100%{transform:translate(0,0)}50%{transform:translate(-20%,-20%)}}
+        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+        .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(12px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px}
+        .modal-overlay.show{display:flex;animation:fadeIn 0.3s ease}
+        .modal{background:linear-gradient(145deg,var(--bg-card),var(--bg-secondary));border:1px solid var(--border-color);border-radius:18px;padding:24px 20px;max-width:380px;width:100%;box-shadow:0 20px 60px var(--shadow);position:relative;overflow:hidden;max-height:90vh;overflow-y:auto}
+        .modal::before{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(245,200,66,0.04) 0%,transparent 70%);animation:shimmer 8s ease-in-out infinite}
+        .modal h2{font-size:1.2rem;color:var(--gold);margin-bottom:4px;text-align:center;position:relative;z-index:1;text-shadow:0 0 30px var(--gold-glow)}
+        .modal p{color:var(--text-secondary);font-size:0.75rem;text-align:center;margin-bottom:16px;position:relative;z-index:1}
+        .modal .form-group{margin-bottom:12px;position:relative;z-index:1}
+        .modal .form-group label{font-size:0.6rem;color:var(--text-secondary);font-weight:600;display:block;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px}
+        .modal .form-group label .required{color:var(--red);margin-left:2px}
+        .modal .form-group input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border-color);background:var(--bg-input);color:var(--text-primary);font-size:0.85rem;outline:none;transition:all 0.3s ease}
+        .modal .form-group input:focus{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
+        .modal .form-group input::placeholder{color:var(--text-secondary);font-size:0.7rem}
+        .modal .form-group input.error{border-color:var(--red);box-shadow:0 0 20px rgba(239,68,68,0.2)}
+        .modal .form-group .error-text{font-size:0.55rem;color:var(--red);margin-top:3px;display:none}
+        .modal .form-group .error-text.show{display:block}
+        .modal .btn-primary{width:100%;padding:11px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:10px;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;position:relative;z-index:1}
+        .modal .btn-primary:active{transform:scale(0.96)}
+        .modal .btn-primary:hover{box-shadow:0 0 40px var(--gold-glow)}
+        .modal .switch-link{color:var(--cyan);cursor:pointer;font-weight:600;text-align:center;display:block;margin-top:10px;font-size:0.7rem;position:relative;z-index:1}
+        .modal .switch-link:active{opacity:0.7}
+        .modal .close-btn{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--text-secondary);font-size:1.1rem;cursor:pointer;z-index:2}
+
+        .avatar-upload{display:flex;flex-direction:column;align-items:center;margin-bottom:12px;position:relative;z-index:1}
+        .avatar-upload .preview{width:70px;height:70px;border-radius:50%;background:var(--bg-input);border:2px solid var(--border-color);display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--text-secondary);cursor:pointer;transition:all 0.3s ease;overflow:hidden;position:relative}
+        .avatar-upload .preview:hover{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
+        .avatar-upload .preview img{width:100%;height:100%;object-fit:cover}
+        .avatar-upload .preview input{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}
+        .avatar-upload .preview .upload-hint{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.7);padding:2px;font-size:0.4rem;color:var(--text-secondary);text-align:center;display:none}
+        .avatar-upload .preview:hover .upload-hint{display:block}
+        .avatar-upload .label{font-size:0.55rem;color:var(--text-secondary);margin-top:4px}
     </style>
 </head>
 <body>
-
-    <!-- ====== NAVBAR ====== -->
-    <nav class="navbar">
-        <div class="logo">🎮 Premium <span>Game Shop</span></div>
-        <div class="navbar-right">
-            <!-- Language Switcher (ညာဘက်အပေါ်) -->
-            <div class="language-switcher">
-                <button class="lang-btn" data-lang="en" onclick="switchLanguage('en')">EN</button>
-                <button class="lang-btn active" data-lang="my" onclick="switchLanguage('my')">မြန်မာ</button>
+<div class="container">
+    <div class="header">
+        <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Game Shop</div>
+        <div class="right">
+            <div class="lang-switcher">
+                <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" data-lang="my" onclick="setLang('my')">MY</button>
             </div>
+            <div class="auth-btn" id="authBtn" onclick="handleAuthClick()">🔑 Login</div>
+        </div>
+    </div>
 
-            <!-- Auth Section -->
-            <div id="authSection">
-                <button class="btn-login" id="loginBtn" onclick="showLogin()">ဝင်ရန်</button>
-                <button class="btn-register" id="registerBtn" onclick="showRegister()">စာရင်းသွင်းရန်</button>
-                <div class="profile-dropdown" id="profileDropdown">
-                    <img src="default-avatar.png" alt="Profile" class="profile-avatar small" id="profileAvatar">
-                    <span class="username-display" id="usernameDisplay">အသုံးပြုသူ</span>
-                    <div class="dropdown-menu">
-                        <a href="#" onclick="viewProfile()">ပရိုဖိုင်</a>
-                        <a href="#" onclick="logoutUser()">ထွက်ရန်</a>
-                    </div>
+    <div class="welcome">
+        <div class="greeting"><i class="fas fa-fire"></i> <span id="greeting">Hey, Gamer!</span></div>
+        <h2 id="title"><i class="fas fa-arrow-right"></i> Level Up Your <span>Game!</span></h2>
+        <p id="subtitle">Top up diamonds and dominate the battlefield</p>
+    </div>
+
+    <div class="banner" onclick="showToast(getText('bannerTitle'))">
+        <span class="banner-tag" id="bannerTag">🔥 HOT</span>
+        <span class="banner-icon">⚡</span>
+        <h4 id="bannerTitle">20% Bonus Diamonds!</h4>
+        <p id="bannerDesc">Limited time offer • Shop now</p>
+    </div>
+
+    <a href="shop.html" style="text-decoration:none;">
+        <div class="shop-card">
+            <span class="icon">🛒</span>
+            <div class="label" id="goToShop">Enter Shop →</div>
+            <div class="sub" id="shopSubText">Browse all packages</div>
+        </div>
+    </a>
+
+    <div class="section-title" id="servicesTitle"><i class="fas fa-bolt"></i> Premium Services</div>
+    <div class="services-grid">
+        <div class="service"><span class="icon">⚡</span><span class="label" id="s1">Instant</span></div>
+        <div class="service"><span class="icon">🛡️</span><span class="label" id="s2">Secure</span></div>
+        <div class="service"><span class="icon">💎</span><span class="label" id="s3">Best Price</span></div>
+        <div class="service"><span class="icon">🕒</span><span class="label" id="s4">24/7</span></div>
+        <div class="service"><span class="icon">📱</span><span class="label" id="s5">Mobile</span></div>
+        <div class="service"><span class="icon">⭐</span><span class="label" id="s6">Top Rated</span></div>
+    </div>
+
+    <div class="footer-text">&copy; 2026 Premium Game Shop</div>
+</div>
+
+<div class="bottom-nav">
+    <a href="index.html" class="nav-item active"><span class="icon">🏠</span><span class="label" id="navHome">Home</span></a>
+    <a href="shop.html" class="nav-item"><span class="icon">🛒</span><span class="label" id="navShop">Shop</span></a>
+    <a href="payment.html" class="nav-item"><span class="icon">💳</span><span class="label" id="navPayment">Payment</span></a>
+    <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label" id="navProfile">Profile</span></a>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ===== AUTH MODAL ===== -->
+<div class="modal-overlay" id="authModal">
+    <div class="modal">
+        <button class="close-btn" onclick="closeModal()">✕</button>
+        <h2 id="modalTitle">⚔️ Login</h2>
+        <p id="modalSub">Welcome back, warrior!</p>
+        <div id="modalBody">
+            <div id="loginForm">
+                <div class="form-group">
+                    <label id="emailLabel">📧 Email or Username</label>
+                    <input type="text" id="loginEmail" placeholder="Enter your email or username">
                 </div>
+                <div class="form-group">
+                    <label id="passLabel">🔑 Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password">
+                </div>
+                <button class="btn-primary" id="loginBtn" onclick="handleLogin()">⚡ Login</button>
+                <span class="switch-link" id="switchToRegister" onclick="switchAuthMode()">Don't have an account? Register</span>
             </div>
-        </div>
-    </nav>
 
-    <!-- ====== HERO (မူလပုံစံ) ====== -->
-    <section class="hero">
-        <h1>Premium Game Shop</h1>
-        <p>ဂိမ်းအကောင့်များ၊ ယူစာနိမ်းများနှင့် ပရီမီယံပစ္စည်းများကို အကောင်းဆုံးဈေးနှုန်းဖြင့် ဝယ်ယူပါ။</p>
-        <div class="cta-buttons">
-            <button class="btn-primary" onclick="showLogin()">ဈေးဝယ်မယ်</button>
-            <button class="btn-secondary" onclick="showRegister()">အကောင့်ဖွင့်မယ်</button>
-        </div>
-    </section>
-
-    <!-- ====== GAME LIST (မူလပုံစံ) ====== -->
-    <div class="game-list">
-        <div class="game-card">
-            <div class="game-icon">⚔️</div>
-            <h3>Game Account 1</h3>
-            <p>Level 100 + Rare Items</p>
-            <div class="price">💰 15,000 MMK</div>
-        </div>
-        <div class="game-card">
-            <div class="game-icon">🎯</div>
-            <h3>Game Account 2</h3>
-            <p>ပရီမီယံအကောင့်</p>
-            <div class="price">💰 25,000 MMK</div>
-        </div>
-        <div class="game-card">
-            <div class="game-icon">🏆</div>
-            <h3>Game Account 3</h3>
-            <p>တစ်မျိုးတည်းသော ပစ္စည်းများ</p>
-            <div class="price">💰 40,000 MMK</div>
-        </div>
-        <div class="game-card">
-            <div class="game-icon">🎮</div>
-            <h3>Game Account 4</h3>
-            <p>ဘုရင်အဆင့် အကောင့်</p>
-            <div class="price">💰 60,000 MMK</div>
-        </div>
-    </div>
-
-    <!-- ====== LOGIN MODAL ====== -->
-    <div class="modal" id="loginModal">
-        <div class="modal-content">
-            <span class="modal-close" onclick="closeModal('loginModal')">&times;</span>
-            <h2>🔐 ဝင်ရန်</h2>
-            <label>အသုံးပြုသူအမည်</label>
-            <input type="text" id="loginUsername" placeholder="သင့်အသုံးပြုသူအမည်">
-            <label>စကားဝှက်</label>
-            <input type="password" id="loginPassword" placeholder="စကားဝှက်">
-            <button class="submit-btn" onclick="loginUser()">ဝင်ရန်</button>
-            <div class="switch-link">
-                <span>အကောင့်မရှိသေးဘူးလား</span>
-                <a onclick="switchToRegister()">စာရင်းသွင်းမယ်</a>
+            <div id="registerForm" style="display:none;">
+                <div class="avatar-upload">
+                    <div class="preview" id="avatarPreview">
+                        👤
+                        <input type="file" id="avatarInput" accept="image/*" onchange="handleAvatarUpload(event)">
+                        <span class="upload-hint">Tap to change</span>
+                    </div>
+                    <span class="label">Profile Picture (optional)</span>
+                </div>
+                <div class="form-group">
+                    <label>👤 Username <span class="required">*</span></label>
+                    <input type="text" id="regUsername" placeholder="Choose a username">
+                    <div class="error-text" id="usernameError">Username is required</div>
+                </div>
+                <div class="form-group">
+                    <label>📧 Email <span class="required">*</span></label>
+                    <input type="email" id="regEmail" placeholder="Enter your email">
+                    <div class="error-text" id="emailError">Valid email is required</div>
+                </div>
+                <div class="form-group">
+                    <label>🔑 Password <span class="required">*</span></label>
+                    <input type="password" id="regPassword" placeholder="Min 4 characters">
+                    <div class="error-text" id="passwordError">Password must be at least 4 characters</div>
+                </div>
+                <div class="form-group">
+                    <label>🔐 Confirm Password <span class="required">*</span></label>
+                    <input type="password" id="regConfirmPassword" placeholder="Re-enter password">
+                    <div class="error-text" id="confirmError">Passwords do not match</div>
+                </div>
+                <button class="btn-primary" onclick="handleRegister()">🛡️ Register</button>
+                <span class="switch-link" id="switchToLogin" onclick="switchAuthMode()">Already have an account? Login</span>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- ====== REGISTER MODAL ====== -->
-    <div class="modal" id="registerModal">
-        <div class="modal-content">
-            <span class="modal-close" onclick="closeModal('registerModal')">&times;</span>
-            <h2>📝 စာရင်းသွင်းရန်</h2>
-            <label>အသုံးပြုသူအမည်</label>
-            <input type="text" id="regUsername" placeholder="အသုံးပြုသူအမည်">
-            <label>အီးမေးလ်</label>
-            <input type="email" id="regEmail" placeholder="your@email.com">
-            <label>စကားဝှက်</label>
-            <input type="password" id="regPassword" placeholder="စကားဝှက် (အနည်းဆုံး ၆ လုံး)">
-            <button class="submit-btn" onclick="registerUser()">စာရင်းသွင်းမယ်</button>
-            <div class="switch-link">
-                <span>အကောင့်ရှိပြီးသားလား</span>
-                <a onclick="switchToLogin()">ဝင်မယ်</a>
-            </div>
-        </div>
-    </div>
+<script>
+    // ===== LANGUAGE DATA =====
+    const LANG_DATA = {
+        en: {
+            appName: 'Premium Game Shop',
+            greeting: 'Hey, Gamer!',
+            title: 'Level Up Your <span>Game!</span>',
+            subtitle: 'Top up diamonds and dominate the battlefield',
+            bannerTag: '🔥 HOT',
+            bannerTitle: '20% Bonus Diamonds!',
+            bannerDesc: 'Limited time offer • Shop now',
+            goToShop: 'Enter Shop →',
+            shopSubText: 'Browse all packages',
+            servicesTitle: 'Premium Services',
+            s1: 'Instant', s2: 'Secure', s3: 'Best Price',
+            s4: '24/7', s5: 'Mobile', s6: 'Top Rated',
+            home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
+            noti: '🔔 No new notifications',
+            modalLogin: '⚔️ Login',
+            modalRegister: '🛡️ Register',
+            modalLoginSub: 'Welcome back, warrior!',
+            modalRegisterSub: 'Create your account, champion!',
+            email: '📧 Email or Username',
+            password: '🔑 Password',
+            login: 'Login',
+            register: 'Register',
+            loginSuccess: '✅ Welcome back, Champion!',
+            registerSuccess: '✅ Account created! Welcome!',
+            logoutSuccess: '🚪 Logged out successfully!',
+            logoutConfirm: 'Are you sure you want to logout?',
+            enterEmail: 'Please enter your email or username',
+            enterPassword: 'Please enter your password',
+            enterUsername: 'Please enter your username',
+            enterValidEmail: 'Please enter a valid email',
+            passwordMin: 'Password must be at least 4 characters',
+            passwordMatch: 'Passwords do not match',
+            userExists: '❌ Username or email already exists'
+        },
+        my: {
+            appName: 'ပရီမီယံ ဂိမ်းဆိုင်',
+            greeting: 'ဟေ့ကောင်လေး!',
+            title: 'ဂိမ်းကို <span>မြှင့်တင်လိုက်ပါ!</span>',
+            subtitle: 'စိန်တွေဖြည့်ပြီး စစ်မြေပြင်ကို အနိုင်ယူလိုက်ပါ',
+            bannerTag: '🔥 ပူပူ',
+            bannerTitle: 'စိန် ၂၀% အပိုရယူလိုက်ပါ!',
+            bannerDesc: 'အချိန်အကန့်အသတ်နဲ့ • အခုပဲဝယ်ယူပါ',
+            goToShop: 'ဆိုင်သို့သွားရန် →',
+            shopSubText: 'ပက်ကေ့ခ်ျအားလုံးကိုကြည့်ပါ',
+            servicesTitle: 'ထိပ်တန်းဝန်ဆောင်မှုများ',
+            s1: 'ချက်ချင်း', s2: 'လုံခြုံ', s3: 'ဈေးအကောင်းဆုံး',
+            s4: '၂၄/၇', s5: 'မိုဘိုင်း', s6: 'ထိပ်တန်း',
+            home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
+            noti: '🔔 အသိပေးချက်အသစ်မရှိပါ',
+            modalLogin: '⚔️ ဝင်ရန်',
+            modalRegister: '🛡️ မှတ်ပုံတင်ရန်',
+            modalLoginSub: 'ပြန်လည်ကြိုဆိုပါတယ် စစ်သည်တော်!',
+            modalRegisterSub: 'အကောင့်ဖွင့်ပါ ချန်ပီယံ!',
+            email: '📧 အီးမေးလ် သို့မဟုတ် အသုံးပြုသူအမည်',
+            password: '🔑 စကားဝှက်',
+            login: 'ဝင်ရန်',
+            register: 'မှတ်ပုံတင်ရန်',
+            loginSuccess: '✅ ကြိုဆိုပါတယ် ချန်ပီယံ!',
+            registerSuccess: '✅ အကောင့်ဖွင့်ခြင်းအောင်မြင်ပါပြီ!',
+            logoutSuccess: '🚪 ထွက်ခြင်းအောင်မြင်ပါပြီ!',
+            logoutConfirm: 'ထွက်မှာသေချာလား?',
+            enterEmail: 'ကျေးဇူးပြု၍ အီးမေးလ် သို့မဟုတ် အသုံးပြုသူအမည်ထည့်ပါ',
+            enterPassword: 'ကျေးဇူးပြု၍ စကားဝှက်ထည့်ပါ',
+            enterUsername: 'ကျေးဇူးပြု၍ အသုံးပြုသူအမည်ထည့်ပါ',
+            enterValidEmail: 'ကျေးဇူးပြု၍ မှန်ကန်တဲ့ အီးမေးလ်ထည့်ပါ',
+            passwordMin: 'စကားဝှက်သည် အနည်းဆုံး ၄ လုံးရှိရမယ်',
+            passwordMatch: 'စကားဝှက်များ မတူညီပါ',
+            userExists: '❌ အသုံးပြုသူအမည် သို့မဟုတ် အီးမေးလ် ရှိပြီးသားပါ'
+        }
+    };
 
-    <!-- ====== FOOTER ====== -->
-    <div class="footer">
-        &copy; 2026 Premium Game Shop | All Rights Reserved
-    </div>
+    let currentLang = localStorage.getItem('lang') || 'en';
 
-    <!-- ====== JAVASCRIPT ====== -->
-    <script>
-        // ============================================================
-        //  1. LANGUAGE FUNCTIONS
-        // ============================================================
-        function switchLanguage(lang) {
-            localStorage.setItem('selectedLang', lang);
-            // ဘာသာပြောင်းတာကို ပြရန် (ခလုတ် active ပြောင်းဖို့)
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.lang === lang);
-            });
-            // စာသားတွေကို ပြောင်းမယ် (လိုအပ်ရင် ထပ်ထည့်)
-            if (lang === 'en') {
-                document.querySelector('.hero h1').textContent = 'Premium Game Shop';
-                document.querySelector('.hero p').textContent = 'Buy game accounts, game points and premium items at the best prices.';
-                document.querySelector('.hero .btn-primary').textContent = 'Shop Now';
-                document.querySelector('.hero .btn-secondary').textContent = 'Join Now';
-                document.getElementById('loginBtn').textContent = 'Login';
-                document.getElementById('registerBtn').textContent = 'Register';
-                document.querySelector('#loginModal h2').textContent = '🔐 Login';
-                document.querySelector('#registerModal h2').textContent = '📝 Register';
-                document.querySelector('#loginModal .submit-btn').textContent = 'Login';
-                document.querySelector('#registerModal .submit-btn').textContent = 'Register';
-                document.querySelector('#loginModal .switch-link span').textContent = "Don't have an account?";
-                document.querySelector('#registerModal .switch-link span').textContent = 'Already have an account?';
-                document.querySelector('#loginModal .switch-link a').textContent = 'Register';
-                document.querySelector('#registerModal .switch-link a').textContent = 'Login';
-                document.querySelectorAll('#loginModal label')[0].textContent = 'Username';
-                document.querySelectorAll('#loginModal label')[1].textContent = 'Password';
-                document.querySelectorAll('#registerModal label')[0].textContent = 'Username';
-                document.querySelectorAll('#registerModal label')[1].textContent = 'Email';
-                document.querySelectorAll('#registerModal label')[2].textContent = 'Password';
-                document.querySelector('.profile-dropdown .dropdown-menu a:first-child').textContent = 'Profile';
-                document.querySelector('.profile-dropdown .dropdown-menu a:last-child').textContent = 'Logout';
+    function getText(key) { return LANG_DATA[currentLang][key] || key; }
+
+    function setLang(lang) {
+        currentLang = lang;
+        localStorage.setItem('lang', lang);
+        updateLanguage();
+        document.querySelectorAll('.lang-btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.lang === lang);
+        });
+    }
+
+    function updateLanguage() {
+        const d = LANG_DATA[currentLang];
+        document.getElementById('appName').innerHTML = '<i class="fas fa-gamepad"></i> ' + d.appName;
+        document.getElementById('greeting').textContent = d.greeting;
+        document.getElementById('title').innerHTML = '<i class="fas fa-arrow-right"></i> ' + d.title;
+        document.getElementById('subtitle').textContent = d.subtitle;
+        document.getElementById('bannerTag').textContent = d.bannerTag;
+        document.getElementById('bannerTitle').textContent = d.bannerTitle;
+        document.getElementById('bannerDesc').textContent = d.bannerDesc;
+        document.getElementById('goToShop').textContent = d.goToShop;
+        document.getElementById('shopSubText').textContent = d.shopSubText;
+        document.getElementById('servicesTitle').innerHTML = '<i class="fas fa-bolt"></i> ' + d.servicesTitle;
+        document.getElementById('s1').textContent = d.s1;
+        document.getElementById('s2').textContent = d.s2;
+        document.getElementById('s3').textContent = d.s3;
+        document.getElementById('s4').textContent = d.s4;
+        document.getElementById('s5').textContent = d.s5;
+        document.getElementById('s6').textContent = d.s6;
+        document.getElementById('navHome').textContent = d.home;
+        document.getElementById('navShop').textContent = d.shop;
+        document.getElementById('navPayment').textContent = d.payment;
+        document.getElementById('navProfile').textContent = d.profile;
+        updateAuthUI();
+        updateModalUI();
+    }
+
+    // ===== TOAST =====
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        clearTimeout(t._timer);
+        t._timer = setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    // ===== AUTH SYSTEM =====
+    let currentUser = null;
+    const savedUser = localStorage.getItem('currentUser');
+    if (savedUser) currentUser = JSON.parse(savedUser);
+
+    function isLoggedIn() { return currentUser !== null; }
+
+    function updateAuthUI() {
+        const authBtn = document.getElementById('authBtn');
+        if (currentUser) {
+            const savedAvatar = localStorage.getItem('userAvatar_' + currentUser.username);
+            if (savedAvatar) {
+                authBtn.innerHTML = '<img src="' + savedAvatar + '" alt="avatar"> ' + currentUser.username;
             } else {
-                document.querySelector('.hero h1').textContent = 'Premium Game Shop';
-                document.querySelector('.hero p').textContent = 'ဂိမ်းအကောင့်များ၊ ယူစာနိမ်းများနှင့် ပရီမီယံပစ္စည်းများကို အကောင်းဆုံးဈေးနှုန်းဖြင့် ဝယ်ယူပါ။';
-                document.querySelector('.hero .btn-primary').textContent = 'ဈေးဝယ်မယ်';
-                document.querySelector('.hero .btn-secondary').textContent = 'အကောင့်ဖွင့်မယ်';
-                document.getElementById('loginBtn').textContent = 'ဝင်ရန်';
-                document.getElementById('registerBtn').textContent = 'စာရင်းသွင်းရန်';
-                document.querySelector('#loginModal h2').textContent = '🔐 ဝင်ရန်';
-                document.querySelector('#registerModal h2').textContent = '📝 စာရင်းသွင်းရန်';
-                document.querySelector('#loginModal .submit-btn').textContent = 'ဝင်ရန်';
-                document.querySelector('#registerModal .submit-btn').textContent = 'စာရင်းသွင်းမယ်';
-                document.querySelector('#loginModal .switch-link span').textContent = 'အကောင့်မရှိသေးဘူးလား';
-                document.querySelector('#registerModal .switch-link span').textContent = 'အကောင့်ရှိပြီးသားလား';
-                document.querySelector('#loginModal .switch-link a').textContent = 'စာရင်းသွင်းမယ်';
-                document.querySelector('#registerModal .switch-link a').textContent = 'ဝင်မယ်';
-                document.querySelectorAll('#loginModal label')[0].textContent = 'အသုံးပြုသူအမည်';
-                document.querySelectorAll('#loginModal label')[1].textContent = 'စကားဝှက်';
-                document.querySelectorAll('#registerModal label')[0].textContent = 'အသုံးပြုသူအမည်';
-                document.querySelectorAll('#registerModal label')[1].textContent = 'အီးမေးလ်';
-                document.querySelectorAll('#registerModal label')[2].textContent = 'စကားဝှက်';
-                document.querySelector('.profile-dropdown .dropdown-menu a:first-child').textContent = 'ပရိုဖိုင်';
-                document.querySelector('.profile-dropdown .dropdown-menu a:last-child').textContent = 'ထွက်ရန်';
+                authBtn.innerHTML = '👤 ' + currentUser.username;
             }
+            authBtn.className = 'auth-btn logged-in';
+            authBtn.title = 'Go to Profile';
+        } else {
+            authBtn.innerHTML = '🔑 ' + getText('login');
+            authBtn.className = 'auth-btn';
+            authBtn.title = 'Login';
         }
+        if (window.updateProfileUI) window.updateProfileUI();
+    }
 
-        // ============================================================
-        //  2. AUTH FUNCTIONS
-        // ============================================================
-        function showLogin() {
-            document.getElementById('loginModal').classList.add('show');
+    // ===== AVATAR UPLOAD =====
+    let tempAvatar = null;
+
+    function handleAvatarUpload(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                tempAvatar = e.target.result;
+                document.getElementById('avatarPreview').innerHTML = 
+                    '<img src="' + e.target.result + '" alt="avatar"><input type="file" accept="image/*" onchange="handleAvatarUpload(event)"><span class="upload-hint">Tap to change</span>';
+            };
+            reader.readAsDataURL(file);
         }
+    }
 
-        function showRegister() {
-            document.getElementById('registerModal').classList.add('show');
-        }
-
-        function closeModal(id) {
-            document.getElementById(id).classList.remove('show');
-        }
-
-        function switchToRegister() {
-            closeModal('loginModal');
-            showRegister();
-        }
-
-        function switchToLogin() {
-            closeModal('registerModal');
-            showLogin();
-        }
-
-        function loginUser() {
-            const username = document.getElementById('loginUsername').value.trim();
-            const password = document.getElementById('loginPassword').value.trim();
-
-            if (!username || !password) {
-                showNotification('အသုံးပြုသူအမည်နှင့် စကားဝှက် ထည့်ပါ။', 'error');
-                return;
-            }
-            localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('username', username);
-            if (!localStorage.getItem('gamePoints')) {
-                localStorage.setItem('gamePoints', '1250');
-            }
-            closeModal('loginModal');
-            updateAuthUI();
-            showNotification('အကောင့်ဝင်ခြင်း အောင်မြင်ပါသည်။ ကြိုဆိုပါတယ် ' + username + '!', 'success');
-            document.getElementById('loginUsername').value = '';
-            document.getElementById('loginPassword').value = '';
-        }
-
-        function registerUser() {
-            const username = document.getElementById('regUsername').value.trim();
-            const email = document.getElementById('regEmail').value.trim();
-            const password = document.getElementById('regPassword').value.trim();
-
-            if (!username || !email || !password) {
-                showNotification('အချက်အလက်အားလုံး ဖြည့်ပါ။', 'error');
-                return;
-            }
-            if (password.length < 6) {
-                showNotification('စကားဝှက် အနည်းဆုံး ၆ လုံးထည့်ပါ။', 'error');
-                return;
-            }
-            localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('username', username);
-            localStorage.setItem('gamePoints', '1000');
-            closeModal('registerModal');
-            updateAuthUI();
-            showNotification('စာရင်းသွင်းခြင်း အောင်မြင်ပါသည်။ ကြိုဆိုပါတယ် ' + username + '!', 'success');
-            document.getElementById('regUsername').value = '';
-            document.getElementById('regEmail').value = '';
-            document.getElementById('regPassword').value = '';
-        }
-
-        function logoutUser() {
-            localStorage.removeItem('isLoggedIn');
-            localStorage.removeItem('username');
-            updateAuthUI();
-            showNotification('ထွက်ခြင်း အောင်မြင်ပါသည်။', 'success');
-        }
-
-        function viewProfile() {
-            if (localStorage.getItem('isLoggedIn') !== 'true') {
-                showNotification('ကျေးဇူးပြု၍ အကောင့်ဝင်ပါ။', 'error');
-                return;
-            }
+    // ===== AUTH CLICK =====
+    function handleAuthClick() {
+        if (isLoggedIn()) {
             window.location.href = 'profile.html';
+        } else {
+            openModal('login');
         }
+    }
 
-        // ============================================================
-        //  3. UI UPDATE
-        // ============================================================
-        function updateAuthUI() {
-            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-            const username = localStorage.getItem('username') || 'အသုံးပြုသူ';
+    // ===== AUTH MODAL =====
+    let isLoginMode = true;
 
-            const loginBtn = document.getElementById('loginBtn');
-            const registerBtn = document.getElementById('registerBtn');
-            const profileDropdown = document.getElementById('profileDropdown');
-            const usernameDisplay = document.getElementById('usernameDisplay');
-            const profileAvatar = document.getElementById('profileAvatar');
+    function openModal(mode) {
+        isLoginMode = mode !== 'register';
+        const modal = document.getElementById('authModal');
+        modal.classList.add('show');
+        updateModalUI();
+        document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
+        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
+        if (!isLoginMode) {
+            document.getElementById('avatarPreview').innerHTML = 
+                '👤<input type="file" accept="image/*" onchange="handleAvatarUpload(event)"><span class="upload-hint">Tap to change</span>';
+            tempAvatar = null;
+        }
+    }
 
-            if (isLoggedIn) {
-                loginBtn.style.display = 'none';
-                registerBtn.style.display = 'none';
-                profileDropdown.classList.add('show');
-                usernameDisplay.textContent = username;
-                const savedImage = localStorage.getItem('profileImage');
-                if (savedImage) {
-                    profileAvatar.src = savedImage;
-                } else {
-                    profileAvatar.src = 'default-avatar.png';
+    function closeModal() {
+        document.getElementById('authModal').classList.remove('show');
+    }
+
+    function switchAuthMode() {
+        isLoginMode = !isLoginMode;
+        updateModalUI();
+        document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
+        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
+    }
+
+    function updateModalUI() {
+        const d = LANG_DATA[currentLang];
+        if (isLoginMode) {
+            document.getElementById('modalTitle').textContent = d.modalLogin;
+            document.getElementById('modalSub').textContent = d.modalLoginSub;
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('loginBtn').innerHTML = '⚡ ' + d.login;
+            document.getElementById('emailLabel').textContent = d.email;
+            document.getElementById('passLabel').textContent = d.password;
+            document.getElementById('switchToRegister').textContent = d.switchLogin;
+        } else {
+            document.getElementById('modalTitle').textContent = d.modalRegister;
+            document.getElementById('modalSub').textContent = d.modalRegisterSub;
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'block';
+            document.getElementById('switchToLogin').textContent = d.switchRegister;
+        }
+    }
+
+    // ===== LOGIN =====
+    function handleLogin() {
+        const email = document.getElementById('loginEmail').value.trim();
+        const password = document.getElementById('loginPassword').value.trim();
+
+        if (!email) { showToast(getText('enterEmail')); return; }
+        if (!password) { showToast(getText('enterPassword')); return; }
+
+        const users = JSON.parse(localStorage.getItem('users') || '{}');
+        let foundUser = null;
+        for (const key in users) {
+            if (key === email || users[key].email === email || users[key].username === email) {
+                if (users[key].password === password) {
+                    foundUser = users[key];
+                    break;
                 }
-            } else {
-                loginBtn.style.display = 'inline-block';
-                registerBtn.style.display = 'inline-block';
-                profileDropdown.classList.remove('show');
             }
         }
 
-        // ============================================================
-        //  4. NOTIFICATION
-        // ============================================================
-        function showNotification(msg, type = 'success') {
-            const existing = document.querySelector('.notification');
-            if (existing) existing.remove();
+        if (foundUser) {
+            currentUser = foundUser;
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            closeModal();
+            showToast(getText('loginSuccess'));
+            updateAuthUI();
+        } else {
+            showToast('❌ Invalid email/username or password');
+        }
+    }
 
-            const notif = document.createElement('div');
-            notif.className = 'notification ' + type;
-            notif.textContent = msg;
-            document.body.appendChild(notif);
+    // ===== REGISTER =====
+    function handleRegister() {
+        const username = document.getElementById('regUsername').value.trim();
+        const email = document.getElementById('regEmail').value.trim();
+        const password = document.getElementById('regPassword').value.trim();
+        const confirmPassword = document.getElementById('regConfirmPassword').value.trim();
 
-            setTimeout(() => {
-                if (notif.parentNode) notif.remove();
-            }, 3500);
+        document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
+        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
+
+        let hasError = false;
+
+        if (!username) {
+            document.getElementById('usernameError').classList.add('show');
+            document.getElementById('regUsername').classList.add('error');
+            hasError = true;
         }
 
-        // ============================================================
-        //  5. CLOSE MODAL ON OUTSIDE CLICK
-        // ============================================================
-        document.querySelectorAll('.modal').forEach(modal => {
-            modal.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    this.classList.remove('show');
+        if (!email || !email.includes('@') || !email.includes('.')) {
+            document.getElementById('emailError').classList.add('show');
+            document.getElementById('regEmail').classList.add('error');
+            hasError = true;
+        }
+
+        if (!password || password.length < 4) {
+            document.getElementById('passwordError').classList.add('show');
+            document.getElementById('regPassword').classList.add('error');
+            hasError = true;
+        }
+
+        if (password !== confirmPassword) {
+            document.getElementById('confirmError').classList.add('show');
+            document.getElementById('regConfirmPassword').classList.add('error');
+            hasError = true;
+        }
+
+        if (hasError) return;
+
+        const users = JSON.parse(localStorage.getItem('users') || '{}');
+        for (const key in users) {
+            if (key === username || users[key].email === email || users[key].username === username) {
+                showToast(getText('userExists'));
+                return;
+            }
+        }
+
+        const newUser = {
+            username: username,
+            email: email,
+            password: password,
+            createdAt: new Date().toISOString()
+        };
+        users[username] = newUser;
+        localStorage.setItem('users', JSON.stringify(users));
+
+        if (tempAvatar) {
+            localStorage.setItem('userAvatar_' + username, tempAvatar);
+        }
+
+        currentUser = newUser;
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        closeModal();
+        showToast(getText('registerSuccess'));
+        updateAuthUI();
+    }
+
+    document.getElementById('authModal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            const modal = document.getElementById('authModal');
+            if (modal.classList.contains('show')) {
+                if (isLoginMode) {
+                    handleLogin();
+                } else {
+                    handleRegister();
                 }
-            });
-        });
+            }
+        }
+        if (e.key === 'Escape') closeModal();
+    });
 
-        // ============================================================
-        //  6. ENTER KEY SUPPORT
-        // ============================================================
-        document.getElementById('loginPassword').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') loginUser();
-        });
-        document.getElementById('regPassword').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') registerUser();
-        });
-
-        // ============================================================
-        //  7. INIT ON PAGE LOAD
-        // ============================================================
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedLang = localStorage.getItem('selectedLang') || 'my';
-            switchLanguage(savedLang);
-            updateAuthUI();
-        });
-    </script>
-
+    document.addEventListener('DOMContentLoaded', function() {
+        const savedLang = localStorage.getItem('lang') || 'en';
+        setLang(savedLang);
+        updateAuthUI();
+    });
+</script>
 </body>
 </html>
