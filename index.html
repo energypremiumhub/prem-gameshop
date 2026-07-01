@@ -56,19 +56,13 @@
         .lang-switcher .lang-btn.active{background:var(--gold);color:#0a0e1a;box-shadow:0 0 20px var(--gold-glow)}
         .lang-switcher .lang-btn:active{transform:scale(0.85)}
 
-        .profile-avatar{width:36px;height:36px;border-radius:50%;background:var(--bg-card);border:2px solid var(--border-color);display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--text-secondary);cursor:pointer;transition:all 0.3s ease;overflow:hidden;text-decoration:none;position:relative}
-        .profile-avatar:active{transform:scale(0.85)}
-        .profile-avatar img{width:100%;height:100%;object-fit:cover}
-        .profile-avatar.logged-in{border-color:var(--gold);box-shadow:0 0 25px var(--gold-glow);animation:pulse-glow 2s ease-in-out infinite}
-        .profile-avatar .online-dot{position:absolute;bottom:0;right:0;width:10px;height:10px;background:#22d3ee;border-radius:50%;border:2px solid var(--bg-primary);display:none}
-        .profile-avatar.logged-in .online-dot{display:block;animation:pulse-dot 1.5s ease-in-out infinite}
-
-        @keyframes pulse-glow{0%,100%{box-shadow:0 0 15px var(--gold-glow)}50%{box-shadow:0 0 35px var(--gold-glow)}}
-        @keyframes pulse-dot{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}
-        @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
-        @keyframes shimmer{0%,100%{transform:translate(0,0)}50%{transform:translate(-20%,-20%)}}
-        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+        /* ===== AUTH BUTTON (စာသားနဲ့) ===== */
+        .auth-btn{background:transparent;border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 12px;border-radius:8px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
+        .auth-btn:active{transform:scale(0.90)}
+        .auth-btn:hover{border-color:var(--gold);color:var(--gold)}
+        .auth-btn.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 25px var(--gold-glow);padding:4px 14px}
+        .auth-btn.logged-in:active{transform:scale(0.90)}
+        .auth-btn.logged-in i{color:#0a0e1a}
 
         /* ===== WELCOME ===== */
         .welcome{margin-bottom:16px;animation:slideUp 0.6s ease}
@@ -125,6 +119,10 @@
         /* ===== TOAST ===== */
         .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-card);padding:10px 20px;border-radius:12px;border:1px solid rgba(245,200,66,0.15);color:var(--gold);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 8px 40px var(--shadow);animation:toastPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
         .toast.show{display:block}
+        @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
+        @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes shimmer{0%,100%{transform:translate(0,0)}50%{transform:translate(-20%,-20%)}}
+        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
         /* ===== AUTH MODAL ===== */
         .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(12px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px}
@@ -173,9 +171,8 @@
                 <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
                 <button class="lang-btn" data-lang="my" onclick="setLang('my')">MY</button>
             </div>
-            <div class="profile-avatar" id="profileAvatar" onclick="handleAvatarClick()">
-                👤<span class="online-dot"></span>
-            </div>
+            <!-- Auth Button (စာသားနဲ့) -->
+            <div class="auth-btn" id="authBtn" onclick="handleAuthClick()">🔑 Login</div>
         </div>
     </div>
 
@@ -310,6 +307,8 @@
             modalRegisterSub: 'Create your account, champion!',
             email: '📧 Email or Username',
             password: '🔑 Password',
+            login: 'Login',
+            register: 'Register',
             loginSuccess: '✅ Welcome back, Champion!',
             registerSuccess: '✅ Account created! Welcome!',
             logoutSuccess: '🚪 Logged out successfully!',
@@ -343,6 +342,8 @@
             modalRegisterSub: 'အကောင့်ဖွင့်ပါ ချန်ပီယံ!',
             email: '📧 အီးမေးလ် သို့မဟုတ် အသုံးပြုသူအမည်',
             password: '🔑 စကားဝှက်',
+            login: 'ဝင်ရန်',
+            register: 'မှတ်ပုံတင်ရန်',
             loginSuccess: '✅ ကြိုဆိုပါတယ် ချန်ပီယံ!',
             registerSuccess: '✅ အကောင့်ဖွင့်ခြင်းအောင်မြင်ပါပြီ!',
             logoutSuccess: '🚪 ထွက်ခြင်းအောင်မြင်ပါပြီ!',
@@ -413,20 +414,20 @@
     function isLoggedIn() { return currentUser !== null; }
 
     function updateAuthUI() {
-        const avatar = document.getElementById('profileAvatar');
+        const authBtn = document.getElementById('authBtn');
         if (currentUser) {
-            avatar.classList.add('logged-in');
             const savedAvatar = localStorage.getItem('userAvatar_' + currentUser.username);
             if (savedAvatar) {
-                avatar.innerHTML = '<img src="' + savedAvatar + '" alt="avatar"><span class="online-dot"></span>';
+                authBtn.innerHTML = '<img src="' + savedAvatar + '" style="width:20px;height:20px;border-radius:50%;object-fit:cover;margin-right:4px;"> ' + currentUser.username;
             } else {
-                avatar.innerHTML = '👤<span class="online-dot"></span>';
+                authBtn.innerHTML = '👤 ' + currentUser.username;
             }
-            avatar.title = currentUser.username;
+            authBtn.className = 'auth-btn logged-in';
+            authBtn.title = 'Go to Profile';
         } else {
-            avatar.classList.remove('logged-in');
-            avatar.innerHTML = '👤<span class="online-dot"></span>';
-            avatar.title = 'Login';
+            authBtn.innerHTML = '🔑 ' + getText('login');
+            authBtn.className = 'auth-btn';
+            authBtn.title = 'Login';
         }
         // Update profile page if open
         if (window.updateProfileUI) window.updateProfileUI();
@@ -445,6 +446,15 @@
                     '<img src="' + e.target.result + '" alt="avatar"><input type="file" accept="image/*" onchange="handleAvatarUpload(event)"><span class="upload-hint">Tap to change</span>';
             };
             reader.readAsDataURL(file);
+        }
+    }
+
+    // ===== AUTH CLICK =====
+    function handleAuthClick() {
+        if (isLoggedIn()) {
+            window.location.href = 'profile.html';
+        } else {
+            openModal('login');
         }
     }
 
@@ -508,7 +518,6 @@
         if (!password) { showToast(getText('enterPassword')); return; }
 
         const users = JSON.parse(localStorage.getItem('users') || '{}');
-        // Check by email or username
         let foundUser = null;
         for (const key in users) {
             if (key === email || users[key].email === email || users[key].username === email) {
@@ -599,15 +608,6 @@
         closeModal();
         showToast(getText('registerSuccess'));
         updateAuthUI();
-    }
-
-    // ===== AVATAR CLICK =====
-    function handleAvatarClick() {
-        if (isLoggedIn()) {
-            window.location.href = 'profile.html';
-        } else {
-            openModal('login');
-        }
     }
 
     // ===== CLOSE MODAL =====
