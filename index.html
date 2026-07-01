@@ -14,18 +14,22 @@
             --bg3: #1a2332;
             --text: #ffffff;
             --text2: #94a3b8;
-            --card: rgba(255,255,255,0.04);
             --border: rgba(255,255,255,0.06);
             --shadow: rgba(0,0,0,0.4);
             --gold: #f5c842;
-            --gold2: #dbaa2a;
-            --green: #22d3ee;
-            --blue: #3b82f6;
             --orange: #f97316;
-            --red: #ef4444;
-            --purple: #8b5cf6;
-            --wave: #0066cc;
-            --kpay: #00a651;
+        }
+
+        body.light {
+            --bg: #f0f2f5;
+            --bg2: #ffffff;
+            --bg3: #e8eaed;
+            --text: #1a1a2e;
+            --text2: #555770;
+            --border: rgba(0,0,0,0.08);
+            --shadow: rgba(0,0,0,0.08);
+            --gold: #d4a020;
+            --orange: #e8850a;
         }
 
         body {
@@ -33,14 +37,11 @@
             color: var(--text);
             min-height: 100vh;
             padding-bottom: 80px;
-            background-image: 
-                radial-gradient(ellipse at 20% 50%, rgba(245,200,66,0.04) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 20%, rgba(59,130,246,0.04) 0%, transparent 50%);
+            transition: all 0.3s ease;
         }
 
         .container{max-width:480px;margin:0 auto;padding:20px 16px}
         
-        /* ===== Header ===== */
         .header{display:flex;justify-content:space-between;align-items:center;padding:8px 0 16px}
         .header .logo{font-size:1.3rem;font-weight:800;color:var(--gold);display:flex;align-items:center;gap:8px}
         .header .logo span{font-size:1.6rem}
@@ -49,14 +50,12 @@
         .header .icons .icon-btn:active{transform:scale(0.90);background:var(--gold);color:#0a0e1a}
         .header .icons .icon-btn.theme-btn{font-size:1rem;width:44px;height:44px}
 
-        /* ===== Welcome ===== */
         .welcome{margin-bottom:24px}
         .welcome .greeting{font-size:0.7rem;color:var(--text2);text-transform:uppercase;letter-spacing:2px;font-weight:600}
         .welcome h2{font-size:1.6rem;margin-top:2px;font-weight:700;color:var(--text)}
         .welcome h2 span{background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
         .welcome p{color:var(--text2);font-size:0.8rem;margin-top:2px}
 
-        /* ===== Glass Card ===== */
         .glass-card{background:var(--bg3);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:18px;box-shadow:0 4px 25px var(--shadow)}
         .quick-menu{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
         .quick-menu .item{text-align:center;padding:12px 4px;border-radius:12px;cursor:pointer;transition:all 0.3s ease;background:var(--bg);border:1px solid transparent}
@@ -64,7 +63,6 @@
         .quick-menu .item .icon{font-size:1.8rem;display:block;margin-bottom:4px}
         .quick-menu .item .label{font-size:0.55rem;color:var(--text2);font-weight:600}
 
-        /* ===== Banner ===== */
         .banner{background:linear-gradient(135deg,rgba(245,200,66,0.10),rgba(59,130,246,0.08));border-radius:16px;padding:22px 18px;border:1px solid rgba(245,200,66,0.10);margin-bottom:20px;text-align:center;position:relative;overflow:hidden}
         .banner::before{content:'⚔️';position:absolute;right:-20px;top:-20px;font-size:80px;opacity:0.05}
         .banner h3{font-size:1.2rem;color:var(--gold);font-weight:700}
@@ -72,7 +70,6 @@
         .banner .btn-shop{display:inline-block;margin-top:12px;padding:10px 32px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:25px;font-weight:700;font-size:0.85rem;cursor:pointer;text-decoration:none;transition:all 0.3s ease}
         .banner .btn-shop:active{transform:scale(0.94)}
 
-        /* ===== Services ===== */
         .section-title{font-size:0.8rem;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;display:flex;align-items:center;gap:10px}
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
         .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
@@ -81,7 +78,6 @@
         .services-grid .service .icon{font-size:1.6rem;display:block;margin-bottom:4px}
         .services-grid .service .label{font-size:0.6rem;color:var(--text2);font-weight:500}
 
-        /* ===== Bottom Nav ===== */
         .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:8px 0 12px;max-width:480px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -4px 25px var(--shadow)}
         .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text2);transition:all 0.3s ease;padding:4px 10px;border-radius:10px;position:relative}
         .bottom-nav .nav-item:active{transform:scale(0.88)}
@@ -136,36 +132,20 @@
     <a href="index.html" class="nav-item active"><span class="icon">🏠</span><span class="label">Home</span></a>
     <a href="shop.html" class="nav-item"><span class="icon">🛒</span><span class="label">Shop</span></a>
     <a href="payment.html" class="nav-item"><span class="icon">💳</span><span class="label">Payment</span></a>
-    <a href="#" class="nav-item"><span class="icon">👤</span><span class="label">Profile</span></a>
+    <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label">Profile</span></a>
 </div>
 
 <script>
     function toggleTheme() {
         document.body.classList.toggle('light');
         const btn = document.querySelector('.theme-btn');
-        if (document.body.classList.contains('light')) {
-            btn.textContent = '🌙';
-            document.body.style.backgroundImage = 'none';
-        } else {
-            btn.textContent = '☀️';
-            document.body.style.backgroundImage = 'radial-gradient(ellipse at 20% 50%, rgba(245,200,66,0.04) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(59,130,246,0.04) 0%, transparent 50%)';
-        }
+        btn.textContent = document.body.classList.contains('light') ? '🌙' : '☀️';
+        localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
     }
     if (localStorage.getItem('theme') === 'light') {
         document.body.classList.add('light');
         document.querySelector('.theme-btn').textContent = '🌙';
-        document.body.style.backgroundImage = 'none';
     }
-    document.addEventListener('DOMContentLoaded', function() {
-        const observer = new MutationObserver(function() {
-            if (document.body.classList.contains('light')) {
-                localStorage.setItem('theme', 'light');
-            } else {
-                localStorage.setItem('theme', 'dark');
-            }
-        });
-        observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
-    });
 </script>
 </body>
 </html>
