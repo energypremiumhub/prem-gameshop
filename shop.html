@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Prem-Game Shop - Shop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        body {
+            background: #0b0e1a;
+            color: #fff;
+            padding: 10px;
+            padding-bottom: 80px;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 2px solid #1f2a3f;
+            margin-bottom: 20px;
+        }
+        .topbar .back-btn {
+            color: #f5c842;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .topbar .shop-title {
+            font-size: 1.2rem;
+            color: #f5c842;
+        }
+        .topbar .spacer {
+            width: 50px;
+        }
+
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .grid .card {
+            flex: 0 0 calc(33.333% - 10px);
+            background: #141b2b;
+            border-radius: 10px;
+            padding: 12px 8px;
+            text-align: center;
+            border: 1px solid #1f2a3f;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        @media (max-width: 420px) {
+            .grid .card {
+                flex: 0 0 calc(50% - 10px);
+            }
+        }
+
+        .grid .card:active {
+            transform: scale(0.96);
+        }
+
+        .card .name {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        .card .bonus {
+            font-size: 0.55rem;
+            color: #64ffda;
+        }
+        .card .price {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #f5c842;
+            margin: 4px 0;
+        }
+
+        .btn {
+            background: #f5c842;
+            color: #0b0e1a;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.55rem;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+        .btn:active {
+            transform: scale(0.90);
+            background: #dbaa2a;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            padding: 12px;
+            border-top: 1px solid #1f2a3f;
+            color: #8892b0;
+            font-size: 0.65rem;
+        }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #141b2b;
+            border-top: 1px solid #1f2a3f;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0 12px;
+            max-width: 500px;
+            margin: 0 auto;
+            z-index: 100;
+        }
+        .bottom-nav .nav-item {
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            color: #8892b0;
+            transition: 0.2s;
+        }
+        .bottom-nav .nav-item:active {
+            transform: scale(0.90);
+        }
+        .bottom-nav .nav-item .icon {
+            font-size: 1.4rem;
+            display: block;
+        }
+        .bottom-nav .nav-item .label {
+            font-size: 0.55rem;
+            margin-top: 2px;
+        }
+        .bottom-nav .nav-item.active {
+            color: #f5c842;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="topbar">
+        <a href="index.html" class="back-btn">← Home</a>
+        <span class="shop-title">🛒 Shop</span>
+        <span class="spacer"></span>
+    </div>
+
+    <!-- Bundles -->
+    <div class="grid">
+        <div class="card"><div class="name">Monthly Epic</div><div class="bonus">275+★180</div><div class="price">17,200 Ks</div><button class="btn">Buy</button></div>
+        <div class="card"><div class="name">Weekly Elite</div><div class="bonus">55+★20</div><div class="price">3,350 Ks</div><button class="btn">Buy</button></div>
+        <div class="card"><div class="name">Weekly Pass</div><div class="price">6,500 Ks</div><button class="btn">Buy</button></div>
+        <div class="card"><div class="name">11 Dia</div><div class="price">1,000 Ks</div><button class="btn">Buy</button></div>
+        <div class="card"><div class="name">22 Dia</div><div class="price">1,750 Ks</div><button class="btn">Buy</button></div>
+    </div>
+
+    <!-- Diamonds -->
+    <div class="grid">
+        <div class="card"><div class="name">33 Dia</div><div class="price">2,500 Ks</div><button class="btn">Buy</button></div>
+        <div class="card"><div class="name">44 Dia</div><div class="price">3,300 Ks</div><button class="btn">Buy</button></div>
+        <div class="card"><div class="name">56 Dia</div><div class="price">4,000 Ks</div><button class="btn">Buy</button></div>
+        <div class="card"><div class="name">86 Dia</div><div class="price">5,500 Ks</div><button class="btn">Buy</button></div>
+        <div class="card"><div class="name">112 Dia</div><div class="price">7,800 Ks</div><button class="btn">Buy</button></div>
+        <div class="card"><div class="name">172 Dia</div><div class="price">10,700 Ks</div><button class="btn">Buy</button></div>
+        <div class="card"><div class="name">257 Dia</div><div class="price">15,900 Ks</div><button class="btn">Buy</button></div>
+        <div class="card"><div class="name">343 Dia</div><div class="price">21,100 Ks</div><button class="btn">Buy</button></div>
+        <div class="card"><div class="name">429 Dia</div><div class="price">26,600 Ks</div><button class="btn">Buy</button></div>
+        <div class="card"><div class="name">514 Dia</div><div class="price">31,200 Ks</div><button class="btn">Buy</button></div>
+    </div>
+
+    <div class="footer">
+        &copy; 2026 Prem-Game Shop
+    </div>
+</div>
+
+<!-- Bottom Navigation -->
+<div class="bottom-nav">
+    <a href="index.html" class="nav-item">
+        <span class="icon">🏠</span>
+        <span class="label">Home</span>
+    </a>
+    <a href="shop.html" class="nav-item active">
+        <span class="icon">🛒</span>
+        <span class="label">Shop</span>
+    </a>
+    <a href="#" class="nav-item">
+        <span class="icon">👛</span>
+        <span class="label">Wallet</span>
+    </a>
+    <a href="#" class="nav-item">
+        <span class="icon">👤</span>
+        <span class="label">Profile</span>
+    </a>
+</div>
+
+</body>
+</html>
