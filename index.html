@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>⚡ Premium Game Shop</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!-- EmailJS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
@@ -143,7 +142,7 @@
         .modal .form-group input:focus{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
         .modal .form-group input::placeholder{color:var(--text-secondary);font-size:0.7rem}
         .modal .form-group input.error{border-color:var(--red);box-shadow:0 0 20px rgba(239,68,68,0.2)}
-        .modal .form-group .error-text{font-size:0.55rem;color:var(--red);margin-top:3px;display:none}
+        .modal .form-group .error-text{font-size:0.5rem;color:var(--red);margin-top:3px;display:none}
         .modal .form-group .error-text.show{display:block}
         .modal .btn-primary{width:100%;padding:11px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:10px;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;position:relative;z-index:1}
         .modal .btn-primary:active{transform:scale(0.96)}
@@ -151,10 +150,11 @@
         .modal .switch-link{color:var(--cyan);cursor:pointer;font-weight:600;text-align:center;display:block;margin-top:10px;font-size:0.7rem;position:relative;z-index:1}
         .modal .switch-link:active{opacity:0.7}
         .modal .close-btn{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--text-secondary);font-size:1.1rem;cursor:pointer;z-index:2}
-        /* Forgot Password link */
-        .modal .forgot-link{color:var(--text-secondary);cursor:pointer;font-size:0.6rem;text-align:right;display:block;margin-top:6px;position:relative;z-index:1;transition:all 0.3s ease}
+        .modal .forgot-link{color:var(--text-secondary);cursor:pointer;font-size:0.55rem;text-align:right;display:block;margin-top:6px;position:relative;z-index:1;transition:all 0.3s ease}
         .modal .forgot-link:hover{color:var(--gold)}
         .modal .forgot-link:active{opacity:0.7}
+        /* Login Error - သေးအောင် */
+        .modal .login-error{font-size:0.55rem;color:var(--red);text-align:center;margin-bottom:8px;display:none;padding:4px 8px;background:rgba(239,68,68,0.08);border-radius:6px;border:1px solid rgba(239,68,68,0.1)}
 
         .avatar-upload .preview{width:70px;height:70px;border-radius:50%;background:var(--bg-input);border:2px solid var(--border-color);display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--text-secondary);cursor:pointer;transition:all 0.3s ease;overflow:hidden;position:relative;margin:0 auto 8px}
         .avatar-upload .preview:hover{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
@@ -253,8 +253,8 @@
                     <input type="password" id="loginPassword" placeholder="Enter your password">
                     <div class="error-text" id="loginPassError">Please enter your password</div>
                 </div>
-                <div class="error-text" id="loginError" style="text-align:center;margin-bottom:8px;display:none;"></div>
-                <button class="btn-primary" id="loginBtn" onclick="handleLogin()">⚡ Login</button>
+                <div class="login-error" id="loginError"></div>
+                <button class="btn-primary" id="loginBtn" onclick="handleLogin()">🔑 Login</button>
                 <span class="forgot-link" onclick="openForgotPassword()">🔑 Forgot Password?</span>
                 <span class="switch-link" id="switchToRegister" onclick="switchAuthMode()">Don't have an account? Register</span>
             </div>
@@ -271,17 +271,17 @@
                 </div>
                 <div class="form-group">
                     <label>👤 Username <span class="required">*</span></label>
-                    <input type="text" id="regUsername" placeholder="Choose a username">
-                    <div class="error-text" id="usernameError">Username is required</div>
+                    <input type="text" id="regUsername" placeholder="Choose a username (no spaces)" oninput="this.value=this.value.replace(/\s/g,'')">
+                    <div class="error-text" id="usernameError">Username is required (no spaces)</div>
                 </div>
                 <div class="form-group">
-                    <label>📧 Email <span class="required">*</span></label>
-                    <input type="email" id="regEmail" placeholder="Enter your email">
+                    <label>📧 Email</label>
+                    <input type="email" id="regEmail" placeholder="Enter your email (optional)">
                     <div class="error-text" id="emailError">Valid email is required</div>
                 </div>
                 <div class="form-group">
-                    <label>📱 Phone Number <span class="required">*</span></label>
-                    <input type="tel" id="regPhone" placeholder="Enter your phone number (e.g. 09712345678)">
+                    <label>📱 Phone Number</label>
+                    <input type="tel" id="regPhone" placeholder="Enter your phone number (optional)">
                     <div class="error-text" id="phoneError">Phone number is required</div>
                 </div>
                 <div class="form-group">
@@ -294,11 +294,11 @@
                     <input type="password" id="regConfirmPassword" placeholder="Re-enter password">
                     <div class="error-text" id="confirmError">Passwords do not match</div>
                 </div>
-                <button class="btn-primary" onclick="handleRegister()">🛡️ Register</button>
+                <button class="btn-primary" onclick="handleRegister()">🔑 Register</button>
                 <span class="switch-link" id="switchToLogin" onclick="switchAuthMode()">Already have an account? Login</span>
             </div>
 
-            <!-- ===== FORGOT PASSWORD FORM ===== -->
+            <!-- ===== FORGOT PASSWORD ===== -->
             <div id="forgotForm" style="display:none;">
                 <div class="form-group">
                     <label>📧 Email or Phone</label>
@@ -332,7 +332,7 @@
 
 <script>
     // ============================================================
-    //  🔧 EMAILJS CONFIG - မင်းရဲ့ Credentials ထည့်ပါ
+    //  🔧 EMAILJS CONFIG
     // ============================================================
     const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
     const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
@@ -391,7 +391,8 @@
             resetSuccess: '✅ Password reset successfully!',
             resetError: '❌ Failed to reset password. Please try again.',
             backToLogin: '← Back to Login',
-            emailSentError: '❌ Failed to send OTP. Please try again.'
+            emailSentError: '❌ Failed to send OTP. Please try again.',
+            noSpace: 'Username cannot contain spaces'
         },
         my: {
             appName: 'ပရီမီယံ ဂိမ်းဆိုင်',
@@ -441,7 +442,8 @@
             resetSuccess: '✅ စကားဝှက်ပြန်သတ်မှတ်ခြင်းအောင်မြင်ပါပြီ!',
             resetError: '❌ စကားဝှက်ပြန်သတ်မှတ်ခြင်းမအောင်မြင်ပါ။ ကျေးဇူးပြု၍ ပြန်စမ်းပါ။',
             backToLogin: '← ဝင်ရန်စာမျက်နှာသို့',
-            emailSentError: '❌ OTP ပို့ရန်မအောင်မြင်ပါ။ ကျေးဇူးပြု၍ ပြန်စမ်းပါ။'
+            emailSentError: '❌ OTP ပို့ရန်မအောင်မြင်ပါ။ ကျေးဇူးပြု၍ ပြန်စမ်းပါ။',
+            noSpace: 'အသုံးပြုသူအမည်တွင် နေရာလွတ်မထည့်ရပါ'
         }
     };
 
@@ -545,7 +547,7 @@
             authBtn.className = 'auth-btn logged-in';
             authBtn.title = 'Go to Profile';
         } else {
-            authBtn.innerHTML = '🔑 ' + getText('login');
+            authBtn.innerHTML = '🔑 Login';
             authBtn.className = 'auth-btn';
             authBtn.title = 'Login';
         }
@@ -591,6 +593,7 @@
         document.getElementById('sendOtpBtn').style.display = 'block';
         // Reset login errors
         document.getElementById('loginError').style.display = 'none';
+        document.getElementById('loginError').textContent = '';
         document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
         document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
         if (!isLoginMode) {
@@ -603,7 +606,6 @@
 
     function closeModal() {
         document.getElementById('authModal').classList.remove('show');
-        // Reset forgot password
         document.getElementById('forgotEmail').value = '';
         document.getElementById('otpCode').value = '';
         document.getElementById('newPassword').value = '';
@@ -641,7 +643,7 @@
         if (isLoginMode) {
             document.getElementById('modalTitle').textContent = d.modalLogin;
             document.getElementById('modalSub').textContent = d.modalLoginSub;
-            document.getElementById('loginBtn').innerHTML = '⚡ ' + d.login;
+            document.getElementById('loginBtn').innerHTML = '🔑 ' + d.login;
             document.getElementById('emailLabel').textContent = d.email;
             document.getElementById('passLabel').textContent = d.password;
             document.getElementById('switchToRegister').textContent = d.switchLogin;
@@ -657,8 +659,8 @@
         const input = document.getElementById('loginEmail').value.trim();
         const password = document.getElementById('loginPassword').value.trim();
 
-        // Reset errors
         document.getElementById('loginError').style.display = 'none';
+        document.getElementById('loginError').textContent = '';
         document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
         document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
 
@@ -682,7 +684,6 @@
         let foundUser = null;
         let userExists = false;
 
-        // Search by username, email, or phone
         for (const key in users) {
             const user = users[key];
             if (key === input || 
@@ -707,15 +708,11 @@
                 window.location.href = 'profile.html';
             }, 1000);
         } else if (userExists) {
-            // Password wrong
             document.getElementById('loginError').textContent = getText('invalidCredentials');
             document.getElementById('loginError').style.display = 'block';
-            document.getElementById('loginError').style.color = 'var(--red)';
         } else {
-            // Account not found
             document.getElementById('loginError').textContent = getText('userNotFound');
             document.getElementById('loginError').style.display = 'block';
-            document.getElementById('loginError').style.color = 'var(--red)';
         }
     }
 
@@ -736,15 +733,22 @@
             document.getElementById('usernameError').classList.add('show');
             document.getElementById('regUsername').classList.add('error');
             hasError = true;
+        } else if (/\s/.test(username)) {
+            document.getElementById('usernameError').textContent = getText('noSpace');
+            document.getElementById('usernameError').classList.add('show');
+            document.getElementById('regUsername').classList.add('error');
+            hasError = true;
         }
 
-        if (!email || !email.includes('@') || !email.includes('.')) {
+        // Email is optional - only validate if provided
+        if (email && (!email.includes('@') || !email.includes('.'))) {
             document.getElementById('emailError').classList.add('show');
             document.getElementById('regEmail').classList.add('error');
             hasError = true;
         }
 
-        if (!phone) {
+        // Phone is optional - only validate if provided
+        if (phone && phone.length < 7) {
             document.getElementById('phoneError').classList.add('show');
             document.getElementById('regPhone').classList.add('error');
             hasError = true;
@@ -764,13 +768,13 @@
 
         if (hasError) return;
 
+        // Check if user exists
         const users = JSON.parse(localStorage.getItem('users') || '{}');
         for (const key in users) {
             const user = users[key];
             if (key === username || 
-                user.email === email || 
-                user.username === username || 
-                user.phone === phone) {
+                (email && user.email === email) || 
+                (phone && user.phone === phone)) {
                 showToast(getText('userExists'));
                 return;
             }
@@ -778,8 +782,8 @@
 
         const newUser = {
             username: username,
-            email: email,
-            phone: phone,
+            email: email || '',
+            phone: phone || '',
             password: password,
             displayName: username,
             createdAt: new Date().toISOString()
@@ -814,7 +818,6 @@
         document.getElementById('modalSub').textContent = getText('forgotSub');
         document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
         document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
-        // Reset fields
         document.getElementById('forgotEmail').value = '';
         document.getElementById('otpCode').value = '';
         document.getElementById('newPassword').value = '';
@@ -847,7 +850,6 @@
             return;
         }
 
-        // Check if email or phone exists
         const users = JSON.parse(localStorage.getItem('users') || '{}');
         let userExists = false;
         let foundUser = null;
@@ -858,7 +860,7 @@
             if (user.email === input || key === input || user.phone === input) {
                 userExists = true;
                 foundUser = user;
-                foundEmail = user.email;
+                foundEmail = user.email || key;
                 break;
             }
         }
@@ -868,17 +870,19 @@
             return;
         }
 
-        // Generate OTP (6 digits)
+        if (!foundEmail) {
+            showToast('❌ No email registered for this account');
+            return;
+        }
+
         const otp = Math.floor(100000 + Math.random() * 900000).toString();
         otpStorage[foundEmail] = {
             otp: otp,
             timestamp: Date.now()
         };
 
-        // Store email for reset
         document.getElementById('forgotEmail').dataset.email = foundEmail;
 
-        // Send OTP via EmailJS
         try {
             const templateParams = {
                 to_email: foundEmail,
@@ -889,12 +893,10 @@
 
             await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
 
-            // Show OTP section
             document.getElementById('otpSection').style.display = 'block';
             document.getElementById('sendOtpBtn').style.display = 'none';
             showToast(d.otpSent);
 
-            // Auto-hide after 5 minutes
             setTimeout(() => {
                 delete otpStorage[foundEmail];
             }, 300000);
@@ -902,7 +904,6 @@
         } catch (error) {
             console.error('EmailJS error:', error);
             showToast(d.emailSentError);
-            // Still show OTP section for demo
             document.getElementById('otpSection').style.display = 'block';
             document.getElementById('sendOtpBtn').style.display = 'none';
             showToast('📧 OTP: ' + otp + ' (Email failed, use this)');
@@ -941,7 +942,6 @@
 
         if (hasError) return;
 
-        // Verify OTP
         const stored = otpStorage[email];
         if (!stored || stored.otp !== otp) {
             document.getElementById('otpError').classList.add('show');
@@ -949,7 +949,6 @@
             return;
         }
 
-        // Update password
         const users = JSON.parse(localStorage.getItem('users') || '{}');
         for (const key in users) {
             if (users[key].email === email || key === email) {
@@ -959,7 +958,6 @@
         }
         localStorage.setItem('users', JSON.stringify(users));
 
-        // Clear OTP
         delete otpStorage[email];
 
         showToast(d.resetSuccess);
