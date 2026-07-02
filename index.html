@@ -129,6 +129,20 @@
         @keyframes shimmer{0%,100%{transform:translate(0,0)}50%{transform:translate(-20%,-20%)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
+        /* ===== CONFIRM OVERLAY ===== */
+        .confirm-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(15px);display:none;z-index:600;align-items:center;justify-content:center;padding:20px;flex-direction:column;text-align:center}
+        .confirm-overlay.show{display:flex;animation:fadeIn 0.4s ease}
+        .confirm-overlay .avatar-box{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--orange));display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#0a0e1a;margin-bottom:12px;overflow:hidden;box-shadow:0 0 40px var(--gold-glow)}
+        .confirm-overlay .avatar-box img{width:100%;height:100%;object-fit:cover}
+        .confirm-overlay .username{font-size:1.2rem;font-weight:700;color:var(--gold);margin-bottom:4px}
+        .confirm-overlay .email{font-size:0.8rem;color:var(--text-secondary);margin-bottom:16px}
+        .confirm-overlay .btn-group{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+        .confirm-overlay .btn-confirm{background:linear-gradient(135deg,var(--green),#0ea5e9);color:#0a0e1a;border:none;padding:12px 36px;border-radius:12px;font-weight:700;font-size:0.9rem;cursor:pointer;transition:all 0.3s ease;box-shadow:0 0 30px rgba(34,211,238,0.3)}
+        .confirm-overlay .btn-confirm:active{transform:scale(0.95)}
+        .confirm-overlay .btn-cancel{background:transparent;border:2px solid var(--border-color);color:var(--text-secondary);padding:12px 36px;border-radius:12px;font-weight:700;font-size:0.9rem;cursor:pointer;transition:all 0.3s ease}
+        .confirm-overlay .btn-cancel:active{transform:scale(0.95)}
+        .confirm-overlay .btn-cancel:hover{border-color:var(--red);color:var(--red)}
+
         /* ===== AUTH MODAL ===== */
         .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(12px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px}
         .modal-overlay.show{display:flex;animation:fadeIn 0.3s ease}
@@ -153,7 +167,6 @@
         .modal .forgot-link{color:var(--text-secondary);cursor:pointer;font-size:0.55rem;text-align:right;display:block;margin-top:6px;position:relative;z-index:1;transition:all 0.3s ease}
         .modal .forgot-link:hover{color:var(--gold)}
         .modal .forgot-link:active{opacity:0.7}
-        /* Login Error - သေးအောင် */
         .modal .login-error{font-size:0.55rem;color:var(--red);text-align:center;margin-bottom:8px;display:none;padding:4px 8px;background:rgba(239,68,68,0.08);border-radius:6px;border:1px solid rgba(239,68,68,0.1)}
 
         .avatar-upload .preview{width:70px;height:70px;border-radius:50%;background:var(--bg-input);border:2px solid var(--border-color);display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--text-secondary);cursor:pointer;transition:all 0.3s ease;overflow:hidden;position:relative;margin:0 auto 8px}
@@ -233,6 +246,17 @@
 
 <!-- ===== TOAST ===== -->
 <div class="toast" id="toast"></div>
+
+<!-- ===== CONFIRM OVERLAY ===== -->
+<div class="confirm-overlay" id="confirmOverlay">
+    <div class="avatar-box" id="confirmAvatar">⚔️</div>
+    <div class="username" id="confirmUsername">Username</div>
+    <div class="email" id="confirmEmail">email@example.com</div>
+    <div class="btn-group">
+        <button class="btn-confirm" id="confirmYes">✅ Yes, that's me</button>
+        <button class="btn-cancel" id="confirmNo">❌ No, cancel</button>
+    </div>
+</div>
 
 <!-- ===== AUTH MODAL ===== -->
 <div class="modal-overlay" id="authModal">
@@ -392,7 +416,11 @@
             resetError: '❌ Failed to reset password. Please try again.',
             backToLogin: '← Back to Login',
             emailSentError: '❌ Failed to send OTP. Please try again.',
-            noSpace: 'Username cannot contain spaces'
+            noSpace: 'Username cannot contain spaces',
+            confirmTitle: 'Confirm Account',
+            confirmDesc: 'Is this you?',
+            confirmYes: '✅ Yes, that\'s me',
+            confirmNo: '❌ No, cancel'
         },
         my: {
             appName: 'ပရီမီယံ ဂိမ်းဆိုင်',
@@ -443,7 +471,11 @@
             resetError: '❌ စကားဝှက်ပြန်သတ်မှတ်ခြင်းမအောင်မြင်ပါ။ ကျေးဇူးပြု၍ ပြန်စမ်းပါ။',
             backToLogin: '← ဝင်ရန်စာမျက်နှာသို့',
             emailSentError: '❌ OTP ပို့ရန်မအောင်မြင်ပါ။ ကျေးဇူးပြု၍ ပြန်စမ်းပါ။',
-            noSpace: 'အသုံးပြုသူအမည်တွင် နေရာလွတ်မထည့်ရပါ'
+            noSpace: 'အသုံးပြုသူအမည်တွင် နေရာလွတ်မထည့်ရပါ',
+            confirmTitle: 'အကောင့်အတည်ပြုရန်',
+            confirmDesc: 'ဒါသင် ဟုတ်ပါသလား?',
+            confirmYes: '✅ ဟုတ်ကဲ့ ကျွန်တော်ပါ',
+            confirmNo: '❌ မဟုတ်ပါ၊ ပယ်ဖျက်မည်'
         }
     };
 
@@ -528,6 +560,74 @@
         }
     });
 
+    // ===== CONFIRM OVERLAY =====
+    let pendingUser = null;
+    let pendingAction = null; // 'login' or 'register'
+
+    function showConfirm(user, action) {
+        pendingUser = user;
+        pendingAction = action;
+        const overlay = document.getElementById('confirmOverlay');
+        const avatar = document.getElementById('confirmAvatar');
+        const username = document.getElementById('confirmUsername');
+        const email = document.getElementById('confirmEmail');
+
+        const savedAvatar = localStorage.getItem('userAvatar_' + user.username);
+        if (savedAvatar) {
+            avatar.innerHTML = '<img src="' + savedAvatar + '" alt="avatar">';
+        } else {
+            avatar.textContent = '⚔️';
+        }
+        username.textContent = user.username || 'Guest';
+        email.textContent = user.email || 'No email';
+        overlay.classList.add('show');
+    }
+
+    function hideConfirm() {
+        document.getElementById('confirmOverlay').classList.remove('show');
+        pendingUser = null;
+        pendingAction = null;
+    }
+
+    // Confirm Yes
+    document.getElementById('confirmYes').addEventListener('click', function() {
+        if (pendingUser && pendingAction) {
+            if (pendingAction === 'login') {
+                currentUser = pendingUser;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                showToast(getText('loginSuccess'));
+                updateAuthUI();
+                // Redirect based on current page
+                const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+                if (currentPage === 'profile.html') {
+                    // Stay on profile page
+                    window.location.reload();
+                } else {
+                    window.location.href = 'profile.html';
+                }
+            } else if (pendingAction === 'register') {
+                currentUser = pendingUser;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                showToast(getText('registerSuccess'));
+                updateAuthUI();
+                const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+                if (currentPage === 'profile.html') {
+                    window.location.reload();
+                } else {
+                    window.location.href = 'profile.html';
+                }
+            }
+            hideConfirm();
+        }
+    });
+
+    // Confirm No (Cancel)
+    document.getElementById('confirmNo').addEventListener('click', function() {
+        hideConfirm();
+        // Close modal too
+        closeModal();
+    });
+
     // ===== AUTH SYSTEM =====
     let currentUser = null;
     const savedUser = localStorage.getItem('currentUser');
@@ -585,13 +685,11 @@
         isLoginMode = mode !== 'register';
         const modal = document.getElementById('authModal');
         modal.classList.add('show');
-        // Reset all forms
         document.getElementById('loginForm').style.display = 'block';
         document.getElementById('registerForm').style.display = 'none';
         document.getElementById('forgotForm').style.display = 'none';
         document.getElementById('otpSection').style.display = 'none';
         document.getElementById('sendOtpBtn').style.display = 'block';
-        // Reset login errors
         document.getElementById('loginError').style.display = 'none';
         document.getElementById('loginError').textContent = '';
         document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
@@ -699,14 +797,9 @@
         }
 
         if (foundUser) {
-            currentUser = foundUser;
-            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            // Show confirm overlay instead of directly logging in
             closeModal();
-            showToast(getText('loginSuccess'));
-            updateAuthUI();
-            setTimeout(() => {
-                window.location.href = 'profile.html';
-            }, 1000);
+            showConfirm(foundUser, 'login');
         } else if (userExists) {
             document.getElementById('loginError').textContent = getText('invalidCredentials');
             document.getElementById('loginError').style.display = 'block';
@@ -740,14 +833,12 @@
             hasError = true;
         }
 
-        // Email is optional - only validate if provided
         if (email && (!email.includes('@') || !email.includes('.'))) {
             document.getElementById('emailError').classList.add('show');
             document.getElementById('regEmail').classList.add('error');
             hasError = true;
         }
 
-        // Phone is optional - only validate if provided
         if (phone && phone.length < 7) {
             document.getElementById('phoneError').classList.add('show');
             document.getElementById('regPhone').classList.add('error');
@@ -768,7 +859,6 @@
 
         if (hasError) return;
 
-        // Check if user exists
         const users = JSON.parse(localStorage.getItem('users') || '{}');
         for (const key in users) {
             const user = users[key];
@@ -795,14 +885,9 @@
             localStorage.setItem('userAvatar_' + username, tempAvatar);
         }
 
-        currentUser = newUser;
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        // Show confirm overlay instead of directly logging in
         closeModal();
-        showToast(getText('registerSuccess'));
-        updateAuthUI();
-        setTimeout(() => {
-            window.location.href = 'profile.html';
-        }, 1000);
+        showConfirm(newUser, 'register');
     }
 
     // ===== FORGOT PASSWORD =====
