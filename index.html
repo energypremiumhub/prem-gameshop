@@ -100,7 +100,6 @@
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
         .section-title i{color:var(--cyan);text-shadow:0 0 20px var(--cyan-glow)}
 
-        /* ===== SERVICES GRID (အကွက်လေးတွေ) ===== */
         .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;animation:slideUp 0.9s ease;margin-bottom:18px}
         .services-grid .service{background:var(--bg-card);border:1px solid var(--border-color);border-radius:14px;padding:16px 10px;text-align:center;cursor:pointer;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);position:relative;overflow:hidden;box-shadow:0 4px 20px var(--shadow)}
         .services-grid .service:active{transform:scale(0.92)}
@@ -126,15 +125,16 @@
         .telegram-card .arrow{color:var(--text-secondary);font-size:1.2rem;transition:all 0.3s ease}
         .telegram-card:hover .arrow{color:var(--gold);transform:translateX(4px)}
 
-        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);border-top:1px solid var(--border-color);display:flex;justify-content:space-around;padding:6px 0 10px;max-width:480px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px var(--shadow)}
-        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);padding:4px 8px;border-radius:10px;position:relative}
-        .bottom-nav .nav-item:active{transform:scale(0.75)}
-        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
-        .bottom-nav .nav-item .label{font-size:0.4rem;margin-top:1px;font-weight:700;letter-spacing:0.5px;transition:all 0.4s ease}
-        .bottom-nav .nav-item.active{color:var(--gold)}
-        .bottom-nav .nav-item.active .icon{transform:translateY(-6px) scale(1.15);text-shadow:0 0 30px var(--gold-glow)}
+        /* ===== BOTTOM NAV (လေးထောင့်ကွက်လေးတွေ) ===== */
+        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);border-top:1px solid var(--border-color);display:flex;justify-content:space-around;padding:8px 0 12px;max-width:480px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px var(--shadow)}
+        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.3s ease;padding:6px 16px;border-radius:12px;position:relative;min-width:56px;border:1px solid transparent}
+        .bottom-nav .nav-item:active{transform:scale(0.85);background:rgba(245,200,66,0.05)}
+        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;transition:all 0.3s ease}
+        .bottom-nav .nav-item .label{font-size:0.4rem;margin-top:1px;font-weight:700;letter-spacing:0.5px;transition:all 0.3s ease}
+        .bottom-nav .nav-item.active{color:var(--gold);background:rgba(245,200,66,0.06);border-color:rgba(245,200,66,0.15);box-shadow:0 0 30px rgba(245,200,66,0.05)}
+        .bottom-nav .nav-item.active .icon{transform:translateY(-2px);color:var(--gold)}
         .bottom-nav .nav-item.active .label{color:var(--gold)}
-        .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:24px;height:2.5px;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:10px;box-shadow:0 0 20px var(--gold-glow)}
+        .bottom-nav .nav-item:not(.active):hover{border-color:rgba(255,255,255,0.04);background:rgba(255,255,255,0.02)}
 
         .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.3;letter-spacing:1px}
 
@@ -259,11 +259,24 @@
     <div class="footer-text">&copy; 2026 Premium Game Shop</div>
 </div>
 
+<!-- ===== BOTTOM NAV (လေးထောင့်ကွက်လေးတွေ) ===== -->
 <div class="bottom-nav">
-    <a href="index.html" class="nav-item active"><span class="icon">🏠</span><span class="label" id="navHome">Home</span></a>
-    <a href="shop.html" class="nav-item"><span class="icon">🛒</span><span class="label" id="navShop">Shop</span></a>
-    <a href="payment.html" class="nav-item"><span class="icon">💳</span><span class="label" id="navPayment">Payment</span></a>
-    <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label" id="navProfile">Profile</span></a>
+    <a href="index.html" class="nav-item active">
+        <span class="icon">🏠</span>
+        <span class="label" id="navHome">Home</span>
+    </a>
+    <a href="shop.html" class="nav-item">
+        <span class="icon">🛒</span>
+        <span class="label" id="navShop">Shop</span>
+    </a>
+    <a href="payment.html" class="nav-item">
+        <span class="icon">💳</span>
+        <span class="label" id="navPayment">Payment</span>
+    </a>
+    <a href="profile.html" class="nav-item">
+        <span class="icon">👤</span>
+        <span class="label" id="navProfile">Profile</span>
+    </a>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -371,7 +384,6 @@
 </div>
 
 <script>
-    // ===== LANGUAGE UPDATE =====
     function updateLanguage() {
         const d = LANG_DATA[currentLang];
         if (!d) return;
@@ -401,7 +413,6 @@
         updateModalUI();
     }
 
-    // ===== TOAST =====
     function showToast(msg) {
         const t = document.getElementById('toast');
         t.textContent = msg;
@@ -410,7 +421,6 @@
         t._timer = setTimeout(() => t.classList.remove('show'), 3000);
     }
 
-    // ===== NOTIFICATION =====
     function checkNotifications() {
         const notiData = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
         const badge = document.getElementById('notiBadge');
@@ -432,7 +442,6 @@
         }
     });
 
-    // ===== AVATAR =====
     function handleAvatarUpload(event) {
         const file = event.target.files[0];
         if (file) {
@@ -446,7 +455,6 @@
         }
     }
 
-    // ===== AUTH =====
     let isLoginMode = true;
 
     function handleAuthClick() {
@@ -517,7 +525,6 @@
         }
     }
 
-    // ===== LOGIN =====
     function handleLogin() {
         const input = document.getElementById('loginInput').value.trim();
         const password = document.getElementById('loginPassword').value.trim();
@@ -566,7 +573,6 @@
         }
     }
 
-    // ===== REGISTER =====
     function handleRegister() {
         const username = document.getElementById('regUsername').value.trim();
         const email = document.getElementById('regEmail').value.trim();
@@ -657,7 +663,6 @@
         updateAuthUI();
     }
 
-    // ===== FORGOT PASSWORD =====
     let otpStorage = {};
 
     function openForgotPassword() {
@@ -799,7 +804,6 @@
         document.getElementById('loginPassword').value = '';
     }
 
-    // ===== CONFIRM OVERLAY =====
     let pendingUser = null;
     let pendingAction = null;
 
@@ -845,7 +849,6 @@
         closeModal();
     });
 
-    // ===== MODAL CLOSE =====
     document.getElementById('authModal').addEventListener('click', function(e) {
         if (e.target === this) closeModal();
     });
@@ -873,7 +876,6 @@
         }
     });
 
-    // ===== INIT =====
     document.addEventListener('DOMContentLoaded', function() {
         const savedLang = localStorage.getItem('lang') || 'en';
         setLang(savedLang);
