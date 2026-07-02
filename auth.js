@@ -27,7 +27,6 @@ function loginUser(input, password) {
     
     for (const key in users) {
         const user = users[key];
-        // Username, email, phone သုံးမျိုးလုံးနဲ့ စစ်မယ်
         if (key === input || user.email === input || user.username === input || user.phone === input) {
             if (user.password === password) {
                 currentUser = user;
@@ -43,12 +42,10 @@ function loginUser(input, password) {
 function registerUser(username, password, email = '', phone = '') {
     const users = JSON.parse(localStorage.getItem('users') || '{}');
     
-    // Username ရှိပြီးသားလား စစ်မယ်
     if (users[username]) {
         return false;
     }
     
-    // Email ရှိပြီးသားလား စစ်မယ်
     if (email) {
         for (const key in users) {
             if (users[key].email === email) {
@@ -57,7 +54,6 @@ function registerUser(username, password, email = '', phone = '') {
         }
     }
     
-    // Phone ရှိပြီးသားလား စစ်မယ်
     if (phone) {
         for (const key in users) {
             if (users[key].phone === phone) {
@@ -100,6 +96,7 @@ function updateAuthUI() {
     const authBtn = document.getElementById('authBtn');
     const profileIcon = document.getElementById('profileIcon');
     
+    // ===== အကောင့်ဝင်ပြီးရင် Profile ပြန်ပေါ်အောင် =====
     if (currentUser) {
         const savedAvatar = localStorage.getItem('userAvatar_' + currentUser.username);
         
@@ -111,6 +108,7 @@ function updateAuthUI() {
             }
             authBtn.className = 'auth-btn logged-in';
             authBtn.title = 'Go to Profile';
+            // ===== Profile ကိုသွားမယ် (Logout မဟုတ်ဘူး) =====
             authBtn.onclick = function(e) {
                 e.preventDefault();
                 window.location.href = 'profile.html';
@@ -130,6 +128,7 @@ function updateAuthUI() {
             authBtn.innerHTML = '🔑 ' + (getText ? getText('login') : 'Login');
             authBtn.className = 'auth-btn';
             authBtn.title = 'Login';
+            // ===== Login Modal ဖွင့်မယ် =====
             authBtn.onclick = function(e) {
                 e.preventDefault();
                 if (typeof openModal === 'function') {
@@ -146,7 +145,6 @@ function updateAuthUI() {
         }
     }
     
-    // Update other UI elements if they exist
     if (window.updateProfileUI) {
         window.updateProfileUI();
     }
