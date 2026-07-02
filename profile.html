@@ -44,16 +44,13 @@
 
         .container{max-width:500px;margin:0 auto}
 
+        /* ===== HEADER (Login button ဖျောက်ထား) ===== */
         .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
         .header .left{display:flex;flex-direction:column;gap:6px}
         .header .left .logo{font-size:1rem;font-weight:800;color:var(--gold);text-shadow:0 0 20px var(--gold-glow);letter-spacing:0.5px}
         .header .left .logo i{color:var(--cyan);margin-right:6px;text-shadow:0 0 20px var(--cyan-glow)}
-        .header .left .auth-btn{background:transparent;border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 14px;border-radius:8px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-flex;align-items:center;gap:6px;height:36px;width:fit-content}
-        .header .left .auth-btn:active{transform:scale(0.85)}
-        .header .left .auth-btn:hover{border-color:var(--gold);color:var(--gold)}
-        .header .left .auth-btn.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 25px var(--gold-glow);padding:4px 14px}
-        .header .left .auth-btn.logged-in:active{transform:scale(0.85)}
-        .header .left .auth-btn.logged-in img{width:22px;height:22px;border-radius:50%;object-fit:cover;margin-right:4px}
+        /* Auth button ကို ဖျောက်ထား */
+        .header .left .auth-btn{display:none !important;}
         
         .header .right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
         .header .right .top{display:flex;gap:8px;align-items:center}
@@ -263,11 +260,11 @@
 </head>
 <body>
 <div class="container">
-    <!-- HEADER -->
+    <!-- ===== HEADER (Login button ဖျောက်ထား) ===== -->
     <div class="header">
         <div class="left">
             <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Game Shop</div>
-            <div class="auth-btn" id="authBtn" onclick="handleAuthClick()">🔑 Login</div>
+            <!-- Auth button ကို ဖယ်ထားတယ် (Profile Box ထဲမှာ ရှိပြီးသား) -->
         </div>
         <div class="right">
             <div class="top">
@@ -283,7 +280,7 @@
         </div>
     </div>
 
-    <!-- PROFILE SECTION -->
+    <!-- ===== PROFILE SECTION (Login button ဒီမှာရှိတယ်) ===== -->
     <div class="profile-section">
         <div class="left-side">
             <div class="avatar-wrap">
@@ -305,6 +302,7 @@
                     <span class="diamond-note">(auto)</span>
                 </div>
 
+                <!-- ===== STATUS / LOGIN BUTTON ဒီမှာရှိတယ် ===== -->
                 <div class="status" id="statusDisplay" onclick="handleStatusClick()">
                     <i class="fas fa-circle"></i> <span id="statusText">🔑 Login</span>
                 </div>
@@ -438,7 +436,6 @@
                 <input type="text" id="settingsName" placeholder="Enter your display name">
             </div>
 
-            <!-- USERNAME CHANGE -->
             <div class="form-group" style="border-top:1px solid var(--border-color);padding-top:12px;margin-top:4px;">
                 <label>🔑 Username <span style="color:var(--text-secondary);font-size:0.5rem;font-weight:400;">(ပြောင်းလို့ရ)</span></label>
                 <div class="username-change-row">
@@ -448,7 +445,6 @@
                 <div id="settingsUsernameResult" class="username-result"></div>
             </div>
 
-            <!-- USER ID - READ ONLY -->
             <div class="form-group">
                 <label>🆔 User ID <span style="color:var(--text-secondary);font-size:0.5rem;font-weight:400;">(ပုံသေ - မပြောင်းရ)</span></label>
                 <input type="text" id="settingsUserId" readonly placeholder="User ID">
@@ -832,7 +828,6 @@
         for (const key in users) {
             const user = users[key];
             
-            // Skip the current user when updating
             if (excludeUsername && key === excludeUsername) {
                 continue;
             }
@@ -853,7 +848,6 @@
 
     // ===== UPDATE AUTH UI =====
     function updateAuthUI() {
-        const authBtn = document.getElementById('authBtn');
         const nameEl = document.getElementById('displayName');
         const userEl = document.getElementById('displayUsername');
         const statusEl = document.getElementById('statusText');
@@ -889,10 +883,6 @@
             const userOrders = orders.filter(o => o.userId === currentUser.username);
             orderCountStat.textContent = userOrders.length;
 
-            authBtn.innerHTML = '👤 ' + currentUser.username;
-            authBtn.className = 'auth-btn logged-in';
-            authBtn.title = 'Go to Profile';
-
             const savedTheme = localStorage.getItem('userTheme_' + currentUser.username);
             if (savedTheme) {
                 document.documentElement.style.setProperty('--theme-color', savedTheme);
@@ -911,9 +901,6 @@
             diamondCount.textContent = '0';
             diamondCountStat.textContent = '0';
             orderCountStat.textContent = '0';
-            authBtn.innerHTML = '🔑 Login';
-            authBtn.className = 'auth-btn';
-            authBtn.title = 'Login';
         }
         renderOrders();
     }
@@ -1035,10 +1022,8 @@
         let foundUser = null;
         let userExists = false;
 
-        // Username, Email, Phone သုံးမျိုးလုံးနဲ့ စစ်မယ်
         for (const key in users) {
             const user = users[key];
-            // Username နဲ့ စစ်
             if (key === input) {
                 userExists = true;
                 if (user.password === password) {
@@ -1046,7 +1031,6 @@
                     break;
                 }
             }
-            // Email နဲ့ စစ်
             if (user.email && user.email === input) {
                 userExists = true;
                 if (user.password === password) {
@@ -1054,7 +1038,6 @@
                     break;
                 }
             }
-            // Phone နဲ့ စစ်
             if (user.phone && user.phone === input) {
                 userExists = true;
                 if (user.password === password) {
@@ -1084,7 +1067,7 @@
         }
     }
 
-    // ===== REGISTER (Username, Email, Phone တစ်ကောင်နဲ့တစ်ကောင် မတူအောင်) =====
+    // ===== REGISTER =====
     function handleRegister() {
         const username = document.getElementById('regUsername').value.trim();
         const email = document.getElementById('regEmail').value.trim();
@@ -1140,7 +1123,6 @@
 
         if (hasError) return;
 
-        // ===== Username, Email, Phone ထပ်မရအောင် စစ်ဆေး =====
         const check = isCredentialExists(username, email, phone);
         if (check.exists) {
             if (check.field === 'username') {
@@ -1498,7 +1480,6 @@
             return;
         }
 
-        // Check if username exists (excluding current user)
         const check = isCredentialExists(newUsername, null, null, oldUsername);
         if (check.exists) {
             result.className = 'username-result error';
@@ -1506,7 +1487,6 @@
             return;
         }
 
-        // Update username
         const userData = users[oldUsername];
         if (!userData) {
             result.className = 'username-result error';
@@ -1526,7 +1506,6 @@
         delete users[oldUsername];
         users[newUsername] = newUserData;
 
-        // Update orders
         const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
         orders.forEach(order => {
             if (order.userId === oldUsername) {
@@ -1535,14 +1514,12 @@
         });
         localStorage.setItem('orderHistory', JSON.stringify(orders));
 
-        // Update avatar
         const oldAvatar = localStorage.getItem('userAvatar_' + oldUsername);
         if (oldAvatar) {
             localStorage.setItem('userAvatar_' + newUsername, oldAvatar);
             localStorage.removeItem('userAvatar_' + oldUsername);
         }
 
-        // Update theme
         const oldTheme = localStorage.getItem('userTheme_' + oldUsername);
         if (oldTheme) {
             localStorage.setItem('userTheme_' + newUsername, oldTheme);
@@ -1564,7 +1541,7 @@
         updateAuthUI();
     }
 
-    // ===== SAVE SETTINGS (Email, Phone ထပ်မရအောင် စစ်ဆေး) =====
+    // ===== SAVE SETTINGS =====
     function saveSettings() {
         const name = document.getElementById('settingsName').value.trim();
         const email = document.getElementById('settingsEmail').value.trim();
@@ -1576,7 +1553,6 @@
         const users = JSON.parse(localStorage.getItem('users') || '{}');
         const oldUsername = currentUser.username;
         
-        // Check if email or phone exists (excluding current user)
         const check = isCredentialExists(null, email, phone, oldUsername);
         if (check.exists) {
             if (check.field === 'email') {
