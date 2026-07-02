@@ -48,28 +48,26 @@
         
         /* ===== HEADER ===== */
         .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
-        .header .left{display:flex;align-items:center;gap:10px}
-        .header .left .logo{font-size:1.2rem;font-weight:800;color:var(--gold);text-shadow:0 0 20px var(--gold-glow);letter-spacing:0.5px}
+        .header .left{display:flex;flex-direction:column;gap:6px}
+        .header .left .logo{font-size:1rem;font-weight:800;color:var(--gold);text-shadow:0 0 20px var(--gold-glow);letter-spacing:0.5px}
         .header .left .logo i{color:var(--cyan);margin-right:6px;text-shadow:0 0 20px var(--cyan-glow)}
+        .header .left .auth-btn{background:transparent;border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 14px;border-radius:8px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-flex;align-items:center;gap:6px;height:36px;width:fit-content}
+        .header .left .auth-btn:active{transform:scale(0.85)}
+        .header .left .auth-btn:hover{border-color:var(--gold);color:var(--gold)}
+        .header .left .auth-btn.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 25px var(--gold-glow);padding:4px 14px}
+        .header .left .auth-btn.logged-in:active{transform:scale(0.85)}
+        .header .left .auth-btn.logged-in img{width:22px;height:22px;border-radius:50%;object-fit:cover;margin-right:4px}
         
         .header .right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
         .header .right .top{display:flex;gap:8px;align-items:center}
-        .header .right .top .auth-btn{background:transparent;border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 14px;border-radius:8px;font-size:0.65rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-flex;align-items:center;gap:6px;height:38px}
-        .header .right .top .auth-btn:active{transform:scale(0.85)}
-        .header .right .top .auth-btn:hover{border-color:var(--gold);color:var(--gold)}
-        .header .right .top .auth-btn.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 25px var(--gold-glow);padding:4px 14px}
-        .header .right .top .auth-btn.logged-in:active{transform:scale(0.85)}
-        .header .right .top .auth-btn.logged-in img{width:22px;height:22px;border-radius:50%;object-fit:cover;margin-right:4px}
+        .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:8px;border:1px solid var(--border-color)}
+        .header .right .top .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;text-transform:uppercase}
+        .header .right .top .lang-switcher .lang-btn.active{background:var(--gold);color:#0a0e1a;box-shadow:0 0 20px var(--gold-glow)}
+        .header .right .top .lang-switcher .lang-btn:active{transform:scale(0.85)}
         
-        .header .right .bottom{display:flex;gap:6px;align-items:center}
-        .header .right .bottom .lang-switcher{display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:8px;border:1px solid var(--border-color)}
-        .header .right .bottom .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;text-transform:uppercase}
-        .header .right .bottom .lang-switcher .lang-btn.active{background:var(--gold);color:#0a0e1a;box-shadow:0 0 20px var(--gold-glow)}
-        .header .right .bottom .lang-switcher .lang-btn:active{transform:scale(0.85)}
-        
-        .header .right .bottom .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:8px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;font-size:1rem;color:var(--text-secondary);position:relative}
-        .header .right .bottom .noti-btn:active{transform:scale(0.85)}
-        .header .right .bottom .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none}
+        .header .right .top .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:8px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;font-size:1rem;color:var(--text-secondary);position:relative}
+        .header .right .top .noti-btn:active{transform:scale(0.85)}
+        .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none}
 
         /* ===== WELCOME ===== */
         .welcome{margin-bottom:16px;animation:slideUp 0.6s ease}
@@ -167,12 +165,10 @@
     <div class="header">
         <div class="left">
             <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Game Shop</div>
+            <div class="auth-btn" id="authBtn" onclick="handleAuthClick()">🔑 Login</div>
         </div>
         <div class="right">
             <div class="top">
-                <div class="auth-btn" id="authBtn" onclick="handleAuthClick()">🔑 Login</div>
-            </div>
-            <div class="bottom">
                 <div class="lang-switcher">
                     <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
                     <button class="lang-btn" data-lang="my" onclick="setLang('my')">MY</button>
