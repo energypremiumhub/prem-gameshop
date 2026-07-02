@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>⚡ Premium Game Shop - Notifications</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="lang.js"></script>
+    <script src="auth.js"></script>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
         
@@ -29,6 +31,7 @@
             --red: #ef4444;
             --purple: #8b5cf6;
             --purple-glow: rgba(139,92,246,0.2);
+            --warning: #f59e0b;
         }
 
         body {
@@ -48,7 +51,6 @@
 
         .container{max-width:500px;margin:0 auto}
 
-        /* ===== HEADER ===== */
         .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
         .header .left{display:flex;flex-direction:column;gap:6px}
         .header .left .logo{font-size:1rem;font-weight:800;color:var(--gold);text-shadow:0 0 20px var(--gold-glow);letter-spacing:0.5px}
@@ -71,14 +73,12 @@
         .header .right .top .noti-btn:active{transform:scale(0.85)}
         .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none}
 
-        /* ===== PAGE HEADER ===== */
         .page-header{margin-bottom:20px;animation:slideUp 0.6s ease}
         .page-header h1{font-size:1.3rem;font-weight:800;color:var(--text-primary)}
         .page-header h1 span{background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 40px var(--gold-glow)}
         .page-header h1 i{color:var(--cyan);-webkit-text-fill-color:initial;margin-right:6px}
         .page-header p{color:var(--text-secondary);font-size:0.75rem;margin-top:2px}
 
-        /* ===== NOTIFICATION ITEMS ===== */
         .noti-item{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:14px 16px;margin-bottom:10px;animation:slideUp 0.5s ease;display:flex;gap:14px;align-items:flex-start;transition:all 0.3s ease;box-shadow:0 2px 15px var(--shadow)}
         .noti-item:active{transform:scale(0.97)}
         .noti-item .icon{font-size:1.5rem;flex-shrink:0;margin-top:2px}
@@ -96,18 +96,15 @@
         .noti-item .status-badge.cancelled{background:rgba(239,68,68,0.12);color:#ef4444}
         .noti-item .status-badge.info{background:rgba(0,212,255,0.12);color:#00d4ff}
 
-        /* ===== EMPTY STATE ===== */
         .empty-state{text-align:center;padding:50px 20px;color:var(--text-secondary);animation:slideUp 0.6s ease}
         .empty-state .icon{font-size:4rem;display:block;margin-bottom:16px;opacity:0.2}
         .empty-state h3{font-size:1.1rem;color:var(--text-primary);margin-bottom:4px}
         .empty-state p{font-size:0.75rem;opacity:0.7}
 
-        /* ===== MARK ALL READ ===== */
         .mark-all{text-align:right;margin-bottom:12px;animation:slideUp 0.5s ease}
         .mark-all button{background:transparent;border:none;color:var(--cyan);font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;padding:4px 12px;border-radius:8px;border:1px solid rgba(0,212,255,0.1)}
         .mark-all button:active{transform:scale(0.90);background:rgba(0,212,255,0.05)}
 
-        /* ===== BOTTOM NAV ===== */
         .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);border-top:1px solid var(--border-color);display:flex;justify-content:space-around;padding:6px 0 10px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px var(--shadow)}
         .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);padding:4px 8px;border-radius:10px;position:relative}
         .bottom-nav .nav-item:active{transform:scale(0.75)}
@@ -126,37 +123,10 @@
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
         @keyframes shimmer{0%,100%{transform:translate(0,0)}50%{transform:translate(-20%,-20%)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-
-        /* ===== AUTH MODAL ===== */
-        .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(12px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px}
-        .modal-overlay.show{display:flex;animation:fadeIn 0.3s ease}
-        .modal{background:linear-gradient(145deg,var(--bg-card),var(--bg-secondary));border:1px solid var(--border-color);border-radius:18px;padding:24px 20px;max-width:380px;width:100%;box-shadow:0 20px 60px var(--shadow);position:relative;overflow:hidden;max-height:90vh;overflow-y:auto}
-        .modal::before{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(245,200,66,0.04) 0%,transparent 70%);animation:shimmer 8s ease-in-out infinite}
-        .modal h2{font-size:1.2rem;color:var(--gold);margin-bottom:4px;text-align:center;position:relative;z-index:1;text-shadow:0 0 30px var(--gold-glow)}
-        .modal p{color:var(--text-secondary);font-size:0.75rem;text-align:center;margin-bottom:16px;position:relative;z-index:1}
-        .modal .form-group{margin-bottom:12px;position:relative;z-index:1}
-        .modal .form-group label{font-size:0.6rem;color:var(--text-secondary);font-weight:600;display:block;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px}
-        .modal .form-group input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border-color);background:var(--bg-input);color:var(--text-primary);font-size:0.85rem;outline:none;transition:all 0.3s ease}
-        .modal .form-group input:focus{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
-        .modal .form-group input::placeholder{color:var(--text-secondary);font-size:0.7rem}
-        .modal .btn-primary{width:100%;padding:11px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:10px;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;position:relative;z-index:1}
-        .modal .btn-primary:active{transform:scale(0.96)}
-        .modal .btn-primary:hover{box-shadow:0 0 40px var(--gold-glow)}
-        .modal .switch-link{color:var(--cyan);cursor:pointer;font-weight:600;text-align:center;display:block;margin-top:10px;font-size:0.7rem;position:relative;z-index:1}
-        .modal .switch-link:active{opacity:0.7}
-        .modal .close-btn{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--text-secondary);font-size:1.1rem;cursor:pointer;z-index:2}
-        .avatar-upload .preview{width:70px;height:70px;border-radius:50%;background:var(--bg-input);border:2px solid var(--border-color);display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--text-secondary);cursor:pointer;transition:all 0.3s ease;overflow:hidden;position:relative;margin:0 auto 8px}
-        .avatar-upload .preview:hover{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
-        .avatar-upload .preview img{width:100%;height:100%;object-fit:cover}
-        .avatar-upload .preview input{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}
-        .avatar-upload .preview .upload-hint{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.7);padding:2px;font-size:0.4rem;color:var(--text-secondary);text-align:center;display:none}
-        .avatar-upload .preview:hover .upload-hint{display:block}
-        .avatar-upload .label{font-size:0.55rem;color:var(--text-secondary);text-align:center;display:block}
     </style>
 </head>
 <body>
 <div class="container">
-    <!-- ===== HEADER ===== -->
     <div class="header">
         <div class="left">
             <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Game Shop</div>
@@ -176,24 +146,20 @@
         </div>
     </div>
 
-    <!-- ===== PAGE HEADER ===== -->
     <div class="page-header">
         <h1><i class="fas fa-bell"></i> <span id="pageTitle">Notifications</span></h1>
         <p id="pageSub">Stay updated with your orders</p>
     </div>
 
-    <!-- ===== MARK ALL READ ===== -->
     <div class="mark-all">
         <button onclick="markAllRead()" id="markAllBtn">✅ Mark all as read</button>
     </div>
 
-    <!-- ===== NOTIFICATIONS ===== -->
     <div id="notiContainer"></div>
 
     <div class="footer-text">&copy; 2026 Premium Game Shop</div>
 </div>
 
-<!-- ===== BOTTOM NAV ===== -->
 <div class="bottom-nav">
     <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label" id="navHome">Home</span></a>
     <a href="shop.html" class="nav-item"><span class="icon">🛒</span><span class="label" id="navShop">Shop</span></a>
@@ -201,166 +167,21 @@
     <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label" id="navProfile">Profile</span></a>
 </div>
 
-<!-- ===== TOAST ===== -->
 <div class="toast" id="toast"></div>
 
-<!-- ===== AUTH MODAL ===== -->
-<div class="modal-overlay" id="authModal">
-    <div class="modal">
-        <button class="close-btn" onclick="closeModal()">✕</button>
-        <h2 id="modalTitle">⚔️ Login</h2>
-        <p id="modalSub">Welcome back, warrior!</p>
-        <div id="modalBody">
-            <div id="loginForm">
-                <div class="form-group">
-                    <label id="emailLabel">📧 Email or Username</label>
-                    <input type="text" id="loginEmail" placeholder="Enter your email or username">
-                </div>
-                <div class="form-group">
-                    <label id="passLabel">🔑 Password</label>
-                    <input type="password" id="loginPassword" placeholder="Enter your password">
-                </div>
-                <button class="btn-primary" id="loginBtn" onclick="handleLogin()">⚡ Login</button>
-                <span class="switch-link" id="switchToRegister" onclick="switchAuthMode()">Don't have an account? Register</span>
-            </div>
-            <div id="registerForm" style="display:none;">
-                <div class="avatar-upload">
-                    <div class="preview" id="avatarPreview">
-                        👤
-                        <input type="file" id="avatarInput" accept="image/*" onchange="handleAvatarUpload(event)">
-                        <span class="upload-hint">Tap to change</span>
-                    </div>
-                    <span class="label">Profile Picture (optional)</span>
-                </div>
-                <div class="form-group">
-                    <label>👤 Username <span class="required">*</span></label>
-                    <input type="text" id="regUsername" placeholder="Choose a username">
-                    <div class="error-text" id="usernameError">Username is required</div>
-                </div>
-                <div class="form-group">
-                    <label>📧 Email <span class="required">*</span></label>
-                    <input type="email" id="regEmail" placeholder="Enter your email">
-                    <div class="error-text" id="emailError">Valid email is required</div>
-                </div>
-                <div class="form-group">
-                    <label>🔑 Password <span class="required">*</span></label>
-                    <input type="password" id="regPassword" placeholder="Min 4 characters">
-                    <div class="error-text" id="passwordError">Password must be at least 4 characters</div>
-                </div>
-                <div class="form-group">
-                    <label>🔐 Confirm Password <span class="required">*</span></label>
-                    <input type="password" id="regConfirmPassword" placeholder="Re-enter password">
-                    <div class="error-text" id="confirmError">Passwords do not match</div>
-                </div>
-                <button class="btn-primary" onclick="handleRegister()">🛡️ Register</button>
-                <span class="switch-link" id="switchToLogin" onclick="switchAuthMode()">Already have an account? Login</span>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script>
-    // ===== LANGUAGE DATA =====
-    const LANG_DATA = {
-        en: {
-            appName: 'Premium Game Shop',
-            pageTitle: 'Notifications',
-            pageSub: 'Stay updated with your orders',
-            markAll: 'Mark all as read',
-            noNoti: 'No notifications yet',
-            noNotiDesc: 'Your notifications will appear here',
-            notiOrder: 'New Order',
-            notiOrderDesc: 'Your order has been placed successfully.',
-            notiStatus: 'Order Status Update',
-            notiStatusDesc: 'Your order status has been updated to',
-            notiWelcome: 'Welcome to Premium Game Shop!',
-            notiWelcomeDesc: 'Start shopping and get the best deals.',
-            notiCompleted: 'Order Completed',
-            notiCompletedDesc: 'Your order has been completed successfully!',
-            home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
-            login: 'Login',
-            register: 'Register',
-            modalLogin: '⚔️ Login',
-            modalRegister: '🛡️ Register',
-            modalLoginSub: 'Welcome back, warrior!',
-            modalRegisterSub: 'Create your account, champion!',
-            email: '📧 Email or Username',
-            password: '🔑 Password',
-            switchLogin: "Don't have an account? Register",
-            switchRegister: 'Already have an account? Login',
-            loginSuccess: '✅ Welcome back, Champion!',
-            registerSuccess: '✅ Account created! Welcome!',
-            logoutSuccess: '🚪 Logged out successfully!',
-            logoutConfirm: 'Are you sure you want to logout?',
-            enterEmail: 'Please enter your email or username',
-            enterPassword: 'Please enter your password',
-            enterUsername: 'Please enter your username',
-            noti: '🔔 No new notifications',
-            markedAll: '✅ All notifications marked as read'
-        },
-        my: {
-            appName: 'ပရီမီယံ ဂိမ်းဆိုင်',
-            pageTitle: 'အသိပေးချက်များ',
-            pageSub: 'သင့်အော်ဒါများကို စောင့်ကြည့်ပါ',
-            markAll: 'အားလုံးဖတ်ပြီးအဖြစ်မှတ်ပါ',
-            noNoti: 'အသိပေးချက်မရှိသေးပါ',
-            noNotiDesc: 'သင့်အသိပေးချက်များ ဤနေရာတွင်ပေါ်လာပါမည်',
-            notiOrder: 'အော်ဒါအသစ်',
-            notiOrderDesc: 'သင့်အော်ဒါကို အောင်မြင်စွာတင်ထားပါသည်။',
-            notiStatus: 'အော်ဒါအခြေအနေ အပ်ဒိတ်',
-            notiStatusDesc: 'သင့်အော်ဒါအခြေအနေကို',
-            notiWelcome: 'Premium Game Shop မှ ကြိုဆိုပါတယ်!',
-            notiWelcomeDesc: 'စျေးဝယ်ပြီး အကောင်းဆုံးဈေးနှုန်းများရယူပါ။',
-            notiCompleted: 'အော်ဒါပြီးဆုံး',
-            notiCompletedDesc: 'သင့်အော်ဒါကို အောင်မြင်စွာဆောင်ရွက်ပြီးပါပြီ!',
-            home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
-            login: 'ဝင်ရန်',
-            register: 'မှတ်ပုံတင်ရန်',
-            modalLogin: '⚔️ ဝင်ရန်',
-            modalRegister: '🛡️ မှတ်ပုံတင်ရန်',
-            modalLoginSub: 'ပြန်လည်ကြိုဆိုပါတယ် စစ်သည်တော်!',
-            modalRegisterSub: 'အကောင့်ဖွင့်ပါ ချန်ပီယံ!',
-            email: '📧 အီးမေးလ် သို့မဟုတ် အသုံးပြုသူအမည်',
-            password: '🔑 စကားဝှက်',
-            switchLogin: 'အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်',
-            switchRegister: 'အကောင့်ရှိပြီးသား? ဝင်ရန်',
-            loginSuccess: '✅ ကြိုဆိုပါတယ် ချန်ပီယံ!',
-            registerSuccess: '✅ အကောင့်ဖွင့်ခြင်းအောင်မြင်ပါပြီ!',
-            logoutSuccess: '🚪 ထွက်ခြင်းအောင်မြင်ပါပြီ!',
-            logoutConfirm: 'ထွက်မှာသေချာလား?',
-            enterEmail: 'ကျေးဇူးပြု၍ အီးမေးလ် သို့မဟုတ် အသုံးပြုသူအမည်ထည့်ပါ',
-            enterPassword: 'ကျေးဇူးပြု၍ စကားဝှက်ထည့်ပါ',
-            enterUsername: 'ကျေးဇူးပြု၍ အသုံးပြုသူအမည်ထည့်ပါ',
-            noti: '🔔 အသိပေးချက်အသစ်မရှိပါ',
-            markedAll: '✅ အားလုံးဖတ်ပြီးအဖြစ်မှတ်ပြီး'
-        }
-    };
-
-    let currentLang = localStorage.getItem('lang') || 'en';
-
-    function getText(key) { return LANG_DATA[currentLang][key] || key; }
-
-    function setLang(lang) {
-        currentLang = lang;
-        localStorage.setItem('lang', lang);
-        updateLanguage();
-        document.querySelectorAll('.lang-btn').forEach(b => {
-            b.classList.toggle('active', b.dataset.lang === lang);
-        });
-    }
-
     function updateLanguage() {
         const d = LANG_DATA[currentLang];
+        if (!d) return;
         document.getElementById('appName').innerHTML = '<i class="fas fa-gamepad"></i> ' + d.appName;
-        document.getElementById('pageTitle').textContent = d.pageTitle;
-        document.getElementById('pageSub').textContent = d.pageSub;
-        document.getElementById('markAllBtn').textContent = d.markAll;
-        document.getElementById('navHome').textContent = d.home;
-        document.getElementById('navShop').textContent = d.shop;
-        document.getElementById('navPayment').textContent = d.payment;
-        document.getElementById('navProfile').textContent = d.profile;
+        document.getElementById('pageTitle').textContent = d.pageTitle || 'Notifications';
+        document.getElementById('pageSub').textContent = d.pageSub || 'Stay updated with your orders';
+        document.getElementById('markAllBtn').textContent = d.markAll || 'Mark all as read';
+        document.getElementById('navHome').textContent = d.home || 'Home';
+        document.getElementById('navShop').textContent = d.shop || 'Shop';
+        document.getElementById('navPayment').textContent = d.payment || 'Payment';
+        document.getElementById('navProfile').textContent = d.profile || 'Profile';
         updateAuthUI();
-        updateModalUI();
         renderNotifications();
     }
 
@@ -372,7 +193,6 @@
         t._timer = setTimeout(() => t.classList.remove('show'), 3000);
     }
 
-    // ===== NOTIFICATION SYSTEM =====
     function checkNotifications() {
         const notiData = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
         const badge = document.getElementById('notiBadge');
@@ -388,58 +208,45 @@
         }
     }
 
-    function showNotification() {
-        const notiData = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
-        if (notiData.show) {
-            showToast('🛒 ' + notiData.message + ' #' + notiData.orderId);
-            localStorage.setItem('newOrderNotification', JSON.stringify({show: false}));
-            document.getElementById('notiBadge').style.display = 'none';
-        } else {
-            showToast(getText('noti'));
-        }
-    }
-
     window.addEventListener('storage', function(e) {
         if (e.key === 'newOrderNotification') {
             checkNotifications();
         }
     });
 
-    // ===== RENDER NOTIFICATIONS =====
     function renderNotifications() {
         const container = document.getElementById('notiContainer');
-        const d = LANG_DATA[currentLang];
+        const d = LANG_DATA[currentLang] || {};
         
         let notifications = JSON.parse(localStorage.getItem('notifications') || '[]');
         
-        if (notifications.length === 0) {
-            const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
-            if (currentUser) {
-                notifications.push({
-                    id: 'noti-1',
-                    userId: currentUser.username,
-                    type: 'welcome',
-                    title: d.notiWelcome,
-                    description: d.notiWelcomeDesc,
-                    time: new Date().toISOString(),
-                    read: false
-                });
-                localStorage.setItem('notifications', JSON.stringify(notifications));
-            }
+        // Add welcome notification if user is logged in and no notifications
+        if (notifications.length === 0 && isLoggedIn()) {
+            const user = getCurrentUser();
+            notifications.push({
+                id: 'noti-1',
+                userId: user.username,
+                type: 'welcome',
+                title: d.notiWelcome || '👋 Welcome to Premium Game Shop!',
+                description: d.notiWelcomeDesc || 'Start shopping and get the best deals.',
+                time: new Date().toISOString(),
+                read: false
+            });
+            localStorage.setItem('notifications', JSON.stringify(notifications));
         }
 
-        const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+        const user = getCurrentUser();
         let userNotis = [];
-        if (currentUser) {
-            userNotis = notifications.filter(n => n.userId === currentUser.username);
+        if (user) {
+            userNotis = notifications.filter(n => n.userId === user.username);
         }
 
         if (userNotis.length === 0) {
             container.innerHTML = `
                 <div class="empty-state">
                     <span class="icon">🔔</span>
-                    <h3>${d.noNoti}</h3>
-                    <p>${d.noNotiDesc}</p>
+                    <h3>${d.noNoti || 'No notifications yet'}</h3>
+                    <p>${d.noNotiDesc || 'Your notifications will appear here'}</p>
                 </div>
             `;
             return;
@@ -489,7 +296,6 @@
         `).join('');
     }
 
-    // ===== MARK AS READ =====
     function markAsRead(id) {
         let notifications = JSON.parse(localStorage.getItem('notifications') || '[]');
         notifications = notifications.map(n => {
@@ -502,47 +308,39 @@
         renderNotifications();
     }
 
-    // ===== MARK ALL READ =====
     function markAllRead() {
         let notifications = JSON.parse(localStorage.getItem('notifications') || '[]');
-        const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
-        if (currentUser) {
+        const user = getCurrentUser();
+        if (user) {
             notifications = notifications.map(n => {
-                if (n.userId === currentUser.username) {
+                if (n.userId === user.username) {
                     n.read = true;
                 }
                 return n;
             });
             localStorage.setItem('notifications', JSON.stringify(notifications));
             renderNotifications();
-            showToast(getText('markedAll'));
+            showToast(getText('markedAll') || '✅ All notifications marked as read');
         }
     }
 
-    // ===== AUTH =====
-    let currentUser = null;
-    const savedUser = localStorage.getItem('currentUser');
-    if (savedUser) currentUser = JSON.parse(savedUser);
-
-    function isLoggedIn() { return currentUser !== null; }
-
     function updateAuthUI() {
         const authBtn = document.getElementById('authBtn');
-        if (currentUser) {
-            const savedAvatar = localStorage.getItem('userAvatar_' + currentUser.username);
+        if (isLoggedIn()) {
+            const user = getCurrentUser();
+            const savedAvatar = localStorage.getItem('userAvatar_' + user.username);
             if (savedAvatar) {
-                authBtn.innerHTML = '<img src="' + savedAvatar + '" alt="avatar"> ' + currentUser.username;
+                authBtn.innerHTML = '<img src="' + savedAvatar + '" alt="avatar"> ' + user.username;
             } else {
-                authBtn.innerHTML = '👤 ' + currentUser.username;
+                authBtn.innerHTML = '👤 ' + user.username;
             }
             authBtn.className = 'auth-btn logged-in';
             authBtn.title = 'Go to Profile';
         } else {
-            authBtn.innerHTML = '🔑 ' + getText('login');
+            authBtn.innerHTML = '🔑 ' + (getText('login') || 'Login');
             authBtn.className = 'auth-btn';
             authBtn.title = 'Login';
         }
-        if (window.updateProfileUI) window.updateProfileUI();
         renderNotifications();
     }
 
@@ -554,90 +352,58 @@
         }
     }
 
-    // ===== AVATAR UPLOAD =====
-    let tempAvatar = null;
-
-    function handleAvatarUpload(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                tempAvatar = e.target.result;
-                document.getElementById('avatarPreview').innerHTML = 
-                    '<img src="' + e.target.result + '" alt="avatar"><input type="file" accept="image/*" onchange="handleAvatarUpload(event)"><span class="upload-hint">Tap to change</span>';
-            };
-            reader.readAsDataURL(file);
-        }
-    }
-
     // ===== AUTH MODAL =====
     let isLoginMode = true;
 
     function openModal(mode) {
         isLoginMode = mode !== 'register';
         const modal = document.getElementById('authModal');
-        modal.classList.add('show');
-        updateModalUI();
-        document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
-        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
-        if (!isLoginMode) {
-            document.getElementById('avatarPreview').innerHTML = 
-                '👤<input type="file" accept="image/*" onchange="handleAvatarUpload(event)"><span class="upload-hint">Tap to change</span>';
-            tempAvatar = null;
+        if (modal) {
+            modal.classList.add('show');
+            updateModalUI();
+        } else {
+            // Fallback: redirect to index if modal not found
+            window.location.href = 'index.html';
         }
     }
 
     function closeModal() {
-        document.getElementById('authModal').classList.remove('show');
+        const modal = document.getElementById('authModal');
+        if (modal) modal.classList.remove('show');
     }
 
     function switchAuthMode() {
         isLoginMode = !isLoginMode;
         updateModalUI();
-        document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
-        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
     }
 
     function updateModalUI() {
-        const d = LANG_DATA[currentLang];
+        const d = LANG_DATA[currentLang] || {};
         if (isLoginMode) {
-            document.getElementById('modalTitle').textContent = d.modalLogin;
-            document.getElementById('modalSub').textContent = d.modalLoginSub;
-            document.getElementById('loginForm').style.display = 'block';
-            document.getElementById('registerForm').style.display = 'none';
-            document.getElementById('loginBtn').innerHTML = '⚡ ' + d.login;
-            document.getElementById('emailLabel').textContent = d.email;
-            document.getElementById('passLabel').textContent = d.password;
-            document.getElementById('switchToRegister').textContent = d.switchLogin;
+            document.getElementById('modalTitle').textContent = d.modalLogin || '⚔️ Login';
+            document.getElementById('modalSub').textContent = d.modalLoginSub || 'Welcome back, warrior!';
+            document.getElementById('loginBtn').innerHTML = '⚡ ' + (d.login || 'Login');
+            document.getElementById('emailLabel').textContent = d.email || '📧 Email / Username / Phone';
+            document.getElementById('passLabel').textContent = d.password || '🔑 Password';
+            document.getElementById('switchToRegister').textContent = d.switchLogin || "Don't have an account? Register";
         } else {
-            document.getElementById('modalTitle').textContent = d.modalRegister;
-            document.getElementById('modalSub').textContent = d.modalRegisterSub;
-            document.getElementById('loginForm').style.display = 'none';
-            document.getElementById('registerForm').style.display = 'block';
-            document.getElementById('switchToLogin').textContent = d.switchRegister;
+            document.getElementById('modalTitle').textContent = d.modalRegister || '🛡️ Register';
+            document.getElementById('modalSub').textContent = d.modalRegisterSub || 'Create your account, champion!';
+            document.getElementById('switchToLogin').textContent = d.switchRegister || 'Already have an account? Login';
         }
     }
 
     function handleLogin() {
-        const email = document.getElementById('loginEmail').value.trim();
-        const password = document.getElementById('loginPassword').value.trim();
-        if (!email) { showToast(getText('enterEmail')); return; }
-        if (!password) { showToast(getText('enterPassword')); return; }
-        const users = JSON.parse(localStorage.getItem('users') || '{}');
-        let foundUser = null;
-        for (const key in users) {
-            if (key === email || users[key].email === email || users[key].username === email) {
-                if (users[key].password === password) {
-                    foundUser = users[key];
-                    break;
-                }
-            }
-        }
-        if (foundUser) {
-            currentUser = foundUser;
-            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        const input = document.getElementById('loginEmail')?.value.trim();
+        const password = document.getElementById('loginPassword')?.value.trim();
+        const d = LANG_DATA[currentLang] || {};
+
+        if (!input) { showToast(d.enterEmail || 'Please enter your email or username'); return; }
+        if (!password) { showToast(d.enterPassword || 'Please enter your password'); return; }
+
+        if (loginUser(input, password)) {
             closeModal();
-            showToast(getText('loginSuccess'));
+            showToast(d.loginSuccess || '✅ Welcome back, Champion!');
             updateAuthUI();
         } else {
             showToast('❌ Invalid email/username or password');
@@ -645,48 +411,101 @@
     }
 
     function handleRegister() {
-        const username = document.getElementById('regUsername').value.trim();
-        const email = document.getElementById('regEmail').value.trim();
-        const password = document.getElementById('regPassword').value.trim();
-        const confirmPassword = document.getElementById('regConfirmPassword').value.trim();
+        const username = document.getElementById('regUsername')?.value.trim();
+        const email = document.getElementById('regEmail')?.value.trim();
+        const password = document.getElementById('regPassword')?.value.trim();
+        const confirmPassword = document.getElementById('regConfirmPassword')?.value.trim();
+        const d = LANG_DATA[currentLang] || {};
 
-        document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
-        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
+        if (!username) { showToast(d.enterUsername || 'Please enter your username'); return; }
+        if (!email || !email.includes('@')) { showToast(d.enterValidEmail || 'Please enter a valid email'); return; }
+        if (!password || password.length < 4) { showToast(d.passwordMin || 'Password must be at least 4 characters'); return; }
+        if (password !== confirmPassword) { showToast(d.passwordMatch || 'Passwords do not match'); return; }
 
-        let hasError = false;
-        if (!username) { document.getElementById('usernameError').classList.add('show'); document.getElementById('regUsername').classList.add('error'); hasError = true; }
-        if (!email || !email.includes('@') || !email.includes('.')) { document.getElementById('emailError').classList.add('show'); document.getElementById('regEmail').classList.add('error'); hasError = true; }
-        if (!password || password.length < 4) { document.getElementById('passwordError').classList.add('show'); document.getElementById('regPassword').classList.add('error'); hasError = true; }
-        if (password !== confirmPassword) { document.getElementById('confirmError').classList.add('show'); document.getElementById('regConfirmPassword').classList.add('error'); hasError = true; }
-        if (hasError) return;
-
-        const users = JSON.parse(localStorage.getItem('users') || '{}');
-        for (const key in users) {
-            if (key === username || users[key].email === email || users[key].username === username) {
-                showToast(getText('userExists'));
-                return;
-            }
+        if (registerUser(username, password)) {
+            closeModal();
+            showToast(d.registerSuccess || '✅ Account created! Welcome!');
+            updateAuthUI();
+        } else {
+            showToast(d.userExists || '❌ Username already exists');
         }
-
-        const newUser = { username, email, password, createdAt: new Date().toISOString() };
-        users[username] = newUser;
-        localStorage.setItem('users', JSON.stringify(users));
-        if (tempAvatar) localStorage.setItem('userAvatar_' + username, tempAvatar);
-        currentUser = newUser;
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
-        closeModal();
-        showToast(getText('registerSuccess'));
-        updateAuthUI();
     }
 
-    document.getElementById('authModal').addEventListener('click', function(e) {
+    // Add auth modal if not exists
+    if (!document.getElementById('authModal')) {
+        const modalHTML = `
+        <div class="modal-overlay" id="authModal">
+            <div class="modal">
+                <button class="close-btn" onclick="closeModal()">✕</button>
+                <h2 id="modalTitle">⚔️ Login</h2>
+                <p id="modalSub">Welcome back, warrior!</p>
+                <div id="modalBody">
+                    <div id="loginForm">
+                        <div class="form-group">
+                            <label id="emailLabel">📧 Email / Username / Phone</label>
+                            <input type="text" id="loginEmail" placeholder="Enter your email or username">
+                        </div>
+                        <div class="form-group">
+                            <label id="passLabel">🔑 Password</label>
+                            <input type="password" id="loginPassword" placeholder="Enter your password">
+                        </div>
+                        <button class="btn-primary" id="loginBtn" onclick="handleLogin()">⚡ Login</button>
+                        <span class="switch-link" id="switchToRegister" onclick="switchAuthMode()">Don't have an account? Register</span>
+                    </div>
+                    <div id="registerForm" style="display:none;">
+                        <div class="form-group">
+                            <label>👤 Username <span class="required">*</span></label>
+                            <input type="text" id="regUsername" placeholder="Choose a username">
+                        </div>
+                        <div class="form-group">
+                            <label>📧 Email <span class="required">*</span></label>
+                            <input type="email" id="regEmail" placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label>🔑 Password <span class="required">*</span></label>
+                            <input type="password" id="regPassword" placeholder="Min 4 characters">
+                        </div>
+                        <div class="form-group">
+                            <label>🔐 Confirm Password <span class="required">*</span></label>
+                            <input type="password" id="regConfirmPassword" placeholder="Re-enter password">
+                        </div>
+                        <button class="btn-primary" onclick="handleRegister()">🛡️ Register</button>
+                        <span class="switch-link" id="switchToLogin" onclick="switchAuthMode()">Already have an account? Login</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <style>
+            .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(12px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px}
+            .modal-overlay.show{display:flex;animation:fadeIn 0.3s ease}
+            .modal{background:linear-gradient(145deg,var(--bg-card),var(--bg-secondary));border:1px solid var(--border-color);border-radius:18px;padding:24px 20px;max-width:380px;width:100%;box-shadow:0 20px 60px var(--shadow);position:relative;overflow:hidden;max-height:90vh;overflow-y:auto}
+            .modal::before{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(245,200,66,0.04) 0%,transparent 70%);animation:shimmer 8s ease-in-out infinite}
+            .modal h2{font-size:1.2rem;color:var(--gold);margin-bottom:4px;text-align:center;position:relative;z-index:1;text-shadow:0 0 30px var(--gold-glow)}
+            .modal p{color:var(--text-secondary);font-size:0.75rem;text-align:center;margin-bottom:16px;position:relative;z-index:1}
+            .modal .form-group{margin-bottom:12px;position:relative;z-index:1}
+            .modal .form-group label{font-size:0.6rem;color:var(--text-secondary);font-weight:600;display:block;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px}
+            .modal .form-group input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border-color);background:var(--bg-input);color:var(--text-primary);font-size:0.85rem;outline:none;transition:all 0.3s ease}
+            .modal .form-group input:focus{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
+            .modal .form-group input::placeholder{color:var(--text-secondary);font-size:0.7rem}
+            .modal .btn-primary{width:100%;padding:11px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:10px;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;position:relative;z-index:1}
+            .modal .btn-primary:active{transform:scale(0.96)}
+            .modal .btn-primary:hover{box-shadow:0 0 40px var(--gold-glow)}
+            .modal .switch-link{color:var(--cyan);cursor:pointer;font-weight:600;text-align:center;display:block;margin-top:10px;font-size:0.7rem;position:relative;z-index:1}
+            .modal .switch-link:active{opacity:0.7}
+            .modal .close-btn{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--text-secondary);font-size:1.1rem;cursor:pointer;z-index:2}
+        </style>
+        `;
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+    }
+
+    document.getElementById('authModal')?.addEventListener('click', function(e) {
         if (e.target === this) closeModal();
     });
 
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Enter') {
             const modal = document.getElementById('authModal');
-            if (modal.classList.contains('show')) {
+            if (modal && modal.classList.contains('show')) {
                 if (isLoginMode) handleLogin();
                 else handleRegister();
             }
