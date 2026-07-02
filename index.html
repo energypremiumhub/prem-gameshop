@@ -149,6 +149,10 @@
         .modal .switch-link{color:var(--cyan);cursor:pointer;font-weight:600;text-align:center;display:block;margin-top:10px;font-size:0.7rem;position:relative;z-index:1}
         .modal .switch-link:active{opacity:0.7}
         .modal .close-btn{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--text-secondary);font-size:1.1rem;cursor:pointer;z-index:2}
+        /* Forgot Password link */
+        .modal .forgot-link{color:var(--text-secondary);cursor:pointer;font-size:0.6rem;text-align:right;display:block;margin-top:6px;position:relative;z-index:1;transition:all 0.3s ease}
+        .modal .forgot-link:hover{color:var(--gold)}
+        .modal .forgot-link:active{opacity:0.7}
 
         .avatar-upload .preview{width:70px;height:70px;border-radius:50%;background:var(--bg-input);border:2px solid var(--border-color);display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--text-secondary);cursor:pointer;transition:all 0.3s ease;overflow:hidden;position:relative;margin:0 auto 8px}
         .avatar-upload .preview:hover{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
@@ -235,6 +239,7 @@
         <h2 id="modalTitle">⚔️ Login</h2>
         <p id="modalSub">Welcome back, warrior!</p>
         <div id="modalBody">
+            <!-- ===== LOGIN FORM ===== -->
             <div id="loginForm">
                 <div class="form-group">
                     <label id="emailLabel">📧 Email or Username</label>
@@ -245,8 +250,11 @@
                     <input type="password" id="loginPassword" placeholder="Enter your password">
                 </div>
                 <button class="btn-primary" id="loginBtn" onclick="handleLogin()">⚡ Login</button>
+                <span class="forgot-link" onclick="openForgotPassword()">🔑 Forgot Password?</span>
                 <span class="switch-link" id="switchToRegister" onclick="switchAuthMode()">Don't have an account? Register</span>
             </div>
+
+            <!-- ===== REGISTER FORM ===== -->
             <div id="registerForm" style="display:none;">
                 <div class="avatar-upload">
                     <div class="preview" id="avatarPreview">
@@ -278,6 +286,35 @@
                 </div>
                 <button class="btn-primary" onclick="handleRegister()">🛡️ Register</button>
                 <span class="switch-link" id="switchToLogin" onclick="switchAuthMode()">Already have an account? Login</span>
+            </div>
+
+            <!-- ===== FORGOT PASSWORD FORM ===== -->
+            <div id="forgotForm" style="display:none;">
+                <div class="form-group">
+                    <label>📧 Email</label>
+                    <input type="email" id="forgotEmail" placeholder="Enter your registered email">
+                    <div class="error-text" id="forgotEmailError">Please enter your email</div>
+                </div>
+                <div id="otpSection" style="display:none;">
+                    <div class="form-group">
+                        <label>🔑 OTP Code</label>
+                        <input type="text" id="otpCode" placeholder="Enter OTP code sent to your email">
+                        <div class="error-text" id="otpError">Invalid OTP code</div>
+                    </div>
+                    <div class="form-group">
+                        <label>🔑 New Password</label>
+                        <input type="password" id="newPassword" placeholder="Min 4 characters">
+                        <div class="error-text" id="newPasswordError">Password must be at least 4 characters</div>
+                    </div>
+                    <div class="form-group">
+                        <label>🔐 Confirm New Password</label>
+                        <input type="password" id="confirmNewPassword" placeholder="Re-enter password">
+                        <div class="error-text" id="confirmNewError">Passwords do not match</div>
+                    </div>
+                    <button class="btn-primary" onclick="resetPassword()">🔄 Reset Password</button>
+                </div>
+                <button class="btn-primary" id="sendOtpBtn" onclick="sendOTP()" style="margin-bottom:8px;">📧 Send OTP</button>
+                <span class="switch-link" onclick="closeForgotPassword()">← Back to Login</span>
             </div>
         </div>
     </div>
@@ -316,7 +353,22 @@
             logoutConfirm: 'Are you sure you want to logout?',
             enterEmail: 'Please enter your email or username',
             enterPassword: 'Please enter your password',
-            enterUsername: 'Please enter your username'
+            enterUsername: 'Please enter your username',
+            enterValidEmail: 'Please enter a valid email',
+            passwordMin: 'Password must be at least 4 characters',
+            passwordMatch: 'Passwords do not match',
+            userExists: '❌ Username or email already exists',
+            userNotFound: '❌ Account not found. Please register first.',
+            invalidCredentials: '❌ Invalid email/username or password',
+            forgotTitle: '🔑 Forgot Password',
+            forgotSub: 'Enter your email to reset password',
+            sendOtp: '📧 Send OTP',
+            resetPassword: '🔄 Reset Password',
+            otpSent: '✅ OTP sent to your email!',
+            otpError: '❌ Invalid OTP code',
+            resetSuccess: '✅ Password reset successfully!',
+            resetError: '❌ Failed to reset password. Please try again.',
+            backToLogin: '← Back to Login'
         },
         my: {
             appName: 'ပရီမီယံ ဂိမ်းဆိုင်',
@@ -348,7 +400,22 @@
             logoutConfirm: 'ထွက်မှာသေချာလား?',
             enterEmail: 'ကျေးဇူးပြု၍ အီးမေးလ် သို့မဟုတ် အသုံးပြုသူအမည်ထည့်ပါ',
             enterPassword: 'ကျေးဇူးပြု၍ စကားဝှက်ထည့်ပါ',
-            enterUsername: 'ကျေးဇူးပြု၍ အသုံးပြုသူအမည်ထည့်ပါ'
+            enterUsername: 'ကျေးဇူးပြု၍ အသုံးပြုသူအမည်ထည့်ပါ',
+            enterValidEmail: 'ကျေးဇူးပြု၍ မှန်ကန်တဲ့ အီးမေးလ်ထည့်ပါ',
+            passwordMin: 'စကားဝှက်သည် အနည်းဆုံး ၄ လုံးရှိရမယ်',
+            passwordMatch: 'စကားဝှက်များ မတူညီပါ',
+            userExists: '❌ အသုံးပြုသူအမည် သို့မဟုတ် အီးမေးလ် ရှိပြီးသားပါ',
+            userNotFound: '❌ အကောင့်မရှိပါ။ ကျေးဇူးပြု၍ မှတ်ပုံတင်ပါ။',
+            invalidCredentials: '❌ အီးမေးလ်/အသုံးပြုသူအမည် သို့မဟုတ် စကားဝှက် မှားနေပါသည်',
+            forgotTitle: '🔑 စကားဝှက်မေ့နေပါသလား',
+            forgotSub: 'စကားဝှက်ပြန်သတ်မှတ်ရန် သင့်အီးမေးလ်ကိုထည့်ပါ',
+            sendOtp: '📧 OTP ပို့ရန်',
+            resetPassword: '🔄 စကားဝှက်ပြန်သတ်မှတ်ရန်',
+            otpSent: '✅ သင့်အီးမေးလ်သို့ OTP ပို့ထားပါသည်!',
+            otpError: '❌ OTP ကုဒ် မှားနေပါသည်',
+            resetSuccess: '✅ စကားဝှက်ပြန်သတ်မှတ်ခြင်းအောင်မြင်ပါပြီ!',
+            resetError: '❌ စကားဝှက်ပြန်သတ်မှတ်ခြင်းမအောင်မြင်ပါ။ ကျေးဇူးပြု၍ ပြန်စမ်းပါ။',
+            backToLogin: '← ဝင်ရန်စာမျက်နှာသို့'
         }
     };
 
@@ -490,6 +557,12 @@
         isLoginMode = mode !== 'register';
         const modal = document.getElementById('authModal');
         modal.classList.add('show');
+        // Reset all forms
+        document.getElementById('loginForm').style.display = 'block';
+        document.getElementById('registerForm').style.display = 'none';
+        document.getElementById('forgotForm').style.display = 'none';
+        document.getElementById('otpSection').style.display = 'none';
+        document.getElementById('sendOtpBtn').style.display = 'block';
         updateModalUI();
         document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
         document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
@@ -502,13 +575,35 @@
 
     function closeModal() {
         document.getElementById('authModal').classList.remove('show');
+        // Reset forgot password
+        document.getElementById('forgotEmail').value = '';
+        document.getElementById('otpCode').value = '';
+        document.getElementById('newPassword').value = '';
+        document.getElementById('confirmNewPassword').value = '';
+        document.getElementById('otpSection').style.display = 'none';
+        document.getElementById('sendOtpBtn').style.display = 'block';
+        document.getElementById('loginForm').style.display = 'block';
+        document.getElementById('registerForm').style.display = 'none';
+        document.getElementById('forgotForm').style.display = 'none';
+        isLoginMode = true;
+        updateModalUI();
     }
 
     function switchAuthMode() {
         isLoginMode = !isLoginMode;
+        document.getElementById('loginForm').style.display = isLoginMode ? 'block' : 'none';
+        document.getElementById('registerForm').style.display = isLoginMode ? 'none' : 'block';
+        document.getElementById('forgotForm').style.display = 'none';
+        document.getElementById('otpSection').style.display = 'none';
+        document.getElementById('sendOtpBtn').style.display = 'block';
         updateModalUI();
         document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
         document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
+        if (!isLoginMode) {
+            document.getElementById('avatarPreview').innerHTML = 
+                '👤<input type="file" accept="image/*" onchange="handleAvatarUpload(event)"><span class="upload-hint">Tap to change</span>';
+            tempAvatar = null;
+        }
     }
 
     function updateModalUI() {
@@ -516,8 +611,6 @@
         if (isLoginMode) {
             document.getElementById('modalTitle').textContent = d.modalLogin;
             document.getElementById('modalSub').textContent = d.modalLoginSub;
-            document.getElementById('loginForm').style.display = 'block';
-            document.getElementById('registerForm').style.display = 'none';
             document.getElementById('loginBtn').innerHTML = '⚡ ' + d.login;
             document.getElementById('emailLabel').textContent = d.email;
             document.getElementById('passLabel').textContent = d.password;
@@ -525,12 +618,11 @@
         } else {
             document.getElementById('modalTitle').textContent = d.modalRegister;
             document.getElementById('modalSub').textContent = d.modalRegisterSub;
-            document.getElementById('loginForm').style.display = 'none';
-            document.getElementById('registerForm').style.display = 'block';
             document.getElementById('switchToLogin').textContent = d.switchRegister;
         }
     }
 
+    // ===== LOGIN =====
     function handleLogin() {
         const email = document.getElementById('loginEmail').value.trim();
         const password = document.getElementById('loginPassword').value.trim();
@@ -555,11 +647,28 @@
             closeModal();
             showToast(getText('loginSuccess'));
             updateAuthUI();
+            // Redirect to profile after 1 second
+            setTimeout(() => {
+                window.location.href = 'profile.html';
+            }, 1000);
         } else {
-            showToast('❌ Invalid email/username or password');
+            // Check if user exists
+            let userExists = false;
+            for (const key in users) {
+                if (key === email || users[key].email === email || users[key].username === email) {
+                    userExists = true;
+                    break;
+                }
+            }
+            if (userExists) {
+                showToast(getText('invalidCredentials'));
+            } else {
+                showToast(getText('userNotFound'));
+            }
         }
     }
 
+    // ===== REGISTER =====
     function handleRegister() {
         const username = document.getElementById('regUsername').value.trim();
         const email = document.getElementById('regEmail').value.trim();
@@ -609,6 +718,7 @@
             username: username,
             email: email,
             password: password,
+            displayName: username,
             createdAt: new Date().toISOString()
         };
         users[username] = newUser;
@@ -623,6 +733,149 @@
         closeModal();
         showToast(getText('registerSuccess'));
         updateAuthUI();
+        // Redirect to profile after 1 second
+        setTimeout(() => {
+            window.location.href = 'profile.html';
+        }, 1000);
+    }
+
+    // ===== FORGOT PASSWORD =====
+    let otpStorage = {};
+
+    function openForgotPassword() {
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('registerForm').style.display = 'none';
+        document.getElementById('forgotForm').style.display = 'block';
+        document.getElementById('otpSection').style.display = 'none';
+        document.getElementById('sendOtpBtn').style.display = 'block';
+        document.getElementById('modalTitle').textContent = getText('forgotTitle');
+        document.getElementById('modalSub').textContent = getText('forgotSub');
+        document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
+        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
+        // Reset fields
+        document.getElementById('forgotEmail').value = '';
+        document.getElementById('otpCode').value = '';
+        document.getElementById('newPassword').value = '';
+        document.getElementById('confirmNewPassword').value = '';
+    }
+
+    function closeForgotPassword() {
+        document.getElementById('forgotForm').style.display = 'none';
+        document.getElementById('loginForm').style.display = 'block';
+        document.getElementById('registerForm').style.display = 'none';
+        document.getElementById('otpSection').style.display = 'none';
+        document.getElementById('sendOtpBtn').style.display = 'block';
+        isLoginMode = true;
+        updateModalUI();
+        document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
+        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
+    }
+
+    function sendOTP() {
+        const email = document.getElementById('forgotEmail').value.trim();
+        if (!email) {
+            document.getElementById('forgotEmailError').classList.add('show');
+            document.getElementById('forgotEmail').classList.add('error');
+            return;
+        }
+        document.getElementById('forgotEmailError').classList.remove('show');
+        document.getElementById('forgotEmail').classList.remove('error');
+
+        // Check if email exists
+        const users = JSON.parse(localStorage.getItem('users') || '{}');
+        let userExists = false;
+        for (const key in users) {
+            if (users[key].email === email || key === email) {
+                userExists = true;
+                break;
+            }
+        }
+
+        if (!userExists) {
+            showToast(getText('userNotFound'));
+            return;
+        }
+
+        // Generate OTP (6 digits)
+        const otp = Math.floor(100000 + Math.random() * 900000).toString();
+        otpStorage[email] = {
+            otp: otp,
+            timestamp: Date.now()
+        };
+
+        // Store email for reset
+        document.getElementById('forgotEmail').dataset.email = email;
+
+        // Show OTP section
+        document.getElementById('otpSection').style.display = 'block';
+        document.getElementById('sendOtpBtn').style.display = 'none';
+
+        // In real app, send email here
+        // For demo, show OTP in toast
+        showToast('📧 ' + getText('otpSent') + ' (OTP: ' + otp + ')');
+
+        // Auto-hide after 5 minutes (300 seconds)
+        setTimeout(() => {
+            delete otpStorage[email];
+        }, 300000);
+    }
+
+    function resetPassword() {
+        const email = document.getElementById('forgotEmail').dataset.email;
+        const otp = document.getElementById('otpCode').value.trim();
+        const newPassword = document.getElementById('newPassword').value.trim();
+        const confirmNewPassword = document.getElementById('confirmNewPassword').value.trim();
+
+        document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
+        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
+
+        let hasError = false;
+
+        if (!otp) {
+            document.getElementById('otpError').classList.add('show');
+            document.getElementById('otpCode').classList.add('error');
+            hasError = true;
+        }
+
+        if (!newPassword || newPassword.length < 4) {
+            document.getElementById('newPasswordError').classList.add('show');
+            document.getElementById('newPassword').classList.add('error');
+            hasError = true;
+        }
+
+        if (newPassword !== confirmNewPassword) {
+            document.getElementById('confirmNewError').classList.add('show');
+            document.getElementById('confirmNewPassword').classList.add('error');
+            hasError = true;
+        }
+
+        if (hasError) return;
+
+        // Verify OTP
+        const stored = otpStorage[email];
+        if (!stored || stored.otp !== otp) {
+            document.getElementById('otpError').classList.add('show');
+            document.getElementById('otpCode').classList.add('error');
+            return;
+        }
+
+        // Update password
+        const users = JSON.parse(localStorage.getItem('users') || '{}');
+        for (const key in users) {
+            if (users[key].email === email || key === email) {
+                users[key].password = newPassword;
+                break;
+            }
+        }
+        localStorage.setItem('users', JSON.stringify(users));
+
+        // Clear OTP
+        delete otpStorage[email];
+
+        showToast(getText('resetSuccess'));
+        closeForgotPassword();
+        document.getElementById('loginEmail').value = email;
+        document.getElementById('loginPassword').value = '';
     }
 
     document.getElementById('authModal').addEventListener('click', function(e) {
@@ -633,7 +886,13 @@
         if (e.key === 'Enter') {
             const modal = document.getElementById('authModal');
             if (modal.classList.contains('show')) {
-                if (isLoginMode) {
+                if (document.getElementById('forgotForm').style.display === 'block') {
+                    if (document.getElementById('otpSection').style.display === 'block') {
+                        resetPassword();
+                    } else {
+                        sendOTP();
+                    }
+                } else if (isLoginMode) {
                     handleLogin();
                 } else {
                     handleRegister();
