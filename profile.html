@@ -30,6 +30,7 @@
             --purple: #8b5cf6;
             --purple-glow: rgba(139,92,246,0.2);
             --warning: #f59e0b;
+            --theme-color: #f5c842;
         }
 
         body {
@@ -54,12 +55,12 @@
         .header .left{display:flex;flex-direction:column;gap:6px}
         .header .left .logo{font-size:1rem;font-weight:800;color:var(--gold);text-shadow:0 0 20px var(--gold-glow);letter-spacing:0.5px}
         .header .left .logo i{color:var(--cyan);margin-right:6px;text-shadow:0 0 20px var(--cyan-glow)}
-        .header .left .auth-btn{background:transparent;border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 14px;border-radius:8px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-flex;align-items:center;gap:6px;height:36px;width:fit-content}
-        .header .left .auth-btn:active{transform:scale(0.85)}
-        .header .left .auth-btn:hover{border-color:var(--gold);color:var(--gold)}
-        .header .left .auth-btn.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 25px var(--gold-glow);padding:4px 14px}
-        .header .left .auth-btn.logged-in:active{transform:scale(0.85)}
-        .header .left .auth-btn.logged-in img{width:22px;height:22px;border-radius:50%;object-fit:cover;margin-right:4px}
+        .header .left .profile-icon{background:transparent;border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 14px;border-radius:8px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-flex;align-items:center;gap:6px;height:36px;width:fit-content}
+        .header .left .profile-icon:active{transform:scale(0.85)}
+        .header .left .profile-icon:hover{border-color:var(--gold);color:var(--gold)}
+        .header .left .profile-icon.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 25px var(--gold-glow);padding:4px 14px}
+        .header .left .profile-icon.logged-in:active{transform:scale(0.85)}
+        .header .left .profile-icon.logged-in img{width:22px;height:22px;border-radius:50%;object-fit:cover;margin-right:4px}
         
         .header .right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
         .header .right .top{display:flex;gap:8px;align-items:center}
@@ -72,23 +73,33 @@
         .header .right .top .noti-btn:active{transform:scale(0.85)}
         .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none}
 
-        /* ===== PROFILE SECTION ===== */
-        .profile-section{text-align:center;margin-bottom:20px;animation:slideUp 0.6s ease}
-        .profile-section .avatar-wrap{position:relative;width:80px;height:80px;margin:0 auto 10px}
-        .profile-section .avatar-wrap .avatar{width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--orange));display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#0a0e1a;border:3px solid var(--border-color);cursor:pointer;transition:all 0.3s ease;overflow:hidden;box-shadow:0 0 30px var(--gold-glow)}
+        /* ===== COVER PHOTO ===== */
+        .cover-section{position:relative;border-radius:16px;overflow:hidden;margin-bottom:16px;background:var(--bg-card);border:1px solid var(--border-color);min-height:120px}
+        .cover-section .cover{width:100%;height:120px;object-fit:cover;background:linear-gradient(135deg,var(--gold),var(--orange));display:flex;align-items:center;justify-content:center;font-size:2rem;color:rgba(255,255,255,0.2);position:relative}
+        .cover-section .cover img{width:100%;height:100%;object-fit:cover}
+        .cover-section .cover .cover-overlay{position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.2)}
+        .cover-section .cover-upload{position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,0.6);border:1px solid var(--border-color);border-radius:8px;padding:4px 12px;font-size:0.5rem;color:var(--text-secondary);cursor:pointer;transition:all 0.3s ease;backdrop-filter:blur(10px)}
+        .cover-section .cover-upload:active{transform:scale(0.90)}
+        .cover-section .cover-upload input{display:none}
+
+        /* ===== PROFILE AVATAR (overlap on cover) ===== */
+        .profile-section{text-align:center;margin-top:-40px;position:relative;z-index:2;padding-bottom:12px}
+        .profile-section .avatar-wrap{position:relative;width:80px;height:80px;margin:0 auto 8px}
+        .profile-section .avatar-wrap .avatar{width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,var(--theme-color),var(--orange));display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#0a0e1a;border:3px solid var(--bg-primary);cursor:pointer;transition:all 0.3s ease;overflow:hidden;box-shadow:0 0 30px var(--gold-glow)}
         .profile-section .avatar-wrap .avatar:active{transform:scale(0.95)}
         .profile-section .avatar-wrap .avatar img{width:100%;height:100%;object-fit:cover}
-        .profile-section .avatar-wrap .level-badge{position:absolute;bottom:-2px;right:-2px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;font-size:0.5rem;font-weight:800;padding:2px 10px;border-radius:12px;border:2px solid var(--bg-primary);box-shadow:0 0 20px var(--gold-glow)}
+        .profile-section .avatar-wrap .level-badge{position:absolute;bottom:-2px;right:-2px;background:linear-gradient(135deg,var(--theme-color),var(--orange));color:#0a0e1a;font-size:0.5rem;font-weight:800;padding:2px 10px;border-radius:12px;border:2px solid var(--bg-primary);box-shadow:0 0 20px var(--gold-glow)}
         .profile-section .name{font-size:1.2rem;font-weight:700;color:var(--text-primary)}
-        .profile-section .name i{color:var(--gold);margin-right:6px}
+        .profile-section .name i{color:var(--theme-color);margin-right:6px}
         .profile-section .username{font-size:0.75rem;color:var(--text-secondary);margin-top:2px}
+        .profile-section .bio{font-size:0.65rem;color:var(--text-secondary);margin-top:4px;max-width:300px;margin-left:auto;margin-right:auto;font-style:italic}
         .profile-section .status{font-size:0.6rem;color:var(--green);margin-top:4px;display:inline-flex;align-items:center;gap:4px;background:rgba(34,211,238,0.08);padding:3px 14px;border-radius:20px;border:1px solid rgba(34,211,238,0.1)}
 
         /* ===== STATS GRID ===== */
         .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px;animation:slideUp 0.7s ease}
         .stats-grid .stat{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:12px 6px;text-align:center;box-shadow:0 4px 20px var(--shadow);transition:all 0.3s ease}
         .stats-grid .stat:active{transform:scale(0.95)}
-        .stats-grid .stat .number{font-size:1.1rem;font-weight:700;color:var(--gold);text-shadow:0 0 20px var(--gold-glow)}
+        .stats-grid .stat .number{font-size:1.1rem;font-weight:700;color:var(--theme-color);text-shadow:0 0 20px var(--gold-glow)}
         .stats-grid .stat .label{font-size:0.45rem;color:var(--text-secondary);margin-top:2px;text-transform:uppercase;letter-spacing:0.5px}
         .stats-grid .stat .icon{font-size:0.8rem;display:block;margin-bottom:2px}
 
@@ -97,24 +108,24 @@
         .glass-card .label{font-size:0.6rem;color:var(--text-secondary);font-weight:600;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
         .glass-card .label i{color:var(--cyan);margin-right:4px}
 
-        .menu-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border-color);cursor:pointer;transition:all 0.3s ease}
-        .menu-item:last-child{border-bottom:none}
-        .menu-item:active{transform:scale(0.97)}
-        .menu-item .icon{font-size:1rem;color:var(--text-secondary);width:28px;text-align:center;transition:all 0.3s ease}
-        .menu-item:hover .icon{color:var(--gold)}
-        .menu-item .text{font-size:0.8rem;color:var(--text-primary);flex:1}
-        .menu-item .arrow{color:var(--text-secondary);font-size:0.6rem;transition:all 0.3s ease}
-        .menu-item:hover .arrow{color:var(--gold);transform:translateX(3px)}
-        .menu-item .badge{font-size:0.45rem;background:rgba(245,200,66,0.12);color:var(--gold);padding:2px 10px;border-radius:10px;font-weight:600}
-        .menu-item .badge.danger{background:rgba(239,68,68,0.12);color:var(--red)}
-        .menu-item .badge.success{background:rgba(34,211,238,0.12);color:var(--green)}
+        /* ===== ORDER HISTORY FILTER ===== */
+        .filter-bar{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+        .filter-bar .filter-btn{background:var(--bg-input);border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 12px;border-radius:16px;font-size:0.5rem;font-weight:600;cursor:pointer;transition:all 0.3s ease}
+        .filter-bar .filter-btn:active{transform:scale(0.90)}
+        .filter-bar .filter-btn.active{background:var(--theme-color);color:#0a0e1a;border-color:var(--theme-color);box-shadow:0 0 20px var(--gold-glow)}
+        .filter-bar .filter-btn:hover{border-color:var(--theme-color);color:var(--theme-color)}
+        
+        .search-bar{display:flex;gap:8px;margin-bottom:10px}
+        .search-bar input{flex:1;padding:6px 12px;border-radius:8px;border:1px solid var(--border-color);background:var(--bg-input);color:var(--text-primary);font-size:0.7rem;outline:none;transition:all 0.3s ease}
+        .search-bar input:focus{border-color:var(--theme-color);box-shadow:0 0 20px var(--gold-glow)}
+        .search-bar input::placeholder{color:var(--text-secondary);font-size:0.6rem}
 
-        /* ===== ORDER HISTORY ===== */
+        /* ===== ORDER LIST ===== */
         .order-list{display:flex;flex-direction:column;gap:6px}
-        .order-item{display:flex;align-items:center;justify-content:space-between;background:var(--bg-input);border:1px solid var(--border-color);border-radius:10px;padding:8px 12px;transition:all 0.3s ease}
+        .order-item{display:flex;align-items:center;justify-content:space-between;background:var(--bg-input);border:1px solid var(--border-color);border-radius:10px;padding:8px 12px;transition:all 0.3s ease;cursor:pointer}
         .order-item:active{transform:scale(0.97)}
-        .order-item .order-info{display:flex;flex-direction:column;gap:2px}
-        .order-item .order-info .order-id{font-size:0.6rem;font-weight:600;color:var(--gold)}
+        .order-item .order-info{display:flex;flex-direction:column;gap:2px;flex:1}
+        .order-item .order-info .order-id{font-size:0.6rem;font-weight:600;color:var(--theme-color)}
         .order-item .order-info .order-pkg{font-size:0.65rem;color:var(--text-primary)}
         .order-item .order-info .order-date{font-size:0.45rem;color:var(--text-secondary)}
         .order-item .order-status{font-size:0.45rem;font-weight:700;padding:2px 10px;border-radius:16px;text-transform:uppercase}
@@ -123,22 +134,42 @@
         .order-item .order-status.cancelled{background:rgba(239,68,68,0.12);color:var(--red)}
 
         .order-more{text-align:center;padding:8px 0;color:var(--cyan);font-size:0.65rem;font-weight:600;cursor:pointer;transition:all 0.3s ease}
-        .order-more:active{transform:scale(0.95);color:var(--gold)}
+        .order-more:active{transform:scale(0.95);color:var(--theme-color)}
         .order-more i{margin-right:4px}
 
         .empty-orders{text-align:center;padding:20px;color:var(--text-secondary);font-size:0.75rem}
         .empty-orders .icon{font-size:2rem;display:block;margin-bottom:8px;opacity:0.3}
 
+        /* ===== MENU ITEMS ===== */
+        .menu-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border-color);cursor:pointer;transition:all 0.3s ease}
+        .menu-item:last-child{border-bottom:none}
+        .menu-item:active{transform:scale(0.97)}
+        .menu-item .icon{font-size:1rem;color:var(--text-secondary);width:28px;text-align:center;transition:all 0.3s ease}
+        .menu-item:hover .icon{color:var(--theme-color)}
+        .menu-item .text{font-size:0.8rem;color:var(--text-primary);flex:1}
+        .menu-item .arrow{color:var(--text-secondary);font-size:0.6rem;transition:all 0.3s ease}
+        .menu-item:hover .arrow{color:var(--theme-color);transform:translateX(3px)}
+        .menu-item .badge{font-size:0.45rem;background:rgba(245,200,66,0.12);color:var(--theme-color);padding:2px 10px;border-radius:10px;font-weight:600}
+        .menu-item .badge.danger{background:rgba(239,68,68,0.12);color:var(--red)}
+        .menu-item .badge.success{background:rgba(34,211,238,0.12);color:var(--green)}
+
+        /* ===== THEME COLOR SELECTOR ===== */
+        .color-options{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}
+        .color-options .color-dot{width:28px;height:28px;border-radius:50%;border:2px solid var(--border-color);cursor:pointer;transition:all 0.3s ease}
+        .color-options .color-dot:active{transform:scale(0.85)}
+        .color-options .color-dot.active{border-color:var(--text-primary);box-shadow:0 0 20px rgba(245,200,66,0.2)}
+        .color-options .color-dot:hover{border-color:var(--text-primary)}
+
         /* ===== BOTTOM NAV ===== */
-        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);border-top:1px solid var(--border-color);display:flex;justify-content:space-around;padding:6px 0 10px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px var(--shadow)}
-        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);padding:4px 8px;border-radius:10px;position:relative}
-        .bottom-nav .nav-item:active{transform:scale(0.75)}
-        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
-        .bottom-nav .nav-item .label{font-size:0.4rem;margin-top:1px;font-weight:700;letter-spacing:0.5px;transition:all 0.4s ease}
-        .bottom-nav .nav-item.active{color:var(--gold)}
-        .bottom-nav .nav-item.active .icon{transform:translateY(-6px) scale(1.15);text-shadow:0 0 30px var(--gold-glow)}
+        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);border-top:1px solid var(--border-color);display:flex;justify-content:space-around;padding:10px 0 14px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px var(--shadow)}
+        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);padding:4px 12px;border-radius:10px;position:relative}
+        .bottom-nav .nav-item:active{transform:scale(0.80)}
+        .bottom-nav .nav-item .icon{font-size:1.3rem;display:block;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
+        .bottom-nav .nav-item .label{font-size:0.45rem;margin-top:2px;font-weight:600;letter-spacing:0.5px;transition:all 0.4s ease}
+        .bottom-nav .nav-item.active{color:var(--gold);background:rgba(245,200,66,0.06)}
+        .bottom-nav .nav-item.active .icon{transform:translateY(-2px)}
         .bottom-nav .nav-item.active .label{color:var(--gold)}
-        .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:24px;height:2.5px;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:10px;box-shadow:0 0 20px var(--gold-glow)}
+        .bottom-nav .nav-item:hover .icon{transform:translateY(-2px)}
 
         .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.3;letter-spacing:1px}
 
@@ -158,12 +189,10 @@
         .modal p{color:var(--text-secondary);font-size:0.75rem;text-align:center;margin-bottom:16px;position:relative;z-index:1}
         .modal .form-group{margin-bottom:12px;position:relative;z-index:1}
         .modal .form-group label{font-size:0.6rem;color:var(--text-secondary);font-weight:600;display:block;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px}
-        .modal .form-group input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border-color);background:var(--bg-input);color:var(--text-primary);font-size:0.85rem;outline:none;transition:all 0.3s ease}
-        .modal .form-group input:focus{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
-        .modal .form-group input::placeholder{color:var(--text-secondary);font-size:0.7rem}
-        .modal .form-group input.error{border-color:var(--red);box-shadow:0 0 20px rgba(239,68,68,0.2)}
-        .modal .form-group .error-text{font-size:0.55rem;color:var(--red);margin-top:3px;display:none}
-        .modal .form-group .error-text.show{display:block}
+        .modal .form-group input,.modal .form-group textarea{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border-color);background:var(--bg-input);color:var(--text-primary);font-size:0.85rem;outline:none;transition:all 0.3s ease;font-family:inherit}
+        .modal .form-group input:focus,.modal .form-group textarea:focus{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
+        .modal .form-group input::placeholder,.modal .form-group textarea::placeholder{color:var(--text-secondary);font-size:0.7rem}
+        .modal .form-group textarea{resize:vertical;min-height:60px}
         .modal .btn-primary{width:100%;padding:11px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:10px;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;position:relative;z-index:1}
         .modal .btn-primary:active{transform:scale(0.96)}
         .modal .btn-primary:hover{box-shadow:0 0 40px var(--gold-glow)}
@@ -183,7 +212,7 @@
     <div class="header">
         <div class="left">
             <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Game Shop</div>
-            <div class="auth-btn" id="authBtn" onclick="handleAuthClick()">🔑 Login</div>
+            <div class="profile-icon" id="profileIcon" onclick="goToProfile()">👤 Profile</div>
         </div>
         <div class="right">
             <div class="top">
@@ -199,6 +228,18 @@
         </div>
     </div>
 
+    <!-- ===== COVER PHOTO ===== -->
+    <div class="cover-section">
+        <div class="cover" id="coverDisplay">
+            <div class="cover-overlay"></div>
+            <span id="coverPlaceholder" style="position:relative;z-index:1;font-size:1.5rem;color:rgba(255,255,255,0.3);">📸 Cover</span>
+        </div>
+        <label class="cover-upload">
+            <i class="fas fa-camera"></i> Change Cover
+            <input type="file" id="coverInput" accept="image/*">
+        </label>
+    </div>
+
     <!-- ===== PROFILE SECTION ===== -->
     <div class="profile-section">
         <div class="avatar-wrap">
@@ -207,6 +248,7 @@
         </div>
         <div class="name" id="displayName"><i class="fas fa-crown"></i> Guest</div>
         <div class="username" id="displayUsername">@guest</div>
+        <div class="bio" id="displayBio">No bio yet</div>
         <div class="status" id="statusDisplay"><i class="fas fa-circle"></i> <span id="statusText">Offline</span></div>
     </div>
 
@@ -218,9 +260,23 @@
         <div class="stat"><span class="icon">🏆</span><div class="number" id="rankCount">0</div><div class="label" id="rankLabel">Rank</div></div>
     </div>
 
-    <!-- ===== ORDER HISTORY ===== -->
+    <!-- ===== ORDER HISTORY (with Filter & Search) ===== -->
     <div class="glass-card">
         <span class="label"><i class="fas fa-list"></i> <span id="orderHistoryLabel">Order History</span></span>
+        
+        <!-- Filter -->
+        <div class="filter-bar" id="filterBar">
+            <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">All</button>
+            <button class="filter-btn" data-filter="pending" onclick="setFilter('pending')">Pending</button>
+            <button class="filter-btn" data-filter="completed" onclick="setFilter('completed')">Completed</button>
+            <button class="filter-btn" data-filter="cancelled" onclick="setFilter('cancelled')">Cancelled</button>
+        </div>
+        
+        <!-- Search -->
+        <div class="search-bar">
+            <input type="text" id="orderSearch" placeholder="🔍 Search by Order ID..." oninput="renderOrders()">
+        </div>
+        
         <div id="orderHistoryContainer"></div>
     </div>
 
@@ -230,6 +286,17 @@
         <div class="menu-item" onclick="openSettingsModal()">
             <span class="icon">⚙️</span>
             <span class="text" id="accountSettingsText">Account Settings</span>
+            <span class="arrow">›</span>
+        </div>
+        <div class="menu-item" onclick="openBioModal()">
+            <span class="icon">✏️</span>
+            <span class="text" id="bioSettingsText">Edit Bio</span>
+            <span class="arrow">›</span>
+        </div>
+        <div class="menu-item" onclick="openThemeModal()">
+            <span class="icon">🎨</span>
+            <span class="text" id="themeSettingsText">Theme Color</span>
+            <span class="badge" id="themeBadge" style="background:var(--theme-color);color:#0a0e1a;">●</span>
             <span class="arrow">›</span>
         </div>
         <div class="menu-item" onclick="openChangePassword()">
@@ -308,6 +375,45 @@
     </div>
 </div>
 
+<!-- ===== BIO MODAL ===== -->
+<div class="modal-overlay" id="bioModal">
+    <div class="modal">
+        <button class="close-btn" onclick="closeBioModal()">✕</button>
+        <h2>✏️ Edit Bio</h2>
+        <p>Tell others about yourself</p>
+        <div>
+            <div class="form-group">
+                <label>📝 Bio</label>
+                <textarea id="bioInput" placeholder="Write something about yourself..." maxlength="150"></textarea>
+                <span style="font-size:0.5rem;color:var(--text-secondary);" id="bioCount">0/150</span>
+            </div>
+            <button class="btn-primary" onclick="saveBio()">💾 Save Bio</button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== THEME COLOR MODAL ===== -->
+<div class="modal-overlay" id="themeModal">
+    <div class="modal">
+        <button class="close-btn" onclick="closeThemeModal()">✕</button>
+        <h2>🎨 Theme Color</h2>
+        <p>Choose your favorite color</p>
+        <div>
+            <div class="color-options">
+                <div class="color-dot" style="background:#f5c842;" onclick="setThemeColor('#f5c842')"></div>
+                <div class="color-dot" style="background:#ff6b9d;" onclick="setThemeColor('#ff6b9d')"></div>
+                <div class="color-dot" style="background:#00d4ff;" onclick="setThemeColor('#00d4ff')"></div>
+                <div class="color-dot" style="background:#22d3ee;" onclick="setThemeColor('#22d3ee')"></div>
+                <div class="color-dot" style="background:#8b5cf6;" onclick="setThemeColor('#8b5cf6')"></div>
+                <div class="color-dot" style="background:#f97316;" onclick="setThemeColor('#f97316')"></div>
+                <div class="color-dot" style="background:#ef4444;" onclick="setThemeColor('#ef4444')"></div>
+                <div class="color-dot" style="background:#10b981;" onclick="setThemeColor('#10b981')"></div>
+            </div>
+            <button class="btn-primary" onclick="closeThemeModal()" style="margin-top:12px;">✅ Done</button>
+        </div>
+    </div>
+</div>
+
 <!-- ===== CHANGE PASSWORD MODAL ===== -->
 <div class="modal-overlay" id="passwordModal">
     <div class="modal">
@@ -357,6 +463,8 @@
             orderHistoryLabel: 'Order History',
             settingsLabel: 'Settings',
             accountSettingsText: 'Account Settings',
+            bioSettingsText: 'Edit Bio',
+            themeSettingsText: 'Theme Color',
             changePasswordText: 'Change Password',
             notiText: 'Notifications',
             achieveText: 'Achievements',
@@ -373,23 +481,9 @@
             home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
             login: 'Login',
             register: 'Register',
-            modalLogin: '⚔️ Login',
-            modalRegister: '🛡️ Register',
-            modalLoginSub: 'Welcome back, warrior!',
-            modalRegisterSub: 'Create your account, champion!',
-            email: '📧 Email or Username',
-            password: '🔑 Password',
-            switchLogin: "Don't have an account? Register",
-            switchRegister: 'Already have an account? Login',
-            loginSuccess: '✅ Welcome back, Champion!',
-            registerSuccess: '✅ Account created! Welcome!',
-            logoutSuccess: '🚪 Logged out successfully!',
-            logoutConfirm: 'Are you sure you want to logout?',
-            enterEmail: 'Please enter your email or username',
-            enterPassword: 'Please enter your password',
-            enterUsername: 'Please enter your username',
             noti: '🔔 No new notifications',
             settingsSaved: '✅ Settings saved successfully!',
+            bioSaved: '✅ Bio saved successfully!',
             currentPassRequired: 'Please enter your current password',
             newPassMin: 'New password must be at least 4 characters',
             passNotMatch: 'Passwords do not match',
@@ -409,6 +503,8 @@
             orderHistoryLabel: 'အော်ဒါမှတ်တမ်း',
             settingsLabel: 'ပြင်ဆင်မှုများ',
             accountSettingsText: 'အကောင့်ဆက်တင်',
+            bioSettingsText: 'ကိုယ်ရေးအကျဉ်းပြင်ရန်',
+            themeSettingsText: 'အရောင်ပြောင်းရန်',
             changePasswordText: 'စကားဝှက်ပြောင်းရန်',
             notiText: 'အသိပေးချက်များ',
             achieveText: 'အောင်မြင်မှုများ',
@@ -425,23 +521,9 @@
             home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
             login: 'ဝင်ရန်',
             register: 'မှတ်ပုံတင်ရန်',
-            modalLogin: '⚔️ ဝင်ရန်',
-            modalRegister: '🛡️ မှတ်ပုံတင်ရန်',
-            modalLoginSub: 'ပြန်လည်ကြိုဆိုပါတယ် စစ်သည်တော်!',
-            modalRegisterSub: 'အကောင့်ဖွင့်ပါ ချန်ပီယံ!',
-            email: '📧 အီးမေးလ် သို့မဟုတ် အသုံးပြုသူအမည်',
-            password: '🔑 စကားဝှက်',
-            switchLogin: 'အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်',
-            switchRegister: 'အကောင့်ရှိပြီးသား? ဝင်ရန်',
-            loginSuccess: '✅ ကြိုဆိုပါတယ် ချန်ပီယံ!',
-            registerSuccess: '✅ အကောင့်ဖွင့်ခြင်းအောင်မြင်ပါပြီ!',
-            logoutSuccess: '🚪 ထွက်ခြင်းအောင်မြင်ပါပြီ!',
-            logoutConfirm: 'ထွက်မှာသေချာလား?',
-            enterEmail: 'ကျေးဇူးပြု၍ အီးမေးလ် သို့မဟုတ် အသုံးပြုသူအမည်ထည့်ပါ',
-            enterPassword: 'ကျေးဇူးပြု၍ စကားဝှက်ထည့်ပါ',
-            enterUsername: 'ကျေးဇူးပြု၍ အသုံးပြုသူအမည်ထည့်ပါ',
             noti: '🔔 အသိပေးချက်အသစ်မရှိပါ',
             settingsSaved: '✅ ဆက်တင်များသိမ်းဆည်းပြီး!',
+            bioSaved: '✅ ကိုယ်ရေးအကျဉ်းသိမ်းဆည်းပြီး!',
             currentPassRequired: 'ကျေးဇူးပြု၍ လက်ရှိစကားဝှက်ထည့်ပါ',
             newPassMin: 'စကားဝှက်အသစ်သည် အနည်းဆုံး ၄ လုံးရှိရမယ်',
             passNotMatch: 'စကားဝှက်များ မတူညီပါ',
@@ -475,6 +557,8 @@
         document.getElementById('orderHistoryLabel').textContent = d.orderHistoryLabel;
         document.getElementById('settingsLabel').innerHTML = '<i class="fas fa-cog"></i> ' + d.settingsLabel;
         document.getElementById('accountSettingsText').textContent = d.accountSettingsText;
+        document.getElementById('bioSettingsText').textContent = d.bioSettingsText;
+        document.getElementById('themeSettingsText').textContent = d.themeSettingsText;
         document.getElementById('changePasswordText').textContent = d.changePasswordText;
         document.getElementById('notiText').textContent = d.notiText;
         document.getElementById('achieveText').textContent = d.achieveText;
@@ -491,6 +575,7 @@
         renderOrders();
     }
 
+    // ===== TOAST =====
     function showToast(msg) {
         const t = document.getElementById('toast');
         t.textContent = msg;
@@ -532,6 +617,21 @@
         }
     });
 
+    // ===== COVER PHOTO =====
+    document.getElementById('coverInput').addEventListener('change', function(e) {
+        if (this.files && this.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const cover = document.getElementById('coverDisplay');
+                const placeholder = document.getElementById('coverPlaceholder');
+                cover.innerHTML = '<img src="' + ev.target.result + '" alt="cover"><div class="cover-overlay"></div>';
+                localStorage.setItem('userCover_' + (currentUser ? currentUser.username : 'guest'), ev.target.result);
+                showToast('✅ Cover photo updated!');
+            };
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+
     // ===== AUTH =====
     let currentUser = null;
     const savedUser = localStorage.getItem('currentUser');
@@ -540,12 +640,13 @@
     function isLoggedIn() { return currentUser !== null; }
 
     function updateAuthUI() {
-        const authBtn = document.getElementById('authBtn');
+        const profileIcon = document.getElementById('profileIcon');
         const nameEl = document.getElementById('displayName');
         const userEl = document.getElementById('displayUsername');
         const statusEl = document.getElementById('statusText');
         const avatarEl = document.getElementById('avatarDisplay');
         const levelBadge = document.getElementById('levelBadge');
+        const bioEl = document.getElementById('displayBio');
 
         if (currentUser) {
             const savedAvatar = localStorage.getItem('userAvatar_' + currentUser.username);
@@ -560,13 +661,27 @@
             statusEl.parentElement.style.color = 'var(--green)';
             statusEl.parentElement.style.borderColor = 'rgba(34,211,238,0.2)';
             levelBadge.textContent = 'Lv.' + (currentUser.level || 1);
-            authBtn.innerHTML = '👤 ' + currentUser.username;
-            authBtn.className = 'auth-btn logged-in';
-            authBtn.title = 'Go to Profile';
+            bioEl.textContent = currentUser.bio || 'No bio yet';
+            profileIcon.innerHTML = '👤 ' + currentUser.username;
+            profileIcon.className = 'profile-icon logged-in';
             
             const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
             const userOrders = orders.filter(o => o.userId === currentUser.username);
             document.getElementById('orderCount').textContent = userOrders.length;
+
+            // Load cover
+            const savedCover = localStorage.getItem('userCover_' + currentUser.username);
+            if (savedCover) {
+                const cover = document.getElementById('coverDisplay');
+                cover.innerHTML = '<img src="' + savedCover + '" alt="cover"><div class="cover-overlay"></div>';
+            }
+
+            // Load theme color
+            const savedTheme = localStorage.getItem('userTheme_' + currentUser.username);
+            if (savedTheme) {
+                document.documentElement.style.setProperty('--theme-color', savedTheme);
+                document.getElementById('themeBadge').style.background = savedTheme;
+            }
         } else {
             avatarEl.textContent = '⚔️';
             nameEl.innerHTML = '<i class="fas fa-crown"></i> Guest';
@@ -575,15 +690,15 @@
             statusEl.parentElement.style.color = 'var(--text-secondary)';
             statusEl.parentElement.style.borderColor = 'var(--border-color)';
             levelBadge.textContent = 'Lv.0';
-            authBtn.innerHTML = '🔑 Login';
-            authBtn.className = 'auth-btn';
-            authBtn.title = 'Login';
+            bioEl.textContent = 'No bio yet';
+            profileIcon.innerHTML = '👤 Profile';
+            profileIcon.className = 'profile-icon';
             document.getElementById('orderCount').textContent = '0';
         }
         renderOrders();
     }
 
-    function handleAuthClick() {
+    function goToProfile() {
         if (isLoggedIn()) {
             // Already on profile
         } else {
@@ -591,12 +706,22 @@
         }
     }
 
-    // ===== RENDER ORDERS =====
+    // ===== RENDER ORDERS (with Filter & Search) =====
+    let currentFilter = 'all';
     let showAllOrders = false;
+
+    function setFilter(filter) {
+        currentFilter = filter;
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.filter === filter);
+        });
+        renderOrders();
+    }
 
     function renderOrders() {
         const container = document.getElementById('orderHistoryContainer');
         const d = LANG_DATA[currentLang];
+        const searchTerm = document.getElementById('orderSearch').value.toLowerCase().trim();
         
         if (!isLoggedIn()) {
             container.innerHTML = `<div class="empty-orders"><span class="icon">🔒</span>Please login to view your orders</div>`;
@@ -604,7 +729,17 @@
         }
 
         const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
-        const userOrders = orders.filter(o => o.userId === currentUser.username);
+        let userOrders = orders.filter(o => o.userId === currentUser.username);
+
+        // Filter
+        if (currentFilter !== 'all') {
+            userOrders = userOrders.filter(o => o.status === currentFilter);
+        }
+
+        // Search
+        if (searchTerm) {
+            userOrders = userOrders.filter(o => o.id.toLowerCase().includes(searchTerm));
+        }
 
         if (userOrders.length === 0) {
             container.innerHTML = `<div class="empty-orders"><span class="icon">📭</span>${d.noOrders}</div>`;
@@ -623,7 +758,7 @@
         container.innerHTML = `<div class="order-list">` + displayOrders.map(order => {
             const status = statusMap[order.status] || statusMap.pending;
             return `
-                <div class="order-item">
+                <div class="order-item" onclick="showOrderDetail('${order.id}')">
                     <div class="order-info">
                         <span class="order-id">📋 #${order.id}</span>
                         <span class="order-pkg">${order.package}</span>
@@ -649,6 +784,75 @@
     function toggleOrders() {
         showAllOrders = !showAllOrders;
         renderOrders();
+    }
+
+    function showOrderDetail(id) {
+        showToast('📋 Order #' + id + ' - Tap to view details');
+    }
+
+    // ===== BIO =====
+    function openBioModal() {
+        if (!isLoggedIn()) {
+            showToast('❌ Please login first');
+            return;
+        }
+        const modal = document.getElementById('bioModal');
+        document.getElementById('bioInput').value = currentUser.bio || '';
+        document.getElementById('bioCount').textContent = (currentUser.bio || '').length + '/150';
+        modal.classList.add('show');
+    }
+
+    function closeBioModal() {
+        document.getElementById('bioModal').classList.remove('show');
+    }
+
+    document.getElementById('bioInput').addEventListener('input', function() {
+        document.getElementById('bioCount').textContent = this.value.length + '/150';
+    });
+
+    function saveBio() {
+        const bio = document.getElementById('bioInput').value.trim();
+        if (bio.length > 150) {
+            showToast('❌ Bio must be less than 150 characters');
+            return;
+        }
+        currentUser.bio = bio;
+        const users = JSON.parse(localStorage.getItem('users') || '{}');
+        if (users[currentUser.username]) {
+            users[currentUser.username].bio = bio;
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        closeBioModal();
+        showToast(getText('bioSaved'));
+        updateAuthUI();
+    }
+
+    // ===== THEME COLOR =====
+    function openThemeModal() {
+        if (!isLoggedIn()) {
+            showToast('❌ Please login first');
+            return;
+        }
+        document.getElementById('themeModal').classList.add('show');
+    }
+
+    function closeThemeModal() {
+        document.getElementById('themeModal').classList.remove('show');
+    }
+
+    function setThemeColor(color) {
+        document.documentElement.style.setProperty('--theme-color', color);
+        document.getElementById('themeBadge').style.background = color;
+        localStorage.setItem('userTheme_' + currentUser.username, color);
+        // Update gold-glow to match
+        const r = parseInt(color.slice(1,3), 16);
+        const g = parseInt(color.slice(3,5), 16);
+        const b = parseInt(color.slice(5,7), 16);
+        document.documentElement.style.setProperty('--gold-glow', `rgba(${r},${g},${b},0.3)`);
+        document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
+        event.target.classList.add('active');
+        showToast('✅ Theme color updated!');
     }
 
     // ===== SETTINGS =====
@@ -722,6 +926,14 @@
 
     document.getElementById('settingsModal').addEventListener('click', function(e) {
         if (e.target === this) closeSettingsModal();
+    });
+
+    document.getElementById('bioModal').addEventListener('click', function(e) {
+        if (e.target === this) closeBioModal();
+    });
+
+    document.getElementById('themeModal').addEventListener('click', function(e) {
+        if (e.target === this) closeThemeModal();
     });
 
     // ===== CHANGE PASSWORD =====
