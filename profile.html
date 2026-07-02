@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>⚡ Premium Game Shop - Profile</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="lang.js"></script>
+    <script src="auth.js"></script>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
         
@@ -44,12 +46,10 @@
 
         .container{max-width:500px;margin:0 auto}
 
-        /* ===== HEADER (Login button ဖျောက်ထား) ===== */
         .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
         .header .left{display:flex;flex-direction:column;gap:6px}
         .header .left .logo{font-size:1rem;font-weight:800;color:var(--gold);text-shadow:0 0 20px var(--gold-glow);letter-spacing:0.5px}
         .header .left .logo i{color:var(--cyan);margin-right:6px;text-shadow:0 0 20px var(--cyan-glow)}
-        /* Auth button ကို ဖျောက်ထား */
         .header .left .auth-btn{display:none !important;}
         
         .header .right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
@@ -192,15 +192,15 @@
         .logout-overlay .btn-cancel:hover{border-color:var(--gold);color:var(--gold)}
         .logout-overlay .glow-ring{position:absolute;top:-20px;left:-20px;right:-20px;bottom:-20px;border-radius:50%;background:conic-gradient(from 0deg,transparent,rgba(239,68,68,0.05),transparent,rgba(0,212,255,0.05),transparent);animation:spin 10s linear infinite;pointer-events:none}
 
-        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);border-top:1px solid var(--border-color);display:flex;justify-content:space-around;padding:10px 0 14px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px var(--shadow)}
-        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);padding:4px 12px;border-radius:10px;position:relative}
-        .bottom-nav .nav-item:active{transform:scale(0.80)}
-        .bottom-nav .nav-item .icon{font-size:1.3rem;display:block;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
-        .bottom-nav .nav-item .label{font-size:0.45rem;margin-top:2px;font-weight:600;letter-spacing:0.5px;transition:all 0.4s ease}
-        .bottom-nav .nav-item.active{color:var(--gold);background:rgba(245,200,66,0.06)}
-        .bottom-nav .nav-item.active .icon{transform:translateY(-2px)}
+        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);border-top:1px solid var(--border-color);display:flex;justify-content:space-around;padding:6px 0 10px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px var(--shadow)}
+        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);padding:4px 8px;border-radius:10px;position:relative}
+        .bottom-nav .nav-item:active{transform:scale(0.75)}
+        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
+        .bottom-nav .nav-item .label{font-size:0.4rem;margin-top:1px;font-weight:700;letter-spacing:0.5px;transition:all 0.4s ease}
+        .bottom-nav .nav-item.active{color:var(--gold)}
+        .bottom-nav .nav-item.active .icon{transform:translateY(-6px) scale(1.15);text-shadow:0 0 30px var(--gold-glow)}
         .bottom-nav .nav-item.active .label{color:var(--gold)}
-        .bottom-nav .nav-item:hover .icon{transform:translateY(-2px)}
+        .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:24px;height:2.5px;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:10px;box-shadow:0 0 20px var(--gold-glow)}
 
         .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.3;letter-spacing:1px}
 
@@ -260,11 +260,9 @@
 </head>
 <body>
 <div class="container">
-    <!-- ===== HEADER (Login button ဖျောက်ထား) ===== -->
     <div class="header">
         <div class="left">
             <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Game Shop</div>
-            <!-- Auth button ကို ဖယ်ထားတယ် (Profile Box ထဲမှာ ရှိပြီးသား) -->
         </div>
         <div class="right">
             <div class="top">
@@ -280,7 +278,6 @@
         </div>
     </div>
 
-    <!-- ===== PROFILE SECTION (Login button ဒီမှာရှိတယ်) ===== -->
     <div class="profile-section">
         <div class="left-side">
             <div class="avatar-wrap">
@@ -302,7 +299,6 @@
                     <span class="diamond-note">(auto)</span>
                 </div>
 
-                <!-- ===== STATUS / LOGIN BUTTON ဒီမှာရှိတယ် ===== -->
                 <div class="status" id="statusDisplay" onclick="handleStatusClick()">
                     <i class="fas fa-circle"></i> <span id="statusText">🔑 Login</span>
                 </div>
@@ -318,13 +314,11 @@
         </div>
     </div>
 
-    <!-- STATS -->
     <div class="stats-grid">
         <div class="stat"><span class="icon">💎</span><div class="number" id="diamondCountStat">0</div><div class="label" id="diamondLabel">Diamonds</div></div>
         <div class="stat"><span class="icon">📦</span><div class="number" id="orderCountStat">0</div><div class="label" id="orderLabel">Orders</div></div>
     </div>
 
-    <!-- ORDER HISTORY -->
     <div class="glass-card">
         <span class="label"><i class="fas fa-list"></i> <span id="orderHistoryLabel">Order History</span></span>
         <div class="filter-bar" id="filterBar">
@@ -339,7 +333,6 @@
         <div id="orderHistoryContainer"></div>
     </div>
 
-    <!-- SETTINGS -->
     <div class="glass-card">
         <span class="label"><i class="fas fa-cog"></i> <span id="settingsLabel">Settings</span></span>
         <div class="menu-item" onclick="openSettingsModal()">
@@ -379,7 +372,6 @@
         </div>
     </div>
 
-    <!-- ABOUT -->
     <div class="glass-card">
         <span class="label"><i class="fas fa-info-circle"></i> <span id="aboutLabel">About</span></span>
         <div class="menu-item"><span class="icon">📱</span><span class="text" id="versionText">App Version 1.0.0</span><span class="arrow">›</span></div>
@@ -390,7 +382,6 @@
     <div class="footer-text">&copy; 2026 Premium Game Shop</div>
 </div>
 
-<!-- BOTTOM NAV -->
 <div class="bottom-nav">
     <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label" id="navHome">Home</span></a>
     <a href="shop.html" class="nav-item"><span class="icon">🛒</span><span class="label" id="navShop">Shop</span></a>
@@ -398,10 +389,8 @@
     <a href="profile.html" class="nav-item active"><span class="icon">👤</span><span class="label" id="navProfile">Profile</span></a>
 </div>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<!-- LOGOUT OVERLAY -->
 <div class="logout-overlay" id="logoutOverlay">
     <div class="card">
         <div class="glow-ring"></div>
@@ -415,7 +404,6 @@
     </div>
 </div>
 
-<!-- SETTINGS MODAL -->
 <div class="modal-overlay" id="settingsModal">
     <div class="modal">
         <button class="close-btn" onclick="closeSettingsModal()">✕</button>
@@ -465,7 +453,6 @@
     </div>
 </div>
 
-<!-- THEME MODAL -->
 <div class="modal-overlay" id="themeModal">
     <div class="modal">
         <button class="close-btn" onclick="closeThemeModal()">✕</button>
@@ -487,7 +474,6 @@
     </div>
 </div>
 
-<!-- PASSWORD MODAL -->
 <div class="modal-overlay" id="passwordModal">
     <div class="modal">
         <button class="close-btn" onclick="closePasswordModal()">✕</button>
@@ -514,7 +500,6 @@
     </div>
 </div>
 
-<!-- AUTH MODAL -->
 <div class="modal-overlay" id="authModal">
     <div class="modal">
         <button class="close-btn" onclick="closeAuthModal()">✕</button>
@@ -604,158 +589,29 @@
 </div>
 
 <script>
-    // ===== LANGUAGE DATA =====
-    const LANG_DATA = {
-        en: {
-            appName: 'Premium Game Shop',
-            diamondLabel: 'Diamonds',
-            orderLabel: 'Orders',
-            orderHistoryLabel: 'Order History',
-            settingsLabel: 'Settings',
-            accountSettingsText: 'Account Settings',
-            themeSettingsText: 'Theme Color',
-            changePasswordText: 'Change Password',
-            notiText: 'Notifications',
-            achieveText: 'Achievements',
-            logoutText: 'Logout',
-            aboutLabel: 'About',
-            versionText: 'App Version 1.0.0',
-            helpText: 'Help & Support',
-            termsText: 'Terms & Privacy',
-            noOrders: 'No orders yet',
-            orderStatusPending: 'Pending',
-            orderStatusCompleted: 'Completed',
-            orderStatusCancelled: 'Cancelled',
-            showMore: 'Show More →',
-            home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
-            login: 'Login',
-            register: 'Register',
-            statusLogin: '🔑 Login',
-            statusOnline: '🟢 Online',
-            settingsSaved: '✅ Settings saved successfully!',
-            passChanged: '✅ Password changed successfully!',
-            wrongCurrentPass: '❌ Current password is incorrect',
-            enterEmail: 'Please enter your email, username or phone',
-            enterPassword: 'Please enter your password',
-            invalidCredentials: '❌ Invalid credentials',
-            userNotFound: '❌ User not found',
-            registerSuccess: '✅ Registration successful! Welcome!',
-            loginSuccess: '✅ Login successful! Welcome!',
-            logoutSuccess: '✅ Logout successful!',
-            userExists: '❌ Username, email or phone already exists',
-            noSpace: 'Username cannot contain spaces',
-            resetSuccess: '✅ Password reset successful!',
-            modalLogin: '⚔️ Login',
-            modalLoginSub: 'Welcome back, warrior!',
-            modalRegister: '📝 Register',
-            modalRegisterSub: 'Create your account!',
-            forgotTitle: '🔑 Forgot Password',
-            forgotSub: 'Enter your email to reset password',
-            switchLogin: "Don't have an account? Register",
-            switchRegister: 'Already have an account? Login',
-            email: '📧 Email / Username / Phone',
-            password: '🔑 Password',
-            currentPassRequired: 'Current password is required',
-            newPassMin: 'New password must be at least 4 characters',
-            passNotMatch: 'Passwords do not match',
-            otpSent: '✅ OTP sent to your email!',
-            usernameChanged: '✅ Username changed successfully!',
-            usernameExists: '❌ Username already exists',
-            usernameRequired: 'Please enter a username'
-        },
-        my: {
-            appName: 'ပရီမီယံ ဂိမ်းဆိုင်',
-            diamondLabel: 'စိန်များ',
-            orderLabel: 'အော်ဒါများ',
-            orderHistoryLabel: 'အော်ဒါမှတ်တမ်း',
-            settingsLabel: 'ပြင်ဆင်မှုများ',
-            accountSettingsText: 'အကောင့်ဆက်တင်',
-            themeSettingsText: 'အရောင်ပြောင်းရန်',
-            changePasswordText: 'စကားဝှက်ပြောင်းရန်',
-            notiText: 'အသိပေးချက်များ',
-            achieveText: 'အောင်မြင်မှုများ',
-            logoutText: 'ထွက်ရန်',
-            aboutLabel: 'အကြောင်း',
-            versionText: 'App ဗားရှင်း 1.0.0',
-            helpText: 'အကူအညီနှင့် ပံ့ပိုးမှု',
-            termsText: 'စည်းကမ်းနှင့် ကိုယ်ရေးအချက်အလက်',
-            noOrders: 'အော်ဒါမရှိသေးပါ',
-            orderStatusPending: 'ဆောင်ရွက်ဆဲ',
-            orderStatusCompleted: 'ပြီးဆုံး',
-            orderStatusCancelled: 'ပယ်ဖျက်',
-            showMore: 'အားလုံးကြည့်ရန် →',
-            home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
-            login: 'ဝင်ရန်',
-            register: 'မှတ်ပုံတင်ရန်',
-            statusLogin: '🔑 ဝင်ရန်',
-            statusOnline: '🟢 အွန်လိုင်း',
-            settingsSaved: '✅ ဆက်တင်များသိမ်းဆည်းပြီး!',
-            passChanged: '✅ စကားဝှက်ပြောင်းလဲခြင်းအောင်မြင်ပါပြီ!',
-            wrongCurrentPass: '❌ လက်ရှိစကားဝှက် မှားနေပါသည်',
-            enterEmail: 'ကျေးဇူးပြု၍ အီးမေးလ်၊ အသုံးပြုသူအမည် သို့မဟုတ် ဖုန်းနံပါတ် ထည့်ပါ',
-            enterPassword: 'ကျေးဇူးပြု၍ စကားဝှက်ထည့်ပါ',
-            invalidCredentials: '❌ အထောက်အထား မှားနေပါသည်',
-            userNotFound: '❌ အသုံးပြုသူ မတွေ့ပါ',
-            registerSuccess: '✅ မှတ်ပုံတင်ခြင်းအောင်မြင်ပါပြီ! ကြိုဆိုပါတယ်!',
-            loginSuccess: '✅ အကောင့်ဝင်ခြင်းအောင်မြင်ပါပြီ! ကြိုဆိုပါတယ်!',
-            logoutSuccess: '✅ ထွက်ခြင်းအောင်မြင်ပါပြီ!',
-            userExists: '❌ အသုံးပြုသူအမည်၊ အီးမေးလ် သို့မဟုတ် ဖုန်းနံပါတ် ရှိပြီးသားဖြစ်သည်',
-            noSpace: 'အသုံးပြုသူအမည်တွင် နေရာလပ်မထည့်ရပါ',
-            resetSuccess: '✅ စကားဝှက်ပြန်လည်သတ်မှတ်ခြင်းအောင်မြင်ပါပြီ!',
-            modalLogin: '⚔️ ဝင်ရန်',
-            modalLoginSub: 'ပြန်လာတာကြိုဆိုပါတယ်!',
-            modalRegister: '📝 မှတ်ပုံတင်ရန်',
-            modalRegisterSub: 'အကောင့်ဖွင့်မယ်!',
-            forgotTitle: '🔑 စကားဝှက်မေ့နေပါသလား',
-            forgotSub: 'သင့်အီးမေးလ်ထည့်ပါ',
-            switchLogin: 'အကောင့်မရှိသေးဘူးလား? မှတ်ပုံတင်မယ်',
-            switchRegister: 'အကောင့်ရှိပြီးသားလား? ဝင်မယ်',
-            email: '📧 အီးမေးလ် / အသုံးပြုသူအမည် / ဖုန်းနံပါတ်',
-            password: '🔑 စကားဝှက်',
-            currentPassRequired: 'လက်ရှိစကားဝှက် ထည့်ပါ',
-            newPassMin: 'စကားဝှက်အသစ်သည် အနည်းဆုံး ၄ လုံးရှိရမယ်',
-            passNotMatch: 'စကားဝှက်များ မတူညီပါ',
-            otpSent: '✅ သင့်အီးမေးလ်သို့ OTP ပို့ထားပါသည်!',
-            usernameChanged: '✅ အသုံးပြုသူအမည် ပြောင်းလဲခြင်းအောင်မြင်ပါပြီ!',
-            usernameExists: '❌ အသုံးပြုသူအမည် ရှိပြီးသားဖြစ်သည်',
-            usernameRequired: 'ကျေးဇူးပြု၍ အသုံးပြုသူအမည် ထည့်ပါ'
-        }
-    };
-
-    let currentLang = localStorage.getItem('lang') || 'en';
-
-    function getText(key) { return LANG_DATA[currentLang][key] || key; }
-
-    function setLang(lang) {
-        currentLang = lang;
-        localStorage.setItem('lang', lang);
-        updateLanguage();
-        document.querySelectorAll('.lang-btn').forEach(b => {
-            b.classList.toggle('active', b.dataset.lang === lang);
-        });
-    }
-
+    // ===== LANGUAGE UPDATE =====
     function updateLanguage() {
         const d = LANG_DATA[currentLang];
+        if (!d) return;
         document.getElementById('appName').innerHTML = '<i class="fas fa-gamepad"></i> ' + d.appName;
-        document.getElementById('diamondLabel').textContent = d.diamondLabel;
-        document.getElementById('orderLabel').textContent = d.orderLabel;
-        document.getElementById('orderHistoryLabel').textContent = d.orderHistoryLabel;
-        document.getElementById('settingsLabel').innerHTML = '<i class="fas fa-cog"></i> ' + d.settingsLabel;
-        document.getElementById('accountSettingsText').textContent = d.accountSettingsText;
-        document.getElementById('themeSettingsText').textContent = d.themeSettingsText;
-        document.getElementById('changePasswordText').textContent = d.changePasswordText;
-        document.getElementById('notiText').textContent = d.notiText;
-        document.getElementById('achieveText').textContent = d.achieveText;
-        document.getElementById('logoutText').textContent = d.logoutText;
-        document.getElementById('aboutLabel').innerHTML = '<i class="fas fa-info-circle"></i> ' + d.aboutLabel;
-        document.getElementById('versionText').textContent = d.versionText;
-        document.getElementById('helpText').textContent = d.helpText;
-        document.getElementById('termsText').textContent = d.termsText;
-        document.getElementById('navHome').textContent = d.home;
-        document.getElementById('navShop').textContent = d.shop;
-        document.getElementById('navPayment').textContent = d.payment;
-        document.getElementById('navProfile').textContent = d.profile;
+        document.getElementById('diamondLabel').textContent = d.diamondLabel || 'Diamonds';
+        document.getElementById('orderLabel').textContent = d.orderLabel || 'Orders';
+        document.getElementById('orderHistoryLabel').textContent = d.orderHistoryLabel || 'Order History';
+        document.getElementById('settingsLabel').innerHTML = '<i class="fas fa-cog"></i> ' + (d.settingsLabel || 'Settings');
+        document.getElementById('accountSettingsText').textContent = d.accountSettingsText || 'Account Settings';
+        document.getElementById('themeSettingsText').textContent = d.themeSettingsText || 'Theme Color';
+        document.getElementById('changePasswordText').textContent = d.changePasswordText || 'Change Password';
+        document.getElementById('notiText').textContent = d.notiText || 'Notifications';
+        document.getElementById('achieveText').textContent = d.achieveText || 'Achievements';
+        document.getElementById('logoutText').textContent = d.logoutText || 'Logout';
+        document.getElementById('aboutLabel').innerHTML = '<i class="fas fa-info-circle"></i> ' + (d.aboutLabel || 'About');
+        document.getElementById('versionText').textContent = d.versionText || 'App Version 1.0.0';
+        document.getElementById('helpText').textContent = d.helpText || 'Help & Support';
+        document.getElementById('termsText').textContent = d.termsText || 'Terms & Privacy';
+        document.getElementById('navHome').textContent = d.home || 'Home';
+        document.getElementById('navShop').textContent = d.shop || 'Shop';
+        document.getElementById('navPayment').textContent = d.payment || 'Payment';
+        document.getElementById('navProfile').textContent = d.profile || 'Profile';
         updateAuthUI();
         renderOrders();
     }
@@ -775,8 +631,9 @@
             const reader = new FileReader();
             reader.onload = function(ev) {
                 document.getElementById('avatarDisplay').innerHTML = '<img src="' + ev.target.result + '" alt="avatar">';
-                if (currentUser) {
-                    localStorage.setItem('userAvatar_' + currentUser.username, ev.target.result);
+                if (isLoggedIn()) {
+                    const user = getCurrentUser();
+                    localStorage.setItem('userAvatar_' + user.username, ev.target.result);
                 }
                 showToast('✅ Avatar updated!');
             };
@@ -784,69 +641,19 @@
         }
     });
 
-    // ===== AUTH =====
-    let currentUser = null;
-    const savedUser = localStorage.getItem('currentUser');
-    if (savedUser) currentUser = JSON.parse(savedUser);
-
-    function isLoggedIn() { return currentUser !== null; }
-
-    // ===== GENERATE UNIQUE USER ID =====
-    function generateUserId() {
-        const users = JSON.parse(localStorage.getItem('users') || '{}');
-        const existingIds = new Set();
-        
-        for (const key in users) {
-            if (users[key].userId) {
-                existingIds.add(users[key].userId);
-            }
+    function handleAvatarUpload(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById('avatarPreview');
+                preview.innerHTML = '<img src="' + e.target.result + '" alt="avatar"><input type="file" accept="image/*" onchange="handleAvatarUpload(event)"><span class="upload-hint">Tap to change</span>';
+                window.tempAvatar = e.target.result;
+            };
+            reader.readAsDataURL(file);
         }
-        
-        let newId;
-        let attempts = 0;
-        const maxAttempts = 1000;
-        
-        do {
-            newId = String(Math.floor(10000000 + Math.random() * 90000000));
-            attempts++;
-        } while (existingIds.has(newId) && attempts < maxAttempts);
-        
-        if (existingIds.has(newId)) {
-            newId = String(Date.now()).slice(-8);
-            while (existingIds.has(newId)) {
-                newId = String(Math.floor(10000000 + Math.random() * 90000000));
-            }
-        }
-        
-        return newId;
     }
 
-    // ===== CHECK IF EMAIL, PHONE OR USERNAME EXISTS =====
-    function isCredentialExists(username, email, phone, excludeUsername = null) {
-        const users = JSON.parse(localStorage.getItem('users') || '{}');
-        
-        for (const key in users) {
-            const user = users[key];
-            
-            if (excludeUsername && key === excludeUsername) {
-                continue;
-            }
-            
-            if (key === username) {
-                return { exists: true, field: 'username' };
-            }
-            if (email && user.email && user.email === email) {
-                return { exists: true, field: 'email' };
-            }
-            if (phone && user.phone && user.phone === phone) {
-                return { exists: true, field: 'phone' };
-            }
-        }
-        
-        return { exists: false };
-    }
-
-    // ===== UPDATE AUTH UI =====
     function updateAuthUI() {
         const nameEl = document.getElementById('displayName');
         const userEl = document.getElementById('displayUsername');
@@ -860,30 +667,31 @@
         const diamondCountStat = document.getElementById('diamondCountStat');
         const orderCountStat = document.getElementById('orderCountStat');
 
-        if (currentUser) {
-            const savedAvatar = localStorage.getItem('userAvatar_' + currentUser.username);
+        if (isLoggedIn()) {
+            const user = getCurrentUser();
+            const savedAvatar = localStorage.getItem('userAvatar_' + user.username);
             if (savedAvatar) {
                 avatarEl.innerHTML = '<img src="' + savedAvatar + '" alt="avatar">';
             } else {
                 avatarEl.textContent = '⚔️';
             }
-            nameEl.innerHTML = '<i class="fas fa-crown"></i> ' + (currentUser.displayName || currentUser.username || 'Guest');
-            userEl.textContent = '@' + (currentUser.username || 'guest');
-            statusEl.textContent = getText('statusOnline');
+            nameEl.innerHTML = '<i class="fas fa-crown"></i> ' + (user.displayName || user.username || 'Guest');
+            userEl.textContent = '@' + (user.username || 'guest');
+            statusEl.textContent = getText('statusOnline') || '🟢 Online';
             statusDisplay.className = 'status';
             statusDisplay.style.cursor = 'default';
-            userIdEl.textContent = 'ID: ' + (currentUser.userId || 'N/A');
-            levelNumber.textContent = currentUser.level || 1;
-            levelXp.textContent = (currentUser.xp || 0) + ' XP';
-            const diamonds = currentUser.diamonds || 0;
+            userIdEl.textContent = 'ID: ' + (user.userId || 'N/A');
+            levelNumber.textContent = user.level || 1;
+            levelXp.textContent = (user.xp || 0) + ' XP';
+            const diamonds = user.diamonds || 0;
             diamondCount.textContent = diamonds;
             diamondCountStat.textContent = diamonds;
             
             const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
-            const userOrders = orders.filter(o => o.userId === currentUser.username);
+            const userOrders = orders.filter(o => o.userId === user.username);
             orderCountStat.textContent = userOrders.length;
 
-            const savedTheme = localStorage.getItem('userTheme_' + currentUser.username);
+            const savedTheme = localStorage.getItem('userTheme_' + user.username);
             if (savedTheme) {
                 document.documentElement.style.setProperty('--theme-color', savedTheme);
                 document.getElementById('themeBadge').style.background = savedTheme;
@@ -892,7 +700,7 @@
             avatarEl.textContent = '⚔️';
             nameEl.innerHTML = '<i class="fas fa-crown"></i> Guest';
             userEl.textContent = '@guest';
-            statusEl.textContent = getText('statusLogin');
+            statusEl.textContent = getText('statusLogin') || '🔑 Login';
             statusDisplay.className = 'status login-status';
             statusDisplay.style.cursor = 'pointer';
             userIdEl.textContent = 'ID: ----------';
@@ -903,14 +711,6 @@
             orderCountStat.textContent = '0';
         }
         renderOrders();
-    }
-
-    function handleAuthClick() {
-        if (isLoggedIn()) {
-            window.location.href = 'profile.html';
-        } else {
-            openAuthModal('login');
-        }
     }
 
     function handleStatusClick() {
@@ -980,17 +780,18 @@
 
     function updateAuthModalUI() {
         const d = LANG_DATA[currentLang];
+        if (!d) return;
         if (isLoginMode) {
-            document.getElementById('modalTitle').textContent = d.modalLogin;
-            document.getElementById('modalSub').textContent = d.modalLoginSub;
-            document.getElementById('loginBtn').innerHTML = '🔑 ' + d.login;
-            document.getElementById('emailLabel').textContent = d.email;
-            document.getElementById('passLabel').textContent = d.password;
-            document.getElementById('switchToRegister').textContent = d.switchLogin;
+            document.getElementById('modalTitle').textContent = d.modalLogin || '⚔️ Login';
+            document.getElementById('modalSub').textContent = d.modalLoginSub || 'Welcome back, warrior!';
+            document.getElementById('loginBtn').innerHTML = '🔑 ' + (d.login || 'Login');
+            document.getElementById('emailLabel').textContent = d.email || '📧 Email / Username / Phone';
+            document.getElementById('passLabel').textContent = d.password || '🔑 Password';
+            document.getElementById('switchToRegister').textContent = d.switchLogin || "Don't have an account? Register";
         } else {
-            document.getElementById('modalTitle').textContent = d.modalRegister;
-            document.getElementById('modalSub').textContent = d.modalRegisterSub;
-            document.getElementById('switchToLogin').textContent = d.switchRegister;
+            document.getElementById('modalTitle').textContent = d.modalRegister || '📝 Register';
+            document.getElementById('modalSub').textContent = d.modalRegisterSub || 'Create your account!';
+            document.getElementById('switchToLogin').textContent = d.switchRegister || 'Already have an account? Login';
         }
     }
 
@@ -998,7 +799,7 @@
         if (e.target === this) closeAuthModal();
     });
 
-    // ===== LOGIN (Username, Email, Phone သုံးမျိုးလုံးနဲ့ ဝင်လို့ရ) =====
+    // ===== LOGIN =====
     function handleLogin() {
         const input = document.getElementById('loginEmail').value.trim();
         const password = document.getElementById('loginPassword').value.trim();
@@ -1008,12 +809,12 @@
         document.getElementById('loginError').textContent = '';
 
         if (!input) {
-            document.getElementById('loginError').textContent = d.enterEmail;
+            document.getElementById('loginError').textContent = d.enterEmail || 'Please enter your email, username or phone';
             document.getElementById('loginError').style.display = 'block';
             return;
         }
         if (!password) {
-            document.getElementById('loginError').textContent = d.enterPassword;
+            document.getElementById('loginError').textContent = d.enterPassword || 'Please enter your password';
             document.getElementById('loginError').style.display = 'block';
             return;
         }
@@ -1024,21 +825,7 @@
 
         for (const key in users) {
             const user = users[key];
-            if (key === input) {
-                userExists = true;
-                if (user.password === password) {
-                    foundUser = user;
-                    break;
-                }
-            }
-            if (user.email && user.email === input) {
-                userExists = true;
-                if (user.password === password) {
-                    foundUser = user;
-                    break;
-                }
-            }
-            if (user.phone && user.phone === input) {
+            if (key === input || user.email === input || user.username === input || user.phone === input) {
                 userExists = true;
                 if (user.password === password) {
                     foundUser = user;
@@ -1048,21 +835,15 @@
         }
 
         if (foundUser) {
-            if (!foundUser.userId) {
-                foundUser.userId = generateUserId();
-                users[foundUser.username].userId = foundUser.userId;
-                localStorage.setItem('users', JSON.stringify(users));
-            }
-            currentUser = foundUser;
-            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            loginUser(input, password);
             closeAuthModal();
-            showToast(d.loginSuccess);
+            showToast(d.loginSuccess || '✅ Login successful! Welcome!');
             updateAuthUI();
         } else if (userExists) {
-            document.getElementById('loginError').textContent = d.invalidCredentials;
+            document.getElementById('loginError').textContent = d.invalidCredentials || '❌ Invalid credentials';
             document.getElementById('loginError').style.display = 'block';
         } else {
-            document.getElementById('loginError').textContent = d.userNotFound;
+            document.getElementById('loginError').textContent = d.userNotFound || '❌ User not found';
             document.getElementById('loginError').style.display = 'block';
         }
     }
@@ -1086,7 +867,7 @@
             document.getElementById('regUsername').classList.add('error');
             hasError = true;
         } else if (/\s/.test(username)) {
-            document.getElementById('usernameError').textContent = d.noSpace;
+            document.getElementById('usernameError').textContent = d.noSpace || 'Username cannot contain spaces';
             document.getElementById('usernameError').style.display = 'block';
             document.getElementById('regUsername').classList.add('error');
             hasError = true;
@@ -1123,20 +904,16 @@
 
         if (hasError) return;
 
-        const check = isCredentialExists(username, email, phone);
-        if (check.exists) {
-            if (check.field === 'username') {
-                showToast('❌ Username already exists');
-            } else if (check.field === 'email') {
-                showToast('❌ Email already exists');
-            } else if (check.field === 'phone') {
-                showToast('❌ Phone number already exists');
+        const users = JSON.parse(localStorage.getItem('users') || '{}');
+        for (const key in users) {
+            const user = users[key];
+            if (key === username || (email && user.email === email) || (phone && user.phone === phone)) {
+                showToast(d.userExists || '❌ Username, email or phone already exists');
+                return;
             }
-            return;
         }
 
-        const userId = generateUserId();
-        
+        const userId = 'UID' + String(Math.floor(10000000 + Math.random() * 90000000));
         const newUser = {
             username: username,
             email: email || '',
@@ -1149,8 +926,6 @@
             diamonds: 100,
             createdAt: new Date().toISOString()
         };
-        
-        const users = JSON.parse(localStorage.getItem('users') || '{}');
         users[username] = newUser;
         localStorage.setItem('users', JSON.stringify(users));
 
@@ -1158,10 +933,9 @@
             localStorage.setItem('userAvatar_' + username, tempAvatar);
         }
 
-        currentUser = newUser;
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        loginUser(username, password);
         closeAuthModal();
-        showToast(d.registerSuccess);
+        showToast(d.registerSuccess || '✅ Registration successful! Welcome!');
         updateAuthUI();
     }
 
@@ -1174,8 +948,9 @@
         document.getElementById('forgotForm').style.display = 'block';
         document.getElementById('otpSection').style.display = 'none';
         document.getElementById('sendOtpBtn').style.display = 'block';
-        document.getElementById('modalTitle').textContent = getText('forgotTitle');
-        document.getElementById('modalSub').textContent = getText('forgotSub');
+        const d = LANG_DATA[currentLang];
+        document.getElementById('modalTitle').textContent = d.forgotTitle || '🔑 Forgot Password';
+        document.getElementById('modalSub').textContent = d.forgotSub || 'Enter your email to reset password';
         document.querySelectorAll('.error-text').forEach(el => el.style.display = 'none');
         document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
         document.getElementById('forgotEmail').value = '';
@@ -1197,7 +972,7 @@
         document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
     }
 
-    async function sendOTP() {
+    function sendOTP() {
         const input = document.getElementById('forgotEmail').value.trim();
         const d = LANG_DATA[currentLang];
 
@@ -1212,21 +987,19 @@
 
         const users = JSON.parse(localStorage.getItem('users') || '{}');
         let userExists = false;
-        let foundUser = null;
         let foundEmail = '';
 
         for (const key in users) {
             const user = users[key];
             if (user.email === input || key === input || user.phone === input) {
                 userExists = true;
-                foundUser = user;
                 foundEmail = user.email || key;
                 break;
             }
         }
 
         if (!userExists) {
-            showToast(d.userNotFound);
+            showToast(d.userNotFound || '❌ User not found');
             return;
         }
 
@@ -1245,7 +1018,7 @@
 
         document.getElementById('otpSection').style.display = 'block';
         document.getElementById('sendOtpBtn').style.display = 'none';
-        showToast('📧 ' + d.otpSent + ' (OTP: ' + otp + ')');
+        showToast('📧 ' + (d.otpSent || 'OTP sent to your email!') + ' (OTP: ' + otp + ')');
 
         setTimeout(() => {
             delete otpStorage[foundEmail];
@@ -1302,7 +1075,7 @@
 
         delete otpStorage[email];
 
-        showToast(d.resetSuccess);
+        showToast(d.resetSuccess || '✅ Password reset successful!');
         closeForgotPassword();
         document.getElementById('loginEmail').value = email;
         document.getElementById('loginPassword').value = '';
@@ -1330,8 +1103,9 @@
             return;
         }
 
+        const user = getCurrentUser();
         const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
-        let userOrders = orders.filter(o => o.userId === currentUser.username);
+        let userOrders = orders.filter(o => o.userId === user.username);
 
         if (currentFilter !== 'all') {
             userOrders = userOrders.filter(o => o.status === currentFilter);
@@ -1342,14 +1116,14 @@
         }
 
         if (userOrders.length === 0) {
-            container.innerHTML = `<div class="empty-orders"><span class="icon">📭</span>${d.noOrders}</div>`;
+            container.innerHTML = `<div class="empty-orders"><span class="icon">📭</span>${d.noOrders || 'No orders yet'}</div>`;
             return;
         }
 
         const statusMap = {
-            'pending': { class: 'pending', text: d.orderStatusPending },
-            'completed': { class: 'completed', text: d.orderStatusCompleted },
-            'cancelled': { class: 'cancelled', text: d.orderStatusCancelled }
+            'pending': { class: 'pending', text: d.orderStatusPending || 'Pending' },
+            'completed': { class: 'completed', text: d.orderStatusCompleted || 'Completed' },
+            'cancelled': { class: 'cancelled', text: d.orderStatusCancelled || 'Cancelled' }
         };
 
         const displayOrders = showAllOrders ? userOrders : userOrders.slice(0, 3);
@@ -1375,7 +1149,7 @@
             container.innerHTML += `
                 <div class="order-more" onclick="toggleOrders()">
                     <i class="fas ${showAllOrders ? 'fa-chevron-up' : 'fa-chevron-down'}"></i> 
-                    ${showAllOrders ? 'Show Less' : d.showMore}
+                    ${showAllOrders ? 'Show Less' : (d.showMore || 'Show More →')}
                 </div>
             `;
         }
@@ -1396,19 +1170,20 @@
             showToast('❌ Please login first');
             return;
         }
+        const user = getCurrentUser();
         const modal = document.getElementById('settingsModal');
         
-        document.getElementById('settingsName').value = currentUser.displayName || currentUser.username || '';
-        document.getElementById('settingsUsername').value = currentUser.username || '';
-        document.getElementById('settingsUserId').value = currentUser.userId || 'N/A';
-        document.getElementById('settingsEmail').value = currentUser.email || '';
-        document.getElementById('settingsPhone').value = currentUser.phone || '';
+        document.getElementById('settingsName').value = user.displayName || user.username || '';
+        document.getElementById('settingsUsername').value = user.username || '';
+        document.getElementById('settingsUserId').value = user.userId || 'N/A';
+        document.getElementById('settingsEmail').value = user.email || '';
+        document.getElementById('settingsPhone').value = user.phone || '';
         
         const result = document.getElementById('settingsUsernameResult');
         result.className = 'username-result';
         result.textContent = '';
         
-        const savedAvatar = localStorage.getItem('userAvatar_' + currentUser.username);
+        const savedAvatar = localStorage.getItem('userAvatar_' + user.username);
         const preview = document.getElementById('settingsAvatarPreview');
         if (savedAvatar) {
             preview.innerHTML = '<img src="' + savedAvatar + '" alt="avatar"><input type="file" id="settingsAvatarInput" accept="image/*" onchange="handleSettingsAvatar(event)"><span class="upload-hint">Tap to change</span>';
@@ -1430,14 +1205,14 @@
             reader.onload = function(e) {
                 const preview = document.getElementById('settingsAvatarPreview');
                 preview.innerHTML = '<img src="' + e.target.result + '" alt="avatar"><input type="file" id="settingsAvatarInput" accept="image/*" onchange="handleSettingsAvatar(event)"><span class="upload-hint">Tap to change</span>';
-                localStorage.setItem('userAvatar_' + currentUser.username, e.target.result);
+                const user = getCurrentUser();
+                localStorage.setItem('userAvatar_' + user.username, e.target.result);
                 showToast('✅ Avatar updated!');
             };
             reader.readAsDataURL(file);
         }
     }
 
-    // ===== CHANGE USERNAME FROM SETTINGS =====
     function changeUsernameFromSettings() {
         const input = document.getElementById('settingsUsername');
         const result = document.getElementById('settingsUsernameResult');
@@ -1455,13 +1230,13 @@
 
         if (!newUsername) {
             result.className = 'username-result error';
-            result.textContent = '❌ ' + d.usernameRequired;
+            result.textContent = '❌ ' + (d.usernameRequired || 'Please enter a username');
             return;
         }
 
         if (/\s/.test(newUsername)) {
             result.className = 'username-result error';
-            result.textContent = '❌ ' + d.noSpace;
+            result.textContent = '❌ ' + (d.noSpace || 'Username cannot contain spaces');
             return;
         }
 
@@ -1472,7 +1247,8 @@
         }
 
         const users = JSON.parse(localStorage.getItem('users') || '{}');
-        const oldUsername = currentUser.username;
+        const user = getCurrentUser();
+        const oldUsername = user.username;
 
         if (newUsername === oldUsername) {
             result.className = 'username-result error';
@@ -1480,13 +1256,13 @@
             return;
         }
 
-        const check = isCredentialExists(newUsername, null, null, oldUsername);
-        if (check.exists) {
+        if (users[newUsername]) {
             result.className = 'username-result error';
-            result.textContent = '❌ ' + d.usernameExists;
+            result.textContent = '❌ ' + (d.usernameExists || 'Username already exists');
             return;
         }
 
+        // Update username
         const userData = users[oldUsername];
         if (!userData) {
             result.className = 'username-result error';
@@ -1506,6 +1282,7 @@
         delete users[oldUsername];
         users[newUsername] = newUserData;
 
+        // Update orders
         const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
         orders.forEach(order => {
             if (order.userId === oldUsername) {
@@ -1514,12 +1291,14 @@
         });
         localStorage.setItem('orderHistory', JSON.stringify(orders));
 
+        // Update avatar
         const oldAvatar = localStorage.getItem('userAvatar_' + oldUsername);
         if (oldAvatar) {
             localStorage.setItem('userAvatar_' + newUsername, oldAvatar);
             localStorage.removeItem('userAvatar_' + oldUsername);
         }
 
+        // Update theme
         const oldTheme = localStorage.getItem('userTheme_' + oldUsername);
         if (oldTheme) {
             localStorage.setItem('userTheme_' + newUsername, oldTheme);
@@ -1528,20 +1307,18 @@
 
         localStorage.setItem('users', JSON.stringify(users));
 
-        currentUser = newUserData;
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
-
+        // Update current user
+        loginUser(newUsername, newUserData.password);
         result.className = 'username-result success';
-        result.textContent = '✅ ' + d.usernameChanged;
+        result.textContent = '✅ ' + (d.usernameChanged || 'Username changed successfully!');
 
         document.getElementById('settingsUsername').value = newUsername;
         document.getElementById('settingsUserId').value = userId;
 
-        showToast('✅ ' + d.usernameChanged);
+        showToast('✅ ' + (d.usernameChanged || 'Username changed successfully!'));
         updateAuthUI();
     }
 
-    // ===== SAVE SETTINGS =====
     function saveSettings() {
         const name = document.getElementById('settingsName').value.trim();
         const email = document.getElementById('settingsEmail').value.trim();
@@ -1551,30 +1328,23 @@
         if (!name) { showToast('❌ Please enter your name'); return; }
 
         const users = JSON.parse(localStorage.getItem('users') || '{}');
-        const oldUsername = currentUser.username;
-        
-        const check = isCredentialExists(null, email, phone, oldUsername);
-        if (check.exists) {
-            if (check.field === 'email') {
-                showToast('❌ Email already exists');
-            } else if (check.field === 'phone') {
-                showToast('❌ Phone number already exists');
-            }
-            return;
-        }
+        const user = getCurrentUser();
+        const oldUsername = user.username;
         
         users[oldUsername].displayName = name;
         users[oldUsername].email = email || users[oldUsername].email;
         users[oldUsername].phone = phone || users[oldUsername].phone;
         localStorage.setItem('users', JSON.stringify(users));
 
-        currentUser.displayName = name;
-        currentUser.email = email || currentUser.email;
-        currentUser.phone = phone || currentUser.phone;
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        // Update current user
+        const updatedUser = getCurrentUser();
+        updatedUser.displayName = name;
+        updatedUser.email = email || updatedUser.email;
+        updatedUser.phone = phone || updatedUser.phone;
+        localStorage.setItem('currentUser', JSON.stringify(updatedUser));
 
         closeSettingsModal();
-        showToast(d.settingsSaved);
+        showToast(d.settingsSaved || '✅ Settings saved successfully!');
         updateAuthUI();
     }
 
@@ -1598,8 +1368,9 @@
     function setThemeColor(color, event) {
         document.documentElement.style.setProperty('--theme-color', color);
         document.getElementById('themeBadge').style.background = color;
-        if (currentUser) {
-            localStorage.setItem('userTheme_' + currentUser.username, color);
+        if (isLoggedIn()) {
+            const user = getCurrentUser();
+            localStorage.setItem('userTheme_' + user.username, color);
         }
         document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
         if (event && event.target) {
@@ -1643,21 +1414,21 @@
         let hasError = false;
 
         if (!currentPass) {
-            document.getElementById('currentPassError').textContent = d.currentPassRequired;
+            document.getElementById('currentPassError').textContent = d.currentPassRequired || 'Current password is required';
             document.getElementById('currentPassError').style.display = 'block';
             document.getElementById('currentPassword').classList.add('error');
             hasError = true;
         }
 
         if (!newPass || newPass.length < 4) {
-            document.getElementById('newPassError').textContent = d.newPassMin;
+            document.getElementById('newPassError').textContent = d.newPassMin || 'New password must be at least 4 characters';
             document.getElementById('newPassError').style.display = 'block';
             document.getElementById('newPassword').classList.add('error');
             hasError = true;
         }
 
         if (newPass !== confirmPass) {
-            document.getElementById('confirmNewError').textContent = d.passNotMatch;
+            document.getElementById('confirmNewError').textContent = d.passNotMatch || 'Passwords do not match';
             document.getElementById('confirmNewError').style.display = 'block';
             document.getElementById('confirmNewPassword').classList.add('error');
             hasError = true;
@@ -1666,16 +1437,11 @@
         if (hasError) return;
 
         const users = JSON.parse(localStorage.getItem('users') || '{}');
-        let userData = null;
-        for (const key in users) {
-            if (key === currentUser.username || users[key].email === currentUser.email) {
-                userData = users[key];
-                break;
-            }
-        }
+        const user = getCurrentUser();
+        let userData = users[user.username];
 
         if (!userData || userData.password !== currentPass) {
-            document.getElementById('currentPassError').textContent = d.wrongCurrentPass;
+            document.getElementById('currentPassError').textContent = d.wrongCurrentPass || '❌ Current password is incorrect';
             document.getElementById('currentPassError').style.display = 'block';
             document.getElementById('currentPassword').classList.add('error');
             return;
@@ -1684,10 +1450,7 @@
         userData.password = newPass;
         localStorage.setItem('users', JSON.stringify(users));
 
-        currentUser.password = newPass;
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
-
-        showToast(d.passChanged);
+        showToast(d.passChanged || '✅ Password changed successfully!');
         closePasswordModal();
     }
 
@@ -1702,10 +1465,9 @@
 
     document.getElementById('logoutConfirmBtn').addEventListener('click', function() {
         document.getElementById('logoutOverlay').classList.remove('show');
-        currentUser = null;
-        localStorage.removeItem('currentUser');
+        logoutUser();
         updateAuthUI();
-        showToast(getText('logoutSuccess'));
+        showToast(getText('logoutSuccess') || '✅ Logout successful!');
         setTimeout(() => window.location.href = 'index.html', 1500);
     });
 
@@ -1755,7 +1517,7 @@
         const savedLang = localStorage.getItem('lang') || 'en';
         setLang(savedLang);
         updateAuthUI();
-        const savedTheme = localStorage.getItem('userTheme_' + (currentUser ? currentUser.username : ''));
+        const savedTheme = localStorage.getItem('userTheme_' + (isLoggedIn() ? getCurrentUser().username : ''));
         if (savedTheme) {
             document.documentElement.style.setProperty('--theme-color', savedTheme);
             document.getElementById('themeBadge').style.background = savedTheme;
