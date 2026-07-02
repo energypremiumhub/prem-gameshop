@@ -228,8 +228,8 @@
     // ============================================================
     //  🔧 CONFIG - မင်းရဲ့ Telegram Bot Token နဲ့ Chat ID ထည့်ပါ
     // ============================================================
-    const TELEGRAM_BOT_TOKEN = '8751360822:AAFQNiWhfGWgUsjD7Bd5DzfHMfpkR4COHY8';
-    const TELEGRAM_CHAT_ID = '8745522082';
+    const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE';
+    const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID_HERE';
     // ============================================================
 
     // ===== LANGUAGE DATA =====
@@ -347,4 +347,215 @@
             input.select();
             document.execCommand('copy');
             document.body.removeChild(input);
-            btn.textCo
+            btn.textContent = getText('copied');
+            btn.classList.add('copied');
+            setTimeout(() => { btn.textContent = getText('copy'); btn.classList.remove('copied'); }, 2500);
+        });
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    document.getElementById('selectedPackage').textContent = urlParams.get('package') || 'Monthly Epic Bundle';
+    document.getElementById('selectedPrice').textContent = urlParams.get('price') || '17,200 Ks';
+
+    let selectedPayment = null;
+    document.querySelectorAll('.payment-option').forEach(el => {
+        el.addEventListener('click', function() {
+            document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedPayment = this.dataset.payment;
+            document.getElementById('waveInfo').classList.remove('show');
+            document.getElementById('kpayInfo').classList.remove('show');
+            if (selectedPayment === 'wave') document.getElementById('waveInfo').classList.add('show');
+            else if (selectedPayment === 'kpay') document.getElementById('kpayInfo').classList.add('show');
+        });
+    });
+
+    const fileInput = document.getElementById('fileInput');
+    const fileUpload = document.getElementById('fileUpload');
+    const fileName = document.getElementById('fileName');
+    fileInput.addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+            fileUpload.classList.add('has-file');
+            fileName.textContent = '✅ ' + this.files[0].name;
+            fileName.classList.add('show');
+        }
+    });
+
+    function readFileAsBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
+    }
+
+    // ===== SUBMIT ORDER =====
+    document.getElementById('submitBtn').addEventListener('click', async function() {
+        const d = LANG_DATA[currentLang];
+        const gameId = document.getElementById('gameId').value.trim();
+        const serverId = document.getElementById('serverId').value.trim();
+        const hasFile = fileInput.files && fileInput.files[0];
+
+        if (!gameId) { showToast(d.enterGameId); return; }
+        if (!serverId) { showToast(d.enterServerId); return; }
+        if (!selectedPayment) { showToast(d.selectPayment); return; }
+        if (!hasFile) { showToast(d.uploadSlip); return; }
+
+        this.disabled = true;
+        this.innerHTML = '⏳ ' + d.sending;
+
+        const orderId = 'ORD-' + Date.now().toString().slice(-6);
+        const pkg = document.getElementById('selectedPackage').textContent;
+        const price = document.getElementById('selectedPrice').textContent;
+        const paymentName = selectedPayment === 'wave' ? 'Wave Pay' : 'KBZ Pay';
+        const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+        const userName = currentUser.username || 'Guest';
+
+        let imageBase64 = '';
+        if (hasFile) {
+            try {
+                imageBase64 = await readFileAsBase64(fileInput.files[0]);
+                console.log('✅ Image loaded, size:', imageBase64.length);
+            } catch (err) {
+                console.error('File read error:', err);
+                showToast('❌ Failed to read image');
+                this.disabled = false;
+                this.innerHTML = '✅ ' + d.submit;
+                return;
+            }
+        }
+
+        const message = `
+🛒 **NEW ORDER!**
+
+📋 **Order ID:** #${orderId}
+👤 **Customer:** ${userName}
+📦 **Package:** ${pkg}
+💰 **Price:** ${price}
+🎮 **Game ID:** ${gameId}
+🌐 **Server ID:** ${serverId}
+💳 **Payment:** ${paymentName}
+📅 **Time:** ${new Date().toLocaleString()}
+        `;
+
+        try {
+            // 1. Send message to Telegram
+            console.log('📤 Sending message to Telegram...');
+            const msgResponse = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CHAT_ID,
+                    text: message,
+                    parse_mode: 'Markdown'
+                })
+            });
+
+            const msgResult = await msgResponse.json();
+            console.log('Telegram message response:', msgResult);
+
+            if (!msgResponse.ok) {
+                throw new Error('Telegram message failed: ' + JSON.stringify(msgResult));
+            }
+
+            // 2. Send photo to Telegram (if image exists)
+            if (imageBase64) {
+                console.log('📸 Sending photo to Telegram...');
+                
+                // Method: Send as file (more reliable)
+                const formData = new FormData();
+                formData.append('chat_id', TELEGRAM_CHAT_ID);
+                formData.append('photo', imageBase64);
+                formData.append('caption', `📸 Payment Slip for Order #${orderId}`);
+
+                const photoResponse = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const photoResult = await photoResponse.json();
+                console.log('Telegram photo response:', photoResult);
+
+                if (!photoResponse.ok) {
+                    throw new Error('Telegram photo failed: ' + JSON.stringify(photoResult));
+                }
+                console.log('✅ Photo sent successfully!');
+            } else {
+                console.log('⚠️ No image to send');
+            }
+
+            // 3. ✅ SAVE ORDER
+            const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+            orders.unshift({
+                id: orderId,
+                userId: currentUser.username || 'guest',
+                package: pkg,
+                price: price,
+                gameId: gameId,
+                serverId: serverId,
+                payment: paymentName,
+                date: new Date().toISOString(),
+                status: 'pending'
+            });
+            localStorage.setItem('orderHistory', JSON.stringify(orders));
+
+            // 4. Send notification
+            localStorage.setItem('newOrderNotification', JSON.stringify({
+                show: true,
+                orderId: orderId,
+                message: d.notiNewOrder
+            }));
+            window.dispatchEvent(new Event('storage'));
+
+            // 5. Show success
+            document.getElementById('orderIdDisplay').textContent = '📋 Order #' + orderId;
+            document.getElementById('orderSuccess').classList.add('show');
+
+        } catch (error) {
+            console.error('❌ Order error:', error);
+            showToast(d.sendError + ' (Check console)');
+            this.disabled = false;
+            this.innerHTML = '✅ ' + d.submit;
+        }
+    });
+
+    // ===== AUTH =====
+    let currentUser = null;
+    const savedUser = localStorage.getItem('currentUser');
+    if (savedUser) currentUser = JSON.parse(savedUser);
+
+    function updateAuthUI() {
+        const authBtn = document.getElementById('authBtn');
+        if (currentUser) {
+            const savedAvatar = localStorage.getItem('userAvatar_' + currentUser.username);
+            if (savedAvatar) {
+                authBtn.innerHTML = '<img src="' + savedAvatar + '" alt="avatar"> ' + currentUser.username;
+            } else {
+                authBtn.innerHTML = '👤 ' + currentUser.username;
+            }
+            authBtn.className = 'auth-btn logged-in';
+            authBtn.title = 'Go to Profile';
+        } else {
+            authBtn.innerHTML = '🔑 ' + getText('login');
+            authBtn.className = 'auth-btn';
+            authBtn.title = 'Login';
+        }
+    }
+
+    function handleAuthClick() {
+        if (currentUser) {
+            window.location.href = 'profile.html';
+        } else {
+            window.location.href = 'index.html';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const savedLang = localStorage.getItem('lang') || 'en';
+        setLang(savedLang);
+        updateAuthUI();
+    });
+</script>
+</body>
+</html>
