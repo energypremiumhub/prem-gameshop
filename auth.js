@@ -1,10 +1,17 @@
-// auth.js - Authentication system
+// ============================================================
+//  auth.js - Authentication System (ပြင်ဆင်ပြီး)
+// ============================================================
+
 let currentUser = null;
 
 // Load saved user
 const savedUser = localStorage.getItem('currentUser');
 if (savedUser) {
-    currentUser = JSON.parse(savedUser);
+    try {
+        currentUser = JSON.parse(savedUser);
+    } catch (e) {
+        currentUser = null;
+    }
 }
 
 function isLoggedIn() {
@@ -15,23 +22,69 @@ function getCurrentUser() {
     return currentUser;
 }
 
-function loginUser(email, password) {
+function loginUser(input, password) {
     const users = JSON.parse(localStorage.getItem('users') || '{}');
-    if (users[email] && users[email].password === password) {
-        currentUser = { username: email, email: email };
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
-        updateAuthUI();
-        return true;
+    
+    for (const key in users) {
+        const user = users[key];
+        // Username, email, phone သုံးမျိုးလုံးနဲ့ စစ်မယ်
+        if (key === input || user.email === input || user.username === input || user.phone === input) {
+            if (user.password === password) {
+                currentUser = user;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                updateAuthUI();
+                return true;
+            }
+        }
     }
     return false;
 }
 
-function registerUser(username, password) {
+function registerUser(username, password, email = '', phone = '') {
     const users = JSON.parse(localStorage.getItem('users') || '{}');
-    if (users[username]) return false;
-    users[username] = { username: username, password: password };
+    
+    // Username ရှိပြီးသားလား စစ်မယ်
+    if (users[username]) {
+        return false;
+    }
+    
+    // Email ရှိပြီးသားလား စစ်မယ်
+    if (email) {
+        for (const key in users) {
+            if (users[key].email === email) {
+                return false;
+            }
+        }
+    }
+    
+    // Phone ရှိပြီးသားလား စစ်မယ်
+    if (phone) {
+        for (const key in users) {
+            if (users[key].phone === phone) {
+                return false;
+            }
+        }
+    }
+    
+    const userId = 'UID' + String(Math.floor(10000000 + Math.random() * 90000000));
+    
+    const newUser = {
+        username: username,
+        email: email || '',
+        phone: phone || '',
+        password: password,
+        displayName: username,
+        userId: userId,
+        level: 1,
+        xp: 0,
+        diamonds: 100,
+        createdAt: new Date().toISOString()
+    };
+    
+    users[username] = newUser;
     localStorage.setItem('users', JSON.stringify(users));
-    currentUser = { username: username, email: username };
+    
+    currentUser = newUser;
     localStorage.setItem('currentUser', JSON.stringify(currentUser));
     updateAuthUI();
     return true;
@@ -45,103 +98,69 @@ function logoutUser() {
 
 function updateAuthUI() {
     const authBtn = document.getElementById('authBtn');
-    const profileBtn = document.getElementById('profileBtn');
-    if (currentUser && authBtn) {
-        authBtn.textContent = getText('logout');
-        authBtn.onclick = () => {
-            if (confirm(getText('logoutConfirm'))) {
-                logoutUser();
-                showToast(getText('logoutSuccess'));
+    const profileIcon = document.getElementById('profileIcon');
+    
+    if (currentUser) {
+        const savedAvatar = localStorage.getItem('userAvatar_' + currentUser.username);
+        
+        if (authBtn) {
+            if (savedAvatar) {
+                authBtn.innerHTML = '<img src="' + savedAvatar + '" alt="avatar"> ' + currentUser.username;
+            } else {
+                authBtn.innerHTML = '👤 ' + currentUser.username;
             }
-        };
-        if (profileBtn) profileBtn.style.display = 'flex';
-    } else if (authBtn) {
-        authBtn.textContent = getText('login');
-        authBtn.onclick = () => openModal('login');
-        if (profileBtn) profileBtn.style.display = 'none';
-    }
-}
-
-// Auth Modal
-function openModal(mode) {
-    const modal = document.getElementById('authModal');
-    if (!modal) return;
-    modal._mode = mode || 'login';
-    modal.classList.add('show');
-    updateModalUI();
-}
-
-function closeModal() {
-    const modal = document.getElementById('authModal');
-    if (modal) modal.classList.remove('show');
-}
-
-function switchAuthMode() {
-    const modal = document.getElementById('authModal');
-    if (!modal) return;
-    modal._mode = modal._mode === 'login' ? 'register' : 'login';
-    updateModalUI();
-}
-
-function updateModalUI() {
-    const modal = document.getElementById('authModal');
-    if (!modal) return;
-    const isLogin = modal._mode === 'login';
-    document.getElementById('modalTitle').textContent = getText(isLogin ? 'modalLogin' : 'modalRegister');
-    document.getElementById('modalSub').textContent = getText(isLogin ? 'modalLoginSub' : 'modalRegisterSub');
-    document.getElementById('modalAction').textContent = getText(isLogin ? 'login' : 'register');
-    document.getElementById('switchLink').textContent = getText(isLogin ? 'switchLogin' : 'switchRegister');
-    document.getElementById('emailLabel').textContent = getText(isLogin ? 'email' : 'username');
-    document.getElementById('emailInput').placeholder = isLogin ? 'Enter your email' : 'Enter your username';
-    document.getElementById('passLabel').textContent = getText('password');
-}
-
-function handleAuth() {
-    const modal = document.getElementById('authModal');
-    if (!modal) return;
-    const isLogin = modal._mode === 'login';
-    const email = document.getElementById('emailInput').value.trim();
-    const password = document.getElementById('passInput').value.trim();
-
-    if (!email) { showToast(getText('enterEmail')); return; }
-    if (!password) { showToast(getText('enterPassword')); return; }
-
-    if (isLogin) {
-        if (loginUser(email, password)) {
-            closeModal();
-            showToast(getText('loginSuccess'));
-            if (window.updateProfileUI) window.updateProfileUI();
-        } else {
-            showToast('❌ Invalid email or password');
+            authBtn.className = 'auth-btn logged-in';
+            authBtn.title = 'Go to Profile';
+            authBtn.onclick = function(e) {
+                e.preventDefault();
+                window.location.href = 'profile.html';
+            };
+        }
+        
+        if (profileIcon) {
+            if (savedAvatar) {
+                profileIcon.innerHTML = '<img src="' + savedAvatar + '" alt="avatar"> ' + currentUser.username;
+            } else {
+                profileIcon.innerHTML = '👤 ' + currentUser.username;
+            }
+            profileIcon.className = 'profile-icon logged-in';
         }
     } else {
-        if (password.length < 4) {
-            showToast('❌ Password must be at least 4 characters');
-            return;
+        if (authBtn) {
+            authBtn.innerHTML = '🔑 ' + (getText ? getText('login') : 'Login');
+            authBtn.className = 'auth-btn';
+            authBtn.title = 'Login';
+            authBtn.onclick = function(e) {
+                e.preventDefault();
+                if (typeof openModal === 'function') {
+                    openModal('login');
+                } else {
+                    window.location.href = 'index.html';
+                }
+            };
         }
-        if (registerUser(email, password)) {
-            closeModal();
-            showToast(getText('registerSuccess'));
-            if (window.updateProfileUI) window.updateProfileUI();
-        } else {
-            showToast('❌ Username already exists');
+        
+        if (profileIcon) {
+            profileIcon.innerHTML = '👤 Profile';
+            profileIcon.className = 'profile-icon';
         }
+    }
+    
+    // Update other UI elements if they exist
+    if (window.updateProfileUI) {
+        window.updateProfileUI();
     }
 }
 
-// Close modal on overlay click
-document.addEventListener('DOMContentLoaded', function() {
-    const modal = document.getElementById('authModal');
-    if (modal) {
-        modal.addEventListener('click', function(e) {
-            if (e.target === this) closeModal();
-        });
-    }
-    // Enter key support
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' && document.getElementById('authModal')?.classList.contains('show')) {
-            handleAuth();
-        }
-    });
-    updateAuthUI();
-});
+// Export for use in other files
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        currentUser,
+        isLoggedIn,
+        getCurrentUser,
+        loginUser,
+        registerUser,
+        logoutUser,
+        updateAuthUI
+    };
+}
