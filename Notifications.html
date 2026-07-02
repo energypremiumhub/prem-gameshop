@@ -67,7 +67,7 @@
         .header .right .top .lang-switcher .lang-btn.active{background:var(--gold);color:#0a0e1a;box-shadow:0 0 20px var(--gold-glow)}
         .header .right .top .lang-switcher .lang-btn:active{transform:scale(0.85)}
         
-        .header .right .top .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:8px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;font-size:1rem;color:var(--text-secondary);position:relative}
+        .header .right .top .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:8px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none}
         .header .right .top .noti-btn:active{transform:scale(0.85)}
         .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none}
 
@@ -168,10 +168,10 @@
                     <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
                     <button class="lang-btn" data-lang="my" onclick="setLang('my')">MY</button>
                 </div>
-                <div class="noti-btn" id="notiBtn" onclick="showNotification()">
+                <a href="notifications.html" class="noti-btn" id="notiBtn">
                     🔔
                     <span class="badge" id="notiBadge">0</span>
-                </div>
+                </a>
             </div>
         </div>
     </div>
@@ -188,9 +188,7 @@
     </div>
 
     <!-- ===== NOTIFICATIONS ===== -->
-    <div id="notiContainer">
-        <!-- Notifications will be rendered here -->
-    </div>
+    <div id="notiContainer"></div>
 
     <div class="footer-text">&copy; 2026 Premium Game Shop</div>
 </div>
@@ -412,15 +410,11 @@
         const container = document.getElementById('notiContainer');
         const d = LANG_DATA[currentLang];
         
-        // Get notifications from localStorage
         let notifications = JSON.parse(localStorage.getItem('notifications') || '[]');
         
-        // If no notifications, create default ones
         if (notifications.length === 0) {
-            // Check if user is logged in
             const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
             if (currentUser) {
-                // Add welcome notification
                 notifications.push({
                     id: 'noti-1',
                     userId: currentUser.username,
@@ -434,7 +428,6 @@
             }
         }
 
-        // Filter notifications for current user
         const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
         let userNotis = [];
         if (currentUser) {
@@ -452,10 +445,8 @@
             return;
         }
 
-        // Sort by time (newest first)
         userNotis.sort((a, b) => new Date(b.time) - new Date(a.time));
 
-        // Get icon and badge class based on type
         const getIcon = (type) => {
             switch(type) {
                 case 'order': return '🛒';
