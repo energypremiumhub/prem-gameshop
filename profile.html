@@ -132,7 +132,7 @@
         .order-item .order-info .order-pkg{font-size:0.65rem;color:var(--text-primary)}
         .order-item .order-info .order-date{font-size:0.45rem;color:var(--text-secondary)}
         .order-item .order-status{font-size:0.45rem;font-weight:700;padding:2px 10px;border-radius:16px;text-transform:uppercase}
-        .order-item .order-status.pending{background:rgba(245,158,11,0.12);color:var(--warning)}
+        .order-item .order-status.pending{background:rgba(245,158,11,0.12);color:#f59e0b}
         .order-item .order-status.completed{background:rgba(34,211,238,0.12);color:var(--green)}
         .order-item .order-status.cancelled{background:rgba(239,68,68,0.12);color:var(--red)}
 
@@ -227,6 +227,100 @@
         .color-dot{width:36px;height:36px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all 0.3s ease}
         .color-dot:hover{transform:scale(1.1)}
         .color-dot.active{border-color:var(--gold);box-shadow:0 0 20px var(--gold-glow)}
+
+        /* ===== NEW: DIAMOND DISPLAY (Read-only) ===== */
+        .diamond-display-box {
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            cursor: default;
+        }
+        .diamond-display-box .diamond-icon {
+            color: var(--gold);
+            font-size: 1.1rem;
+        }
+        .diamond-display-box .diamond-amount {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 20px var(--gold-glow);
+        }
+        .diamond-display-box .diamond-label {
+            font-size: 0.5rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .diamond-display-box .diamond-note {
+            font-size: 0.4rem;
+            color: var(--text-secondary);
+            opacity: 0.5;
+        }
+
+        /* ===== NEW: Username Change Section ===== */
+        .username-change-section {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-top: 6px;
+        }
+        .username-change-section input {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-input);
+            color: var(--text-primary);
+            font-size: 0.75rem;
+            outline: none;
+            transition: all 0.3s ease;
+            min-width: 0;
+        }
+        .username-change-section input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 20px var(--gold-glow);
+        }
+        .username-change-section input::placeholder {
+            color: var(--text-secondary);
+            font-size: 0.6rem;
+        }
+        .username-change-section .change-btn {
+            padding: 8px 14px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+            color: #0a0e1a;
+            font-weight: 700;
+            font-size: 0.6rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .username-change-section .change-btn:active {
+            transform: scale(0.90);
+        }
+        .username-change-section .change-btn:hover {
+            box-shadow: 0 0 25px var(--gold-glow);
+        }
+        .username-change-result {
+            font-size: 0.55rem;
+            margin-top: 4px;
+            display: none;
+        }
+        .username-change-result.success {
+            display: block;
+            color: var(--green);
+        }
+        .username-change-result.error {
+            display: block;
+            color: var(--red);
+        }
     </style>
 </head>
 <body>
@@ -266,7 +360,22 @@
                 <div class="name" id="displayName"><i class="fas fa-crown"></i> Guest</div>
                 <div class="username" id="displayUsername">@guest</div>
                 <div class="user-id" id="userIdDisplay">ID: ----------</div>
-                <div class="diamonds" id="diamondsDisplay"><i class="fas fa-gem"></i> <span id="diamondCount">0</span> 💎</div>
+                
+                <!-- === DIAMOND - READ ONLY (NOT INPUT) === -->
+                <div class="diamond-display-box">
+                    <span class="diamond-icon"><i class="fas fa-gem"></i></span>
+                    <span class="diamond-amount" id="diamondCount">0</span>
+                    <span class="diamond-label">💎 Diamonds</span>
+                    <span class="diamond-note">(auto-updated)</span>
+                </div>
+
+                <!-- === USERNAME CHANGE SECTION === -->
+                <div class="username-change-section">
+                    <input type="text" id="usernameChangeInput" placeholder="Enter new username..." maxlength="20">
+                    <button class="change-btn" onclick="changeUsername()">✏️ Change</button>
+                </div>
+                <div id="usernameChangeResult" class="username-change-result"></div>
+
                 <div class="status" id="statusDisplay" onclick="handleStatusClick()">
                     <i class="fas fa-circle"></i> <span id="statusText">🔑 Login</span>
                 </div>
@@ -380,7 +489,7 @@
     </div>
 </div>
 
-<!-- ===== SETTINGS MODAL ===== -->
+<!-- ===== SETTINGS MODAL (Removed Diamond input) ===== -->
 <div class="modal-overlay" id="settingsModal">
     <div class="modal">
         <button class="close-btn" onclick="closeSettingsModal()">✕</button>
@@ -399,10 +508,7 @@
                 <label>👤 Display Name</label>
                 <input type="text" id="settingsName" placeholder="Enter your name">
             </div>
-            <div class="form-group">
-                <label>💎 Diamonds</label>
-                <input type="number" id="settingsDiamonds" placeholder="Enter diamond amount" min="0">
-            </div>
+            <!-- DIAMOND REMOVED FROM SETTINGS -->
             <div class="form-group">
                 <label>📧 Email</label>
                 <input type="email" id="settingsEmail" placeholder="Enter your email">
@@ -438,7 +544,7 @@
     </div>
 </div>
 
-<!-- ===== CHANGE PASSWORD MODAL (No OTP) ===== -->
+<!-- ===== CHANGE PASSWORD MODAL ===== -->
 <div class="modal-overlay" id="passwordModal">
     <div class="modal">
         <button class="close-btn" onclick="closePasswordModal()">✕</button>
@@ -609,7 +715,10 @@
             currentPassRequired: 'Current password is required',
             newPassMin: 'New password must be at least 4 characters',
             passNotMatch: 'Passwords do not match',
-            otpSent: '✅ OTP sent to your email!'
+            otpSent: '✅ OTP sent to your email!',
+            usernameChanged: '✅ Username changed successfully!',
+            usernameExists: '❌ Username already exists',
+            usernameRequired: 'Please enter a username'
         },
         my: {
             appName: 'ပရီမီယံ ဂိမ်းဆိုင်',
@@ -663,7 +772,10 @@
             currentPassRequired: 'လက်ရှိစကားဝှက် ထည့်ပါ',
             newPassMin: 'စကားဝှက်အသစ်သည် အနည်းဆုံး ၄ လုံးရှိရမယ်',
             passNotMatch: 'စကားဝှက်များ မတူညီပါ',
-            otpSent: '✅ သင့်အီးမေးလ်သို့ OTP ပို့ထားပါသည်!'
+            otpSent: '✅ သင့်အီးမေးလ်သို့ OTP ပို့ထားပါသည်!',
+            usernameChanged: '✅ အသုံးပြုသူအမည် ပြောင်းလဲခြင်းအောင်မြင်ပါပြီ!',
+            usernameExists: '❌ အသုံးပြုသူအမည် ရှိပြီးသားဖြစ်သည်',
+            usernameRequired: 'ကျေးဇူးပြု၍ အသုံးပြုသူအမည် ထည့်ပါ'
         }
     };
 
@@ -737,8 +849,119 @@
     function isLoggedIn() { return currentUser !== null; }
 
     function generateUserId() {
-        // ID ကို ဂဏန်း ၈လုံးနဲ့ပဲ လုပ်မယ်
         return String(Math.floor(10000000 + Math.random() * 90000000));
+    }
+
+    // ===== CHANGE USERNAME =====
+    function changeUsername() {
+        if (!isLoggedIn()) {
+            showToast('❌ Please login first');
+            return;
+        }
+
+        const input = document.getElementById('usernameChangeInput');
+        const result = document.getElementById('usernameChangeResult');
+        const newUsername = input.value.trim();
+        const d = LANG_DATA[currentLang];
+
+        // Clear previous result
+        result.className = 'username-change-result';
+        result.textContent = '';
+
+        if (!newUsername) {
+            result.className = 'username-change-result error';
+            result.textContent = '❌ ' + d.usernameRequired;
+            return;
+        }
+
+        if (/\s/.test(newUsername)) {
+            result.className = 'username-change-result error';
+            result.textContent = '❌ ' + d.noSpace;
+            return;
+        }
+
+        if (newUsername.length < 2) {
+            result.className = 'username-change-result error';
+            result.textContent = '❌ Username must be at least 2 characters';
+            return;
+        }
+
+        // Check if username exists
+        const users = JSON.parse(localStorage.getItem('users') || '{}');
+        const oldUsername = currentUser.username;
+
+        if (newUsername === oldUsername) {
+            result.className = 'username-change-result error';
+            result.textContent = '❌ Same as current username';
+            return;
+        }
+
+        if (users[newUsername]) {
+            result.className = 'username-change-result error';
+            result.textContent = '❌ ' + d.usernameExists;
+            return;
+        }
+
+        // === UPDATE USERNAME ===
+        // 1. Get user data
+        const userData = users[oldUsername];
+        if (!userData) {
+            result.className = 'username-change-result error';
+            result.textContent = '❌ User data not found';
+            return;
+        }
+
+        // 2. Create new entry with new username
+        const newUserData = { ...userData };
+        newUserData.username = newUsername;
+        // Keep userId same
+        // Keep displayName same if not set, else use new username
+        if (newUserData.displayName === oldUsername) {
+            newUserData.displayName = newUsername;
+        }
+
+        // 3. Remove old entry, add new entry
+        delete users[oldUsername];
+        users[newUsername] = newUserData;
+
+        // 4. Update order history with new username
+        const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+        orders.forEach(order => {
+            if (order.userId === oldUsername) {
+                order.userId = newUsername;
+            }
+        });
+        localStorage.setItem('orderHistory', JSON.stringify(orders));
+
+        // 5. Update avatar if exists
+        const oldAvatar = localStorage.getItem('userAvatar_' + oldUsername);
+        if (oldAvatar) {
+            localStorage.setItem('userAvatar_' + newUsername, oldAvatar);
+            localStorage.removeItem('userAvatar_' + oldUsername);
+        }
+
+        // 6. Update theme if exists
+        const oldTheme = localStorage.getItem('userTheme_' + oldUsername);
+        if (oldTheme) {
+            localStorage.setItem('userTheme_' + newUsername, oldTheme);
+            localStorage.removeItem('userTheme_' + oldUsername);
+        }
+
+        // 7. Save users
+        localStorage.setItem('users', JSON.stringify(users));
+
+        // 8. Update currentUser
+        currentUser = newUserData;
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+        // 9. Clear input and show success
+        input.value = '';
+        result.className = 'username-change-result success';
+        result.textContent = '✅ ' + d.usernameChanged;
+
+        // 10. Update UI
+        updateAuthUI();
+        showToast('✅ ' + d.usernameChanged);
     }
 
     function updateAuthUI() {
@@ -754,6 +977,7 @@
         const diamondCount = document.getElementById('diamondCount');
         const diamondCountStat = document.getElementById('diamondCountStat');
         const orderCountStat = document.getElementById('orderCountStat');
+        const usernameInput = document.getElementById('usernameChangeInput');
 
         if (currentUser) {
             const savedAvatar = localStorage.getItem('userAvatar_' + currentUser.username);
@@ -787,6 +1011,10 @@
                 document.documentElement.style.setProperty('--theme-color', savedTheme);
                 document.getElementById('themeBadge').style.background = savedTheme;
             }
+
+            // Enable username input
+            usernameInput.disabled = false;
+            usernameInput.placeholder = 'Enter new username...';
         } else {
             avatarEl.textContent = '⚔️';
             nameEl.innerHTML = '<i class="fas fa-crown"></i> Guest';
@@ -803,6 +1031,12 @@
             authBtn.innerHTML = '🔑 Login';
             authBtn.className = 'auth-btn';
             authBtn.title = 'Login';
+
+            // Disable username input when not logged in
+            usernameInput.disabled = true;
+            usernameInput.placeholder = 'Login to change username';
+            document.getElementById('usernameChangeResult').className = 'username-change-result';
+            document.getElementById('usernameChangeResult').textContent = '';
         }
         renderOrders();
     }
@@ -1275,7 +1509,6 @@
         }
         const modal = document.getElementById('settingsModal');
         document.getElementById('settingsName').value = currentUser.displayName || currentUser.username || '';
-        document.getElementById('settingsDiamonds').value = currentUser.diamonds || 0;
         document.getElementById('settingsEmail').value = currentUser.email || '';
         document.getElementById('settingsPhone').value = currentUser.phone || '';
         
@@ -1309,7 +1542,6 @@
 
     function saveSettings() {
         const name = document.getElementById('settingsName').value.trim();
-        const diamonds = parseInt(document.getElementById('settingsDiamonds').value) || 0;
         const email = document.getElementById('settingsEmail').value.trim();
         const phone = document.getElementById('settingsPhone').value.trim();
         const d = LANG_DATA[currentLang];
@@ -1320,13 +1552,11 @@
         const oldUsername = currentUser.username;
         
         users[oldUsername].displayName = name;
-        users[oldUsername].diamonds = diamonds;
         users[oldUsername].email = email || users[oldUsername].email;
         users[oldUsername].phone = phone || users[oldUsername].phone;
         localStorage.setItem('users', JSON.stringify(users));
 
         currentUser.displayName = name;
-        currentUser.diamonds = diamonds;
         currentUser.email = email || currentUser.email;
         currentUser.phone = phone || currentUser.phone;
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
@@ -1370,7 +1600,7 @@
         if (e.target === this) closeThemeModal();
     });
 
-    // ===== CHANGE PASSWORD (No OTP) =====
+    // ===== CHANGE PASSWORD =====
     function openChangePassword() {
         if (!isLoggedIn()) {
             showToast('❌ Please login first');
