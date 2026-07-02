@@ -226,7 +226,6 @@
         renderPackages();
     }
 
-    // ===== TOAST =====
     function showToast(msg) {
         const t = document.getElementById('toast');
         t.textContent = msg;
@@ -235,7 +234,6 @@
         t._timer = setTimeout(() => t.classList.remove('show'), 3000);
     }
 
-    // ===== NOTIFICATION =====
     function checkNotifications() {
         const notiData = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
         const badge = document.getElementById('notiBadge');
@@ -257,7 +255,6 @@
         }
     });
 
-    // ===== AUTH =====
     function updateAuthUI() {
         const profileIcon = document.getElementById('profileIcon');
         if (isLoggedIn()) {
@@ -391,7 +388,6 @@
         }, 500);
     }
 
-    // ===== INIT =====
     document.addEventListener('DOMContentLoaded', function() {
         const savedLang = localStorage.getItem('lang') || 'en';
         setLang(savedLang);
