@@ -21,15 +21,9 @@
             --gold-glow: rgba(245,200,66,0.3);
             --cyan: #00d4ff;
             --cyan-glow: rgba(0,212,255,0.2);
-            --pink: #ff6b9d;
             --orange: #f97316;
-            --orange-glow: rgba(249,115,22,0.2);
             --green: #22d3ee;
-            --green-glow: rgba(34,211,238,0.2);
             --red: #ef4444;
-            --purple: #8b5cf6;
-            --purple-glow: rgba(139,92,246,0.2);
-            --warning: #f59e0b;
             --theme-color: #f5c842;
         }
 
@@ -73,8 +67,11 @@
         .header .right .top .noti-btn:active{transform:scale(0.85)}
         .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none}
 
-        /* ===== PROFILE SECTION - Left Aligned ===== */
+        /* ===== PROFILE SECTION - Left Avatar + Info, Right Level ===== */
         .profile-section{display:flex;align-items:center;gap:16px;margin-bottom:16px;animation:slideUp 0.6s ease;background:var(--bg-card);border:1px solid var(--border-color);border-radius:14px;padding:14px 16px;box-shadow:0 4px 25px var(--shadow)}
+        
+        /* Left side: Avatar + Info */
+        .profile-section .left-side{display:flex;align-items:center;gap:14px;flex:1;min-width:0}
         .profile-section .avatar-wrap{position:relative;width:64px;height:64px;flex-shrink:0}
         .profile-section .avatar-wrap .avatar{width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,var(--theme-color),var(--orange));display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:#0a0e1a;border:2px solid var(--border-color);cursor:pointer;transition:all 0.3s ease;overflow:hidden;box-shadow:0 0 20px var(--gold-glow)}
         .profile-section .avatar-wrap .avatar:active{transform:scale(0.95)}
@@ -88,22 +85,22 @@
         .profile-section .info .name i{color:var(--theme-color)}
         .profile-section .info .username{font-size:0.65rem;color:var(--text-secondary)}
         .profile-section .info .user-id{font-size:0.5rem;color:var(--text-secondary);opacity:0.5;font-family:monospace}
-        
+        .profile-section .info .diamonds{font-size:0.7rem;color:var(--gold);font-weight:600;display:flex;align-items:center;gap:4px}
+        .profile-section .info .diamonds i{color:var(--gold)}
         .profile-section .info .status{font-size:0.55rem;color:var(--green);margin-top:4px;display:inline-flex;align-items:center;gap:4px;background:rgba(34,211,238,0.08);padding:2px 12px;border-radius:20px;border:1px solid rgba(34,211,238,0.1);cursor:pointer;transition:all 0.3s ease;width:fit-content}
         .profile-section .info .status:active{transform:scale(0.95)}
-        .profile-section .info .status.logout-btn{color:var(--text-secondary);border-color:var(--border-color);background:transparent}
-        .profile-section .info .status.logout-btn:hover{border-color:var(--red);color:var(--red)}
+        .profile-section .info .status.login-status{color:var(--text-secondary);border-color:var(--border-color);background:transparent}
 
-        /* ===== LEVEL BADGE (Separate) ===== */
-        .level-section{text-align:center;margin-bottom:16px;animation:slideUp 0.7s ease}
-        .level-section .level-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--bg-card),var(--bg-secondary));border:1px solid var(--border-color);padding:6px 20px;border-radius:20px;box-shadow:0 4px 20px var(--shadow)}
-        .level-section .level-badge .level-icon{font-size:1.2rem}
-        .level-section .level-badge .level-text{font-size:0.8rem;font-weight:700;color:var(--theme-color)}
-        .level-section .level-badge .level-number{font-size:1.2rem;font-weight:800;color:var(--text-primary)}
-        .level-section .level-badge .level-xp{font-size:0.55rem;color:var(--text-secondary);margin-left:4px}
+        /* Right side: Level Badge */
+        .profile-section .right-side{flex-shrink:0;text-align:center}
+        .profile-section .right-side .level-badge{display:flex;flex-direction:column;align-items:center;background:linear-gradient(135deg,var(--bg-input),var(--bg-secondary));border:1px solid var(--border-color);padding:8px 14px;border-radius:14px;min-width:60px;box-shadow:0 4px 15px var(--shadow)}
+        .profile-section .right-side .level-badge .level-icon{font-size:1.2rem}
+        .profile-section .right-side .level-badge .level-number{font-size:1.3rem;font-weight:800;color:var(--theme-color);text-shadow:0 0 20px var(--gold-glow)}
+        .profile-section .right-side .level-badge .level-label{font-size:0.4rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px}
+        .profile-section .right-side .level-badge .level-xp{font-size:0.45rem;color:var(--text-secondary)}
 
-        /* ===== STATS GRID (Removed Orders & XP) ===== */
-        .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;animation:slideUp 0.8s ease}
+        /* ===== STATS GRID (No Orders & XP) ===== */
+        .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:16px;animation:slideUp 0.7s ease}
         .stats-grid .stat{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:12px 6px;text-align:center;box-shadow:0 4px 20px var(--shadow);transition:all 0.3s ease}
         .stats-grid .stat:active{transform:scale(0.95)}
         .stats-grid .stat .number{font-size:1.1rem;font-weight:700;color:var(--theme-color);text-shadow:0 0 20px var(--gold-glow)}
@@ -111,7 +108,7 @@
         .stats-grid .stat .icon{font-size:0.8rem;display:block;margin-bottom:2px}
 
         /* ===== GLASS CARD ===== */
-        .glass-card{background:var(--bg-card);backdrop-filter:blur(10px);border:1px solid var(--border-color);border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:0 4px 25px var(--shadow);animation:slideUp 0.9s ease}
+        .glass-card{background:var(--bg-card);backdrop-filter:blur(10px);border:1px solid var(--border-color);border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:0 4px 25px var(--shadow);animation:slideUp 0.8s ease}
         .glass-card .label{font-size:0.6rem;color:var(--text-secondary);font-weight:600;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
         .glass-card .label i{color:var(--cyan);margin-right:4px}
 
@@ -224,8 +221,8 @@
         .avatar-upload .preview .upload-hint{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.7);padding:2px;font-size:0.4rem;color:var(--text-secondary);text-align:center;display:none}
         .avatar-upload .preview:hover .upload-hint{display:block}
         .avatar-upload .label{font-size:0.55rem;color:var(--text-secondary);text-align:center;display:block}
+        .error-text{display:none;color:var(--red);font-size:0.55rem;margin-top:3px}
 
-        /* Color options */
         .color-options{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:12px 0}
         .color-dot{width:36px;height:36px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all 0.3s ease}
         .color-dot:hover{transform:scale(1.1)}
@@ -238,7 +235,6 @@
     <div class="header">
         <div class="left">
             <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Game Shop</div>
-            <!-- Login button -->
             <div class="auth-btn" id="authBtn" onclick="handleAuthClick()">🔑 Login</div>
         </div>
         <div class="right">
@@ -255,40 +251,42 @@
         </div>
     </div>
 
-    <!-- ===== PROFILE SECTION (Left Aligned) ===== -->
+    <!-- ===== PROFILE SECTION ===== -->
     <div class="profile-section">
-        <div class="avatar-wrap">
-            <div class="avatar" id="avatarDisplay">⚔️</div>
-            <label class="camera-icon">
-                <i class="fas fa-camera"></i>
-                <input type="file" id="avatarInput" accept="image/*">
-            </label>
+        <!-- Left: Avatar + Info -->
+        <div class="left-side">
+            <div class="avatar-wrap">
+                <div class="avatar" id="avatarDisplay">⚔️</div>
+                <label class="camera-icon">
+                    <i class="fas fa-camera"></i>
+                    <input type="file" id="avatarInput" accept="image/*">
+                </label>
+            </div>
+            <div class="info">
+                <div class="name" id="displayName"><i class="fas fa-crown"></i> Guest</div>
+                <div class="username" id="displayUsername">@guest</div>
+                <div class="user-id" id="userIdDisplay">ID: ----------</div>
+                <div class="diamonds" id="diamondsDisplay"><i class="fas fa-gem"></i> <span id="diamondCount">0</span> 💎</div>
+                <div class="status" id="statusDisplay" onclick="handleStatusClick()">
+                    <i class="fas fa-circle"></i> <span id="statusText">🔑 Login</span>
+                </div>
+            </div>
         </div>
-        <div class="info">
-            <div class="name" id="displayName"><i class="fas fa-crown"></i> Guest</div>
-            <div class="username" id="displayUsername">@guest</div>
-            <div class="user-id" id="userIdDisplay">ID: ----------</div>
-            <div class="status" id="statusDisplay" onclick="handleStatusClick()">
-                <i class="fas fa-circle"></i> <span id="statusText">Login</span>
+        <!-- Right: Level Badge -->
+        <div class="right-side">
+            <div class="level-badge">
+                <span class="level-icon">🏆</span>
+                <span class="level-number" id="levelNumber">0</span>
+                <span class="level-label">Level</span>
+                <span class="level-xp" id="levelXp">0 XP</span>
             </div>
         </div>
     </div>
 
-    <!-- ===== LEVEL SECTION (Separate) ===== -->
-    <div class="level-section">
-        <div class="level-badge">
-            <span class="level-icon">🏆</span>
-            <span class="level-text">Level</span>
-            <span class="level-number" id="levelNumber">0</span>
-            <span class="level-xp" id="levelXp">(0 XP)</span>
-        </div>
-    </div>
-
-    <!-- ===== STATS GRID (Only Diamonds & Rank) ===== -->
+    <!-- ===== STATS GRID (Only Diamonds & Orders - No XP) ===== -->
     <div class="stats-grid">
-        <div class="stat"><span class="icon">💎</span><div class="number" id="diamondCount">0</div><div class="label" id="diamondLabel">Diamonds</div></div>
-        <div class="stat"><span class="icon">📦</span><div class="number" id="orderCount">0</div><div class="label" id="orderLabel">Orders</div></div>
-        <div class="stat"><span class="icon">🏆</span><div class="number" id="rankCount">0</div><div class="label" id="rankLabel">Rank</div></div>
+        <div class="stat"><span class="icon">💎</span><div class="number" id="diamondCountStat">0</div><div class="label" id="diamondLabel">Diamonds</div></div>
+        <div class="stat"><span class="icon">📦</span><div class="number" id="orderCountStat">0</div><div class="label" id="orderLabel">Orders</div></div>
     </div>
 
     <!-- ===== ORDER HISTORY ===== -->
@@ -389,7 +387,6 @@
         <h2>⚙️ Account Settings</h2>
         <p>Update your profile information</p>
         <div>
-            <!-- Profile Picture -->
             <div class="avatar-upload">
                 <div class="preview" id="settingsAvatarPreview" onclick="document.getElementById('settingsAvatarInput').click()">
                     👤
@@ -403,16 +400,16 @@
                 <input type="text" id="settingsName" placeholder="Enter your name">
             </div>
             <div class="form-group">
+                <label>💎 Diamonds</label>
+                <input type="number" id="settingsDiamonds" placeholder="Enter diamond amount" min="0">
+            </div>
+            <div class="form-group">
                 <label>📧 Email</label>
                 <input type="email" id="settingsEmail" placeholder="Enter your email">
             </div>
             <div class="form-group">
                 <label>📱 Phone Number</label>
                 <input type="tel" id="settingsPhone" placeholder="Enter your phone number">
-            </div>
-            <div class="form-group">
-                <label>💎 Diamonds (Points)</label>
-                <input type="number" id="settingsDiamonds" placeholder="Enter diamond amount" min="0">
             </div>
             <button class="btn-primary" onclick="saveSettings()">💾 Save Changes</button>
         </div>
@@ -451,17 +448,17 @@
             <div class="form-group">
                 <label>🔐 Current Password</label>
                 <input type="password" id="currentPassword" placeholder="Enter your current password">
-                <div class="error-text" id="currentPassError" style="display:none;color:var(--red);font-size:0.55rem;margin-top:3px;">Current password is required</div>
+                <div class="error-text" id="currentPassError">Current password is required</div>
             </div>
             <div class="form-group">
                 <label>🔑 New Password</label>
                 <input type="password" id="newPassword" placeholder="Min 4 characters">
-                <div class="error-text" id="newPassError" style="display:none;color:var(--red);font-size:0.55rem;margin-top:3px;">Password must be at least 4 characters</div>
+                <div class="error-text" id="newPassError">Password must be at least 4 characters</div>
             </div>
             <div class="form-group">
                 <label>🔐 Confirm New Password</label>
                 <input type="password" id="confirmNewPassword" placeholder="Re-enter new password">
-                <div class="error-text" id="confirmNewError" style="display:none;color:var(--red);font-size:0.55rem;margin-top:3px;">Passwords do not match</div>
+                <div class="error-text" id="confirmNewError">Passwords do not match</div>
             </div>
             <button class="btn-primary" onclick="changePassword()">🔑 Change Password</button>
         </div>
@@ -501,27 +498,27 @@
                 <div class="form-group">
                     <label>👤 Username <span class="required">*</span></label>
                     <input type="text" id="regUsername" placeholder="Choose a username (no spaces)" oninput="this.value=this.value.replace(/\s/g,'')">
-                    <div class="error-text" id="usernameError" style="display:none;color:var(--red);font-size:0.55rem;margin-top:3px;">Username is required (no spaces)</div>
+                    <div class="error-text" id="usernameError">Username is required (no spaces)</div>
                 </div>
                 <div class="form-group">
                     <label>📧 Email</label>
                     <input type="email" id="regEmail" placeholder="Enter your email (optional)">
-                    <div class="error-text" id="emailError" style="display:none;color:var(--red);font-size:0.55rem;margin-top:3px;">Valid email is required</div>
+                    <div class="error-text" id="emailError">Valid email is required</div>
                 </div>
                 <div class="form-group">
                     <label>📱 Phone Number</label>
                     <input type="tel" id="regPhone" placeholder="Enter your phone number (optional)">
-                    <div class="error-text" id="phoneError" style="display:none;color:var(--red);font-size:0.55rem;margin-top:3px;">Phone number is required</div>
+                    <div class="error-text" id="phoneError">Phone number is required</div>
                 </div>
                 <div class="form-group">
                     <label>🔑 Password <span class="required">*</span></label>
                     <input type="password" id="regPassword" placeholder="Min 4 characters">
-                    <div class="error-text" id="passwordError" style="display:none;color:var(--red);font-size:0.55rem;margin-top:3px;">Password must be at least 4 characters</div>
+                    <div class="error-text" id="passwordError">Password must be at least 4 characters</div>
                 </div>
                 <div class="form-group">
                     <label>🔐 Confirm Password <span class="required">*</span></label>
                     <input type="password" id="regConfirmPassword" placeholder="Re-enter password">
-                    <div class="error-text" id="confirmError" style="display:none;color:var(--red);font-size:0.55rem;margin-top:3px;">Passwords do not match</div>
+                    <div class="error-text" id="confirmError">Passwords do not match</div>
                 </div>
                 <button class="btn-primary" onclick="handleRegister()">🔑 Register</button>
                 <span class="switch-link" id="switchToLogin" onclick="switchAuthMode()">Already have an account? Login</span>
@@ -530,23 +527,23 @@
                 <div class="form-group">
                     <label>📧 Email or Phone</label>
                     <input type="text" id="forgotEmail" placeholder="Enter your registered email or phone">
-                    <div class="error-text" id="forgotEmailError" style="display:none;color:var(--red);font-size:0.55rem;margin-top:3px;">Please enter your email or phone</div>
+                    <div class="error-text" id="forgotEmailError">Please enter your email or phone</div>
                 </div>
                 <div id="otpSection" style="display:none;">
                     <div class="form-group">
                         <label>🔑 OTP Code</label>
                         <input type="text" id="otpCode" placeholder="Enter OTP code sent to your email">
-                        <div class="error-text" id="otpError" style="display:none;color:var(--red);font-size:0.55rem;margin-top:3px;">Invalid OTP code</div>
+                        <div class="error-text" id="otpError">Invalid OTP code</div>
                     </div>
                     <div class="form-group">
                         <label>🔑 New Password</label>
                         <input type="password" id="newPasswordForgot" placeholder="Min 4 characters">
-                        <div class="error-text" id="newPasswordError" style="display:none;color:var(--red);font-size:0.55rem;margin-top:3px;">Password must be at least 4 characters</div>
+                        <div class="error-text" id="newPasswordError">Password must be at least 4 characters</div>
                     </div>
                     <div class="form-group">
                         <label>🔐 Confirm New Password</label>
                         <input type="password" id="confirmNewPasswordForgot" placeholder="Re-enter password">
-                        <div class="error-text" id="confirmNewErrorForgot" style="display:none;color:var(--red);font-size:0.55rem;margin-top:3px;">Passwords do not match</div>
+                        <div class="error-text" id="confirmNewErrorForgot">Passwords do not match</div>
                     </div>
                     <button class="btn-primary" onclick="resetPassword()">🔄 Reset Password</button>
                 </div>
@@ -564,7 +561,6 @@
             appName: 'Premium Game Shop',
             diamondLabel: 'Diamonds',
             orderLabel: 'Orders',
-            rankLabel: 'Rank',
             orderHistoryLabel: 'Order History',
             settingsLabel: 'Settings',
             accountSettingsText: 'Account Settings',
@@ -585,7 +581,8 @@
             home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
             login: 'Login',
             register: 'Register',
-            statusLogin: 'Login',
+            statusLogin: '🔑 Login',
+            statusOnline: '🟢 Online',
             settingsSaved: '✅ Settings saved successfully!',
             passChanged: '✅ Password changed successfully!',
             wrongCurrentPass: '❌ Current password is incorrect',
@@ -598,7 +595,6 @@
             logoutSuccess: '✅ Logout successful!',
             userExists: '❌ Username, email or phone already exists',
             noSpace: 'Username cannot contain spaces',
-            emailSentError: '❌ Failed to send OTP. Please try again.',
             resetSuccess: '✅ Password reset successful!',
             modalLogin: '⚔️ Login',
             modalLoginSub: 'Welcome back, warrior!',
@@ -612,13 +608,13 @@
             password: '🔑 Password',
             currentPassRequired: 'Current password is required',
             newPassMin: 'New password must be at least 4 characters',
-            passNotMatch: 'Passwords do not match'
+            passNotMatch: 'Passwords do not match',
+            otpSent: '✅ OTP sent to your email!'
         },
         my: {
             appName: 'ပရီမီယံ ဂိမ်းဆိုင်',
             diamondLabel: 'စိန်များ',
             orderLabel: 'အော်ဒါများ',
-            rankLabel: 'အဆင့်',
             orderHistoryLabel: 'အော်ဒါမှတ်တမ်း',
             settingsLabel: 'ပြင်ဆင်မှုများ',
             accountSettingsText: 'အကောင့်ဆက်တင်',
@@ -639,7 +635,8 @@
             home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
             login: 'ဝင်ရန်',
             register: 'မှတ်ပုံတင်ရန်',
-            statusLogin: 'ဝင်ရန်',
+            statusLogin: '🔑 ဝင်ရန်',
+            statusOnline: '🟢 အွန်လိုင်း',
             settingsSaved: '✅ ဆက်တင်များသိမ်းဆည်းပြီး!',
             passChanged: '✅ စကားဝှက်ပြောင်းလဲခြင်းအောင်မြင်ပါပြီ!',
             wrongCurrentPass: '❌ လက်ရှိစကားဝှက် မှားနေပါသည်',
@@ -652,7 +649,6 @@
             logoutSuccess: '✅ ထွက်ခြင်းအောင်မြင်ပါပြီ!',
             userExists: '❌ အသုံးပြုသူအမည်၊ အီးမေးလ် သို့မဟုတ် ဖုန်းနံပါတ် ရှိပြီးသားဖြစ်သည်',
             noSpace: 'အသုံးပြုသူအမည်တွင် နေရာလပ်မထည့်ရပါ',
-            emailSentError: '❌ OTP ပို့ရန် မအောင်မြင်ပါ။ ထပ်ကြိုးစားပါ။',
             resetSuccess: '✅ စကားဝှက်ပြန်လည်သတ်မှတ်ခြင်းအောင်မြင်ပါပြီ!',
             modalLogin: '⚔️ ဝင်ရန်',
             modalLoginSub: 'ပြန်လာတာကြိုဆိုပါတယ်!',
@@ -666,7 +662,8 @@
             password: '🔑 စကားဝှက်',
             currentPassRequired: 'လက်ရှိစကားဝှက် ထည့်ပါ',
             newPassMin: 'စကားဝှက်အသစ်သည် အနည်းဆုံး ၄ လုံးရှိရမယ်',
-            passNotMatch: 'စကားဝှက်များ မတူညီပါ'
+            passNotMatch: 'စကားဝှက်များ မတူညီပါ',
+            otpSent: '✅ သင့်အီးမေးလ်သို့ OTP ပို့ထားပါသည်!'
         }
     };
 
@@ -688,7 +685,6 @@
         document.getElementById('appName').innerHTML = '<i class="fas fa-gamepad"></i> ' + d.appName;
         document.getElementById('diamondLabel').textContent = d.diamondLabel;
         document.getElementById('orderLabel').textContent = d.orderLabel;
-        document.getElementById('rankLabel').textContent = d.rankLabel;
         document.getElementById('orderHistoryLabel').textContent = d.orderHistoryLabel;
         document.getElementById('settingsLabel').innerHTML = '<i class="fas fa-cog"></i> ' + d.settingsLabel;
         document.getElementById('accountSettingsText').textContent = d.accountSettingsText;
@@ -741,9 +737,8 @@
     function isLoggedIn() { return currentUser !== null; }
 
     function generateUserId() {
-        // ID ကို ဂဏန်းနဲ့ပဲ လုပ်မယ် (UID + ၆လုံး)
-        const num = Math.floor(100000 + Math.random() * 900000);
-        return 'UID' + num;
+        // ID ကို ဂဏန်း ၈လုံးနဲ့ပဲ လုပ်မယ်
+        return String(Math.floor(10000000 + Math.random() * 90000000));
     }
 
     function updateAuthUI() {
@@ -757,8 +752,8 @@
         const levelXp = document.getElementById('levelXp');
         const userIdEl = document.getElementById('userIdDisplay');
         const diamondCount = document.getElementById('diamondCount');
-        const rankCount = document.getElementById('rankCount');
-        const orderCount = document.getElementById('orderCount');
+        const diamondCountStat = document.getElementById('diamondCountStat');
+        const orderCountStat = document.getElementById('orderCountStat');
 
         if (currentUser) {
             const savedAvatar = localStorage.getItem('userAvatar_' + currentUser.username);
@@ -769,26 +764,24 @@
             }
             nameEl.innerHTML = '<i class="fas fa-crown"></i> ' + (currentUser.displayName || currentUser.username || 'Guest');
             userEl.textContent = '@' + (currentUser.username || 'guest');
-            statusEl.textContent = '🟢 Online';
-            statusDisplay.style.color = 'var(--green)';
-            statusDisplay.style.borderColor = 'rgba(34,211,238,0.2)';
-            statusDisplay.style.background = 'rgba(34,211,238,0.08)';
+            statusEl.textContent = getText('statusOnline');
+            statusDisplay.className = 'status';
             statusDisplay.style.cursor = 'default';
             userIdEl.textContent = 'ID: ' + (currentUser.userId || generateUserId());
             levelNumber.textContent = currentUser.level || 1;
-            levelXp.textContent = '(' + (currentUser.xp || 0) + ' XP)';
-            diamondCount.textContent = currentUser.diamonds || 0;
-            rankCount.textContent = currentUser.rank || 'Bronze';
+            levelXp.textContent = (currentUser.xp || 0) + ' XP';
+            const diamonds = currentUser.diamonds || 0;
+            diamondCount.textContent = diamonds;
+            diamondCountStat.textContent = diamonds;
             
             const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
             const userOrders = orders.filter(o => o.userId === currentUser.username);
-            orderCount.textContent = userOrders.length;
+            orderCountStat.textContent = userOrders.length;
 
             authBtn.innerHTML = '👤 ' + currentUser.username;
             authBtn.className = 'auth-btn logged-in';
             authBtn.title = 'Go to Profile';
 
-            // Load theme color
             const savedTheme = localStorage.getItem('userTheme_' + currentUser.username);
             if (savedTheme) {
                 document.documentElement.style.setProperty('--theme-color', savedTheme);
@@ -798,17 +791,15 @@
             avatarEl.textContent = '⚔️';
             nameEl.innerHTML = '<i class="fas fa-crown"></i> Guest';
             userEl.textContent = '@guest';
-            statusEl.textContent = '🔑 Login';
-            statusDisplay.style.color = 'var(--text-secondary)';
-            statusDisplay.style.borderColor = 'var(--border-color)';
-            statusDisplay.style.background = 'transparent';
+            statusEl.textContent = getText('statusLogin');
+            statusDisplay.className = 'status login-status';
             statusDisplay.style.cursor = 'pointer';
             userIdEl.textContent = 'ID: ----------';
             levelNumber.textContent = '0';
-            levelXp.textContent = '(0 XP)';
+            levelXp.textContent = '0 XP';
             diamondCount.textContent = '0';
-            rankCount.textContent = '—';
-            orderCount.textContent = '0';
+            diamondCountStat.textContent = '0';
+            orderCountStat.textContent = '0';
             authBtn.innerHTML = '🔑 Login';
             authBtn.className = 'auth-btn';
             authBtn.title = 'Login';
@@ -1035,7 +1026,6 @@
             level: 1,
             xp: 0,
             diamonds: 100,
-            rank: 'Bronze',
             createdAt: new Date().toISOString()
         };
         users[username] = newUser;
@@ -1285,11 +1275,10 @@
         }
         const modal = document.getElementById('settingsModal');
         document.getElementById('settingsName').value = currentUser.displayName || currentUser.username || '';
+        document.getElementById('settingsDiamonds').value = currentUser.diamonds || 0;
         document.getElementById('settingsEmail').value = currentUser.email || '';
         document.getElementById('settingsPhone').value = currentUser.phone || '';
-        document.getElementById('settingsDiamonds').value = currentUser.diamonds || 0;
         
-        // Load avatar preview
         const savedAvatar = localStorage.getItem('userAvatar_' + currentUser.username);
         const preview = document.getElementById('settingsAvatarPreview');
         if (savedAvatar) {
@@ -1320,29 +1309,26 @@
 
     function saveSettings() {
         const name = document.getElementById('settingsName').value.trim();
+        const diamonds = parseInt(document.getElementById('settingsDiamonds').value) || 0;
         const email = document.getElementById('settingsEmail').value.trim();
         const phone = document.getElementById('settingsPhone').value.trim();
-        const diamonds = parseInt(document.getElementById('settingsDiamonds').value) || 0;
         const d = LANG_DATA[currentLang];
 
         if (!name) { showToast('❌ Please enter your name'); return; }
 
         const users = JSON.parse(localStorage.getItem('users') || '{}');
-        
-        // Check if username already taken (if changed)
         const oldUsername = currentUser.username;
         
-        // Update user data
         users[oldUsername].displayName = name;
+        users[oldUsername].diamonds = diamonds;
         users[oldUsername].email = email || users[oldUsername].email;
         users[oldUsername].phone = phone || users[oldUsername].phone;
-        users[oldUsername].diamonds = diamonds;
         localStorage.setItem('users', JSON.stringify(users));
 
         currentUser.displayName = name;
+        currentUser.diamonds = diamonds;
         currentUser.email = email || currentUser.email;
         currentUser.phone = phone || currentUser.phone;
-        currentUser.diamonds = diamonds;
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
         closeSettingsModal();
@@ -1453,7 +1439,6 @@
             return;
         }
 
-        // Update password
         userData.password = newPass;
         localStorage.setItem('users', JSON.stringify(users));
 
@@ -1528,13 +1513,11 @@
         const savedLang = localStorage.getItem('lang') || 'en';
         setLang(savedLang);
         updateAuthUI();
-        // Set default theme color badge
         const savedTheme = localStorage.getItem('userTheme_' + (currentUser ? currentUser.username : ''));
         if (savedTheme) {
             document.documentElement.style.setProperty('--theme-color', savedTheme);
             document.getElementById('themeBadge').style.background = savedTheme;
         }
-        // Check for notification
         const notiData = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
         if (notiData.show) {
             const badge = document.getElementById('notiBadge');
