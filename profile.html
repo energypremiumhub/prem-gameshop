@@ -67,10 +67,9 @@
         .header .right .top .noti-btn:active{transform:scale(0.85)}
         .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none}
 
-        /* ===== PROFILE SECTION - Left Avatar + Info, Right Level ===== */
+        /* ===== PROFILE SECTION ===== */
         .profile-section{display:flex;align-items:center;gap:16px;margin-bottom:16px;animation:slideUp 0.6s ease;background:var(--bg-card);border:1px solid var(--border-color);border-radius:14px;padding:14px 16px;box-shadow:0 4px 25px var(--shadow)}
         
-        /* Left side: Avatar + Info */
         .profile-section .left-side{display:flex;align-items:center;gap:14px;flex:1;min-width:0}
         .profile-section .avatar-wrap{position:relative;width:64px;height:64px;flex-shrink:0}
         .profile-section .avatar-wrap .avatar{width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,var(--theme-color),var(--orange));display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:#0a0e1a;border:2px solid var(--border-color);cursor:pointer;transition:all 0.3s ease;overflow:hidden;box-shadow:0 0 20px var(--gold-glow)}
@@ -85,13 +84,45 @@
         .profile-section .info .name i{color:var(--theme-color)}
         .profile-section .info .username{font-size:0.65rem;color:var(--text-secondary)}
         .profile-section .info .user-id{font-size:0.5rem;color:var(--text-secondary);opacity:0.5;font-family:monospace}
-        .profile-section .info .diamonds{font-size:0.7rem;color:var(--gold);font-weight:600;display:flex;align-items:center;gap:4px}
-        .profile-section .info .diamonds i{color:var(--gold)}
+        
+        /* DIAMOND - READ ONLY */
+        .diamond-display-box {
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 6px 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: default;
+            margin-top: 4px;
+        }
+        .diamond-display-box .diamond-icon {
+            color: var(--gold);
+            font-size: 0.8rem;
+        }
+        .diamond-display-box .diamond-amount {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 20px var(--gold-glow);
+        }
+        .diamond-display-box .diamond-label {
+            font-size: 0.45rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .diamond-display-box .diamond-note {
+            font-size: 0.4rem;
+            color: var(--text-secondary);
+            opacity: 0.5;
+        }
+
         .profile-section .info .status{font-size:0.55rem;color:var(--green);margin-top:4px;display:inline-flex;align-items:center;gap:4px;background:rgba(34,211,238,0.08);padding:2px 12px;border-radius:20px;border:1px solid rgba(34,211,238,0.1);cursor:pointer;transition:all 0.3s ease;width:fit-content}
         .profile-section .info .status:active{transform:scale(0.95)}
         .profile-section .info .status.login-status{color:var(--text-secondary);border-color:var(--border-color);background:transparent}
 
-        /* Right side: Level Badge */
         .profile-section .right-side{flex-shrink:0;text-align:center}
         .profile-section .right-side .level-badge{display:flex;flex-direction:column;align-items:center;background:linear-gradient(135deg,var(--bg-input),var(--bg-secondary));border:1px solid var(--border-color);padding:8px 14px;border-radius:14px;min-width:60px;box-shadow:0 4px 15px var(--shadow)}
         .profile-section .right-side .level-badge .level-icon{font-size:1.2rem}
@@ -99,7 +130,7 @@
         .profile-section .right-side .level-badge .level-label{font-size:0.4rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px}
         .profile-section .right-side .level-badge .level-xp{font-size:0.45rem;color:var(--text-secondary)}
 
-        /* ===== STATS GRID (No Orders & XP) ===== */
+        /* ===== STATS GRID ===== */
         .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:16px;animation:slideUp 0.7s ease}
         .stats-grid .stat{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:12px 6px;text-align:center;box-shadow:0 4px 20px var(--shadow);transition:all 0.3s ease}
         .stats-grid .stat:active{transform:scale(0.95)}
@@ -204,6 +235,7 @@
         .modal .form-group input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border-color);background:var(--bg-input);color:var(--text-primary);font-size:0.85rem;outline:none;transition:all 0.3s ease}
         .modal .form-group input:focus{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
         .modal .form-group input::placeholder{color:var(--text-secondary);font-size:0.7rem}
+        .modal .form-group input[readonly]{background:var(--bg-secondary);color:var(--text-secondary);cursor:not-allowed;opacity:0.7}
         .modal .btn-primary{width:100%;padding:11px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:10px;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;position:relative;z-index:1}
         .modal .btn-primary:active{transform:scale(0.96)}
         .modal .btn-primary:hover{box-shadow:0 0 40px var(--gold-glow)}
@@ -228,99 +260,14 @@
         .color-dot:hover{transform:scale(1.1)}
         .color-dot.active{border-color:var(--gold);box-shadow:0 0 20px var(--gold-glow)}
 
-        /* ===== NEW: DIAMOND DISPLAY (Read-only) ===== */
-        .diamond-display-box {
-            background: var(--bg-input);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 10px 14px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            cursor: default;
-        }
-        .diamond-display-box .diamond-icon {
-            color: var(--gold);
-            font-size: 1.1rem;
-        }
-        .diamond-display-box .diamond-amount {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--gold);
-            text-shadow: 0 0 20px var(--gold-glow);
-        }
-        .diamond-display-box .diamond-label {
-            font-size: 0.5rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .diamond-display-box .diamond-note {
-            font-size: 0.4rem;
-            color: var(--text-secondary);
-            opacity: 0.5;
-        }
-
-        /* ===== NEW: Username Change Section ===== */
-        .username-change-section {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            margin-top: 6px;
-        }
-        .username-change-section input {
-            flex: 1;
-            padding: 8px 12px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            background: var(--bg-input);
-            color: var(--text-primary);
-            font-size: 0.75rem;
-            outline: none;
-            transition: all 0.3s ease;
-            min-width: 0;
-        }
-        .username-change-section input:focus {
-            border-color: var(--gold);
-            box-shadow: 0 0 20px var(--gold-glow);
-        }
-        .username-change-section input::placeholder {
-            color: var(--text-secondary);
-            font-size: 0.6rem;
-        }
-        .username-change-section .change-btn {
-            padding: 8px 14px;
-            border: none;
-            border-radius: 8px;
-            background: linear-gradient(135deg, var(--gold), var(--orange));
-            color: #0a0e1a;
-            font-weight: 700;
-            font-size: 0.6rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-        .username-change-section .change-btn:active {
-            transform: scale(0.90);
-        }
-        .username-change-section .change-btn:hover {
-            box-shadow: 0 0 25px var(--gold-glow);
-        }
-        .username-change-result {
-            font-size: 0.55rem;
-            margin-top: 4px;
-            display: none;
-        }
-        .username-change-result.success {
-            display: block;
-            color: var(--green);
-        }
-        .username-change-result.error {
-            display: block;
-            color: var(--red);
-        }
+        .username-change-row{display:flex;gap:8px;align-items:center}
+        .username-change-row input{flex:1;min-width:0}
+        .username-change-row .change-btn{padding:8px 16px;border:none;border-radius:8px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;font-weight:700;font-size:0.7rem;cursor:pointer;white-space:nowrap;transition:all 0.3s ease}
+        .username-change-row .change-btn:active{transform:scale(0.90)}
+        .username-change-row .change-btn:hover{box-shadow:0 0 25px var(--gold-glow)}
+        .username-result{font-size:0.55rem;margin-top:4px;display:none}
+        .username-result.success{display:block;color:var(--green)}
+        .username-result.error{display:block;color:var(--red)}
     </style>
 </head>
 <body>
@@ -347,7 +294,6 @@
 
     <!-- ===== PROFILE SECTION ===== -->
     <div class="profile-section">
-        <!-- Left: Avatar + Info -->
         <div class="left-side">
             <div class="avatar-wrap">
                 <div class="avatar" id="avatarDisplay">⚔️</div>
@@ -361,27 +307,19 @@
                 <div class="username" id="displayUsername">@guest</div>
                 <div class="user-id" id="userIdDisplay">ID: ----------</div>
                 
-                <!-- === DIAMOND - READ ONLY (NOT INPUT) === -->
+                <!-- DIAMOND - READ ONLY -->
                 <div class="diamond-display-box">
                     <span class="diamond-icon"><i class="fas fa-gem"></i></span>
                     <span class="diamond-amount" id="diamondCount">0</span>
                     <span class="diamond-label">💎 Diamonds</span>
-                    <span class="diamond-note">(auto-updated)</span>
+                    <span class="diamond-note">(auto)</span>
                 </div>
-
-                <!-- === USERNAME CHANGE SECTION === -->
-                <div class="username-change-section">
-                    <input type="text" id="usernameChangeInput" placeholder="Enter new username..." maxlength="20">
-                    <button class="change-btn" onclick="changeUsername()">✏️ Change</button>
-                </div>
-                <div id="usernameChangeResult" class="username-change-result"></div>
 
                 <div class="status" id="statusDisplay" onclick="handleStatusClick()">
                     <i class="fas fa-circle"></i> <span id="statusText">🔑 Login</span>
                 </div>
             </div>
         </div>
-        <!-- Right: Level Badge -->
         <div class="right-side">
             <div class="level-badge">
                 <span class="level-icon">🏆</span>
@@ -392,7 +330,7 @@
         </div>
     </div>
 
-    <!-- ===== STATS GRID (Only Diamonds & Orders - No XP) ===== -->
+    <!-- ===== STATS GRID ===== -->
     <div class="stats-grid">
         <div class="stat"><span class="icon">💎</span><div class="number" id="diamondCountStat">0</div><div class="label" id="diamondLabel">Diamonds</div></div>
         <div class="stat"><span class="icon">📦</span><div class="number" id="orderCountStat">0</div><div class="label" id="orderLabel">Orders</div></div>
@@ -489,13 +427,14 @@
     </div>
 </div>
 
-<!-- ===== SETTINGS MODAL (Removed Diamond input) ===== -->
+<!-- ===== SETTINGS MODAL (Username Change inside) ===== -->
 <div class="modal-overlay" id="settingsModal">
     <div class="modal">
         <button class="close-btn" onclick="closeSettingsModal()">✕</button>
         <h2>⚙️ Account Settings</h2>
         <p>Update your profile information</p>
         <div>
+            <!-- Avatar -->
             <div class="avatar-upload">
                 <div class="preview" id="settingsAvatarPreview" onclick="document.getElementById('settingsAvatarInput').click()">
                     👤
@@ -504,19 +443,41 @@
                 </div>
                 <span class="label">Profile Picture</span>
             </div>
+
+            <!-- Display Name -->
             <div class="form-group">
                 <label>👤 Display Name</label>
-                <input type="text" id="settingsName" placeholder="Enter your name">
+                <input type="text" id="settingsName" placeholder="Enter your display name">
             </div>
-            <!-- DIAMOND REMOVED FROM SETTINGS -->
+
+            <!-- ===== USERNAME CHANGE (Display Name ရဲ့အောက်မှာ) ===== -->
+            <div class="form-group" style="border-top:1px solid var(--border-color);padding-top:12px;margin-top:4px;">
+                <label>🔑 Username <span style="color:var(--text-secondary);font-size:0.5rem;font-weight:400;">(ပြောင်းလို့ရ)</span></label>
+                <div class="username-change-row">
+                    <input type="text" id="settingsUsername" placeholder="Enter new username (no spaces)" oninput="this.value=this.value.replace(/\s/g,'')">
+                    <button class="change-btn" onclick="changeUsernameFromSettings()">✏️ Change</button>
+                </div>
+                <div id="settingsUsernameResult" class="username-result"></div>
+            </div>
+
+            <!-- ===== USER ID (READ-ONLY) ===== -->
+            <div class="form-group">
+                <label>🆔 User ID <span style="color:var(--text-secondary);font-size:0.5rem;font-weight:400;">(တစ်ကောင်နဲ့တစ်ကောင်မတူ)</span></label>
+                <input type="text" id="settingsUserId" readonly placeholder="User ID">
+            </div>
+
+            <!-- Email -->
             <div class="form-group">
                 <label>📧 Email</label>
                 <input type="email" id="settingsEmail" placeholder="Enter your email">
             </div>
+
+            <!-- Phone -->
             <div class="form-group">
                 <label>📱 Phone Number</label>
                 <input type="tel" id="settingsPhone" placeholder="Enter your phone number">
             </div>
+
             <button class="btn-primary" onclick="saveSettings()">💾 Save Changes</button>
         </div>
     </div>
@@ -826,7 +787,7 @@
         t._timer = setTimeout(() => t.classList.remove('show'), 3000);
     }
 
-    // ===== AVATAR UPLOAD =====
+    // ===== AVATAR =====
     document.getElementById('avatarInput').addEventListener('change', function(e) {
         if (this.files && this.files[0]) {
             const reader = new FileReader();
@@ -852,118 +813,7 @@
         return String(Math.floor(10000000 + Math.random() * 90000000));
     }
 
-    // ===== CHANGE USERNAME =====
-    function changeUsername() {
-        if (!isLoggedIn()) {
-            showToast('❌ Please login first');
-            return;
-        }
-
-        const input = document.getElementById('usernameChangeInput');
-        const result = document.getElementById('usernameChangeResult');
-        const newUsername = input.value.trim();
-        const d = LANG_DATA[currentLang];
-
-        // Clear previous result
-        result.className = 'username-change-result';
-        result.textContent = '';
-
-        if (!newUsername) {
-            result.className = 'username-change-result error';
-            result.textContent = '❌ ' + d.usernameRequired;
-            return;
-        }
-
-        if (/\s/.test(newUsername)) {
-            result.className = 'username-change-result error';
-            result.textContent = '❌ ' + d.noSpace;
-            return;
-        }
-
-        if (newUsername.length < 2) {
-            result.className = 'username-change-result error';
-            result.textContent = '❌ Username must be at least 2 characters';
-            return;
-        }
-
-        // Check if username exists
-        const users = JSON.parse(localStorage.getItem('users') || '{}');
-        const oldUsername = currentUser.username;
-
-        if (newUsername === oldUsername) {
-            result.className = 'username-change-result error';
-            result.textContent = '❌ Same as current username';
-            return;
-        }
-
-        if (users[newUsername]) {
-            result.className = 'username-change-result error';
-            result.textContent = '❌ ' + d.usernameExists;
-            return;
-        }
-
-        // === UPDATE USERNAME ===
-        // 1. Get user data
-        const userData = users[oldUsername];
-        if (!userData) {
-            result.className = 'username-change-result error';
-            result.textContent = '❌ User data not found';
-            return;
-        }
-
-        // 2. Create new entry with new username
-        const newUserData = { ...userData };
-        newUserData.username = newUsername;
-        // Keep userId same
-        // Keep displayName same if not set, else use new username
-        if (newUserData.displayName === oldUsername) {
-            newUserData.displayName = newUsername;
-        }
-
-        // 3. Remove old entry, add new entry
-        delete users[oldUsername];
-        users[newUsername] = newUserData;
-
-        // 4. Update order history with new username
-        const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
-        orders.forEach(order => {
-            if (order.userId === oldUsername) {
-                order.userId = newUsername;
-            }
-        });
-        localStorage.setItem('orderHistory', JSON.stringify(orders));
-
-        // 5. Update avatar if exists
-        const oldAvatar = localStorage.getItem('userAvatar_' + oldUsername);
-        if (oldAvatar) {
-            localStorage.setItem('userAvatar_' + newUsername, oldAvatar);
-            localStorage.removeItem('userAvatar_' + oldUsername);
-        }
-
-        // 6. Update theme if exists
-        const oldTheme = localStorage.getItem('userTheme_' + oldUsername);
-        if (oldTheme) {
-            localStorage.setItem('userTheme_' + newUsername, oldTheme);
-            localStorage.removeItem('userTheme_' + oldUsername);
-        }
-
-        // 7. Save users
-        localStorage.setItem('users', JSON.stringify(users));
-
-        // 8. Update currentUser
-        currentUser = newUserData;
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
-
-        // 9. Clear input and show success
-        input.value = '';
-        result.className = 'username-change-result success';
-        result.textContent = '✅ ' + d.usernameChanged;
-
-        // 10. Update UI
-        updateAuthUI();
-        showToast('✅ ' + d.usernameChanged);
-    }
-
+    // ===== UPDATE AUTH UI =====
     function updateAuthUI() {
         const authBtn = document.getElementById('authBtn');
         const nameEl = document.getElementById('displayName');
@@ -977,7 +827,6 @@
         const diamondCount = document.getElementById('diamondCount');
         const diamondCountStat = document.getElementById('diamondCountStat');
         const orderCountStat = document.getElementById('orderCountStat');
-        const usernameInput = document.getElementById('usernameChangeInput');
 
         if (currentUser) {
             const savedAvatar = localStorage.getItem('userAvatar_' + currentUser.username);
@@ -1011,10 +860,6 @@
                 document.documentElement.style.setProperty('--theme-color', savedTheme);
                 document.getElementById('themeBadge').style.background = savedTheme;
             }
-
-            // Enable username input
-            usernameInput.disabled = false;
-            usernameInput.placeholder = 'Enter new username...';
         } else {
             avatarEl.textContent = '⚔️';
             nameEl.innerHTML = '<i class="fas fa-crown"></i> Guest';
@@ -1031,12 +876,6 @@
             authBtn.innerHTML = '🔑 Login';
             authBtn.className = 'auth-btn';
             authBtn.title = 'Login';
-
-            // Disable username input when not logged in
-            usernameInput.disabled = true;
-            usernameInput.placeholder = 'Login to change username';
-            document.getElementById('usernameChangeResult').className = 'username-change-result';
-            document.getElementById('usernameChangeResult').textContent = '';
         }
         renderOrders();
     }
@@ -1508,9 +1347,17 @@
             return;
         }
         const modal = document.getElementById('settingsModal');
+        
         document.getElementById('settingsName').value = currentUser.displayName || currentUser.username || '';
+        document.getElementById('settingsUsername').value = currentUser.username || '';
+        document.getElementById('settingsUserId').value = currentUser.userId || generateUserId();
         document.getElementById('settingsEmail').value = currentUser.email || '';
         document.getElementById('settingsPhone').value = currentUser.phone || '';
+        
+        // Clear username result
+        const result = document.getElementById('settingsUsernameResult');
+        result.className = 'username-result';
+        result.textContent = '';
         
         const savedAvatar = localStorage.getItem('userAvatar_' + currentUser.username);
         const preview = document.getElementById('settingsAvatarPreview');
@@ -1519,6 +1366,7 @@
         } else {
             preview.innerHTML = '👤<input type="file" id="settingsAvatarInput" accept="image/*" onchange="handleSettingsAvatar(event)"><span class="upload-hint">Tap to change</span>';
         }
+        
         modal.classList.add('show');
     }
 
@@ -1540,6 +1388,116 @@
         }
     }
 
+    // ===== CHANGE USERNAME FROM SETTINGS =====
+    function changeUsernameFromSettings() {
+        const input = document.getElementById('settingsUsername');
+        const result = document.getElementById('settingsUsernameResult');
+        const newUsername = input.value.trim();
+        const d = LANG_DATA[currentLang];
+
+        result.className = 'username-result';
+        result.textContent = '';
+
+        if (!isLoggedIn()) {
+            result.className = 'username-result error';
+            result.textContent = '❌ Please login first';
+            return;
+        }
+
+        if (!newUsername) {
+            result.className = 'username-result error';
+            result.textContent = '❌ ' + d.usernameRequired;
+            return;
+        }
+
+        if (/\s/.test(newUsername)) {
+            result.className = 'username-result error';
+            result.textContent = '❌ ' + d.noSpace;
+            return;
+        }
+
+        if (newUsername.length < 2) {
+            result.className = 'username-result error';
+            result.textContent = '❌ Username must be at least 2 characters';
+            return;
+        }
+
+        const users = JSON.parse(localStorage.getItem('users') || '{}');
+        const oldUsername = currentUser.username;
+
+        if (newUsername === oldUsername) {
+            result.className = 'username-result error';
+            result.textContent = '❌ Same as current username';
+            return;
+        }
+
+        if (users[newUsername]) {
+            result.className = 'username-result error';
+            result.textContent = '❌ ' + d.usernameExists;
+            return;
+        }
+
+        // === UPDATE USERNAME (ID ကို အတူတူထား) ===
+        const userData = users[oldUsername];
+        if (!userData) {
+            result.className = 'username-result error';
+            result.textContent = '❌ User data not found';
+            return;
+        }
+
+        const userId = userData.userId; // ID ကို အတူတူထား
+
+        const newUserData = { ...userData };
+        newUserData.username = newUsername;
+        newUserData.userId = userId;
+        if (newUserData.displayName === oldUsername) {
+            newUserData.displayName = newUsername;
+        }
+
+        delete users[oldUsername];
+        users[newUsername] = newUserData;
+
+        // Update orders
+        const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+        orders.forEach(order => {
+            if (order.userId === oldUsername) {
+                order.userId = newUsername;
+            }
+        });
+        localStorage.setItem('orderHistory', JSON.stringify(orders));
+
+        // Update avatar
+        const oldAvatar = localStorage.getItem('userAvatar_' + oldUsername);
+        if (oldAvatar) {
+            localStorage.setItem('userAvatar_' + newUsername, oldAvatar);
+            localStorage.removeItem('userAvatar_' + oldUsername);
+        }
+
+        // Update theme
+        const oldTheme = localStorage.getItem('userTheme_' + oldUsername);
+        if (oldTheme) {
+            localStorage.setItem('userTheme_' + newUsername, oldTheme);
+            localStorage.removeItem('userTheme_' + oldUsername);
+        }
+
+        localStorage.setItem('users', JSON.stringify(users));
+
+        currentUser = newUserData;
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+        // Update UI
+        result.className = 'username-result success';
+        result.textContent = '✅ ' + d.usernameChanged;
+
+        // Update settings fields
+        document.getElementById('settingsUsername').value = newUsername;
+        document.getElementById('settingsUserId').value = userId;
+
+        showToast('✅ ' + d.usernameChanged);
+        updateAuthUI();
+    }
+
+    // ===== SAVE SETTINGS =====
     function saveSettings() {
         const name = document.getElementById('settingsName').value.trim();
         const email = document.getElementById('settingsEmail').value.trim();
@@ -1570,7 +1528,7 @@
         if (e.target === this) closeSettingsModal();
     });
 
-    // ===== THEME COLOR =====
+    // ===== THEME =====
     function openThemeModal() {
         if (!isLoggedIn()) {
             showToast('❌ Please login first');
