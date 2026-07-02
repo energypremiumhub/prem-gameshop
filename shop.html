@@ -47,23 +47,51 @@
 
         .container{max-width:500px;margin:0 auto}
 
-        .header{display:flex;justify-content:space-between;align-items:center;padding:6px 0 14px;flex-wrap:wrap;gap:6px}
-        .header .logo{font-size:1rem;font-weight:800;color:var(--gold);text-shadow:0 0 20px var(--gold-glow);letter-spacing:0.5px}
-        .header .logo i{color:var(--cyan);margin-right:6px;text-shadow:0 0 20px var(--cyan-glow)}
-        .header .right{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+        /* ===== HEADER ===== */
+        .header{display:flex;justify-content:space-between;align-items:center;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
+        .header .left{display:flex;align-items:center;gap:10px}
+        .header .left .menu-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--text-secondary);cursor:pointer;transition:all 0.3s ease}
+        .header .left .menu-btn:active{transform:scale(0.85);background:var(--gold);color:#0a0e1a}
+        .header .left .logo{font-size:1.2rem;font-weight:800;color:var(--gold);text-shadow:0 0 20px var(--gold-glow);letter-spacing:0.5px}
+        .header .left .logo i{color:var(--cyan);margin-right:6px;text-shadow:0 0 20px var(--cyan-glow)}
+        
+        .header .right{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+        .header .right .top{display:flex;gap:6px;align-items:center}
+        .header .right .top .icon-btn{background:var(--bg-card);padding:8px;border-radius:10px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid var(--border-color);color:var(--text-secondary);transition:all 0.3s ease;font-size:1.1rem;text-decoration:none}
+        .header .right .top .icon-btn:active{transform:scale(0.85)}
+        .header .right .top .icon-btn.noti-btn{position:relative}
+        .header .right .top .icon-btn.noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.45rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none}
+        
+        .header .right .top .auth-btn{background:transparent;border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 12px;border-radius:8px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-flex;align-items:center;gap:4px;height:40px}
+        .header .right .top .auth-btn:active{transform:scale(0.85)}
+        .header .right .top .auth-btn:hover{border-color:var(--gold);color:var(--gold)}
+        .header .right .top .auth-btn.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 25px var(--gold-glow);padding:4px 14px}
+        .header .right .top .auth-btn.logged-in:active{transform:scale(0.85)}
+        .header .right .top .auth-btn.logged-in img{width:20px;height:20px;border-radius:50%;object-fit:cover;margin-right:4px}
+        
+        .header .right .lang-switcher{display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:8px;border:1px solid var(--border-color)}
+        .header .right .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;text-transform:uppercase}
+        .header .right .lang-switcher .lang-btn.active{background:var(--gold);color:#0a0e1a;box-shadow:0 0 20px var(--gold-glow)}
+        .header .right .lang-switcher .lang-btn:active{transform:scale(0.85)}
 
-        .lang-switcher{display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:8px;border:1px solid var(--border-color)}
-        .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 8px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;text-transform:uppercase}
-        .lang-switcher .lang-btn.active{background:var(--gold);color:#0a0e1a;box-shadow:0 0 20px var(--gold-glow)}
-        .lang-switcher .lang-btn:active{transform:scale(0.85)}
+        /* ===== SIDEBAR ===== */
+        .sidebar-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);display:none;z-index:400}
+        .sidebar-overlay.show{display:block;animation:fadeIn 0.3s ease}
+        .sidebar{position:fixed;top:0;left:-280px;width:280px;height:100%;background:var(--bg-secondary);border-right:1px solid var(--border-color);z-index:500;transition:left 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);padding:20px;overflow-y:auto}
+        .sidebar.open{left:0}
+        .sidebar .close-btn{background:none;border:none;color:var(--text-secondary);font-size:1.5rem;cursor:pointer;float:right}
+        .sidebar .close-btn:active{transform:scale(0.85)}
+        .sidebar .sidebar-logo{font-size:1.1rem;font-weight:800;color:var(--gold);margin-top:10px;display:block}
+        .sidebar .sidebar-logo i{color:var(--cyan);margin-right:6px}
+        .sidebar .menu-list{list-style:none;margin-top:30px}
+        .sidebar .menu-list li{padding:12px 0;border-bottom:1px solid var(--border-color)}
+        .sidebar .menu-list li a{color:var(--text-secondary);text-decoration:none;font-size:0.85rem;font-weight:600;display:flex;align-items:center;gap:12px;transition:all 0.3s ease}
+        .sidebar .menu-list li a:active{color:var(--gold)}
+        .sidebar .menu-list li a i{width:20px;text-align:center;font-size:1rem}
+        .sidebar .menu-list li a.active{color:var(--gold)}
+        .sidebar .sidebar-footer{position:absolute;bottom:20px;left:20px;right:20px;color:var(--text-secondary);font-size:0.55rem;opacity:0.3;text-align:center}
 
-        .auth-btn{background:transparent;border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 12px;border-radius:8px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
-        .auth-btn:active{transform:scale(0.90)}
-        .auth-btn:hover{border-color:var(--gold);color:var(--gold)}
-        .auth-btn.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 25px var(--gold-glow);padding:4px 14px}
-        .auth-btn.logged-in:active{transform:scale(0.90)}
-        .auth-btn.logged-in img{width:20px;height:20px;border-radius:50%;object-fit:cover;margin-right:4px}
-
+        /* ===== PAGE HEADER ===== */
         .page-header{margin-bottom:20px;animation:slideUp 0.6s ease}
         .page-header h1{font-size:1.3rem;font-weight:800;color:var(--text-primary)}
         .page-header h1 span{background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 40px var(--gold-glow)}
@@ -86,11 +114,9 @@
         .package-item:active{transform:scale(0.96)}
         .package-item:hover::before{opacity:1}
         .package-item:hover{border-color:rgba(245,200,66,0.2)}
-        
         .package-item.selected{border-color:var(--gold);background:rgba(245,200,66,0.06);box-shadow:0 0 30px var(--gold-glow), inset 0 0 30px rgba(245,200,66,0.03)}
         .package-item.selected::before{opacity:1}
         .package-item.selected .check-mark{display:inline-block}
-        
         .package-item .check-mark{display:none;color:var(--gold);font-size:0.7rem;margin-right:4px}
         .package-item .info{display:flex;flex-direction:column;gap:2px;flex:1;position:relative;z-index:1}
         .package-item .info .name{font-size:0.75rem;font-weight:600;color:var(--text-primary)}
@@ -102,21 +128,19 @@
         .package-item .right .btn{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;padding:3px 12px;border-radius:10px;font-weight:700;font-size:0.5rem;cursor:pointer;transition:all 0.3s ease;box-shadow:0 0 20px var(--gold-glow)}
         .package-item .right .btn:active{transform:scale(0.85)}
         .package-item .right .btn:hover{box-shadow:0 0 40px var(--gold-glow)}
+        .package-item .right .btn:disabled{opacity:0.3;cursor:not-allowed;box-shadow:none}
 
-        /* ===== FIXED BUY BUTTON with Quantity ===== */
         .fixed-buy{position:fixed;bottom:65px;left:0;right:0;padding:10px 16px;background:var(--bg-secondary);border-top:1px solid var(--border-color);border-bottom:1px solid var(--border-color);z-index:50;display:flex;justify-content:space-between;align-items:center;max-width:500px;margin:0 auto}
         .fixed-buy .info{display:flex;flex-direction:column;gap:2px}
         .fixed-buy .info .label{font-size:0.5rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px}
         .fixed-buy .info .name{font-size:0.75rem;font-weight:600;color:var(--text-primary)}
         .fixed-buy .info .price{font-size:0.85rem;font-weight:700;color:var(--gold)}
-        
         .fixed-buy .qty-section{display:flex;align-items:center;gap:8px}
         .fixed-buy .qty-section .qty-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--border-color);background:var(--bg-card);color:var(--text-primary);font-size:0.9rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;display:flex;align-items:center;justify-content:center}
         .fixed-buy .qty-section .qty-btn:active{transform:scale(0.85);background:var(--gold);color:#0a0e1a}
         .fixed-buy .qty-section .qty-btn:disabled{opacity:0.2;cursor:not-allowed}
         .fixed-buy .qty-section .qty-num{font-size:1rem;font-weight:700;color:var(--gold);min-width:24px;text-align:center}
         .fixed-buy .qty-section .total-price{font-size:0.9rem;font-weight:700;color:var(--gold);margin-left:4px}
-        
         .fixed-buy .btn-buy-now{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;padding:10px 20px;border-radius:12px;font-weight:700;font-size:0.75rem;cursor:pointer;transition:all 0.3s ease;box-shadow:0 0 30px var(--gold-glow);margin-left:8px}
         .fixed-buy .btn-buy-now:active{transform:scale(0.92)}
         .fixed-buy .btn-buy-now:disabled{opacity:0.3;cursor:not-allowed;box-shadow:none}
@@ -152,45 +176,78 @@
         .modal .form-group input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border-color);background:var(--bg-input);color:var(--text-primary);font-size:0.85rem;outline:none;transition:all 0.3s ease}
         .modal .form-group input:focus{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
         .modal .form-group input::placeholder{color:var(--text-secondary);font-size:0.7rem}
+        .modal .form-group input.error{border-color:var(--red);box-shadow:0 0 20px rgba(239,68,68,0.2)}
+        .modal .form-group .error-text{font-size:0.55rem;color:var(--red);margin-top:3px;display:none}
+        .modal .form-group .error-text.show{display:block}
         .modal .btn-primary{width:100%;padding:11px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:10px;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;position:relative;z-index:1}
         .modal .btn-primary:active{transform:scale(0.96)}
+        .modal .btn-primary:hover{box-shadow:0 0 40px var(--gold-glow)}
         .modal .switch-link{color:var(--cyan);cursor:pointer;font-weight:600;text-align:center;display:block;margin-top:10px;font-size:0.7rem;position:relative;z-index:1}
+        .modal .switch-link:active{opacity:0.7}
         .modal .close-btn{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--text-secondary);font-size:1.1rem;cursor:pointer;z-index:2}
         .avatar-upload .preview{width:70px;height:70px;border-radius:50%;background:var(--bg-input);border:2px solid var(--border-color);display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--text-secondary);cursor:pointer;transition:all 0.3s ease;overflow:hidden;position:relative;margin:0 auto 8px}
+        .avatar-upload .preview:hover{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
         .avatar-upload .preview img{width:100%;height:100%;object-fit:cover}
         .avatar-upload .preview input{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}
         .avatar-upload .preview .upload-hint{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.7);padding:2px;font-size:0.4rem;color:var(--text-secondary);text-align:center;display:none}
         .avatar-upload .preview:hover .upload-hint{display:block}
         .avatar-upload .label{font-size:0.55rem;color:var(--text-secondary);text-align:center;display:block}
-        .error-text{font-size:0.55rem;color:var(--red);margin-top:3px;display:none}
-        .error-text.show{display:block}
-        .form-group input.error{border-color:var(--red);box-shadow:0 0 20px rgba(239,68,68,0.2)}
     </style>
 </head>
 <body>
 <div class="container">
+    <!-- ===== HEADER ===== -->
     <div class="header">
-        <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Game Shop</div>
+        <div class="left">
+            <div class="menu-btn" onclick="toggleSidebar()">☰</div>
+            <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Game Shop</div>
+        </div>
         <div class="right">
+            <div class="top">
+                <div class="icon-btn noti-btn" id="notiBtn" onclick="showNotification()">
+                    🔔
+                    <span class="badge" id="notiBadge">0</span>
+                </div>
+                <div class="icon-btn theme-btn" onclick="toggleTheme()">🌙</div>
+                <div class="auth-btn" id="authBtn" onclick="handleAuthClick()">🔑 Login</div>
+            </div>
             <div class="lang-switcher">
                 <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
                 <button class="lang-btn" data-lang="my" onclick="setLang('my')">MY</button>
             </div>
-            <div class="auth-btn" id="authBtn" onclick="handleAuthClick()">🔑 Login</div>
         </div>
     </div>
 
+    <!-- ===== SIDEBAR ===== -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+    <div class="sidebar" id="sidebar">
+        <button class="close-btn" onclick="toggleSidebar()">✕</button>
+        <span class="sidebar-logo"><i class="fas fa-gamepad"></i> Premium Game Shop</span>
+        <ul class="menu-list">
+            <li><a href="index.html"><i class="fas fa-home"></i> <span id="sideHome">Home</span></a></li>
+            <li><a href="shop.html" class="active"><i class="fas fa-store"></i> <span id="sideShop">Shop</span></a></li>
+            <li><a href="payment.html"><i class="fas fa-credit-card"></i> <span id="sidePayment">Payment</span></a></li>
+            <li><a href="profile.html"><i class="fas fa-user"></i> <span id="sideProfile">Profile</span></a></li>
+            <li><a href="notifications.html"><i class="fas fa-bell"></i> <span id="sideNoti">Notifications</span></a></li>
+        </ul>
+        <div class="sidebar-footer">&copy; 2026 Premium Game Shop</div>
+    </div>
+
+    <!-- ===== PAGE CONTENT ===== -->
     <div class="page-header">
         <h1 id="shopTitle"><i class="fas fa-gem"></i> Diamonds <span>Package</span></h1>
         <p id="shopSub">Select a package, then tap Buy</p>
     </div>
 
+    <!-- Bundles -->
     <div class="section-title" id="bundlesTitle"><i class="fas fa-gift"></i> Bundles</div>
     <div class="package-list" id="bundlesList"></div>
 
+    <!-- Diamonds -->
     <div class="section-title" id="diamondsTitle"><i class="fas fa-diamond"></i> Diamonds</div>
     <div class="package-list" id="diamondsList"></div>
 
+    <!-- Double Top Up -->
     <div class="section-title" id="doubleTitle"><i class="fas fa-star"></i> Double Top Up</div>
     <div class="warning-box">
         <span class="icon">⚠️</span>
@@ -204,7 +261,7 @@
     <div class="footer">&copy; 2026 Premium Game Shop</div>
 </div>
 
-<!-- FIXED BUY BUTTON with Quantity -->
+<!-- ===== FIXED BUY ===== -->
 <div class="fixed-buy" id="fixedBuy">
     <div class="info">
         <span class="label" id="buyLabel">Selected Package</span>
@@ -222,6 +279,7 @@
     </div>
 </div>
 
+<!-- ===== BOTTOM NAV ===== -->
 <div class="bottom-nav">
     <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label" id="navHome">Home</span></a>
     <a href="shop.html" class="nav-item active"><span class="icon">🛒</span><span class="label" id="navShop">Shop</span></a>
@@ -231,6 +289,7 @@
 
 <div class="toast" id="toast"></div>
 
+<!-- ===== AUTH MODAL ===== -->
 <div class="modal-overlay" id="authModal">
     <div class="modal">
         <button class="close-btn" onclick="closeModal()">✕</button>
@@ -286,6 +345,177 @@
 </div>
 
 <script>
+    // ===== LANGUAGE DATA =====
+    const LANG_DATA = {
+        en: {
+            appName: 'Premium Game Shop',
+            shopTitle: 'Diamonds Package',
+            shopSub: 'Select a package, then tap Buy',
+            bundlesTitle: 'Bundles',
+            diamondsTitle: 'Diamonds',
+            doubleTitle: 'Double Top Up',
+            warningText: '⚠️ Double Dia can only be claimed once per account per package 🤠 Example - After buying 50+50, you can still buy the other 3 double packages.',
+            buyLabel: 'Selected Package',
+            buyNow: 'Buy',
+            buy: 'Select',
+            home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
+            sideHome: 'Home', sideShop: 'Shop', sidePayment: 'Payment', sideProfile: 'Profile', sideNoti: 'Notifications',
+            login: 'Login',
+            register: 'Register',
+            modalLogin: '⚔️ Login',
+            modalRegister: '🛡️ Register',
+            modalLoginSub: 'Welcome back, warrior!',
+            modalRegisterSub: 'Create your account, champion!',
+            email: '📧 Email or Username',
+            password: '🔑 Password',
+            switchLogin: "Don't have an account? Register",
+            switchRegister: 'Already have an account? Login',
+            loginSuccess: '✅ Welcome back, Champion!',
+            registerSuccess: '✅ Account created! Welcome!',
+            logoutSuccess: '🚪 Logged out successfully!',
+            logoutConfirm: 'Are you sure you want to logout?',
+            enterEmail: 'Please enter your email or username',
+            enterPassword: 'Please enter your password',
+            enterUsername: 'Please enter your username',
+            selectFirst: '⚠️ Please select a package first!',
+            noti: '🔔 No new notifications'
+        },
+        my: {
+            appName: 'ပရီမီယံ ဂိမ်းဆိုင်',
+            shopTitle: 'စိန်အထုပ်များ',
+            shopSub: 'အထုပ်တစ်ခုရွေးပြီး Buy နှိပ်ပါ',
+            bundlesTitle: 'အထုပ်များ',
+            diamondsTitle: 'စိန်များ',
+            doubleTitle: 'နှစ်ဆဖြည့်မှု',
+            warningText: '⚠️ နှစ်ဆစိန်ကို အကောင့်တစ်ကောင့်မှာ တစ်ခုကို တစ်ခါပဲ ရယူနိုင်ပါတယ် 🤠 ဥပမာ - ၅၀ နှစ်ဆဖြည့်ပြီးရင် ကျန်တဲ့ သုံးခုကို ဆက်ဖြည့်လို့ရပါတယ်။',
+            buyLabel: 'ရွေးထားသောအထုပ်',
+            buyNow: 'ဝယ်မည်',
+            buy: 'ရွေးရန်',
+            home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
+            sideHome: 'ပင်မ', sideShop: 'ဆိုင်', sidePayment: 'ငွေပေးချေ', sideProfile: 'ပရိုဖိုင်', sideNoti: 'အသိပေးချက်များ',
+            login: 'ဝင်ရန်',
+            register: 'မှတ်ပုံတင်ရန်',
+            modalLogin: '⚔️ ဝင်ရန်',
+            modalRegister: '🛡️ မှတ်ပုံတင်ရန်',
+            modalLoginSub: 'ပြန်လည်ကြိုဆိုပါတယ် စစ်သည်တော်!',
+            modalRegisterSub: 'အကောင့်ဖွင့်ပါ ချန်ပီယံ!',
+            email: '📧 အီးမေးလ် သို့မဟုတ် အသုံးပြုသူအမည်',
+            password: '🔑 စကားဝှက်',
+            switchLogin: 'အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်',
+            switchRegister: 'အကောင့်ရှိပြီးသား? ဝင်ရန်',
+            loginSuccess: '✅ ကြိုဆိုပါတယ် ချန်ပီယံ!',
+            registerSuccess: '✅ အကောင့်ဖွင့်ခြင်းအောင်မြင်ပါပြီ!',
+            logoutSuccess: '🚪 ထွက်ခြင်းအောင်မြင်ပါပြီ!',
+            logoutConfirm: 'ထွက်မှာသေချာလား?',
+            enterEmail: 'ကျေးဇူးပြု၍ အီးမေးလ် သို့မဟုတ် အသုံးပြုသူအမည်ထည့်ပါ',
+            enterPassword: 'ကျေးဇူးပြု၍ စကားဝှက်ထည့်ပါ',
+            enterUsername: 'ကျေးဇူးပြု၍ အသုံးပြုသူအမည်ထည့်ပါ',
+            selectFirst: '⚠️ ကျေးဇူးပြု၍ အထုပ်တစ်ခုကို ဦးစွာရွေးပါ!',
+            noti: '🔔 အသိပေးချက်အသစ်မရှိပါ'
+        }
+    };
+
+    let currentLang = localStorage.getItem('lang') || 'en';
+
+    function getText(key) { return LANG_DATA[currentLang][key] || key; }
+
+    function setLang(lang) {
+        currentLang = lang;
+        localStorage.setItem('lang', lang);
+        updateLanguage();
+        document.querySelectorAll('.lang-btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.lang === lang);
+        });
+    }
+
+    function updateLanguage() {
+        const d = LANG_DATA[currentLang];
+        document.getElementById('appName').innerHTML = '<i class="fas fa-gamepad"></i> ' + d.appName;
+        document.getElementById('shopTitle').innerHTML = '<i class="fas fa-gem"></i> ' + d.shopTitle;
+        document.getElementById('shopSub').textContent = d.shopSub;
+        document.getElementById('bundlesTitle').innerHTML = '<i class="fas fa-gift"></i> ' + d.bundlesTitle;
+        document.getElementById('diamondsTitle').innerHTML = '<i class="fas fa-diamond"></i> ' + d.diamondsTitle;
+        document.getElementById('doubleTitle').innerHTML = '<i class="fas fa-star"></i> ' + d.doubleTitle;
+        document.getElementById('warningText').innerHTML = d.warningText;
+        document.getElementById('buyLabel').textContent = d.buyLabel;
+        document.getElementById('buyNowText').textContent = d.buyNow;
+        document.getElementById('navHome').textContent = d.home;
+        document.getElementById('navShop').textContent = d.shop;
+        document.getElementById('navPayment').textContent = d.payment;
+        document.getElementById('navProfile').textContent = d.profile;
+        document.getElementById('sideHome').textContent = d.sideHome;
+        document.getElementById('sideShop').textContent = d.sideShop;
+        document.getElementById('sidePayment').textContent = d.sidePayment;
+        document.getElementById('sideProfile').textContent = d.sideProfile;
+        document.getElementById('sideNoti').textContent = d.sideNoti;
+        updateAuthUI();
+        updateModalUI();
+        renderPackages();
+    }
+
+    // ===== THEME =====
+    function toggleTheme() {
+        document.body.classList.toggle('light');
+        const btn = document.querySelector('.theme-btn');
+        btn.textContent = document.body.classList.contains('light') ? '🌙' : '☀️';
+        localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+    }
+    if (localStorage.getItem('theme') === 'light') {
+        document.body.classList.add('light');
+        document.querySelector('.theme-btn').textContent = '🌙';
+    }
+
+    // ===== SIDEBAR =====
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('show');
+    }
+
+    // ===== TOAST =====
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        clearTimeout(t._timer);
+        t._timer = setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    // ===== NOTIFICATION =====
+    function checkNotifications() {
+        const notiData = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
+        const badge = document.getElementById('notiBadge');
+        if (notiData.show) {
+            badge.style.display = 'block';
+            badge.textContent = '1';
+            setTimeout(() => {
+                badge.style.display = 'none';
+                localStorage.setItem('newOrderNotification', JSON.stringify({show: false}));
+            }, 5000);
+        } else {
+            badge.style.display = 'none';
+        }
+    }
+
+    function showNotification() {
+        const notiData = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
+        if (notiData.show) {
+            showToast('🛒 ' + notiData.message + ' #' + notiData.orderId);
+            localStorage.setItem('newOrderNotification', JSON.stringify({show: false}));
+            document.getElementById('notiBadge').style.display = 'none';
+        } else {
+            showToast(getText('noti'));
+        }
+    }
+
+    window.addEventListener('storage', function(e) {
+        if (e.key === 'newOrderNotification') {
+            checkNotifications();
+        }
+    });
+
+    // ===== PACKAGE DATA =====
     const PACKAGES = {
         bundles: [
             { id: 'b1', name: 'Monthly Epic Bundle', price: 17200 },
@@ -330,107 +560,12 @@
     let quantity = 1;
     const MAX_QTY = 10;
 
-    const LANG_DATA = {
-        en: {
-            appName: 'Premium Game Shop',
-            shopTitle: 'Diamonds Package',
-            shopSub: 'Select a package, then tap Buy',
-            bundlesTitle: 'Bundles',
-            diamondsTitle: 'Diamonds',
-            doubleTitle: 'Double Top Up',
-            warningText: '⚠️ Double Dia can only be claimed once per account per package 🤠 Example - After buying 50+50, you can still buy the other 3 double packages.',
-            buyLabel: 'Selected Package',
-            buyNow: 'Buy',
-            select: 'Select',
-            home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
-            login: 'Login',
-            register: 'Register',
-            modalLogin: '⚔️ Login',
-            modalRegister: '🛡️ Register',
-            modalLoginSub: 'Welcome back, warrior!',
-            modalRegisterSub: 'Create your account, champion!',
-            email: '📧 Email or Username',
-            password: '🔑 Password',
-            switchLogin: "Don't have an account? Register",
-            switchRegister: 'Already have an account? Login',
-            loginSuccess: '✅ Welcome back, Champion!',
-            registerSuccess: '✅ Account created! Welcome!',
-            logoutSuccess: '🚪 Logged out successfully!',
-            logoutConfirm: 'Are you sure you want to logout?',
-            enterEmail: 'Please enter your email or username',
-            enterPassword: 'Please enter your password',
-            enterUsername: 'Please enter your username',
-            selectFirst: '⚠️ Please select a package first!'
-        },
-        my: {
-            appName: 'ပရီမီယံ ဂိမ်းဆိုင်',
-            shopTitle: 'စိန်အထုပ်များ',
-            shopSub: 'အထုပ်တစ်ခုရွေးပြီး Buy နှိပ်ပါ',
-            bundlesTitle: 'အထုပ်များ',
-            diamondsTitle: 'စိန်များ',
-            doubleTitle: 'နှစ်ဆဖြည့်မှု',
-            warningText: '⚠️ နှစ်ဆစိန်ကို အကောင့်တစ်ကောင့်မှာ တစ်ခုကို တစ်ခါပဲ ရယူနိုင်ပါတယ် 🤠 ဥပမာ - ၅၀ နှစ်ဆဖြည့်ပြီးရင် ကျန်တဲ့ သုံးခုကို ဆက်ဖြည့်လို့ရပါတယ်။',
-            buyLabel: 'ရွေးထားသောအထုပ်',
-            buyNow: 'ဝယ်မည်',
-            select: 'ရွေးရန်',
-            home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
-            login: 'ဝင်ရန်',
-            register: 'မှတ်ပုံတင်ရန်',
-            modalLogin: '⚔️ ဝင်ရန်',
-            modalRegister: '🛡️ မှတ်ပုံတင်ရန်',
-            modalLoginSub: 'ပြန်လည်ကြိုဆိုပါတယ် စစ်သည်တော်!',
-            modalRegisterSub: 'အကောင့်ဖွင့်ပါ ချန်ပီယံ!',
-            email: '📧 အီးမေးလ် သို့မဟုတ် အသုံးပြုသူအမည်',
-            password: '🔑 စကားဝှက်',
-            switchLogin: 'အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်',
-            switchRegister: 'အကောင့်ရှိပြီးသား? ဝင်ရန်',
-            loginSuccess: '✅ ကြိုဆိုပါတယ် ချန်ပီယံ!',
-            registerSuccess: '✅ အကောင့်ဖွင့်ခြင်းအောင်မြင်ပါပြီ!',
-            logoutSuccess: '🚪 ထွက်ခြင်းအောင်မြင်ပါပြီ!',
-            logoutConfirm: 'ထွက်မှာသေချာလား?',
-            enterEmail: 'ကျေးဇူးပြု၍ အီးမေးလ် သို့မဟုတ် အသုံးပြုသူအမည်ထည့်ပါ',
-            enterPassword: 'ကျေးဇူးပြု၍ စကားဝှက်ထည့်ပါ',
-            enterUsername: 'ကျေးဇူးပြု၍ အသုံးပြုသူအမည်ထည့်ပါ',
-            selectFirst: '⚠️ ကျေးဇူးပြု၍ အထုပ်တစ်ခုကို ဦးစွာရွေးပါ!'
-        }
-    };
-
-    let currentLang = localStorage.getItem('lang') || 'en';
-
-    function getText(key) { return LANG_DATA[currentLang][key] || key; }
-
-    function setLang(lang) {
-        currentLang = lang;
-        localStorage.setItem('lang', lang);
-        updateLanguage();
-        document.querySelectorAll('.lang-btn').forEach(b => {
-            b.classList.toggle('active', b.dataset.lang === lang);
-        });
-        renderPackages();
-    }
-
-    function updateLanguage() {
-        const d = LANG_DATA[currentLang];
-        document.getElementById('appName').innerHTML = '<i class="fas fa-gamepad"></i> ' + d.appName;
-        document.getElementById('shopTitle').innerHTML = '<i class="fas fa-gem"></i> ' + d.shopTitle;
-        document.getElementById('shopSub').textContent = d.shopSub;
-        document.getElementById('bundlesTitle').innerHTML = '<i class="fas fa-gift"></i> ' + d.bundlesTitle;
-        document.getElementById('diamondsTitle').innerHTML = '<i class="fas fa-diamond"></i> ' + d.diamondsTitle;
-        document.getElementById('doubleTitle').innerHTML = '<i class="fas fa-star"></i> ' + d.doubleTitle;
-        document.getElementById('warningText').innerHTML = d.warningText;
-        document.getElementById('buyLabel').textContent = d.buyLabel;
-        document.getElementById('buyNowText').textContent = d.buyNow;
-        document.getElementById('navHome').textContent = d.home;
-        document.getElementById('navShop').textContent = d.shop;
-        document.getElementById('navPayment').textContent = d.payment;
-        document.getElementById('navProfile').textContent = d.profile;
-        updateBuyUI();
-        updateAuthUI();
-        updateModalUI();
+    function formatPrice(price) {
+        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' Ks';
     }
 
     function renderPackages() {
-        const selectText = getText('select');
+        const buyText = getText('buy');
         
         const renderItems = (items, type) => {
             return items.map(pkg => {
@@ -446,7 +581,7 @@
                         </div>
                         <div class="right">
                             <div class="price">${formatPrice(pkg.price)}</div>
-                            <button class="btn" onclick="event.stopPropagation(); selectPackage('${pkg.id}', '${pkg.name}', '${pkg.price}', '${type}')">${selectText}</button>
+                            <button class="btn" onclick="event.stopPropagation(); selectPackage('${pkg.id}', '${pkg.name}', '${pkg.price}', '${type}')">${buyText}</button>
                         </div>
                     </div>
                 `;
@@ -467,10 +602,6 @@
         updateBuyUI();
     }
 
-    function formatPrice(price) {
-        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' Ks';
-    }
-
     function selectPackage(id, name, price, type) {
         document.querySelectorAll('.package-item').forEach(el => el.classList.remove('selected'));
         const item = document.querySelector(`.package-item[data-id="${id}"]`);
@@ -479,7 +610,7 @@
         quantity = 1;
         document.getElementById('qtyNum').textContent = quantity;
         updateBuyUI();
-        showToast(`✅ ${getText('select')}: ${name}`);
+        showToast(`✅ ${getText('buy')}: ${name}`);
     }
 
     function changeQty(delta) {
@@ -525,15 +656,7 @@
         window.location.href = 'checkout.html?package=' + encodeURIComponent(nameWithQty) + '&price=' + encodeURIComponent(formatPrice(total));
     }
 
-    function showToast(msg) {
-        const t = document.getElementById('toast');
-        t.textContent = msg;
-        t.classList.add('show');
-        clearTimeout(t._timer);
-        t._timer = setTimeout(() => t.classList.remove('show'), 2500);
-    }
-
-    // ===== AUTH =====
+    // ===== AUTH SYSTEM =====
     let currentUser = null;
     const savedUser = localStorage.getItem('currentUser');
     if (savedUser) currentUser = JSON.parse(savedUser);
@@ -567,6 +690,7 @@
         }
     }
 
+    // ===== AVATAR UPLOAD =====
     let tempAvatar = null;
 
     function handleAvatarUpload(event) {
@@ -582,6 +706,7 @@
         }
     }
 
+    // ===== AUTH MODAL =====
     let isLoginMode = true;
 
     function openModal(mode) {
@@ -705,11 +830,13 @@
         if (e.key === 'Escape') closeModal();
     });
 
+    // ===== INIT =====
     document.addEventListener('DOMContentLoaded', function() {
         const savedLang = localStorage.getItem('lang') || 'en';
         setLang(savedLang);
         renderPackages();
         updateAuthUI();
+        checkNotifications();
     });
 </script>
 </body>
