@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>⚡ Premium Game Shop</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
         
@@ -107,7 +108,7 @@
         .services-grid .service:active{transform:scale(0.92)}
         .services-grid .service:hover{border-color:rgba(245,200,66,0.2);transform:translateY(-3px);box-shadow:0 8px 30px var(--gold-glow)}
         .services-grid .service .icon{font-size:1.8rem;display:block;margin-bottom:6px}
-        .services-grid .service .label{font-size:0.6rem;color:var(--text-secondary);font-weight:600;line-height:1.3}
+        .services-grid .service .label{font-size:0.55rem;color:var(--text-secondary);font-weight:600;line-height:1.3}
         .services-grid .service .glow{position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(245,200,66,0.03) 0%,transparent 70%);opacity:0;transition:all 0.5s ease}
         .services-grid .service:hover .glow{opacity:1}
         /* Service colors */
@@ -125,21 +126,19 @@
         .telegram-card .icon{font-size:2rem;color:#0088cc;flex-shrink:0}
         .telegram-card .info{flex:1}
         .telegram-card .info .title{font-size:0.85rem;font-weight:700;color:var(--text-primary)}
-        .telegram-card .info .desc{font-size:0.6rem;color:var(--text-secondary)}
+        .telegram-card .info .desc{font-size:0.55rem;color:var(--text-secondary);margin-top:2px}
         .telegram-card .arrow{color:var(--text-secondary);font-size:1.2rem;transition:all 0.3s ease}
         .telegram-card:hover .arrow{color:var(--gold);transform:translateX(4px)}
 
-        /* ===== BOTTOM NAV (No Sticker) ===== */
+        /* ===== BOTTOM NAV (No Sticker - Color Only) ===== */
         .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);border-top:1px solid var(--border-color);display:flex;justify-content:space-around;padding:10px 0 14px;max-width:480px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px var(--shadow)}
         .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);padding:4px 12px;border-radius:12px;position:relative}
         .bottom-nav .nav-item:active{transform:scale(0.80)}
         .bottom-nav .nav-item .icon{font-size:1.3rem;display:block;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
         .bottom-nav .nav-item .label{font-size:0.45rem;margin-top:2px;font-weight:600;letter-spacing:0.5px;transition:all 0.4s ease}
-        /* Active - ရိုးရိုးအရောင်ဖြည့် */
         .bottom-nav .nav-item.active{color:var(--gold);background:rgba(245,200,66,0.06)}
         .bottom-nav .nav-item.active .icon{transform:translateY(-2px)}
         .bottom-nav .nav-item.active .label{color:var(--gold)}
-        /* Hover effect */
         .bottom-nav .nav-item:hover .icon{transform:translateY(-2px)}
 
         .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.3;letter-spacing:1px}
@@ -151,13 +150,6 @@
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
         @keyframes shimmer{0%,100%{transform:translate(0,0)}50%{transform:translate(-20%,-20%)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-
-        /* ===== FLOATING ACTION BUTTON (FAB) ===== */
-        .fab{position:fixed;bottom:100px;right:20px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;font-size:1.5rem;box-shadow:0 4px 30px var(--gold-glow);cursor:pointer;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);z-index:50;display:flex;align-items:center;justify-content:center;touch-action:none}
-        .fab:active{transform:scale(0.85)}
-        .fab:hover{box-shadow:0 4px 50px var(--gold-glow)}
-        .fab .tooltip{position:absolute;bottom:70px;right:0;background:var(--bg-card);color:var(--text-primary);font-size:0.55rem;padding:6px 14px;border-radius:8px;border:1px solid var(--border-color);white-space:nowrap;opacity:0;transition:all 0.3s ease;pointer-events:none}
-        .fab:hover .tooltip{opacity:1;transform:translateY(-4px)}
 
         /* ===== MODAL ===== */
         .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(12px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px}
@@ -263,12 +255,12 @@
         <div class="service">
             <span class="glow"></span>
             <span class="icon">🚀</span>
-            <span class="label" id="s2">လျှင်မြန် လွယ်ကူ ယုံကြည်စိတ်ချရ</span>
+            <span class="label" id="s2">လျှင်မြန် • လွယ်ကူ • ယုံကြည်စိတ်ချရ</span>
         </div>
         <div class="service">
             <span class="glow"></span>
             <span class="icon">💰</span>
-            <span class="label" id="s3">ဈေးအကောင်းဆုံး</span>
+            <span class="label" id="s3">ဈေးအကောင်းဆုံး အာမခံ</span>
         </div>
         <div class="service">
             <span class="glow"></span>
@@ -278,7 +270,7 @@
         <div class="service">
             <span class="glow"></span>
             <span class="icon">🎮</span>
-            <span class="label" id="s5">ဂိမ်းအားလုံးအတွက်</span>
+            <span class="label" id="s5">Mobile Legends အတွက်</span>
         </div>
         <div class="service">
             <span class="glow"></span>
@@ -288,7 +280,7 @@
     </div>
 
     <!-- ===== TELEGRAM CHANNEL ===== -->
-    <div class="telegram-card" onclick="window.open('https://t.me/yourchannel', '_blank')">
+    <div class="telegram-card" onclick="window.open('https://t.me/Premium_GameShop', '_blank')">
         <span class="icon"><i class="fab fa-telegram-plane"></i></span>
         <div class="info">
             <div class="title" id="telegramTitle">📢 Join Our Telegram Channel</div>
@@ -310,12 +302,6 @@
 
 <!-- ===== TOAST ===== -->
 <div class="toast" id="toast"></div>
-
-<!-- ===== FLOATING ACTION BUTTON ===== -->
-<div class="fab" id="fab" onclick="showToast('🌟 Welcome to Premium Game Shop!')">
-    <i class="fas fa-gamepad"></i>
-    <span class="tooltip">Click me!</span>
-</div>
 
 <!-- ===== CONFIRM OVERLAY ===== -->
 <div class="confirm-overlay" id="confirmOverlay">
@@ -434,59 +420,6 @@
 
     emailjs.init(EMAILJS_PUBLIC_KEY);
 
-    // ===== FLOATING ACTION BUTTON (Draggable) =====
-    const fab = document.getElementById('fab');
-    let isDragging = false;
-    let startX, startY, fabX, fabY;
-
-    fab.addEventListener('touchstart', function(e) {
-        const touch = e.touches[0];
-        isDragging = true;
-        startX = touch.clientX - this.offsetLeft;
-        startY = touch.clientY - this.offsetTop;
-        this.style.transition = 'none';
-        e.preventDefault();
-    });
-
-    fab.addEventListener('touchmove', function(e) {
-        if (!isDragging) return;
-        const touch = e.touches[0];
-        this.style.left = (touch.clientX - startX) + 'px';
-        this.style.top = (touch.clientY - startY) + 'px';
-        this.style.right = 'auto';
-        this.style.bottom = 'auto';
-        e.preventDefault();
-    });
-
-    fab.addEventListener('touchend', function(e) {
-        isDragging = false;
-        this.style.transition = 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
-    });
-
-    // Mouse support for desktop
-    fab.addEventListener('mousedown', function(e) {
-        isDragging = true;
-        startX = e.clientX - this.offsetLeft;
-        startY = e.clientY - this.offsetTop;
-        this.style.transition = 'none';
-        e.preventDefault();
-    });
-
-    document.addEventListener('mousemove', function(e) {
-        if (!isDragging) return;
-        fab.style.left = (e.clientX - startX) + 'px';
-        fab.style.top = (e.clientY - startY) + 'px';
-        fab.style.right = 'auto';
-        fab.style.bottom = 'auto';
-    });
-
-    document.addEventListener('mouseup', function() {
-        if (isDragging) {
-            isDragging = false;
-            fab.style.transition = 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
-        }
-    });
-
     // ===== LANGUAGE DATA =====
     const LANG_DATA = {
         en: {
@@ -504,7 +437,7 @@
             s2: 'Fast • Easy • Trusted',
             s3: 'Best Price Guarantee',
             s4: '10 AM - 10 PM Daily',
-            s5: 'All Games Supported',
+            s5: 'For Mobile Legends',
             s6: 'Top Rated Service',
             telegramTitle: '📢 Join Our Telegram Channel',
             telegramDesc: 'Get latest updates, promos and support',
@@ -563,7 +496,7 @@
             s2: 'လျှင်မြန် • လွယ်ကူ • ယုံကြည်စိတ်ချရ',
             s3: 'ဈေးအကောင်းဆုံး အာမခံ',
             s4: 'မနက် ၁၀ နာရီမှ ည ၁၀ နာရီအထိ',
-            s5: 'ဂိမ်းအားလုံးအတွက်',
+            s5: 'Mobile Legends အတွက်',
             s6: 'ထိပ်တန်းအဆင့်သတ်မှတ်ချက်',
             telegramTitle: '📢 ကျွန်ုပ်တို့ Telegram ချန်နယ်သို့လာရောက်ပါ',
             telegramDesc: 'နောက်ဆုံးရသတင်းများ၊ ပရိုမိုးရှင်းများနှင့် အကူအညီရယူပါ',
