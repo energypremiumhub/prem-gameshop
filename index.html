@@ -47,48 +47,29 @@
         .container{max-width:480px;margin:0 auto;padding:16px 16px 0}
         
         /* ===== HEADER ===== */
-        .header{display:flex;justify-content:space-between;align-items:center;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
+        .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
         .header .left{display:flex;align-items:center;gap:10px}
-        .header .left .menu-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--text-secondary);cursor:pointer;transition:all 0.3s ease}
-        .header .left .menu-btn:active{transform:scale(0.85);background:var(--gold);color:#0a0e1a}
         .header .left .logo{font-size:1.2rem;font-weight:800;color:var(--gold);text-shadow:0 0 20px var(--gold-glow);letter-spacing:0.5px}
         .header .left .logo i{color:var(--cyan);margin-right:6px;text-shadow:0 0 20px var(--cyan-glow)}
         
-        .header .right{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
-        .header .right .top{display:flex;gap:6px;align-items:center}
-        .header .right .top .icon-btn{background:var(--bg-card);padding:8px;border-radius:10px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid var(--border-color);color:var(--text-secondary);transition:all 0.3s ease;font-size:1.1rem;text-decoration:none}
-        .header .right .top .icon-btn:active{transform:scale(0.85)}
-        .header .right .top .icon-btn.noti-btn{position:relative}
-        .header .right .top .icon-btn.noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.45rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none}
-        
-        .header .right .top .auth-btn{background:transparent;border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 12px;border-radius:8px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-flex;align-items:center;gap:4px;height:40px}
+        .header .right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+        .header .right .top{display:flex;gap:8px;align-items:center}
+        .header .right .top .auth-btn{background:transparent;border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 14px;border-radius:8px;font-size:0.65rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-flex;align-items:center;gap:6px;height:38px}
         .header .right .top .auth-btn:active{transform:scale(0.85)}
         .header .right .top .auth-btn:hover{border-color:var(--gold);color:var(--gold)}
         .header .right .top .auth-btn.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 25px var(--gold-glow);padding:4px 14px}
         .header .right .top .auth-btn.logged-in:active{transform:scale(0.85)}
-        .header .right .top .auth-btn.logged-in img{width:20px;height:20px;border-radius:50%;object-fit:cover;margin-right:4px}
+        .header .right .top .auth-btn.logged-in img{width:22px;height:22px;border-radius:50%;object-fit:cover;margin-right:4px}
         
-        .header .right .lang-switcher{display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:8px;border:1px solid var(--border-color)}
-        .header .right .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;text-transform:uppercase}
-        .header .right .lang-switcher .lang-btn.active{background:var(--gold);color:#0a0e1a;box-shadow:0 0 20px var(--gold-glow)}
-        .header .right .lang-switcher .lang-btn:active{transform:scale(0.85)}
-
-        /* ===== SIDEBAR ===== */
-        .sidebar-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);display:none;z-index:400}
-        .sidebar-overlay.show{display:block;animation:fadeIn 0.3s ease}
-        .sidebar{position:fixed;top:0;left:-280px;width:280px;height:100%;background:var(--bg-secondary);border-right:1px solid var(--border-color);z-index:500;transition:left 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);padding:20px;overflow-y:auto}
-        .sidebar.open{left:0}
-        .sidebar .close-btn{background:none;border:none;color:var(--text-secondary);font-size:1.5rem;cursor:pointer;float:right}
-        .sidebar .close-btn:active{transform:scale(0.85)}
-        .sidebar .sidebar-logo{font-size:1.1rem;font-weight:800;color:var(--gold);margin-top:10px;display:block}
-        .sidebar .sidebar-logo i{color:var(--cyan);margin-right:6px}
-        .sidebar .menu-list{list-style:none;margin-top:30px}
-        .sidebar .menu-list li{padding:12px 0;border-bottom:1px solid var(--border-color)}
-        .sidebar .menu-list li a{color:var(--text-secondary);text-decoration:none;font-size:0.85rem;font-weight:600;display:flex;align-items:center;gap:12px;transition:all 0.3s ease}
-        .sidebar .menu-list li a:active{color:var(--gold)}
-        .sidebar .menu-list li a i{width:20px;text-align:center;font-size:1rem}
-        .sidebar .menu-list li a.active{color:var(--gold)}
-        .sidebar .sidebar-footer{position:absolute;bottom:20px;left:20px;right:20px;color:var(--text-secondary);font-size:0.55rem;opacity:0.3;text-align:center}
+        .header .right .bottom{display:flex;gap:6px;align-items:center}
+        .header .right .bottom .lang-switcher{display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:8px;border:1px solid var(--border-color)}
+        .header .right .bottom .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;text-transform:uppercase}
+        .header .right .bottom .lang-switcher .lang-btn.active{background:var(--gold);color:#0a0e1a;box-shadow:0 0 20px var(--gold-glow)}
+        .header .right .bottom .lang-switcher .lang-btn:active{transform:scale(0.85)}
+        
+        .header .right .bottom .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:8px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;font-size:1rem;color:var(--text-secondary);position:relative}
+        .header .right .bottom .noti-btn:active{transform:scale(0.85)}
+        .header .right .bottom .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none}
 
         /* ===== WELCOME ===== */
         .welcome{margin-bottom:16px;animation:slideUp 0.6s ease}
@@ -185,21 +166,21 @@
     <!-- ===== HEADER ===== -->
     <div class="header">
         <div class="left">
-            <div class="menu-btn" onclick="toggleSidebar()">☰</div>
             <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Game Shop</div>
         </div>
         <div class="right">
             <div class="top">
-                <div class="icon-btn noti-btn" id="notiBtn" onclick="showNotification()">
+                <div class="auth-btn" id="authBtn" onclick="handleAuthClick()">🔑 Login</div>
+            </div>
+            <div class="bottom">
+                <div class="lang-switcher">
+                    <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+                    <button class="lang-btn" data-lang="my" onclick="setLang('my')">MY</button>
+                </div>
+                <div class="noti-btn" id="notiBtn" onclick="showNotification()">
                     🔔
                     <span class="badge" id="notiBadge">0</span>
                 </div>
-                <div class="icon-btn theme-btn" onclick="toggleTheme()">🌙</div>
-                <div class="auth-btn" id="authBtn" onclick="handleAuthClick()">🔑 Login</div>
-            </div>
-            <div class="lang-switcher">
-                <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
-                <button class="lang-btn" data-lang="my" onclick="setLang('my')">MY</button>
             </div>
         </div>
     </div>
@@ -250,21 +231,6 @@
 
 <!-- ===== TOAST ===== -->
 <div class="toast" id="toast"></div>
-
-<!-- ===== SIDEBAR ===== -->
-<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
-<div class="sidebar" id="sidebar">
-    <button class="close-btn" onclick="toggleSidebar()">✕</button>
-    <span class="sidebar-logo"><i class="fas fa-gamepad"></i> Premium Game Shop</span>
-    <ul class="menu-list">
-        <li><a href="index.html" class="active"><i class="fas fa-home"></i> <span id="sideHome">Home</span></a></li>
-        <li><a href="shop.html"><i class="fas fa-store"></i> <span id="sideShop">Shop</span></a></li>
-        <li><a href="payment.html"><i class="fas fa-credit-card"></i> <span id="sidePayment">Payment</span></a></li>
-        <li><a href="profile.html"><i class="fas fa-user"></i> <span id="sideProfile">Profile</span></a></li>
-        <li><a href="notifications.html"><i class="fas fa-bell"></i> <span id="sideNoti">Notifications</span></a></li>
-    </ul>
-    <div class="sidebar-footer">&copy; 2026 Premium Game Shop</div>
-</div>
 
 <!-- ===== AUTH MODAL ===== -->
 <div class="modal-overlay" id="authModal">
@@ -338,7 +304,6 @@
             s1: 'Instant', s2: 'Secure', s3: 'Best Price',
             s4: '24/7', s5: 'Mobile', s6: 'Top Rated',
             home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
-            sideHome: 'Home', sideShop: 'Shop', sidePayment: 'Payment', sideProfile: 'Profile', sideNoti: 'Notifications',
             noti: '🔔 No new notifications',
             modalLogin: '⚔️ Login',
             modalRegister: '🛡️ Register',
@@ -371,7 +336,6 @@
             s1: 'ချက်ချင်း', s2: 'လုံခြုံ', s3: 'ဈေးအကောင်းဆုံး',
             s4: '၂၄/၇', s5: 'မိုဘိုင်း', s6: 'ထိပ်တန်း',
             home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
-            sideHome: 'ပင်မ', sideShop: 'ဆိုင်', sidePayment: 'ငွေပေးချေ', sideProfile: 'ပရိုဖိုင်', sideNoti: 'အသိပေးချက်များ',
             noti: '🔔 အသိပေးချက်အသစ်မရှိပါ',
             modalLogin: '⚔️ ဝင်ရန်',
             modalRegister: '🛡️ မှတ်ပုံတင်ရန်',
@@ -427,33 +391,8 @@
         document.getElementById('navShop').textContent = d.shop;
         document.getElementById('navPayment').textContent = d.payment;
         document.getElementById('navProfile').textContent = d.profile;
-        document.getElementById('sideHome').textContent = d.sideHome;
-        document.getElementById('sideShop').textContent = d.sideShop;
-        document.getElementById('sidePayment').textContent = d.sidePayment;
-        document.getElementById('sideProfile').textContent = d.sideProfile;
-        document.getElementById('sideNoti').textContent = d.sideNoti;
         updateAuthUI();
         updateModalUI();
-    }
-
-    // ===== THEME =====
-    function toggleTheme() {
-        document.body.classList.toggle('light');
-        const btn = document.querySelector('.theme-btn');
-        btn.textContent = document.body.classList.contains('light') ? '🌙' : '☀️';
-        localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
-    }
-    if (localStorage.getItem('theme') === 'light') {
-        document.body.classList.add('light');
-        document.querySelector('.theme-btn').textContent = '🌙';
-    }
-
-    // ===== SIDEBAR =====
-    function toggleSidebar() {
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('sidebarOverlay');
-        sidebar.classList.toggle('open');
-        overlay.classList.toggle('show');
     }
 
     // ===== TOAST =====
