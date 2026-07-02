@@ -852,7 +852,10 @@
             statusEl.textContent = getText('statusOnline');
             statusDisplay.className = 'status';
             statusDisplay.style.cursor = 'default';
-            userIdEl.textContent = 'ID: ' + (currentUser.userId || generateUserId());
+            
+            // ===== ID ကို သိမ်းထားတဲ့အတိုင်းပဲ ပြမယ် (အသစ်မထုတ်ရ) =====
+            userIdEl.textContent = 'ID: ' + (currentUser.userId || 'N/A');
+            
             levelNumber.textContent = currentUser.level || 1;
             levelXp.textContent = (currentUser.xp || 0) + ' XP';
             const diamonds = currentUser.diamonds || 0;
@@ -1021,6 +1024,7 @@
         }
 
         if (foundUser) {
+            // ID ရှိမရှိစစ်၊ မရှိရင် အသစ်ထုတ်ပေး (ဒါပေမယ့် ရှိပြီးသားအကောင့်တွေမှာ ID ရှိပြီးသား)
             if (!foundUser.userId) {
                 foundUser.userId = generateUserId();
                 users[foundUser.username].userId = foundUser.userId;
@@ -1364,7 +1368,8 @@
         
         document.getElementById('settingsName').value = currentUser.displayName || currentUser.username || '';
         document.getElementById('settingsUsername').value = currentUser.username || '';
-        document.getElementById('settingsUserId').value = currentUser.userId || generateUserId();
+        // ===== ID ကို သိမ်းထားတဲ့အတိုင်းပဲ ပြမယ် =====
+        document.getElementById('settingsUserId').value = currentUser.userId || 'N/A';
         document.getElementById('settingsEmail').value = currentUser.email || '';
         document.getElementById('settingsPhone').value = currentUser.phone || '';
         
