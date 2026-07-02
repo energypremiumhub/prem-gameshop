@@ -448,7 +448,7 @@
                 <div id="settingsUsernameResult" class="username-result"></div>
             </div>
 
-            <!-- USER ID - READ ONLY (ပုံသေ၊ မပြောင်းရ) -->
+            <!-- USER ID - READ ONLY -->
             <div class="form-group">
                 <label>🆔 User ID <span style="color:var(--text-secondary);font-size:0.5rem;font-weight:400;">(ပုံသေ - မပြောင်းရ)</span></label>
                 <input type="text" id="settingsUserId" readonly placeholder="User ID">
@@ -795,7 +795,7 @@
 
     function isLoggedIn() { return currentUser !== null; }
 
-    // ===== GENERATE UNIQUE USER ID (ပုံသေ၊ တစ်ကောင်နဲ့တစ်ကောင်မတူ) =====
+    // ===== GENERATE UNIQUE USER ID =====
     function generateUserId() {
         const users = JSON.parse(localStorage.getItem('users') || '{}');
         const existingIds = new Set();
@@ -825,6 +825,32 @@
         return newId;
     }
 
+    // ===== CHECK IF EMAIL, PHONE OR USERNAME EXISTS =====
+    function isCredentialExists(username, email, phone, excludeUsername = null) {
+        const users = JSON.parse(localStorage.getItem('users') || '{}');
+        
+        for (const key in users) {
+            const user = users[key];
+            
+            // Skip the current user when updating
+            if (excludeUsername && key === excludeUsername) {
+                continue;
+            }
+            
+            if (key === username) {
+                return { exists: true, field: 'username' };
+            }
+            if (email && user.email && user.email === email) {
+                return { exists: true, field: 'email' };
+            }
+            if (phone && user.phone && user.phone === phone) {
+                return { exists: true, field: 'phone' };
+            }
+        }
+        
+        return { exists: false };
+    }
+
     // ===== UPDATE AUTH UI =====
     function updateAuthUI() {
         const authBtn = document.getElementById('authBtn');
@@ -852,10 +878,7 @@
             statusEl.textContent = getText('statusOnline');
             statusDisplay.className = 'status';
             statusDisplay.style.cursor = 'default';
-            
-            // ===== ID ကို သိမ်းထားတဲ့အတိုင်းပဲ ပြမယ် (အသစ်မထုတ်ရ) =====
             userIdEl.textContent = 'ID: ' + (currentUser.userId || 'N/A');
-            
             levelNumber.textContent = currentUser.level || 1;
             levelXp.textContent = (currentUser.xp || 0) + ' XP';
             const diamonds = currentUser.diamonds || 0;
@@ -988,7 +1011,7 @@
         if (e.target === this) closeAuthModal();
     });
 
-    // ===== LOGIN =====
+    // ===== LOGIN (Username, Email, Phone သုံးမျိုးလုံးနဲ့ ဝင်လို့ရ) =====
     function handleLogin() {
         const input = document.getElementById('loginEmail').value.trim();
         const password = document.getElementById('loginPassword').value.trim();
@@ -1012,9 +1035,27 @@
         let foundUser = null;
         let userExists = false;
 
+        // Username, Email, Phone သုံးမျိုးလုံးနဲ့ စစ်မယ်
         for (const key in users) {
             const user = users[key];
-            if (key === input || user.email === input || user.username === input || user.phone === input) {
+            // Username နဲ့ စစ်
+            if (key === input) {
+                userExists = true;
+                if (user.password === password) {
+                    foundUser = user;
+                    break;
+                }
+            }
+            // Email နဲ့ စစ်
+            if (user.email && user.email === input) {
+                userExists = true;
+                if (user.password === password) {
+                    foundUser = user;
+                    break;
+                }
+            }
+            // Phone နဲ့ စစ်
+            if (user.phone && user.phone === input) {
                 userExists = true;
                 if (user.password === password) {
                     foundUser = user;
@@ -1024,7 +1065,6 @@
         }
 
         if (foundUser) {
-            // ID ရှိမရှိစစ်၊ မရှိရင် အသစ်ထုတ်ပေး (ဒါပေမယ့် ရှိပြီးသားအကောင့်တွေမှာ ID ရှိပြီးသား)
             if (!foundUser.userId) {
                 foundUser.userId = generateUserId();
                 users[foundUser.username].userId = foundUser.userId;
@@ -1044,7 +1084,7 @@
         }
     }
 
-    // ===== REGISTER =====
+    // ===== REGISTER (Username, Email, Phone တစ်ကောင်နဲ့တစ်ကောင် မတူအောင်) =====
     function handleRegister() {
         const username = document.getElementById('regUsername').value.trim();
         const email = document.getElementById('regEmail').value.trim();
@@ -1064,6 +1104,11 @@
             hasError = true;
         } else if (/\s/.test(username)) {
             document.getElementById('usernameError').textContent = d.noSpace;
+            document.getElementById('usernameError').style.display = 'block';
+            document.getElementById('regUsername').classList.add('error');
+            hasError = true;
+        } else if (username.length < 2) {
+            document.getElementById('usernameError').textContent = 'Username must be at least 2 characters';
             document.getElementById('usernameError').style.display = 'block';
             document.getElementById('regUsername').classList.add('error');
             hasError = true;
@@ -1095,16 +1140,19 @@
 
         if (hasError) return;
 
-        const users = JSON.parse(localStorage.getItem('users') || '{}');
-        for (const key in users) {
-            const user = users[key];
-            if (key === username || (email && user.email === email) || (phone && user.phone === phone)) {
-                showToast(d.userExists);
-                return;
+        // ===== Username, Email, Phone ထပ်မရအောင် စစ်ဆေး =====
+        const check = isCredentialExists(username, email, phone);
+        if (check.exists) {
+            if (check.field === 'username') {
+                showToast('❌ Username already exists');
+            } else if (check.field === 'email') {
+                showToast('❌ Email already exists');
+            } else if (check.field === 'phone') {
+                showToast('❌ Phone number already exists');
             }
+            return;
         }
 
-        // ===== ID အသစ်ထုတ် (မတူအောင် စစ်ဆေး) =====
         const userId = generateUserId();
         
         const newUser = {
@@ -1113,12 +1161,14 @@
             phone: phone || '',
             password: password,
             displayName: username,
-            userId: userId,  // ပုံသေ ID
+            userId: userId,
             level: 1,
             xp: 0,
             diamonds: 100,
             createdAt: new Date().toISOString()
         };
+        
+        const users = JSON.parse(localStorage.getItem('users') || '{}');
         users[username] = newUser;
         localStorage.setItem('users', JSON.stringify(users));
 
@@ -1368,7 +1418,6 @@
         
         document.getElementById('settingsName').value = currentUser.displayName || currentUser.username || '';
         document.getElementById('settingsUsername').value = currentUser.username || '';
-        // ===== ID ကို သိမ်းထားတဲ့အတိုင်းပဲ ပြမယ် =====
         document.getElementById('settingsUserId').value = currentUser.userId || 'N/A';
         document.getElementById('settingsEmail').value = currentUser.email || '';
         document.getElementById('settingsPhone').value = currentUser.phone || '';
@@ -1406,7 +1455,7 @@
         }
     }
 
-    // ===== CHANGE USERNAME FROM SETTINGS (ID ကို အတူတူထား) =====
+    // ===== CHANGE USERNAME FROM SETTINGS =====
     function changeUsernameFromSettings() {
         const input = document.getElementById('settingsUsername');
         const result = document.getElementById('settingsUsernameResult');
@@ -1449,13 +1498,15 @@
             return;
         }
 
-        if (users[newUsername]) {
+        // Check if username exists (excluding current user)
+        const check = isCredentialExists(newUsername, null, null, oldUsername);
+        if (check.exists) {
             result.className = 'username-result error';
             result.textContent = '❌ ' + d.usernameExists;
             return;
         }
 
-        // === UPDATE USERNAME (ID ကို အတူတူထား) ===
+        // Update username
         const userData = users[oldUsername];
         if (!userData) {
             result.className = 'username-result error';
@@ -1463,12 +1514,11 @@
             return;
         }
 
-        // ID ကို အတူတူထား
         const userId = userData.userId;
 
         const newUserData = { ...userData };
         newUserData.username = newUsername;
-        newUserData.userId = userId;  // ID ပုံသေ
+        newUserData.userId = userId;
         if (newUserData.displayName === oldUsername) {
             newUserData.displayName = newUsername;
         }
@@ -1504,19 +1554,17 @@
         currentUser = newUserData;
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
-        // Update UI
         result.className = 'username-result success';
         result.textContent = '✅ ' + d.usernameChanged;
 
-        // Update settings fields
         document.getElementById('settingsUsername').value = newUsername;
-        document.getElementById('settingsUserId').value = userId;  // ID ပုံသေပဲ
+        document.getElementById('settingsUserId').value = userId;
 
         showToast('✅ ' + d.usernameChanged);
         updateAuthUI();
     }
 
-    // ===== SAVE SETTINGS =====
+    // ===== SAVE SETTINGS (Email, Phone ထပ်မရအောင် စစ်ဆေး) =====
     function saveSettings() {
         const name = document.getElementById('settingsName').value.trim();
         const email = document.getElementById('settingsEmail').value.trim();
@@ -1528,10 +1576,20 @@
         const users = JSON.parse(localStorage.getItem('users') || '{}');
         const oldUsername = currentUser.username;
         
+        // Check if email or phone exists (excluding current user)
+        const check = isCredentialExists(null, email, phone, oldUsername);
+        if (check.exists) {
+            if (check.field === 'email') {
+                showToast('❌ Email already exists');
+            } else if (check.field === 'phone') {
+                showToast('❌ Phone number already exists');
+            }
+            return;
+        }
+        
         users[oldUsername].displayName = name;
         users[oldUsername].email = email || users[oldUsername].email;
         users[oldUsername].phone = phone || users[oldUsername].phone;
-        // ID ကို မပြောင်းဘူး
         localStorage.setItem('users', JSON.stringify(users));
 
         currentUser.displayName = name;
