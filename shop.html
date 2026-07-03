@@ -103,10 +103,20 @@
         @keyframes spinGlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
         @keyframes pulseGlow{0%,100%{opacity:0.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
 
-        .package-item:hover .dia-icon{animation:floatIcon 2s ease-in-out infinite;color:var(--gold)}
-        .package-item:hover .price{color:var(--gold)}
-        .package-item:hover{border-color:rgba(245,200,66,0.15)}
-        @keyframes floatIcon{0%,100%{transform:translateY(0px)}50%{transform:translateY(-3px)}}
+        /* ===== စိန်အိုင်ကွန် လှုပ်တဲ့ Animation ===== */
+        .package-item .dia-icon {
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        .package-item:hover .dia-icon,
+        .package-item.selected .dia-icon {
+            animation: floatIcon 2s ease-in-out infinite;
+            color: var(--gold);
+        }
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-5px) scale(1.1); }
+        }
 
         .package-item .info{display:flex;flex-direction:column;gap:2px;flex:1;position:relative;z-index:1}
         .package-item .info .name{font-size:0.75rem;font-weight:600;color:var(--text-primary)}
@@ -328,6 +338,7 @@
         window.location.href = 'profile.html';
     }
 
+    // ===== PACKAGE DATA =====
     const PACKAGES = {
         bundles: [
             { id: 'b1', name: 'Monthly Epic Bundle', price: 17200 },
@@ -335,36 +346,36 @@
             { id: 'b3', name: 'Weekly Pass', price: 6500 }
         ],
         diamonds: [
-            { id: 'd1', name: '💎 11', price: 1000 },
-            { id: 'd2', name: '💎 22', price: 1750 },
-            { id: 'd3', name: '💎 33', price: 2500 },
-            { id: 'd4', name: '💎 44', price: 3300 },
-            { id: 'd5', name: '💎 56', price: 4000 },
-            { id: 'd6', name: '💎 86', price: 5500 },
-            { id: 'd7', name: '💎 112', price: 7800 },
-            { id: 'd8', name: '💎 172', price: 10700 },
-            { id: 'd9', name: '💎 257', price: 15900 },
-            { id: 'd10', name: '💎 343', price: 21100 },
-            { id: 'd11', name: '💎 429', price: 26600 },
-            { id: 'd12', name: '💎 514', price: 31200 },
-            { id: 'd13', name: '💎 600', price: 36700 },
-            { id: 'd14', name: '💎 706', price: 42800 },
-            { id: 'd15', name: '💎 878', price: 53100 },
-            { id: 'd16', name: '💎 963', price: 58500 },
-            { id: 'd17', name: '💎 1,049', price: 63800 },
-            { id: 'd18', name: '💎 1,135', price: 69300 },
-            { id: 'd19', name: '💎 1,412', price: 84900 },
-            { id: 'd20', name: '💎 2,195', price: 126000 },
-            { id: 'd21', name: '💎 2,901', price: 166300 },
-            { id: 'd22', name: '💎 3,688', price: 207500 },
-            { id: 'd23', name: '💎 5,532', price: 312000 },
-            { id: 'd24', name: '💎 9,288', price: 522000 }
+            { id: 'd1', name: '11', price: 1000 },
+            { id: 'd2', name: '22', price: 1750 },
+            { id: 'd3', name: '33', price: 2500 },
+            { id: 'd4', name: '44', price: 3300 },
+            { id: 'd5', name: '56', price: 4000 },
+            { id: 'd6', name: '86', price: 5500 },
+            { id: 'd7', name: '112', price: 7800 },
+            { id: 'd8', name: '172', price: 10700 },
+            { id: 'd9', name: '257', price: 15900 },
+            { id: 'd10', name: '343', price: 21100 },
+            { id: 'd11', name: '429', price: 26600 },
+            { id: 'd12', name: '514', price: 31200 },
+            { id: 'd13', name: '600', price: 36700 },
+            { id: 'd14', name: '706', price: 42800 },
+            { id: 'd15', name: '878', price: 53100 },
+            { id: 'd16', name: '963', price: 58500 },
+            { id: 'd17', name: '1,049', price: 63800 },
+            { id: 'd18', name: '1,135', price: 69300 },
+            { id: 'd19', name: '1,412', price: 84900 },
+            { id: 'd20', name: '2,195', price: 126000 },
+            { id: 'd21', name: '2,901', price: 166300 },
+            { id: 'd22', name: '3,688', price: 207500 },
+            { id: 'd23', name: '5,532', price: 312000 },
+            { id: 'd24', name: '9,288', price: 522000 }
         ],
         double: [
-            { id: 'x1', name: '💎 50 + 50 (Double)', price: 3800, badge: '⭐ 2x Bonus' },
-            { id: 'x2', name: '💎 150 + 150 (Double)', price: 10300, badge: '⭐ 2x Bonus' },
-            { id: 'x3', name: '💎 250 + 250 (Double)', price: 16000, badge: '⭐ 2x Bonus' },
-            { id: 'x4', name: '💎 500 + 500 (Double)', price: 32400, badge: '⭐ 2x Bonus' }
+            { id: 'x1', name: '50 + 50 (Double)', price: 3800, badge: '⭐ 2x Bonus' },
+            { id: 'x2', name: '150 + 150 (Double)', price: 10300, badge: '⭐ 2x Bonus' },
+            { id: 'x3', name: '250 + 250 (Double)', price: 16000, badge: '⭐ 2x Bonus' },
+            { id: 'x4', name: '500 + 500 (Double)', price: 32400, badge: '⭐ 2x Bonus' }
         ]
     };
 
@@ -382,7 +393,7 @@
             return items.map(pkg => {
                 let badgeHtml = '';
                 if (type === 'double' && pkg.badge) {
-                    badgeHtml = `<span class="double-badge">${pkg.badge}</span>`;
+                    badgeHtml = `<span class="double-badge">${pkg.badge}</span>';
                 }
                 const isSelected = selectedPackage && selectedPackage.id === pkg.id;
                 return `
