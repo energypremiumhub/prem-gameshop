@@ -96,13 +96,14 @@
         .modal{background:linear-gradient(145deg,var(--bg-card),var(--bg-secondary));border:1px solid var(--border-color);border-radius:18px;padding:24px 20px;max-width:420px;width:100%;box-shadow:0 20px 60px var(--shadow);position:relative;overflow:hidden;max-height:90vh;overflow-y:auto}
         .modal::before{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(245,200,66,0.04) 0%,transparent 70%);animation:shimmer 8s ease-in-out infinite}
         .modal h2{font-size:1.2rem;color:var(--gold);margin-bottom:4px;text-align:center;position:relative;z-index:1;text-shadow:0 0 30px var(--gold-glow)}
-        .modal p{font-size:0.75rem;color:var(--text-secondary);text-align:center;margin-bottom:16px;position:relative;z-index:1}
+        .modal p{color:var(--text-secondary);font-size:0.75rem;text-align:center;margin-bottom:16px;position:relative;z-index:1}
         .modal .form-group{margin-bottom:12px;position:relative;z-index:1}
         .modal .form-group label{font-size:0.6rem;color:var(--text-secondary);font-weight:600;display:block;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px}
         .modal .form-group label i{color:var(--cyan);margin-right:4px}
         .modal .form-group input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border-color);background:var(--bg-input);color:var(--text-primary);font-size:0.85rem;outline:none;transition:all 0.3s ease}
         .modal .form-group input:focus{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
         .modal .form-group input::placeholder{color:var(--text-secondary);font-size:0.7rem}
+        .modal .form-group .input-hint{font-size:0.5rem;color:var(--text-secondary);margin-top:3px;opacity:0.5}
         .modal .selected-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg-input);border-radius:10px;border:1px solid var(--border-color);margin-bottom:12px}
         .modal .selected-row .pkg{font-size:0.85rem;font-weight:600;color:var(--text-primary)}
         .modal .selected-row .price{font-size:0.9rem;font-weight:700;color:var(--gold);text-shadow:0 0 20px var(--gold-glow)}
@@ -189,7 +190,7 @@
 
 <div class="bottom-nav">
     <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label" id="navHome">ပင်မ</span></a>
-    <a href="shop.html" class="nav-item"><span class="icon">🛒</span><span class="label" id="navShop">ဆိုင်</span></a>
+    <a href="shop.html" class="nav-item active"><span class="icon">🛒</span><span class="label" id="navShop">ဆိုင်</span></a>
     <a href="payment.html" class="nav-item"><span class="icon">💳</span><span class="label" id="navPayment">ငွေပေးချေ</span></a>
     <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label" id="navProfile">ပရိုဖိုင်</span></a>
 </div>
@@ -200,8 +201,8 @@
 <div class="modal-overlay" id="checkoutModal">
     <div class="modal">
         <button class="close-btn" onclick="closeCheckoutModal()">✕</button>
-        <h2 id="modalTitle">🛒 အော်ဒါတင်ရန်</h2>
-        <p id="modalSub">ဝယ်ယူမှုအတွက် အချက်အလက်များကို ဖြည့်သွင်းပါ</p>
+        <h2 id="modalTitle">🛒 အော်ဒါအတည်ပြုရန်</h2>
+        <p id="modalSub">သင့်ရွေးချယ်မှုကို အတည်ပြုပါ</p>
         
         <div class="selected-row">
             <span class="pkg" id="modalPackage">Loading...</span>
@@ -210,12 +211,14 @@
 
         <div class="form-group">
             <label><i class="fas fa-gamepad"></i> <span id="gameIdLabel">ဂိမ်းအိုင်ဒီ</span></label>
-            <input type="text" id="gameId" placeholder="" id="gameIdPlaceholder">
+            <input type="text" id="gameId" placeholder="သင့်ဂိမ်းအိုင်ဒီထည့်ပါ (e.g. 12345678)">
+            <div class="input-hint" id="gameIdHint">Mobile Legends ID ထည့်ပါ</div>
         </div>
         
         <div class="form-group">
             <label><i class="fas fa-server"></i> <span id="serverIdLabel">ဆာဗာအိုင်ဒီ</span></label>
-            <input type="text" id="serverId" placeholder="" id="serverIdPlaceholder">
+            <input type="text" id="serverId" placeholder="သင့်ဆာဗာအိုင်ဒီထည့်ပါ (e.g. 9876)">
+            <div class="input-hint" id="serverIdHint">Mobile Legends Server ID ထည့်ပါ</div>
         </div>
 
         <div class="form-group">
@@ -269,7 +272,7 @@
     <h2 id="successTitle">အော်ဒါတင်ပြီးပါပြီ!</h2>
     <p id="successDesc">သင့်အော်ဒါကို လက်ခံရရှိပါပြီ။ ကျွန်ုပ်တို့ မကြာမီ ဆောင်ရွက်ပေးပါမည်။</p>
     <div class="order-id" id="orderIdDisplay">📋 Order #123456</div>
-    <button class="btn-shop" id="shopBtnText" onclick="closeSuccess()">🛒 ဆိုင်သို့ပြန်သွားမည်</button>
+    <button class="btn-shop" onclick="closeSuccess()">🛒 ဆိုင်သို့ပြန်သွားမည်</button>
 </div>
 
 <script>
@@ -291,12 +294,12 @@
             buy: 'ဝယ်ယူရန်',
             home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
             currency: 'ကျပ်',
-            modalTitle: '🛒 အော်ဒါတင်ရန်',
-            modalSub: 'သင့်ဝယ်ယူမှုအတွက် အချက်အလက်များကို ဖြည့်သွင်းပါ',
+            modalTitle: '🛒 အော်ဒါအတည်ပြုရန်',
+            modalSub: 'သင့်ရွေးချယ်မှုကို အတည်ပြုပါ',
             gameId: 'ဂိမ်းအိုင်ဒီ',
             serverId: 'ဆာဗာအိုင်ဒီ',
-            gameIdPlaceholder: 'သင့်ဂိမ်းအိုင်ဒီထည့်ပါ (e.g. 12345678)',
-            serverIdPlaceholder: 'သင့်ဆာဗာအိုင်ဒီထည့်ပါ (e.g. 9876)',
+            gameIdHint: 'Mobile Legends ID ထည့်ပါ',
+            serverIdHint: 'Mobile Legends Server ID ထည့်ပါ',
             paymentLabel: 'ငွေပေးချေနည်း',
             wave: 'Wave Pay',
             waveDetail: 'လမ်းပေါ်ငွေ',
@@ -333,12 +336,12 @@
             buy: 'Buy',
             home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
             currency: 'Ks',
-            modalTitle: '🛒 Submit Order',
-            modalSub: 'Fill in your purchase details',
+            modalTitle: '🛒 Confirm Order',
+            modalSub: 'Confirm your selection',
             gameId: 'Game ID',
             serverId: 'Server ID',
-            gameIdPlaceholder: 'Enter your Game ID (e.g. 12345678)',
-            serverIdPlaceholder: 'Enter your Server ID (e.g. 9876)',
+            gameIdHint: 'Enter your Mobile Legends ID',
+            serverIdHint: 'Enter your Mobile Legends Server ID',
             paymentLabel: 'Payment Method',
             wave: 'Wave Pay',
             waveDetail: 'Mobile Money',
@@ -371,15 +374,11 @@
 
     function getText(key){ return LANG_DATA[currentLang][key] || key; }
 
-    // ===== ဘာသာစကားပြောင်းတဲ့ခလုတ် - ပြင်ဆင်ပြီး =====
     function setLang(lang){
         currentLang = lang;
         localStorage.setItem('lang', lang);
         updateLanguage();
-        renderPackages();  // ← ဒီလိုင်းကို ထည့်လိုက်ပါ
-        document.querySelectorAll('.lang-btn').forEach(b => {
-            b.classList.toggle('active', b.dataset.lang === lang);
-        });
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
     }
 
     function updateLanguage(){
@@ -401,8 +400,8 @@
         document.getElementById('modalSub').textContent = d.modalSub;
         document.getElementById('gameIdLabel').textContent = d.gameId;
         document.getElementById('serverIdLabel').textContent = d.serverId;
-        document.getElementById('gameIdPlaceholder').placeholder = d.gameIdPlaceholder;
-        document.getElementById('serverIdPlaceholder').placeholder = d.serverIdPlaceholder;
+        document.getElementById('gameIdHint').textContent = d.gameIdHint;
+        document.getElementById('serverIdHint').textContent = d.serverIdHint;
         document.getElementById('paymentLabel').textContent = d.paymentLabel;
         document.getElementById('waveName').textContent = d.wave;
         document.getElementById('waveDetail').textContent = d.waveDetail;
@@ -413,9 +412,9 @@
         document.getElementById('submitBtn').textContent = '✅ ' + d.submit;
         document.getElementById('successTitle').textContent = d.successTitle;
         document.getElementById('successDesc').textContent = d.successDesc;
-        document.getElementById('shopBtnText').textContent = d.shopBtn;
         
         updateAuthUI();
+        renderPackages();
     }
 
     function showToast(msg, type){
@@ -448,36 +447,24 @@
             { id: 'b3', name: 'Weekly Pass', price: 6500 }
         ],
         diamonds: [
-            { id: 'd1', name: '11', price: 1000 },
-            { id: 'd2', name: '22', price: 1750 },
-            { id: 'd3', name: '33', price: 2500 },
-            { id: 'd4', name: '44', price: 3300 },
-            { id: 'd5', name: '56', price: 4000 },
-            { id: 'd6', name: '86', price: 5500 },
-            { id: 'd7', name: '112', price: 7800 },
-            { id: 'd8', name: '172', price: 10700 },
-            { id: 'd9', name: '257', price: 15900 },
-            { id: 'd10', name: '343', price: 21100 },
-            { id: 'd11', name: '429', price: 26600 },
-            { id: 'd12', name: '514', price: 31200 },
-            { id: 'd13', name: '600', price: 36700 },
-            { id: 'd14', name: '706', price: 42800 },
-            { id: 'd15', name: '878', price: 53100 },
-            { id: 'd16', name: '963', price: 58500 },
-            { id: 'd17', name: '1,049', price: 63800 },
-            { id: 'd18', name: '1,135', price: 69300 },
-            { id: 'd19', name: '1,412', price: 84900 },
-            { id: 'd20', name: '2,195', price: 126000 },
-            { id: 'd21', name: '2,901', price: 166300 },
-            { id: 'd22', name: '3,688', price: 207500 },
-            { id: 'd23', name: '5,532', price: 312000 },
-            { id: 'd24', name: '9,288', price: 522000 }
+            { id: 'd1', name: '11', price: 1000 }, { id: 'd2', name: '22', price: 1750 },
+            { id: 'd3', name: '33', price: 2500 }, { id: 'd4', name: '44', price: 3300 },
+            { id: 'd5', name: '56', price: 4000 }, { id: 'd6', name: '86', price: 5500 },
+            { id: 'd7', name: '112', price: 7800 }, { id: 'd8', name: '172', price: 10700 },
+            { id: 'd9', name: '257', price: 15900 }, { id: 'd10', name: '343', price: 21100 },
+            { id: 'd11', name: '429', price: 26600 }, { id: 'd12', name: '514', price: 31200 },
+            { id: 'd13', name: '600', price: 36700 }, { id: 'd14', name: '706', price: 42800 },
+            { id: 'd15', name: '878', price: 53100 }, { id: 'd16', name: '963', price: 58500 },
+            { id: 'd17', name: '1,049', price: 63800 }, { id: 'd18', name: '1,135', price: 69300 },
+            { id: 'd19', name: '1,412', price: 84900 }, { id: 'd20', name: '2,195', price: 126000 },
+            { id: 'd21', name: '2,901', price: 166300 }, { id: 'd22', name: '3,688', price: 207500 },
+            { id: 'd23', name: '5,532', price: 312000 }, { id: 'd24', name: '9,288', price: 522000 }
         ],
         double: [
-            { id: 'x1', name: '50+50 (2x)', price: 3800, badge: '⭐2x Bonus' },
-            { id: 'x2', name: '150+150 (2x)', price: 10300, badge: '⭐2x Bonus' },
-            { id: 'x3', name: '250+250 (2x)', price: 16000, badge: '⭐2x Bonus' },
-            { id: 'x4', name: '500+500 (2x)', price: 32400, badge: '⭐2x Bonus' }
+            { id: 'x1', name: '50 + 50 (Double)', price: 3800, badge: '⭐ 2x Bonus' },
+            { id: 'x2', name: '150 + 150 (Double)', price: 10300, badge: '⭐ 2x Bonus' },
+            { id: 'x3', name: '250 + 250 (Double)', price: 16000, badge: '⭐ 2x Bonus' },
+            { id: 'x4', name: '500 + 500 (Double)', price: 32400, badge: '⭐ 2x Bonus' }
         ]
     };
 
@@ -526,19 +513,17 @@
         if(selectedPackage){ selectedPackage = null; }
         selectedPackage = { id, name, price, type };
         renderPackages();
-        // openCheckoutModal မခေါ်ဘူး
     }
 
     // ===== BUY - Modal ပေါ်လာမယ် =====
     function handleBuyClick(id, name, price, type){
         bounceIcon(id);
         
-        if(selectedPackage && selectedPackage.id === id){
-            openCheckoutModal(name, price);
-            return;
-        }
+        // ဒီ package ကို select လုပ်
         selectedPackage = { id, name, price, type };
         renderPackages();
+        
+        // Modal ပေါ်လာမယ်
         openCheckoutModal(name, price);
     }
 
@@ -627,6 +612,7 @@
         });
     }
 
+    // ===== SEND ORDER TO TELEGRAM =====
     async function sendOrderToTelegram(orderData) {
         if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE') {
             console.warn('Telegram Bot Token not configured');
@@ -689,6 +675,7 @@
         }
     }
 
+    // ===== SUBMIT ORDER =====
     document.getElementById('submitBtn').addEventListener('click', async function() {
         const d = LANG_DATA[currentLang] || {};
         const gameId = document.getElementById('gameId').value.trim();
@@ -828,10 +815,6 @@
         if(noti.show){ badge.style.display = 'block'; badge.textContent = '1'; setTimeout(() => { badge.style.display = 'none'; localStorage.setItem('newOrderNotification', JSON.stringify({show:false})); }, 5000); }
     });
 
-    window.addEventListener('load', function(){
-        renderPackages();
-    });
-
     document.getElementById('checkoutModal').addEventListener('click', function(e) {
         if (e.target === this) closeCheckoutModal();
     });
@@ -843,6 +826,7 @@
         }
     });
 
+    // Telegram Polling
     async function checkTelegramUpdates() {
         if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE') return;
         
