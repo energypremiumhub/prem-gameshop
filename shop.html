@@ -285,18 +285,23 @@
         if(icon){ icon.classList.remove('bounce'); void icon.offsetWidth; icon.classList.add('bounce'); }
     }
 
+    // ===== Package box ကိုနှိပ်ရင် Select/Deselect ပဲလုပ် =====
     function handlePackageClick(id, name, price, type){
         bounceIcon(id);
+        
+        // ရွေးထားပြီးသား package ကိုပြန်နှိပ်ရင် Deselect
         if(selectedPackage && selectedPackage.id === id){
             selectedPackage = null;
             renderPackages();
             return;
         }
+        
+        // အသစ်ရွေးမယ် (Select ဖြစ်သွားမယ်)
         selectedPackage = { id, name, price, type };
         renderPackages();
     }
 
-    // ===== အဓိကပြင်ဆင်ချက် - ဒီမှာ =====
+    // ===== Buy button ကိုနှိပ်ရင် ဒီမှာ စစ်ဆေးပြီး Checkout သွား =====
     function handleBuyClick(id, name, price, type){
         bounceIcon(id);
         
@@ -307,10 +312,11 @@
             return;
         }
         
-        // အသစ်ရွေးမယ်
+        // ဒီမှာ ပြဿနာရှိတယ် - selectedPackage က null ဖြစ်နေတယ်
+        // ဒါကြောင့် ဒီမှာ သေချာသတ်မှတ်ပြီးမှ Checkout သွား
         selectedPackage = { id, name, price, type };
         
-        // ချက်ချင်း checkout ကိုသွားမယ် (render မလုပ်တော့ဘူး)
+        // Checkout သွား
         const data = encodeURIComponent(JSON.stringify({
             name: name,
             price: price,
