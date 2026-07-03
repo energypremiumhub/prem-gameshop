@@ -107,7 +107,7 @@
         .package-item:hover .price{color:var(--gold)}
         .package-item:hover{border-color:rgba(245,200,66,0.15)}
         
-        /* စိန်အိုင်ကွန် အပေါ်အောက်လှုပ်တဲ့ Animation */
+        /* စိန်အိုင်ကွန် အပေါ်အောက်လှုပ်တဲ့ Animation - တစ်လုံးပဲထား */
         .package-item .dia-icon {
             display: inline-block;
             transition: all 0.3s ease;
@@ -129,6 +129,7 @@
 
         .package-item .info{display:flex;flex-direction:column;gap:2px;flex:1;position:relative;z-index:1}
         .package-item .info .name{font-size:0.75rem;font-weight:600;color:var(--text-primary)}
+        /* စိန်အိုင်ကွန်ကို ဒီမှာတစ်ခါပဲသုံးတယ် - နာမည်ထဲမှာပါတယ် */
         .package-item .info .name .dia-icon{color:var(--text-secondary);margin-right:4px;transition:all 0.3s ease}
         .package-item .info .double-badge{display:inline-block;font-size:0.4rem;color:var(--warning);background:rgba(245,158,11,0.12);padding:1px 8px;border-radius:10px;border:1px solid rgba(245,158,11,0.1);font-weight:600}
         
@@ -199,7 +200,7 @@
 <div class="container">
     <div class="header">
         <div class="left">
-            <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Game Shop</div>
+            <div class="logo" id="appName"><i class="fas fa-gamepad"></i> ပရီမီယံ ဂိမ်းဆိုင်</div>
             <div class="profile-icon" id="profileIcon" onclick="goToProfile()">👤 Profile</div>
         </div>
         <div class="right">
@@ -472,7 +473,6 @@
         const allDiaIcons = document.querySelectorAll('.dia-icon');
         allDiaIcons.forEach(icon => {
             icon.classList.remove('bounce');
-            // Force reflow
             void icon.offsetWidth;
             icon.classList.add('bounce');
         });
@@ -507,18 +507,20 @@
 
     function scrollToDouble() {
         document.getElementById('doubleList').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // ၁စက္ကန့်ပဲကြာအောင် ပြင်ဆင်
         setTimeout(() => {
-            document.getElementById('doubleList').style.border = '2px solid var(--gold)';
-            document.getElementById('doubleList').style.borderRadius = '12px';
-            document.getElementById('doubleList').style.padding = '4px';
+            const doubleList = document.getElementById('doubleList');
+            doubleList.style.border = '2px solid var(--gold)';
+            doubleList.style.borderRadius = '12px';
+            doubleList.style.padding = '4px';
             setTimeout(() => {
-                document.getElementById('doubleList').style.border = 'none';
-                document.getElementById('doubleList').style.padding = '0';
-            }, 2000);
+                doubleList.style.border = 'none';
+                doubleList.style.padding = '0';
+            }, 1000); // ၁စက္ကန့်
         }, 500);
     }
 
-    // နှိပ်လိုက်တိုင်း စိန်အိုင်ကွန် bounce ဖြစ်အောင်
+    // စိန်အိုင်ကွန် နှိပ်တိုင်း bounce ဖြစ်အောင်
     document.addEventListener('click', function(e) {
         const diaIcons = document.querySelectorAll('.dia-icon');
         diaIcons.forEach(icon => {
