@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="my">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -11,27 +11,34 @@
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
         
         :root {
-            --bg-primary: #0a0e1a;
-            --bg-secondary: #111927;
-            --bg-card: #141c2b;
-            --bg-input: #1a2438;
+            --bg-primary: #08081a;
+            --bg-secondary: #0c0c24;
+            --bg-card: rgba(16,16,50,0.6);
+            --bg-input: rgba(25,25,60,0.4);
             --text-primary: #ffffff;
-            --text-secondary: #8899bb;
+            --text-secondary: #9999cc;
             --border-color: rgba(255,255,255,0.06);
-            --shadow: rgba(0,0,0,0.5);
-            --gold: #f5c842;
-            --gold-glow: rgba(245,200,66,0.3);
-            --cyan: #00d4ff;
-            --cyan-glow: rgba(0,212,255,0.2);
-            --pink: #ff6b9d;
-            --orange: #f97316;
-            --orange-glow: rgba(249,115,22,0.2);
-            --green: #22d3ee;
-            --green-glow: rgba(34,211,238,0.2);
-            --red: #ef4444;
-            --purple: #8b5cf6;
-            --purple-glow: rgba(139,92,246,0.2);
-            --warning: #f59e0b;
+            --shadow: rgba(0,0,0,0.6);
+            --primary: #4488ff;
+            --primary-glow: rgba(68,136,255,0.3);
+            --secondary: #aa66ff;
+            --secondary-glow: rgba(170,102,255,0.3);
+            --gold: #ffd700;
+            --gold-glow: rgba(255,215,0,0.3);
+            --cyan: #00e5ff;
+            --cyan-glow: rgba(0,229,255,0.2);
+            --pink: #ff2d78;
+            --pink-glow: rgba(255,45,120,0.2);
+            --orange: #ff6a00;
+            --orange-glow: rgba(255,106,0,0.2);
+            --green: #00ff87;
+            --green-glow: rgba(0,255,135,0.2);
+            --red: #ff0044;
+            --red-glow: rgba(255,0,68,0.4);
+            --purple: #b388ff;
+            --purple-glow: rgba(179,136,255,0.2);
+            --glass-border: rgba(255,255,255,0.06);
+            --glass-bg: rgba(16,16,50,0.3);
         }
 
         body {
@@ -41,125 +48,161 @@
             padding: 16px;
             padding-bottom: 90px;
             background-image: 
-                radial-gradient(ellipse at 20% 50%, rgba(245,200,66,0.04) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 20%, rgba(0,212,255,0.04) 0%, transparent 50%);
+                radial-gradient(ellipse at 20% 50%, rgba(68,136,255,0.05) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(170,102,255,0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 100%, rgba(68,136,255,0.03) 0%, transparent 40%);
+            overflow-x: hidden;
         }
 
         ::-webkit-scrollbar{width:4px}
         ::-webkit-scrollbar-track{background:var(--bg-primary)}
-        ::-webkit-scrollbar-thumb{background:var(--gold);border-radius:10px}
+        ::-webkit-scrollbar-thumb{background:var(--primary);border-radius:10px;box-shadow:0 0 20px var(--primary-glow)}
 
         .container{max-width:500px;margin:0 auto}
 
+        /* ===== HEADER ===== */
         .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
         .header .left{display:flex;flex-direction:column;gap:6px}
-        .header .left .logo{font-size:1rem;font-weight:800;color:var(--gold);text-shadow:0 0 20px var(--gold-glow);letter-spacing:0.5px}
-        .header .left .logo i{color:var(--cyan);margin-right:6px;text-shadow:0 0 20px var(--cyan-glow)}
-        .header .left .profile-icon{background:transparent;border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 14px;border-radius:8px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-flex;align-items:center;gap:6px;height:36px;width:fit-content}
+        .header .left .logo{font-size:0.9rem;font-weight:800;color:var(--primary);text-shadow:0 0 30px var(--primary-glow);letter-spacing:0.5px;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none;filter:drop-shadow(0 0 20px var(--primary-glow))}
+        .header .left .logo i{color:var(--cyan);-webkit-text-fill-color:initial;margin-right:4px;text-shadow:0 0 20px var(--cyan-glow)}
+        .header .left .profile-icon{background:var(--glass-bg);border:1px solid var(--glass-border);color:var(--text-secondary);padding:4px 14px;border-radius:10px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);text-decoration:none;display:inline-flex;align-items:center;gap:6px;height:36px;width:fit-content;backdrop-filter:blur(20px)}
         .header .left .profile-icon:active{transform:scale(0.85)}
-        .header .left .profile-icon:hover{border-color:var(--gold);color:var(--gold)}
-        .header .left .profile-icon.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 25px var(--gold-glow);padding:4px 14px}
+        .header .left .profile-icon:hover{border-color:var(--gold);color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
+        .header .left .profile-icon.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow);padding:4px 14px}
         .header .left .profile-icon.logged-in:active{transform:scale(0.85)}
         .header .left .profile-icon.logged-in img{width:22px;height:22px;border-radius:50%;object-fit:cover;margin-right:4px}
         
         .header .right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
         .header .right .top{display:flex;gap:8px;align-items:center}
-        .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:8px;border:1px solid var(--border-color)}
+        .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--glass-bg);padding:3px;border-radius:10px;border:1px solid var(--glass-border);backdrop-filter:blur(20px)}
         .header .right .top .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;text-transform:uppercase}
         .header .right .top .lang-switcher .lang-btn.active{background:var(--gold);color:#0a0e1a;box-shadow:0 0 20px var(--gold-glow)}
         .header .right .top .lang-switcher .lang-btn:active{transform:scale(0.85)}
         
-        .header .right .top .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:8px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none}
+        .header .right .top .noti-btn{background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;backdrop-filter:blur(20px)}
         .header .right .top .noti-btn:active{transform:scale(0.85)}
-        .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none}
+        .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none;box-shadow:0 0 15px var(--red-glow)}
 
         .page-header{margin-bottom:16px;animation:slideUp 0.6s ease}
         .page-header h1{font-size:1.3rem;font-weight:800;color:var(--text-primary)}
-        .page-header h1 span{background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 40px var(--gold-glow)}
+        .page-header h1 span{background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 40px var(--primary-glow)}
         .page-header h1 i{color:var(--cyan);-webkit-text-fill-color:initial;margin-right:6px}
-        .page-header p{color:var(--text-secondary);font-size:0.7rem;margin-top:2px}
+        .page-header p{color:var(--text-secondary);font-size:0.7rem;margin-top:2px;opacity:0.6}
 
-        .double-box{background:linear-gradient(135deg,rgba(245,200,66,0.08),rgba(249,115,22,0.04));border:1px solid rgba(245,200,66,0.12);border-radius:14px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;cursor:pointer;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);animation:slideUp 0.7s ease;position:relative;overflow:hidden}
+        .double-box{background:var(--glass-bg);border:1px solid var(--glass-border);backdrop-filter:blur(20px);border-radius:14px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;cursor:pointer;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);animation:slideUp 0.7s ease;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.2)}
         .double-box:active{transform:scale(0.96)}
-        .double-box:hover{border-color:rgba(245,200,66,0.3);box-shadow:0 0 40px var(--gold-glow)}
+        .double-box:hover{border-color:rgba(68,136,255,0.2);box-shadow:0 0 40px var(--primary-glow)}
         .double-box .left{display:flex;align-items:center;gap:12px}
         .double-box .left .icon{font-size:1.8rem;color:var(--gold)}
         .double-box .left .text{font-size:0.8rem;font-weight:600;color:var(--text-primary)}
-        .double-box .left .sub{font-size:0.55rem;color:var(--text-secondary);margin-top:2px}
+        .double-box .left .sub{font-size:0.55rem;color:var(--text-secondary);margin-top:2px;opacity:0.6}
         .double-box .arrow{color:var(--gold);font-size:1.2rem;transition:all 0.3s ease}
         .double-box:hover .arrow{transform:translateX(4px)}
 
-        .section-title{font-size:0.65rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+        .section-title{font-size:0.65rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;display:flex;align-items:center;gap:10px;opacity:0.5}
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
         .section-title i{color:var(--cyan);text-shadow:0 0 20px var(--cyan-glow)}
 
         .package-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
         
-        .package-item{display:flex;align-items:center;justify-content:space-between;background:var(--bg-card);border:2px solid var(--border-color);border-radius:12px;padding:12px 14px;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);cursor:pointer;box-shadow:0 4px 20px var(--shadow);position:relative;overflow:hidden}
+        .package-item{display:flex;align-items:center;justify-content:space-between;background:var(--glass-bg);border:1px solid var(--glass-border);backdrop-filter:blur(20px);border-radius:12px;padding:12px 14px;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,0.2);position:relative;overflow:hidden}
         
-        .package-item.selected{border-color:var(--gold);background:rgba(245,200,66,0.04);box-shadow:0 0 50px var(--gold-glow), inset 0 0 40px rgba(245,200,66,0.03)}
-        .package-item.selected::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(from 0deg,transparent,rgba(245,200,66,0.05),transparent,rgba(0,212,255,0.05),transparent);animation:spinGlow 6s linear infinite;pointer-events:none}
+        .package-item.selected{border-color:var(--gold);background:rgba(255,215,0,0.04);box-shadow:0 0 50px var(--gold-glow), inset 0 0 40px rgba(255,215,0,0.03)}
+        .package-item.selected::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(from 0deg,transparent,rgba(255,215,0,0.05),transparent,rgba(68,136,255,0.05),transparent);animation:spinGlow 6s linear infinite;pointer-events:none}
         .package-item.selected .price{color:var(--gold);text-shadow:0 0 30px var(--gold-glow)}
-        .package-item.selected .glow-pulse{position:absolute;top:0;left:0;right:0;bottom:0;border-radius:12px;background:radial-gradient(circle at center,rgba(245,200,66,0.05) 0%,transparent 70%);animation:pulseGlow 1.5s ease-in-out infinite;pointer-events:none}
+        .package-item.selected .glow-pulse{position:absolute;top:0;left:0;right:0;bottom:0;border-radius:12px;background:radial-gradient(circle at center,rgba(255,215,0,0.05) 0%,transparent 70%);animation:pulseGlow 1.5s ease-in-out infinite;pointer-events:none}
         
         @keyframes spinGlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
         @keyframes pulseGlow{0%,100%{opacity:0.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
 
         .package-item:hover .dia-icon{animation:floatIcon 2s ease-in-out infinite;color:var(--gold)}
         .package-item:hover .price{color:var(--gold)}
-        .package-item:hover{border-color:rgba(245,200,66,0.15)}
+        .package-item:hover{border-color:rgba(255,215,0,0.15)}
         @keyframes floatIcon{0%,100%{transform:translateY(0px)}50%{transform:translateY(-3px)}}
 
         .package-item .info{display:flex;flex-direction:column;gap:2px;flex:1;position:relative;z-index:1}
         .package-item .info .name{font-size:0.75rem;font-weight:600;color:var(--text-primary)}
         .package-item .info .name .dia-icon{color:var(--text-secondary);margin-right:4px;transition:all 0.3s ease;display:inline-block}
-        .package-item .info .double-badge{display:inline-block;font-size:0.4rem;color:var(--warning);background:rgba(245,158,11,0.12);padding:1px 8px;border-radius:10px;border:1px solid rgba(245,158,11,0.1);font-weight:600}
+        .package-item .info .double-badge{display:inline-block;font-size:0.4rem;color:var(--gold);background:rgba(255,215,0,0.12);padding:1px 8px;border-radius:10px;border:1px solid rgba(255,215,0,0.1);font-weight:600}
         
         .package-item .right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:3px;position:relative;z-index:1}
         .package-item .right .price{font-size:0.85rem;font-weight:700;color:var(--text-secondary);transition:all 0.4s ease}
         
-        .package-item .right .btn{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;padding:4px 14px;border-radius:12px;font-weight:700;font-size:0.55rem;cursor:pointer;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);box-shadow:0 0 20px rgba(245,200,66,0.1)}
+        .package-item .right .btn{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;padding:4px 14px;border-radius:12px;font-weight:700;font-size:0.55rem;cursor:pointer;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);box-shadow:0 0 20px rgba(255,215,0,0.1)}
         .package-item .right .btn:active{transform:scale(0.85)}
         .package-item .right .btn:hover{box-shadow:0 0 40px var(--gold-glow)}
-        .package-item .right .btn.select-mode{background:var(--bg-input);color:var(--text-secondary);box-shadow:none;border:1px solid var(--border-color)}
+        .package-item .right .btn.select-mode{background:var(--bg-input);color:var(--text-secondary);box-shadow:none;border:1px solid var(--glass-border)}
         .package-item .right .btn.select-mode:active{transform:scale(0.85)}
         .package-item .right .btn.select-mode:hover{border-color:var(--gold);color:var(--gold)}
         .package-item .right .btn.buy-mode{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;box-shadow:0 0 30px var(--gold-glow);animation:btnPulse 1s ease-in-out infinite}
         @keyframes btnPulse{0%,100%{box-shadow:0 0 20px var(--gold-glow)}50%{box-shadow:0 0 50px var(--gold-glow)}}
 
-        /* ===== BOTTOM NAV (လေးထောင့်ကွက်လေးတွေ) ===== */
-        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);border-top:1px solid var(--border-color);display:flex;justify-content:space-around;padding:8px 0 12px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px var(--shadow)}
+        /* ===== BOTTOM NAV ===== */
+        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(8,8,26,0.92);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,0.04);display:flex;justify-content:space-around;padding:8px 0 12px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px rgba(0,0,0,0.4)}
         .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.3s ease;padding:6px 16px;border-radius:12px;position:relative;min-width:56px;border:1px solid transparent}
-        .bottom-nav .nav-item:active{transform:scale(0.85);background:rgba(245,200,66,0.05)}
+        .bottom-nav .nav-item:active{transform:scale(0.85);background:rgba(255,215,0,0.05)}
         .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;transition:all 0.3s ease}
         .bottom-nav .nav-item .label{font-size:0.4rem;margin-top:1px;font-weight:700;letter-spacing:0.5px;transition:all 0.3s ease}
-        .bottom-nav .nav-item.active{color:var(--gold);background:rgba(245,200,66,0.06);border-color:rgba(245,200,66,0.15);box-shadow:0 0 30px rgba(245,200,66,0.05)}
+        .bottom-nav .nav-item.active{color:var(--gold);background:rgba(255,215,0,0.06);border-color:rgba(255,215,0,0.12);box-shadow:0 0 30px rgba(255,215,0,0.05)}
         .bottom-nav .nav-item.active .icon{transform:translateY(-2px);color:var(--gold)}
         .bottom-nav .nav-item.active .label{color:var(--gold)}
         .bottom-nav .nav-item:not(.active):hover{border-color:rgba(255,255,255,0.04);background:rgba(255,255,255,0.02)}
 
-        .footer{text-align:center;margin-top:10px;padding:10px;border-top:1px solid var(--border-color);color:var(--text-secondary);font-size:0.45rem;opacity:0.3;letter-spacing:1px}
+        .footer{text-align:center;margin-top:10px;padding:10px;border-top:1px solid var(--glass-border);color:var(--text-secondary);font-size:0.45rem;opacity:0.2;letter-spacing:1px}
 
-        .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-card);padding:10px 20px;border-radius:12px;border:1px solid rgba(245,200,66,0.15);color:var(--gold);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 8px 40px var(--shadow);animation:toastPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
+        .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:rgba(8,8,26,0.95);backdrop-filter:blur(20px);padding:10px 20px;border-radius:12px;border:1px solid rgba(68,136,255,0.1);color:var(--primary);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 8px 40px rgba(0,0,0,0.5);animation:toastPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
         .toast.show{display:block}
         @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
         @keyframes shimmer{0%,100%{transform:translate(0,0)}50%{transform:translate(-20%,-20%)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+        /* ===== MODAL ===== */
+        .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(12px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px}
+        .modal-overlay.show{display:flex;animation:fadeIn 0.3s ease}
+        .modal{background:rgba(30,30,70,0.95);border:1px solid rgba(255,255,255,0.08);backdrop-filter:blur(20px);border-radius:20px;padding:28px 24px;max-width:380px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.6);position:relative;overflow:hidden;max-height:90vh;overflow-y:auto}
+        .modal::before{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(68,136,255,0.04) 0%,transparent 70%);animation:shimmer 8s ease-in-out infinite}
+        .modal h2{font-size:1.2rem;color:var(--gold);margin-bottom:4px;text-align:center;position:relative;z-index:1;text-shadow:0 0 30px var(--gold-glow)}
+        .modal p{color:var(--text-secondary);font-size:0.75rem;text-align:center;margin-bottom:16px;position:relative;z-index:1;opacity:0.7}
+        .modal .form-group{margin-bottom:14px;position:relative;z-index:1}
+        .modal .form-group label{font-size:0.55rem;color:#8888bb;font-weight:500;display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px}
+        .modal .form-group label .required{color:var(--red);margin-left:2px}
+        .modal .form-group input{width:100%;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.03);color:var(--text-primary);font-size:0.85rem;outline:none;transition:all 0.3s ease}
+        .modal .form-group input:focus{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
+        .modal .form-group input::placeholder{color:#666699;font-size:0.7rem;font-weight:400;opacity:0.8}
+        .modal .form-group input.error{border-color:var(--red);box-shadow:0 0 20px var(--red-glow)}
+        .modal .form-group .error-text{font-size:0.5rem;color:var(--red);margin-top:3px;display:none}
+        .modal .form-group .error-text.show{display:block}
+        .modal .btn-primary{width:100%;padding:12px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:12px;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;position:relative;z-index:1;box-shadow:0 0 30px var(--gold-glow)}
+        .modal .btn-primary:hover{box-shadow:0 0 50px var(--gold-glow)}
+        .modal .btn-primary:active{transform:scale(0.96)}
+        .modal .switch-link{color:var(--cyan);cursor:pointer;font-weight:600;text-align:center;display:block;margin-top:12px;font-size:0.7rem;position:relative;z-index:1}
+        .modal .switch-link:active{opacity:0.7}
+        .modal .close-btn{position:absolute;top:12px;right:16px;background:none;border:none;color:var(--text-secondary);font-size:1.2rem;cursor:pointer;z-index:2;transition:all 0.3s ease}
+        .modal .close-btn:hover{color:var(--gold)}
+        .modal .login-error{font-size:0.55rem;color:var(--red);text-align:center;margin-bottom:10px;display:none;padding:6px 12px;background:rgba(255,0,68,0.08);border-radius:8px;border:1px solid rgba(255,0,68,0.1)}
+        .avatar-upload .preview{width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,0.03);border:2px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--text-secondary);cursor:pointer;transition:all 0.3s ease;overflow:hidden;position:relative;margin:0 auto 8px}
+        .avatar-upload .preview:hover{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
+        .avatar-upload .preview img{width:100%;height:100%;object-fit:cover}
+        .avatar-upload .preview input{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}
+        .avatar-upload .preview .upload-hint{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.7);padding:2px;font-size:0.4rem;color:var(--text-secondary);text-align:center;display:none}
+        .avatar-upload .preview:hover .upload-hint{display:block}
+        .avatar-upload .label{font-size:0.55rem;color:var(--text-secondary);text-align:center;display:block;opacity:0.5}
     </style>
 </head>
 <body>
 <div class="container">
+    <!-- ===== HEADER ===== -->
     <div class="header">
         <div class="left">
-            <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Game Shop</div>
+            <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Shop</div>
             <div class="profile-icon" id="profileIcon" onclick="goToProfile()">👤 Profile</div>
         </div>
         <div class="right">
             <div class="top">
                 <div class="lang-switcher">
-                    <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
-                    <button class="lang-btn" data-lang="my" onclick="setLang('my')">MY</button>
+                    <button class="lang-btn active" data-lang="my" onclick="setLang('my')">မြန်မာ</button>
+                    <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
                 </div>
                 <a href="notifications.html" class="noti-btn" id="notiBtn">
                     🔔
@@ -169,11 +212,13 @@
         </div>
     </div>
 
+    <!-- ===== PAGE HEADER ===== -->
     <div class="page-header">
         <h1 id="shopTitle"><i class="fas fa-gem"></i> Diamonds <span>Package</span></h1>
         <p id="shopSub">Select a package, then tap Buy</p>
     </div>
 
+    <!-- ===== DOUBLE BOX ===== -->
     <div class="double-box" onclick="scrollToDouble()">
         <div class="left">
             <span class="icon">⭐</span>
@@ -185,60 +230,198 @@
         <span class="arrow"><i class="fas fa-chevron-down"></i></span>
     </div>
 
+    <!-- ===== BUNDLES ===== -->
     <div class="section-title" id="bundlesTitle"><i class="fas fa-gift"></i> Bundles</div>
     <div class="package-list" id="bundlesList"></div>
 
+    <!-- ===== DIAMONDS ===== -->
     <div class="section-title" id="diamondsTitle"><i class="fas fa-diamond"></i> Diamonds</div>
     <div class="package-list" id="diamondsList"></div>
 
+    <!-- ===== DOUBLE TOP UP ===== -->
     <div class="section-title" id="doubleTitle"><i class="fas fa-star"></i> Double Top Up</div>
     <div class="package-list" id="doubleList"></div>
 
     <div class="footer">&copy; 2026 Premium Game Shop</div>
 </div>
 
-<!-- ===== BOTTOM NAV (လေးထောင့်ကွက်လေးတွေ) ===== -->
+<!-- ===== BOTTOM NAV ===== -->
 <div class="bottom-nav">
-    <a href="index.html" class="nav-item">
-        <span class="icon">🏠</span>
-        <span class="label" id="navHome">Home</span>
-    </a>
-    <a href="shop.html" class="nav-item active">
-        <span class="icon">🛒</span>
-        <span class="label" id="navShop">Shop</span>
-    </a>
-    <a href="payment.html" class="nav-item">
-        <span class="icon">💳</span>
-        <span class="label" id="navPayment">Payment</span>
-    </a>
-    <a href="profile.html" class="nav-item">
-        <span class="icon">👤</span>
-        <span class="label" id="navProfile">Profile</span>
-    </a>
+    <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label" id="navHome">ပင်မ</span></a>
+    <a href="shop.html" class="nav-item active"><span class="icon">🛒</span><span class="label" id="navShop">ဆိုင်</span></a>
+    <a href="payment.html" class="nav-item"><span class="icon">💳</span><span class="label" id="navPayment">ငွေပေးချေ</span></a>
+    <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label" id="navProfile">ပရိုဖိုင်</span></a>
 </div>
 
+<!-- ===== TOAST ===== -->
 <div class="toast" id="toast"></div>
 
+<!-- ===== AUTH MODAL ===== -->
+<div class="modal-overlay" id="authModal">
+    <div class="modal">
+        <button class="close-btn" onclick="closeModal()">✕</button>
+        <h2 id="modalTitle">⚔️ ဝင်ရန်</h2>
+        <p id="modalSub">ပြန်လည်ကြိုဆိုပါတယ် စစ်သည်တော်!</p>
+        <div id="modalBody">
+            <div id="loginForm">
+                <div class="form-group">
+                    <label id="emailLabel">📧 အီးမေးလ် / အသုံးပြုသူအမည် / ဖုန်းနံပါတ်</label>
+                    <input type="text" id="loginEmail" placeholder="သင့်အီးမေးလ်၊ အသုံးပြုသူအမည် သို့မဟုတ် ဖုန်းနံပါတ်ထည့်ပါ">
+                </div>
+                <div class="form-group">
+                    <label id="passLabel">🔑 စကားဝှက်</label>
+                    <input type="password" id="loginPassword" placeholder="သင့်စကားဝှက်ထည့်ပါ">
+                </div>
+                <div class="login-error" id="loginError"></div>
+                <button class="btn-primary" id="loginBtn" onclick="handleLogin()">🔑 ဝင်ရန်</button>
+                <span class="switch-link" id="switchToRegister" onclick="switchAuthMode()">အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်</span>
+            </div>
+            <div id="registerForm" style="display:none;">
+                <div class="avatar-upload">
+                    <div class="preview" id="avatarPreview">
+                        👤
+                        <input type="file" id="avatarInput" accept="image/*" onchange="handleAvatarUpload(event)">
+                        <span class="upload-hint">Tap to change</span>
+                    </div>
+                    <span class="label">Profile Picture (optional)</span>
+                </div>
+                <div class="form-group">
+                    <label>👤 အသုံးပြုသူအမည် <span class="required">*</span></label>
+                    <input type="text" id="regUsername" placeholder="အသုံးပြုသူအမည်ရွေးပါ (နေရာလပ်မထည့်ရ)" oninput="this.value=this.value.replace(/\s/g,'')">
+                    <div class="error-text" id="usernameError">အသုံးပြုသူအမည် လိုအပ်ပါသည် (နေရာလပ်မထည့်ရ)</div>
+                </div>
+                <div class="form-group">
+                    <label>📧 အီးမေးလ်</label>
+                    <input type="email" id="regEmail" placeholder="သင့်အီးမေးလ်ထည့်ပါ (optional)">
+                    <div class="error-text" id="emailError">မှန်ကန်တဲ့ အီးမေးလ် လိုအပ်ပါသည်</div>
+                </div>
+                <div class="form-group">
+                    <label>📱 ဖုန်းနံပါတ်</label>
+                    <input type="tel" id="regPhone" placeholder="သင့်ဖုန်းနံပါတ်ထည့်ပါ (optional)">
+                    <div class="error-text" id="phoneError">ဖုန်းနံပါတ် လိုအပ်ပါသည်</div>
+                </div>
+                <div class="form-group">
+                    <label>🔑 စကားဝှက် <span class="required">*</span></label>
+                    <input type="password" id="regPassword" placeholder="အနည်းဆုံး ၄ လုံး">
+                    <div class="error-text" id="passwordError">စကားဝှက်သည် အနည်းဆုံး ၄ လုံးရှိရမယ်</div>
+                </div>
+                <div class="form-group">
+                    <label>🔐 စကားဝှက်အတည်ပြုရန် <span class="required">*</span></label>
+                    <input type="password" id="regConfirmPassword" placeholder="စကားဝှက်ပြန်ထည့်ပါ">
+                    <div class="error-text" id="confirmError">စကားဝှက်များ မတူညီပါ</div>
+                </div>
+                <button class="btn-primary" onclick="handleRegister()">🔑 မှတ်ပုံတင်ရန်</button>
+                <span class="switch-link" id="switchToLogin" onclick="switchAuthMode()">အကောင့်ရှိပြီးသား? ဝင်ရန်</span>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
+    // ===== LANGUAGE DATA =====
+    const LANG_DATA = {
+        my: {
+            appName: 'Premium Shop',
+            shopTitle: 'စိန်အထုပ်များ',
+            shopSub: 'အထုပ်တစ်ခုရွေးပြီး Buy နှိပ်ပါ',
+            bundlesTitle: 'အထုပ်များ',
+            diamondsTitle: 'စိန်များ',
+            doubleTitle: 'နှစ်ဆဖြည့်မှု',
+            doubleBoxTitle: 'နှစ်ဆစိန်များ',
+            doubleBoxSub: 'နှစ်ဆစိန်အထုပ်များကိုကြည့်ရန် နှိပ်ပါ',
+            select: 'ရွေးရန်',
+            buy: 'ဝယ်ရန်',
+            selected: 'ရွေးပြီး',
+            selectFirst: '⚠️ ကျေးဇူးပြု၍ အထုပ်တစ်ခုကို ဦးစွာရွေးပါ!',
+            home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
+            noti: '🔔 အသိပေးချက်အသစ်မရှိပါ',
+            modalLogin: '⚔️ ဝင်ရန်',
+            modalRegister: '🛡️ မှတ်ပုံတင်ရန်',
+            modalLoginSub: 'ပြန်လည်ကြိုဆိုပါတယ် စစ်သည်တော်!',
+            modalRegisterSub: 'အကောင့်ဖွင့်ပါ ချန်ပီယံ!',
+            email: '📧 အီးမေးလ် / အသုံးပြုသူအမည် / ဖုန်းနံပါတ်',
+            password: '🔑 စကားဝှက်',
+            switchLogin: 'အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်',
+            switchRegister: 'အကောင့်ရှိပြီးသား? ဝင်ရန်',
+            loginSuccess: '✅ ကြိုဆိုပါတယ် ချန်ပီယံ!',
+            registerSuccess: '✅ အကောင့်ဖွင့်ခြင်းအောင်မြင်ပါပြီ!',
+            enterEmail: 'ကျေးဇူးပြု၍ အီးမေးလ်၊ အသုံးပြုသူအမည် သို့မဟုတ် ဖုန်းနံပါတ်ထည့်ပါ',
+            enterPassword: 'ကျေးဇူးပြု၍ စကားဝှက်ထည့်ပါ',
+            enterUsername: 'ကျေးဇူးပြု၍ အသုံးပြုသူအမည်ထည့်ပါ',
+            noSpace: 'အသုံးပြုသူအမည်တွင် နေရာလွတ်မထည့်ရပါ',
+            invalidCredentials: '❌ အထောက်အထား မှားနေပါသည်',
+            userNotFound: '❌ အသုံးပြုသူ မတွေ့ပါ',
+            userExists: '❌ အသုံးပြုသူအမည်၊ အီးမေးလ် သို့မဟုတ် ဖုန်းနံပါတ် ရှိပြီးသားပါ'
+        },
+        en: {
+            appName: 'Premium Shop',
+            shopTitle: 'Diamonds Package',
+            shopSub: 'Choose your package and top up instantly',
+            bundlesTitle: 'Bundles',
+            diamondsTitle: 'Diamonds',
+            doubleTitle: 'Double Top Up',
+            doubleBoxTitle: 'Double Diamonds',
+            doubleBoxSub: 'Tap to view double diamond packages',
+            select: 'Select',
+            buy: 'Buy',
+            selected: 'Selected',
+            selectFirst: '⚠️ Please select a package first!',
+            home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
+            noti: '🔔 No new notifications',
+            modalLogin: '⚔️ Login',
+            modalRegister: '🛡️ Register',
+            modalLoginSub: 'Welcome back, warrior!',
+            modalRegisterSub: 'Create your account, champion!',
+            email: '📧 Email / Username / Phone',
+            password: '🔑 Password',
+            switchLogin: "Don't have an account? Register",
+            switchRegister: 'Already have an account? Login',
+            loginSuccess: '✅ Welcome back, Champion!',
+            registerSuccess: '✅ Account created! Welcome!',
+            enterEmail: 'Please enter your email, username or phone',
+            enterPassword: 'Please enter your password',
+            enterUsername: 'Please enter your username',
+            noSpace: 'Username cannot contain spaces',
+            invalidCredentials: '❌ Invalid credentials',
+            userNotFound: '❌ User not found',
+            userExists: '❌ Username, email or phone already exists'
+        }
+    };
+
+    let currentLang = localStorage.getItem('lang') || 'my';
+
+    function getText(key) { return LANG_DATA[currentLang][key] || key; }
+
+    function setLang(lang) {
+        currentLang = lang;
+        localStorage.setItem('lang', lang);
+        updateLanguage();
+        document.querySelectorAll('.lang-btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.lang === lang);
+        });
+    }
+
     function updateLanguage() {
         const d = LANG_DATA[currentLang];
         if (!d) return;
         document.getElementById('appName').innerHTML = '<i class="fas fa-gamepad"></i> ' + d.appName;
-        document.getElementById('shopTitle').innerHTML = '<i class="fas fa-gem"></i> ' + (d.shopTitle || 'Diamonds Package');
-        document.getElementById('shopSub').textContent = d.shopSub || 'Select a package, then tap Buy';
-        document.getElementById('bundlesTitle').innerHTML = '<i class="fas fa-gift"></i> ' + (d.bundles || 'Bundles');
-        document.getElementById('diamondsTitle').innerHTML = '<i class="fas fa-diamond"></i> ' + (d.diamonds || 'Diamonds');
-        document.getElementById('doubleTitle').innerHTML = '<i class="fas fa-star"></i> ' + (d.doubleTitle || 'Double Top Up');
-        document.getElementById('doubleBoxTitle').textContent = d.doubleBoxTitle || 'Double Diamonds';
-        document.getElementById('doubleBoxSub').textContent = d.doubleBoxSub || 'Tap to view double diamond packages';
-        document.getElementById('navHome').textContent = d.home || 'Home';
-        document.getElementById('navShop').textContent = d.shop || 'Shop';
-        document.getElementById('navPayment').textContent = d.payment || 'Payment';
-        document.getElementById('navProfile').textContent = d.profile || 'Profile';
+        document.getElementById('shopTitle').innerHTML = '<i class="fas fa-gem"></i> ' + d.shopTitle;
+        document.getElementById('shopSub').textContent = d.shopSub;
+        document.getElementById('bundlesTitle').innerHTML = '<i class="fas fa-gift"></i> ' + d.bundlesTitle;
+        document.getElementById('diamondsTitle').innerHTML = '<i class="fas fa-diamond"></i> ' + d.diamondsTitle;
+        document.getElementById('doubleTitle').innerHTML = '<i class="fas fa-star"></i> ' + d.doubleTitle;
+        document.getElementById('doubleBoxTitle').textContent = d.doubleBoxTitle;
+        document.getElementById('doubleBoxSub').textContent = d.doubleBoxSub;
+        document.getElementById('navHome').textContent = d.home;
+        document.getElementById('navShop').textContent = d.shop;
+        document.getElementById('navPayment').textContent = d.payment;
+        document.getElementById('navProfile').textContent = d.profile;
         updateAuthUI();
+        updateModalUI();
         renderPackages();
     }
 
+    // ===== TOAST =====
     function showToast(msg) {
         const t = document.getElementById('toast');
         t.textContent = msg;
@@ -247,6 +430,7 @@
         t._timer = setTimeout(() => t.classList.remove('show'), 3000);
     }
 
+    // ===== NOTIFICATION =====
     function checkNotifications() {
         const notiData = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
         const badge = document.getElementById('notiBadge');
@@ -268,6 +452,7 @@
         }
     });
 
+    // ===== AUTH =====
     function updateAuthUI() {
         const profileIcon = document.getElementById('profileIcon');
         if (isLoggedIn()) {
@@ -289,6 +474,187 @@
         window.location.href = 'profile.html';
     }
 
+    // ===== AUTH MODAL =====
+    let isLoginMode = true;
+
+    function openModal(mode) {
+        isLoginMode = mode !== 'register';
+        const modal = document.getElementById('authModal');
+        modal.classList.add('show');
+        document.getElementById('loginForm').style.display = 'block';
+        document.getElementById('registerForm').style.display = 'none';
+        document.getElementById('loginError').style.display = 'none';
+        document.getElementById('loginError').textContent = '';
+        document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
+        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
+        if (!isLoginMode) {
+            document.getElementById('avatarPreview').innerHTML = 
+                '👤<input type="file" accept="image/*" onchange="handleAvatarUpload(event)"><span class="upload-hint">Tap to change</span>';
+            tempAvatar = null;
+        }
+        updateModalUI();
+    }
+
+    function closeModal() {
+        document.getElementById('authModal').classList.remove('show');
+        document.getElementById('loginForm').style.display = 'block';
+        document.getElementById('registerForm').style.display = 'none';
+        document.getElementById('loginError').style.display = 'none';
+        isLoginMode = true;
+        updateModalUI();
+    }
+
+    function switchAuthMode() {
+        isLoginMode = !isLoginMode;
+        document.getElementById('loginForm').style.display = isLoginMode ? 'block' : 'none';
+        document.getElementById('registerForm').style.display = isLoginMode ? 'none' : 'block';
+        document.getElementById('loginError').style.display = 'none';
+        updateModalUI();
+        document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
+        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
+        if (!isLoginMode) {
+            document.getElementById('avatarPreview').innerHTML = 
+                '👤<input type="file" accept="image/*" onchange="handleAvatarUpload(event)"><span class="upload-hint">Tap to change</span>';
+            tempAvatar = null;
+        }
+    }
+
+    function updateModalUI() {
+        const d = LANG_DATA[currentLang];
+        if (!d) return;
+        if (isLoginMode) {
+            document.getElementById('modalTitle').textContent = d.modalLogin || '⚔️ Login';
+            document.getElementById('modalSub').textContent = d.modalLoginSub || 'Welcome back, warrior!';
+            document.getElementById('loginBtn').innerHTML = '🔑 ' + (d.login || 'Login');
+            document.getElementById('emailLabel').textContent = d.email || '📧 Email / Username / Phone';
+            document.getElementById('passLabel').textContent = d.password || '🔑 Password';
+            document.getElementById('switchToRegister').textContent = d.switchLogin || "Don't have an account? Register";
+        } else {
+            document.getElementById('modalTitle').textContent = d.modalRegister || '📝 Register';
+            document.getElementById('modalSub').textContent = d.modalRegisterSub || 'Create your account!';
+            document.getElementById('switchToLogin').textContent = d.switchRegister || 'Already have an account? Login';
+        }
+    }
+
+    function handleLogin() {
+        const input = document.getElementById('loginEmail').value.trim();
+        const password = document.getElementById('loginPassword').value.trim();
+        const d = LANG_DATA[currentLang];
+
+        document.getElementById('loginError').style.display = 'none';
+        document.getElementById('loginError').textContent = '';
+
+        if (!input) {
+            document.getElementById('loginError').textContent = d.enterEmail || 'Please enter your email, username or phone';
+            document.getElementById('loginError').style.display = 'block';
+            return;
+        }
+        if (!password) {
+            document.getElementById('loginError').textContent = d.enterPassword || 'Please enter your password';
+            document.getElementById('loginError').style.display = 'block';
+            return;
+        }
+
+        if (loginUser(input, password)) {
+            closeModal();
+            showToast(d.loginSuccess || '✅ Welcome back, Champion!');
+            updateAuthUI();
+        } else {
+            document.getElementById('loginError').textContent = d.invalidCredentials || '❌ Invalid credentials';
+            document.getElementById('loginError').style.display = 'block';
+        }
+    }
+
+    function handleRegister() {
+        const username = document.getElementById('regUsername').value.trim();
+        const email = document.getElementById('regEmail').value.trim();
+        const phone = document.getElementById('regPhone').value.trim();
+        const password = document.getElementById('regPassword').value.trim();
+        const confirmPassword = document.getElementById('regConfirmPassword').value.trim();
+        const d = LANG_DATA[currentLang];
+
+        document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
+        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
+
+        let hasError = false;
+
+        if (!username) {
+            document.getElementById('usernameError').classList.add('show');
+            document.getElementById('regUsername').classList.add('error');
+            hasError = true;
+        } else if (/\s/.test(username)) {
+            document.getElementById('usernameError').textContent = d.noSpace || 'Username cannot contain spaces';
+            document.getElementById('usernameError').classList.add('show');
+            document.getElementById('regUsername').classList.add('error');
+            hasError = true;
+        }
+
+        if (email && (!email.includes('@') || !email.includes('.'))) {
+            document.getElementById('emailError').classList.add('show');
+            document.getElementById('regEmail').classList.add('error');
+            hasError = true;
+        }
+
+        if (phone && phone.length < 7) {
+            document.getElementById('phoneError').classList.add('show');
+            document.getElementById('regPhone').classList.add('error');
+            hasError = true;
+        }
+
+        if (!password || password.length < 4) {
+            document.getElementById('passwordError').classList.add('show');
+            document.getElementById('regPassword').classList.add('error');
+            hasError = true;
+        }
+
+        if (password !== confirmPassword) {
+            document.getElementById('confirmError').classList.add('show');
+            document.getElementById('regConfirmPassword').classList.add('error');
+            hasError = true;
+        }
+
+        if (hasError) return;
+
+        if (registerUser(username, password, email, phone)) {
+            closeModal();
+            showToast(d.registerSuccess || '✅ Account created! Welcome!');
+            updateAuthUI();
+        } else {
+            showToast(d.userExists || '❌ Username, email or phone already exists');
+        }
+    }
+
+    let tempAvatar = null;
+
+    function handleAvatarUpload(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                tempAvatar = e.target.result;
+                document.getElementById('avatarPreview').innerHTML = 
+                    '<img src="' + e.target.result + '" alt="avatar"><input type="file" accept="image/*" onchange="handleAvatarUpload(event)"><span class="upload-hint">Tap to change</span>';
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    document.getElementById('authModal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            const modal = document.getElementById('authModal');
+            if (modal.classList.contains('show')) {
+                if (isLoginMode) handleLogin();
+                else handleRegister();
+            }
+        }
+        if (e.key === 'Escape') closeModal();
+    });
+
+    // ===== PACKAGE DATA =====
     const PACKAGES = {
         bundles: [
             { id: 'b1', name: 'Monthly Epic Bundle', price: 17200 },
@@ -347,7 +713,7 @@
                 }
                 const isSelected = selectedPackage && selectedPackage.id === pkg.id;
                 return `
-                    <div class="package-item ${isSelected ? 'selected' : ''}" data-id="${pkg.id}" onclick="handlePackageClick('${pkg.id}', '${pkg.name}', ${pkg.price}, '${type}')">
+                    <div class="package-item ${isSelected ? 'selected' : ''}" data-id="${pkg.id}" onclick="handlePackageClick('${pkg.id}', '${pkg.name}', ${pkg.price}', '${type}')">
                         <div class="glow-pulse"></div>
                         <div class="info">
                             <div class="name"><span class="dia-icon">💎</span> ${pkg.name}</div>
@@ -355,7 +721,7 @@
                         </div>
                         <div class="right">
                             <div class="price">${formatPrice(pkg.price)}</div>
-                            <button class="btn ${isSelected ? 'buy-mode' : 'select-mode'}" onclick="event.stopPropagation(); handlePackageClick('${pkg.id}', '${pkg.name}', ${pkg.price}, '${type}')">
+                            <button class="btn ${isSelected ? 'buy-mode' : 'select-mode'}" onclick="event.stopPropagation(); handlePackageClick('${pkg.id}', '${pkg.name}', ${pkg.price}', '${type}')">
                                 ${isSelected ? buyText : selectText}
                             </button>
                         </div>
@@ -400,8 +766,9 @@
         }, 500);
     }
 
+    // ===== INIT =====
     document.addEventListener('DOMContentLoaded', function() {
-        const savedLang = localStorage.getItem('lang') || 'en';
+        const savedLang = localStorage.getItem('lang') || 'my';
         setLang(savedLang);
         renderPackages();
         updateAuthUI();
