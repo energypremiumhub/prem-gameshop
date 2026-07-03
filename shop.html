@@ -296,25 +296,27 @@
         renderPackages();
     }
 
+    // ===== အဓိကပြင်ဆင်ချက် - ဒီမှာ =====
     function handleBuyClick(id, name, price, type){
         bounceIcon(id);
+        
+        // ရွေးထားပြီးသား package ကိုပြန်နှိပ်ရင် Deselect
         if(selectedPackage && selectedPackage.id === id){
             selectedPackage = null;
             renderPackages();
             return;
         }
+        
+        // အသစ်ရွေးမယ်
         selectedPackage = { id, name, price, type };
-        proceedToCheckout();
-    }
-
-    function proceedToCheckout(){
-        if(!selectedPackage){ showToast(getText('selectFirst')); return; }
+        
+        // ချက်ချင်း checkout ကိုသွားမယ် (render မလုပ်တော့ဘူး)
         const data = encodeURIComponent(JSON.stringify({
-            name: selectedPackage.name,
-            price: selectedPackage.price,
-            priceFormatted: formatPrice(selectedPackage.price),
-            id: selectedPackage.id,
-            type: selectedPackage.type
+            name: name,
+            price: price,
+            priceFormatted: formatPrice(price),
+            id: id,
+            type: type
         }));
         window.location.href = 'checkout.html?package=' + data;
     }
