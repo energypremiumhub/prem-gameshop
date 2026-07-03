@@ -54,6 +54,7 @@
 
         .container{max-width:500px;margin:0 auto}
 
+        /* ===== HEADER ===== */
         .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
         .header .left{display:flex;flex-direction:column;gap:6px}
         .header .left .logo{font-size:0.9rem;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 20px var(--gold-glow))}
@@ -130,6 +131,7 @@
         .package-item .right .btn.buy-mode{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;box-shadow:0 0 30px var(--gold-glow);animation:btnPulse 1s ease-in-out infinite}
         @keyframes btnPulse{0%,100%{box-shadow:0 0 20px var(--gold-glow)}50%{box-shadow:0 0 50px var(--gold-glow)}}
 
+        /* ===== DOUBLE WARNING ===== */
         .double-warning {
             background: rgba(255,171,0,0.06);
             border: 1px solid rgba(255,171,0,0.12);
@@ -160,6 +162,7 @@
             font-weight: 600;
         }
 
+        /* ===== BOTTOM NAV ===== */
         .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(8,8,26,0.92);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,0.04);display:flex;justify-content:space-around;padding:8px 0 12px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px rgba(0,0,0,0.4)}
         .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.3s ease;padding:6px 16px;border-radius:12px;position:relative;min-width:56px;border:1px solid transparent}
         .bottom-nav .nav-item:active{transform:scale(0.85);background:rgba(255,215,0,0.05)}
@@ -182,6 +185,7 @@
 </head>
 <body>
 <div class="container">
+    <!-- ===== HEADER ===== -->
     <div class="header">
         <div class="left">
             <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Shop</div>
@@ -201,11 +205,13 @@
         </div>
     </div>
 
+    <!-- ===== PAGE HEADER ===== -->
     <div class="page-header">
         <h1 id="shopTitle"><i class="fas fa-gem"></i> Diamonds <span>Package</span></h1>
         <p id="shopSub">Select a package, then tap Buy</p>
     </div>
 
+    <!-- ===== DOUBLE BOX ===== -->
     <div class="double-box" onclick="scrollToDouble()">
         <div class="left">
             <span class="icon">⭐</span>
@@ -217,14 +223,18 @@
         <span class="arrow"><i class="fas fa-chevron-down"></i></span>
     </div>
 
+    <!-- ===== BUNDLES ===== -->
     <div class="section-title" id="bundlesTitle"><i class="fas fa-gift"></i> Bundles</div>
     <div class="package-list" id="bundlesList"></div>
 
+    <!-- ===== DIAMONDS ===== -->
     <div class="section-title" id="diamondsTitle"><i class="fas fa-diamond"></i> Diamonds</div>
     <div class="package-list" id="diamondsList"></div>
 
+    <!-- ===== DOUBLE TOP UP ===== -->
     <div class="section-title" id="doubleTitle"><i class="fas fa-star"></i> Double Top Up</div>
     
+    <!-- ===== DOUBLE WARNING ===== -->
     <div class="double-warning">
         <span class="icon">⚠️</span>
         <span class="text" id="doubleWarning">
@@ -238,6 +248,7 @@
     <div class="footer">&copy; 2026 Premium Game Shop</div>
 </div>
 
+<!-- ===== BOTTOM NAV ===== -->
 <div class="bottom-nav">
     <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label" id="navHome">ပင်မ</span></a>
     <a href="shop.html" class="nav-item active"><span class="icon">🛒</span><span class="label" id="navShop">ဆိုင်</span></a>
@@ -245,6 +256,7 @@
     <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label" id="navProfile">ပရိုဖိုင်</span></a>
 </div>
 
+<!-- ===== TOAST ===== -->
 <div class="toast" id="toast"></div>
 
 <script>
@@ -319,6 +331,7 @@
         renderPackages();
     }
 
+    // ===== TOAST =====
     function showToast(msg) {
         const t = document.getElementById('toast');
         t.textContent = msg;
@@ -327,6 +340,7 @@
         t._timer = setTimeout(() => t.classList.remove('show'), 3000);
     }
 
+    // ===== NOTIFICATION =====
     function checkNotifications() {
         const notiData = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
         const badge = document.getElementById('notiBadge');
@@ -348,6 +362,7 @@
         }
     });
 
+    // ===== AUTH =====
     let currentUser = null;
     const savedUser = localStorage.getItem('currentUser');
     if (savedUser) currentUser = JSON.parse(savedUser);
@@ -435,7 +450,7 @@
                 }
                 const isSelected = selectedPackage && selectedPackage.id === pkg.id;
                 return `
-                    <div class="package-item ${isSelected ? 'selected' : ''}" data-id="${pkg.id}" onclick="handlePackageClick('${pkg.id}', '${pkg.name}', ${pkg.price}', '${type}')">
+                    <div class="package-item ${isSelected ? 'selected' : ''}" data-id="${pkg.id}" onclick="handlePackageClick('${pkg.id}', '${pkg.name}', ${pkg.price}, '${type}')">
                         <div class="glow-pulse"></div>
                         <div class="info">
                             <div class="name"><span class="dia-icon">💎</span> ${pkg.name}</div>
@@ -443,7 +458,7 @@
                         </div>
                         <div class="right">
                             <div class="price">${formatPrice(pkg.price)}</div>
-                            <button class="btn ${isSelected ? 'buy-mode' : 'select-mode'}" onclick="event.stopPropagation(); handlePackageClick('${pkg.id}', '${pkg.name}', ${pkg.price}', '${type}')">
+                            <button class="btn ${isSelected ? 'buy-mode' : 'select-mode'}" onclick="event.stopPropagation(); handlePackageClick('${pkg.id}', '${pkg.name}', ${pkg.price}, '${type}')">
                                 ${isSelected ? buyText : selectText}
                             </button>
                         </div>
@@ -457,21 +472,18 @@
         document.getElementById('doubleList').innerHTML = renderItems(PACKAGES.double, 'double');
     }
 
-    // ===== ပထမနှိပ်=Select, ဒုတိယနှိပ်=Deselect =====
     function handlePackageClick(id, name, price, type) {
         if (selectedPackage && selectedPackage.id === id) {
-            selectedPackage = null;
-            renderPackages();
+            proceedToCheckout();
             return;
         }
         selectedPackage = { id, name, price, type };
         renderPackages();
     }
 
-    // ===== ရွေးပြီးသား ခလုတ်ကို နှိပ်ရင် Checkout သွားမယ် =====
     function proceedToCheckout() {
         if (!selectedPackage) {
-            showToast(getText('selectFirst') || '⚠️ ကျေးဇူးပြု၍ အထုပ်တစ်ခုကို ဦးစွာရွေးပါ!');
+            showToast(getText('selectFirst') || '⚠️ Please select a package first!');
             return;
         }
         window.location.href = 'checkout.html?package=' + encodeURIComponent(selectedPackage.name) + '&price=' + encodeURIComponent(formatPrice(selectedPackage.price));
@@ -490,6 +502,7 @@
         }, 500);
     }
 
+    // ===== INIT =====
     document.addEventListener('DOMContentLoaded', function() {
         const savedLang = localStorage.getItem('lang') || 'my';
         setLang(savedLang);
