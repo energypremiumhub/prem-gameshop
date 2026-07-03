@@ -59,7 +59,6 @@
         @keyframes spinGlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
         @keyframes pulseGlow{0%,100%{opacity:0.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
         
-        /* ===== Dia Icon - ဖြေးဖြေးလှုပ် ===== */
         .package-item .dia-icon{display:inline-block;transition:all 0.3s ease}
         .package-item.selected .dia-icon{animation:bounceIcon 0.8s ease-in-out infinite}
         @keyframes bounceIcon{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
@@ -450,14 +449,15 @@
         renderPackages();
     }
 
+    // ===== BUY BUTTON - ဒီမှာ အဓိကပြင်ထားတယ် =====
     function handleBuyClick(id, name, price, type){
         bounceIcon(id);
-        if(selectedPackage && selectedPackage.id === id){
-            openCheckoutModal(name, price);
-            return;
-        }
+        
+        // ရွေးပြီးသား package ဆိုရင် Modal ပေါ်လာမယ်
+        // မရွေးရသေးရင် Select လုပ်ပြီး Modal ပေါ်လာမယ်
         selectedPackage = { id, name, price, type };
         renderPackages();
+        openCheckoutModal(name, price);
     }
 
     function openCheckoutModal(name, price){
