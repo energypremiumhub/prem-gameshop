@@ -103,6 +103,7 @@
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
         .section-title i{color:var(--cyan);text-shadow:0 0 20px var(--cyan-glow)}
 
+        /* ===== PACKAGE LIST (အရင်ဒီဇိုင်းအတိုင်း) ===== */
         .package-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
         
         .package-item{display:flex;align-items:center;justify-content:space-between;background:var(--glass-bg);border:1px solid var(--glass-border);backdrop-filter:blur(20px);border-radius:12px;padding:12px 14px;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,0.2);position:relative;overflow:hidden}
@@ -470,12 +471,14 @@
         }
     }
 
+    // ===== PROFILE ကိုသွားမယ် =====
     function goToProfile() {
         window.location.href = 'profile.html';
     }
 
     // ===== AUTH MODAL =====
     let isLoginMode = true;
+    let tempAvatar = null;
 
     function openModal(mode) {
         isLoginMode = mode !== 'register';
@@ -624,8 +627,6 @@
         }
     }
 
-    let tempAvatar = null;
-
     function handleAvatarUpload(event) {
         const file = event.target.files[0];
         if (file) {
@@ -713,7 +714,7 @@
                 }
                 const isSelected = selectedPackage && selectedPackage.id === pkg.id;
                 return `
-                    <div class="package-item ${isSelected ? 'selected' : ''}" data-id="${pkg.id}" onclick="handlePackageClick('${pkg.id}', '${pkg.name}', ${pkg.price}', '${type}')">
+                    <div class="package-item ${isSelected ? 'selected' : ''}" data-id="${pkg.id}" onclick="handlePackageClick('${pkg.id}', '${pkg.name}', '${pkg.price}', '${type}')">
                         <div class="glow-pulse"></div>
                         <div class="info">
                             <div class="name"><span class="dia-icon">💎</span> ${pkg.name}</div>
@@ -721,7 +722,7 @@
                         </div>
                         <div class="right">
                             <div class="price">${formatPrice(pkg.price)}</div>
-                            <button class="btn ${isSelected ? 'buy-mode' : 'select-mode'}" onclick="event.stopPropagation(); handlePackageClick('${pkg.id}', '${pkg.name}', ${pkg.price}', '${type}')">
+                            <button class="btn ${isSelected ? 'buy-mode' : 'select-mode'}" onclick="event.stopPropagation(); handlePackageClick('${pkg.id}', '${pkg.name}', '${pkg.price}', '${type}')">
                                 ${isSelected ? buyText : selectText}
                             </button>
                         </div>
