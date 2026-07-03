@@ -88,9 +88,31 @@
 
         .package-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
         
-        .package-item{display:flex;align-items:center;justify-content:space-between;background:var(--bg-card);border:2px solid var(--border-color);border-radius:12px;padding:12px 14px;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);cursor:pointer;box-shadow:0 4px 20px var(--shadow);position:relative;overflow:hidden}
+        .package-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px 14px;
+            transition: all 0.2s cubic-bezier(0.34, 1.2, 0.64, 1);
+            cursor: pointer;
+            box-shadow: 0 4px 20px var(--shadow);
+            position: relative;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .package-item:active {
+            transform: scale(0.97);
+            transition: transform 0.1s ease;
+        }
         
-        .package-item.selected{border-color:var(--gold);background:rgba(245,200,66,0.04);box-shadow:0 0 50px var(--gold-glow), inset 0 0 40px rgba(245,200,66,0.03)}
+        .package-item.selected {
+            border-color: var(--gold);
+            background: rgba(245,200,66,0.04);
+            box-shadow: 0 0 50px var(--gold-glow), inset 0 0 40px rgba(245,200,66,0.03);
+        }
         .package-item.selected::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(from 0deg,transparent,rgba(245,200,66,0.05),transparent,rgba(0,212,255,0.05),transparent);animation:spinGlow 6s linear infinite;pointer-events:none}
         .package-item.selected .price{color:var(--gold);text-shadow:0 0 30px var(--gold-glow)}
         .package-item.selected .glow-pulse{position:absolute;top:0;left:0;right:0;bottom:0;border-radius:12px;background:radial-gradient(circle at center,rgba(245,200,66,0.05) 0%,transparent 70%);animation:pulseGlow 1.5s ease-in-out infinite;pointer-events:none}
@@ -103,13 +125,12 @@
             transition: all 0.3s ease;
         }
         .package-item .dia-icon.bounce {
-            animation: bounceIcon 0.6s ease-in-out;
+            animation: bounceIcon 0.5s cubic-bezier(0.34, 1.2, 0.64, 1);
         }
         @keyframes bounceIcon {
             0%, 100% { transform: translateY(0); }
-            30% { transform: translateY(-8px); }
-            60% { transform: translateY(-4px); }
-            80% { transform: translateY(-6px); }
+            40% { transform: translateY(-10px); }
+            70% { transform: translateY(-4px); }
         }
 
         .package-item .info{display:flex;flex-direction:column;gap:2px;flex:1;position:relative;z-index:1}
@@ -120,13 +141,45 @@
         .package-item .right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:3px;position:relative;z-index:1}
         .package-item .right .price{font-size:0.85rem;font-weight:700;color:var(--text-secondary);transition:all 0.4s ease}
         
-        .package-item .right .btn{background:var(--bg-input);color:var(--text-secondary);border:none;padding:4px 14px;border-radius:12px;font-weight:700;font-size:0.55rem;cursor:pointer;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);border:1px solid var(--border-color)}
-        .package-item .right .btn:active{transform:scale(0.85)}
-        .package-item .right .btn.select-mode{background:var(--bg-input);color:var(--text-secondary);box-shadow:none;border:1px solid var(--border-color)}
-        .package-item .right .btn.select-mode:active{transform:scale(0.85)}
-        .package-item .right .btn.select-mode:hover{border-color:var(--gold);color:var(--gold)}
-        .package-item .right .btn.buy-mode{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;box-shadow:0 0 30px var(--gold-glow);border-color:var(--gold);animation:btnPulse 1s ease-in-out infinite}
-        @keyframes btnPulse{0%,100%{box-shadow:0 0 20px var(--gold-glow)}50%{box-shadow:0 0 50px var(--gold-glow)}}
+        .package-item .right .btn {
+            background: var(--bg-input);
+            color: var(--text-secondary);
+            border: none;
+            padding: 5px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.6rem;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.34, 1.2, 0.64, 1);
+            border: 1px solid var(--border-color);
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        .package-item .right .btn:active {
+            transform: scale(0.88);
+            transition: transform 0.1s ease;
+        }
+        .package-item .right .btn.select-mode {
+            background: var(--bg-input);
+            color: var(--text-secondary);
+            box-shadow: none;
+            border: 1px solid var(--border-color);
+        }
+        .package-item .right .btn.select-mode:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        .package-item .right .btn.buy-mode {
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+            color: #0a0e1a;
+            box-shadow: 0 0 30px var(--gold-glow);
+            border-color: var(--gold);
+            animation: btnPulse 1.5s ease-in-out infinite;
+        }
+        @keyframes btnPulse {
+            0%,100%{box-shadow:0 0 15px var(--gold-glow)}
+            50%{box-shadow:0 0 40px var(--gold-glow)}
+        }
 
         .bottom-nav {
             position: fixed;
@@ -149,16 +202,17 @@
             cursor: pointer;
             text-decoration: none;
             color: var(--text-secondary);
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.2s cubic-bezier(0.34, 1.2, 0.64, 1);
             padding: 4px 8px;
             border-radius: 8px;
             position: relative;
             border: 2px solid transparent;
             min-width: 50px;
+            -webkit-tap-highlight-color: transparent;
         }
-        .bottom-nav .nav-item:active{transform:scale(0.75)}
-        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
-        .bottom-nav .nav-item .label{font-size:0.4rem;margin-top:1px;font-weight:700;letter-spacing:0.5px;transition:all 0.4s ease}
+        .bottom-nav .nav-item:active{transform:scale(0.85);transition:transform 0.1s ease}
+        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;transition:all 0.2s cubic-bezier(0.34, 1.2, 0.64, 1)}
+        .bottom-nav .nav-item .label{font-size:0.4rem;margin-top:1px;font-weight:700;letter-spacing:0.5px;transition:all 0.2s ease}
         .bottom-nav .nav-item.active {
             color: var(--gold);
             border-color: var(--gold);
@@ -171,9 +225,9 @@
 
         .footer{text-align:center;margin-top:10px;padding:10px;border-top:1px solid var(--border-color);color:var(--text-secondary);font-size:0.45rem;opacity:0.3;letter-spacing:1px}
 
-        .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-card);padding:10px 20px;border-radius:12px;border:1px solid rgba(245,200,66,0.15);color:var(--gold);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 8px 40px var(--shadow);animation:toastPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
+        .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-card);padding:10px 20px;border-radius:12px;border:1px solid rgba(245,200,66,0.15);color:var(--gold);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 8px 40px var(--shadow);animation:toastPop 0.3s cubic-bezier(0.34, 1.2, 0.64, 1)}
         .toast.show{display:block}
-        @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
+        @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.9)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
     </style>
 </head>
@@ -437,7 +491,7 @@
         document.getElementById('doubleList').innerHTML = renderItems(PACKAGES.double, 'double');
     }
 
-    // Package box ကိုနှိပ်ရင် ဒီ function က အလုပ်လုပ်မယ်
+    // Package box ကိုနှိပ်ရင် Select/Deselect ပဲလုပ်
     function handlePackageClick(id, name, price, type) {
         // စိန်အိုင်ကွန် bounce
         const diaIcon = document.querySelector(`.package-item[data-id="${id}"] .dia-icon`);
@@ -459,7 +513,7 @@
         renderPackages();
     }
 
-    // Buy button ကိုနှိပ်ရင် ဒီ function က အလုပ်လုပ်မယ်
+    // Buy button ကိုနှိပ်ရင် checkout ကိုသွား
     function handleBuyClick(id, name, price, type) {
         // စိန်အိုင်ကွန် bounce
         const diaIcon = document.querySelector(`.package-item[data-id="${id}"] .dia-icon`);
