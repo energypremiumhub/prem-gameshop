@@ -54,7 +54,6 @@
 
         .container{max-width:500px;margin:0 auto}
 
-        /* ===== HEADER ===== */
         .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
         .header .left{display:flex;flex-direction:column;gap:6px}
         .header .left .logo{font-size:0.9rem;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 20px var(--gold-glow))}
@@ -131,7 +130,6 @@
         .package-item .right .btn.buy-mode{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;box-shadow:0 0 30px var(--gold-glow);animation:btnPulse 1s ease-in-out infinite}
         @keyframes btnPulse{0%,100%{box-shadow:0 0 20px var(--gold-glow)}50%{box-shadow:0 0 50px var(--gold-glow)}}
 
-        /* ===== DOUBLE WARNING ===== */
         .double-warning {
             background: rgba(255,171,0,0.06);
             border: 1px solid rgba(255,171,0,0.12);
@@ -162,7 +160,6 @@
             font-weight: 600;
         }
 
-        /* ===== BOTTOM NAV ===== */
         .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(8,8,26,0.92);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,0.04);display:flex;justify-content:space-around;padding:8px 0 12px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px rgba(0,0,0,0.4)}
         .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.3s ease;padding:6px 16px;border-radius:12px;position:relative;min-width:56px;border:1px solid transparent}
         .bottom-nav .nav-item:active{transform:scale(0.85);background:rgba(255,215,0,0.05)}
@@ -184,332 +181,326 @@
     </style>
 </head>
 <body>
-<div class="container">
-    <!-- ===== HEADER ===== -->
-    <div class="header">
-        <div class="left">
-            <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Shop</div>
-            <div class="profile-icon" id="profileIcon" onclick="goToProfile()">👤 Profile</div>
-        </div>
-        <div class="right">
-            <div class="top">
-                <div class="lang-switcher">
-                    <button class="lang-btn active" data-lang="my" onclick="setLang('my')">မြန်မာ</button>
-                    <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
-                </div>
-                <a href="notifications.html" class="noti-btn" id="notiBtn">
-                    🔔
-                    <span class="badge" id="notiBadge">0</span>
-                </a>
+    <div class="container">
+        <div class="header">
+            <div class="left">
+                <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Shop</div>
+                <div class="profile-icon" id="profileIcon" onclick="goToProfile()">👤 Profile</div>
             </div>
-        </div>
-    </div>
-
-    <!-- ===== PAGE HEADER ===== -->
-    <div class="page-header">
-        <h1 id="shopTitle"><i class="fas fa-gem"></i> Diamonds <span>Package</span></h1>
-        <p id="shopSub">Select a package, then tap Buy</p>
-    </div>
-
-    <!-- ===== DOUBLE BOX ===== -->
-    <div class="double-box" onclick="scrollToDouble()">
-        <div class="left">
-            <span class="icon">⭐</span>
-            <div>
-                <div class="text" id="doubleBoxTitle">Double Diamonds</div>
-                <div class="sub" id="doubleBoxSub">Tap to view double diamond packages</div>
-            </div>
-        </div>
-        <span class="arrow"><i class="fas fa-chevron-down"></i></span>
-    </div>
-
-    <!-- ===== BUNDLES ===== -->
-    <div class="section-title" id="bundlesTitle"><i class="fas fa-gift"></i> Bundles</div>
-    <div class="package-list" id="bundlesList"></div>
-
-    <!-- ===== DIAMONDS ===== -->
-    <div class="section-title" id="diamondsTitle"><i class="fas fa-diamond"></i> Diamonds</div>
-    <div class="package-list" id="diamondsList"></div>
-
-    <!-- ===== DOUBLE TOP UP ===== -->
-    <div class="section-title" id="doubleTitle"><i class="fas fa-star"></i> Double Top Up</div>
-    
-    <!-- ===== DOUBLE WARNING ===== -->
-    <div class="double-warning">
-        <span class="icon">⚠️</span>
-        <span class="text" id="doubleWarning">
-            <strong>Warning:</strong> အကောင့်တစ်ကောင့်မှာ တစ်ခုကို တစ်ခါပဲ နှစ်ဆရပါမယ်။<br>
-            ဥပမာ - <span class="highlight">၅၀ နှစ်ဆ</span> ဖြည့်ပြီးရင် ကျန်တဲ့ <span class="highlight">သုံးခု</span> ပဲ နှစ်ဆဖြည့်လို့ရပါတော့မယ်။
-        </span>
-    </div>
-    
-    <div class="package-list" id="doubleList"></div>
-
-    <div class="footer">&copy; 2026 Premium Game Shop</div>
-</div>
-
-<!-- ===== BOTTOM NAV ===== -->
-<div class="bottom-nav">
-    <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label" id="navHome">ပင်မ</span></a>
-    <a href="shop.html" class="nav-item active"><span class="icon">🛒</span><span class="label" id="navShop">ဆိုင်</span></a>
-    <a href="payment.html" class="nav-item"><span class="icon">💳</span><span class="label" id="navPayment">ငွေပေးချေ</span></a>
-    <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label" id="navProfile">ပရိုဖိုင်</span></a>
-</div>
-
-<!-- ===== TOAST ===== -->
-<div class="toast" id="toast"></div>
-
-<script>
-    // ===== LANGUAGE DATA =====
-    const LANG_DATA = {
-        my: {
-            appName: 'Premium Shop',
-            shopTitle: 'စိန်အထုပ်များ',
-            shopSub: 'အထုပ်တစ်ခုရွေးပြီး Buy နှိပ်ပါ',
-            bundlesTitle: 'အထုပ်များ',
-            diamondsTitle: 'စိန်များ',
-            doubleTitle: 'နှစ်ဆဖြည့်မှု',
-            doubleBoxTitle: 'နှစ်ဆစိန်များ',
-            doubleBoxSub: 'နှစ်ဆစိန်အထုပ်များကိုကြည့်ရန် နှိပ်ပါ',
-            select: 'ရွေးရန်',
-            buy: 'ဝယ်ရန်',
-            selected: 'ရွေးပြီး',
-            selectFirst: '⚠️ ကျေးဇူးပြု၍ အထုပ်တစ်ခုကို ဦးစွာရွေးပါ!',
-            doubleWarning: '⚠️ Warning: အကောင့်တစ်ကောင့်မှာ တစ်ခုကို တစ်ခါပဲ နှစ်ဆရပါမယ်။\nဥပမာ - ၅၀ နှစ်ဆ ဖြည့်ပြီးရင် ကျန်တဲ့ သုံးခု ပဲ နှစ်ဆဖြည့်လို့ရပါတော့မယ်။',
-            home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
-            noti: '🔔 အသိပေးချက်အသစ်မရှိပါ'
-        },
-        en: {
-            appName: 'Premium Shop',
-            shopTitle: 'Diamonds Package',
-            shopSub: 'Choose your package and top up instantly',
-            bundlesTitle: 'Bundles',
-            diamondsTitle: 'Diamonds',
-            doubleTitle: 'Double Top Up',
-            doubleBoxTitle: 'Double Diamonds',
-            doubleBoxSub: 'Tap to view double diamond packages',
-            select: 'Select',
-            buy: 'Buy',
-            selected: 'Selected',
-            selectFirst: '⚠️ Please select a package first!',
-            doubleWarning: '⚠️ Warning: Each account can only get double bonus once per package.\nExample: After buying 50 double, only the remaining 3 packages can be doubled.',
-            home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
-            noti: '🔔 No new notifications'
-        }
-    };
-
-    let currentLang = localStorage.getItem('lang') || 'my';
-
-    function getText(key) { return LANG_DATA[currentLang][key] || key; }
-
-    function setLang(lang) {
-        currentLang = lang;
-        localStorage.setItem('lang', lang);
-        updateLanguage();
-        document.querySelectorAll('.lang-btn').forEach(b => {
-            b.classList.toggle('active', b.dataset.lang === lang);
-        });
-    }
-
-    function updateLanguage() {
-        const d = LANG_DATA[currentLang];
-        if (!d) return;
-        document.getElementById('appName').innerHTML = '<i class="fas fa-gamepad"></i> ' + d.appName;
-        document.getElementById('shopTitle').innerHTML = '<i class="fas fa-gem"></i> ' + d.shopTitle;
-        document.getElementById('shopSub').textContent = d.shopSub;
-        document.getElementById('bundlesTitle').innerHTML = '<i class="fas fa-gift"></i> ' + d.bundlesTitle;
-        document.getElementById('diamondsTitle').innerHTML = '<i class="fas fa-diamond"></i> ' + d.diamondsTitle;
-        document.getElementById('doubleTitle').innerHTML = '<i class="fas fa-star"></i> ' + d.doubleTitle;
-        document.getElementById('doubleBoxTitle').textContent = d.doubleBoxTitle;
-        document.getElementById('doubleBoxSub').textContent = d.doubleBoxSub;
-        document.getElementById('doubleWarning').innerHTML = d.doubleWarning;
-        document.getElementById('navHome').textContent = d.home;
-        document.getElementById('navShop').textContent = d.shop;
-        document.getElementById('navPayment').textContent = d.payment;
-        document.getElementById('navProfile').textContent = d.profile;
-        updateAuthUI();
-        renderPackages();
-    }
-
-    // ===== TOAST =====
-    function showToast(msg) {
-        const t = document.getElementById('toast');
-        t.textContent = msg;
-        t.classList.add('show');
-        clearTimeout(t._timer);
-        t._timer = setTimeout(() => t.classList.remove('show'), 3000);
-    }
-
-    // ===== NOTIFICATION =====
-    function checkNotifications() {
-        const notiData = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
-        const badge = document.getElementById('notiBadge');
-        if (notiData.show) {
-            badge.style.display = 'block';
-            badge.textContent = '1';
-            setTimeout(() => {
-                badge.style.display = 'none';
-                localStorage.setItem('newOrderNotification', JSON.stringify({show: false}));
-            }, 5000);
-        } else {
-            badge.style.display = 'none';
-        }
-    }
-
-    window.addEventListener('storage', function(e) {
-        if (e.key === 'newOrderNotification') {
-            checkNotifications();
-        }
-    });
-
-    // ===== AUTH =====
-    let currentUser = null;
-    const savedUser = localStorage.getItem('currentUser');
-    if (savedUser) currentUser = JSON.parse(savedUser);
-
-    function isLoggedIn() { return currentUser !== null; }
-
-    function getCurrentUser() { return currentUser; }
-
-    function updateAuthUI() {
-        const profileIcon = document.getElementById('profileIcon');
-        if (currentUser) {
-            const savedAvatar = localStorage.getItem('userAvatar_' + currentUser.username);
-            if (savedAvatar) {
-                profileIcon.innerHTML = '<img src="' + savedAvatar + '" alt="avatar"> ' + currentUser.username;
-            } else {
-                profileIcon.innerHTML = '👤 ' + currentUser.username;
-            }
-            profileIcon.className = 'profile-icon logged-in';
-        } else {
-            profileIcon.innerHTML = '👤 Profile';
-            profileIcon.className = 'profile-icon';
-        }
-    }
-
-    function goToProfile() {
-        window.location.href = 'profile.html';
-    }
-
-    // ===== PACKAGE DATA =====
-    const PACKAGES = {
-        bundles: [
-            { id: 'b1', name: 'Monthly Epic Bundle', price: 17200 },
-            { id: 'b2', name: 'Weekly Elite Bundle', price: 3350 },
-            { id: 'b3', name: 'Weekly Pass', price: 6500 }
-        ],
-        diamonds: [
-            { id: 'd1', name: '11', price: 1000 },
-            { id: 'd2', name: '22', price: 1750 },
-            { id: 'd3', name: '33', price: 2500 },
-            { id: 'd4', name: '44', price: 3300 },
-            { id: 'd5', name: '56', price: 4000 },
-            { id: 'd6', name: '86', price: 5500 },
-            { id: 'd7', name: '112', price: 7800 },
-            { id: 'd8', name: '172', price: 10700 },
-            { id: 'd9', name: '257', price: 15900 },
-            { id: 'd10', name: '343', price: 21100 },
-            { id: 'd11', name: '429', price: 26600 },
-            { id: 'd12', name: '514', price: 31200 },
-            { id: 'd13', name: '600', price: 36700 },
-            { id: 'd14', name: '706', price: 42800 },
-            { id: 'd15', name: '878', price: 53100 },
-            { id: 'd16', name: '963', price: 58500 },
-            { id: 'd17', name: '1,049', price: 63800 },
-            { id: 'd18', name: '1,135', price: 69300 },
-            { id: 'd19', name: '1,412', price: 84900 },
-            { id: 'd20', name: '2,195', price: 126000 },
-            { id: 'd21', name: '2,901', price: 166300 },
-            { id: 'd22', name: '3,688', price: 207500 },
-            { id: 'd23', name: '5,532', price: 312000 },
-            { id: 'd24', name: '9,288', price: 522000 }
-        ],
-        double: [
-            { id: 'x1', name: '50 + 50 (Double)', price: 3800, badge: '⭐ 2x Bonus' },
-            { id: 'x2', name: '150 + 150 (Double)', price: 10300, badge: '⭐ 2x Bonus' },
-            { id: 'x3', name: '250 + 250 (Double)', price: 16000, badge: '⭐ 2x Bonus' },
-            { id: 'x4', name: '500 + 500 (Double)', price: 32400, badge: '⭐ 2x Bonus' }
-        ]
-    };
-
-    let selectedPackage = null;
-
-    function formatPrice(price) {
-        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' Ks';
-    }
-
-    function renderPackages() {
-        const selectText = getText('select') || 'Select';
-        const buyText = getText('buy') || 'Buy';
-        
-        const renderItems = (items, type) => {
-            return items.map(pkg => {
-                let badgeHtml = '';
-                if (type === 'double' && pkg.badge) {
-                    badgeHtml = `<span class="double-badge">${pkg.badge}</span>`;
-                }
-                const isSelected = selectedPackage && selectedPackage.id === pkg.id;
-                return `
-                    <div class="package-item ${isSelected ? 'selected' : ''}" data-id="${pkg.id}" onclick="handlePackageClick('${pkg.id}', '${pkg.name}', ${pkg.price}, '${type}')">
-                        <div class="glow-pulse"></div>
-                        <div class="info">
-                            <div class="name"><span class="dia-icon">💎</span> ${pkg.name}</div>
-                            ${badgeHtml}
-                        </div>
-                        <div class="right">
-                            <div class="price">${formatPrice(pkg.price)}</div>
-                            <button class="btn ${isSelected ? 'buy-mode' : 'select-mode'}" onclick="event.stopPropagation(); handlePackageClick('${pkg.id}', '${pkg.name}', ${pkg.price}, '${type}')">
-                                ${isSelected ? buyText : selectText}
-                            </button>
-                        </div>
+            <div class="right">
+                <div class="top">
+                    <div class="lang-switcher">
+                        <button class="lang-btn active" data-lang="my" onclick="setLang('my')">မြန်မာ</button>
+                        <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
                     </div>
-                `;
-            }).join('');
+                    <a href="notifications.html" class="noti-btn" id="notiBtn">
+                        🔔
+                        <span class="badge" id="notiBadge">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-header">
+            <h1 id="shopTitle"><i class="fas fa-gem"></i> Diamonds <span>Package</span></h1>
+            <p id="shopSub">Select a package, then tap Buy</p>
+        </div>
+
+        <div class="double-box" onclick="scrollToDouble()">
+            <div class="left">
+                <span class="icon">⭐</span>
+                <div>
+                    <div class="text" id="doubleBoxTitle">Double Diamonds</div>
+                    <div class="sub" id="doubleBoxSub">Tap to view double diamond packages</div>
+                </div>
+            </div>
+            <span class="arrow"><i class="fas fa-chevron-down"></i></span>
+        </div>
+
+        <div class="section-title" id="bundlesTitle"><i class="fas fa-gift"></i> Bundles</div>
+        <div class="package-list" id="bundlesList"></div>
+
+        <div class="section-title" id="diamondsTitle"><i class="fas fa-diamond"></i> Diamonds</div>
+        <div class="package-list" id="diamondsList"></div>
+
+        <div class="section-title" id="doubleTitle"><i class="fas fa-star"></i> Double Top Up</div>
+        
+        <div class="double-warning">
+            <span class="icon">⚠️</span>
+            <span class="text" id="doubleWarning">
+                <strong>Warning:</strong> အကောင့်တစ်ကောင့်မှာ တစ်ခုကို တစ်ခါပဲ နှစ်ဆရပါမယ်။<br>
+                ဥပမာ - <span class="highlight">၅၀ နှစ်ဆ</span> ဖြည့်ပြီးရင် ကျန်တဲ့ <span class="highlight">သုံးခု</span> ပဲ နှစ်ဆဖြည့်လို့ရပါတော့မယ်။
+            </span>
+        </div>
+        
+        <div class="package-list" id="doubleList"></div>
+
+        <div class="footer">&copy; 2026 Premium Game Shop</div>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label" id="navHome">ပင်မ</span></a>
+        <a href="shop.html" class="nav-item active"><span class="icon">🛒</span><span class="label" id="navShop">ဆိုင်</span></a>
+        <a href="payment.html" class="nav-item"><span class="icon">💳</span><span class="label" id="navPayment">ငွေပေးချေ</span></a>
+        <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label" id="navProfile">ပရိုဖိုင်</span></a>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // ===== LANGUAGE DATA =====
+        const LANG_DATA = {
+            my: {
+                appName: 'Premium Shop',
+                shopTitle: 'စိန်အထုပ်များ',
+                shopSub: 'အထုပ်တစ်ခုရွေးပြီး Buy နှိပ်ပါ',
+                bundlesTitle: 'အထုပ်များ',
+                diamondsTitle: 'စိန်များ',
+                doubleTitle: 'နှစ်ဆဖြည့်မှု',
+                doubleBoxTitle: 'နှစ်ဆစိန်များ',
+                doubleBoxSub: 'နှစ်ဆစိန်အထုပ်များကိုကြည့်ရန် နှိပ်ပါ',
+                select: 'ရွေးရန်',
+                buy: 'ဝယ်ရန်',
+                selected: 'ရွေးပြီး',
+                selectFirst: '⚠️ ကျေးဇူးပြု၍ အထုပ်တစ်ခုကို ဦးစွာရွေးပါ!',
+                doubleWarning: '⚠️ Warning: အကောင့်တစ်ကောင့်မှာ တစ်ခုကို တစ်ခါပဲ နှစ်ဆရပါမယ်။\nဥပမာ - ၅၀ နှစ်ဆ ဖြည့်ပြီးရင် ကျန်တဲ့ သုံးခု ပဲ နှစ်ဆဖြည့်လို့ရပါတော့မယ်။',
+                home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
+                noti: '🔔 အသိပေးချက်အသစ်မရှိပါ'
+            },
+            en: {
+                appName: 'Premium Shop',
+                shopTitle: 'Diamonds Package',
+                shopSub: 'Choose your package and top up instantly',
+                bundlesTitle: 'Bundles',
+                diamondsTitle: 'Diamonds',
+                doubleTitle: 'Double Top Up',
+                doubleBoxTitle: 'Double Diamonds',
+                doubleBoxSub: 'Tap to view double diamond packages',
+                select: 'Select',
+                buy: 'Buy',
+                selected: 'Selected',
+                selectFirst: '⚠️ Please select a package first!',
+                doubleWarning: '⚠️ Warning: Each account can only get double bonus once per package.\nExample: After buying 50 double, only the remaining 3 packages can be doubled.',
+                home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
+                noti: '🔔 No new notifications'
+            }
         };
 
-        document.getElementById('bundlesList').innerHTML = renderItems(PACKAGES.bundles, 'bundle');
-        document.getElementById('diamondsList').innerHTML = renderItems(PACKAGES.diamonds, 'diamond');
-        document.getElementById('doubleList').innerHTML = renderItems(PACKAGES.double, 'double');
-    }
+        let currentLang = localStorage.getItem('lang') || 'my';
 
-    function handlePackageClick(id, name, price, type) {
-        if (selectedPackage && selectedPackage.id === id) {
-            proceedToCheckout();
-            return;
+        function getText(key) { return LANG_DATA[currentLang][key] || key; }
+
+        function setLang(lang) {
+            currentLang = lang;
+            localStorage.setItem('lang', lang);
+            updateLanguage();
+            document.querySelectorAll('.lang-btn').forEach(b => {
+                b.classList.toggle('active', b.dataset.lang === lang);
+            });
         }
-        selectedPackage = { id, name, price, type };
-        renderPackages();
-    }
 
-    function proceedToCheckout() {
-        if (!selectedPackage) {
-            showToast(getText('selectFirst') || '⚠️ Please select a package first!');
-            return;
+        function updateLanguage() {
+            const d = LANG_DATA[currentLang];
+            if (!d) return;
+            document.getElementById('appName').innerHTML = '<i class="fas fa-gamepad"></i> ' + d.appName;
+            document.getElementById('shopTitle').innerHTML = '<i class="fas fa-gem"></i> ' + d.shopTitle;
+            document.getElementById('shopSub').textContent = d.shopSub;
+            document.getElementById('bundlesTitle').innerHTML = '<i class="fas fa-gift"></i> ' + d.bundlesTitle;
+            document.getElementById('diamondsTitle').innerHTML = '<i class="fas fa-diamond"></i> ' + d.diamondsTitle;
+            document.getElementById('doubleTitle').innerHTML = '<i class="fas fa-star"></i> ' + d.doubleTitle;
+            document.getElementById('doubleBoxTitle').textContent = d.doubleBoxTitle;
+            document.getElementById('doubleBoxSub').textContent = d.doubleBoxSub;
+            document.getElementById('doubleWarning').innerHTML = d.doubleWarning;
+            document.getElementById('navHome').textContent = d.home;
+            document.getElementById('navShop').textContent = d.shop;
+            document.getElementById('navPayment').textContent = d.payment;
+            document.getElementById('navProfile').textContent = d.profile;
+            updateAuthUI();
+            renderPackages();
         }
-        window.location.href = 'checkout.html?package=' + encodeURIComponent(selectedPackage.name) + '&price=' + encodeURIComponent(formatPrice(selectedPackage.price));
-    }
 
-    function scrollToDouble() {
-        document.getElementById('doubleList').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        setTimeout(() => {
-            document.getElementById('doubleList').style.border = '2px solid var(--gold)';
-            document.getElementById('doubleList').style.borderRadius = '12px';
-            document.getElementById('doubleList').style.padding = '4px';
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            clearTimeout(t._timer);
+            t._timer = setTimeout(() => t.classList.remove('show'), 3000);
+        }
+
+        function checkNotifications() {
+            const notiData = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
+            const badge = document.getElementById('notiBadge');
+            if (notiData.show) {
+                badge.style.display = 'block';
+                badge.textContent = '1';
+                setTimeout(() => {
+                    badge.style.display = 'none';
+                    localStorage.setItem('newOrderNotification', JSON.stringify({show: false}));
+                }, 5000);
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'newOrderNotification') {
+                checkNotifications();
+            }
+        });
+
+        let currentUser = null;
+        const savedUser = localStorage.getItem('currentUser');
+        if (savedUser) currentUser = JSON.parse(savedUser);
+
+        function isLoggedIn() { return currentUser !== null; }
+
+        function getCurrentUser() { return currentUser; }
+
+        function updateAuthUI() {
+            const profileIcon = document.getElementById('profileIcon');
+            if (currentUser) {
+                const savedAvatar = localStorage.getItem('userAvatar_' + currentUser.username);
+                if (savedAvatar) {
+                    profileIcon.innerHTML = '<img src="' + savedAvatar + '" alt="avatar"> ' + currentUser.username;
+                } else {
+                    profileIcon.innerHTML = '👤 ' + currentUser.username;
+                }
+                profileIcon.className = 'profile-icon logged-in';
+            } else {
+                profileIcon.innerHTML = '👤 Profile';
+                profileIcon.className = 'profile-icon';
+            }
+        }
+
+        function goToProfile() {
+            window.location.href = 'profile.html';
+        }
+
+        // ===== PACKAGE DATA =====
+        const PACKAGES = {
+            bundles: [
+                { id: 'b1', name: 'Monthly Epic Bundle', price: 17200 },
+                { id: 'b2', name: 'Weekly Elite Bundle', price: 3350 },
+                { id: 'b3', name: 'Weekly Pass', price: 6500 }
+            ],
+            diamonds: [
+                { id: 'd1', name: '11', price: 1000 },
+                { id: 'd2', name: '22', price: 1750 },
+                { id: 'd3', name: '33', price: 2500 },
+                { id: 'd4', name: '44', price: 3300 },
+                { id: 'd5', name: '56', price: 4000 },
+                { id: 'd6', name: '86', price: 5500 },
+                { id: 'd7', name: '112', price: 7800 },
+                { id: 'd8', name: '172', price: 10700 },
+                { id: 'd9', name: '257', price: 15900 },
+                { id: 'd10', name: '343', price: 21100 },
+                { id: 'd11', name: '429', price: 26600 },
+                { id: 'd12', name: '514', price: 31200 },
+                { id: 'd13', name: '600', price: 36700 },
+                { id: 'd14', name: '706', price: 42800 },
+                { id: 'd15', name: '878', price: 53100 },
+                { id: 'd16', name: '963', price: 58500 },
+                { id: 'd17', name: '1,049', price: 63800 },
+                { id: 'd18', name: '1,135', price: 69300 },
+                { id: 'd19', name: '1,412', price: 84900 },
+                { id: 'd20', name: '2,195', price: 126000 },
+                { id: 'd21', name: '2,901', price: 166300 },
+                { id: 'd22', name: '3,688', price: 207500 },
+                { id: 'd23', name: '5,532', price: 312000 },
+                { id: 'd24', name: '9,288', price: 522000 }
+            ],
+            double: [
+                { id: 'x1', name: '50 + 50 (Double)', price: 3800, badge: '⭐ 2x Bonus' },
+                { id: 'x2', name: '150 + 150 (Double)', price: 10300, badge: '⭐ 2x Bonus' },
+                { id: 'x3', name: '250 + 250 (Double)', price: 16000, badge: '⭐ 2x Bonus' },
+                { id: 'x4', name: '500 + 500 (Double)', price: 32400, badge: '⭐ 2x Bonus' }
+            ]
+        };
+
+        let selectedPackage = null;
+
+        function formatPrice(price) {
+            return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' Ks';
+        }
+
+        function renderPackages() {
+            const selectText = getText('select') || 'Select';
+            const buyText = getText('buy') || 'Buy';
+            
+            const renderItems = (items, type) => {
+                return items.map(pkg => {
+                    let badgeHtml = '';
+                    if (type === 'double' && pkg.badge) {
+                        badgeHtml = `<span class="double-badge">${pkg.badge}</span>`;
+                    }
+                    const isSelected = selectedPackage && selectedPackage.id === pkg.id;
+                    return `
+                        <div class="package-item ${isSelected ? 'selected' : ''}" data-id="${pkg.id}" onclick="handlePackageClick('${pkg.id}', '${pkg.name}', ${pkg.price}, '${type}')">
+                            <div class="glow-pulse"></div>
+                            <div class="info">
+                                <div class="name"><span class="dia-icon">💎</span> ${pkg.name}</div>
+                                ${badgeHtml}
+                            </div>
+                            <div class="right">
+                                <div class="price">${formatPrice(pkg.price)}</div>
+                                <button class="btn ${isSelected ? 'buy-mode' : 'select-mode'}" onclick="event.stopPropagation(); handlePackageClick('${pkg.id}', '${pkg.name}', ${pkg.price}, '${type}')">
+                                    ${isSelected ? buyText : selectText}
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            };
+
+            document.getElementById('bundlesList').innerHTML = renderItems(PACKAGES.bundles, 'bundle');
+            document.getElementById('diamondsList').innerHTML = renderItems(PACKAGES.diamonds, 'diamond');
+            document.getElementById('doubleList').innerHTML = renderItems(PACKAGES.double, 'double');
+        }
+
+        // ===== ပြင်ဆင်ထားတဲ့ handlePackageClick (Deselect ဖြစ်အောင်) =====
+        function handlePackageClick(id, name, price, type) {
+            // ရွေးပြီးသား package ကို ပြန်နှိပ်ရင် Deselect လုပ်မယ်
+            if (selectedPackage && selectedPackage.id === id) {
+                selectedPackage = null;
+                renderPackages();
+                return;
+            }
+            
+            // Select - ရွေးမယ်
+            selectedPackage = { id, name, price, type };
+            renderPackages();
+        }
+
+        // ===== Buy ခလုတ်နှိပ်မှ Checkout သွားမယ် =====
+        function proceedToCheckout() {
+            if (!selectedPackage) {
+                showToast(getText('selectFirst') || '⚠️ ကျေးဇူးပြု၍ အထုပ်တစ်ခုကို ဦးစွာရွေးပါ!');
+                return;
+            }
+            window.location.href = 'checkout.html?package=' + encodeURIComponent(selectedPackage.name) + '&price=' + encodeURIComponent(formatPrice(selectedPackage.price));
+        }
+
+        function scrollToDouble() {
+            document.getElementById('doubleList').scrollIntoView({ behavior: 'smooth', block: 'start' });
             setTimeout(() => {
-                document.getElementById('doubleList').style.border = 'none';
-                document.getElementById('doubleList').style.padding = '0';
-            }, 2000);
-        }, 500);
-    }
+                document.getElementById('doubleList').style.border = '2px solid var(--gold)';
+                document.getElementById('doubleList').style.borderRadius = '12px';
+                document.getElementById('doubleList').style.padding = '4px';
+                setTimeout(() => {
+                    document.getElementById('doubleList').style.border = 'none';
+                    document.getElementById('doubleList').style.padding = '0';
+                }, 2000);
+            }, 500);
+        }
 
-    // ===== INIT =====
-    document.addEventListener('DOMContentLoaded', function() {
-        const savedLang = localStorage.getItem('lang') || 'my';
-        setLang(savedLang);
-        renderPackages();
-        updateAuthUI();
-        checkNotifications();
-    });
-</script>
+        // ===== INIT =====
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('lang') || 'my';
+            setLang(savedLang);
+            renderPackages();
+            updateAuthUI();
+            checkNotifications();
+        });
+    </script>
 </body>
 </html>
