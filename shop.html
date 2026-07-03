@@ -445,18 +445,30 @@
             { id: 'b3', name: 'Weekly Pass', price: 6500 }
         ],
         diamonds: [
-            { id: 'd1', name: '11', price: 1000 }, { id: 'd2', name: '22', price: 1750 },
-            { id: 'd3', name: '33', price: 2500 }, { id: 'd4', name: '44', price: 3300 },
-            { id: 'd5', name: '56', price: 4000 }, { id: 'd6', name: '86', price: 5500 },
-            { id: 'd7', name: '112', price: 7800 }, { id: 'd8', name: '172', price: 10700 },
-            { id: 'd9', name: '257', price: 15900 }, { id: 'd10', name: '343', price: 21100 },
-            { id: 'd11', name: '429', price: 26600 }, { id: 'd12', name: '514', price: 31200 },
-            { id: 'd13', name: '600', price: 36700 }, { id: 'd14', name: '706', price: 42800 },
-            { id: 'd15', name: '878', price: 53100 }, { id: 'd16', name: '963', price: 58500 },
-            { id: 'd17', name: '1,049', price: 63800 }, { id: 'd18', name: '1,135', price: 69300 },
-            { id: 'd19', name: '1,412', price: 84900 }, { id: 'd20', name: '2,195', price: 126000 },
-            { id: 'd21', name: '2,901', price: 166300 }, { id: 'd22', name: '3,688', price: 207500 },
-            { id: 'd23', name: '5,532', price: 312000 }, { id: 'd24', name: '9,288', price: 522000 }
+            { id: 'd1', name: '11', price: 1000 },
+            { id: 'd2', name: '22', price: 1750 },
+            { id: 'd3', name: '33', price: 2500 },
+            { id: 'd4', name: '44', price: 3300 },
+            { id: 'd5', name: '56', price: 4000 },
+            { id: 'd6', name: '86', price: 5500 },
+            { id: 'd7', name: '112', price: 7800 },
+            { id: 'd8', name: '172', price: 10700 },
+            { id: 'd9', name: '257', price: 15900 },
+            { id: 'd10', name: '343', price: 21100 },
+            { id: 'd11', name: '429', price: 26600 },
+            { id: 'd12', name: '514', price: 31200 },
+            { id: 'd13', name: '600', price: 36700 },
+            { id: 'd14', name: '706', price: 42800 },
+            { id: 'd15', name: '878', price: 53100 },
+            { id: 'd16', name: '963', price: 58500 },
+            { id: 'd17', name: '1,049', price: 63800 },
+            { id: 'd18', name: '1,135', price: 69300 },
+            { id: 'd19', name: '1,412', price: 84900 },
+            { id: 'd20', name: '2,195', price: 126000 },
+            { id: 'd21', name: '2,901', price: 166300 },
+            { id: 'd22', name: '3,688', price: 207500 },
+            { id: 'd23', name: '5,532', price: 312000 },
+            { id: 'd24', name: '9,288', price: 522000 }
         ],
         double: [
             { id: 'x1', name: '50+50 (2x)', price: 3800, badge: '⭐2x' },
@@ -469,6 +481,7 @@
     function formatPrice(price){ return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' ' + getText('currency'); }
 
     function renderPackages(){
+        console.log('renderPackages called');
         const selectText = getText('select');
         const buyText = getText('buy');
         const renderItems = (items, type) => items.map(pkg => {
@@ -493,6 +506,7 @@
         document.getElementById('bundlesList').innerHTML = renderItems(PACKAGES.bundles, 'bundle');
         document.getElementById('diamondsList').innerHTML = renderItems(PACKAGES.diamonds, 'diamond');
         document.getElementById('doubleList').innerHTML = renderItems(PACKAGES.double, 'double');
+        console.log('renderPackages done');
     }
 
     function bounceIcon(id){
@@ -803,13 +817,23 @@
     }
 
     document.addEventListener('DOMContentLoaded', function(){
+        console.log('DOMContentLoaded');
         setLang(localStorage.getItem('lang') || 'my');
-        renderPackages();
+        // renderPackages ကို အတင်းခေါ်မယ်
+        setTimeout(function(){
+            renderPackages();
+        }, 100);
         updateAuthUI();
         currentUser = getCurrentUser();
         const noti = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
         const badge = document.getElementById('notiBadge');
         if(noti.show){ badge.style.display = 'block'; badge.textContent = '1'; setTimeout(() => { badge.style.display = 'none'; localStorage.setItem('newOrderNotification', JSON.stringify({show:false})); }, 5000); }
+    });
+
+    // စာမျက်နှာ Load ဖြစ်ပြီးတိုင်း renderPackages ကို ထပ်ခေါ်မယ်
+    window.addEventListener('load', function(){
+        console.log('window load');
+        renderPackages();
     });
 
     document.getElementById('checkoutModal').addEventListener('click', function(e) {
