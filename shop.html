@@ -449,15 +449,32 @@
         renderPackages();
     }
 
-    // ===== BUY BUTTON - ဒီမှာ အဓိကပြင်ထားတယ် =====
+    // ===== BUY BUTTON - FIXED =====
     function handleBuyClick(id, name, price, type){
         bounceIcon(id);
         
-        // ရွေးပြီးသား package ဆိုရင် Modal ပေါ်လာမယ်
-        // မရွေးရသေးရင် Select လုပ်ပြီး Modal ပေါ်လာမယ်
+        // selectedPackage ကိုသတ်မှတ်
         selectedPackage = { id, name, price, type };
         renderPackages();
-        openCheckoutModal(name, price);
+        
+        // Modal ကိုချက်ချင်းပေါ်အောင်
+        const modal = document.getElementById('checkoutModal');
+        if(modal) {
+            document.getElementById('modalPackage').textContent = name;
+            document.getElementById('modalPrice').textContent = formatPrice(price);
+            modal.classList.add('show');
+            document.getElementById('gameId').value = '';
+            document.getElementById('serverId').value = '';
+            document.getElementById('fileInput').value = '';
+            document.getElementById('fileUpload').classList.remove('has-file');
+            document.getElementById('fileName').classList.remove('show');
+            document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+            document.getElementById('waveInfo').classList.remove('show');
+            document.getElementById('kpayInfo').classList.remove('show');
+            selectedPayment = null;
+            document.getElementById('submitBtn').disabled = false;
+            document.getElementById('submitBtn').textContent = '✅ ' + (getText('submit') || 'Submit Order');
+        }
     }
 
     function openCheckoutModal(name, price){
