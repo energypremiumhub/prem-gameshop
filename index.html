@@ -28,7 +28,7 @@
             --green: #00e676;
             --green-glow: rgba(0,230,118,0.3);
             --red: #ff1744;
-            --red-glow: rgba(255,23,68,0.5);
+            --red-glow: rgba(255,23,68,0.6);
             --dark-red: #b71c1c;
             --purple: #b388ff;
             --purple-glow: rgba(179,136,255,0.2);
@@ -87,7 +87,7 @@
         .welcome h2 i{color:var(--cyan);-webkit-text-fill-color:initial}
         .welcome p{color:var(--text-secondary);font-size:0.75rem;margin-top:2px;font-weight:400;opacity:0.7}
 
-        /* ===== SHOP STATUS BANNER (24 ဖယ်ထား) ===== */
+        /* ===== SHOP STATUS BANNER ===== */
         .shop-status-banner {
             background: linear-gradient(135deg, rgba(247,212,74,0.06), rgba(0,229,255,0.04));
             border-radius: 16px;
@@ -123,7 +123,7 @@
             text-align: center;
         }
         .shop-status-banner .banner-status {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 900;
             padding: 10px 30px;
             border-radius: 30px;
@@ -142,20 +142,18 @@
             animation: pulseStatus 1.5s ease-in-out infinite;
             box-shadow: 0 0 40px rgba(0,230,118,0.1);
             text-shadow: 0 0 30px rgba(0,230,118,0.2);
-            font-size: 1.3rem;
         }
         .shop-status-banner .banner-status.closed {
             background: rgba(255,23,68,0.12);
             color: var(--red);
             border: 1px solid rgba(255,23,68,0.2);
-            box-shadow: 0 0 50px var(--red-glow);
-            text-shadow: 0 0 30px var(--red-glow);
+            box-shadow: 0 0 60px var(--red-glow);
+            text-shadow: 0 0 40px var(--red-glow);
             animation: closedPulse 1s ease-in-out infinite;
-            font-size: 1.3rem;
         }
         @keyframes closedPulse {
-            0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 40px var(--red-glow); }
-            50% { opacity: 0.7; transform: scale(0.97); box-shadow: 0 0 70px var(--red-glow); }
+            0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 50px var(--red-glow); }
+            50% { opacity: 0.7; transform: scale(0.97); box-shadow: 0 0 80px var(--red-glow); }
         }
         .shop-status-banner .banner-status.open .status-dot {
             display: inline-block;
@@ -317,38 +315,22 @@
             background-size: 200% 200%;
         }
 
-        /* ===== CLICK EFFECT (ပေါက်ကွဲသလိုမျိုး) ===== */
-        .click-ripple {
-            position: fixed;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(247,212,74,0.6), rgba(247,212,74,0.1), transparent);
-            transform: scale(0);
-            animation: rippleEffect 0.8s ease-out forwards;
-            pointer-events: none;
-            z-index: 999;
+        /* ===== CLICK EFFECT (နူးညံ့တဲ့ Animation) ===== */
+        .click-soft {
+            animation: softClick 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        .click-ripple.red {
-            background: radial-gradient(circle, rgba(255,23,68,0.6), rgba(255,23,68,0.1), transparent);
-        }
-        @keyframes rippleEffect {
-            0% { transform: scale(0); opacity: 1; }
-            100% { transform: scale(4); opacity: 0; }
-        }
-        .click-burst {
-            animation: burstEffect 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        @keyframes burstEffect {
+        @keyframes softClick {
             0% { transform: scale(1); }
-            30% { transform: scale(0.85) rotate(-3deg); }
-            60% { transform: scale(1.1) rotate(2deg); }
-            100% { transform: scale(1) rotate(0deg); }
+            40% { transform: scale(0.92); }
+            70% { transform: scale(1.04); }
+            100% { transform: scale(1); }
         }
 
         .section-title{font-size:0.65rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;display:flex;align-items:center;gap:10px;opacity:0.5}
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
         .section-title i{color:var(--cyan);text-shadow:0 0 20px var(--cyan-glow)}
 
-        /* ===== SERVICES GRID ===== */
+        /* ===== SERVICES GRID (အကွက် ၆ ကွက်) ===== */
         .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;animation:slideUp 0.9s ease;margin-bottom:18px}
         .services-grid .service{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);border-radius:14px;padding:16px 10px;text-align:center;cursor:pointer;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.2);backdrop-filter:blur(10px)}
         .services-grid .service .icon{font-size:1.8rem;display:block;margin-bottom:6px;transition:all 0.4s ease}
@@ -481,7 +463,7 @@
         <p id="subtitle">စိန်တွေဖြည့်ပြီး စစ်မြေပြင်ကို အနိုင်ယူလိုက်ပါ</p>
     </div>
 
-    <!-- ===== SHOP STATUS BANNER (စာလုံးကြီးကြီး) ===== -->
+    <!-- ===== SHOP STATUS BANNER ===== -->
     <div class="shop-status-banner" id="shopStatusBanner" onclick="handleBannerClick()">
         <div class="banner-content">
             <div class="banner-status open" id="statusBadge">
@@ -497,7 +479,7 @@
         <div class="sub" id="shopSubText">ပက်ကေ့ခ်ျအားလုံးကိုကြည့်ပါ</div>
     </a>
 
-    <!-- ===== SERVICES ===== -->
+    <!-- ===== SERVICES (အကွက် ၆ ကွက်) ===== -->
     <div class="section-title" id="servicesTitle"><i class="fas fa-bolt"></i> ဘာကြောင့် ကျွန်ုပ်တို့ကိုရွေးမလဲ?</div>
     <div class="services-grid">
         <div class="service" onclick="handleServiceClick(this)"><span class="glow"></span><span class="icon">⚡</span><span class="label" id="s1">၁၀ မိနစ်အတွင်း အော်ဒါပြီးမြောက်</span></div>
@@ -868,89 +850,53 @@
 
     setInterval(updateShopUI, 60000);
 
-    // ===== CLICK ANIMATIONS (ပေါက်ကွဲသလိုမျိုး) =====
-    function createRipple(x, y, isRed = false) {
-        const ripple = document.createElement('div');
-        ripple.className = 'click-ripple' + (isRed ? ' red' : '');
-        const size = Math.random() * 60 + 40;
-        ripple.style.width = size + 'px';
-        ripple.style.height = size + 'px';
-        ripple.style.left = (x - size/2) + 'px';
-        ripple.style.top = (y - size/2) + 'px';
-        document.body.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 800);
+    // ===== CLICK ANIMATIONS (နူးညံ့တဲ့ Soft Click) =====
+    function applySoftClick(element) {
+        element.classList.remove('click-soft');
+        void element.offsetWidth;
+        element.classList.add('click-soft');
     }
 
-    function handleBannerClick(e) {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const x = e.clientX || rect.left + rect.width/2;
-        const y = e.clientY || rect.top + rect.height/2;
-        const isRed = !isShopOpen();
-        createRipple(x, y, isRed);
-        
+    function handleBannerClick() {
         const banner = document.getElementById('shopStatusBanner');
-        banner.classList.add('click-burst');
-        setTimeout(() => banner.classList.remove('click-burst'), 600);
-        
-        showToast(isShopOpen() ? '🟢 ဆိုင်ဖွင့်ထားပါသည်! အခုပဲ စျေးဝယ်လိုက်ပါ!' : '🔴 ဆိုင်ပိတ်ထားပါသည်။ မနက် ၁၀ နာရီတွင် ပြန်လည်ဖွင့်ပါမည်။');
+        applySoftClick(banner);
+        // Toast မပေါ်တော့ဘူး
     }
 
     function handleShopClick(e) {
+        const shopCard = document.getElementById('shopCard');
+        applySoftClick(shopCard);
+        
         if (!isShopOpen()) {
             e.preventDefault();
-            const rect = e.currentTarget.getBoundingClientRect();
-            const x = e.clientX || rect.left + rect.width/2;
-            const y = e.clientY || rect.top + rect.height/2;
-            createRipple(x, y, true);
-            showToast('🔴 ဆိုင်ပိတ်ထားပါသည်။ မနက် ၁၀ နာရီတွင် ပြန်လည်ဖွင့်ပါမည်။');
             return false;
         }
-        const rect = e.currentTarget.getBoundingClientRect();
-        const x = e.clientX || rect.left + rect.width/2;
-        const y = e.clientY || rect.top + rect.height/2;
-        createRipple(x, y, false);
         return true;
     }
 
-    function handleServiceClick(el, e) {
-        const rect = el.getBoundingClientRect();
-        const x = e.clientX || rect.left + rect.width/2;
-        const y = e.clientY || rect.top + rect.height/2;
-        createRipple(x, y, false);
-        
-        el.classList.add('click-burst');
-        setTimeout(() => el.classList.remove('click-burst'), 600);
-        
-        const label = el.querySelector('.label').textContent;
-        showToast('✅ ' + label);
+    function handleServiceClick(el) {
+        applySoftClick(el);
+        // Toast မပေါ်တော့ဘူး
     }
 
     function handleTelegramClick() {
-        const x = window.innerWidth / 2;
-        const y = window.innerHeight / 2;
-        createRipple(x, y, false);
+        const card = document.querySelector('.telegram-card');
+        applySoftClick(card);
         window.open('https://t.me/Premium_GameShop', '_blank');
     }
 
     function handleTelegramContactClick() {
-        const x = window.innerWidth / 2;
-        const y = window.innerHeight / 2;
-        createRipple(x, y, false);
+        const contact = document.querySelector('.telegram-contact');
+        applySoftClick(contact);
         window.open('https://t.me/Energypremiumhub', '_blank');
     }
 
     function handleNavClick(el, e) {
         e.preventDefault();
-        const rect = el.getBoundingClientRect();
-        const x = e.clientX || rect.left + rect.width/2;
-        const y = e.clientY || rect.top + rect.height/2;
-        createRipple(x, y, false);
-        
-        el.classList.add('click-burst');
-        setTimeout(() => el.classList.remove('click-burst'), 600);
+        applySoftClick(el);
         setTimeout(() => {
             window.location.href = el.getAttribute('href');
-        }, 400);
+        }, 300);
     }
 
     // ===== TOAST =====
