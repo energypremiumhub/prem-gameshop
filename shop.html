@@ -374,11 +374,8 @@
     function setLang(lang){
         currentLang = lang;
         localStorage.setItem('lang', lang);
-        // ဘာသာစကားပြောင်းတာနဲ့ UI ကို update လုပ်
         updateLanguage();
-        // ပက်ကေ့ချ်တွေကို ပြန်ဆွဲ
-        renderPackages();
-        // ခလုတ်တွေကို active လုပ်
+        renderPackages();  // ← ဒီလိုင်းကို ထည့်လိုက်ပါ
         document.querySelectorAll('.lang-btn').forEach(b => {
             b.classList.toggle('active', b.dataset.lang === lang);
         });
@@ -418,6 +415,7 @@
         document.getElementById('shopBtnText').textContent = d.shopBtn;
         
         updateAuthUI();
+        renderPackages();
     }
 
     function showToast(msg, type){
@@ -486,6 +484,7 @@
     function formatPrice(price){ return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' ' + getText('currency'); }
 
     function renderPackages(){
+        console.log('renderPackages called');
         const selectText = getText('select');
         const buyText = getText('buy');
         const renderItems = (items, type) => items.map(pkg => {
@@ -510,6 +509,7 @@
         document.getElementById('bundlesList').innerHTML = renderItems(PACKAGES.bundles, 'bundle');
         document.getElementById('diamondsList').innerHTML = renderItems(PACKAGES.diamonds, 'diamond');
         document.getElementById('doubleList').innerHTML = renderItems(PACKAGES.double, 'double');
+        console.log('renderPackages done');
     }
 
     function bounceIcon(id){
@@ -820,8 +820,12 @@
     }
 
     document.addEventListener('DOMContentLoaded', function(){
+        console.log('DOMContentLoaded');
         setLang(localStorage.getItem('lang') || 'my');
-        renderPackages();
+        // renderPackages ကို အတင်းခေါ်မယ်
+        setTimeout(function(){
+            renderPackages();
+        }, 100);
         updateAuthUI();
         currentUser = getCurrentUser();
         const noti = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
@@ -831,6 +835,7 @@
 
     // စာမျက်နာ Load ဖြစ်ပြီးတိုင်း renderPackages ကို ထပ်ခေါ်မယ်
     window.addEventListener('load', function(){
+        console.log('window load');
         renderPackages();
     });
 
