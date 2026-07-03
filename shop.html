@@ -612,7 +612,7 @@
         });
     }
 
-    // ===== SEND ORDER TO TELEGRAM (ပြင်ဆင်ပြီး) =====
+    // ===== SEND ORDER TO TELEGRAM =====
     async function sendOrderToTelegram(orderData) {
         if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE') {
             console.warn('Telegram Bot Token not configured');
@@ -659,7 +659,7 @@
                 return false;
             }
 
-            // ၂။ ပြေစာပုံကိုပို့မယ် (ပုံပေါ်အောင်)
+            // ၂။ ပြေစာပုံကိုပို့မယ်
             if (orderData.photo) {
                 try {
                     const photoBlob = await fetch(orderData.photo).then(res => res.blob());
@@ -681,100 +681,6 @@
         } catch(error) {
             console.error('Telegram error:', error);
             return false;
-        }
-    }
-
-    // ===== TELEGRAM POLLING (ပြင်ဆင်ပြီး) =====
-    async function checkTelegramUpdates() {
-        if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE') return;
-        
-        try {
-            const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getUpdates?limit=10`);
-            const data = await response.json();
-            
-            if (data.ok && data.result) {
-                for (const update of data.result) {
-                    if (update.callback_query) {
-                        const callbackData = update.callback_query.data;
-                        const messageId = update.callback_query.message.message_id;
-                        const chatId = update.callback_query.message.chat.id;
-                        
-                        // ===== DONE နှိပ်ရင် =====
-                        if (callbackData.startsWith('done_')) {
-                            const orderId = callbackData.replace('done_', '');
-                            await updateOrderStatus(orderId, 'completed');
-                            
-                            // Done နှိပ်မှပဲ အောင်မြင်ကြောင်းစာပို့မယ်
-                            await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({
-                                    chat_id: TELEGRAM_CHAT_ID,
-                                    text: `✅ Order #${orderId} has been **completed**!\n\nThank you for your purchase! 🙏`,
-                                    parse_mode: 'Markdown'
-                                })
-                            });
-                            
-                            // ခလုတ်တွေကိုဖျက်မယ်
-                            await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/editMessageReplyMarkup`, {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({
-                                    chat_id: chatId,
-                                    message_id: messageId,
-                                    reply_markup: { inline_keyboard: [] }
-                                })
-                            });
-                            
-                            // Notification ပို့မယ်
-                            localStorage.setItem('newOrderNotification', JSON.stringify({
-                                show: true,
-                                orderId: orderId,
-                                message: `✅ Order #${orderId} completed!`
-                            }));
-                            window.dispatchEvent(new Event('storage'));
-                        }
-                        
-                        // ===== FAIL နှိပ်ရင် =====
-                        else if (callbackData.startsWith('fail_')) {
-                            const orderId = callbackData.replace('fail_', '');
-                            await updateOrderStatus(orderId, 'cancelled');
-                            
-                            // Fail ကြောင်းစာပို့မယ်
-                            await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({
-                                    chat_id: TELEGRAM_CHAT_ID,
-                                    text: `❌ Order #${orderId} has been **failed**.\n\nPlease contact support for assistance. 🙏`,
-                                    parse_mode: 'Markdown'
-                                })
-                            });
-                            
-                            // ခလုတ်တွေကိုဖျက်မယ်
-                            await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/editMessageReplyMarkup`, {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({
-                                    chat_id: chatId,
-                                    message_id: messageId,
-                                    reply_markup: { inline_keyboard: [] }
-                                })
-                            });
-                            
-                            // Notification ပို့မယ်
-                            localStorage.setItem('newOrderNotification', JSON.stringify({
-                                show: true,
-                                orderId: orderId,
-                                message: `❌ Order #${orderId} failed!`
-                            }));
-                            window.dispatchEvent(new Event('storage'));
-                        }
-                    }
-                }
-            }
-        } catch(error) {
-            console.error('Telegram update check error:', error);
         }
     }
 
@@ -860,6 +766,16 @@
 
             const telegramSuccess = await sendOrderToTelegram(orderData);
 
+            // ===== အော်ဒါရောက်ပြီဆိုတာနဲ့ User ဆီ Notification ပို့မယ် =====
+            if (telegramSuccess) {
+                localStorage.setItem('newOrderNotification', JSON.stringify({
+                    show: true,
+                    orderId: orderId,
+                    message: `✅ သင့်အော်ဒါ #${orderId} အောင်မြင်ပါသည်!`
+                }));
+                window.dispatchEvent(new Event('storage'));
+            }
+
             localStorage.setItem('newOrderNotification', JSON.stringify({
                 show: true,
                 orderId: orderId,
@@ -870,9 +786,7 @@
             document.getElementById('orderIdDisplay').textContent = '📋 Order #' + orderId;
             document.getElementById('orderSuccess').classList.add('show');
             
-            if (telegramSuccess) {
-                showToast(d.orderSuccess || '✅ Order successful!', 'success');
-            } else {
+            if (!telegramSuccess) {
                 showToast(d.telegramError || '⚠️ Order saved but Telegram send failed.', 'error');
             }
             
@@ -929,7 +843,110 @@
         }
     });
 
-    // Telegram Polling - ၁၀ စက္ကန့်တစ်ခါ
+    // ===== TELEGRAM POLLING =====
+    async function checkTelegramUpdates() {
+        if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE') return;
+        
+        try {
+            const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getUpdates?limit=10`);
+            const data = await response.json();
+            
+            if (data.ok && data.result) {
+                for (const update of data.result) {
+                    if (update.callback_query) {
+                        const callbackData = update.callback_query.data;
+                        const messageId = update.callback_query.message.message_id;
+                        const chatId = update.callback_query.message.chat.id;
+                        
+                        // ===== DONE နှိပ်ရင် =====
+                        if (callbackData.startsWith('done_')) {
+                            const orderId = callbackData.replace('done_', '');
+                            await updateOrderStatus(orderId, 'completed');
+                            
+                            // ၁။ Telegram ကိုပြန်ပို့
+                            await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                    chat_id: TELEGRAM_CHAT_ID,
+                                    text: `✅ Order #${orderId} has been **completed**!\n\nThank you for your purchase! 🙏`,
+                                    parse_mode: 'Markdown'
+                                })
+                            });
+                            
+                            // ၂။ User ဆီကို စိန်ဖြည့်အောင်မြင်ကြောင်း Notification ပို့မယ်
+                            localStorage.setItem('newOrderNotification', JSON.stringify({
+                                show: true,
+                                orderId: orderId,
+                                message: `✅ စိန်ဖြည့်တာ အောင်မြင်ပါသည်!\n\nဝယ်ယူအားပေးမှုအတွက် ကျေးဇူးတင်ပါတယ်! 🙏`
+                            }));
+                            window.dispatchEvent(new Event('storage'));
+                            
+                            // ၃။ ခလုတ်တွေကိုဖျက်မယ်
+                            await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/editMessageReplyMarkup`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                    chat_id: chatId,
+                                    message_id: messageId,
+                                    reply_markup: { inline_keyboard: [] }
+                                })
+                            });
+                        }
+                        
+                        // ===== FAIL နှိပ်ရင် =====
+                        else if (callbackData.startsWith('fail_')) {
+                            const orderId = callbackData.replace('fail_', '');
+                            await updateOrderStatus(orderId, 'cancelled');
+                            
+                            // ၁။ Telegram ကိုပြန်ပို့
+                            await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                    chat_id: TELEGRAM_CHAT_ID,
+                                    text: `❌ Order #${orderId} has been **failed**.\n\nPlease contact support for assistance. 🙏`,
+                                    parse_mode: 'Markdown'
+                                })
+                            });
+                            
+                            // ၂။ User ဆီကို Notification ပို့မယ်
+                            localStorage.setItem('newOrderNotification', JSON.stringify({
+                                show: true,
+                                orderId: orderId,
+                                message: `❌ အော်ဒါ #${orderId} မအောင်မြင်ပါ။\n\nကျေးဇူးပြု၍ ပြန်လည်ကြိုးစားပါ။`
+                            }));
+                            window.dispatchEvent(new Event('storage'));
+                            
+                            // ၃။ ခလုတ်တွေကိုဖျက်မယ်
+                            await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/editMessageReplyMarkup`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                    chat_id: chatId,
+                                    message_id: messageId,
+                                    reply_markup: { inline_keyboard: [] }
+                                })
+                            });
+                        }
+                    }
+                }
+            }
+        } catch(error) {
+            console.error('Telegram update check error:', error);
+        }
+    }
+
+    async function updateOrderStatus(orderId, status) {
+        const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+        const order = orders.find(o => o.id === orderId);
+        if (order) {
+            order.status = status;
+            localStorage.setItem('orderHistory', JSON.stringify(orders));
+            showToast(`✅ Order #${orderId} ${status}!`, 'success');
+        }
+    }
+
     if (TELEGRAM_BOT_TOKEN && TELEGRAM_BOT_TOKEN !== 'YOUR_BOT_TOKEN_HERE') {
         setInterval(checkTelegramUpdates, 10000);
     }
