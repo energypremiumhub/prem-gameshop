@@ -285,7 +285,11 @@
         if(icon){ icon.classList.remove('bounce'); void icon.offsetWidth; icon.classList.add('bounce'); }
     }
 
-    // ===== Package box ကိုနှိပ်ရင် Select/Deselect ပဲလုပ် =====
+    // ==========================================
+    // အဓိက ပြင်ဆင်ချက် - ဒီမှာ
+    // ==========================================
+    
+    // Package box ကိုနှိပ်ရင် Select/Deselect ပဲလုပ်
     function handlePackageClick(id, name, price, type){
         bounceIcon(id);
         
@@ -301,7 +305,7 @@
         renderPackages();
     }
 
-    // ===== Buy button ကိုနှိပ်ရင် ဒီမှာ စစ်ဆေးပြီး Checkout သွား =====
+    // Buy button ကိုနှိပ်ရင် Checkout သွား
     function handleBuyClick(id, name, price, type){
         bounceIcon(id);
         
@@ -312,18 +316,10 @@
             return;
         }
         
-        // ===== အရေးကြီးဆုံး အပိုင်း =====
-        // ဒီမှာ selectedPackage က null ဖြစ်နေတယ်
-        // ဒါကြောင့် ဒီမှာ သေချာသတ်မှတ်ပြီး 
-        // UI ကို update လုပ်ပြီးမှ Checkout သွား
-        
-        // ၁။ selectedPackage ကို သတ်မှတ်
+        // အသစ်ရွေးမယ် (Select ဖြစ်သွားမယ်)
         selectedPackage = { id, name, price, type };
         
-        // ၂။ UI ကို update လုပ် (button ကို Buy ဖြစ်အောင်)
-        renderPackages();
-        
-        // ၃။ ပြီးရင် Checkout သွား
+        // Checkout သွား
         const data = encodeURIComponent(JSON.stringify({
             name: name,
             price: price,
