@@ -108,26 +108,57 @@
         @keyframes spinGlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
         @keyframes pulseGlow{0%,100%{opacity:0.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
 
-        .package-item:hover .dia-icon{animation:floatIcon 2s ease-in-out infinite;color:var(--gold)}
-        .package-item:hover .price{color:var(--gold)}
-        .package-item:hover{border-color:rgba(255,215,0,0.2)}
-        @keyframes floatIcon{0%,100%{transform:translateY(0px)}50%{transform:translateY(-3px)}}
+        /* ===== စိန်အိုင်ကွန် လှုပ်တဲ့ Animation ===== */
+        .package-item:hover .dia-icon,
+        .package-item.selected .dia-icon {
+            animation: floatIcon 2s ease-in-out infinite;
+            color: var(--gold);
+        }
+        .package-item .dia-icon {
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-5px) scale(1.1); }
+        }
 
-        .package-item .info{display:flex;flex-direction:column;gap:2px;flex:1;position:relative;z-index:1}
         .package-item .info .name{font-size:0.75rem;font-weight:600;color:var(--text-primary)}
-        .package-item .info .name .dia-icon{color:var(--gold);margin-right:4px;transition:all 0.3s ease;display:inline-block}
+        .package-item .info .name .dia-icon{color:var(--text-secondary);margin-right:4px;transition:all 0.3s ease;display:inline-block}
         .package-item .info .double-badge{display:inline-block;font-size:0.4rem;color:var(--gold);background:rgba(255,215,0,0.12);padding:1px 8px;border-radius:10px;border:1px solid rgba(255,215,0,0.1);font-weight:600}
         
         .package-item .right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:3px;position:relative;z-index:1}
         .package-item .right .price{font-size:0.85rem;font-weight:700;color:var(--text-secondary);transition:all 0.4s ease}
         
-        .package-item .right .btn{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;padding:4px 14px;border-radius:12px;font-weight:700;font-size:0.55rem;cursor:pointer;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);box-shadow:0 0 20px var(--gold-glow)}
+        /* ===== Select / Buy Button ===== */
+        .package-item .right .btn{
+            background:linear-gradient(135deg,var(--gold),var(--orange));
+            color:#0a0e1a;
+            border:none;
+            padding:4px 14px;
+            border-radius:12px;
+            font-weight:700;
+            font-size:0.55rem;
+            cursor:pointer;
+            transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow:0 0 20px var(--gold-glow)
+        }
         .package-item .right .btn:active{transform:scale(0.85)}
         .package-item .right .btn:hover{box-shadow:0 0 40px var(--gold-glow)}
-        .package-item .right .btn.select-mode{background:var(--bg-input);color:var(--text-secondary);box-shadow:none;border:1px solid var(--glass-border)}
+        .package-item .right .btn.select-mode{
+            background:var(--bg-input);
+            color:var(--text-secondary);
+            box-shadow:none;
+            border:1px solid var(--glass-border)
+        }
         .package-item .right .btn.select-mode:active{transform:scale(0.85)}
         .package-item .right .btn.select-mode:hover{border-color:var(--gold);color:var(--gold)}
-        .package-item .right .btn.buy-mode{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;box-shadow:0 0 30px var(--gold-glow);animation:btnPulse 1s ease-in-out infinite}
+        .package-item .right .btn.buy-mode{
+            background:linear-gradient(135deg,var(--gold),var(--orange));
+            color:#0a0e1a;
+            box-shadow:0 0 30px var(--gold-glow);
+            animation:btnPulse 1s ease-in-out infinite
+        }
         @keyframes btnPulse{0%,100%{box-shadow:0 0 20px var(--gold-glow)}50%{box-shadow:0 0 50px var(--gold-glow)}}
 
         .double-warning {
@@ -435,7 +466,7 @@
                     }
                     const isSelected = selectedPackage && selectedPackage.id === pkg.id;
                     return `
-                        <div class="package-item ${isSelected ? 'selected' : ''}" data-id="${pkg.id}" onclick="handlePackageClick('${pkg.id}', '${pkg.name}', ${pkg.price}, '${type}')">
+                        <div class="package-item ${isSelected ? 'selected' : ''}" data-id="${pkg.id}">
                             <div class="glow-pulse"></div>
                             <div class="info">
                                 <div class="name"><span class="dia-icon">💎</span> ${pkg.name}</div>
@@ -443,7 +474,7 @@
                             </div>
                             <div class="right">
                                 <div class="price">${formatPrice(pkg.price)}</div>
-                                <button class="btn ${isSelected ? 'buy-mode' : 'select-mode'}" onclick="event.stopPropagation(); handlePackageClick('${pkg.id}', '${pkg.name}', ${pkg.price}, '${type}')">
+                                <button class="btn ${isSelected ? 'buy-mode' : 'select-mode'}" onclick="event.stopPropagation(); handlePackageClick('${pkg.id}', '${pkg.name}', ${pkg.price}', '${type}')">
                                     ${isSelected ? buyText : selectText}
                                 </button>
                             </div>
@@ -457,7 +488,7 @@
             document.getElementById('doubleList').innerHTML = renderItems(PACKAGES.double, 'double');
         }
 
-        // ===== ပြင်ဆင်ထားတဲ့ handlePackageClick (Deselect ဖြစ်အောင်) =====
+        // ===== handlePackageClick (Select / Deselect) =====
         function handlePackageClick(id, name, price, type) {
             // ရွေးပြီးသား package ကို ပြန်နှိပ်ရင် Deselect လုပ်မယ်
             if (selectedPackage && selectedPackage.id === id) {
@@ -469,9 +500,12 @@
             // Select - ရွေးမယ်
             selectedPackage = { id, name, price, type };
             renderPackages();
+            
+            // ===== ဒီနေရာမှာ Buy ခလုတ်ကို နှိပ်လို့ရအောင် =====
+            // ရွေးပြီးသား ခလုတ်ကိုပဲ ထပ်နှိပ်ရင် Checkout သွားမယ်
         }
 
-        // ===== Buy ခလုတ်နှိပ်မှ Checkout သွားမယ် =====
+        // ===== Buy နှိပ်ရင် Checkout သွားမယ် (ဒီ function ကို button က ခေါ်မယ်) =====
         function proceedToCheckout() {
             if (!selectedPackage) {
                 showToast(getText('selectFirst') || '⚠️ ကျေးဇူးပြု၍ အထုပ်တစ်ခုကို ဦးစွာရွေးပါ!');
