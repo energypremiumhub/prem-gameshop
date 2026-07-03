@@ -178,6 +178,35 @@
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
         @keyframes shimmer{0%,100%{transform:translate(0,0)}50%{transform:translate(-20%,-20%)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+        /* ===== BUY BUTTON (အောက်မှာ) ===== */
+        .buy-now-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+            color: #0a0e1a;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 30px var(--gold-glow);
+            margin-top: 8px;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+        .buy-now-btn:active {
+            transform: scale(0.96);
+        }
+        .buy-now-btn:hover {
+            box-shadow: 0 0 50px var(--gold-glow);
+        }
+        .buy-now-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
     </style>
 </head>
 <body>
@@ -234,6 +263,11 @@
     </div>
     
     <div class="package-list" id="doubleList"></div>
+
+    <!-- ===== BUY BUTTON (အောက်မှာ) ===== -->
+    <button class="buy-now-btn" id="buyNowBtn" onclick="proceedToCheckout()">
+        🛒 Buy Now
+    </button>
 
     <div class="footer">&copy; 2026 Premium Game Shop</div>
 </div>
@@ -317,6 +351,7 @@
         document.getElementById('navProfile').textContent = d.profile;
         updateAuthUI();
         renderPackages();
+        updateBuyButton();
     }
 
     function showToast(msg) {
@@ -423,6 +458,19 @@
         return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' Ks';
     }
 
+    // ===== Update Buy Button =====
+    function updateBuyButton() {
+        const btn = document.getElementById('buyNowBtn');
+        const d = LANG_DATA[currentLang];
+        if (selectedPackage) {
+            btn.disabled = false;
+            btn.textContent = '🛒 ' + (d.buy || 'Buy') + ' ' + selectedPackage.name + ' (' + formatPrice(selectedPackage.price) + ')';
+        } else {
+            btn.disabled = true;
+            btn.textContent = '⚠️ ' + (d.selectFirst || 'Please select a package first!');
+        }
+    }
+
     function renderPackages() {
         const selectText = getText('select') || 'Select';
         const buyText = getText('buy') || 'Buy';
@@ -455,6 +503,8 @@
         document.getElementById('bundlesList').innerHTML = renderItems(PACKAGES.bundles, 'bundle');
         document.getElementById('diamondsList').innerHTML = renderItems(PACKAGES.diamonds, 'diamond');
         document.getElementById('doubleList').innerHTML = renderItems(PACKAGES.double, 'double');
+        
+        updateBuyButton();
     }
 
     // ===== ပထမနှိပ်=Select, ဒုတိယနှိပ်=Deselect =====
