@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>⚡ Premium Game Shop - Shop</title>
+    <title>⚡ Premium Shop - Shop</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
@@ -21,14 +21,9 @@
             --gold-glow: rgba(245,200,66,0.3);
             --cyan: #00d4ff;
             --cyan-glow: rgba(0,212,255,0.2);
-            --pink: #ff6b9d;
             --orange: #f97316;
             --orange-glow: rgba(249,115,22,0.2);
-            --green: #22d3ee;
-            --green-glow: rgba(34,211,238,0.2);
             --red: #ef4444;
-            --purple: #8b5cf6;
-            --purple-glow: rgba(139,92,246,0.2);
             --warning: #f59e0b;
         }
 
@@ -107,7 +102,6 @@
         .package-item:hover .price{color:var(--gold)}
         .package-item:hover{border-color:rgba(245,200,66,0.15)}
         
-        /* စိန်အိုင်ကွန် အပေါ်အောက်လှုပ်တဲ့ Animation - တစ်လုံးပဲထား */
         .package-item .dia-icon {
             display: inline-block;
             transition: all 0.3s ease;
@@ -129,7 +123,6 @@
 
         .package-item .info{display:flex;flex-direction:column;gap:2px;flex:1;position:relative;z-index:1}
         .package-item .info .name{font-size:0.75rem;font-weight:600;color:var(--text-primary)}
-        /* စိန်အိုင်ကွန်ကို ဒီမှာတစ်ခါပဲသုံးတယ် - နာမည်ထဲမှာပါတယ် */
         .package-item .info .name .dia-icon{color:var(--text-secondary);margin-right:4px;transition:all 0.3s ease}
         .package-item .info .double-badge{display:inline-block;font-size:0.4rem;color:var(--warning);background:rgba(245,158,11,0.12);padding:1px 8px;border-radius:10px;border:1px solid rgba(245,158,11,0.1);font-weight:600}
         
@@ -144,7 +137,6 @@
         .package-item .right .btn.buy-mode{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;box-shadow:0 0 30px var(--gold-glow);border-color:var(--gold);animation:btnPulse 1s ease-in-out infinite}
         @keyframes btnPulse{0%,100%{box-shadow:0 0 20px var(--gold-glow)}50%{box-shadow:0 0 50px var(--gold-glow)}}
 
-        /* Navigation Bar - လေးထောင့်ကွက်ပုံစံ */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -192,15 +184,13 @@
         .toast.show{display:block}
         @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes shimmer{0%,100%{transform:translate(0,0)}50%{transform:translate(-20%,-20%)}}
-        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header">
         <div class="left">
-            <div class="logo" id="appName"><i class="fas fa-gamepad"></i> ပရီမီယံ ဂိမ်းဆိုင်</div>
+            <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Shop</div>
             <div class="profile-icon" id="profileIcon" onclick="goToProfile()">👤 Profile</div>
         </div>
         <div class="right">
@@ -218,8 +208,8 @@
     </div>
 
     <div class="page-header">
-        <h1 id="shopTitle"><i class="fas fa-gem"></i> စိန်အထုပ် <span>များ</span></h1>
-        <p id="shopSub">အထုပ်တစ်ခုရွေးပြီး Buy နှိပ်ပါ</p>
+        <h1 id="shopTitle"><i class="fas fa-gem"></i> စိန်ပက်ကေ့ချ် <span>များ</span></h1>
+        <p id="shopSub">ပက်ကေ့ချ်တစ်ခုရွေးပြီး ဝယ်ယူရန် နှိပ်ပါ</p>
     </div>
 
     <div class="double-box" onclick="scrollToDouble()">
@@ -227,13 +217,13 @@
             <span class="icon">⭐</span>
             <div>
                 <div class="text" id="doubleBoxTitle">နှစ်ဆစိန်များ</div>
-                <div class="sub" id="doubleBoxSub">နှစ်ဆစိန်အထုပ်များကိုကြည့်ရန် နှိပ်ပါ</div>
+                <div class="sub" id="doubleBoxSub">နှစ်ဆစိန်ပက်ကေ့ချ်များကိုကြည့်ရန် နှိပ်ပါ</div>
             </div>
         </div>
         <span class="arrow"><i class="fas fa-chevron-down"></i></span>
     </div>
 
-    <div class="section-title" id="bundlesTitle"><i class="fas fa-gift"></i> အထုပ်များ</div>
+    <div class="section-title" id="bundlesTitle"><i class="fas fa-gift"></i> ပက်ကေ့ချ်များ</div>
     <div class="package-list" id="bundlesList"></div>
 
     <div class="section-title" id="diamondsTitle"><i class="fas fa-diamond"></i> စိန်များ</div>
@@ -242,10 +232,9 @@
     <div class="section-title" id="doubleTitle"><i class="fas fa-star"></i> နှစ်ဆဖြည့်မှု</div>
     <div class="package-list" id="doubleList"></div>
 
-    <div class="footer">&copy; 2026 Premium Game Shop</div>
+    <div class="footer">&copy; 2026 Premium Shop</div>
 </div>
 
-<!-- Navigation Bar - လေးထောင့်ကွက်ပုံစံ -->
 <div class="bottom-nav">
     <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label" id="navHome">ပင်မ</span></a>
     <a href="shop.html" class="nav-item active"><span class="icon">🛒</span><span class="label" id="navShop">ဆိုင်</span></a>
@@ -256,42 +245,35 @@
 <div class="toast" id="toast"></div>
 
 <script>
-    // ===== LANGUAGE DATA =====
     const LANG_DATA = {
         my: {
-            appName: 'ပရီမီယံ ဂိမ်းဆိုင်',
-            shopTitle: 'စိန်အထုပ်များ',
-            shopSub: 'အထုပ်တစ်ခုရွေးပြီး Buy နှိပ်ပါ',
-            bundlesTitle: 'အထုပ်များ',
+            appName: 'Premium Shop',
+            shopTitle: 'စိန်ပက်ကေ့ချ်များ',
+            shopSub: 'ပက်ကေ့ချ်တစ်ခုရွေးပြီး ဝယ်ယူရန် နှိပ်ပါ',
+            bundlesTitle: 'ပက်ကေ့ချ်များ',
             diamondsTitle: 'စိန်များ',
             doubleTitle: 'နှစ်ဆဖြည့်မှု',
             doubleBoxTitle: 'နှစ်ဆစိန်များ',
-            doubleBoxSub: 'နှစ်ဆစိန်အထုပ်များကိုကြည့်ရန် နှိပ်ပါ',
+            doubleBoxSub: 'နှစ်ဆစိန်ပက်ကေ့ချ်များကိုကြည့်ရန် နှိပ်ပါ',
             select: 'ရွေးရန်',
-            deselect: 'ဖြုတ်ရန်',
-            buy: 'ဝယ်ရန်',
-            selected: 'ရွေးပြီး',
-            selectFirst: '⚠️ ကျေးဇူးပြု၍ အထုပ်တစ်ခုကို ဦးစွာရွေးပါ!',
+            buy: 'ဝယ်ယူရန်',
+            selectFirst: '⚠️ ကျေးဇူးပြု၍ ပက်ကေ့ချ်တစ်ခုကို ဦးစွာရွေးပါ!',
             home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
-            noti: '🔔 အသိပေးချက်အသစ်မရှိပါ',
             currency: 'ကျပ်'
         },
         en: {
-            appName: 'Premium Game Shop',
-            shopTitle: 'Diamonds Package',
-            shopSub: 'Select a package, then tap Buy',
-            bundlesTitle: 'Bundles',
+            appName: 'Premium Shop',
+            shopTitle: 'Diamond Packages',
+            shopSub: 'Select a package and tap Buy',
+            bundlesTitle: 'Packages',
             diamondsTitle: 'Diamonds',
             doubleTitle: 'Double Top Up',
             doubleBoxTitle: 'Double Diamonds',
             doubleBoxSub: 'Tap to view double diamond packages',
             select: 'Select',
-            deselect: 'Deselect',
             buy: 'Buy',
-            selected: 'Selected',
             selectFirst: '⚠️ Please select a package first!',
             home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
-            noti: '🔔 No new notifications',
             currency: 'Ks'
         }
     };
@@ -359,10 +341,6 @@
     let currentUser = null;
     const savedUser = localStorage.getItem('currentUser');
     if (savedUser) currentUser = JSON.parse(savedUser);
-
-    function isLoggedIn() { return currentUser !== null; }
-
-    function getCurrentUser() { return currentUser; }
 
     function updateAuthUI() {
         const profileIcon = document.getElementById('profileIcon');
@@ -433,7 +411,6 @@
 
     function renderPackages() {
         const selectText = getText('select');
-        const deselectText = getText('deselect');
         const buyText = getText('buy');
         
         const renderItems = (items, type) => {
@@ -469,7 +446,7 @@
     }
 
     function handlePackageClick(id, name, price, type) {
-        // စိန်အိုင်ကွန်ကို bounce ဖြစ်အောင်လုပ်
+        // စိန်အိုင်ကွန် bounce
         const allDiaIcons = document.querySelectorAll('.dia-icon');
         allDiaIcons.forEach(icon => {
             icon.classList.remove('bounce');
@@ -484,9 +461,36 @@
             return;
         }
         
-        // အသစ်ရွေးမယ်
+        // အသစ်ရွေးမယ် (ဒီမှာ select ဖြစ်သွားပြီး button က buy ဖြစ်သွားမယ်)
         selectedPackage = { id, name, price, type };
         renderPackages();
+    }
+
+    // Package box ကိုနှိပ်လိုက်ရင် ဒီ function က အလုပ်လုပ်မယ်
+    // box ထဲက button ကိုနှိပ်ရင်လည်း အလုပ်လုပ်မယ်
+    // ဒါပေမယ့် buy ဖြစ်နေရင် checkout ကိုသွားမယ်
+    function handlePackageBoxClick(id, name, price, type) {
+        // စိန်အိုင်ကွန် bounce
+        const allDiaIcons = document.querySelectorAll('.dia-icon');
+        allDiaIcons.forEach(icon => {
+            icon.classList.remove('bounce');
+            void icon.offsetWidth;
+            icon.classList.add('bounce');
+        });
+
+        // ရွေးထားပြီးသား package ကိုပြန်နှိပ်ရင် Deselect ဖြစ်မယ်
+        if (selectedPackage && selectedPackage.id === id) {
+            selectedPackage = null;
+            renderPackages();
+            return;
+        }
+        
+        // အသစ်ရွေးမယ် (select ဖြစ်သွားမယ်)
+        selectedPackage = { id, name, price, type };
+        renderPackages();
+        
+        // ရွေးပြီးသားဖြစ်သွားတဲ့အတွက် buy ဖြစ်သွားပြီး
+        // ဒီမှာ ထပ်ပြီး auto buy မလုပ်ဘူး။ အသုံးပြုသူက buy ကိုထပ်နှိပ်မှ checkout သွားမယ်
     }
 
     function proceedToCheckout() {
@@ -494,7 +498,6 @@
             showToast(getText('selectFirst'));
             return;
         }
-        // Checkout ကို package အချက်အလက်တွေအကုန်ပါအောင်ပို့မယ်
         const packageData = encodeURIComponent(JSON.stringify({
             name: selectedPackage.name,
             price: selectedPackage.price,
@@ -507,7 +510,6 @@
 
     function scrollToDouble() {
         document.getElementById('doubleList').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        // ၁စက္ကန့်ပဲကြာအောင် ပြင်ဆင်
         setTimeout(() => {
             const doubleList = document.getElementById('doubleList');
             doubleList.style.border = '2px solid var(--gold)';
@@ -516,19 +518,9 @@
             setTimeout(() => {
                 doubleList.style.border = 'none';
                 doubleList.style.padding = '0';
-            }, 1000); // ၁စက္ကန့်
+            }, 1000);
         }, 500);
     }
-
-    // စိန်အိုင်ကွန် နှိပ်တိုင်း bounce ဖြစ်အောင်
-    document.addEventListener('click', function(e) {
-        const diaIcons = document.querySelectorAll('.dia-icon');
-        diaIcons.forEach(icon => {
-            icon.classList.remove('bounce');
-            void icon.offsetWidth;
-            icon.classList.add('bounce');
-        });
-    });
 
     document.addEventListener('DOMContentLoaded', function() {
         const savedLang = localStorage.getItem('lang') || 'my';
