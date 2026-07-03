@@ -375,7 +375,10 @@
         currentLang = lang;
         localStorage.setItem('lang', lang);
         updateLanguage();
-        document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+        renderPackages();  // ← ဒီလိုင်းကို ထည့်လိုက်ပါ
+        document.querySelectorAll('.lang-btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.lang === lang);
+        });
     }
 
     function updateLanguage(){
@@ -830,7 +833,7 @@
         if(noti.show){ badge.style.display = 'block'; badge.textContent = '1'; setTimeout(() => { badge.style.display = 'none'; localStorage.setItem('newOrderNotification', JSON.stringify({show:false})); }, 5000); }
     });
 
-    // စာမျက်နှာ Load ဖြစ်ပြီးတိုင်း renderPackages ကို ထပ်ခေါ်မယ်
+    // စာမျက်နာ Load ဖြစ်ပြီးတိုင်း renderPackages ကို ထပ်ခေါ်မယ်
     window.addEventListener('load', function(){
         console.log('window load');
         renderPackages();
