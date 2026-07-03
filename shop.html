@@ -58,12 +58,16 @@
         .package-item.selected .glow-pulse{position:absolute;top:0;left:0;right:0;bottom:0;border-radius:12px;background:radial-gradient(circle at center,rgba(245,200,66,0.05) 0%,transparent 70%);animation:pulseGlow 1.5s ease-in-out infinite;pointer-events:none}
         @keyframes spinGlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
         @keyframes pulseGlow{0%,100%{opacity:0.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+        
+        /* ===== Dia Icon - Select ဖြစ်ရင် အပေါ်အောက်လှုပ် ===== */
         .package-item .dia-icon{display:inline-block;transition:all 0.3s ease}
-        .package-item .dia-icon.bounce{animation:bounceIcon 0.5s cubic-bezier(0.34,1.2,0.64,1)}
-        @keyframes bounceIcon{0%,100%{transform:translateY(0)}40%{transform:translateY(-10px)}70%{transform:translateY(-4px)}}
+        .package-item.selected .dia-icon{animation:bounceIcon 0.6s ease-in-out infinite}
+        @keyframes bounceIcon{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+        
         .package-item .info{display:flex;flex-direction:column;gap:2px;flex:1;position:relative;z-index:1}
         .package-item .info .name{font-size:0.75rem;font-weight:600;color:var(--text-primary)}
         .package-item .info .name .dia-icon{color:var(--text-secondary);margin-right:4px;transition:all 0.3s ease}
+        .package-item.selected .info .name .dia-icon{color:var(--gold)}
         .package-item .info .double-badge{display:inline-block;font-size:0.45rem;color:var(--warning);background:rgba(245,158,11,0.1);padding:2px 10px;border-radius:12px;border:1px solid rgba(245,158,11,0.08);font-weight:600;margin-top:2px;letter-spacing:0.3px}
         .package-item .right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:3px;position:relative;z-index:1}
         .package-item .right .price{font-size:0.85rem;font-weight:700;color:var(--text-secondary);transition:all 0.4s ease}
@@ -73,6 +77,8 @@
         .package-item .right .btn.select-mode:hover{border-color:var(--gold);color:var(--gold)}
         .package-item .right .btn.buy-mode{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;box-shadow:0 0 30px var(--gold-glow);border-color:var(--gold);animation:btnPulse 1.5s ease-in-out infinite}
         @keyframes btnPulse{0%,100%{box-shadow:0 0 15px var(--gold-glow)}50%{box-shadow:0 0 40px var(--gold-glow)}}
+        
+        /* ===== NAVIGATION - လေးထောင့်ကွက်ပုံစံ ===== */
         .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);border-top:1px solid var(--border-color);display:flex;justify-content:space-around;padding:6px 0 10px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px var(--shadow)}
         .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.2s cubic-bezier(0.34,1.2,0.64,1);padding:4px 8px;border-radius:8px;position:relative;border:2px solid transparent;min-width:50px;-webkit-tap-highlight-color:transparent}
         .bottom-nav .nav-item:active{transform:scale(0.85);transition:transform 0.1s ease}
@@ -82,6 +88,7 @@
         .bottom-nav .nav-item.active .icon{transform:translateY(-6px) scale(1.15);text-shadow:0 0 30px var(--gold-glow)}
         .bottom-nav .nav-item.active .label{color:var(--gold)}
         .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:24px;height:2.5px;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:10px;box-shadow:0 0 20px var(--gold-glow)}
+        
         .footer{text-align:center;margin-top:10px;padding:10px;border-top:1px solid var(--border-color);color:var(--text-secondary);font-size:0.45rem;opacity:0.3;letter-spacing:1px}
         .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-card);padding:10px 20px;border-radius:12px;border:1px solid rgba(245,200,66,0.15);color:var(--gold);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 8px 40px var(--shadow);animation:toastPop 0.3s cubic-bezier(0.34,1.2,0.64,1)}
         .toast.show{display:block}
@@ -89,7 +96,7 @@
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
         @keyframes fadeIn{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
 
-        /* ===== CHECKOUT MODAL (index.html login modal style) ===== */
+        /* ===== CHECKOUT MODAL ===== */
         .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px;animation:fadeIn 0.3s ease}
         .modal-overlay.show{display:flex}
         .modal{background:linear-gradient(145deg,var(--bg-card),var(--bg-secondary));border:1px solid var(--border-color);border-radius:18px;padding:24px 20px;max-width:420px;width:100%;box-shadow:0 20px 60px var(--shadow);position:relative;overflow:hidden;max-height:90vh;overflow-y:auto}
@@ -185,12 +192,15 @@
     <div class="package-list" id="doubleList"></div>
     <div class="footer">&copy; 2026 Premium Shop</div>
 </div>
+
+<!-- ===== NAVIGATION - လေးထောင့်ကွက်ပုံစံ ===== -->
 <div class="bottom-nav">
     <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label" id="navHome">ပင်မ</span></a>
     <a href="shop.html" class="nav-item active"><span class="icon">🛒</span><span class="label" id="navShop">ဆိုင်</span></a>
     <a href="payment.html" class="nav-item"><span class="icon">💳</span><span class="label" id="navPayment">ငွေပေးချေ</span></a>
     <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label" id="navProfile">ပရိုဖိုင်</span></a>
 </div>
+
 <div class="toast" id="toast"></div>
 
 <!-- ===== CHECKOUT MODAL ===== -->
@@ -474,7 +484,6 @@
         if(icon){ icon.classList.remove('bounce'); void icon.offsetWidth; icon.classList.add('bounce'); }
     }
 
-    // ===== SELECT =====
     function handlePackageClick(id, name, price, type){
         bounceIcon(id);
         if(selectedPackage && selectedPackage.id === id){
@@ -487,23 +496,16 @@
         renderPackages();
     }
 
-    // ===== BUY =====
     function handleBuyClick(id, name, price, type){
         bounceIcon(id);
-        
         if(selectedPackage && selectedPackage.id === id){
-            // ရွေးပြီးသား package ကိုပြန်နှိပ်ရင် Modal ပေါ်လာမယ်
             openCheckoutModal(name, price);
             return;
         }
-        
         selectedPackage = { id, name, price, type };
         renderPackages();
-        // select ဖြစ်သွားပြီး buy ပြောင်းသွားမယ်
-        // ဒီမှာ ထပ်မပေါ်ဘူး (အသုံးပြုသက buy ကိုထပ်နှိပ်မှ Modal ပေါ်မယ်)
     }
 
-    // ===== CHECKOUT MODAL =====
     function openCheckoutModal(name, price){
         document.getElementById('modalPackage').textContent = name;
         document.getElementById('modalPrice').textContent = formatPrice(price);
@@ -525,7 +527,6 @@
         document.getElementById('checkoutModal').classList.remove('show');
     }
 
-    // ===== PAYMENT =====
     document.querySelectorAll('.payment-option').forEach(el => {
         el.addEventListener('click', function() {
             document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
@@ -538,7 +539,6 @@
         });
     });
 
-    // ===== FILE UPLOAD =====
     const fileInput = document.getElementById('fileInput');
     const fileUpload = document.getElementById('fileUpload');
     const fileName = document.getElementById('fileName');
@@ -550,7 +550,6 @@
         }
     });
 
-    // ===== COPY =====
     function copyNumber(number, btn){
         navigator.clipboard.writeText(number).then(() => {
             btn.textContent = '✅ Copied!';
@@ -569,7 +568,6 @@
         });
     }
 
-    // ===== SUBMIT =====
     document.getElementById('submitBtn').addEventListener('click', async function() {
         const d = LANG_DATA[currentLang] || {};
         const gameId = document.getElementById('gameId').value.trim();
@@ -589,7 +587,6 @@
         const price = document.getElementById('modalPrice').textContent;
         const paymentName = selectedPayment === 'wave' ? 'Wave Pay' : 'KBZ Pay';
         const user = currentUser;
-        const userName = user ? user.username : 'Guest';
 
         try {
             const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
