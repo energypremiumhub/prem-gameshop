@@ -96,8 +96,8 @@
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
         @keyframes fadeIn{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
 
-        /* ===== CHECKOUT MODAL ===== */
-        .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px;animation:fadeIn 0.3s ease}
+        /* ===== MODAL - နောက်ခံဝါးထား ===== */
+        .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(8,8,26,0.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px;animation:fadeIn 0.3s ease}
         .modal-overlay.show{display:flex}
         .modal{background:linear-gradient(145deg,var(--bg-card),var(--bg-secondary));border:1px solid var(--border-color);border-radius:18px;padding:24px 20px;max-width:420px;width:100%;box-shadow:0 20px 60px var(--shadow);position:relative;overflow:hidden;max-height:90vh;overflow-y:auto}
         .modal::before{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(245,200,66,0.04) 0%,transparent 70%);animation:shimmer 8s ease-in-out infinite}
@@ -138,7 +138,7 @@
         .modal .btn-primary{width:100%;padding:11px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:10px;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;position:relative;z-index:1;margin-top:6px}
         .modal .btn-primary:active{transform:scale(0.96)}
         .modal .btn-primary:hover{box-shadow:0 0 40px var(--gold-glow)}
-        .modal .btn-primary:disabled{opacity:0.4;cursor:not-allowed}
+        .modal .btn-primary:disabled{opacity:0.4;cursor:not-allowed;background:var(--bg-input);color:var(--text-secondary);box-shadow:none;border-color:var(--border-color)}
         .modal .close-btn{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--text-secondary);font-size:1.1rem;cursor:pointer;z-index:2}
         .modal .close-btn:active{transform:scale(0.85)}
         
@@ -193,7 +193,7 @@
     <div class="footer">&copy; 2026 Premium Shop</div>
 </div>
 
-<!-- ===== NAVIGATION - လေးထောင့်ကွက်ပုံစံ ===== -->
+<!-- ===== NAVIGATION ===== -->
 <div class="bottom-nav">
     <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label" id="navHome">ပင်မ</span></a>
     <a href="shop.html" class="nav-item active"><span class="icon">🛒</span><span class="label" id="navShop">ဆိုင်</span></a>
@@ -230,12 +230,12 @@
                 <div class="payment-option" data-payment="wave">
                     <span class="icon">🏦</span>
                     <span class="name" id="waveName">Wave Pay</span>
-                    <span class="detail" id="waveDetail">Mobile Money</span>
+                    <span class="detail" id="waveDetail">လမ်းပေါ်ငွေ</span>
                 </div>
                 <div class="payment-option" data-payment="kpay">
                     <span class="icon">🏦</span>
                     <span class="name" id="kpayName">KBZ Pay</span>
-                    <span class="detail" id="kpayDetail">KBZ Bank</span>
+                    <span class="detail" id="kpayDetail">KBZ ဘဏ်</span>
                 </div>
             </div>
         </div>
@@ -244,14 +244,14 @@
             <div class="acc-name">🏦 Wave Pay</div>
             <div class="acc-number">
                 📞 09682506493
-                <button class="copy-btn" onclick="copyNumber('09682506493', this)">Copy</button>
+                <button class="copy-btn" onclick="copyNumber('09682506493', this)">ကူးယူမည်</button>
             </div>
         </div>
         <div class="account-info" id="kpayInfo">
             <div class="acc-name">🏦 KBZ Pay</div>
             <div class="acc-number">
                 📞 09682506493
-                <button class="copy-btn" onclick="copyNumber('09682506493', this)">Copy</button>
+                <button class="copy-btn" onclick="copyNumber('09682506493', this)">ကူးယူမည်</button>
             </div>
         </div>
 
@@ -265,7 +265,7 @@
             </div>
         </div>
 
-        <button class="btn-primary" id="submitBtn">✅ အော်ဒါတင်မည်</button>
+        <button class="btn-primary" id="submitBtn" disabled>✅ အော်ဒါတင်မည်</button>
     </div>
 </div>
 
@@ -299,9 +299,9 @@
             serverId: 'ဆာဗာအိုင်ဒီ',
             paymentLabel: 'ငွေပေးချေနည်း',
             wave: 'Wave Pay',
-            waveDetail: 'Mobile Money',
+            waveDetail: 'လမ်းပေါ်ငွေ',
             kpay: 'KBZ Pay',
-            kpayDetail: 'KBZ Bank',
+            kpayDetail: 'KBZ ဘဏ်',
             uploadLabel: 'ပြေစာတင်ပို့ရန်',
             uploadText: 'နှိပ်ပြီး ဖိုင်တင်ပါ',
             submit: 'အော်ဒါတင်မည်',
@@ -313,7 +313,9 @@
             selectPayment: 'ကျေးဇူးပြု၍ ငွေပေးချေနည်းရွေးပါ',
             uploadSlip: 'ကျေးဇူးပြု၍ ပြေစာတင်ပါ',
             sending: '⏳ ပို့နေသည်...',
-            notiNewOrder: '🛒 အော်ဒါအသစ်!'
+            notiNewOrder: '🛒 အော်ဒါအသစ်!',
+            copy: 'ကူးယူမည်',
+            copied: '✅ ကူးပြီး'
         },
         en: {
             appName: 'Premium Shop',
@@ -348,7 +350,9 @@
             selectPayment: 'Please select a payment method',
             uploadSlip: 'Please upload your payment slip',
             sending: '⏳ Sending...',
-            notiNewOrder: '🛒 New order!'
+            notiNewOrder: '🛒 New order!',
+            copy: 'Copy',
+            copied: '✅ Copied!'
         }
     };
 
@@ -484,10 +488,8 @@
         if(icon){ icon.classList.remove('bounce'); void icon.offsetWidth; icon.classList.add('bounce'); }
     }
 
-    // ===== SELECT - နှိပ်လိုက်ရင် ချက်ချင်းဖြစ်မယ် =====
     function handlePackageClick(id, name, price, type){
         bounceIcon(id);
-        
         if(selectedPackage && selectedPackage.id === id){
             selectedPackage = null;
             renderPackages();
@@ -498,10 +500,8 @@
         renderPackages();
     }
 
-    // ===== BUY =====
     function handleBuyClick(id, name, price, type){
         bounceIcon(id);
-        
         if(selectedPackage && selectedPackage.id === id){
             openCheckoutModal(name, price);
             return;
@@ -510,6 +510,7 @@
         renderPackages();
     }
 
+    // ===== CHECKOUT MODAL =====
     function openCheckoutModal(name, price){
         document.getElementById('modalPackage').textContent = name;
         document.getElementById('modalPrice').textContent = formatPrice(price);
@@ -523,14 +524,46 @@
         document.getElementById('waveInfo').classList.remove('show');
         document.getElementById('kpayInfo').classList.remove('show');
         selectedPayment = null;
-        document.getElementById('submitBtn').disabled = false;
+        document.getElementById('submitBtn').disabled = true;
         document.getElementById('submitBtn').textContent = '✅ ' + (getText('submit') || 'Submit Order');
+        checkForm();
     }
 
     function closeCheckoutModal(){
         document.getElementById('checkoutModal').classList.remove('show');
     }
 
+    // ===== CHECK FORM - အချက်အလက်တွေ ပြည့်မှ Submit လင်းမယ် =====
+    function checkForm(){
+        const gameId = document.getElementById('gameId').value.trim();
+        const serverId = document.getElementById('serverId').value.trim();
+        const hasFile = document.getElementById('fileInput').files && document.getElementById('fileInput').files[0];
+        const btn = document.getElementById('submitBtn');
+        
+        if(gameId && serverId && selectedPayment && hasFile){
+            btn.disabled = false;
+            btn.style.background = 'linear-gradient(135deg, var(--gold), var(--orange))';
+            btn.style.color = '#0a0e1a';
+            btn.style.boxShadow = '0 0 30px var(--gold-glow)';
+            btn.style.borderColor = 'var(--gold)';
+            btn.style.opacity = '1';
+            btn.style.cursor = 'pointer';
+        } else {
+            btn.disabled = true;
+            btn.style.background = 'var(--bg-input)';
+            btn.style.color = 'var(--text-secondary)';
+            btn.style.boxShadow = 'none';
+            btn.style.borderColor = 'var(--border-color)';
+            btn.style.opacity = '0.4';
+            btn.style.cursor = 'not-allowed';
+        }
+    }
+
+    // ===== EVENT LISTENERS FOR FORM =====
+    document.getElementById('gameId').addEventListener('input', checkForm);
+    document.getElementById('serverId').addEventListener('input', checkForm);
+
+    // ===== PAYMENT =====
     document.querySelectorAll('.payment-option').forEach(el => {
         el.addEventListener('click', function() {
             document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
@@ -540,9 +573,11 @@
             document.getElementById('kpayInfo').classList.remove('show');
             if (selectedPayment === 'wave') document.getElementById('waveInfo').classList.add('show');
             else if (selectedPayment === 'kpay') document.getElementById('kpayInfo').classList.add('show');
+            checkForm();
         });
     });
 
+    // ===== FILE UPLOAD =====
     const fileInput = document.getElementById('fileInput');
     const fileUpload = document.getElementById('fileUpload');
     const fileName = document.getElementById('fileName');
@@ -551,14 +586,16 @@
             fileUpload.classList.add('has-file');
             fileName.textContent = '✅ ' + this.files[0].name;
             fileName.classList.add('show');
+            checkForm();
         }
     });
 
     function copyNumber(number, btn){
+        const d = LANG_DATA[currentLang] || {};
         navigator.clipboard.writeText(number).then(() => {
-            btn.textContent = '✅ Copied!';
+            btn.textContent = d.copied || '✅ Copied!';
             btn.classList.add('copied');
-            setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2500);
+            setTimeout(() => { btn.textContent = d.copy || 'Copy'; btn.classList.remove('copied'); }, 2500);
         }).catch(() => {
             const input = document.createElement('input');
             input.value = number;
@@ -566,12 +603,13 @@
             input.select();
             document.execCommand('copy');
             document.body.removeChild(input);
-            btn.textContent = '✅ Copied!';
+            btn.textContent = d.copied || '✅ Copied!';
             btn.classList.add('copied');
-            setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2500);
+            setTimeout(() => { btn.textContent = d.copy || 'Copy'; btn.classList.remove('copied'); }, 2500);
         });
     }
 
+    // ===== SUBMIT =====
     document.getElementById('submitBtn').addEventListener('click', async function() {
         const d = LANG_DATA[currentLang] || {};
         const gameId = document.getElementById('gameId').value.trim();
