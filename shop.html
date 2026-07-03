@@ -98,10 +98,7 @@
         @keyframes spinGlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
         @keyframes pulseGlow{0%,100%{opacity:0.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
 
-        .package-item:hover .dia-icon{animation:floatIcon 2s ease-in-out infinite;color:var(--gold)}
-        .package-item:hover .price{color:var(--gold)}
-        .package-item:hover{border-color:rgba(245,200,66,0.15)}
-        
+        /* စိန်အိုင်ကွန် အပေါ်အောက်လှုပ်တဲ့ Animation */
         .package-item .dia-icon {
             display: inline-block;
             transition: all 0.3s ease;
@@ -115,14 +112,10 @@
             60% { transform: translateY(-4px); }
             80% { transform: translateY(-6px); }
         }
-        
-        @keyframes floatIcon{
-            0%,100%{transform:translateY(0px)}
-            50%{transform:translateY(-3px)}
-        }
 
         .package-item .info{display:flex;flex-direction:column;gap:2px;flex:1;position:relative;z-index:1}
         .package-item .info .name{font-size:0.75rem;font-weight:600;color:var(--text-primary)}
+        /* စိန်အိုင်ကွန်ကို တစ်ခါပဲသုံးတယ် */
         .package-item .info .name .dia-icon{color:var(--text-secondary);margin-right:4px;transition:all 0.3s ease}
         .package-item .info .double-badge{display:inline-block;font-size:0.4rem;color:var(--warning);background:rgba(245,158,11,0.12);padding:1px 8px;border-radius:10px;border:1px solid rgba(245,158,11,0.1);font-weight:600}
         
@@ -431,7 +424,7 @@
                         </div>
                         <div class="right">
                             <div class="price">${formatPrice(pkg.price)}</div>
-                            <button class="btn ${btnClass}" onclick="event.stopPropagation(); handlePackageClick('${pkg.id}', '${pkg.name}', ${pkg.price}, '${type}')">
+                            <button class="btn ${btnClass}" onclick="event.stopPropagation(); handleBuyClick('${pkg.id}', '${pkg.name}', ${pkg.price}, '${type}')">
                                 ${btnText}
                             </button>
                         </div>
@@ -445,38 +438,15 @@
         document.getElementById('doubleList').innerHTML = renderItems(PACKAGES.double, 'double');
     }
 
+    // Package box ကိုနှိပ်ရင် ဒီ function က အလုပ်လုပ်မယ်
     function handlePackageClick(id, name, price, type) {
         // စိန်အိုင်ကွန် bounce
-        const allDiaIcons = document.querySelectorAll('.dia-icon');
-        allDiaIcons.forEach(icon => {
-            icon.classList.remove('bounce');
-            void icon.offsetWidth;
-            icon.classList.add('bounce');
-        });
-
-        // ရွေးထားပြီးသား package ကိုပြန်နှိပ်ရင် Deselect ဖြစ်မယ်
-        if (selectedPackage && selectedPackage.id === id) {
-            selectedPackage = null;
-            renderPackages();
-            return;
+        const diaIcon = document.querySelector(`.package-item[data-id="${id}"] .dia-icon`);
+        if (diaIcon) {
+            diaIcon.classList.remove('bounce');
+            void diaIcon.offsetWidth;
+            diaIcon.classList.add('bounce');
         }
-        
-        // အသစ်ရွေးမယ် (ဒီမှာ select ဖြစ်သွားပြီး button က buy ဖြစ်သွားမယ်)
-        selectedPackage = { id, name, price, type };
-        renderPackages();
-    }
-
-    // Package box ကိုနှိပ်လိုက်ရင် ဒီ function က အလုပ်လုပ်မယ်
-    // box ထဲက button ကိုနှိပ်ရင်လည်း အလုပ်လုပ်မယ်
-    // ဒါပေမယ့် buy ဖြစ်နေရင် checkout ကိုသွားမယ်
-    function handlePackageBoxClick(id, name, price, type) {
-        // စိန်အိုင်ကွန် bounce
-        const allDiaIcons = document.querySelectorAll('.dia-icon');
-        allDiaIcons.forEach(icon => {
-            icon.classList.remove('bounce');
-            void icon.offsetWidth;
-            icon.classList.add('bounce');
-        });
 
         // ရွေးထားပြီးသား package ကိုပြန်နှိပ်ရင် Deselect ဖြစ်မယ်
         if (selectedPackage && selectedPackage.id === id) {
@@ -488,9 +458,31 @@
         // အသစ်ရွေးမယ် (select ဖြစ်သွားမယ်)
         selectedPackage = { id, name, price, type };
         renderPackages();
+    }
+
+    // Buy button ကိုနှိပ်ရင် ဒီ function က အလုပ်လုပ်မယ်
+    function handleBuyClick(id, name, price, type) {
+        // စိန်အိုင်ကွန် bounce
+        const diaIcon = document.querySelector(`.package-item[data-id="${id}"] .dia-icon`);
+        if (diaIcon) {
+            diaIcon.classList.remove('bounce');
+            void diaIcon.offsetWidth;
+            diaIcon.classList.add('bounce');
+        }
+
+        // ရွေးထားပြီးသား package ကိုပြန်နှိပ်ရင် Deselect ဖြစ်မယ်
+        if (selectedPackage && selectedPackage.id === id) {
+            selectedPackage = null;
+            renderPackages();
+            return;
+        }
         
-        // ရွေးပြီးသားဖြစ်သွားတဲ့အတွက် buy ဖြစ်သွားပြီး
-        // ဒီမှာ ထပ်ပြီး auto buy မလုပ်ဘူး။ အသုံးပြုသူက buy ကိုထပ်နှိပ်မှ checkout သွားမယ်
+        // အသစ်ရွေးမယ်
+        selectedPackage = { id, name, price, type };
+        renderPackages();
+        
+        // ရွေးပြီးသားဖြစ်သွားတဲ့အတွက် checkout ကိုသွားမယ်
+        proceedToCheckout();
     }
 
     function proceedToCheckout() {
