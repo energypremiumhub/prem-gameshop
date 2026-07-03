@@ -98,7 +98,6 @@
         @keyframes spinGlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
         @keyframes pulseGlow{0%,100%{opacity:0.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
 
-        /* စိန်အိုင်ကွန် အပေါ်အောက်လှုပ်တဲ့ Animation */
         .package-item .dia-icon {
             display: inline-block;
             transition: all 0.3s ease;
@@ -416,9 +415,9 @@
                 const btnText = isSelected ? buyText : selectText;
                 const btnClass = isSelected ? 'buy-mode' : 'select-mode';
                 return `
-                    <div class="package-item ${isSelected ? 'selected' : ''}" data-id="${pkg.id}" onclick="handlePackageClick('${pkg.id}', '${pkg.name}', ${pkg.price}, '${type}')">
+                    <div class="package-item ${isSelected ? 'selected' : ''}" data-id="${pkg.id}">
                         <div class="glow-pulse"></div>
-                        <div class="info">
+                        <div class="info" onclick="handlePackageClick('${pkg.id}', '${pkg.name}', ${pkg.price}, '${type}')">
                             <div class="name"><span class="dia-icon">💎</span> ${pkg.name}</div>
                             ${badgeHtml}
                         </div>
@@ -479,9 +478,8 @@
         
         // အသစ်ရွေးမယ်
         selectedPackage = { id, name, price, type };
-        renderPackages();
         
-        // ရွေးပြီးသားဖြစ်သွားတဲ့အတွက် checkout ကိုသွားမယ်
+        // ချက်ချင်း checkout ကိုသွားမယ် (render မလုပ်တော့ဘူး)
         proceedToCheckout();
     }
 
