@@ -258,6 +258,7 @@
         const buyText = getText('buy');
         const renderItems = (items, type) => items.map(pkg => {
             const isSelected = selectedPackage && selectedPackage.id === pkg.id;
+            // selected ဖြစ်ရင် Buy ပြ၊ မဟုတ်ရင် Select ပြ
             const btnText = isSelected ? buyText : selectText;
             const btnClass = isSelected ? 'buy-mode' : 'select-mode';
             const badgeHtml = type === 'double' && pkg.badge ? `<span class="double-badge">${pkg.badge}</span>` : '';
@@ -270,7 +271,8 @@
                     </div>
                     <div class="right">
                         <div class="price">${formatPrice(pkg.price)}</div>
-                        <button class="btn ${btnClass}" onclick="event.stopPropagation(); handleBuyClick('${pkg.id}','${pkg.name}',${pkg.price},'${type}')">${btnText}</button>
+                        <!-- button မှာ onclick ကို ဖယ်ထားတယ် (package box ကိုပဲနှိပ်ရမယ်) -->
+                        <button class="btn ${btnClass}">${btnText}</button>
                     </div>
                 </div>
             `;
@@ -285,42 +287,32 @@
         if(icon){ icon.classList.remove('bounce'); void icon.offsetWidth; icon.classList.add('bounce'); }
     }
 
-    // Package box ကိုနှိပ်ရင် Select/Deselect ပဲလုပ်
+    // ==========================================
+    // အဓိက - Package box ကိုနှိပ်ရင် ဒီမှာ အလုပ်လုပ်တယ်
+    // ==========================================
     function handlePackageClick(id, name, price, type){
         bounceIcon(id);
         
+        // ရွေးထားပြီးသား package ကိုပြန်နှိပ်ရင် Deselect
         if(selectedPackage && selectedPackage.id === id){
             selectedPackage = null;
             renderPackages();
             return;
         }
         
-        selectedPackage = { id, name, price, type };
-        renderPackages();
-    }
-
-    // Buy button ကိုနှိပ်ရင် Checkout သွား (နှစ်ချက်နှိပ်ရင် checkout သွား)
-    function handleBuyClick(id, name, price, type){
-        bounceIcon(id);
-        
-        if(selectedPackage && selectedPackage.id === id){
+        // ရွေးထားပြီးသားတစ်ခုရှိရင် အရင်ဟာကို Deselect
+        if(selectedPackage){
             selectedPackage = null;
-            renderPackages();
-            return;
         }
         
+        // အသစ်ရွေးမယ် (Select ဖြစ်သွားမယ်)
         selectedPackage = { id, name, price, type };
-        renderPackages();  // ပထမ UI update လုပ်
+        renderPackages();  // UI update (button က Buy ဖြစ်သွားမယ်)
         
-        // ဒုတိယမှ checkout သွား (နှစ်ချက်နှိပ်ရင် checkout သွား)
-        const data = encodeURIComponent(JSON.stringify({
-            name: name,
-            price: price,
-            priceFormatted: formatPrice(price),
-            id: id,
-            type: type
-        }));
-        window.location.href = 'checkout.html?package=' + data;
+        // ===== နောက်တစ်ချက်ထပ်နှိပ်ရင် Checkout သွားမယ် =====
+        // ဒါပေမယ့် ဒီမှာ ချက်ချင်း Checkout မသွားဘူး
+        // နောက်တစ်ချက်ထပ်နှိပ်မှ Checkout သွားမယ်
+        // ဒါကြောင့် ဒီမှာ ဘာမှမလုပ်ဘူး
     }
 
     function scrollToDouble(){
