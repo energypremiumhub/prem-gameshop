@@ -191,15 +191,16 @@
         .logout-overlay .btn-cancel:hover{border-color:var(--gold);color:var(--gold)}
         .logout-overlay .glow-ring{position:absolute;top:-20px;left:-20px;right:-20px;bottom:-20px;border-radius:50%;background:conic-gradient(from 0deg,transparent,rgba(239,68,68,0.05),transparent,rgba(0,212,255,0.05),transparent);animation:spin 10s linear infinite;pointer-events:none}
 
-        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);border-top:1px solid var(--border-color);display:flex;justify-content:space-around;padding:6px 0 10px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px var(--shadow)}
-        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);padding:4px 8px;border-radius:10px;position:relative}
-        .bottom-nav .nav-item:active{transform:scale(0.75)}
-        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
-        .bottom-nav .nav-item .label{font-size:0.4rem;margin-top:1px;font-weight:700;letter-spacing:0.5px;transition:all 0.4s ease}
-        .bottom-nav .nav-item.active{color:var(--gold)}
-        .bottom-nav .nav-item.active .icon{transform:translateY(-6px) scale(1.15);text-shadow:0 0 30px var(--gold-glow)}
+        /* ===== BOTTOM NAV (လေးထောင့်ကွက်လေးတွေ) ===== */
+        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);border-top:1px solid var(--border-color);display:flex;justify-content:space-around;padding:8px 0 12px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px var(--shadow)}
+        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.3s ease;padding:6px 16px;border-radius:12px;position:relative;min-width:56px;border:1px solid transparent}
+        .bottom-nav .nav-item:active{transform:scale(0.85);background:rgba(245,200,66,0.05)}
+        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;transition:all 0.3s ease}
+        .bottom-nav .nav-item .label{font-size:0.4rem;margin-top:1px;font-weight:700;letter-spacing:0.5px;transition:all 0.3s ease}
+        .bottom-nav .nav-item.active{color:var(--gold);background:rgba(245,200,66,0.06);border-color:rgba(245,200,66,0.15);box-shadow:0 0 30px rgba(245,200,66,0.05)}
+        .bottom-nav .nav-item.active .icon{transform:translateY(-2px);color:var(--gold)}
         .bottom-nav .nav-item.active .label{color:var(--gold)}
-        .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:24px;height:2.5px;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:10px;box-shadow:0 0 20px var(--gold-glow)}
+        .bottom-nav .nav-item:not(.active):hover{border-color:rgba(255,255,255,0.04);background:rgba(255,255,255,0.02)}
 
         .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.3;letter-spacing:1px}
 
@@ -381,11 +382,24 @@
     <div class="footer-text">&copy; 2026 Premium Game Shop</div>
 </div>
 
+<!-- ===== BOTTOM NAV (လေးထောင့်ကွက်လေးတွေ) ===== -->
 <div class="bottom-nav">
-    <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label" id="navHome">Home</span></a>
-    <a href="shop.html" class="nav-item"><span class="icon">🛒</span><span class="label" id="navShop">Shop</span></a>
-    <a href="payment.html" class="nav-item"><span class="icon">💳</span><span class="label" id="navPayment">Payment</span></a>
-    <a href="profile.html" class="nav-item active"><span class="icon">👤</span><span class="label" id="navProfile">Profile</span></a>
+    <a href="index.html" class="nav-item">
+        <span class="icon">🏠</span>
+        <span class="label" id="navHome">Home</span>
+    </a>
+    <a href="shop.html" class="nav-item">
+        <span class="icon">🛒</span>
+        <span class="label" id="navShop">Shop</span>
+    </a>
+    <a href="payment.html" class="nav-item">
+        <span class="icon">💳</span>
+        <span class="label" id="navPayment">Payment</span>
+    </a>
+    <a href="profile.html" class="nav-item active">
+        <span class="icon">👤</span>
+        <span class="label" id="navProfile">Profile</span>
+    </a>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -588,7 +602,6 @@
 </div>
 
 <script>
-    // ===== LANGUAGE UPDATE =====
     function updateLanguage() {
         const d = LANG_DATA[currentLang];
         if (!d) return;
@@ -615,7 +628,6 @@
         renderOrders();
     }
 
-    // ===== TOAST =====
     function showToast(msg) {
         const t = document.getElementById('toast');
         t.textContent = msg;
@@ -624,7 +636,6 @@
         t._timer = setTimeout(() => t.classList.remove('show'), 3000);
     }
 
-    // ===== AVATAR =====
     document.getElementById('avatarInput').addEventListener('change', function(e) {
         if (this.files && this.files[0]) {
             const reader = new FileReader();
@@ -718,7 +729,6 @@
         }
     }
 
-    // ===== AUTH MODAL =====
     let isLoginMode = true;
     let tempAvatar = null;
 
@@ -798,7 +808,6 @@
         if (e.target === this) closeAuthModal();
     });
 
-    // ===== LOGIN =====
     function handleLogin() {
         const input = document.getElementById('loginEmail').value.trim();
         const password = document.getElementById('loginPassword').value.trim();
@@ -847,7 +856,6 @@
         }
     }
 
-    // ===== REGISTER =====
     function handleRegister() {
         const username = document.getElementById('regUsername').value.trim();
         const email = document.getElementById('regEmail').value.trim();
@@ -938,7 +946,6 @@
         updateAuthUI();
     }
 
-    // ===== FORGOT PASSWORD =====
     let otpStorage = {};
 
     function openForgotPassword() {
@@ -1080,7 +1087,6 @@
         document.getElementById('loginPassword').value = '';
     }
 
-    // ===== ORDER HISTORY =====
     let currentFilter = 'all';
     let showAllOrders = false;
 
@@ -1163,7 +1169,6 @@
         showToast('📋 Order #' + id + ' - Tap to view details');
     }
 
-    // ===== SETTINGS MODAL =====
     function openSettingsModal() {
         if (!isLoggedIn()) {
             showToast('❌ Please login first');
@@ -1261,7 +1266,6 @@
             return;
         }
 
-        // Update username
         const userData = users[oldUsername];
         if (!userData) {
             result.className = 'username-result error';
@@ -1281,7 +1285,6 @@
         delete users[oldUsername];
         users[newUsername] = newUserData;
 
-        // Update orders
         const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
         orders.forEach(order => {
             if (order.userId === oldUsername) {
@@ -1290,14 +1293,12 @@
         });
         localStorage.setItem('orderHistory', JSON.stringify(orders));
 
-        // Update avatar
         const oldAvatar = localStorage.getItem('userAvatar_' + oldUsername);
         if (oldAvatar) {
             localStorage.setItem('userAvatar_' + newUsername, oldAvatar);
             localStorage.removeItem('userAvatar_' + oldUsername);
         }
 
-        // Update theme
         const oldTheme = localStorage.getItem('userTheme_' + oldUsername);
         if (oldTheme) {
             localStorage.setItem('userTheme_' + newUsername, oldTheme);
@@ -1306,7 +1307,6 @@
 
         localStorage.setItem('users', JSON.stringify(users));
 
-        // Update current user
         loginUser(newUsername, newUserData.password);
         result.className = 'username-result success';
         result.textContent = '✅ ' + (d.usernameChanged || 'Username changed successfully!');
@@ -1335,7 +1335,6 @@
         users[oldUsername].phone = phone || users[oldUsername].phone;
         localStorage.setItem('users', JSON.stringify(users));
 
-        // Update current user
         const updatedUser = getCurrentUser();
         updatedUser.displayName = name;
         updatedUser.email = email || updatedUser.email;
@@ -1351,7 +1350,6 @@
         if (e.target === this) closeSettingsModal();
     });
 
-    // ===== THEME =====
     function openThemeModal() {
         if (!isLoggedIn()) {
             showToast('❌ Please login first');
@@ -1382,7 +1380,6 @@
         if (e.target === this) closeThemeModal();
     });
 
-    // ===== CHANGE PASSWORD =====
     function openChangePassword() {
         if (!isLoggedIn()) {
             showToast('❌ Please login first');
@@ -1457,7 +1454,6 @@
         if (e.target === this) closePasswordModal();
     });
 
-    // ===== LOGOUT =====
     function logout() {
         document.getElementById('logoutOverlay').classList.add('show');
     }
@@ -1480,7 +1476,6 @@
         }
     });
 
-    // ===== KEYBOARD SHORTCUTS =====
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Enter') {
             const modal = document.getElementById('authModal');
@@ -1511,7 +1506,6 @@
         }
     });
 
-    // ===== INIT =====
     document.addEventListener('DOMContentLoaded', function() {
         const savedLang = localStorage.getItem('lang') || 'en';
         setLang(savedLang);
