@@ -70,6 +70,7 @@
         
         .header .right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
         .header .right .top{display:flex;gap:8px;align-items:center}
+        /* ===== ဘာသာစကားပြောင်းတဲ့နေရာ အပေါ်ဘက်ပြန်ထား ===== */
         .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--glass-bg);padding:3px;border-radius:10px;border:1px solid var(--glass-border);backdrop-filter:blur(20px)}
         .header .right .top .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;text-transform:uppercase}
         .header .right .top .lang-switcher .lang-btn.active{background:var(--gold);color:#0a0e1a;box-shadow:0 0 20px var(--gold-glow)}
@@ -88,7 +89,7 @@
         .welcome h2 i{color:var(--cyan);-webkit-text-fill-color:initial;text-shadow:0 0 20px var(--cyan-glow)}
         .welcome p{color:var(--text-secondary);font-size:0.75rem;margin-top:2px;font-weight:400;opacity:0.6}
 
-        /* ===== SHOP STATUS BANNER (Glass) ===== */
+        /* ===== SHOP STATUS BANNER (OPEN / CLOSED) ===== */
         .shop-status-banner {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
@@ -190,7 +191,7 @@
             50% { opacity: 0.7; transform: scale(0.97); box-shadow: 0 0 60px rgba(0,255,135,0.2); }
         }
 
-        /* ===== SHOP CARD (Glass) ===== */
+        /* ===== SHOP CARD ===== */
         .shop-card {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
@@ -317,15 +318,34 @@
             background-size: 200% 200%;
         }
 
-        /* ===== CLICK EFFECT (Soft) ===== */
-        .click-soft {
-            animation: softClick 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        /* ===== CLICK EFFECT (Ripple + Burst) ===== */
+        .click-ripple {
+            position: fixed;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,215,0,0.6), rgba(255,215,0,0.1), transparent);
+            transform: scale(0);
+            animation: rippleEffect 0.8s ease-out forwards;
+            pointer-events: none;
+            z-index: 999;
         }
-        @keyframes softClick {
+        .click-ripple.red {
+            background: radial-gradient(circle, rgba(255,0,68,0.6), rgba(255,0,68,0.1), transparent);
+        }
+        .click-ripple.cyan {
+            background: radial-gradient(circle, rgba(0,245,255,0.5), rgba(0,245,255,0.1), transparent);
+        }
+        @keyframes rippleEffect {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(4); opacity: 0; }
+        }
+        .click-burst {
+            animation: burstEffect 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes burstEffect {
             0% { transform: scale(1); }
-            40% { transform: scale(0.92); }
-            70% { transform: scale(1.04); }
-            100% { transform: scale(1); }
+            30% { transform: scale(0.85) rotate(-2deg); }
+            60% { transform: scale(1.08) rotate(2deg); }
+            100% { transform: scale(1) rotate(0deg); }
         }
 
         /* ===== SECTION TITLE ===== */
@@ -360,7 +380,7 @@
         .services-grid .service:nth-child(5) .icon{color:var(--pink)}
         .services-grid .service:nth-child(6) .icon{color:var(--orange)}
 
-        /* ===== TELEGRAM (Glass) ===== */
+        /* ===== TELEGRAM ===== */
         .telegram-card{background:var(--glass-bg);border:1px solid var(--glass-border);backdrop-filter:blur(20px);border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:12px;margin-bottom:10px;cursor:pointer;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);animation:slideUp 0.85s ease;box-shadow:0 4px 20px rgba(0,0,0,0.2)}
         .telegram-card .icon{font-size:1.6rem;color:#0088cc;flex-shrink:0}
         .telegram-card .info{flex:1}
@@ -369,7 +389,7 @@
         .telegram-card .arrow{color:var(--text-secondary);font-size:1rem;transition:all 0.3s ease}
         .telegram-card:hover .arrow{color:var(--gold);transform:translateX(4px)}
 
-        /* ===== TELEGRAM CONTACT (Glass) ===== */
+        /* ===== TELEGRAM CONTACT ===== */
         .telegram-contact{background:var(--glass-bg);border:1px solid var(--glass-border);backdrop-filter:blur(20px);border-radius:12px;padding:10px 16px;display:flex;align-items:center;gap:12px;margin-bottom:16px;cursor:pointer;transition:all 0.4s ease;animation:slideUp 0.85s ease;box-shadow:0 4px 20px rgba(0,0,0,0.2)}
         .telegram-contact .icon{font-size:1.2rem;color:var(--cyan);flex-shrink:0;text-shadow:0 0 20px var(--cyan-glow)}
         .telegram-contact .info{flex:1}
@@ -451,7 +471,7 @@
 </head>
 <body>
 <div class="container">
-    <!-- ===== HEADER ===== -->
+    <!-- ===== HEADER (ဘာသာစကားပြောင်းတဲ့နေရာ အပေါ်ဘက်ပြန်ထား) ===== -->
     <div class="header">
         <div class="left">
             <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Game Shop</div>
@@ -478,11 +498,11 @@
         <p id="subtitle">စိန်တွေဖြည့်ပြီး စစ်မြေပြင်ကို အနိုင်ယူလိုက်ပါ</p>
     </div>
 
-    <!-- ===== SHOP STATUS BANNER ===== -->
-    <div class="shop-status-banner" id="shopStatusBanner" onclick="handleBannerClick()">
+    <!-- ===== SHOP STATUS BANNER (OPEN / CLOSED) ===== -->
+    <div class="shop-status-banner" id="shopStatusBanner" onclick="handleBannerClick(event)">
         <div class="banner-content">
             <div class="banner-status open" id="statusBadge">
-                <span class="status-dot"></span> ဆိုင်ဖွင့်သည်
+                <span class="status-dot"></span> OPEN
             </div>
         </div>
     </div>
@@ -497,16 +517,16 @@
     <!-- ===== SERVICES (အကွက် ၆ ကွက်) ===== -->
     <div class="section-title" id="servicesTitle"><i class="fas fa-bolt"></i> ဘာကြောင့် ကျွန်ုပ်တို့ကိုရွေးမလဲ?</div>
     <div class="services-grid">
-        <div class="service" onclick="handleServiceClick(this)"><span class="glow"></span><span class="icon">⚡</span><span class="label" id="s1">၁၀ မိနစ်အတွင်း အော်ဒါပြီးမြောက်</span></div>
-        <div class="service" onclick="handleServiceClick(this)"><span class="glow"></span><span class="icon">🚀</span><span class="label" id="s2">လျှင်မြန် • လွယ်ကူ • ယုံကြည်စိတ်ချရ</span></div>
-        <div class="service" onclick="handleServiceClick(this)"><span class="glow"></span><span class="icon">💰</span><span class="label" id="s3">အတန်ဆုံးဈေးနဲ့ အကောင်းဆုံး Service</span></div>
-        <div class="service" onclick="handleServiceClick(this)"><span class="glow"></span><span class="icon">🕐</span><span class="label" id="s4">မနက် ၁၀ နာရီမှ ည ၁၀ နာရီအထိ</span></div>
-        <div class="service" onclick="handleServiceClick(this)"><span class="glow"></span><span class="icon">🎮</span><span class="label" id="s5">Mobile Legends</span></div>
-        <div class="service" onclick="handleServiceClick(this)"><span class="glow"></span><span class="icon">⭐</span><span class="label" id="s6">Coming Soon</span></div>
+        <div class="service" onclick="handleServiceClick(this, event)"><span class="glow"></span><span class="icon">⚡</span><span class="label" id="s1">၁၀ မိနစ်အတွင်း အော်ဒါပြီးမြောက်</span></div>
+        <div class="service" onclick="handleServiceClick(this, event)"><span class="glow"></span><span class="icon">🚀</span><span class="label" id="s2">လျှင်မြန် • လွယ်ကူ • ယုံကြည်စိတ်ချရ</span></div>
+        <div class="service" onclick="handleServiceClick(this, event)"><span class="glow"></span><span class="icon">💰</span><span class="label" id="s3">အတန်ဆုံးဈေးနဲ့ အကောင်းဆုံး Service</span></div>
+        <div class="service" onclick="handleServiceClick(this, event)"><span class="glow"></span><span class="icon">🕐</span><span class="label" id="s4">မနက် ၁၀ နာရီမှ ည ၁၀ နာရီအထိ</span></div>
+        <div class="service" onclick="handleServiceClick(this, event)"><span class="glow"></span><span class="icon">🎮</span><span class="label" id="s5">Mobile Legends</span></div>
+        <div class="service" onclick="handleServiceClick(this, event)"><span class="glow"></span><span class="icon">⭐</span><span class="label" id="s6">Coming Soon</span></div>
     </div>
 
     <!-- ===== TELEGRAM CHANNEL ===== -->
-    <div class="telegram-card" onclick="handleTelegramClick()">
+    <div class="telegram-card" onclick="handleTelegramClick(event)">
         <span class="icon"><i class="fab fa-telegram-plane"></i></span>
         <div class="info">
             <div class="title" id="telegramTitle">📢 ကျွန်ုပ်တို့ Telegram ချန်နယ်သို့လာရောက်ပါ</div>
@@ -516,7 +536,7 @@
     </div>
 
     <!-- ===== TELEGRAM CONTACT ===== -->
-    <div class="telegram-contact" onclick="handleTelegramContactClick()">
+    <div class="telegram-contact" onclick="handleTelegramContactClick(event)">
         <span class="icon"><i class="fas fa-headset"></i></span>
         <div class="info">
             <div class="label" id="contactLabel">💬 အကူအညီလိုပါသလား?</div>
@@ -726,8 +746,8 @@
             confirmYes: '✅ ဟုတ်ကဲ့ ကျွန်တော်ပါ',
             confirmNo: '❌ မဟုတ်ပါ၊ ပယ်ဖျက်မည်',
             forgotBack: '← ဝင်ရန်စာမျက်နှာသို့',
-            shopOpen: '🟢 ဆိုင်ဖွင့်သည်',
-            shopClosed: '🔴 ဆိုင်ပိတ်သည်'
+            shopOpen: 'OPEN',
+            shopClosed: 'CLOSED'
         },
         en: {
             appName: 'Premium Game Shop',
@@ -787,8 +807,8 @@
             confirmYes: '✅ Yes, that\'s me',
             confirmNo: '❌ No, cancel',
             forgotBack: '← Back to Login',
-            shopOpen: '🟢 Shop Open',
-            shopClosed: '🔴 Shop Closed'
+            shopOpen: 'OPEN',
+            shopClosed: 'CLOSED'
         }
     };
 
@@ -865,50 +885,71 @@
 
     setInterval(updateShopUI, 60000);
 
-    // ===== CLICK ANIMATIONS =====
-    function applySoftClick(element) {
-        element.classList.remove('click-soft');
+    // ===== CLICK EFFECTS (Ripple + Burst) =====
+    function createRipple(x, y, color = 'gold') {
+        const ripple = document.createElement('div');
+        ripple.className = 'click-ripple';
+        if (color === 'red') ripple.classList.add('red');
+        if (color === 'cyan') ripple.classList.add('cyan');
+        const size = Math.random() * 60 + 40;
+        ripple.style.width = size + 'px';
+        ripple.style.height = size + 'px';
+        ripple.style.left = (x - size/2) + 'px';
+        ripple.style.top = (y - size/2) + 'px';
+        document.body.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 800);
+    }
+
+    function applyClickEffect(element, event, color = 'gold') {
+        const rect = element.getBoundingClientRect();
+        const x = event.clientX || rect.left + rect.width/2;
+        const y = event.clientY || rect.top + rect.height/2;
+        createRipple(x, y, color);
+        element.classList.remove('click-burst');
         void element.offsetWidth;
-        element.classList.add('click-soft');
+        element.classList.add('click-burst');
+        setTimeout(() => element.classList.remove('click-burst'), 500);
     }
 
-    function handleBannerClick() {
+    function handleBannerClick(event) {
         const banner = document.getElementById('shopStatusBanner');
-        applySoftClick(banner);
+        const isRed = !isShopOpen();
+        applyClickEffect(banner, event, isRed ? 'red' : 'gold');
     }
 
-    function handleShopClick(e) {
+    function handleShopClick(event) {
         const shopCard = document.getElementById('shopCard');
-        applySoftClick(shopCard);
         if (!isShopOpen()) {
-            e.preventDefault();
+            event.preventDefault();
+            applyClickEffect(shopCard, event, 'red');
             return false;
         }
+        applyClickEffect(shopCard, event, 'gold');
         return true;
     }
 
-    function handleServiceClick(el) {
-        applySoftClick(el);
+    function handleServiceClick(el, event) {
+        applyClickEffect(el, event, 'cyan');
     }
 
-    function handleTelegramClick() {
+    function handleTelegramClick(event) {
         const card = document.querySelector('.telegram-card');
-        applySoftClick(card);
+        applyClickEffect(card, event, 'gold');
         window.open('https://t.me/Premium_GameShop', '_blank');
     }
 
-    function handleTelegramContactClick() {
+    function handleTelegramContactClick(event) {
         const contact = document.querySelector('.telegram-contact');
-        applySoftClick(contact);
+        applyClickEffect(contact, event, 'gold');
         window.open('https://t.me/Energypremiumhub', '_blank');
     }
 
-    function handleNavClick(el, e) {
-        e.preventDefault();
-        applySoftClick(el);
+    function handleNavClick(el, event) {
+        event.preventDefault();
+        applyClickEffect(el, event, 'gold');
         setTimeout(() => {
             window.location.href = el.getAttribute('href');
-        }, 300);
+        }, 400);
     }
 
     // ===== TOAST =====
