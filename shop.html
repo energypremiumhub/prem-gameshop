@@ -371,11 +371,15 @@
 
     function getText(key){ return LANG_DATA[currentLang][key] || key; }
 
+    // ===== ဘာသာစကားပြောင်းတဲ့ခလုတ် - ပြင်ဆင်ပြီး =====
     function setLang(lang){
         currentLang = lang;
         localStorage.setItem('lang', lang);
+        // ပထမ UI ကိုပြောင်း
         updateLanguage();
+        // ပြီးရင် ပက်ကေ့ချ်တွေကိုပြန်ဆွဲ
         renderPackages();
+        // ခလုတ်တွေကို active လုပ်
         document.querySelectorAll('.lang-btn').forEach(b => {
             b.classList.toggle('active', b.dataset.lang === lang);
         });
@@ -415,7 +419,6 @@
         document.getElementById('shopBtnText').textContent = d.shopBtn;
         
         updateAuthUI();
-        renderPackages();
     }
 
     function showToast(msg, type){
@@ -484,7 +487,6 @@
     function formatPrice(price){ return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' ' + getText('currency'); }
 
     function renderPackages(){
-        console.log('renderPackages called');
         const selectText = getText('select');
         const buyText = getText('buy');
         const renderItems = (items, type) => items.map(pkg => {
@@ -509,7 +511,6 @@
         document.getElementById('bundlesList').innerHTML = renderItems(PACKAGES.bundles, 'bundle');
         document.getElementById('diamondsList').innerHTML = renderItems(PACKAGES.diamonds, 'diamond');
         document.getElementById('doubleList').innerHTML = renderItems(PACKAGES.double, 'double');
-        console.log('renderPackages done');
     }
 
     function bounceIcon(id){
@@ -528,7 +529,7 @@
         if(selectedPackage){ selectedPackage = null; }
         selectedPackage = { id, name, price, type };
         renderPackages();
-        // openCheckoutModal(name, price); ← ဒီလိုင်းကို ဖျက်လိုက်ပါ
+        // openCheckoutModal မခေါ်ဘူး
     }
 
     // ===== BUY - Modal ပေါ်လာမယ် =====
@@ -821,7 +822,6 @@
     }
 
     document.addEventListener('DOMContentLoaded', function(){
-        console.log('DOMContentLoaded');
         setLang(localStorage.getItem('lang') || 'my');
         renderPackages();
         updateAuthUI();
@@ -831,9 +831,7 @@
         if(noti.show){ badge.style.display = 'block'; badge.textContent = '1'; setTimeout(() => { badge.style.display = 'none'; localStorage.setItem('newOrderNotification', JSON.stringify({show:false})); }, 5000); }
     });
 
-    // စာမျက်နာ Load ဖြစ်ပြီးတိုင်း renderPackages ကို ထပ်ခေါ်မယ်
     window.addEventListener('load', function(){
-        console.log('window load');
         renderPackages();
     });
 
