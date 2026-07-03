@@ -160,7 +160,6 @@
             font-weight: 600;
         }
 
-        /* ===== BOTTOM NAV ===== */
         .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(8,8,26,0.92);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,0.04);display:flex;justify-content:space-around;padding:8px 0 12px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px rgba(0,0,0,0.4)}
         .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.3s ease;padding:6px 16px;border-radius:12px;position:relative;min-width:56px;border:1px solid transparent}
         .bottom-nav .nav-item:active{transform:scale(0.85);background:rgba(255,215,0,0.05)}
@@ -239,7 +238,6 @@
     <div class="footer">&copy; 2026 Premium Game Shop</div>
 </div>
 
-<!-- ===== BOTTOM NAV ===== -->
 <div class="bottom-nav">
     <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label" id="navHome">ပင်မ</span></a>
     <a href="shop.html" class="nav-item active"><span class="icon">🛒</span><span class="label" id="navShop">ဆိုင်</span></a>
@@ -459,16 +457,13 @@
         document.getElementById('doubleList').innerHTML = renderItems(PACKAGES.double, 'double');
     }
 
-    // ===== ပထမနှိပ်=Select, ဒုတိယနှိပ်=Deselect, Buy နှိပ်မှ Checkout =====
+    // ===== ပထမနှိပ်=Select, ဒုတိယနှိပ်=Deselect =====
     function handlePackageClick(id, name, price, type) {
-        // ရွေးပြီးသား package ကို ပြန်နှိပ်ရင် Deselect လုပ်မယ်
         if (selectedPackage && selectedPackage.id === id) {
             selectedPackage = null;
             renderPackages();
             return;
         }
-        
-        // Select - ရွေးမယ်
         selectedPackage = { id, name, price, type };
         renderPackages();
     }
@@ -495,7 +490,6 @@
         }, 500);
     }
 
-    // ===== INIT =====
     document.addEventListener('DOMContentLoaded', function() {
         const savedLang = localStorage.getItem('lang') || 'my';
         setLang(savedLang);
