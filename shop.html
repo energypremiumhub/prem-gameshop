@@ -276,6 +276,11 @@
 </div>
 
 <script>
+    // ===== TELEGRAM BOT CONFIG =====
+    // ခင်ဗျားရဲ့ Telegram Bot Token နဲ့ Chat ID ကို ဒီမှာထည့်ပါ
+    const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE';
+    const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID_HERE';
+
     const LANG_DATA = {
         my: {
             appName: 'Premium Shop',
@@ -314,7 +319,10 @@
             sending: '⏳ ပို့နေသည်...',
             notiNewOrder: '🛒 အော်ဒါအသစ်!',
             copy: 'ကူးယူမည်',
-            copied: '✅ ကူးပြီး'
+            copied: '✅ ကူးပြီး',
+            orderSuccess: '✅ အော်ဒါအောင်မြင်ပါသည်!',
+            orderFail: '❌ အော်ဒါမအောင်မြင်ပါ။ ထပ်မံကြိုးစားပါ။',
+            telegramError: '❌ Telegram သို့ပို့ရာတွင်အမှားရှိသည်။'
         },
         en: {
             appName: 'Premium Shop',
@@ -353,7 +361,10 @@
             sending: '⏳ Sending...',
             notiNewOrder: '🛒 New order!',
             copy: 'Copy',
-            copied: '✅ Copied!'
+            copied: '✅ Copied!',
+            orderSuccess: '✅ Order successful!',
+            orderFail: '❌ Order failed. Please try again.',
+            telegramError: '❌ Error sending to Telegram.'
         }
     };
 
@@ -407,9 +418,10 @@
         renderPackages();
     }
 
-    function showToast(msg){
+    function showToast(msg, type){
         const t = document.getElementById('toast');
         t.textContent = msg;
+        t.style.color = type === 'success' ? 'var(--green)' : type === 'error' ? 'var(--red)' : 'var(--gold)';
         t.classList.add('show');
         clearTimeout(t._timer);
         t._timer = setTimeout(() => t.classList.remove('show'), 3000);
@@ -491,7 +503,6 @@
         if(icon){ icon.classList.remove('bounce'); void icon.offsetWidth; icon.classList.add('bounce'); }
     }
 
-    // ===== SELECT - Modal မပေါ်ဘူး =====
     function handlePackageClick(id, name, price, type){
         bounceIcon(id);
         if(selectedPackage && selectedPackage.id === id){
@@ -504,15 +515,15 @@
         renderPackages();
     }
 
-    // ===== BUY - Modal ပေါ်လာမယ် =====
     function handleBuyClick(id, name, price, type){
         bounceIcon(id);
         
-        // ဒီ package ကို select လုပ်
+        if(selectedPackage && selectedPackage.id === id){
+            openCheckoutModal(name, price);
+            return;
+        }
         selectedPackage = { id, name, price, type };
         renderPackages();
-        
-        // Modal ပေါ်လာမယ်
         openCheckoutModal(name, price);
     }
 
@@ -539,7 +550,6 @@
         document.getElementById('checkoutModal').classList.remove('show');
     }
 
-    // ===== CHECK FORM - အချက်အလက်တွေ ပြည့်မှ Submit လင်းမယ် =====
     function checkForm(){
         const gameId = document.getElementById('gameId').value.trim();
         const serverId = document.getElementById('serverId').value.trim();
@@ -602,7 +612,72 @@
         });
     }
 
-    // ===== SUBMIT =====
+    // ===== SEND ORDER TO TELEGRAM =====
+    async function sendOrderToTelegram(orderData) {
+        if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE') {
+            console.warn('Telegram Bot Token not configured');
+            return true; // Skip if not configured
+        }
+
+        const message = `
+🛒 **New Order!**
+━━━━━━━━━━━━━━━━━
+📦 **Package:** ${orderData.package}
+💰 **Price:** ${orderData.price}
+🎮 **Game ID:** ${orderData.gameId}
+🌐 **Server ID:** ${orderData.serverId}
+💳 **Payment:** ${orderData.payment}
+👤 **User:** ${orderData.user}
+🕐 **Time:** ${orderData.time}
+📋 **Order ID:** ${orderData.orderId}
+━━━━━━━━━━━━━━━━━
+✅ *Status: Pending*
+        `;
+
+        try {
+            // Send text message
+            const textResponse = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CHAT_ID,
+                    text: message,
+                    parse_mode: 'Markdown',
+                    reply_markup: {
+                        inline_keyboard: [
+                            [{ text: '✅ Done', callback_data: `done_${orderData.orderId}` }],
+                            [{ text: '❌ Cancel', callback_data: `cancel_${orderData.orderId}` }]
+                        ]
+                    }
+                })
+            });
+
+            if (!textResponse.ok) {
+                console.error('Telegram send error:', await textResponse.text());
+                return false;
+            }
+
+            // Send photo if exists
+            if (orderData.photo) {
+                const formData = new FormData();
+                formData.append('chat_id', TELEGRAM_CHAT_ID);
+                formData.append('photo', orderData.photo);
+                formData.append('caption', `📸 Payment Slip - Order: ${orderData.orderId}`);
+
+                await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`, {
+                    method: 'POST',
+                    body: formData
+                });
+            }
+
+            return true;
+        } catch(error) {
+            console.error('Telegram error:', error);
+            return false;
+        }
+    }
+
+    // ===== SUBMIT ORDER =====
     document.getElementById('submitBtn').addEventListener('click', async function() {
         const d = LANG_DATA[currentLang] || {};
         const gameId = document.getElementById('gameId').value.trim();
@@ -622,8 +697,37 @@
         const price = document.getElementById('modalPrice').textContent;
         const paymentName = selectedPayment === 'wave' ? 'Wave Pay' : 'KBZ Pay';
         const user = currentUser;
+        const userName = user ? user.username : 'Guest';
+        const time = new Date().toLocaleString();
+
+        // Read file as base64 for Telegram
+        let photoBase64 = null;
+        if (hasFile) {
+            try {
+                photoBase64 = await new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onload = (e) => resolve(e.target.result);
+                    reader.readAsDataURL(hasFile);
+                });
+            } catch(e) {
+                console.warn('Failed to read file:', e);
+            }
+        }
+
+        const orderData = {
+            orderId: orderId,
+            package: pkg,
+            price: price,
+            gameId: gameId,
+            serverId: serverId,
+            payment: paymentName,
+            user: userName,
+            time: time,
+            photo: photoBase64
+        };
 
         try {
+            // Save to localStorage
             const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
             orders.unshift({
                 id: orderId,
@@ -638,6 +742,30 @@
             });
             localStorage.setItem('orderHistory', JSON.stringify(orders));
 
+            // Update user diamonds
+            if (user) {
+                const users = JSON.parse(localStorage.getItem('users') || '{}');
+                if (users[user.username]) {
+                    // Extract diamond amount from package name
+                    const diamondMatch = pkg.match(/(\d+,?\d*)/);
+                    const diamondAmount = diamondMatch ? parseInt(diamondMatch[0].replace(/,/g, '')) : 0;
+                    if (diamondAmount > 0) {
+                        users[user.username].diamonds = (users[user.username].diamonds || 0) + diamondAmount;
+                        localStorage.setItem('users', JSON.stringify(users));
+                        // Update current user
+                        const current = getCurrentUser();
+                        if (current) {
+                            current.diamonds = users[user.username].diamonds;
+                            localStorage.setItem('currentUser', JSON.stringify(current));
+                        }
+                    }
+                }
+            }
+
+            // Send to Telegram
+            const telegramSuccess = await sendOrderToTelegram(orderData);
+
+            // Send notification
             localStorage.setItem('newOrderNotification', JSON.stringify({
                 show: true,
                 orderId: orderId,
@@ -645,8 +773,16 @@
             }));
             window.dispatchEvent(new Event('storage'));
 
+            // Show success
             document.getElementById('orderIdDisplay').textContent = '📋 Order #' + orderId;
             document.getElementById('orderSuccess').classList.add('show');
+            
+            if (telegramSuccess) {
+                showToast(d.orderSuccess || '✅ Order successful!', 'success');
+            } else {
+                showToast(d.telegramError || '⚠️ Order saved but Telegram send failed.', 'error');
+            }
+            
             closeCheckoutModal();
 
             this.disabled = false;
@@ -654,7 +790,7 @@
 
         } catch (error) {
             console.error('Order error:', error);
-            showToast(d.sendError || '❌ Failed to send order. Please try again.');
+            showToast(d.orderFail || '❌ Order failed. Please try again.', 'error');
             this.disabled = false;
             this.textContent = '✅ ' + (d.submit || 'Submit Order');
         }
@@ -662,7 +798,6 @@
 
     function closeSuccess(){
         document.getElementById('orderSuccess').classList.remove('show');
-        window.location.href = 'shop.html';
     }
 
     function scrollToDouble(){
@@ -676,10 +811,16 @@
         }, 500);
     }
 
+    // ===== GET CURRENT USER =====
+    function getCurrentUser(){
+        return JSON.parse(localStorage.getItem('currentUser'));
+    }
+
     document.addEventListener('DOMContentLoaded', function(){
         setLang(localStorage.getItem('lang') || 'my');
         renderPackages();
         updateAuthUI();
+        currentUser = getCurrentUser();
         const noti = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
         const badge = document.getElementById('notiBadge');
         if(noti.show){ badge.style.display = 'block'; badge.textContent = '1'; setTimeout(() => { badge.style.display = 'none'; localStorage.setItem('newOrderNotification', JSON.stringify({show:false})); }, 5000); }
@@ -695,6 +836,82 @@
             closeSuccess();
         }
     });
+
+    // Telegram Bot Webhook listener (for incoming updates)
+    // Note: This is for Polling method - for production use Webhook
+    // This will check for incoming 'done' or 'cancel' commands
+    async function checkTelegramUpdates() {
+        if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE') return;
+        
+        try {
+            const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getUpdates?limit=10`);
+            const data = await response.json();
+            
+            if (data.ok && data.result) {
+                for (const update of data.result) {
+                    if (update.callback_query) {
+                        const data = update.callback_query.data;
+                        const messageId = update.callback_query.message.message_id;
+                        
+                        if (data.startsWith('done_')) {
+                            const orderId = data.replace('done_', '');
+                            await updateOrderStatus(orderId, 'completed');
+                            
+                            // Send success message back to Telegram
+                            await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                    chat_id: TELEGRAM_CHAT_ID,
+                                    text: `✅ Order #${orderId} has been **completed**!\n\nThank you for your purchase! 🙏`,
+                                    parse_mode: 'Markdown'
+                                })
+                            });
+                            
+                            // Send notification to user
+                            localStorage.setItem('newOrderNotification', JSON.stringify({
+                                show: true,
+                                orderId: orderId,
+                                message: `✅ Order #${orderId} completed!`
+                            }));
+                            window.dispatchEvent(new Event('storage'));
+                            
+                        } else if (data.startsWith('cancel_')) {
+                            const orderId = data.replace('cancel_', '');
+                            await updateOrderStatus(orderId, 'cancelled');
+                            
+                            await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                    chat_id: TELEGRAM_CHAT_ID,
+                                    text: `❌ Order #${orderId} has been **cancelled**.`,
+                                    parse_mode: 'Markdown'
+                                })
+                            });
+                        }
+                    }
+                }
+            }
+        } catch(error) {
+            console.error('Telegram update check error:', error);
+        }
+    }
+
+    async function updateOrderStatus(orderId, status) {
+        const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+        const order = orders.find(o => o.id === orderId);
+        if (order) {
+            order.status = status;
+            localStorage.setItem('orderHistory', JSON.stringify(orders));
+            showToast(`✅ Order #${orderId} ${status}!`, 'success');
+        }
+    }
+
+    // Check Telegram updates every 10 seconds (Polling)
+    if (TELEGRAM_BOT_TOKEN && TELEGRAM_BOT_TOKEN !== 'YOUR_BOT_TOKEN_HERE') {
+        setInterval(checkTelegramUpdates, 10000);
+    }
 </script>
 </body>
 </html>
