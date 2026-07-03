@@ -193,7 +193,7 @@
 </div>
 <div class="toast" id="toast"></div>
 
-<!-- ===== CHECKOUT MODAL (index.html login modal style) ===== -->
+<!-- ===== CHECKOUT MODAL ===== -->
 <div class="modal-overlay" id="checkoutModal">
     <div class="modal">
         <button class="close-btn" onclick="closeCheckoutModal()">✕</button>
@@ -269,7 +269,6 @@
 </div>
 
 <script>
-    // ===== LANGUAGE DATA =====
     const LANG_DATA = {
         my: {
             appName: 'Premium Shop',
@@ -282,7 +281,6 @@
             doubleBoxSub: 'နှစ်ဆစိန်ပက်ကေ့ချ်များကိုကြည့်ရန် နှိပ်ပါ',
             select: 'ရွေးရန်',
             buy: 'ဝယ်ယူရန်',
-            selectFirst: 'ကျေးဇူးပြု၍ ပက်ကေ့ချ်တစ်ခုကို ဦးစွာရွေးပါ!',
             home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
             currency: 'ကျပ်',
             modalTitle: '🛒 အော်ဒါအတည်ပြုရန်',
@@ -305,7 +303,6 @@
             selectPayment: 'ကျေးဇူးပြု၍ ငွေပေးချေနည်းရွေးပါ',
             uploadSlip: 'ကျေးဇူးပြု၍ ပြေစာတင်ပါ',
             sending: '⏳ ပို့နေသည်...',
-            orderSuccess: '✅ အော်ဒါတင်ပြီးပါပြီ!',
             notiNewOrder: '🛒 အော်ဒါအသစ်!'
         },
         en: {
@@ -319,7 +316,6 @@
             doubleBoxSub: 'Tap to view double diamond packages',
             select: 'Select',
             buy: 'Buy',
-            selectFirst: 'Please select a package first!',
             home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
             currency: 'Ks',
             modalTitle: '🛒 Confirm Order',
@@ -342,7 +338,6 @@
             selectPayment: 'Please select a payment method',
             uploadSlip: 'Please upload your payment slip',
             sending: '⏳ Sending...',
-            orderSuccess: '✅ Order Submitted!',
             notiNewOrder: '🛒 New order!'
         }
     };
@@ -376,21 +371,20 @@
         document.getElementById('navPayment').textContent = d.payment;
         document.getElementById('navProfile').textContent = d.profile;
         
-        // Modal
-        document.getElementById('modalTitle').textContent = d.modalTitle || '🛒 Confirm Order';
-        document.getElementById('modalSub').textContent = d.modalSub || 'Confirm your selection';
-        document.getElementById('gameIdLabel').textContent = d.gameId || 'Game ID';
-        document.getElementById('serverIdLabel').textContent = d.serverId || 'Server ID';
-        document.getElementById('paymentLabel').textContent = d.paymentLabel || 'Payment Method';
-        document.getElementById('waveName').textContent = d.wave || 'Wave Pay';
-        document.getElementById('waveDetail').textContent = d.waveDetail || 'Mobile Money';
-        document.getElementById('kpayName').textContent = d.kpay || 'KBZ Pay';
-        document.getElementById('kpayDetail').textContent = d.kpayDetail || 'KBZ Bank';
-        document.getElementById('uploadLabel').textContent = d.uploadLabel || 'Upload Payment Slip';
-        document.getElementById('uploadText').innerHTML = d.uploadText || 'Tap to upload <strong>file</strong>';
-        document.getElementById('submitBtn').textContent = '✅ ' + (d.submit || 'Submit Order');
-        document.getElementById('successTitle').textContent = d.successTitle || 'Order Submitted!';
-        document.getElementById('successDesc').textContent = d.successDesc || 'Your order has been received.';
+        document.getElementById('modalTitle').textContent = d.modalTitle;
+        document.getElementById('modalSub').textContent = d.modalSub;
+        document.getElementById('gameIdLabel').textContent = d.gameId;
+        document.getElementById('serverIdLabel').textContent = d.serverId;
+        document.getElementById('paymentLabel').textContent = d.paymentLabel;
+        document.getElementById('waveName').textContent = d.wave;
+        document.getElementById('waveDetail').textContent = d.waveDetail;
+        document.getElementById('kpayName').textContent = d.kpay;
+        document.getElementById('kpayDetail').textContent = d.kpayDetail;
+        document.getElementById('uploadLabel').textContent = d.uploadLabel;
+        document.getElementById('uploadText').innerHTML = d.uploadText + ' <strong>file</strong>';
+        document.getElementById('submitBtn').textContent = '✅ ' + d.submit;
+        document.getElementById('successTitle').textContent = d.successTitle;
+        document.getElementById('successDesc').textContent = d.successDesc;
         
         updateAuthUI();
         renderPackages();
@@ -417,21 +411,6 @@
     }
 
     function goToProfile(){ window.location.href = 'profile.html'; }
-
-    function checkNotifications(){
-        const notiData = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
-        const badge = document.getElementById('notiBadge');
-        if(notiData.show){
-            badge.style.display = 'block';
-            badge.textContent = '1';
-            setTimeout(() => {
-                badge.style.display = 'none';
-                localStorage.setItem('newOrderNotification', JSON.stringify({show:false}));
-            }, 5000);
-        } else {
-            badge.style.display = 'none';
-        }
-    }
 
     const PACKAGES = {
         bundles: [
@@ -472,9 +451,9 @@
             const btnClass = isSelected ? 'buy-mode' : 'select-mode';
             const badgeHtml = type === 'double' && pkg.badge ? `<span class="double-badge">${pkg.badge}</span>` : '';
             return `
-                <div class="package-item ${isSelected ? 'selected' : ''}" data-id="${pkg.id}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price},'${type}')">
+                <div class="package-item ${isSelected ? 'selected' : ''}" data-id="${pkg.id}">
                     <div class="glow-pulse"></div>
-                    <div class="info">
+                    <div class="info" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price},'${type}')">
                         <div class="name"><span class="dia-icon">💎</span> ${pkg.name}</div>
                         ${badgeHtml}
                     </div>
@@ -495,6 +474,7 @@
         if(icon){ icon.classList.remove('bounce'); void icon.offsetWidth; icon.classList.add('bounce'); }
     }
 
+    // ===== SELECT =====
     function handlePackageClick(id, name, price, type){
         bounceIcon(id);
         if(selectedPackage && selectedPackage.id === id){
@@ -507,23 +487,20 @@
         renderPackages();
     }
 
-    // ==========================================
-    // Buy နှိပ်ရင် Modal ပေါ်လာမယ်
-    // ==========================================
+    // ===== BUY =====
     function handleBuyClick(id, name, price, type){
         bounceIcon(id);
         
         if(selectedPackage && selectedPackage.id === id){
-            selectedPackage = null;
-            renderPackages();
+            // ရွေးပြီးသား package ကိုပြန်နှိပ်ရင် Modal ပေါ်လာမယ်
+            openCheckoutModal(name, price);
             return;
         }
         
         selectedPackage = { id, name, price, type };
         renderPackages();
-        
-        // Modal ပေါ်လာမယ်
-        openCheckoutModal(name, price);
+        // select ဖြစ်သွားပြီး buy ပြောင်းသွားမယ်
+        // ဒီမှာ ထပ်မပေါ်ဘူး (အသုံးပြုသက buy ကိုထပ်နှိပ်မှ Modal ပေါ်မယ်)
     }
 
     // ===== CHECKOUT MODAL =====
@@ -548,7 +525,7 @@
         document.getElementById('checkoutModal').classList.remove('show');
     }
 
-    // ===== PAYMENT SELECTION =====
+    // ===== PAYMENT =====
     document.querySelectorAll('.payment-option').forEach(el => {
         el.addEventListener('click', function() {
             document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
@@ -573,9 +550,8 @@
         }
     });
 
-    // ===== COPY NUMBER =====
+    // ===== COPY =====
     function copyNumber(number, btn){
-        const d = LANG_DATA[currentLang] || {};
         navigator.clipboard.writeText(number).then(() => {
             btn.textContent = '✅ Copied!';
             btn.classList.add('copied');
@@ -593,7 +569,7 @@
         });
     }
 
-    // ===== SUBMIT ORDER =====
+    // ===== SUBMIT =====
     document.getElementById('submitBtn').addEventListener('click', async function() {
         const d = LANG_DATA[currentLang] || {};
         const gameId = document.getElementById('gameId').value.trim();
@@ -671,15 +647,15 @@
         setLang(localStorage.getItem('lang') || 'my');
         renderPackages();
         updateAuthUI();
-        checkNotifications();
+        const noti = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
+        const badge = document.getElementById('notiBadge');
+        if(noti.show){ badge.style.display = 'block'; badge.textContent = '1'; setTimeout(() => { badge.style.display = 'none'; localStorage.setItem('newOrderNotification', JSON.stringify({show:false})); }, 5000); }
     });
 
-    // Close modal on overlay click
     document.getElementById('checkoutModal').addEventListener('click', function(e) {
         if (e.target === this) closeCheckoutModal();
     });
 
-    // Close on Escape
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             closeCheckoutModal();
