@@ -68,6 +68,7 @@
         .package-item .info .double-badge{display:inline-block;font-size:0.45rem;color:var(--warning);background:rgba(245,158,11,0.1);padding:2px 10px;border-radius:12px;border:1px solid rgba(245,158,11,0.08);font-weight:600;margin-top:2px;letter-spacing:0.3px}
         .package-item .right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:3px;position:relative;z-index:1}
         .package-item .right .price{font-size:0.85rem;font-weight:700;color:var(--text-secondary);transition:all 0.4s ease}
+        /* ===== Button - Select ဖြစ်မှပဲ နှိပ်လို့ရမယ် ===== */
         .package-item .right .btn{background:var(--bg-input);color:var(--text-secondary);border:none;padding:5px 16px;border-radius:20px;font-weight:700;font-size:0.6rem;cursor:default;border:1px solid var(--border-color);user-select:none;pointer-events:none;opacity:0.5;transition:all 0.2s cubic-bezier(0.34,1.2,0.64,1)}
         .package-item.selected .right .btn{pointer-events:auto;cursor:pointer;opacity:1}
         .package-item .right .btn.select-mode{background:var(--bg-input);color:var(--text-secondary);box-shadow:none;border:1px solid var(--border-color)}
@@ -201,8 +202,8 @@
 <div class="modal-overlay" id="checkoutModal">
     <div class="modal">
         <button class="close-btn" onclick="closeCheckoutModal()">✕</button>
-        <h2 id="modalTitle">🛒 အော်ဒါတင်ရန်</h2>
-        <p id="modalSub">အချက်အလက်များကို မှန်ကန်စွာဖြည့်သွင်းပါ</p>
+        <h2 id="modalTitle">🛒 အော်ဒါအတည်ပြုရန်</h2>
+        <p id="modalSub">သင့်ရွေးချယ်မှုကို အတည်ပြုပါ</p>
         
         <div class="selected-row">
             <span class="pkg" id="modalPackage">Loading...</span>
@@ -211,12 +212,14 @@
 
         <div class="form-group">
             <label><i class="fas fa-gamepad"></i> <span id="gameIdLabel">ဂိမ်းအိုင်ဒီ</span></label>
-            <input type="text" id="gameId" placeholder="" id="gameIdPlaceholder">
+            <input type="text" id="gameId" placeholder="သင့်ဂိမ်းအိုင်ဒီထည့်ပါ (e.g. 12345678)">
+            <div class="input-hint" id="gameIdHint">Mobile Legends ID ထည့်ပါ</div>
         </div>
         
         <div class="form-group">
             <label><i class="fas fa-server"></i> <span id="serverIdLabel">ဆာဗာအိုင်ဒီ</span></label>
-            <input type="text" id="serverId" placeholder="" id="serverIdPlaceholder">
+            <input type="text" id="serverId" placeholder="သင့်ဆာဗာအိုင်ဒီထည့်ပါ (e.g. 9876)">
+            <div class="input-hint" id="serverIdHint">Mobile Legends Server ID ထည့်ပါ</div>
         </div>
 
         <div class="form-group">
@@ -292,12 +295,12 @@
             buy: 'ဝယ်ယူရန်',
             home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
             currency: 'ကျပ်',
-            modalTitle: '🛒 အော်ဒါတင်ရန်',
-            modalSub: 'အချက်အလက်များကို မှန်ကန်စွာဖြည့်သွင်းပါ',
+            modalTitle: '🛒 အော်ဒါအတည်ပြုရန်',
+            modalSub: 'သင့်ရွေးချယ်မှုကို အတည်ပြုပါ',
             gameId: 'ဂိမ်းအိုင်ဒီ',
             serverId: 'ဆာဗာအိုင်ဒီ',
-            gameIdPlaceholder: 'သင့်ဂိမ်းအိုင်ဒီထည့်ပါ (e.g. 12345678)',
-            serverIdPlaceholder: 'သင့်ဆာဗာအိုင်ဒီထည့်ပါ (e.g. 9876)',
+            gameIdHint: 'Mobile Legends ID ထည့်ပါ',
+            serverIdHint: 'Mobile Legends Server ID ထည့်ပါ',
             paymentLabel: 'ငွေပေးချေနည်း',
             wave: 'Wave Pay',
             waveDetail: 'လမ်းပေါ်ငွေ',
@@ -334,12 +337,12 @@
             buy: 'Buy',
             home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
             currency: 'Ks',
-            modalTitle: '🛒 Submit Order',
-            modalSub: 'Fill in your details correctly',
+            modalTitle: '🛒 Confirm Order',
+            modalSub: 'Confirm your selection',
             gameId: 'Game ID',
             serverId: 'Server ID',
-            gameIdPlaceholder: 'Enter your Game ID (e.g. 12345678)',
-            serverIdPlaceholder: 'Enter your Server ID (e.g. 9876)',
+            gameIdHint: 'Enter your Mobile Legends ID',
+            serverIdHint: 'Enter your Mobile Legends Server ID',
             paymentLabel: 'Payment Method',
             wave: 'Wave Pay',
             waveDetail: 'Mobile Money',
@@ -398,8 +401,8 @@
         document.getElementById('modalSub').textContent = d.modalSub;
         document.getElementById('gameIdLabel').textContent = d.gameId;
         document.getElementById('serverIdLabel').textContent = d.serverId;
-        document.getElementById('gameIdPlaceholder').placeholder = d.gameIdPlaceholder;
-        document.getElementById('serverIdPlaceholder').placeholder = d.serverIdPlaceholder;
+        document.getElementById('gameIdHint').textContent = d.gameIdHint;
+        document.getElementById('serverIdHint').textContent = d.serverIdHint;
         document.getElementById('paymentLabel').textContent = d.paymentLabel;
         document.getElementById('waveName').textContent = d.wave;
         document.getElementById('waveDetail').textContent = d.waveDetail;
@@ -500,6 +503,7 @@
         if(icon){ icon.classList.remove('bounce'); void icon.offsetWidth; icon.classList.add('bounce'); }
     }
 
+    // ===== SELECT - Modal မပေါ်ဘူး =====
     function handlePackageClick(id, name, price, type){
         bounceIcon(id);
         if(selectedPackage && selectedPackage.id === id){
@@ -512,10 +516,15 @@
         renderPackages();
     }
 
+    // ===== BUY - Modal ပေါ်လာမယ် =====
     function handleBuyClick(id, name, price, type){
         bounceIcon(id);
+        
+        // ဒီ package ကို select လုပ်
         selectedPackage = { id, name, price, type };
         renderPackages();
+        
+        // Modal ပေါ်လာမယ်
         openCheckoutModal(name, price);
     }
 
@@ -604,6 +613,7 @@
         });
     }
 
+    // ===== SEND ORDER TO TELEGRAM =====
     async function sendOrderToTelegram(orderData) {
         if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE') {
             console.warn('Telegram Bot Token not configured');
@@ -666,6 +676,7 @@
         }
     }
 
+    // ===== SUBMIT ORDER =====
     document.getElementById('submitBtn').addEventListener('click', async function() {
         const d = LANG_DATA[currentLang] || {};
         const gameId = document.getElementById('gameId').value.trim();
@@ -816,6 +827,7 @@
         }
     });
 
+    // Telegram Polling
     async function checkTelegramUpdates() {
         if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE') return;
         
