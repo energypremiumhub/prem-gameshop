@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
-        :root{--bg-primary:#0a0e1a;--bg-secondary:#111927;--bg-card:#141c2b;--bg-input:#1a2438;--text-primary:#ffffff;--text-secondary:#8899bb;--border-color:rgba(255,255,255,0.06);--shadow:rgba(0,0,0,0.5);--gold:#f5c842;--gold-glow:rgba(245,200,66,0.3);--cyan:#00d4ff;--cyan-glow:rgba(0,212,255,0.2);--orange:#f97316;--orange-glow:rgba(249,115,22,0.2);--red:#ef4444;--warning:#f59e0b}
+        :root{--bg-primary:#0a0e1a;--bg-secondary:#111927;--bg-card:#141c2b;--bg-input:#1a2438;--text-primary:#ffffff;--text-secondary:#8899bb;--border-color:rgba(255,255,255,0.06);--shadow:rgba(0,0,0,0.5);--gold:#f5c842;--gold-glow:rgba(245,200,66,0.3);--cyan:#00d4ff;--cyan-glow:rgba(0,212,255,0.2);--orange:#f97316;--orange-glow:rgba(249,115,22,0.2);--red:#ef4444;--warning:#f59e0b;--green:#22d3ee;--green-glow:rgba(34,211,238,0.2)}
         body{background:var(--bg-primary);color:var(--text-primary);min-height:100vh;padding:16px;padding-bottom:90px;background-image:radial-gradient(ellipse at 20% 50%,rgba(245,200,66,0.04) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(0,212,255,0.04) 0%,transparent 50%)}
         ::-webkit-scrollbar{width:4px}
         ::-webkit-scrollbar-track{background:var(--bg-primary)}
@@ -87,6 +87,63 @@
         .toast.show{display:block}
         @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.9)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes fadeIn{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
+
+        /* ===== CHECKOUT MODAL (index.html login modal style) ===== */
+        .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px;animation:fadeIn 0.3s ease}
+        .modal-overlay.show{display:flex}
+        .modal{background:linear-gradient(145deg,var(--bg-card),var(--bg-secondary));border:1px solid var(--border-color);border-radius:18px;padding:24px 20px;max-width:420px;width:100%;box-shadow:0 20px 60px var(--shadow);position:relative;overflow:hidden;max-height:90vh;overflow-y:auto}
+        .modal::before{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(245,200,66,0.04) 0%,transparent 70%);animation:shimmer 8s ease-in-out infinite}
+        .modal h2{font-size:1.2rem;color:var(--gold);margin-bottom:4px;text-align:center;position:relative;z-index:1;text-shadow:0 0 30px var(--gold-glow)}
+        .modal p{color:var(--text-secondary);font-size:0.75rem;text-align:center;margin-bottom:16px;position:relative;z-index:1}
+        .modal .form-group{margin-bottom:12px;position:relative;z-index:1}
+        .modal .form-group label{font-size:0.6rem;color:var(--text-secondary);font-weight:600;display:block;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px}
+        .modal .form-group label i{color:var(--cyan);margin-right:4px}
+        .modal .form-group input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border-color);background:var(--bg-input);color:var(--text-primary);font-size:0.85rem;outline:none;transition:all 0.3s ease}
+        .modal .form-group input:focus{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
+        .modal .form-group input::placeholder{color:var(--text-secondary);font-size:0.7rem}
+        .modal .selected-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg-input);border-radius:10px;border:1px solid var(--border-color);margin-bottom:12px}
+        .modal .selected-row .pkg{font-size:0.85rem;font-weight:600;color:var(--text-primary)}
+        .modal .selected-row .price{font-size:0.9rem;font-weight:700;color:var(--gold);text-shadow:0 0 20px var(--gold-glow)}
+        .modal .payment-options{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
+        .modal .payment-option{background:var(--bg-input);border:2px solid var(--border-color);border-radius:10px;padding:10px;text-align:center;cursor:pointer;transition:all 0.3s ease}
+        .modal .payment-option:active{transform:scale(0.95)}
+        .modal .payment-option.selected{border-color:var(--gold);background:rgba(245,200,66,0.06);box-shadow:0 0 30px var(--gold-glow)}
+        .modal .payment-option .icon{font-size:1.2rem;display:block;margin-bottom:2px}
+        .modal .payment-option .name{font-size:0.7rem;font-weight:600;color:var(--text-primary)}
+        .modal .payment-option .detail{font-size:0.45rem;color:var(--text-secondary)}
+        .modal .account-info{background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.08);border-radius:10px;padding:10px 14px;margin-top:8px;display:none}
+        .modal .account-info.show{display:block;animation:fadeIn 0.3s ease}
+        .modal .account-info .acc-name{font-size:0.8rem;font-weight:600;color:var(--text-primary)}
+        .modal .account-info .acc-number{font-size:0.75rem;color:var(--green);font-weight:500;margin-top:2px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+        .modal .account-info .acc-number .copy-btn{background:var(--bg-card);border:1px solid var(--border-color);color:var(--text-secondary);padding:2px 10px;border-radius:10px;font-size:0.45rem;cursor:pointer;transition:all 0.3s ease;font-weight:600}
+        .modal .account-info .acc-number .copy-btn:active{transform:scale(0.85);background:var(--gold);color:#0a0e1a}
+        .modal .account-info .acc-number .copy-btn.copied{background:rgba(34,211,238,0.15);border-color:var(--green);color:var(--green)}
+        .modal .file-upload{border:2px dashed var(--border-color);border-radius:10px;padding:14px;text-align:center;cursor:pointer;transition:all 0.3s ease;position:relative}
+        .modal .file-upload:active{transform:scale(0.97)}
+        .modal .file-upload.has-file{border-color:var(--green);background:rgba(34,211,238,0.04)}
+        .modal .file-upload .icon{font-size:1.5rem;display:block;margin-bottom:2px;color:var(--text-secondary)}
+        .modal .file-upload .text{font-size:0.6rem;color:var(--text-secondary)}
+        .modal .file-upload .text strong{color:var(--gold)}
+        .modal .file-upload input[type="file"]{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}
+        .modal .file-upload .file-name{font-size:0.5rem;color:var(--green);margin-top:3px;display:none}
+        .modal .file-upload .file-name.show{display:block}
+        .modal .btn-primary{width:100%;padding:11px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:10px;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;position:relative;z-index:1;margin-top:6px}
+        .modal .btn-primary:active{transform:scale(0.96)}
+        .modal .btn-primary:hover{box-shadow:0 0 40px var(--gold-glow)}
+        .modal .btn-primary:disabled{opacity:0.4;cursor:not-allowed}
+        .modal .close-btn{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--text-secondary);font-size:1.1rem;cursor:pointer;z-index:2}
+        .modal .close-btn:active{transform:scale(0.85)}
+        
+        .order-success{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(15px);display:none;z-index:500;align-items:center;justify-content:center;padding:20px;flex-direction:column;text-align:center}
+        .order-success.show{display:flex;animation:fadeIn 0.5s ease}
+        .order-success .icon{font-size:4rem;color:var(--green);margin-bottom:16px;animation:scaleIn 0.6s cubic-bezier(0.34,1.56,0.64,1)}
+        .order-success h2{font-size:1.5rem;color:var(--gold);margin-bottom:8px}
+        .order-success p{color:var(--text-secondary);font-size:0.85rem;max-width:320px;line-height:1.6}
+        .order-success .order-id{background:var(--bg-card);padding:8px 20px;border-radius:10px;border:1px solid var(--border-color);color:var(--gold);font-size:0.8rem;font-weight:600;margin:12px 0}
+        .order-success .btn-home{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;padding:12px 40px;border-radius:12px;font-weight:700;font-size:0.9rem;cursor:pointer;transition:all 0.3s ease;margin-top:8px;text-decoration:none}
+        .order-success .btn-home:active{transform:scale(0.95)}
+        @keyframes scaleIn{from{transform:scale(0)}to{transform:scale(1)}}
     </style>
 </head>
 <body>
@@ -136,7 +193,83 @@
 </div>
 <div class="toast" id="toast"></div>
 
+<!-- ===== CHECKOUT MODAL (index.html login modal style) ===== -->
+<div class="modal-overlay" id="checkoutModal">
+    <div class="modal">
+        <button class="close-btn" onclick="closeCheckoutModal()">✕</button>
+        <h2 id="modalTitle">🛒 အော်ဒါအတည်ပြုရန်</h2>
+        <p id="modalSub">သင့်ရွေးချယ်မှုကို အတည်ပြုပါ</p>
+        
+        <div class="selected-row">
+            <span class="pkg" id="modalPackage">Loading...</span>
+            <span class="price" id="modalPrice">0 Ks</span>
+        </div>
+
+        <div class="form-group">
+            <label><i class="fas fa-gamepad"></i> <span id="gameIdLabel">ဂိမ်းအိုင်ဒီ</span></label>
+            <input type="text" id="gameId" placeholder="သင့်ဂိမ်းအိုင်ဒီထည့်ပါ (e.g. 12345678)">
+        </div>
+        <div class="form-group">
+            <label><i class="fas fa-server"></i> <span id="serverIdLabel">ဆာဗာအိုင်ဒီ</span></label>
+            <input type="text" id="serverId" placeholder="သင့်ဆာဗာအိုင်ဒီထည့်ပါ (e.g. 9876)">
+        </div>
+
+        <div class="form-group">
+            <label><i class="fas fa-money-bill-wave"></i> <span id="paymentLabel">ငွေပေးချေနည်း</span></label>
+            <div class="payment-options" id="paymentOptions">
+                <div class="payment-option" data-payment="wave">
+                    <span class="icon">🏦</span>
+                    <span class="name" id="waveName">Wave Pay</span>
+                    <span class="detail" id="waveDetail">Mobile Money</span>
+                </div>
+                <div class="payment-option" data-payment="kpay">
+                    <span class="icon">🏦</span>
+                    <span class="name" id="kpayName">KBZ Pay</span>
+                    <span class="detail" id="kpayDetail">KBZ Bank</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="account-info" id="waveInfo">
+            <div class="acc-name">🏦 Wave Pay</div>
+            <div class="acc-number">
+                📞 09682506493
+                <button class="copy-btn" onclick="copyNumber('09682506493', this)">Copy</button>
+            </div>
+        </div>
+        <div class="account-info" id="kpayInfo">
+            <div class="acc-name">🏦 KBZ Pay</div>
+            <div class="acc-number">
+                📞 09682506493
+                <button class="copy-btn" onclick="copyNumber('09682506493', this)">Copy</button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label><i class="fas fa-image"></i> <span id="uploadLabel">ပြေစာတင်ပို့ရန်</span></label>
+            <div class="file-upload" id="fileUpload">
+                <span class="icon">📁</span>
+                <span class="text" id="uploadText">နှိပ်ပြီး <strong>ဖိုင်တင်ပါ</strong></span>
+                <span class="file-name" id="fileName">✅ image.png</span>
+                <input type="file" id="fileInput" accept="image/*">
+            </div>
+        </div>
+
+        <button class="btn-primary" id="submitBtn">✅ အော်ဒါတင်မည်</button>
+    </div>
+</div>
+
+<!-- ===== ORDER SUCCESS ===== -->
+<div class="order-success" id="orderSuccess">
+    <div class="icon">✅</div>
+    <h2 id="successTitle">အော်ဒါတင်ပြီးပါပြီ!</h2>
+    <p id="successDesc">သင့်အော်ဒါကို လက်ခံရရှိပါပြီ။ ကျွန်ုပ်တို့ မကြာမီ ဆောင်ရွက်ပေးပါမည်။</p>
+    <div class="order-id" id="orderIdDisplay">📋 Order #123456</div>
+    <button class="btn-home" onclick="closeSuccess()">🏠 ပြန်သွားမည်</button>
+</div>
+
 <script>
+    // ===== LANGUAGE DATA =====
     const LANG_DATA = {
         my: {
             appName: 'Premium Shop',
@@ -151,7 +284,29 @@
             buy: 'ဝယ်ယူရန်',
             selectFirst: 'ကျေးဇူးပြု၍ ပက်ကေ့ချ်တစ်ခုကို ဦးစွာရွေးပါ!',
             home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
-            currency: 'ကျပ်'
+            currency: 'ကျပ်',
+            modalTitle: '🛒 အော်ဒါအတည်ပြုရန်',
+            modalSub: 'သင့်ရွေးချယ်မှုကို အတည်ပြုပါ',
+            gameId: 'ဂိမ်းအိုင်ဒီ',
+            serverId: 'ဆာဗာအိုင်ဒီ',
+            paymentLabel: 'ငွေပေးချေနည်း',
+            wave: 'Wave Pay',
+            waveDetail: 'Mobile Money',
+            kpay: 'KBZ Pay',
+            kpayDetail: 'KBZ Bank',
+            uploadLabel: 'ပြေစာတင်ပို့ရန်',
+            uploadText: 'နှိပ်ပြီး ဖိုင်တင်ပါ',
+            submit: 'အော်ဒါတင်မည်',
+            successTitle: 'အော်ဒါတင်ပြီးပါပြီ!',
+            successDesc: 'သင့်အော်ဒါကို လက်ခံရရှိပါပြီ။ ကျွန်ုပ်တို့ မကြာမီ ဆောင်ရွက်ပေးပါမည်။',
+            homeBtn: '🏠 ပြန်သွားမည်',
+            enterGameId: 'ကျေးဇူးပြု၍ ဂိမ်းအိုင်ဒီထည့်ပါ',
+            enterServerId: 'ကျေးဇူးပြု၍ ဆာဗာအိုင်ဒီထည့်ပါ',
+            selectPayment: 'ကျေးဇူးပြု၍ ငွေပေးချေနည်းရွေးပါ',
+            uploadSlip: 'ကျေးဇူးပြု၍ ပြေစာတင်ပါ',
+            sending: '⏳ ပို့နေသည်...',
+            orderSuccess: '✅ အော်ဒါတင်ပြီးပါပြီ!',
+            notiNewOrder: '🛒 အော်ဒါအသစ်!'
         },
         en: {
             appName: 'Premium Shop',
@@ -166,13 +321,36 @@
             buy: 'Buy',
             selectFirst: 'Please select a package first!',
             home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
-            currency: 'Ks'
+            currency: 'Ks',
+            modalTitle: '🛒 Confirm Order',
+            modalSub: 'Confirm your selection',
+            gameId: 'Game ID',
+            serverId: 'Server ID',
+            paymentLabel: 'Payment Method',
+            wave: 'Wave Pay',
+            waveDetail: 'Mobile Money',
+            kpay: 'KBZ Pay',
+            kpayDetail: 'KBZ Bank',
+            uploadLabel: 'Upload Payment Slip',
+            uploadText: 'Tap to upload file',
+            submit: 'Submit Order',
+            successTitle: 'Order Submitted!',
+            successDesc: 'Your order has been received. We will process it shortly.',
+            homeBtn: '🏠 Back to Home',
+            enterGameId: 'Please enter your Game ID',
+            enterServerId: 'Please enter your Server ID',
+            selectPayment: 'Please select a payment method',
+            uploadSlip: 'Please upload your payment slip',
+            sending: '⏳ Sending...',
+            orderSuccess: '✅ Order Submitted!',
+            notiNewOrder: '🛒 New order!'
         }
     };
 
     let currentLang = localStorage.getItem('lang') || 'my';
     let selectedPackage = null;
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    let selectedPayment = null;
 
     function getText(key){ return LANG_DATA[currentLang][key] || key; }
 
@@ -197,6 +375,23 @@
         document.getElementById('navShop').textContent = d.shop;
         document.getElementById('navPayment').textContent = d.payment;
         document.getElementById('navProfile').textContent = d.profile;
+        
+        // Modal
+        document.getElementById('modalTitle').textContent = d.modalTitle || '🛒 Confirm Order';
+        document.getElementById('modalSub').textContent = d.modalSub || 'Confirm your selection';
+        document.getElementById('gameIdLabel').textContent = d.gameId || 'Game ID';
+        document.getElementById('serverIdLabel').textContent = d.serverId || 'Server ID';
+        document.getElementById('paymentLabel').textContent = d.paymentLabel || 'Payment Method';
+        document.getElementById('waveName').textContent = d.wave || 'Wave Pay';
+        document.getElementById('waveDetail').textContent = d.waveDetail || 'Mobile Money';
+        document.getElementById('kpayName').textContent = d.kpay || 'KBZ Pay';
+        document.getElementById('kpayDetail').textContent = d.kpayDetail || 'KBZ Bank';
+        document.getElementById('uploadLabel').textContent = d.uploadLabel || 'Upload Payment Slip';
+        document.getElementById('uploadText').innerHTML = d.uploadText || 'Tap to upload <strong>file</strong>';
+        document.getElementById('submitBtn').textContent = '✅ ' + (d.submit || 'Submit Order');
+        document.getElementById('successTitle').textContent = d.successTitle || 'Order Submitted!';
+        document.getElementById('successDesc').textContent = d.successDesc || 'Your order has been received.';
+        
         updateAuthUI();
         renderPackages();
     }
@@ -206,7 +401,7 @@
         t.textContent = msg;
         t.classList.add('show');
         clearTimeout(t._timer);
-        t._timer = setTimeout(() => t.classList.remove('show'), 2000);
+        t._timer = setTimeout(() => t.classList.remove('show'), 3000);
     }
 
     function updateAuthUI(){
@@ -222,6 +417,21 @@
     }
 
     function goToProfile(){ window.location.href = 'profile.html'; }
+
+    function checkNotifications(){
+        const notiData = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
+        const badge = document.getElementById('notiBadge');
+        if(notiData.show){
+            badge.style.display = 'block';
+            badge.textContent = '1';
+            setTimeout(() => {
+                badge.style.display = 'none';
+                localStorage.setItem('newOrderNotification', JSON.stringify({show:false}));
+            }, 5000);
+        } else {
+            badge.style.display = 'none';
+        }
+    }
 
     const PACKAGES = {
         bundles: [
@@ -260,7 +470,6 @@
             const isSelected = selectedPackage && selectedPackage.id === pkg.id;
             const btnText = isSelected ? buyText : selectText;
             const btnClass = isSelected ? 'buy-mode' : 'select-mode';
-            // ===== double badge အကုန်တူအောင်ပြင်ထား =====
             const badgeHtml = type === 'double' && pkg.badge ? `<span class="double-badge">${pkg.badge}</span>` : '';
             return `
                 <div class="package-item ${isSelected ? 'selected' : ''}" data-id="${pkg.id}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price},'${type}')">
@@ -271,8 +480,7 @@
                     </div>
                     <div class="right">
                         <div class="price">${formatPrice(pkg.price)}</div>
-                        <!-- ===== Buy button ကို နှိပ်လို့ရအောင်ပြင်ထား ===== -->
-                        <button class="btn ${btnClass}" onclick="event.stopPropagation(); goToCheckout('${pkg.id}','${pkg.name}',${pkg.price},'${type}')">${btnText}</button>
+                        <button class="btn ${btnClass}" onclick="event.stopPropagation(); handleBuyClick('${pkg.id}','${pkg.name}',${pkg.price},'${type}')">${btnText}</button>
                     </div>
                 </div>
             `;
@@ -287,8 +495,22 @@
         if(icon){ icon.classList.remove('bounce'); void icon.offsetWidth; icon.classList.add('bounce'); }
     }
 
-    // Package box ကိုနှိပ်ရင် Select/Deselect ပဲလုပ်
     function handlePackageClick(id, name, price, type){
+        bounceIcon(id);
+        if(selectedPackage && selectedPackage.id === id){
+            selectedPackage = null;
+            renderPackages();
+            return;
+        }
+        if(selectedPackage){ selectedPackage = null; }
+        selectedPackage = { id, name, price, type };
+        renderPackages();
+    }
+
+    // ==========================================
+    // Buy နှိပ်ရင် Modal ပေါ်လာမယ်
+    // ==========================================
+    function handleBuyClick(id, name, price, type){
         bounceIcon(id);
         
         if(selectedPackage && selectedPackage.id === id){
@@ -297,26 +519,141 @@
             return;
         }
         
-        if(selectedPackage){
-            selectedPackage = null;
-        }
-        
         selectedPackage = { id, name, price, type };
         renderPackages();
+        
+        // Modal ပေါ်လာမယ်
+        openCheckoutModal(name, price);
     }
 
-    // ==========================================
-    // Buy button ကိုနှိပ်ရင် checkout သွား
-    // ==========================================
-    function goToCheckout(id, name, price, type){
-        const data = encodeURIComponent(JSON.stringify({
-            name: name,
-            price: price,
-            priceFormatted: formatPrice(price),
-            id: id,
-            type: type
-        }));
-        window.location.href = 'checkout.html?package=' + data;
+    // ===== CHECKOUT MODAL =====
+    function openCheckoutModal(name, price){
+        document.getElementById('modalPackage').textContent = name;
+        document.getElementById('modalPrice').textContent = formatPrice(price);
+        document.getElementById('checkoutModal').classList.add('show');
+        document.getElementById('gameId').value = '';
+        document.getElementById('serverId').value = '';
+        document.getElementById('fileInput').value = '';
+        document.getElementById('fileUpload').classList.remove('has-file');
+        document.getElementById('fileName').classList.remove('show');
+        document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+        document.getElementById('waveInfo').classList.remove('show');
+        document.getElementById('kpayInfo').classList.remove('show');
+        selectedPayment = null;
+        document.getElementById('submitBtn').disabled = false;
+        document.getElementById('submitBtn').textContent = '✅ ' + (getText('submit') || 'Submit Order');
+    }
+
+    function closeCheckoutModal(){
+        document.getElementById('checkoutModal').classList.remove('show');
+    }
+
+    // ===== PAYMENT SELECTION =====
+    document.querySelectorAll('.payment-option').forEach(el => {
+        el.addEventListener('click', function() {
+            document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedPayment = this.dataset.payment;
+            document.getElementById('waveInfo').classList.remove('show');
+            document.getElementById('kpayInfo').classList.remove('show');
+            if (selectedPayment === 'wave') document.getElementById('waveInfo').classList.add('show');
+            else if (selectedPayment === 'kpay') document.getElementById('kpayInfo').classList.add('show');
+        });
+    });
+
+    // ===== FILE UPLOAD =====
+    const fileInput = document.getElementById('fileInput');
+    const fileUpload = document.getElementById('fileUpload');
+    const fileName = document.getElementById('fileName');
+    fileInput.addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+            fileUpload.classList.add('has-file');
+            fileName.textContent = '✅ ' + this.files[0].name;
+            fileName.classList.add('show');
+        }
+    });
+
+    // ===== COPY NUMBER =====
+    function copyNumber(number, btn){
+        const d = LANG_DATA[currentLang] || {};
+        navigator.clipboard.writeText(number).then(() => {
+            btn.textContent = '✅ Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2500);
+        }).catch(() => {
+            const input = document.createElement('input');
+            input.value = number;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+            btn.textContent = '✅ Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2500);
+        });
+    }
+
+    // ===== SUBMIT ORDER =====
+    document.getElementById('submitBtn').addEventListener('click', async function() {
+        const d = LANG_DATA[currentLang] || {};
+        const gameId = document.getElementById('gameId').value.trim();
+        const serverId = document.getElementById('serverId').value.trim();
+        const hasFile = fileInput.files && fileInput.files[0];
+
+        if (!gameId) { showToast(d.enterGameId || 'Please enter your Game ID'); return; }
+        if (!serverId) { showToast(d.enterServerId || 'Please enter your Server ID'); return; }
+        if (!selectedPayment) { showToast(d.selectPayment || 'Please select a payment method'); return; }
+        if (!hasFile) { showToast(d.uploadSlip || 'Please upload your payment slip'); return; }
+
+        this.disabled = true;
+        this.textContent = '⏳ ' + (d.sending || 'Sending...');
+
+        const orderId = 'ORD-' + Date.now().toString().slice(-6);
+        const pkg = document.getElementById('modalPackage').textContent;
+        const price = document.getElementById('modalPrice').textContent;
+        const paymentName = selectedPayment === 'wave' ? 'Wave Pay' : 'KBZ Pay';
+        const user = currentUser;
+        const userName = user ? user.username : 'Guest';
+
+        try {
+            const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+            orders.unshift({
+                id: orderId,
+                userId: user ? user.username : 'guest',
+                package: pkg,
+                price: price,
+                gameId: gameId,
+                serverId: serverId,
+                payment: paymentName,
+                date: new Date().toISOString(),
+                status: 'pending'
+            });
+            localStorage.setItem('orderHistory', JSON.stringify(orders));
+
+            localStorage.setItem('newOrderNotification', JSON.stringify({
+                show: true,
+                orderId: orderId,
+                message: d.notiNewOrder || '🛒 New order!'
+            }));
+            window.dispatchEvent(new Event('storage'));
+
+            document.getElementById('orderIdDisplay').textContent = '📋 Order #' + orderId;
+            document.getElementById('orderSuccess').classList.add('show');
+            closeCheckoutModal();
+
+            this.disabled = false;
+            this.textContent = '✅ ' + (d.submit || 'Submit Order');
+
+        } catch (error) {
+            console.error('Order error:', error);
+            showToast(d.sendError || '❌ Failed to send order. Please try again.');
+            this.disabled = false;
+            this.textContent = '✅ ' + (d.submit || 'Submit Order');
+        }
+    });
+
+    function closeSuccess(){
+        document.getElementById('orderSuccess').classList.remove('show');
     }
 
     function scrollToDouble(){
@@ -334,9 +671,20 @@
         setLang(localStorage.getItem('lang') || 'my');
         renderPackages();
         updateAuthUI();
-        const noti = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
-        const badge = document.getElementById('notiBadge');
-        if(noti.show){ badge.style.display = 'block'; badge.textContent = '1'; setTimeout(() => { badge.style.display = 'none'; localStorage.setItem('newOrderNotification', JSON.stringify({show:false})); }, 5000); }
+        checkNotifications();
+    });
+
+    // Close modal on overlay click
+    document.getElementById('checkoutModal').addEventListener('click', function(e) {
+        if (e.target === this) closeCheckoutModal();
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeCheckoutModal();
+            closeSuccess();
+        }
     });
 </script>
 </body>
