@@ -19,16 +19,16 @@
             --border-color: rgba(255,255,255,0.06);
             --shadow: rgba(0,0,0,0.6);
             --gold: #f7d44a;
-            --gold-glow: rgba(247,212,74,0.4);
+            --gold-glow: rgba(247,212,74,0.5);
             --cyan: #00e5ff;
             --cyan-glow: rgba(0,229,255,0.2);
             --pink: #ff6b9d;
             --orange: #ff8a65;
             --orange-glow: rgba(255,138,101,0.2);
             --green: #00e676;
-            --green-glow: rgba(0,230,118,0.2);
+            --green-glow: rgba(0,230,118,0.3);
             --red: #ff1744;
-            --red-glow: rgba(255,23,68,0.4);
+            --red-glow: rgba(255,23,68,0.5);
             --dark-red: #b71c1c;
             --purple: #b388ff;
             --purple-glow: rgba(179,136,255,0.2);
@@ -87,7 +87,7 @@
         .welcome h2 i{color:var(--cyan);-webkit-text-fill-color:initial}
         .welcome p{color:var(--text-secondary);font-size:0.75rem;margin-top:2px;font-weight:400;opacity:0.7}
 
-        /* ===== SHOP STATUS BANNER ===== */
+        /* ===== SHOP STATUS BANNER (24 ဖယ်ထား) ===== */
         .shop-status-banner {
             background: linear-gradient(135deg, rgba(247,212,74,0.06), rgba(0,229,255,0.04));
             border-radius: 16px;
@@ -114,62 +114,26 @@
         .shop-status-banner .banner-content {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             position: relative;
             z-index: 1;
             flex-wrap: wrap;
             gap: 10px;
-        }
-        .shop-status-banner .banner-left {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-        .shop-status-banner .banner-icon {
-            font-size: 2rem;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(247,212,74,0.06);
-            border: 1px solid rgba(247,212,74,0.08);
-            flex-shrink: 0;
-            transition: all 0.5s ease;
-            box-shadow: 0 0 30px rgba(247,212,74,0.05);
-        }
-        .shop-status-banner .banner-text {
-            display: flex;
             flex-direction: column;
-        }
-        .shop-status-banner .banner-title {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--gold);
-            text-shadow: 0 0 30px var(--gold-glow);
-            transition: all 0.5s ease;
-            background: linear-gradient(135deg, var(--gold), var(--orange));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .shop-status-banner .banner-sub {
-            font-size: 0.6rem;
-            color: var(--text-secondary);
-            margin-top: 2px;
-            opacity: 0.5;
+            text-align: center;
         }
         .shop-status-banner .banner-status {
-            font-size: 0.75rem;
-            font-weight: 800;
-            padding: 8px 20px;
+            font-size: 1.2rem;
+            font-weight: 900;
+            padding: 10px 30px;
             border-radius: 30px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             transition: all 0.5s ease;
-            flex-shrink: 0;
             backdrop-filter: blur(10px);
             font-family: 'Segoe UI', sans-serif;
+            width: 100%;
+            text-align: center;
         }
         .shop-status-banner .banner-status.open {
             background: rgba(0,230,118,0.08);
@@ -178,6 +142,7 @@
             animation: pulseStatus 1.5s ease-in-out infinite;
             box-shadow: 0 0 40px rgba(0,230,118,0.1);
             text-shadow: 0 0 30px rgba(0,230,118,0.2);
+            font-size: 1.3rem;
         }
         .shop-status-banner .banner-status.closed {
             background: rgba(255,23,68,0.12);
@@ -186,28 +151,29 @@
             box-shadow: 0 0 50px var(--red-glow);
             text-shadow: 0 0 30px var(--red-glow);
             animation: closedPulse 1s ease-in-out infinite;
+            font-size: 1.3rem;
         }
         @keyframes closedPulse {
             0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 40px var(--red-glow); }
-            50% { opacity: 0.6; transform: scale(0.95); box-shadow: 0 0 70px var(--red-glow); }
+            50% { opacity: 0.7; transform: scale(0.97); box-shadow: 0 0 70px var(--red-glow); }
         }
         .shop-status-banner .banner-status.open .status-dot {
             display: inline-block;
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             background: var(--green);
             border-radius: 50%;
-            margin-right: 8px;
+            margin-right: 10px;
             animation: pulseDot 1s ease-in-out infinite;
             box-shadow: 0 0 20px var(--green-glow);
         }
         .shop-status-banner .banner-status.closed .status-dot {
             display: inline-block;
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             background: var(--red);
             border-radius: 50%;
-            margin-right: 8px;
+            margin-right: 10px;
             box-shadow: 0 0 30px var(--red-glow);
             animation: pulseDotRed 1s ease-in-out infinite;
         }
@@ -242,19 +208,6 @@
             display: block;
             backdrop-filter: blur(10px);
         }
-        .shop-card:active {
-            transform: scale(0.95);
-        }
-        .shop-card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(from 0deg, transparent, rgba(247,212,74,0.05), transparent, rgba(0,229,255,0.05), transparent);
-            animation: spin 10s linear infinite;
-        }
         .shop-card .icon {
             font-size: 2rem;
             display: block;
@@ -281,9 +234,6 @@
             transition: all 0.5s ease;
             opacity: 0.5;
             letter-spacing: 0.5px;
-        }
-        .shop-card.open {
-            border-color: rgba(0,230,118,0.08);
         }
         .shop-card.open .icon {
             color: var(--gold);
@@ -367,7 +317,32 @@
             background-size: 200% 200%;
         }
 
-        @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+        /* ===== CLICK EFFECT (ပေါက်ကွဲသလိုမျိုး) ===== */
+        .click-ripple {
+            position: fixed;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(247,212,74,0.6), rgba(247,212,74,0.1), transparent);
+            transform: scale(0);
+            animation: rippleEffect 0.8s ease-out forwards;
+            pointer-events: none;
+            z-index: 999;
+        }
+        .click-ripple.red {
+            background: radial-gradient(circle, rgba(255,23,68,0.6), rgba(255,23,68,0.1), transparent);
+        }
+        @keyframes rippleEffect {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(4); opacity: 0; }
+        }
+        .click-burst {
+            animation: burstEffect 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes burstEffect {
+            0% { transform: scale(1); }
+            30% { transform: scale(0.85) rotate(-3deg); }
+            60% { transform: scale(1.1) rotate(2deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
 
         .section-title{font-size:0.65rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;display:flex;align-items:center;gap:10px;opacity:0.5}
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
@@ -376,9 +351,6 @@
         /* ===== SERVICES GRID ===== */
         .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;animation:slideUp 0.9s ease;margin-bottom:18px}
         .services-grid .service{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);border-radius:14px;padding:16px 10px;text-align:center;cursor:pointer;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.2);backdrop-filter:blur(10px)}
-        .services-grid .service:active{transform:scale(0.92);animation:clickPop 0.3s ease}
-        @keyframes clickPop{0%{transform:scale(0.92)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
-        .services-grid .service:hover{border-color:rgba(247,212,74,0.15);transform:translateY(-4px);box-shadow:0 8px 40px var(--gold-glow)}
         .services-grid .service .icon{font-size:1.8rem;display:block;margin-bottom:6px;transition:all 0.4s ease}
         .services-grid .service:hover .icon{transform:scale(1.1) rotate(5deg)}
         .services-grid .service .label{font-size:0.55rem;color:var(--text-secondary);font-weight:600;line-height:1.3}
@@ -393,8 +365,6 @@
 
         /* ===== TELEGRAM ===== */
         .telegram-card{background:rgba(0,136,204,0.04);border:1px solid rgba(0,136,204,0.08);border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:12px;margin-bottom:10px;cursor:pointer;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);animation:slideUp 0.85s ease;backdrop-filter:blur(10px)}
-        .telegram-card:active{transform:scale(0.96);animation:clickPop 0.3s ease}
-        .telegram-card:hover{border-color:rgba(0,136,204,0.2);box-shadow:0 0 30px rgba(0,136,204,0.05)}
         .telegram-card .icon{font-size:1.6rem;color:#0088cc;flex-shrink:0}
         .telegram-card .info{flex:1}
         .telegram-card .info .title{font-size:0.7rem;font-weight:600;color:var(--text-primary)}
@@ -404,8 +374,6 @@
 
         /* ===== TELEGRAM CONTACT ===== */
         .telegram-contact{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);border-radius:12px;padding:10px 16px;display:flex;align-items:center;gap:12px;margin-bottom:16px;cursor:pointer;transition:all 0.4s ease;animation:slideUp 0.85s ease;backdrop-filter:blur(10px)}
-        .telegram-contact:active{transform:scale(0.96);animation:clickPop 0.3s ease}
-        .telegram-contact:hover{border-color:rgba(247,212,74,0.1)}
         .telegram-contact .icon{font-size:1.2rem;color:var(--cyan);flex-shrink:0}
         .telegram-contact .info{flex:1}
         .telegram-contact .info .label{font-size:0.55rem;color:var(--text-secondary);font-weight:500;opacity:0.6}
@@ -416,7 +384,6 @@
         /* ===== BOTTOM NAV ===== */
         .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(15,15,35,0.92);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,0.04);display:flex;justify-content:space-around;padding:8px 0 12px;max-width:480px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px rgba(0,0,0,0.4)}
         .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.3s ease;padding:6px 16px;border-radius:12px;position:relative;min-width:56px;border:1px solid transparent}
-        .bottom-nav .nav-item:active{transform:scale(0.85);background:rgba(247,212,74,0.05);animation:clickPop 0.3s ease}
         .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;transition:all 0.3s ease}
         .bottom-nav .nav-item .label{font-size:0.4rem;margin-top:1px;font-weight:700;letter-spacing:0.5px;transition:all 0.3s ease}
         .bottom-nav .nav-item.active{color:var(--gold);background:rgba(247,212,74,0.06);border-color:rgba(247,212,74,0.12);box-shadow:0 0 30px rgba(247,212,74,0.05)}
@@ -450,7 +417,6 @@
         .modal .form-group .error-text{font-size:0.5rem;color:var(--red);margin-top:3px;display:none}
         .modal .form-group .error-text.show{display:block}
         .modal .btn-primary{width:100%;padding:11px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:10px;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;position:relative;z-index:1;box-shadow:0 0 30px var(--gold-glow)}
-        .modal .btn-primary:active{transform:scale(0.96);animation:clickPop 0.3s ease}
         .modal .btn-primary:hover{box-shadow:0 0 50px var(--gold-glow)}
         .modal .switch-link{color:var(--cyan);cursor:pointer;font-weight:600;text-align:center;display:block;margin-top:10px;font-size:0.7rem;position:relative;z-index:1}
         .modal .switch-link:active{opacity:0.7}
@@ -478,7 +444,7 @@
         .confirm-overlay .status{display:inline-block;font-size:0.5rem;color:var(--green);background:rgba(0,230,118,0.08);padding:2px 14px;border-radius:20px;border:1px solid rgba(0,230,118,0.1);margin-bottom:16px;position:relative;z-index:1}
         .confirm-overlay .btn-group{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;position:relative;z-index:1}
         .confirm-overlay .btn-confirm{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;padding:10px 28px;border-radius:12px;font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.3s ease;box-shadow:0 0 30px var(--gold-glow)}
-        .confirm-overlay .btn-confirm:active{transform:scale(0.95);animation:clickPop 0.3s ease}
+        .confirm-overlay .btn-confirm:active{transform:scale(0.95)}
         .confirm-overlay .btn-cancel{background:transparent;border:2px solid rgba(255,255,255,0.06);color:var(--text-secondary);padding:10px 28px;border-radius:12px;font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.3s ease}
         .confirm-overlay .btn-cancel:active{transform:scale(0.95)}
         .confirm-overlay .btn-cancel:hover{border-color:var(--red);color:var(--red)}
@@ -510,60 +476,53 @@
 
     <!-- ===== WELCOME ===== -->
     <div class="welcome">
-        <div class="greeting"><i class="fas fa-fire"></i> <span id="greeting">Hey, Gamer!</span></div>
-        <h2 id="title"><i class="fas fa-arrow-right"></i> Level Up Your <span>Game!</span></h2>
-        <p id="subtitle">Top up diamonds and dominate the battlefield</p>
+        <div class="greeting"><i class="fas fa-fire"></i> <span id="greeting">ဟေ့ကောင်လေး!</span></div>
+        <h2 id="title"><i class="fas fa-arrow-right"></i> ဂိမ်းကို <span>မြှင့်တင်လိုက်ပါ!</span></h2>
+        <p id="subtitle">စိန်တွေဖြည့်ပြီး စစ်မြေပြင်ကို အနိုင်ယူလိုက်ပါ</p>
     </div>
 
-    <!-- ===== SHOP STATUS BANNER ===== -->
+    <!-- ===== SHOP STATUS BANNER (စာလုံးကြီးကြီး) ===== -->
     <div class="shop-status-banner" id="shopStatusBanner" onclick="handleBannerClick()">
         <div class="banner-content">
-            <div class="banner-left">
-                <div class="banner-icon" id="statusIcon">🏪</div>
-                <div class="banner-text">
-                    <div class="banner-title" id="statusTitle">🟢 Shop Open</div>
-                    <div class="banner-sub" id="statusSub">10:00 AM - 10:00 PM</div>
-                </div>
-            </div>
             <div class="banner-status open" id="statusBadge">
-                <span class="status-dot"></span> OPEN
+                <span class="status-dot"></span> ဆိုင်ဖွင့်သည်
             </div>
         </div>
     </div>
 
     <!-- ===== SHOP CARD (GO TO SHOP) ===== -->
-    <a href="shop.html" class="shop-card open" id="shopCard">
+    <a href="shop.html" class="shop-card open" id="shopCard" onclick="handleShopClick(event)">
         <span class="icon">🎮</span>
         <div class="label" id="goToShop"><span class="highlight">⚡ GO TO SHOP</span></div>
-        <div class="sub" id="shopSubText">Browse all packages</div>
+        <div class="sub" id="shopSubText">ပက်ကေ့ခ်ျအားလုံးကိုကြည့်ပါ</div>
     </a>
 
     <!-- ===== SERVICES ===== -->
-    <div class="section-title" id="servicesTitle"><i class="fas fa-bolt"></i> Why Choose Us?</div>
+    <div class="section-title" id="servicesTitle"><i class="fas fa-bolt"></i> ဘာကြောင့် ကျွန်ုပ်တို့ကိုရွေးမလဲ?</div>
     <div class="services-grid">
-        <div class="service" onclick="handleServiceClick(this)"><span class="glow"></span><span class="icon">⚡</span><span class="label" id="s1">10 mins delivery</span></div>
-        <div class="service" onclick="handleServiceClick(this)"><span class="glow"></span><span class="icon">🚀</span><span class="label" id="s2">Fast • Easy • Trusted</span></div>
-        <div class="service" onclick="handleServiceClick(this)"><span class="glow"></span><span class="icon">💰</span><span class="label" id="s3">Best Price & Best Service</span></div>
-        <div class="service" onclick="handleServiceClick(this)"><span class="glow"></span><span class="icon">🕐</span><span class="label" id="s4">10 AM - 10 PM</span></div>
+        <div class="service" onclick="handleServiceClick(this)"><span class="glow"></span><span class="icon">⚡</span><span class="label" id="s1">၁၀ မိနစ်အတွင်း အော်ဒါပြီးမြောက်</span></div>
+        <div class="service" onclick="handleServiceClick(this)"><span class="glow"></span><span class="icon">🚀</span><span class="label" id="s2">လျှင်မြန် • လွယ်ကူ • ယုံကြည်စိတ်ချရ</span></div>
+        <div class="service" onclick="handleServiceClick(this)"><span class="glow"></span><span class="icon">💰</span><span class="label" id="s3">အတန်ဆုံးဈေးနဲ့ အကောင်းဆုံး Service</span></div>
+        <div class="service" onclick="handleServiceClick(this)"><span class="glow"></span><span class="icon">🕐</span><span class="label" id="s4">မနက် ၁၀ နာရီမှ ည ၁၀ နာရီအထိ</span></div>
         <div class="service" onclick="handleServiceClick(this)"><span class="glow"></span><span class="icon">🎮</span><span class="label" id="s5">Mobile Legends</span></div>
         <div class="service" onclick="handleServiceClick(this)"><span class="glow"></span><span class="icon">⭐</span><span class="label" id="s6">Coming Soon</span></div>
     </div>
 
     <!-- ===== TELEGRAM CHANNEL ===== -->
-    <div class="telegram-card" onclick="window.open('https://t.me/Premium_GameShop', '_blank')">
+    <div class="telegram-card" onclick="handleTelegramClick()">
         <span class="icon"><i class="fab fa-telegram-plane"></i></span>
         <div class="info">
-            <div class="title" id="telegramTitle">📢 Join Our Telegram Channel</div>
-            <div class="desc" id="telegramDesc">Get latest updates, promos and support</div>
+            <div class="title" id="telegramTitle">📢 ကျွန်ုပ်တို့ Telegram ချန်နယ်သို့လာရောက်ပါ</div>
+            <div class="desc" id="telegramDesc">နောက်ဆုံးရသတင်းများ၊ ပရိုမိုးရှင်းများနှင့် အကူအညီရယူပါ</div>
         </div>
         <span class="arrow"><i class="fas fa-chevron-right"></i></span>
     </div>
 
     <!-- ===== TELEGRAM CONTACT ===== -->
-    <div class="telegram-contact" onclick="window.open('https://t.me/Energypremiumhub', '_blank')">
+    <div class="telegram-contact" onclick="handleTelegramContactClick()">
         <span class="icon"><i class="fas fa-headset"></i></span>
         <div class="info">
-            <div class="label" id="contactLabel">💬 Need Help?</div>
+            <div class="label" id="contactLabel">💬 အကူအညီလိုပါသလား?</div>
             <div class="username">@Energypremiumhub</div>
         </div>
         <span class="arrow"><i class="fas fa-chevron-right"></i></span>
@@ -604,8 +563,8 @@
         <div class="email" id="confirmEmail">email@example.com</div>
         <div class="status">🟢 Online</div>
         <div class="btn-group">
-            <button class="btn-confirm" id="confirmYes"><i class="fas fa-check"></i> Confirm</button>
-            <button class="btn-cancel" id="confirmNo"><i class="fas fa-times"></i> Cancel</button>
+            <button class="btn-confirm" id="confirmYes"><i class="fas fa-check"></i> ဟုတ်ကဲ့</button>
+            <button class="btn-cancel" id="confirmNo"><i class="fas fa-times"></i> မဟုတ်ပါ</button>
         </div>
     </div>
 </div>
@@ -614,22 +573,22 @@
 <div class="modal-overlay" id="authModal">
     <div class="modal">
         <button class="close-btn" onclick="closeModal()">✕</button>
-        <h2 id="modalTitle">⚔️ Login</h2>
-        <p id="modalSub">Welcome back, warrior!</p>
+        <h2 id="modalTitle">⚔️ ဝင်ရန်</h2>
+        <p id="modalSub">ပြန်လည်ကြိုဆိုပါတယ် စစ်သည်တော်!</p>
         <div id="modalBody">
             <div id="loginForm">
                 <div class="form-group">
-                    <label id="emailLabel">📧 Email / Username / Phone</label>
-                    <input type="text" id="loginEmail" placeholder="Enter your email, username or phone">
+                    <label id="emailLabel">📧 အီးမေးလ် / အသုံးပြုသူအမည် / ဖုန်းနံပါတ်</label>
+                    <input type="text" id="loginEmail" placeholder="သင့်အီးမေးလ်၊ အသုံးပြုသူအမည် သို့မဟုတ် ဖုန်းနံပါတ်ထည့်ပါ">
                 </div>
                 <div class="form-group">
-                    <label id="passLabel">🔑 Password</label>
-                    <input type="password" id="loginPassword" placeholder="Enter your password">
+                    <label id="passLabel">🔑 စကားဝှက်</label>
+                    <input type="password" id="loginPassword" placeholder="သင့်စကားဝှက်ထည့်ပါ">
                 </div>
                 <div class="login-error" id="loginError"></div>
-                <button class="btn-primary" id="loginBtn" onclick="handleLogin()">🔑 Login</button>
-                <span class="forgot-link" onclick="openForgotPassword()">🔑 Forgot Password?</span>
-                <span class="switch-link" id="switchToRegister" onclick="switchAuthMode()">Don't have an account? Register</span>
+                <button class="btn-primary" id="loginBtn" onclick="handleLogin()">🔑 ဝင်ရန်</button>
+                <span class="forgot-link" onclick="openForgotPassword()">🔑 စကားဝှက်မေ့နေပါသလား?</span>
+                <span class="switch-link" id="switchToRegister" onclick="switchAuthMode()">အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်</span>
             </div>
             <div id="registerForm" style="display:none;">
                 <div class="avatar-upload">
@@ -641,59 +600,59 @@
                     <span class="label">Profile Picture (optional)</span>
                 </div>
                 <div class="form-group">
-                    <label>👤 Username <span class="required">*</span></label>
-                    <input type="text" id="regUsername" placeholder="Choose a username (no spaces)" oninput="this.value=this.value.replace(/\s/g,'')">
-                    <div class="error-text" id="usernameError">Username is required (no spaces)</div>
+                    <label>👤 အသုံးပြုသူအမည် <span class="required">*</span></label>
+                    <input type="text" id="regUsername" placeholder="အသုံးပြုသူအမည်ရွေးပါ (နေရာလပ်မထည့်ရ)" oninput="this.value=this.value.replace(/\s/g,'')">
+                    <div class="error-text" id="usernameError">အသုံးပြုသူအမည် လိုအပ်ပါသည် (နေရာလပ်မထည့်ရ)</div>
                 </div>
                 <div class="form-group">
-                    <label>📧 Email</label>
-                    <input type="email" id="regEmail" placeholder="Enter your email (optional)">
-                    <div class="error-text" id="emailError">Valid email is required</div>
+                    <label>📧 အီးမေးလ်</label>
+                    <input type="email" id="regEmail" placeholder="သင့်အီးမေးလ်ထည့်ပါ (optional)">
+                    <div class="error-text" id="emailError">မှန်ကန်တဲ့ အီးမေးလ် လိုအပ်ပါသည်</div>
                 </div>
                 <div class="form-group">
-                    <label>📱 Phone Number</label>
-                    <input type="tel" id="regPhone" placeholder="Enter your phone number (optional)">
-                    <div class="error-text" id="phoneError">Phone number is required</div>
+                    <label>📱 ဖုန်းနံပါတ်</label>
+                    <input type="tel" id="regPhone" placeholder="သင့်ဖုန်းနံပါတ်ထည့်ပါ (optional)">
+                    <div class="error-text" id="phoneError">ဖုန်းနံပါတ် လိုအပ်ပါသည်</div>
                 </div>
                 <div class="form-group">
-                    <label>🔑 Password <span class="required">*</span></label>
-                    <input type="password" id="regPassword" placeholder="Min 4 characters">
-                    <div class="error-text" id="passwordError">Password must be at least 4 characters</div>
+                    <label>🔑 စကားဝှက် <span class="required">*</span></label>
+                    <input type="password" id="regPassword" placeholder="အနည်းဆုံး ၄ လုံး">
+                    <div class="error-text" id="passwordError">စကားဝှက်သည် အနည်းဆုံး ၄ လုံးရှိရမယ်</div>
                 </div>
                 <div class="form-group">
-                    <label>🔐 Confirm Password <span class="required">*</span></label>
-                    <input type="password" id="regConfirmPassword" placeholder="Re-enter password">
-                    <div class="error-text" id="confirmError">Passwords do not match</div>
+                    <label>🔐 စကားဝှက်အတည်ပြုရန် <span class="required">*</span></label>
+                    <input type="password" id="regConfirmPassword" placeholder="စကားဝှက်ပြန်ထည့်ပါ">
+                    <div class="error-text" id="confirmError">စကားဝှက်များ မတူညီပါ</div>
                 </div>
-                <button class="btn-primary" onclick="handleRegister()">🔑 Register</button>
-                <span class="switch-link" id="switchToLogin" onclick="switchAuthMode()">Already have an account? Login</span>
+                <button class="btn-primary" onclick="handleRegister()">🔑 မှတ်ပုံတင်ရန်</button>
+                <span class="switch-link" id="switchToLogin" onclick="switchAuthMode()">အကောင့်ရှိပြီးသား? ဝင်ရန်</span>
             </div>
             <div id="forgotForm" style="display:none;">
                 <div class="form-group">
-                    <label>📧 Email or Phone</label>
-                    <input type="text" id="forgotEmail" placeholder="Enter your registered email or phone">
-                    <div class="error-text" id="forgotEmailError">Please enter your email or phone</div>
+                    <label>📧 အီးမေးလ် သို့မဟုတ် ဖုန်းနံပါတ်</label>
+                    <input type="text" id="forgotEmail" placeholder="သင့်မှတ်ပုံတင်ထားတဲ့ အီးမေးလ် သို့မဟုတ် ဖုန်းနံပါတ်ထည့်ပါ">
+                    <div class="error-text" id="forgotEmailError">ကျေးဇူးပြု၍ အီးမေးလ် သို့မဟုတ် ဖုန်းနံပါတ်ထည့်ပါ</div>
                 </div>
                 <div id="otpSection" style="display:none;">
                     <div class="form-group">
-                        <label>🔑 OTP Code</label>
-                        <input type="text" id="otpCode" placeholder="Enter OTP code sent to your email">
-                        <div class="error-text" id="otpError">Invalid OTP code</div>
+                        <label>🔑 OTP ကုဒ်</label>
+                        <input type="text" id="otpCode" placeholder="သင့်အီးမေးလ်သို့ ပို့ထားတဲ့ OTP ကုဒ်ထည့်ပါ">
+                        <div class="error-text" id="otpError">OTP ကုဒ် မမှန်ပါ</div>
                     </div>
                     <div class="form-group">
-                        <label>🔑 New Password</label>
-                        <input type="password" id="newPassword" placeholder="Min 4 characters">
-                        <div class="error-text" id="newPasswordError">Password must be at least 4 characters</div>
+                        <label>🔑 စကားဝှက်အသစ်</label>
+                        <input type="password" id="newPassword" placeholder="အနည်းဆုံး ၄ လုံး">
+                        <div class="error-text" id="newPasswordError">စကားဝှက်သည် အနည်းဆုံး ၄ လုံးရှိရမယ်</div>
                     </div>
                     <div class="form-group">
-                        <label>🔐 Confirm New Password</label>
-                        <input type="password" id="confirmNewPassword" placeholder="Re-enter password">
-                        <div class="error-text" id="confirmNewError">Passwords do not match</div>
+                        <label>🔐 စကားဝှက်အသစ်အတည်ပြုရန်</label>
+                        <input type="password" id="confirmNewPassword" placeholder="စကားဝှက်ပြန်ထည့်ပါ">
+                        <div class="error-text" id="confirmNewError">စကားဝှက်များ မတူညီပါ</div>
                     </div>
-                    <button class="btn-primary" onclick="resetPassword()">🔄 Reset Password</button>
+                    <button class="btn-primary" onclick="resetPassword()">🔄 စကားဝှက်ပြန်သတ်မှတ်ရန်</button>
                 </div>
-                <button class="btn-primary" id="sendOtpBtn" onclick="sendOTP()" style="margin-bottom:8px;">📧 Send OTP</button>
-                <span class="switch-link" onclick="closeForgotPassword()">← Back to Login</span>
+                <button class="btn-primary" id="sendOtpBtn" onclick="sendOTP()" style="margin-bottom:8px;">📧 OTP ပို့ရန်</button>
+                <span class="switch-link" onclick="closeForgotPassword()">← ဝင်ရန်စာမျက်နှာသို့</span>
             </div>
         </div>
     </div>
@@ -714,68 +673,64 @@
     const LANG_DATA = {
         my: {
             appName: 'Premium Game Shop',
-            greeting: 'Hey, Gamer!',
-            title: 'Level Up Your <span>Game!</span>',
-            subtitle: 'Top up diamonds and dominate the battlefield',
+            greeting: 'ဟေ့ကောင်လေး!',
+            title: 'ဂိမ်းကို <span>မြှင့်တင်လိုက်ပါ!</span>',
+            subtitle: 'စိန်တွေဖြည့်ပြီး စစ်မြေပြင်ကို အနိုင်ယူလိုက်ပါ',
             goToShop: '⚡ GO TO SHOP',
-            shopSubText: 'Browse all packages',
-            servicesTitle: 'Why Choose Us?',
-            s1: '10 mins delivery',
-            s2: 'Fast • Easy • Trusted',
-            s3: 'Best Price & Best Service',
-            s4: '10 AM - 10 PM',
+            shopSubText: 'ပက်ကေ့ခ်ျအားလုံးကိုကြည့်ပါ',
+            servicesTitle: 'ဘာကြောင့် ကျွန်ုပ်တို့ကိုရွေးမလဲ?',
+            s1: '၁၀ မိနစ်အတွင်း အော်ဒါပြီးမြောက်',
+            s2: 'လျှင်မြန် • လွယ်ကူ • ယုံကြည်စိတ်ချရ',
+            s3: 'အတန်ဆုံးဈေးနဲ့ အကောင်းဆုံး Service',
+            s4: 'မနက် ၁၀ နာရီမှ ည ၁၀ နာရီအထိ',
             s5: 'Mobile Legends',
             s6: 'Coming Soon',
-            telegramTitle: '📢 Join Our Telegram Channel',
-            telegramDesc: 'Get latest updates, promos and support',
-            contactLabel: '💬 Need Help?',
+            telegramTitle: '📢 ကျွန်ုပ်တို့ Telegram ချန်နယ်သို့လာရောက်ပါ',
+            telegramDesc: 'နောက်ဆုံးရသတင်းများ၊ ပရိုမိုးရှင်းများနှင့် အကူအညီရယူပါ',
+            contactLabel: '💬 အကူအညီလိုပါသလား?',
             contactUsername: '@Energypremiumhub',
             home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
-            noti: '🔔 No new notifications',
-            modalLogin: '⚔️ Login',
-            modalRegister: '🛡️ Register',
-            modalLoginSub: 'Welcome back, warrior!',
-            modalRegisterSub: 'Create your account, champion!',
-            email: '📧 Email / Username / Phone',
-            password: '🔑 Password',
-            username: '👤 Username',
-            phone: '📱 Phone Number',
-            switchLogin: "Don't have an account? Register",
-            switchRegister: 'Already have an account? Login',
-            loginSuccess: '✅ Welcome back, Champion!',
-            registerSuccess: '✅ Account created! Welcome!',
-            logoutSuccess: '🚪 Logged out successfully!',
-            logoutConfirm: 'Are you sure you want to logout?',
-            enterEmail: 'Please enter your email, username or phone',
-            enterPassword: 'Please enter your password',
-            enterUsername: 'Please enter your username',
-            enterValidEmail: 'Please enter a valid email',
-            enterPhone: 'Please enter your phone number',
-            passwordMin: 'Password must be at least 4 characters',
-            passwordMatch: 'Passwords do not match',
-            userExists: '❌ Username, email or phone already exists',
-            userNotFound: '❌ Account not found. Please register first.',
-            invalidCredentials: '❌ Invalid email/username/phone or password',
-            forgotTitle: '🔑 Forgot Password',
-            forgotSub: 'Enter your email or phone to reset password',
-            sendOtp: '📧 Send OTP',
-            resetPassword: '🔄 Reset Password',
-            otpSent: '✅ OTP sent to your email!',
-            otpError: '❌ Invalid OTP code',
-            resetSuccess: '✅ Password reset successfully!',
-            resetError: '❌ Failed to reset password. Please try again.',
-            backToLogin: '← Back to Login',
-            emailSentError: '❌ Failed to send OTP. Please try again.',
-            noSpace: 'Username cannot contain spaces',
-            confirmYes: '✅ Yes, that\'s me',
-            confirmNo: '❌ No, cancel',
-            forgotBack: '← Back to Login',
-            shopOpen: '🟢 OPEN',
-            shopClosed: '🔴 CLOSED',
-            bannerOpenTitle: '🟢 Shop Open',
-            bannerClosedTitle: '🔴 Shop Closed',
-            bannerOpenSub: '10:00 AM - 10:00 PM',
-            bannerClosedSub: 'Please come back later'
+            noti: '🔔 အသိပေးချက်အသစ်မရှိပါ',
+            modalLogin: '⚔️ ဝင်ရန်',
+            modalRegister: '🛡️ မှတ်ပုံတင်ရန်',
+            modalLoginSub: 'ပြန်လည်ကြိုဆိုပါတယ် စစ်သည်တော်!',
+            modalRegisterSub: 'အကောင့်ဖွင့်ပါ ချန်ပီယံ!',
+            email: '📧 အီးမေးလ် / အသုံးပြုသူအမည် / ဖုန်းနံပါတ်',
+            password: '🔑 စကားဝှက်',
+            username: '👤 အသုံးပြုသူအမည်',
+            phone: '📱 ဖုန်းနံပါတ်',
+            switchLogin: 'အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်',
+            switchRegister: 'အကောင့်ရှိပြီးသား? ဝင်ရန်',
+            loginSuccess: '✅ ကြိုဆိုပါတယ် ချန်ပီယံ!',
+            registerSuccess: '✅ အကောင့်ဖွင့်ခြင်းအောင်မြင်ပါပြီ!',
+            logoutSuccess: '🚪 ထွက်ခြင်းအောင်မြင်ပါပြီ!',
+            logoutConfirm: 'ထွက်မှာသေချာလား?',
+            enterEmail: 'ကျေးဇူးပြု၍ အီးမေးလ်၊ အသုံးပြုသူအမည် သို့မဟုတ် ဖုန်းနံပါတ်ထည့်ပါ',
+            enterPassword: 'ကျေးဇူးပြု၍ စကားဝှက်ထည့်ပါ',
+            enterUsername: 'ကျေးဇူးပြု၍ အသုံးပြုသူအမည်ထည့်ပါ',
+            enterValidEmail: 'ကျေးဇူးပြု၍ မှန်ကန်တဲ့ အီးမေးလ်ထည့်ပါ',
+            enterPhone: 'ကျေးဇူးပြု၍ ဖုန်းနံပါတ်ထည့်ပါ',
+            passwordMin: 'စကားဝှက်သည် အနည်းဆုံး ၄ လုံးရှိရမယ်',
+            passwordMatch: 'စကားဝှက်များ မတူညီပါ',
+            userExists: '❌ အသုံးပြုသူအမည်၊ အီးမေးလ် သို့မဟုတ် ဖုန်းနံပါတ် ရှိပြီးသားပါ',
+            userNotFound: '❌ အကောင့်မရှိပါ။ ကျေးဇူးပြု၍ မှတ်ပုံတင်ပါ။',
+            invalidCredentials: '❌ အီးမေးလ်/အသုံးပြုသူအမည်/ဖုန်းနံပါတ် သို့မဟုတ် စကားဝှက် မှားနေပါသည်',
+            forgotTitle: '🔑 စကားဝှက်မေ့နေပါသလား',
+            forgotSub: 'စကားဝှက်ပြန်သတ်မှတ်ရန် သင့်အီးမေးလ် သို့မဟုတ် ဖုန်းနံပါတ်ကိုထည့်ပါ',
+            sendOtp: '📧 OTP ပို့ရန်',
+            resetPassword: '🔄 စကားဝှက်ပြန်သတ်မှတ်ရန်',
+            otpSent: '✅ သင့်အီးမေးလ်သို့ OTP ပို့ထားပါသည်!',
+            otpError: '❌ OTP ကုဒ် မှားနေပါသည်',
+            resetSuccess: '✅ စကားဝှက်ပြန်သတ်မှတ်ခြင်းအောင်မြင်ပါပြီ!',
+            resetError: '❌ စကားဝှက်ပြန်သတ်မှတ်ခြင်းမအောင်မြင်ပါ။ ကျေးဇူးပြု၍ ပြန်စမ်းပါ။',
+            backToLogin: '← ဝင်ရန်စာမျက်နှာသို့',
+            emailSentError: '❌ OTP ပို့ရန်မအောင်မြင်ပါ။ ကျေးဇူးပြု၍ ပြန်စမ်းပါ။',
+            noSpace: 'အသုံးပြုသူအမည်တွင် နေရာလွတ်မထည့်ရပါ',
+            confirmYes: '✅ ဟုတ်ကဲ့ ကျွန်တော်ပါ',
+            confirmNo: '❌ မဟုတ်ပါ၊ ပယ်ဖျက်မည်',
+            forgotBack: '← ဝင်ရန်စာမျက်နှာသို့',
+            shopOpen: '🟢 ဆိုင်ဖွင့်သည်',
+            shopClosed: '🔴 ဆိုင်ပိတ်သည်'
         },
         en: {
             appName: 'Premium Game Shop',
@@ -835,12 +790,8 @@
             confirmYes: '✅ Yes, that\'s me',
             confirmNo: '❌ No, cancel',
             forgotBack: '← Back to Login',
-            shopOpen: '🟢 OPEN',
-            shopClosed: '🔴 CLOSED',
-            bannerOpenTitle: '🟢 Shop Open',
-            bannerClosedTitle: '🔴 Shop Closed',
-            bannerOpenSub: '10:00 AM - 10:00 PM',
-            bannerClosedSub: 'Please come back later'
+            shopOpen: '🟢 Shop Open',
+            shopClosed: '🔴 Shop Closed'
         }
     };
 
@@ -881,11 +832,8 @@
         document.getElementById('navShop').textContent = d.shop;
         document.getElementById('navPayment').textContent = d.payment;
         document.getElementById('navProfile').textContent = d.profile;
-        document.getElementById('statusTitle').textContent = isShopOpen() ? d.bannerOpenTitle : d.bannerClosedTitle;
-        document.getElementById('statusSub').textContent = isShopOpen() ? d.bannerOpenSub : d.bannerClosedSub;
         document.getElementById('statusBadge').innerHTML = isShopOpen() ? '<span class="status-dot"></span> ' + d.shopOpen : '<span class="status-dot"></span> ' + d.shopClosed;
         document.getElementById('statusBadge').className = 'banner-status ' + (isShopOpen() ? 'open' : 'closed');
-        document.getElementById('statusIcon').textContent = isShopOpen() ? '🏪' : '🔒';
         updateAuthUI();
         updateModalUI();
         updateShopUI();
@@ -905,58 +853,104 @@
     function updateShopUI() {
         const shopCard = document.getElementById('shopCard');
         const statusBadge = document.getElementById('statusBadge');
-        const statusIcon = document.getElementById('statusIcon');
-        const statusTitle = document.getElementById('statusTitle');
-        const statusSub = document.getElementById('statusSub');
         const d = LANG_DATA[currentLang];
 
         if (isShopOpen()) {
             shopCard.className = 'shop-card open';
             statusBadge.innerHTML = '<span class="status-dot"></span> ' + d.shopOpen;
             statusBadge.className = 'banner-status open';
-            statusIcon.textContent = '🏪';
-            statusTitle.textContent = d.bannerOpenTitle;
-            statusSub.textContent = d.bannerOpenSub;
         } else {
             shopCard.className = 'shop-card closed';
             statusBadge.innerHTML = '<span class="status-dot"></span> ' + d.shopClosed;
             statusBadge.className = 'banner-status closed';
-            statusIcon.textContent = '🔒';
-            statusTitle.textContent = d.bannerClosedTitle;
-            statusSub.textContent = d.bannerClosedSub;
         }
     }
 
     setInterval(updateShopUI, 60000);
 
-    // ===== CLICK ANIMATIONS =====
-    function handleBannerClick() {
-        const banner = document.getElementById('shopStatusBanner');
-        banner.style.animation = 'none';
-        setTimeout(() => {
-            banner.style.animation = 'slideUp 0.5s ease';
-        }, 10);
-        showToast(isShopOpen() ? '🟢 Shop is Open! Start shopping now!' : '🔴 Shop is Closed. Please come back at 10 AM!');
+    // ===== CLICK ANIMATIONS (ပေါက်ကွဲသလိုမျိုး) =====
+    function createRipple(x, y, isRed = false) {
+        const ripple = document.createElement('div');
+        ripple.className = 'click-ripple' + (isRed ? ' red' : '');
+        const size = Math.random() * 60 + 40;
+        ripple.style.width = size + 'px';
+        ripple.style.height = size + 'px';
+        ripple.style.left = (x - size/2) + 'px';
+        ripple.style.top = (y - size/2) + 'px';
+        document.body.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 800);
     }
 
-    function handleServiceClick(el) {
-        el.style.animation = 'none';
-        setTimeout(() => {
-            el.style.animation = 'clickPop 0.3s ease';
-        }, 10);
+    function handleBannerClick(e) {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = e.clientX || rect.left + rect.width/2;
+        const y = e.clientY || rect.top + rect.height/2;
+        const isRed = !isShopOpen();
+        createRipple(x, y, isRed);
+        
+        const banner = document.getElementById('shopStatusBanner');
+        banner.classList.add('click-burst');
+        setTimeout(() => banner.classList.remove('click-burst'), 600);
+        
+        showToast(isShopOpen() ? '🟢 ဆိုင်ဖွင့်ထားပါသည်! အခုပဲ စျေးဝယ်လိုက်ပါ!' : '🔴 ဆိုင်ပိတ်ထားပါသည်။ မနက် ၁၀ နာရီတွင် ပြန်လည်ဖွင့်ပါမည်။');
+    }
+
+    function handleShopClick(e) {
+        if (!isShopOpen()) {
+            e.preventDefault();
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = e.clientX || rect.left + rect.width/2;
+            const y = e.clientY || rect.top + rect.height/2;
+            createRipple(x, y, true);
+            showToast('🔴 ဆိုင်ပိတ်ထားပါသည်။ မနက် ၁၀ နာရီတွင် ပြန်လည်ဖွင့်ပါမည်။');
+            return false;
+        }
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = e.clientX || rect.left + rect.width/2;
+        const y = e.clientY || rect.top + rect.height/2;
+        createRipple(x, y, false);
+        return true;
+    }
+
+    function handleServiceClick(el, e) {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX || rect.left + rect.width/2;
+        const y = e.clientY || rect.top + rect.height/2;
+        createRipple(x, y, false);
+        
+        el.classList.add('click-burst');
+        setTimeout(() => el.classList.remove('click-burst'), 600);
+        
         const label = el.querySelector('.label').textContent;
         showToast('✅ ' + label);
     }
 
+    function handleTelegramClick() {
+        const x = window.innerWidth / 2;
+        const y = window.innerHeight / 2;
+        createRipple(x, y, false);
+        window.open('https://t.me/Premium_GameShop', '_blank');
+    }
+
+    function handleTelegramContactClick() {
+        const x = window.innerWidth / 2;
+        const y = window.innerHeight / 2;
+        createRipple(x, y, false);
+        window.open('https://t.me/Energypremiumhub', '_blank');
+    }
+
     function handleNavClick(el, e) {
         e.preventDefault();
-        el.style.animation = 'none';
-        setTimeout(() => {
-            el.style.animation = 'clickPop 0.3s ease';
-        }, 10);
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX || rect.left + rect.width/2;
+        const y = e.clientY || rect.top + rect.height/2;
+        createRipple(x, y, false);
+        
+        el.classList.add('click-burst');
+        setTimeout(() => el.classList.remove('click-burst'), 600);
         setTimeout(() => {
             window.location.href = el.getAttribute('href');
-        }, 300);
+        }, 400);
     }
 
     // ===== TOAST =====
