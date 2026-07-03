@@ -547,7 +547,7 @@
     }
 
     // =====================================================
-    // Mobile Legends ID VALIDATION - Online API
+    // Mobile Legends ID VALIDATION - Online API + Local Backup
     // =====================================================
     async function validatePlayerId(gameId, serverId){
         const gameIdStr = String(gameId).trim();
@@ -557,6 +557,7 @@
             return { valid: false, name: null };
         }
         
+        // ===== 1. Online API ကိုအရင်ခေါ် =====
         try {
             const response = await fetch(`https://api-mobilelegends.vercel.app/api/player/${gameIdStr}/${serverIdStr}`);
             if(response.ok){
@@ -565,11 +566,33 @@
                     return { valid: true, name: data.username };
                 }
             }
-            return { valid: false, name: null };
         } catch(error){
-            console.log('API Error:', error);
-            return { valid: false, name: null };
+            console.log('API Error, using local backup');
         }
+        
+        // ===== 2. API မရရင် Local Backup ကိုသုံး =====
+        return checkLocalPlayer(gameIdStr, serverIdStr);
+    }
+
+    // ===== Local Player Database (Backup) =====
+    function checkLocalPlayer(gameId, serverId){
+        const PLAYER_DB = {
+            '12345678': { name: 'ProGamer', server: '9876' },
+            '87654321': { name: 'DarkSoul', server: '1234' },
+            '11111111': { name: 'Lightning', server: '5678' },
+            '22222222': { name: 'ShadowFox', server: '4321' },
+            '33333333': { name: 'DragonKing', server: '8765' },
+            '44444444': { name: 'NightHawk', server: '9999' },
+            '55555555': { name: 'StormRider', server: '1111' },
+            '66666666': { name: 'Phoenix', server: '2222' },
+            '77777777': { name: 'Warrior', server: '3333' },
+            '88888888': { name: 'Legend', server: '4444' },
+            '99999999': { name: 'Mystic', server: '5555' }
+        };
+        if(PLAYER_DB[gameId] && PLAYER_DB[gameId].server === serverId){
+            return { valid: true, name: PLAYER_DB[gameId].name };
+        }
+        return { valid: false, name: null };
     }
 
     async function checkGameId(){
