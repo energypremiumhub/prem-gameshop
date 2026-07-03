@@ -68,10 +68,8 @@
         .package-item .info .double-badge{display:inline-block;font-size:0.45rem;color:var(--warning);background:rgba(245,158,11,0.1);padding:2px 10px;border-radius:12px;border:1px solid rgba(245,158,11,0.08);font-weight:600;margin-top:2px;letter-spacing:0.3px}
         .package-item .right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:3px;position:relative;z-index:1}
         .package-item .right .price{font-size:0.85rem;font-weight:700;color:var(--text-secondary);transition:all 0.4s ease}
-        .package-item .right .btn{background:var(--bg-input);color:var(--text-secondary);border:none;padding:5px 16px;border-radius:20px;font-weight:700;font-size:0.6rem;cursor:pointer;transition:all 0.2s cubic-bezier(0.34,1.2,0.64,1);border:1px solid var(--border-color);-webkit-tap-highlight-color:transparent;user-select:none}
-        .package-item .right .btn:active{transform:scale(0.88);transition:transform 0.1s ease}
+        .package-item .right .btn{background:var(--bg-input);color:var(--text-secondary);border:none;padding:5px 16px;border-radius:20px;font-weight:700;font-size:0.6rem;cursor:default;border:1px solid var(--border-color);user-select:none;pointer-events:none}
         .package-item .right .btn.select-mode{background:var(--bg-input);color:var(--text-secondary);box-shadow:none;border:1px solid var(--border-color)}
-        .package-item .right .btn.select-mode:hover{border-color:var(--gold);color:var(--gold)}
         .package-item .right .btn.buy-mode{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;box-shadow:0 0 30px var(--gold-glow);border-color:var(--gold);animation:btnPulse 1.5s ease-in-out infinite}
         @keyframes btnPulse{0%,100%{box-shadow:0 0 15px var(--gold-glow)}50%{box-shadow:0 0 40px var(--gold-glow)}}
         
@@ -479,15 +477,15 @@
             const btnClass = isSelected ? 'buy-mode' : 'select-mode';
             const badgeHtml = type === 'double' && pkg.badge ? `<span class="double-badge">${pkg.badge}</span>` : '';
             return `
-                <div class="package-item ${isSelected ? 'selected' : ''}" data-id="${pkg.id}">
+                <div class="package-item ${isSelected ? 'selected' : ''}" data-id="${pkg.id}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price},'${type}')">
                     <div class="glow-pulse"></div>
-                    <div class="info" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price},'${type}')">
+                    <div class="info">
                         <div class="name"><span class="dia-icon">💎</span> ${pkg.name}</div>
                         ${badgeHtml}
                     </div>
                     <div class="right">
                         <div class="price">${formatPrice(pkg.price)}</div>
-                        <button class="btn ${btnClass}" onclick="event.stopPropagation(); handleBuyClick('${pkg.id}','${pkg.name}',${pkg.price},'${type}')">${btnText}</button>
+                        <span class="btn ${btnClass}">${btnText}</span>
                     </div>
                 </div>
             `;
@@ -515,7 +513,7 @@
         renderPackages();
     }
 
-    // ===== BUY - Modal ပေါ်လာမယ် =====
+    // ===== BUY - Modal ပေါ်လာမယ် (ဒီမှာ ထပ်နှိပ်ရင် Modal ပေါ်မယ်) =====
     function handleBuyClick(id, name, price, type){
         bounceIcon(id);
         
