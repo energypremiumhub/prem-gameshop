@@ -1,45 +1,35 @@
 <!DOCTYPE html>
-<html lang="my">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>⚡ Premium Game Shop - Shop</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <script src="lang.js"></script>
-    <script src="auth.js"></script>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
         
         :root {
-            --bg-primary: #08081a;
-            --bg-secondary: #0c0c24;
-            --bg-card: rgba(16,16,50,0.6);
-            --bg-input: rgba(25,25,60,0.4);
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #111927;
+            --bg-card: #141c2b;
+            --bg-input: #1a2438;
             --text-primary: #ffffff;
-            --text-secondary: #9999cc;
+            --text-secondary: #8899bb;
             --border-color: rgba(255,255,255,0.06);
-            --shadow: rgba(0,0,0,0.6);
-            --primary: #4488ff;
-            --primary-glow: rgba(68,136,255,0.3);
-            --secondary: #aa66ff;
-            --secondary-glow: rgba(170,102,255,0.3);
-            --gold: #ffd700;
-            --gold-glow: rgba(255,215,0,0.3);
-            --cyan: #00e5ff;
-            --cyan-glow: rgba(0,229,255,0.2);
-            --pink: #ff2d78;
-            --pink-glow: rgba(255,45,120,0.2);
-            --orange: #ff6a00;
-            --orange-glow: rgba(255,106,0,0.2);
-            --green: #00ff87;
-            --green-glow: rgba(0,255,135,0.2);
-            --red: #ff0044;
-            --red-glow: rgba(255,0,68,0.4);
-            --purple: #b388ff;
-            --purple-glow: rgba(179,136,255,0.2);
-            --glass-border: rgba(255,255,255,0.06);
-            --glass-bg: rgba(16,16,50,0.3);
-            --warning: #ffab00;
+            --shadow: rgba(0,0,0,0.5);
+            --gold: #f5c842;
+            --gold-glow: rgba(245,200,66,0.3);
+            --cyan: #00d4ff;
+            --cyan-glow: rgba(0,212,255,0.2);
+            --pink: #ff6b9d;
+            --orange: #f97316;
+            --orange-glow: rgba(249,115,22,0.2);
+            --green: #22d3ee;
+            --green-glow: rgba(34,211,238,0.2);
+            --red: #ef4444;
+            --purple: #8b5cf6;
+            --purple-glow: rgba(139,92,246,0.2);
+            --warning: #f59e0b;
         }
 
         body {
@@ -49,134 +39,105 @@
             padding: 16px;
             padding-bottom: 90px;
             background-image: 
-                radial-gradient(ellipse at 20% 50%, rgba(68,136,255,0.05) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 20%, rgba(170,102,255,0.05) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 100%, rgba(68,136,255,0.03) 0%, transparent 40%);
-            overflow-x: hidden;
+                radial-gradient(ellipse at 20% 50%, rgba(245,200,66,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(0,212,255,0.04) 0%, transparent 50%);
         }
 
         ::-webkit-scrollbar{width:4px}
         ::-webkit-scrollbar-track{background:var(--bg-primary)}
-        ::-webkit-scrollbar-thumb{background:var(--primary);border-radius:10px;box-shadow:0 0 20px var(--primary-glow)}
+        ::-webkit-scrollbar-thumb{background:var(--gold);border-radius:10px}
 
         .container{max-width:500px;margin:0 auto}
 
         .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
         .header .left{display:flex;flex-direction:column;gap:6px}
-        .header .left .logo{font-size:0.9rem;font-weight:800;color:var(--primary);text-shadow:0 0 30px var(--primary-glow);letter-spacing:0.5px;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none;filter:drop-shadow(0 0 20px var(--primary-glow))}
-        .header .left .logo i{color:var(--cyan);-webkit-text-fill-color:initial;margin-right:4px;text-shadow:0 0 20px var(--cyan-glow)}
-        .header .left .profile-icon{background:var(--glass-bg);border:1px solid var(--glass-border);color:var(--text-secondary);padding:4px 14px;border-radius:10px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);text-decoration:none;display:inline-flex;align-items:center;gap:6px;height:36px;width:fit-content;backdrop-filter:blur(20px)}
+        .header .left .logo{font-size:1rem;font-weight:800;color:var(--gold);text-shadow:0 0 20px var(--gold-glow);letter-spacing:0.5px}
+        .header .left .logo i{color:var(--cyan);margin-right:6px;text-shadow:0 0 20px var(--cyan-glow)}
+        .header .left .profile-icon{background:transparent;border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 14px;border-radius:8px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-flex;align-items:center;gap:6px;height:36px;width:fit-content}
         .header .left .profile-icon:active{transform:scale(0.85)}
-        .header .left .profile-icon:hover{border-color:var(--gold);color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
-        .header .left .profile-icon.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow);padding:4px 14px}
+        .header .left .profile-icon:hover{border-color:var(--gold);color:var(--gold)}
+        .header .left .profile-icon.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 25px var(--gold-glow);padding:4px 14px}
         .header .left .profile-icon.logged-in:active{transform:scale(0.85)}
         .header .left .profile-icon.logged-in img{width:22px;height:22px;border-radius:50%;object-fit:cover;margin-right:4px}
         
         .header .right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
         .header .right .top{display:flex;gap:8px;align-items:center}
-        .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--glass-bg);padding:3px;border-radius:10px;border:1px solid var(--glass-border);backdrop-filter:blur(20px)}
+        .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:8px;border:1px solid var(--border-color)}
         .header .right .top .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;text-transform:uppercase}
         .header .right .top .lang-switcher .lang-btn.active{background:var(--gold);color:#0a0e1a;box-shadow:0 0 20px var(--gold-glow)}
         .header .right .top .lang-switcher .lang-btn:active{transform:scale(0.85)}
         
-        .header .right .top .noti-btn{background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;backdrop-filter:blur(20px)}
+        .header .right .top .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:8px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none}
         .header .right .top .noti-btn:active{transform:scale(0.85)}
-        .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none;box-shadow:0 0 15px var(--red-glow)}
+        .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none}
 
         .page-header{margin-bottom:16px;animation:slideUp 0.6s ease}
         .page-header h1{font-size:1.3rem;font-weight:800;color:var(--text-primary)}
-        .page-header h1 span{background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 40px var(--primary-glow)}
+        .page-header h1 span{background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 40px var(--gold-glow)}
         .page-header h1 i{color:var(--cyan);-webkit-text-fill-color:initial;margin-right:6px}
-        .page-header p{color:var(--text-secondary);font-size:0.7rem;margin-top:2px;opacity:0.6}
+        .page-header p{color:var(--text-secondary);font-size:0.7rem;margin-top:2px}
 
-        .double-box{background:var(--glass-bg);border:1px solid var(--glass-border);backdrop-filter:blur(20px);border-radius:14px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;cursor:pointer;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);animation:slideUp 0.7s ease;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.2)}
+        .double-box{background:linear-gradient(135deg,rgba(245,200,66,0.08),rgba(249,115,22,0.04));border:1px solid rgba(245,200,66,0.12);border-radius:14px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;cursor:pointer;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);animation:slideUp 0.7s ease;position:relative;overflow:hidden}
         .double-box:active{transform:scale(0.96)}
-        .double-box:hover{border-color:rgba(68,136,255,0.2);box-shadow:0 0 40px var(--primary-glow)}
+        .double-box:hover{border-color:rgba(245,200,66,0.3);box-shadow:0 0 40px var(--gold-glow)}
         .double-box .left{display:flex;align-items:center;gap:12px}
         .double-box .left .icon{font-size:1.8rem;color:var(--gold)}
         .double-box .left .text{font-size:0.8rem;font-weight:600;color:var(--text-primary)}
-        .double-box .left .sub{font-size:0.55rem;color:var(--text-secondary);margin-top:2px;opacity:0.6}
+        .double-box .left .sub{font-size:0.55rem;color:var(--text-secondary);margin-top:2px}
         .double-box .arrow{color:var(--gold);font-size:1.2rem;transition:all 0.3s ease}
         .double-box:hover .arrow{transform:translateX(4px)}
 
-        /* ===== DOUBLE WARNING ===== */
-        .double-warning {
-            background: rgba(255,171,0,0.06);
-            border: 1px solid rgba(255,171,0,0.12);
-            border-radius: 10px;
-            padding: 10px 14px;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
-        .double-warning .icon {
-            color: var(--warning);
-            font-size: 1.2rem;
-            flex-shrink: 0;
-            margin-top: 1px;
-        }
-        .double-warning .text {
-            font-size: 0.6rem;
-            color: var(--text-secondary);
-            line-height: 1.5;
-            opacity: 0.8;
-        }
-        .double-warning .text strong {
-            color: var(--gold);
-        }
-
-        .section-title{font-size:0.65rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;display:flex;align-items:center;gap:10px;opacity:0.5}
+        .section-title{font-size:0.65rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
         .section-title i{color:var(--cyan);text-shadow:0 0 20px var(--cyan-glow)}
 
         .package-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
         
-        .package-item{display:flex;align-items:center;justify-content:space-between;background:var(--glass-bg);border:1px solid var(--glass-border);backdrop-filter:blur(20px);border-radius:12px;padding:12px 14px;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,0.2);position:relative;overflow:hidden}
+        .package-item{display:flex;align-items:center;justify-content:space-between;background:var(--bg-card);border:2px solid var(--border-color);border-radius:12px;padding:12px 14px;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);cursor:pointer;box-shadow:0 4px 20px var(--shadow);position:relative;overflow:hidden}
         
-        .package-item.selected{border-color:var(--gold);background:rgba(255,215,0,0.04);box-shadow:0 0 50px var(--gold-glow), inset 0 0 40px rgba(255,215,0,0.03)}
-        .package-item.selected::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(from 0deg,transparent,rgba(255,215,0,0.05),transparent,rgba(68,136,255,0.05),transparent);animation:spinGlow 6s linear infinite;pointer-events:none}
+        .package-item.selected{border-color:var(--gold);background:rgba(245,200,66,0.04);box-shadow:0 0 50px var(--gold-glow), inset 0 0 40px rgba(245,200,66,0.03)}
+        .package-item.selected::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(from 0deg,transparent,rgba(245,200,66,0.05),transparent,rgba(0,212,255,0.05),transparent);animation:spinGlow 6s linear infinite;pointer-events:none}
         .package-item.selected .price{color:var(--gold);text-shadow:0 0 30px var(--gold-glow)}
-        .package-item.selected .glow-pulse{position:absolute;top:0;left:0;right:0;bottom:0;border-radius:12px;background:radial-gradient(circle at center,rgba(255,215,0,0.05) 0%,transparent 70%);animation:pulseGlow 1.5s ease-in-out infinite;pointer-events:none}
+        .package-item.selected .glow-pulse{position:absolute;top:0;left:0;right:0;bottom:0;border-radius:12px;background:radial-gradient(circle at center,rgba(245,200,66,0.05) 0%,transparent 70%);animation:pulseGlow 1.5s ease-in-out infinite;pointer-events:none}
         
         @keyframes spinGlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
         @keyframes pulseGlow{0%,100%{opacity:0.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
 
         .package-item:hover .dia-icon{animation:floatIcon 2s ease-in-out infinite;color:var(--gold)}
         .package-item:hover .price{color:var(--gold)}
-        .package-item:hover{border-color:rgba(255,215,0,0.15)}
+        .package-item:hover{border-color:rgba(245,200,66,0.15)}
         @keyframes floatIcon{0%,100%{transform:translateY(0px)}50%{transform:translateY(-3px)}}
 
         .package-item .info{display:flex;flex-direction:column;gap:2px;flex:1;position:relative;z-index:1}
         .package-item .info .name{font-size:0.75rem;font-weight:600;color:var(--text-primary)}
         .package-item .info .name .dia-icon{color:var(--text-secondary);margin-right:4px;transition:all 0.3s ease;display:inline-block}
-        .package-item .info .double-badge{display:inline-block;font-size:0.4rem;color:var(--gold);background:rgba(255,215,0,0.12);padding:1px 8px;border-radius:10px;border:1px solid rgba(255,215,0,0.1);font-weight:600}
+        .package-item .info .double-badge{display:inline-block;font-size:0.4rem;color:var(--warning);background:rgba(245,158,11,0.12);padding:1px 8px;border-radius:10px;border:1px solid rgba(245,158,11,0.1);font-weight:600}
         
         .package-item .right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:3px;position:relative;z-index:1}
         .package-item .right .price{font-size:0.85rem;font-weight:700;color:var(--text-secondary);transition:all 0.4s ease}
         
-        .package-item .right .btn{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;padding:4px 14px;border-radius:12px;font-weight:700;font-size:0.55rem;cursor:pointer;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);box-shadow:0 0 20px rgba(255,215,0,0.1)}
+        .package-item .right .btn{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;padding:4px 14px;border-radius:12px;font-weight:700;font-size:0.55rem;cursor:pointer;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);box-shadow:0 0 20px rgba(245,200,66,0.1)}
         .package-item .right .btn:active{transform:scale(0.85)}
         .package-item .right .btn:hover{box-shadow:0 0 40px var(--gold-glow)}
-        .package-item .right .btn.select-mode{background:var(--bg-input);color:var(--text-secondary);box-shadow:none;border:1px solid var(--glass-border)}
+        .package-item .right .btn.select-mode{background:var(--bg-input);color:var(--text-secondary);box-shadow:none;border:1px solid var(--border-color)}
         .package-item .right .btn.select-mode:active{transform:scale(0.85)}
         .package-item .right .btn.select-mode:hover{border-color:var(--gold);color:var(--gold)}
         .package-item .right .btn.buy-mode{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;box-shadow:0 0 30px var(--gold-glow);animation:btnPulse 1s ease-in-out infinite}
         @keyframes btnPulse{0%,100%{box-shadow:0 0 20px var(--gold-glow)}50%{box-shadow:0 0 50px var(--gold-glow)}}
 
-        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(8,8,26,0.92);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,0.04);display:flex;justify-content:space-around;padding:8px 0 12px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px rgba(0,0,0,0.4)}
-        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.3s ease;padding:6px 16px;border-radius:12px;position:relative;min-width:56px;border:1px solid transparent}
-        .bottom-nav .nav-item:active{transform:scale(0.85);background:rgba(255,215,0,0.05)}
-        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;transition:all 0.3s ease}
-        .bottom-nav .nav-item .label{font-size:0.4rem;margin-top:1px;font-weight:700;letter-spacing:0.5px;transition:all 0.3s ease}
-        .bottom-nav .nav-item.active{color:var(--gold);background:rgba(255,215,0,0.06);border-color:rgba(255,215,0,0.12);box-shadow:0 0 30px rgba(255,215,0,0.05)}
-        .bottom-nav .nav-item.active .icon{transform:translateY(-2px);color:var(--gold)}
+        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);border-top:1px solid var(--border-color);display:flex;justify-content:space-around;padding:6px 0 10px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px var(--shadow)}
+        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);padding:4px 8px;border-radius:10px;position:relative}
+        .bottom-nav .nav-item:active{transform:scale(0.75)}
+        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
+        .bottom-nav .nav-item .label{font-size:0.4rem;margin-top:1px;font-weight:700;letter-spacing:0.5px;transition:all 0.4s ease}
+        .bottom-nav .nav-item.active{color:var(--gold)}
+        .bottom-nav .nav-item.active .icon{transform:translateY(-6px) scale(1.15);text-shadow:0 0 30px var(--gold-glow)}
         .bottom-nav .nav-item.active .label{color:var(--gold)}
-        .bottom-nav .nav-item:not(.active):hover{border-color:rgba(255,255,255,0.04);background:rgba(255,255,255,0.02)}
+        .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:24px;height:2.5px;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:10px;box-shadow:0 0 20px var(--gold-glow)}
 
-        .footer{text-align:center;margin-top:10px;padding:10px;border-top:1px solid var(--glass-border);color:var(--text-secondary);font-size:0.45rem;opacity:0.2;letter-spacing:1px}
+        .footer{text-align:center;margin-top:10px;padding:10px;border-top:1px solid var(--border-color);color:var(--text-secondary);font-size:0.45rem;opacity:0.3;letter-spacing:1px}
 
-        .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:rgba(8,8,26,0.95);backdrop-filter:blur(20px);padding:10px 20px;border-radius:12px;border:1px solid rgba(68,136,255,0.1);color:var(--primary);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 8px 40px rgba(0,0,0,0.5);animation:toastPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
+        .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-card);padding:10px 20px;border-radius:12px;border:1px solid rgba(245,200,66,0.15);color:var(--gold);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 8px 40px var(--shadow);animation:toastPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
         .toast.show{display:block}
         @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
@@ -186,17 +147,16 @@
 </head>
 <body>
 <div class="container">
-    <!-- ===== HEADER ===== -->
     <div class="header">
         <div class="left">
-            <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Shop</div>
+            <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Game Shop</div>
             <div class="profile-icon" id="profileIcon" onclick="goToProfile()">👤 Profile</div>
         </div>
         <div class="right">
             <div class="top">
                 <div class="lang-switcher">
-                    <button class="lang-btn active" data-lang="my" onclick="setLang('my')">မြန်မာ</button>
-                    <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+                    <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+                    <button class="lang-btn" data-lang="my" onclick="setLang('my')">MY</button>
                 </div>
                 <a href="notifications.html" class="noti-btn" id="notiBtn">
                     🔔
@@ -206,13 +166,11 @@
         </div>
     </div>
 
-    <!-- ===== PAGE HEADER ===== -->
     <div class="page-header">
         <h1 id="shopTitle"><i class="fas fa-gem"></i> Diamonds <span>Package</span></h1>
         <p id="shopSub">Select a package, then tap Buy</p>
     </div>
 
-    <!-- ===== DOUBLE BOX ===== -->
     <div class="double-box" onclick="scrollToDouble()">
         <div class="left">
             <span class="icon">⭐</span>
@@ -224,47 +182,48 @@
         <span class="arrow"><i class="fas fa-chevron-down"></i></span>
     </div>
 
-    <!-- ===== BUNDLES ===== -->
     <div class="section-title" id="bundlesTitle"><i class="fas fa-gift"></i> Bundles</div>
     <div class="package-list" id="bundlesList"></div>
 
-    <!-- ===== DIAMONDS ===== -->
     <div class="section-title" id="diamondsTitle"><i class="fas fa-diamond"></i> Diamonds</div>
     <div class="package-list" id="diamondsList"></div>
 
-    <!-- ===== DOUBLE TOP UP ===== -->
     <div class="section-title" id="doubleTitle"><i class="fas fa-star"></i> Double Top Up</div>
-    
-    <!-- ===== DOUBLE WARNING ===== -->
-    <div class="double-warning">
-        <span class="icon">⚠️</span>
-        <span class="text" id="doubleWarning">
-            <strong>Warning:</strong> အကောင့်တစ်ကောင့်မှာ တစ်ခုကို တစ်ခါပဲ နှစ်ဆရပါမယ်။<br>
-            ဥပမာ - ၅၀ နှစ်ဆဖြည့်ပြီးရင် ကျန်တဲ့ သုံးခုပဲ နှစ်ဆဖြည့်လို့ရပါတော့မယ်။
-        </span>
-    </div>
-    
     <div class="package-list" id="doubleList"></div>
 
     <div class="footer">&copy; 2026 Premium Game Shop</div>
 </div>
 
-<!-- ===== BOTTOM NAV ===== -->
 <div class="bottom-nav">
-    <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label" id="navHome">ပင်မ</span></a>
-    <a href="shop.html" class="nav-item active"><span class="icon">🛒</span><span class="label" id="navShop">ဆိုင်</span></a>
-    <a href="payment.html" class="nav-item"><span class="icon">💳</span><span class="label" id="navPayment">ငွေပေးချေ</span></a>
-    <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label" id="navProfile">ပရိုဖိုင်</span></a>
+    <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label" id="navHome">Home</span></a>
+    <a href="shop.html" class="nav-item active"><span class="icon">🛒</span><span class="label" id="navShop">Shop</span></a>
+    <a href="payment.html" class="nav-item"><span class="icon">💳</span><span class="label" id="navPayment">Payment</span></a>
+    <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label" id="navProfile">Profile</span></a>
 </div>
 
-<!-- ===== TOAST ===== -->
 <div class="toast" id="toast"></div>
 
 <script>
     // ===== LANGUAGE DATA =====
     const LANG_DATA = {
+        en: {
+            appName: 'Premium Game Shop',
+            shopTitle: 'Diamonds Package',
+            shopSub: 'Select a package, then tap Buy',
+            bundlesTitle: 'Bundles',
+            diamondsTitle: 'Diamonds',
+            doubleTitle: 'Double Top Up',
+            doubleBoxTitle: 'Double Diamonds',
+            doubleBoxSub: 'Tap to view double diamond packages',
+            select: 'Select',
+            buy: 'Buy',
+            selected: 'Selected',
+            selectFirst: '⚠️ Please select a package first!',
+            home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
+            noti: '🔔 No new notifications'
+        },
         my: {
-            appName: 'Premium Shop',
+            appName: 'ပရီမီယံ ဂိမ်းဆိုင်',
             shopTitle: 'စိန်အထုပ်များ',
             shopSub: 'အထုပ်တစ်ခုရွေးပြီး Buy နှိပ်ပါ',
             bundlesTitle: 'အထုပ်များ',
@@ -276,30 +235,12 @@
             buy: 'ဝယ်ရန်',
             selected: 'ရွေးပြီး',
             selectFirst: '⚠️ ကျေးဇူးပြု၍ အထုပ်တစ်ခုကို ဦးစွာရွေးပါ!',
-            doubleWarning: '⚠️ Warning: အကောင့်တစ်ကောင့်မှာ တစ်ခုကို တစ်ခါပဲ နှစ်ဆရပါမယ်။ ဥပမာ - ၅၀ နှစ်ဆဖြည့်ပြီးရင် ကျန်တဲ့ သုံးခုပဲ နှစ်ဆဖြည့်လို့ရပါတော့မယ်။',
             home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
             noti: '🔔 အသိပေးချက်အသစ်မရှိပါ'
-        },
-        en: {
-            appName: 'Premium Shop',
-            shopTitle: 'Diamonds Package',
-            shopSub: 'Choose your package and top up instantly',
-            bundlesTitle: 'Bundles',
-            diamondsTitle: 'Diamonds',
-            doubleTitle: 'Double Top Up',
-            doubleBoxTitle: 'Double Diamonds',
-            doubleBoxSub: 'Tap to view double diamond packages',
-            select: 'Select',
-            buy: 'Buy',
-            selected: 'Selected',
-            selectFirst: '⚠️ Please select a package first!',
-            doubleWarning: '⚠️ Warning: Each account can only get double bonus once per package. Example: After buying 50 double, only the remaining 3 packages can be doubled.',
-            home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
-            noti: '🔔 No new notifications'
         }
     };
 
-    let currentLang = localStorage.getItem('lang') || 'my';
+    let currentLang = localStorage.getItem('lang') || 'en';
 
     function getText(key) { return LANG_DATA[currentLang][key] || key; }
 
@@ -314,7 +255,6 @@
 
     function updateLanguage() {
         const d = LANG_DATA[currentLang];
-        if (!d) return;
         document.getElementById('appName').innerHTML = '<i class="fas fa-gamepad"></i> ' + d.appName;
         document.getElementById('shopTitle').innerHTML = '<i class="fas fa-gem"></i> ' + d.shopTitle;
         document.getElementById('shopSub').textContent = d.shopSub;
@@ -323,7 +263,6 @@
         document.getElementById('doubleTitle').innerHTML = '<i class="fas fa-star"></i> ' + d.doubleTitle;
         document.getElementById('doubleBoxTitle').textContent = d.doubleBoxTitle;
         document.getElementById('doubleBoxSub').textContent = d.doubleBoxSub;
-        document.getElementById('doubleWarning').innerHTML = d.doubleWarning;
         document.getElementById('navHome').textContent = d.home;
         document.getElementById('navShop').textContent = d.shop;
         document.getElementById('navPayment').textContent = d.payment;
@@ -332,7 +271,6 @@
         renderPackages();
     }
 
-    // ===== TOAST =====
     function showToast(msg) {
         const t = document.getElementById('toast');
         t.textContent = msg;
@@ -341,7 +279,6 @@
         t._timer = setTimeout(() => t.classList.remove('show'), 3000);
     }
 
-    // ===== NOTIFICATION =====
     function checkNotifications() {
         const notiData = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
         const badge = document.getElementById('notiBadge');
@@ -363,16 +300,22 @@
         }
     });
 
-    // ===== AUTH =====
+    let currentUser = null;
+    const savedUser = localStorage.getItem('currentUser');
+    if (savedUser) currentUser = JSON.parse(savedUser);
+
+    function isLoggedIn() { return currentUser !== null; }
+
+    function getCurrentUser() { return currentUser; }
+
     function updateAuthUI() {
         const profileIcon = document.getElementById('profileIcon');
-        if (isLoggedIn()) {
-            const user = getCurrentUser();
-            const savedAvatar = localStorage.getItem('userAvatar_' + user.username);
+        if (currentUser) {
+            const savedAvatar = localStorage.getItem('userAvatar_' + currentUser.username);
             if (savedAvatar) {
-                profileIcon.innerHTML = '<img src="' + savedAvatar + '" alt="avatar"> ' + user.username;
+                profileIcon.innerHTML = '<img src="' + savedAvatar + '" alt="avatar"> ' + currentUser.username;
             } else {
-                profileIcon.innerHTML = '👤 ' + user.username;
+                profileIcon.innerHTML = '👤 ' + currentUser.username;
             }
             profileIcon.className = 'profile-icon logged-in';
         } else {
@@ -385,7 +328,6 @@
         window.location.href = 'profile.html';
     }
 
-    // ===== PACKAGE DATA =====
     const PACKAGES = {
         bundles: [
             { id: 'b1', name: 'Monthly Epic Bundle', price: 17200 },
@@ -497,9 +439,8 @@
         }, 500);
     }
 
-    // ===== INIT =====
     document.addEventListener('DOMContentLoaded', function() {
-        const savedLang = localStorage.getItem('lang') || 'my';
+        const savedLang = localStorage.getItem('lang') || 'en';
         setLang(savedLang);
         renderPackages();
         updateAuthUI();
