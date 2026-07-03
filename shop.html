@@ -10,8 +10,6 @@
         :root{--bg-primary:#0a0e1a;--bg-secondary:#111927;--bg-card:#141c2b;--bg-input:#1a2438;--text-primary:#ffffff;--text-secondary:#8899bb;--border-color:rgba(255,255,255,0.06);--shadow:rgba(0,0,0,0.5);--gold:#f5c842;--gold-glow:rgba(245,200,66,0.3);--cyan:#00d4ff;--cyan-glow:rgba(0,212,255,0.2);--orange:#f97316;--orange-glow:rgba(249,115,22,0.2);--red:#ef4444;--warning:#f59e0b;--green:#22d3ee;--green-glow:rgba(34,211,238,0.2)}
         body{background:var(--bg-primary);color:var(--text-primary);min-height:100vh;padding:16px;padding-bottom:90px;background-image:radial-gradient(ellipse at 20% 50%,rgba(245,200,66,0.04) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(0,212,255,0.04) 0%,transparent 50%)}
         ::-webkit-scrollbar{width:0px;height:0px}
-        ::-webkit-scrollbar-track{background:transparent}
-        ::-webkit-scrollbar-thumb{background:transparent}
         .container{max-width:500px;margin:0 auto}
         .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
         .header .left{display:flex;flex-direction:column;gap:6px}
@@ -59,7 +57,6 @@
         @keyframes spinGlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
         @keyframes pulseGlow{0%,100%{opacity:0.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
         
-        /* ===== Dia Icon - ဖြေးဖြေးလှုပ် (1.2s) ===== */
         .package-item .dia-icon{display:inline-block;transition:all 0.3s ease}
         .package-item.selected .dia-icon{animation:bounceIcon 1.2s ease-in-out infinite}
         @keyframes bounceIcon{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
@@ -133,9 +130,9 @@
         .modal .file-upload input[type="file"]{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}
         .modal .file-upload .file-name{font-size:0.5rem;color:var(--green);margin-top:3px;display:none}
         .modal .file-upload .file-name.show{display:block}
-        .modal .btn-primary{width:100%;padding:11px;background:var(--bg-input);color:var(--text-secondary);border:1px solid var(--border-color);border-radius:10px;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;position:relative;z-index:1;margin-top:6px;opacity:1}
+        .modal .btn-primary{width:100%;padding:11px;background:var(--bg-input);color:var(--text-secondary);border:1px solid var(--border-color);border-radius:10px;font-size:0.85rem;font-weight:700;cursor:not-allowed;transition:all 0.3s ease;position:relative;z-index:1;margin-top:6px;opacity:0.4}
         .modal .btn-primary:active{transform:scale(0.96)}
-        .modal .btn-primary.enabled{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
+        .modal .btn-primary.enabled{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow);cursor:pointer;opacity:1}
         .modal .btn-primary.enabled:hover{box-shadow:0 0 40px var(--gold-glow)}
         .modal .close-btn{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--text-secondary);font-size:1.1rem;cursor:pointer;z-index:2}
         .modal .close-btn:active{transform:scale(0.85)}
@@ -265,7 +262,7 @@
             </div>
         </div>
 
-        <button class="btn-primary" id="submitBtn">✅ အော်ဒါတင်မည်</button>
+        <button class="btn-primary" id="submitBtn" disabled>✅ အော်ဒါတင်မည်</button>
     </div>
 </div>
 
@@ -494,6 +491,7 @@
         if(icon){ icon.classList.remove('bounce'); void icon.offsetWidth; icon.classList.add('bounce'); }
     }
 
+    // ===== SELECT - Modal မပေါ်ဘူး =====
     function handlePackageClick(id, name, price, type){
         bounceIcon(id);
         if(selectedPackage && selectedPackage.id === id){
@@ -506,7 +504,7 @@
         renderPackages();
     }
 
-    // ===== BUY BUTTON =====
+    // ===== BUY - Modal ပေါ်လာမယ် =====
     function handleBuyClick(id, name, price, type){
         bounceIcon(id);
         
@@ -531,13 +529,34 @@
         document.getElementById('waveInfo').classList.remove('show');
         document.getElementById('kpayInfo').classList.remove('show');
         selectedPayment = null;
-        document.getElementById('submitBtn').disabled = false;
+        document.getElementById('submitBtn').disabled = true;
+        document.getElementById('submitBtn').className = 'btn-primary';
         document.getElementById('submitBtn').textContent = '✅ ' + (getText('submit') || 'Submit Order');
+        checkForm();
     }
 
     function closeCheckoutModal(){
         document.getElementById('checkoutModal').classList.remove('show');
     }
+
+    // ===== CHECK FORM - အချက်အလက်တွေ ပြည့်မှ Submit လင်းမယ် =====
+    function checkForm(){
+        const gameId = document.getElementById('gameId').value.trim();
+        const serverId = document.getElementById('serverId').value.trim();
+        const hasFile = document.getElementById('fileInput').files && document.getElementById('fileInput').files[0];
+        const btn = document.getElementById('submitBtn');
+        
+        if(gameId && serverId && selectedPayment && hasFile){
+            btn.disabled = false;
+            btn.className = 'btn-primary enabled';
+        } else {
+            btn.disabled = true;
+            btn.className = 'btn-primary';
+        }
+    }
+
+    document.getElementById('gameId').addEventListener('input', checkForm);
+    document.getElementById('serverId').addEventListener('input', checkForm);
 
     document.querySelectorAll('.payment-option').forEach(el => {
         el.addEventListener('click', function() {
@@ -548,6 +567,7 @@
             document.getElementById('kpayInfo').classList.remove('show');
             if (selectedPayment === 'wave') document.getElementById('waveInfo').classList.add('show');
             else if (selectedPayment === 'kpay') document.getElementById('kpayInfo').classList.add('show');
+            checkForm();
         });
     });
 
@@ -559,6 +579,7 @@
             fileUpload.classList.add('has-file');
             fileName.textContent = '✅ ' + this.files[0].name;
             fileName.classList.add('show');
+            checkForm();
         }
     });
 
@@ -581,6 +602,7 @@
         });
     }
 
+    // ===== SUBMIT =====
     document.getElementById('submitBtn').addEventListener('click', async function() {
         const d = LANG_DATA[currentLang] || {};
         const gameId = document.getElementById('gameId').value.trim();
