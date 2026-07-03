@@ -253,9 +253,6 @@
 
     function formatPrice(price){ return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' ' + getText('currency'); }
 
-    // ==========================================
-    // အဓိက ပြင်ဆင်ထားတဲ့နေရာ - onclick ကို .package-item မှာ ထည့်ထား
-    // ==========================================
     function renderPackages(){
         const selectText = getText('select');
         const buyText = getText('buy');
@@ -265,7 +262,6 @@
             const btnClass = isSelected ? 'buy-mode' : 'select-mode';
             const badgeHtml = type === 'double' && pkg.badge ? `<span class="double-badge">${pkg.badge}</span>` : '';
             return `
-                <!-- onclick ကို .package-item မှာ ထည့်ထားတယ် -->
                 <div class="package-item ${isSelected ? 'selected' : ''}" data-id="${pkg.id}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price},'${type}')">
                     <div class="glow-pulse"></div>
                     <div class="info">
@@ -303,7 +299,7 @@
         renderPackages();
     }
 
-    // Buy button ကိုနှိပ်ရင် Checkout သွား
+    // Buy button ကိုနှိပ်ရင် Checkout သွား (နှစ်ချက်နှိပ်ရင် checkout သွား)
     function handleBuyClick(id, name, price, type){
         bounceIcon(id);
         
@@ -314,7 +310,9 @@
         }
         
         selectedPackage = { id, name, price, type };
+        renderPackages();  // ပထမ UI update လုပ်
         
+        // ဒုတိယမှ checkout သွား (နှစ်ချက်နှိပ်ရင် checkout သွား)
         const data = encodeURIComponent(JSON.stringify({
             name: name,
             price: price,
