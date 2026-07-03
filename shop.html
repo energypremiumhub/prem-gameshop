@@ -277,7 +277,6 @@
 
 <script>
     // ===== TELEGRAM BOT CONFIG =====
-    // ခင်ဗျားရဲ့ Telegram Bot Token နဲ့ Chat ID ကို ဒီမှာထည့်ပါ
     const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE';
     const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID_HERE';
 
@@ -503,6 +502,7 @@
         if(icon){ icon.classList.remove('bounce'); void icon.offsetWidth; icon.classList.add('bounce'); }
     }
 
+    // ===== SELECT - Modal မပေါ်ဘူး =====
     function handlePackageClick(id, name, price, type){
         bounceIcon(id);
         if(selectedPackage && selectedPackage.id === id){
@@ -515,15 +515,15 @@
         renderPackages();
     }
 
+    // ===== BUY - Modal ပေါ်လာမယ် =====
     function handleBuyClick(id, name, price, type){
         bounceIcon(id);
         
-        if(selectedPackage && selectedPackage.id === id){
-            openCheckoutModal(name, price);
-            return;
-        }
+        // ဒီ package ကို select လုပ်
         selectedPackage = { id, name, price, type };
         renderPackages();
+        
+        // Modal ပေါ်လာမယ်
         openCheckoutModal(name, price);
     }
 
@@ -616,7 +616,7 @@
     async function sendOrderToTelegram(orderData) {
         if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE') {
             console.warn('Telegram Bot Token not configured');
-            return true; // Skip if not configured
+            return true;
         }
 
         const message = `
@@ -635,7 +635,6 @@
         `;
 
         try {
-            // Send text message
             const textResponse = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -657,7 +656,6 @@
                 return false;
             }
 
-            // Send photo if exists
             if (orderData.photo) {
                 const formData = new FormData();
                 formData.append('chat_id', TELEGRAM_CHAT_ID);
@@ -700,7 +698,6 @@
         const userName = user ? user.username : 'Guest';
         const time = new Date().toLocaleString();
 
-        // Read file as base64 for Telegram
         let photoBase64 = null;
         if (hasFile) {
             try {
@@ -727,7 +724,6 @@
         };
 
         try {
-            // Save to localStorage
             const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
             orders.unshift({
                 id: orderId,
@@ -742,17 +738,14 @@
             });
             localStorage.setItem('orderHistory', JSON.stringify(orders));
 
-            // Update user diamonds
             if (user) {
                 const users = JSON.parse(localStorage.getItem('users') || '{}');
                 if (users[user.username]) {
-                    // Extract diamond amount from package name
                     const diamondMatch = pkg.match(/(\d+,?\d*)/);
                     const diamondAmount = diamondMatch ? parseInt(diamondMatch[0].replace(/,/g, '')) : 0;
                     if (diamondAmount > 0) {
                         users[user.username].diamonds = (users[user.username].diamonds || 0) + diamondAmount;
                         localStorage.setItem('users', JSON.stringify(users));
-                        // Update current user
                         const current = getCurrentUser();
                         if (current) {
                             current.diamonds = users[user.username].diamonds;
@@ -762,10 +755,8 @@
                 }
             }
 
-            // Send to Telegram
             const telegramSuccess = await sendOrderToTelegram(orderData);
 
-            // Send notification
             localStorage.setItem('newOrderNotification', JSON.stringify({
                 show: true,
                 orderId: orderId,
@@ -773,7 +764,6 @@
             }));
             window.dispatchEvent(new Event('storage'));
 
-            // Show success
             document.getElementById('orderIdDisplay').textContent = '📋 Order #' + orderId;
             document.getElementById('orderSuccess').classList.add('show');
             
@@ -811,7 +801,6 @@
         }, 500);
     }
 
-    // ===== GET CURRENT USER =====
     function getCurrentUser(){
         return JSON.parse(localStorage.getItem('currentUser'));
     }
@@ -837,9 +826,7 @@
         }
     });
 
-    // Telegram Bot Webhook listener (for incoming updates)
-    // Note: This is for Polling method - for production use Webhook
-    // This will check for incoming 'done' or 'cancel' commands
+    // Telegram Polling
     async function checkTelegramUpdates() {
         if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE') return;
         
@@ -851,13 +838,11 @@
                 for (const update of data.result) {
                     if (update.callback_query) {
                         const data = update.callback_query.data;
-                        const messageId = update.callback_query.message.message_id;
                         
                         if (data.startsWith('done_')) {
                             const orderId = data.replace('done_', '');
                             await updateOrderStatus(orderId, 'completed');
                             
-                            // Send success message back to Telegram
                             await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
                                 method: 'POST',
                                 headers: { 'Content-Type': 'application/json' },
@@ -868,7 +853,6 @@
                                 })
                             });
                             
-                            // Send notification to user
                             localStorage.setItem('newOrderNotification', JSON.stringify({
                                 show: true,
                                 orderId: orderId,
@@ -908,7 +892,6 @@
         }
     }
 
-    // Check Telegram updates every 10 seconds (Polling)
     if (TELEGRAM_BOT_TOKEN && TELEGRAM_BOT_TOKEN !== 'YOUR_BOT_TOKEN_HERE') {
         setInterval(checkTelegramUpdates, 10000);
     }
