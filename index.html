@@ -10,29 +10,31 @@
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
         
         :root {
-            --bg-primary: #0a0e1a;
-            --bg-secondary: #111927;
-            --bg-card: #141c2b;
-            --bg-input: #1a2438;
+            --bg-primary: #0a0a1a;
+            --bg-secondary: #0f0f23;
+            --bg-card: #141430;
+            --bg-input: #1a1a3e;
             --text-primary: #ffffff;
-            --text-secondary: #8899bb;
+            --text-secondary: #a0a0c0;
             --border-color: rgba(255,255,255,0.06);
-            --shadow: rgba(0,0,0,0.5);
-            --gold: #f5c842;
-            --gold-glow: rgba(245,200,66,0.3);
-            --cyan: #00d4ff;
-            --cyan-glow: rgba(0,212,255,0.2);
+            --shadow: rgba(0,0,0,0.6);
+            --gold: #f7d44a;
+            --gold-glow: rgba(247,212,74,0.4);
+            --cyan: #00e5ff;
+            --cyan-glow: rgba(0,229,255,0.2);
             --pink: #ff6b9d;
-            --orange: #f97316;
-            --orange-glow: rgba(249,115,22,0.2);
-            --green: #22d3ee;
-            --green-glow: rgba(34,211,238,0.2);
-            --red: #ef4444;
-            --purple: #8b5cf6;
-            --purple-glow: rgba(139,92,246,0.2);
-            --warning: #f59e0b;
-            --shop-open: #22d3ee;
-            --shop-closed: #ef4444;
+            --orange: #ff8a65;
+            --orange-glow: rgba(255,138,101,0.2);
+            --green: #00e676;
+            --green-glow: rgba(0,230,118,0.2);
+            --red: #ff5252;
+            --purple: #b388ff;
+            --purple-glow: rgba(179,136,255,0.2);
+            --warning: #ffab00;
+            --shop-open: #00e676;
+            --shop-closed: #ff5252;
+            --neon-blue: #448aff;
+            --neon-pink: #ff4081;
         }
 
         body {
@@ -41,57 +43,61 @@
             min-height: 100vh;
             padding-bottom: 80px;
             background-image: 
-                radial-gradient(ellipse at 20% 50%, rgba(245,200,66,0.04) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 20%, rgba(0,212,255,0.04) 0%, transparent 50%);
+                radial-gradient(ellipse at 20% 50%, rgba(247,212,74,0.03) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(0,229,255,0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 100%, rgba(255,64,129,0.02) 0%, transparent 40%);
+            overflow-x: hidden;
         }
 
         ::-webkit-scrollbar{width:4px}
         ::-webkit-scrollbar-track{background:var(--bg-primary)}
-        ::-webkit-scrollbar-thumb{background:var(--gold);border-radius:10px}
+        ::-webkit-scrollbar-thumb{background:var(--gold);border-radius:10px;box-shadow:0 0 20px var(--gold-glow)}
 
         .container{max-width:480px;margin:0 auto;padding:16px 16px 0}
         
         .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
         .header .left{display:flex;flex-direction:column;gap:6px}
-        .header .left .logo{font-size:1rem;font-weight:800;color:var(--gold);text-shadow:0 0 20px var(--gold-glow);letter-spacing:0.5px}
-        .header .left .logo i{color:var(--cyan);margin-right:6px;text-shadow:0 0 20px var(--cyan-glow)}
-        .header .left .auth-btn{background:transparent;border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 14px;border-radius:8px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-flex;align-items:center;gap:6px;height:36px;width:fit-content}
+        .header .left .logo{font-size:1rem;font-weight:800;color:var(--gold);text-shadow:0 0 30px var(--gold-glow);letter-spacing:0.5px;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none}
+        .header .left .logo i{color:var(--cyan);-webkit-text-fill-color:initial;margin-right:6px;text-shadow:0 0 20px var(--cyan-glow)}
+        .header .left .auth-btn{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);color:var(--text-secondary);padding:4px 14px;border-radius:10px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);text-decoration:none;display:inline-flex;align-items:center;gap:6px;height:36px;width:fit-content;backdrop-filter:blur(10px)}
         .header .left .auth-btn:active{transform:scale(0.85)}
-        .header .left .auth-btn:hover{border-color:var(--gold);color:var(--gold)}
-        .header .left .auth-btn.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 25px var(--gold-glow);padding:4px 14px}
+        .header .left .auth-btn:hover{border-color:var(--gold);color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
+        .header .left .auth-btn.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow);padding:4px 14px}
         .header .left .auth-btn.logged-in:active{transform:scale(0.85)}
         .header .left .auth-btn.logged-in img{width:22px;height:22px;border-radius:50%;object-fit:cover;margin-right:4px}
         
         .header .right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
         .header .right .top{display:flex;gap:8px;align-items:center}
-        .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:8px;border:1px solid var(--border-color)}
+        .header .right .top .lang-switcher{display:flex;gap:2px;background:rgba(255,255,255,0.03);padding:3px;border-radius:10px;border:1px solid rgba(255,255,255,0.04)}
         .header .right .top .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;text-transform:uppercase}
         .header .right .top .lang-switcher .lang-btn.active{background:var(--gold);color:#0a0e1a;box-shadow:0 0 20px var(--gold-glow)}
         .header .right .top .lang-switcher .lang-btn:active{transform:scale(0.85)}
         
-        .header .right .top .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:8px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none}
+        .header .right .top .noti-btn{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;backdrop-filter:blur(10px)}
         .header .right .top .noti-btn:active{transform:scale(0.85)}
-        .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none}
+        .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none;box-shadow:0 0 15px rgba(255,82,82,0.4)}
 
         .welcome{margin-bottom:16px;animation:slideUp 0.6s ease}
-        .welcome .greeting{font-size:0.65rem;color:var(--text-secondary);font-weight:600;letter-spacing:1px;text-transform:uppercase}
+        .welcome .greeting{font-size:0.65rem;color:var(--text-secondary);font-weight:600;letter-spacing:1px;text-transform:uppercase;opacity:0.7}
         .welcome .greeting i{color:var(--pink);margin-right:4px}
-        .welcome h2{font-size:1.5rem;margin-top:2px;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 40px var(--gold-glow)}
+        .welcome h2{font-size:1.5rem;margin-top:2px;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--orange),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 40px var(--gold-glow);animation:gradientMove 3s ease-in-out infinite;background-size:200% 200%}
+        @keyframes gradientMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
         .welcome h2 i{color:var(--cyan);-webkit-text-fill-color:initial}
-        .welcome p{color:var(--text-secondary);font-size:0.75rem;margin-top:2px;font-weight:400}
+        .welcome p{color:var(--text-secondary);font-size:0.75rem;margin-top:2px;font-weight:400;opacity:0.7}
 
-        /* ===== BANNER (ဆိုင်ဖွင့်/ပိတ်) ===== */
+        /* ===== SHOP STATUS BANNER ===== */
         .shop-status-banner {
-            background: linear-gradient(135deg, rgba(245,200,66,0.06), rgba(0,212,255,0.04));
+            background: linear-gradient(135deg, rgba(247,212,74,0.06), rgba(0,229,255,0.04));
             border-radius: 16px;
             padding: 18px 20px;
             margin-bottom: 16px;
-            border: 1px solid var(--border-color);
+            border: 1px solid rgba(255,255,255,0.04);
             position: relative;
             overflow: hidden;
             animation: slideUp 0.7s ease;
             transition: all 0.5s ease;
             cursor: pointer;
+            backdrop-filter: blur(10px);
         }
         .shop-status-banner::before {
             content: '';
@@ -100,7 +106,7 @@
             right: -30%;
             width: 150%;
             height: 150%;
-            background: radial-gradient(circle, rgba(245,200,66,0.03) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(247,212,74,0.03) 0%, transparent 70%);
             animation: shimmer 6s ease-in-out infinite;
         }
         .shop-status-banner .banner-content {
@@ -125,10 +131,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(245,200,66,0.08);
-            border: 1px solid rgba(245,200,66,0.1);
+            background: rgba(247,212,74,0.06);
+            border: 1px solid rgba(247,212,74,0.08);
             flex-shrink: 0;
             transition: all 0.5s ease;
+            box-shadow: 0 0 30px rgba(247,212,74,0.05);
         }
         .shop-status-banner .banner-text {
             display: flex;
@@ -140,58 +147,90 @@
             color: var(--gold);
             text-shadow: 0 0 30px var(--gold-glow);
             transition: all 0.5s ease;
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .shop-status-banner .banner-sub {
             font-size: 0.6rem;
             color: var(--text-secondary);
             margin-top: 2px;
-            opacity: 0.7;
+            opacity: 0.5;
         }
         .shop-status-banner .banner-status {
-            font-size: 0.55rem;
-            font-weight: 700;
-            padding: 6px 18px;
-            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 8px 20px;
+            border-radius: 30px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             transition: all 0.5s ease;
             flex-shrink: 0;
+            backdrop-filter: blur(10px);
+            font-family: 'Segoe UI', sans-serif;
         }
         .shop-status-banner .banner-status.open {
-            background: rgba(34,211,238,0.12);
+            background: rgba(0,230,118,0.08);
             color: var(--green);
-            border: 1px solid rgba(34,211,238,0.15);
+            border: 1px solid rgba(0,230,118,0.15);
             animation: pulseStatus 1.5s ease-in-out infinite;
+            box-shadow: 0 0 40px rgba(0,230,118,0.1);
+            text-shadow: 0 0 30px rgba(0,230,118,0.2);
         }
         .shop-status-banner .banner-status.closed {
-            background: rgba(239,68,68,0.12);
+            background: rgba(255,82,82,0.08);
             color: var(--red);
-            border: 1px solid rgba(239,68,68,0.15);
+            border: 1px solid rgba(255,82,82,0.15);
+            box-shadow: 0 0 40px rgba(255,82,82,0.05);
+        }
+        .shop-status-banner .banner-status.open .status-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--green);
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulseDot 1s ease-in-out infinite;
+            box-shadow: 0 0 20px var(--green-glow);
+        }
+        .shop-status-banner .banner-status.closed .status-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--red);
+            border-radius: 50%;
+            margin-right: 8px;
+            box-shadow: 0 0 20px rgba(255,82,82,0.2);
+        }
+        @keyframes pulseDot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.6); }
         }
         @keyframes pulseStatus {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(0.95); }
+            0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 40px rgba(0,230,118,0.1); }
+            50% { opacity: 0.7; transform: scale(0.97); box-shadow: 0 0 60px rgba(0,230,118,0.2); }
         }
 
-        /* ===== SHOP CARD (ဈေးဆိုင်သွားရန်) ===== */
+        /* ===== SHOP CARD (GO TO SHOP) ===== */
         .shop-card {
-            background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary));
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 14px;
+            background: linear-gradient(135deg, rgba(247,212,74,0.04), rgba(0,229,255,0.02));
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 16px;
+            padding: 18px 14px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
             margin-bottom: 16px;
-            box-shadow: 0 4px 25px var(--shadow);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
             animation: slideUp 0.8s ease;
             position: relative;
             overflow: hidden;
             text-decoration: none;
             display: block;
+            backdrop-filter: blur(10px);
         }
         .shop-card:active {
-            transform: scale(0.96);
+            transform: scale(0.95);
         }
         .shop-card::after {
             content: '';
@@ -200,11 +239,11 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: conic-gradient(from 0deg, transparent, rgba(245,200,66,0.03), transparent, rgba(0,212,255,0.03), transparent);
-            animation: spin 8s linear infinite;
+            background: conic-gradient(from 0deg, transparent, rgba(247,212,74,0.05), transparent, rgba(0,229,255,0.05), transparent);
+            animation: spin 10s linear infinite;
         }
         .shop-card .icon {
-            font-size: 1.8rem;
+            font-size: 2rem;
             display: block;
             position: relative;
             z-index: 1;
@@ -212,12 +251,13 @@
             transition: all 0.5s ease;
         }
         .shop-card .label {
-            font-weight: 700;
-            font-size: 1rem;
+            font-weight: 900;
+            font-size: 1.3rem;
             position: relative;
             z-index: 1;
             transition: all 0.5s ease;
-            letter-spacing: 0.5px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
         }
         .shop-card .sub {
             font-size: 0.6rem;
@@ -226,18 +266,24 @@
             z-index: 1;
             margin-top: 2px;
             transition: all 0.5s ease;
+            opacity: 0.5;
+            letter-spacing: 0.5px;
         }
-        /* Shop Open State */
         .shop-card.open {
-            border-color: rgba(34,211,238,0.2);
+            border-color: rgba(0,230,118,0.08);
         }
         .shop-card.open .icon {
             color: var(--gold);
             animation: floatIcon 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px var(--gold-glow));
         }
         .shop-card.open .label {
-            color: var(--gold);
-            text-shadow: 0 0 30px var(--gold-glow);
+            background: linear-gradient(135deg, var(--gold), var(--orange), var(--pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: none;
+            animation: gradientMove 2s ease-in-out infinite;
+            background-size: 200% 200%;
         }
         .shop-card.open::before {
             content: '';
@@ -246,57 +292,64 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at center, rgba(245,200,66,0.04) 0%, transparent 70%);
+            background: radial-gradient(circle at center, rgba(247,212,74,0.04) 0%, transparent 70%);
             animation: pulseGlow 2s ease-in-out infinite;
             pointer-events: none;
         }
         @keyframes pulseGlow {
             0%, 100% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.02); }
+            50% { opacity: 1; transform: scale(1.03); }
         }
         @keyframes floatIcon {
-            0%, 100% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-6px) scale(1.05); }
+            0%, 100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 20px var(--gold-glow)); }
+            50% { transform: translateY(-8px) scale(1.1); filter: drop-shadow(0 0 40px var(--gold-glow)); }
         }
-        /* Shop Closed State */
         .shop-card.closed {
-            border-color: rgba(239,68,68,0.1);
-            opacity: 0.7;
+            border-color: rgba(255,82,82,0.05);
+            opacity: 0.6;
         }
         .shop-card.closed .icon {
             color: var(--text-secondary);
             animation: none;
+            filter: none;
         }
         .shop-card.closed .label {
             color: var(--text-secondary);
-            text-shadow: none;
+            -webkit-text-fill-color: var(--text-secondary);
+            animation: none;
+            background: none;
         }
         .shop-card.closed::before {
             display: none;
         }
         .shop-card .label .highlight {
-            background: linear-gradient(135deg, var(--gold), var(--orange));
+            background: linear-gradient(135deg, var(--gold), var(--orange), var(--pink));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: gradientMove 2s ease-in-out infinite;
+            background-size: 200% 200%;
         }
         .shop-card.closed .label .highlight {
             -webkit-text-fill-color: var(--text-secondary);
+            animation: none;
+            background: none;
         }
 
         @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 
-        .section-title{font-size:0.7rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+        .section-title{font-size:0.65rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;display:flex;align-items:center;gap:10px;opacity:0.5}
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
         .section-title i{color:var(--cyan);text-shadow:0 0 20px var(--cyan-glow)}
 
-        /* ===== SERVICES GRID (အကွက် ၆ ကွက်) ===== */
+        /* ===== SERVICES GRID ===== */
         .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;animation:slideUp 0.9s ease;margin-bottom:18px}
-        .services-grid .service{background:var(--bg-card);border:1px solid var(--border-color);border-radius:14px;padding:16px 10px;text-align:center;cursor:pointer;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);position:relative;overflow:hidden;box-shadow:0 4px 20px var(--shadow)}
+        .services-grid .service{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);border-radius:14px;padding:16px 10px;text-align:center;cursor:pointer;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.2);backdrop-filter:blur(10px)}
         .services-grid .service:active{transform:scale(0.92)}
-        .services-grid .service:hover{border-color:rgba(245,200,66,0.2);transform:translateY(-3px);box-shadow:0 8px 30px var(--gold-glow)}
-        .services-grid .service .icon{font-size:1.8rem;display:block;margin-bottom:6px}
+        .services-grid .service:hover{border-color:rgba(247,212,74,0.15);transform:translateY(-4px);box-shadow:0 8px 40px var(--gold-glow)}
+        .services-grid .service .icon{font-size:1.8rem;display:block;margin-bottom:6px;transition:all 0.4s ease}
+        .services-grid .service:hover .icon{transform:scale(1.1)}
         .services-grid .service .label{font-size:0.55rem;color:var(--text-secondary);font-weight:600;line-height:1.3}
-        .services-grid .service .glow{position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(245,200,66,0.03) 0%,transparent 70%);opacity:0;transition:all 0.5s ease}
+        .services-grid .service .glow{position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(247,212,74,0.03) 0%,transparent 70%);opacity:0;transition:all 0.5s ease}
         .services-grid .service:hover .glow{opacity:1}
         .services-grid .service:nth-child(1) .icon{color:var(--gold)}
         .services-grid .service:nth-child(2) .icon{color:var(--cyan)}
@@ -306,96 +359,97 @@
         .services-grid .service:nth-child(6) .icon{color:var(--orange)}
 
         /* ===== TELEGRAM ===== */
-        .telegram-card{background:linear-gradient(135deg,rgba(0,136,204,0.08),rgba(0,136,204,0.02));border:1px solid rgba(0,136,204,0.12);border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:12px;margin-bottom:10px;cursor:pointer;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);animation:slideUp 0.85s ease}
+        .telegram-card{background:rgba(0,136,204,0.04);border:1px solid rgba(0,136,204,0.08);border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:12px;margin-bottom:10px;cursor:pointer;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);animation:slideUp 0.85s ease;backdrop-filter:blur(10px)}
         .telegram-card:active{transform:scale(0.96)}
-        .telegram-card:hover{border-color:rgba(0,136,204,0.3);box-shadow:0 0 30px rgba(0,136,204,0.1)}
+        .telegram-card:hover{border-color:rgba(0,136,204,0.2);box-shadow:0 0 30px rgba(0,136,204,0.05)}
         .telegram-card .icon{font-size:1.6rem;color:#0088cc;flex-shrink:0}
         .telegram-card .info{flex:1}
         .telegram-card .info .title{font-size:0.7rem;font-weight:600;color:var(--text-primary)}
-        .telegram-card .info .desc{font-size:0.5rem;color:var(--text-secondary);margin-top:1px}
+        .telegram-card .info .desc{font-size:0.5rem;color:var(--text-secondary);margin-top:1px;opacity:0.6}
         .telegram-card .arrow{color:var(--text-secondary);font-size:1rem;transition:all 0.3s ease}
         .telegram-card:hover .arrow{color:var(--gold);transform:translateX(4px)}
 
-        /* ===== TELEGRAM CONTACT (ဆက်သွယ်ရန်) ===== */
-        .telegram-contact{background:linear-gradient(135deg,rgba(0,136,204,0.06),rgba(0,136,204,0.01));border:1px solid rgba(0,136,204,0.08);border-radius:12px;padding:10px 16px;display:flex;align-items:center;gap:12px;margin-bottom:16px;cursor:pointer;transition:all 0.3s ease;animation:slideUp 0.85s ease}
+        /* ===== TELEGRAM CONTACT ===== */
+        .telegram-contact{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);border-radius:12px;padding:10px 16px;display:flex;align-items:center;gap:12px;margin-bottom:16px;cursor:pointer;transition:all 0.4s ease;animation:slideUp 0.85s ease;backdrop-filter:blur(10px)}
         .telegram-contact:active{transform:scale(0.96)}
-        .telegram-contact:hover{border-color:rgba(0,136,204,0.2)}
-        .telegram-contact .icon{font-size:1.2rem;color:#0088cc;flex-shrink:0}
+        .telegram-contact:hover{border-color:rgba(247,212,74,0.1)}
+        .telegram-contact .icon{font-size:1.2rem;color:var(--cyan);flex-shrink:0}
         .telegram-contact .info{flex:1}
-        .telegram-contact .info .label{font-size:0.55rem;color:var(--text-secondary);font-weight:500}
-        .telegram-contact .info .username{font-size:0.7rem;font-weight:600;color:var(--text-primary)}
+        .telegram-contact .info .label{font-size:0.55rem;color:var(--text-secondary);font-weight:500;opacity:0.6}
+        .telegram-contact .info .username{font-size:0.7rem;font-weight:600;color:var(--gold);text-shadow:0 0 20px var(--gold-glow)}
         .telegram-contact .arrow{color:var(--text-secondary);font-size:0.9rem;transition:all 0.3s ease}
         .telegram-contact:hover .arrow{color:var(--gold);transform:translateX(3px)}
 
-        /* ===== BOTTOM NAV (လေးထောင့်ကွက်လေးတွေ) ===== */
-        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);border-top:1px solid var(--border-color);display:flex;justify-content:space-around;padding:8px 0 12px;max-width:480px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px var(--shadow)}
+        /* ===== BOTTOM NAV ===== */
+        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(15,15,35,0.92);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,0.04);display:flex;justify-content:space-around;padding:8px 0 12px;max-width:480px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px rgba(0,0,0,0.4)}
         .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.3s ease;padding:6px 16px;border-radius:12px;position:relative;min-width:56px;border:1px solid transparent}
-        .bottom-nav .nav-item:active{transform:scale(0.85);background:rgba(245,200,66,0.05)}
+        .bottom-nav .nav-item:active{transform:scale(0.85);background:rgba(247,212,74,0.05)}
         .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;transition:all 0.3s ease}
         .bottom-nav .nav-item .label{font-size:0.4rem;margin-top:1px;font-weight:700;letter-spacing:0.5px;transition:all 0.3s ease}
-        .bottom-nav .nav-item.active{color:var(--gold);background:rgba(245,200,66,0.06);border-color:rgba(245,200,66,0.15);box-shadow:0 0 30px rgba(245,200,66,0.05)}
+        .bottom-nav .nav-item.active{color:var(--gold);background:rgba(247,212,74,0.06);border-color:rgba(247,212,74,0.12);box-shadow:0 0 30px rgba(247,212,74,0.05)}
         .bottom-nav .nav-item.active .icon{transform:translateY(-2px);color:var(--gold)}
         .bottom-nav .nav-item.active .label{color:var(--gold)}
         .bottom-nav .nav-item:not(.active):hover{border-color:rgba(255,255,255,0.04);background:rgba(255,255,255,0.02)}
 
-        .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.3;letter-spacing:1px}
+        .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.2;letter-spacing:1px}
 
-        .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-card);padding:10px 20px;border-radius:12px;border:1px solid rgba(245,200,66,0.15);color:var(--gold);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 8px 40px var(--shadow);animation:toastPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
+        .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:rgba(20,20,48,0.95);backdrop-filter:blur(20px);padding:10px 20px;border-radius:12px;border:1px solid rgba(247,212,74,0.1);color:var(--gold);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 8px 40px rgba(0,0,0,0.5);animation:toastPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
         .toast.show{display:block}
         @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
         @keyframes shimmer{0%,100%{transform:translate(0,0)}50%{transform:translate(-20%,-20%)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
-        .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(12px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px}
+        /* ===== MODALS ===== */
+        .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(20px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px}
         .modal-overlay.show{display:flex;animation:fadeIn 0.3s ease}
-        .modal{background:linear-gradient(145deg,var(--bg-card),var(--bg-secondary));border:1px solid var(--border-color);border-radius:18px;padding:24px 20px;max-width:380px;width:100%;box-shadow:0 20px 60px var(--shadow);position:relative;overflow:hidden;max-height:90vh;overflow-y:auto}
-        .modal::before{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(245,200,66,0.04) 0%,transparent 70%);animation:shimmer 8s ease-in-out infinite}
+        .modal{background:linear-gradient(145deg,var(--bg-card),var(--bg-secondary));border:1px solid rgba(255,255,255,0.06);border-radius:18px;padding:24px 20px;max-width:380px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.6);position:relative;overflow:hidden;max-height:90vh;overflow-y:auto}
+        .modal::before{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(247,212,74,0.03) 0%,transparent 70%);animation:shimmer 8s ease-in-out infinite}
         .modal h2{font-size:1.2rem;color:var(--gold);margin-bottom:4px;text-align:center;position:relative;z-index:1;text-shadow:0 0 30px var(--gold-glow)}
-        .modal p{color:var(--text-secondary);font-size:0.75rem;text-align:center;margin-bottom:16px;position:relative;z-index:1}
+        .modal p{color:var(--text-secondary);font-size:0.75rem;text-align:center;margin-bottom:16px;position:relative;z-index:1;opacity:0.7}
         .modal .form-group{margin-bottom:12px;position:relative;z-index:1}
         .modal .form-group label{font-size:0.55rem;color:#7a8aaa;font-weight:500;display:block;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px}
         .modal .form-group label .required{color:var(--red);margin-left:2px}
-        .modal .form-group input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border-color);background:var(--bg-input);color:var(--text-primary);font-size:0.85rem;outline:none;transition:all 0.3s ease}
+        .modal .form-group input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.03);color:var(--text-primary);font-size:0.85rem;outline:none;transition:all 0.3s ease}
         .modal .form-group input:focus{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
         .modal .form-group input::placeholder{color:#6a7a9a;font-size:0.7rem;font-weight:400;opacity:0.8}
-        .modal .form-group input.error{border-color:var(--red);box-shadow:0 0 20px rgba(239,68,68,0.2)}
+        .modal .form-group input.error{border-color:var(--red);box-shadow:0 0 20px rgba(255,82,82,0.2)}
         .modal .form-group .error-text{font-size:0.5rem;color:var(--red);margin-top:3px;display:none}
         .modal .form-group .error-text.show{display:block}
-        .modal .btn-primary{width:100%;padding:11px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:10px;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;position:relative;z-index:1}
+        .modal .btn-primary{width:100%;padding:11px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:10px;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;position:relative;z-index:1;box-shadow:0 0 30px var(--gold-glow)}
         .modal .btn-primary:active{transform:scale(0.96)}
-        .modal .btn-primary:hover{box-shadow:0 0 40px var(--gold-glow)}
+        .modal .btn-primary:hover{box-shadow:0 0 50px var(--gold-glow)}
         .modal .switch-link{color:var(--cyan);cursor:pointer;font-weight:600;text-align:center;display:block;margin-top:10px;font-size:0.7rem;position:relative;z-index:1}
         .modal .switch-link:active{opacity:0.7}
         .modal .close-btn{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--text-secondary);font-size:1.1rem;cursor:pointer;z-index:2}
         .modal .forgot-link{color:var(--text-secondary);cursor:pointer;font-size:0.55rem;text-align:right;display:block;margin-top:6px;position:relative;z-index:1;transition:all 0.3s ease}
         .modal .forgot-link:hover{color:var(--gold)}
-        .modal .login-error{font-size:0.55rem;color:var(--red);text-align:center;margin-bottom:8px;display:none;padding:4px 8px;background:rgba(239,68,68,0.08);border-radius:6px;border:1px solid rgba(239,68,68,0.1)}
+        .modal .login-error{font-size:0.55rem;color:var(--red);text-align:center;margin-bottom:8px;display:none;padding:4px 8px;background:rgba(255,82,82,0.08);border-radius:6px;border:1px solid rgba(255,82,82,0.1)}
 
-        .avatar-upload .preview{width:70px;height:70px;border-radius:50%;background:var(--bg-input);border:2px solid var(--border-color);display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--text-secondary);cursor:pointer;transition:all 0.3s ease;overflow:hidden;position:relative;margin:0 auto 8px}
+        .avatar-upload .preview{width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,0.03);border:2px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--text-secondary);cursor:pointer;transition:all 0.3s ease;overflow:hidden;position:relative;margin:0 auto 8px}
         .avatar-upload .preview:hover{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
         .avatar-upload .preview img{width:100%;height:100%;object-fit:cover}
         .avatar-upload .preview input{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}
         .avatar-upload .preview .upload-hint{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.7);padding:2px;font-size:0.4rem;color:var(--text-secondary);text-align:center;display:none}
         .avatar-upload .preview:hover .upload-hint{display:block}
-        .avatar-upload .label{font-size:0.55rem;color:var(--text-secondary);text-align:center;display:block}
+        .avatar-upload .label{font-size:0.55rem;color:var(--text-secondary);text-align:center;display:block;opacity:0.5}
 
         .confirm-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.9);backdrop-filter:blur(20px);display:none;z-index:600;align-items:center;justify-content:center;padding:20px;flex-direction:column;text-align:center}
         .confirm-overlay.show{display:flex;animation:fadeIn 0.5s ease}
-        .confirm-overlay .card{background:linear-gradient(145deg,var(--bg-card),var(--bg-secondary));border:1px solid var(--border-color);border-radius:24px;padding:30px 24px;max-width:360px;width:100%;box-shadow:0 20px 60px var(--shadow),0 0 60px rgba(245,200,66,0.05);position:relative;overflow:hidden}
-        .confirm-overlay .card::before{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(245,200,66,0.05) 0%,transparent 70%);animation:shimmer 8s ease-in-out infinite}
+        .confirm-overlay .card{background:linear-gradient(145deg,var(--bg-card),var(--bg-secondary));border:1px solid rgba(255,255,255,0.06);border-radius:24px;padding:30px 24px;max-width:360px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.6);position:relative;overflow:hidden}
+        .confirm-overlay .card::before{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(247,212,74,0.04) 0%,transparent 70%);animation:shimmer 8s ease-in-out infinite}
         .confirm-overlay .avatar-box{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--orange));display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#0a0e1a;margin:0 auto 12px;overflow:hidden;box-shadow:0 0 40px var(--gold-glow)}
         .confirm-overlay .avatar-box img{width:100%;height:100%;object-fit:cover}
         .confirm-overlay .username{font-size:1.2rem;font-weight:700;color:var(--gold);margin-bottom:2px;position:relative;z-index:1;text-shadow:0 0 20px var(--gold-glow)}
-        .confirm-overlay .email{font-size:0.75rem;color:var(--text-secondary);margin-bottom:4px;position:relative;z-index:1}
-        .confirm-overlay .status{display:inline-block;font-size:0.5rem;color:var(--green);background:rgba(34,211,238,0.08);padding:2px 14px;border-radius:20px;border:1px solid rgba(34,211,238,0.1);margin-bottom:16px;position:relative;z-index:1}
+        .confirm-overlay .email{font-size:0.75rem;color:var(--text-secondary);margin-bottom:4px;position:relative;z-index:1;opacity:0.7}
+        .confirm-overlay .status{display:inline-block;font-size:0.5rem;color:var(--green);background:rgba(0,230,118,0.08);padding:2px 14px;border-radius:20px;border:1px solid rgba(0,230,118,0.1);margin-bottom:16px;position:relative;z-index:1}
         .confirm-overlay .btn-group{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;position:relative;z-index:1}
         .confirm-overlay .btn-confirm{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;padding:10px 28px;border-radius:12px;font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.3s ease;box-shadow:0 0 30px var(--gold-glow)}
         .confirm-overlay .btn-confirm:active{transform:scale(0.95)}
-        .confirm-overlay .btn-cancel{background:transparent;border:2px solid var(--border-color);color:var(--text-secondary);padding:10px 28px;border-radius:12px;font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.3s ease}
+        .confirm-overlay .btn-cancel{background:transparent;border:2px solid rgba(255,255,255,0.06);color:var(--text-secondary);padding:10px 28px;border-radius:12px;font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.3s ease}
         .confirm-overlay .btn-cancel:active{transform:scale(0.95)}
         .confirm-overlay .btn-cancel:hover{border-color:var(--red);color:var(--red)}
-        .confirm-overlay .glow-ring{position:absolute;top:-20px;left:-20px;right:-20px;bottom:-20px;border-radius:50%;background:conic-gradient(from 0deg,transparent,rgba(245,200,66,0.05),transparent,rgba(0,212,255,0.05),transparent);animation:spin 10s linear infinite;pointer-events:none}
+        .confirm-overlay .glow-ring{position:absolute;top:-20px;left:-20px;right:-20px;bottom:-20px;border-radius:50%;background:conic-gradient(from 0deg,transparent,rgba(247,212,74,0.05),transparent,rgba(0,229,255,0.05),transparent);animation:spin 10s linear infinite;pointer-events:none}
         @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
     </style>
 </head>
@@ -423,39 +477,41 @@
 
     <!-- ===== WELCOME ===== -->
     <div class="welcome">
-        <div class="greeting"><i class="fas fa-fire"></i> <span id="greeting">ဟေ့ကောင်လေး!</span></div>
-        <h2 id="title"><i class="fas fa-arrow-right"></i> ဂိမ်းကို <span>မြှင့်တင်လိုက်ပါ!</span></h2>
-        <p id="subtitle">စိန်တွေဖြည့်ပြီး စစ်မြေပြင်ကို အနိုင်ယူလိုက်ပါ</p>
+        <div class="greeting"><i class="fas fa-fire"></i> <span id="greeting">Hey, Gamer!</span></div>
+        <h2 id="title"><i class="fas fa-arrow-right"></i> Level Up Your <span>Game!</span></h2>
+        <p id="subtitle">Top up diamonds and dominate the battlefield</p>
     </div>
 
-    <!-- ===== SHOP STATUS BANNER (ဆိုင်ဖွင့်/ပိတ်) ===== -->
+    <!-- ===== SHOP STATUS BANNER ===== -->
     <div class="shop-status-banner" id="shopStatusBanner">
         <div class="banner-content">
             <div class="banner-left">
                 <div class="banner-icon" id="statusIcon">🏪</div>
                 <div class="banner-text">
-                    <div class="banner-title" id="statusTitle">20% အပိုစိန်များ</div>
-                    <div class="banner-sub" id="statusSub">အချိန်အကန့်အသတ်နဲ့ ကမ်းလှမ်းမှု</div>
+                    <div class="banner-title" id="statusTitle">🟢 Shop Open</div>
+                    <div class="banner-sub" id="statusSub">10:00 AM - 10:00 PM</div>
                 </div>
             </div>
-            <div class="banner-status open" id="statusBadge">🟢 ဆိုင်ဖွင့်သည်</div>
+            <div class="banner-status open" id="statusBadge">
+                <span class="status-dot"></span> OPEN
+            </div>
         </div>
     </div>
 
-    <!-- ===== SHOP CARD (ဈေးဆိုင်သွားရန်) ===== -->
+    <!-- ===== SHOP CARD (GO TO SHOP) ===== -->
     <a href="shop.html" class="shop-card open" id="shopCard">
-        <span class="icon">🛒</span>
-        <div class="label" id="goToShop"><span class="highlight">Go to Shop</span></div>
-        <div class="sub" id="shopSubText">ပက်ကေ့ခ်ျအားလုံးကိုကြည့်ပါ</div>
+        <span class="icon">🎮</span>
+        <div class="label" id="goToShop"><span class="highlight">⚡ GO TO SHOP</span></div>
+        <div class="sub" id="shopSubText">Browse all packages</div>
     </a>
 
-    <!-- ===== SERVICES (အကွက် ၆ ကွက်) ===== -->
-    <div class="section-title" id="servicesTitle"><i class="fas fa-bolt"></i> ဘာကြောင့် ကျွန်ုပ်တို့ကိုရွေးမလဲ?</div>
+    <!-- ===== SERVICES ===== -->
+    <div class="section-title" id="servicesTitle"><i class="fas fa-bolt"></i> Why Choose Us?</div>
     <div class="services-grid">
-        <div class="service"><span class="glow"></span><span class="icon">⚡</span><span class="label" id="s1">၁၀ မိနစ်အတွင်း အော်ဒါပြီးမြောက်</span></div>
-        <div class="service"><span class="glow"></span><span class="icon">🚀</span><span class="label" id="s2">လျှင်မြန် • လွယ်ကူ • ယုံကြည်စိတ်ချရ</span></div>
-        <div class="service"><span class="glow"></span><span class="icon">💰</span><span class="label" id="s3">အတန်ဆုံးဈေးနဲ့ အကောင်းဆုံး Service</span></div>
-        <div class="service"><span class="glow"></span><span class="icon">🕐</span><span class="label" id="s4">မနက် ၁၀ နာရီမှ ည ၁၀ နာရီအထိ</span></div>
+        <div class="service"><span class="glow"></span><span class="icon">⚡</span><span class="label" id="s1">10 mins delivery</span></div>
+        <div class="service"><span class="glow"></span><span class="icon">🚀</span><span class="label" id="s2">Fast • Easy • Trusted</span></div>
+        <div class="service"><span class="glow"></span><span class="icon">💰</span><span class="label" id="s3">Best Price & Best Service</span></div>
+        <div class="service"><span class="glow"></span><span class="icon">🕐</span><span class="label" id="s4">10 AM - 10 PM</span></div>
         <div class="service"><span class="glow"></span><span class="icon">🎮</span><span class="label" id="s5">Mobile Legends</span></div>
         <div class="service"><span class="glow"></span><span class="icon">⭐</span><span class="label" id="s6">Coming Soon</span></div>
     </div>
@@ -464,8 +520,8 @@
     <div class="telegram-card" onclick="window.open('https://t.me/Premium_GameShop', '_blank')">
         <span class="icon"><i class="fab fa-telegram-plane"></i></span>
         <div class="info">
-            <div class="title" id="telegramTitle">📢 ကျွန်ုပ်တို့ Telegram ချန်နယ်သို့လာရောက်ပါ</div>
-            <div class="desc" id="telegramDesc">နောက်ဆုံးရသတင်းများ၊ ပရိုမိုးရှင်းများနှင့် အကူအညီရယူပါ</div>
+            <div class="title" id="telegramTitle">📢 Join Our Telegram Channel</div>
+            <div class="desc" id="telegramDesc">Get latest updates, promos and support</div>
         </div>
         <span class="arrow"><i class="fas fa-chevron-right"></i></span>
     </div>
@@ -474,7 +530,7 @@
     <div class="telegram-contact" onclick="window.open('https://t.me/Energypremiumhub', '_blank')">
         <span class="icon"><i class="fas fa-headset"></i></span>
         <div class="info">
-            <div class="label" id="contactLabel">ဆက်သွယ်ရန်</div>
+            <div class="label" id="contactLabel">💬 Need Help?</div>
             <div class="username">@Energypremiumhub</div>
         </div>
         <span class="arrow"><i class="fas fa-chevron-right"></i></span>
@@ -515,8 +571,8 @@
         <div class="email" id="confirmEmail">email@example.com</div>
         <div class="status">🟢 Online</div>
         <div class="btn-group">
-            <button class="btn-confirm" id="confirmYes"><i class="fas fa-check"></i> ဟုတ်ကဲ့</button>
-            <button class="btn-cancel" id="confirmNo"><i class="fas fa-times"></i> မဟုတ်ပါ</button>
+            <button class="btn-confirm" id="confirmYes"><i class="fas fa-check"></i> Confirm</button>
+            <button class="btn-cancel" id="confirmNo"><i class="fas fa-times"></i> Cancel</button>
         </div>
     </div>
 </div>
@@ -525,22 +581,22 @@
 <div class="modal-overlay" id="authModal">
     <div class="modal">
         <button class="close-btn" onclick="closeModal()">✕</button>
-        <h2 id="modalTitle">⚔️ ဝင်ရန်</h2>
-        <p id="modalSub">ပြန်လည်ကြိုဆိုပါတယ် စစ်သည်တော်!</p>
+        <h2 id="modalTitle">⚔️ Login</h2>
+        <p id="modalSub">Welcome back, warrior!</p>
         <div id="modalBody">
             <div id="loginForm">
                 <div class="form-group">
-                    <label id="emailLabel">📧 အီးမေးလ် / အသုံးပြုသူအမည် / ဖုန်းနံပါတ်</label>
-                    <input type="text" id="loginEmail" placeholder="သင့်အီးမေးလ်၊ အသုံးပြုသူအမည် သို့မဟုတ် ဖုန်းနံပါတ်ထည့်ပါ">
+                    <label id="emailLabel">📧 Email / Username / Phone</label>
+                    <input type="text" id="loginEmail" placeholder="Enter your email, username or phone">
                 </div>
                 <div class="form-group">
-                    <label id="passLabel">🔑 စကားဝှက်</label>
-                    <input type="password" id="loginPassword" placeholder="သင့်စကားဝှက်ထည့်ပါ">
+                    <label id="passLabel">🔑 Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password">
                 </div>
                 <div class="login-error" id="loginError"></div>
-                <button class="btn-primary" id="loginBtn" onclick="handleLogin()">🔑 ဝင်ရန်</button>
-                <span class="forgot-link" onclick="openForgotPassword()">🔑 စကားဝှက်မေ့နေပါသလား?</span>
-                <span class="switch-link" id="switchToRegister" onclick="switchAuthMode()">အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်</span>
+                <button class="btn-primary" id="loginBtn" onclick="handleLogin()">🔑 Login</button>
+                <span class="forgot-link" onclick="openForgotPassword()">🔑 Forgot Password?</span>
+                <span class="switch-link" id="switchToRegister" onclick="switchAuthMode()">Don't have an account? Register</span>
             </div>
             <div id="registerForm" style="display:none;">
                 <div class="avatar-upload">
@@ -552,59 +608,59 @@
                     <span class="label">Profile Picture (optional)</span>
                 </div>
                 <div class="form-group">
-                    <label>👤 အသုံးပြုသူအမည် <span class="required">*</span></label>
-                    <input type="text" id="regUsername" placeholder="အသုံးပြုသူအမည်ရွေးပါ (နေရာလပ်မထည့်ရ)" oninput="this.value=this.value.replace(/\s/g,'')">
-                    <div class="error-text" id="usernameError">အသုံးပြုသူအမည် လိုအပ်ပါသည် (နေရာလပ်မထည့်ရ)</div>
+                    <label>👤 Username <span class="required">*</span></label>
+                    <input type="text" id="regUsername" placeholder="Choose a username (no spaces)" oninput="this.value=this.value.replace(/\s/g,'')">
+                    <div class="error-text" id="usernameError">Username is required (no spaces)</div>
                 </div>
                 <div class="form-group">
-                    <label>📧 အီးမေးလ်</label>
-                    <input type="email" id="regEmail" placeholder="သင့်အီးမေးလ်ထည့်ပါ (optional)">
-                    <div class="error-text" id="emailError">မှန်ကန်တဲ့ အီးမေးလ် လိုအပ်ပါသည်</div>
+                    <label>📧 Email</label>
+                    <input type="email" id="regEmail" placeholder="Enter your email (optional)">
+                    <div class="error-text" id="emailError">Valid email is required</div>
                 </div>
                 <div class="form-group">
-                    <label>📱 ဖုန်းနံပါတ်</label>
-                    <input type="tel" id="regPhone" placeholder="သင့်ဖုန်းနံပါတ်ထည့်ပါ (optional)">
-                    <div class="error-text" id="phoneError">ဖုန်းနံပါတ် လိုအပ်ပါသည်</div>
+                    <label>📱 Phone Number</label>
+                    <input type="tel" id="regPhone" placeholder="Enter your phone number (optional)">
+                    <div class="error-text" id="phoneError">Phone number is required</div>
                 </div>
                 <div class="form-group">
-                    <label>🔑 စကားဝှက် <span class="required">*</span></label>
-                    <input type="password" id="regPassword" placeholder="အနည်းဆုံး ၄ လုံး">
-                    <div class="error-text" id="passwordError">စကားဝှက်သည် အနည်းဆုံး ၄ လုံးရှိရမယ်</div>
+                    <label>🔑 Password <span class="required">*</span></label>
+                    <input type="password" id="regPassword" placeholder="Min 4 characters">
+                    <div class="error-text" id="passwordError">Password must be at least 4 characters</div>
                 </div>
                 <div class="form-group">
-                    <label>🔐 စကားဝှက်အတည်ပြုရန် <span class="required">*</span></label>
-                    <input type="password" id="regConfirmPassword" placeholder="စကားဝှက်ပြန်ထည့်ပါ">
-                    <div class="error-text" id="confirmError">စကားဝှက်များ မတူညီပါ</div>
+                    <label>🔐 Confirm Password <span class="required">*</span></label>
+                    <input type="password" id="regConfirmPassword" placeholder="Re-enter password">
+                    <div class="error-text" id="confirmError">Passwords do not match</div>
                 </div>
-                <button class="btn-primary" onclick="handleRegister()">🔑 မှတ်ပုံတင်ရန်</button>
-                <span class="switch-link" id="switchToLogin" onclick="switchAuthMode()">အကောင့်ရှိပြီးသား? ဝင်ရန်</span>
+                <button class="btn-primary" onclick="handleRegister()">🔑 Register</button>
+                <span class="switch-link" id="switchToLogin" onclick="switchAuthMode()">Already have an account? Login</span>
             </div>
             <div id="forgotForm" style="display:none;">
                 <div class="form-group">
-                    <label>📧 အီးမေးလ် သို့မဟုတ် ဖုန်းနံပါတ်</label>
-                    <input type="text" id="forgotEmail" placeholder="သင့်မှတ်ပုံတင်ထားတဲ့ အီးမေးလ် သို့မဟုတ် ဖုန်းနံပါတ်ထည့်ပါ">
-                    <div class="error-text" id="forgotEmailError">ကျေးဇူးပြု၍ အီးမေးလ် သို့မဟုတ် ဖုန်းနံပါတ်ထည့်ပါ</div>
+                    <label>📧 Email or Phone</label>
+                    <input type="text" id="forgotEmail" placeholder="Enter your registered email or phone">
+                    <div class="error-text" id="forgotEmailError">Please enter your email or phone</div>
                 </div>
                 <div id="otpSection" style="display:none;">
                     <div class="form-group">
-                        <label>🔑 OTP ကုဒ်</label>
-                        <input type="text" id="otpCode" placeholder="သင့်အီးမေးလ်သို့ ပို့ထားတဲ့ OTP ကုဒ်ထည့်ပါ">
-                        <div class="error-text" id="otpError">OTP ကုဒ် မမှန်ပါ</div>
+                        <label>🔑 OTP Code</label>
+                        <input type="text" id="otpCode" placeholder="Enter OTP code sent to your email">
+                        <div class="error-text" id="otpError">Invalid OTP code</div>
                     </div>
                     <div class="form-group">
-                        <label>🔑 စကားဝှက်အသစ်</label>
-                        <input type="password" id="newPassword" placeholder="အနည်းဆုံး ၄ လုံး">
-                        <div class="error-text" id="newPasswordError">စကားဝှက်သည် အနည်းဆုံး ၄ လုံးရှိရမယ်</div>
+                        <label>🔑 New Password</label>
+                        <input type="password" id="newPassword" placeholder="Min 4 characters">
+                        <div class="error-text" id="newPasswordError">Password must be at least 4 characters</div>
                     </div>
                     <div class="form-group">
-                        <label>🔐 စကားဝှက်အသစ်အတည်ပြုရန်</label>
-                        <input type="password" id="confirmNewPassword" placeholder="စကားဝှက်ပြန်ထည့်ပါ">
-                        <div class="error-text" id="confirmNewError">စကားဝှက်များ မတူညီပါ</div>
+                        <label>🔐 Confirm New Password</label>
+                        <input type="password" id="confirmNewPassword" placeholder="Re-enter password">
+                        <div class="error-text" id="confirmNewError">Passwords do not match</div>
                     </div>
-                    <button class="btn-primary" onclick="resetPassword()">🔄 စကားဝှက်ပြန်သတ်မှတ်ရန်</button>
+                    <button class="btn-primary" onclick="resetPassword()">🔄 Reset Password</button>
                 </div>
-                <button class="btn-primary" id="sendOtpBtn" onclick="sendOTP()" style="margin-bottom:8px;">📧 OTP ပို့ရန်</button>
-                <span class="switch-link" onclick="closeForgotPassword()">← ဝင်ရန်စာမျက်နှာသို့</span>
+                <button class="btn-primary" id="sendOtpBtn" onclick="sendOTP()" style="margin-bottom:8px;">📧 Send OTP</button>
+                <span class="switch-link" onclick="closeForgotPassword()">← Back to Login</span>
             </div>
         </div>
     </div>
@@ -625,92 +681,86 @@
     const LANG_DATA = {
         my: {
             appName: 'Premium Game Shop',
-            greeting: 'Hey, Gammer!',
-            title: 'ဂိမ်းကို <span>မြှင့်တင်လိုက်ပါ!</span>',
-            subtitle: 'စိန်တွေဖြည့်ပြီး စစ်မြေပြင်ကို အနိုင်ယူလိုက်ပါ',
-            bannerTag: 'HOT',
-            bannerTitle: 'ဆိုင်ဖွင့်ပါပြီ/စိန်များကို ဝယ်ူနိုင်ပါပြီ!',
-            bannerDesc: 'စိန်များကို ဆိုင်ဖွင်ချိန်တွင်သာ ဝယ်ယူနိုင်မည် ဖြစ်သည်! ',
-            goToShop: 'Go to Shop',
-            shopSubText: 'ပက်ကေ့ခ်ျအားလုံးကိုကြည့်ပါ',
-            servicesTitle: 'ဘာကြောင့် ကျွန်ုပ်တို့ကိုရွေးမလဲ?',
-            s1: '၁၀ မိနစ်အတွင်း အော်ဒါပြီးမြောက်',
-            s2: 'လျှင်မြန် • လွယ်ကူ • ယုံကြည်စိတ်ချရ',
-            s3: 'အတန်ဆုံးဈေးနဲ့ အကောင်းဆုံး Service',
-            s4: 'မနက် ၁၀ နာရီမှ ည ၁၀ နာရီအထိ',
+            greeting: 'Hey, Gamer!',
+            title: 'Level Up Your <span>Game!</span>',
+            subtitle: 'Top up diamonds and dominate the battlefield',
+            goToShop: '⚡ GO TO SHOP',
+            shopSubText: 'Browse all packages',
+            servicesTitle: 'Why Choose Us?',
+            s1: '10 mins delivery',
+            s2: 'Fast • Easy • Trusted',
+            s3: 'Best Price & Best Service',
+            s4: '10 AM - 10 PM',
             s5: 'Mobile Legends',
             s6: 'Coming Soon',
-            telegramTitle: '📢 ကျွန်ုပ်တို့ Telegram ချန်နယ်သို့လာရောက်ပါ',
-            telegramDesc: 'နောက်ဆုံးရသတင်းများ၊ ပရိုမိုးရှင်းများနှင့် အကူအညီရယူပါ',
-            contactLabel: 'ဆက်သွယ်ရန်',
+            telegramTitle: '📢 Join Our Telegram Channel',
+            telegramDesc: 'Get latest updates, promos and support',
+            contactLabel: '💬 Need Help?',
             contactUsername: '@Energypremiumhub',
             home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
-            noti: '🔔 အသိပေးချက်အသစ်မရှိပါ',
-            modalLogin: '⚔️ ဝင်ရန်',
-            modalRegister: '🛡️ မှတ်ပုံတင်ရန်',
-            modalLoginSub: 'ပြန်လည်ကြိုဆိုပါတယ် စစ်သည်တော်!',
-            modalRegisterSub: 'အကောင့်ဖွင့်ပါ ချန်ပီယံ!',
-            email: '📧 အီးမေးလ် / အသုံးပြုသူအမည် / ဖုန်းနံပါတ်',
-            password: '🔑 စကားဝှက်',
-            username: '👤 အသုံးပြုသူအမည်',
-            phone: '📱 ဖုန်းနံပါတ်',
-            switchLogin: 'အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်',
-            switchRegister: 'အကောင့်ရှိပြီးသား? ဝင်ရန်',
-            loginSuccess: '✅ ကြိုဆိုပါတယ် ချန်ပီယံ!',
-            registerSuccess: '✅ အကောင့်ဖွင့်ခြင်းအောင်မြင်ပါပြီ!',
-            logoutSuccess: '🚪 ထွက်ခြင်းအောင်မြင်ပါပြီ!',
-            logoutConfirm: 'ထွက်မှာသေချာလား?',
-            enterEmail: 'ကျေးဇူးပြု၍ အီးမေးလ်၊ အသုံးပြုသူအမည် သို့မဟုတ် ဖုန်းနံပါတ်ထည့်ပါ',
-            enterPassword: 'ကျေးဇူးပြု၍ စကားဝှက်ထည့်ပါ',
-            enterUsername: 'ကျေးဇူးပြု၍ အသုံးပြုသူအမည်ထည့်ပါ',
-            enterValidEmail: 'ကျေးဇူးပြု၍ မှန်ကန်တဲ့ အီးမေးလ်ထည့်ပါ',
-            enterPhone: 'ကျေးဇူးပြု၍ ဖုန်းနံပါတ်ထည့်ပါ',
-            passwordMin: 'စကားဝှက်သည် အနည်းဆုံး ၄ လုံးရှိရမယ်',
-            passwordMatch: 'စကားဝှက်များ မတူညီပါ',
-            userExists: '❌ အသုံးပြုသူအမည်၊ အီးမေးလ် သို့မဟုတ် ဖုန်းနံပါတ် ရှိပြီးသားပါ',
-            userNotFound: '❌ အကောင့်မရှိပါ။ ကျေးဇူးပြု၍ မှတ်ပုံတင်ပါ။',
-            invalidCredentials: '❌ အီးမေးလ်/အသုံးပြုသူအမည်/ဖုန်းနံပါတ် သို့မဟုတ် စကားဝှက် မှားနေပါသည်',
-            forgotTitle: '🔑 စကားဝှက်မေ့နေပါသလား',
-            forgotSub: 'စကားဝှက်ပြန်သတ်မှတ်ရန် သင့်အီးမေးလ် သို့မဟုတ် ဖုန်းနံပါတ်ကိုထည့်ပါ',
-            sendOtp: '📧 OTP ပို့ရန်',
-            resetPassword: '🔄 စကားဝှက်ပြန်သတ်မှတ်ရန်',
-            otpSent: '✅ သင့်အီးမေးလ်သို့ OTP ပို့ထားပါသည်!',
-            otpError: '❌ OTP ကုဒ် မှားနေပါသည်',
-            resetSuccess: '✅ စကားဝှက်ပြန်သတ်မှတ်ခြင်းအောင်မြင်ပါပြီ!',
-            resetError: '❌ စကားဝှက်ပြန်သတ်မှတ်ခြင်းမအောင်မြင်ပါ။ ကျေးဇူးပြု၍ ပြန်စမ်းပါ။',
-            backToLogin: '← ဝင်ရန်စာမျက်နှာသို့',
-            emailSentError: '❌ OTP ပို့ရန်မအောင်မြင်ပါ။ ကျေးဇူးပြု၍ ပြန်စမ်းပါ။',
-            noSpace: 'အသုံးပြုသူအမည်တွင် နေရာလွတ်မထည့်ရပါ',
-            confirmYes: '✅ ဟုတ်ကဲ့ ကျွန်တော်ပါ',
-            confirmNo: '❌ မဟုတ်ပါ၊ ပယ်ဖျက်မည်',
-            forgotBack: '← ဝင်ရန်စာမျက်နှာသို့',
-            shopOpen: '🟢 ဆိုင်ဖွင့်သည်',
-            shopClosed: '🔴 ဆိုင်ပိတ်သည်',
-            bannerOpenTitle: '၂၀% အပိုစိန်များ',
-            bannerClosedTitle: 'ကျေးဇူးပြု၍ ပြန်လည်ဝင်ရောက်ပါ',
-            bannerOpenSub: 'အချိန်အကန့်အသတ်နဲ့ ကမ်းလှမ်းမှု',
-            bannerClosedSub: 'မနက် ၁၀ နာရီမှ ည ၁၀ နာရီအထိ ဖွင့်ပါမည်'
+            noti: '🔔 No new notifications',
+            modalLogin: '⚔️ Login',
+            modalRegister: '🛡️ Register',
+            modalLoginSub: 'Welcome back, warrior!',
+            modalRegisterSub: 'Create your account, champion!',
+            email: '📧 Email / Username / Phone',
+            password: '🔑 Password',
+            username: '👤 Username',
+            phone: '📱 Phone Number',
+            switchLogin: "Don't have an account? Register",
+            switchRegister: 'Already have an account? Login',
+            loginSuccess: '✅ Welcome back, Champion!',
+            registerSuccess: '✅ Account created! Welcome!',
+            logoutSuccess: '🚪 Logged out successfully!',
+            logoutConfirm: 'Are you sure you want to logout?',
+            enterEmail: 'Please enter your email, username or phone',
+            enterPassword: 'Please enter your password',
+            enterUsername: 'Please enter your username',
+            enterValidEmail: 'Please enter a valid email',
+            enterPhone: 'Please enter your phone number',
+            passwordMin: 'Password must be at least 4 characters',
+            passwordMatch: 'Passwords do not match',
+            userExists: '❌ Username, email or phone already exists',
+            userNotFound: '❌ Account not found. Please register first.',
+            invalidCredentials: '❌ Invalid email/username/phone or password',
+            forgotTitle: '🔑 Forgot Password',
+            forgotSub: 'Enter your email or phone to reset password',
+            sendOtp: '📧 Send OTP',
+            resetPassword: '🔄 Reset Password',
+            otpSent: '✅ OTP sent to your email!',
+            otpError: '❌ Invalid OTP code',
+            resetSuccess: '✅ Password reset successfully!',
+            resetError: '❌ Failed to reset password. Please try again.',
+            backToLogin: '← Back to Login',
+            emailSentError: '❌ Failed to send OTP. Please try again.',
+            noSpace: 'Username cannot contain spaces',
+            confirmYes: '✅ Yes, that\'s me',
+            confirmNo: '❌ No, cancel',
+            forgotBack: '← Back to Login',
+            shopOpen: '🟢 OPEN',
+            shopClosed: '🔴 CLOSED',
+            bannerOpenTitle: '🟢 Shop Open',
+            bannerClosedTitle: '🔴 Shop Closed',
+            bannerOpenSub: '10:00 AM - 10:00 PM',
+            bannerClosedSub: 'Please come back later'
         },
         en: {
             appName: 'Premium Game Shop',
             greeting: 'Hey, Gamer!',
             title: 'Level Up Your <span>Game!</span>',
             subtitle: 'Top up diamonds and dominate the battlefield',
-            bannerTag: '🔥 HOT',
-            bannerTitle: '20% Bonus Diamonds!',
-            bannerDesc: 'Limited time offer • Shop now',
-            goToShop: 'Go to Shop',
+            goToShop: '⚡ GO TO SHOP',
             shopSubText: 'Browse all packages',
             servicesTitle: 'Why Choose Us?',
-            s1: 'Order completed within 10 mins',
+            s1: '10 mins delivery',
             s2: 'Fast • Easy • Trusted',
             s3: 'Best Price & Best Service',
-            s4: '10 AM - 10 PM Daily',
+            s4: '10 AM - 10 PM',
             s5: 'Mobile Legends',
             s6: 'Coming Soon',
             telegramTitle: '📢 Join Our Telegram Channel',
             telegramDesc: 'Get latest updates, promos and support',
-            contactLabel: 'Contact Us',
+            contactLabel: '💬 Need Help?',
             contactUsername: '@Energypremiumhub',
             home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
             noti: '🔔 No new notifications',
@@ -752,12 +802,12 @@
             confirmYes: '✅ Yes, that\'s me',
             confirmNo: '❌ No, cancel',
             forgotBack: '← Back to Login',
-            shopOpen: '🟢 Shop Open',
-            shopClosed: '🔴 Shop Closed',
-            bannerOpenTitle: '20% Bonus Diamonds!',
-            bannerClosedTitle: 'Please come back later',
-            bannerOpenSub: 'Limited time offer • Shop now',
-            bannerClosedSub: 'Open from 10 AM to 10 PM'
+            shopOpen: '🟢 OPEN',
+            shopClosed: '🔴 CLOSED',
+            bannerOpenTitle: '🟢 Shop Open',
+            bannerClosedTitle: '🔴 Shop Closed',
+            bannerOpenSub: '10:00 AM - 10:00 PM',
+            bannerClosedSub: 'Please come back later'
         }
     };
 
@@ -792,15 +842,15 @@
         document.getElementById('s6').textContent = d.s6;
         document.getElementById('telegramTitle').textContent = d.telegramTitle;
         document.getElementById('telegramDesc').textContent = d.telegramDesc;
-        document.getElementById('contactLabel').textContent = d.contactLabel || 'ဆက်သွယ်ရန်';
-        document.querySelector('.telegram-contact .username').textContent = d.contactUsername || '@Energypremiumhub';
+        document.getElementById('contactLabel').textContent = d.contactLabel;
+        document.querySelector('.telegram-contact .username').textContent = d.contactUsername;
         document.getElementById('navHome').textContent = d.home;
         document.getElementById('navShop').textContent = d.shop;
         document.getElementById('navPayment').textContent = d.payment;
         document.getElementById('navProfile').textContent = d.profile;
         document.getElementById('statusTitle').textContent = isShopOpen() ? d.bannerOpenTitle : d.bannerClosedTitle;
         document.getElementById('statusSub').textContent = isShopOpen() ? d.bannerOpenSub : d.bannerClosedSub;
-        document.getElementById('statusBadge').textContent = isShopOpen() ? d.shopOpen : d.shopClosed;
+        document.getElementById('statusBadge').innerHTML = isShopOpen() ? '<span class="status-dot"></span> ' + d.shopOpen : '<span class="status-dot"></span> ' + d.shopClosed;
         document.getElementById('statusBadge').className = 'banner-status ' + (isShopOpen() ? 'open' : 'closed');
         document.getElementById('statusIcon').textContent = isShopOpen() ? '🏪' : '🔒';
         updateAuthUI();
@@ -829,14 +879,14 @@
 
         if (isShopOpen()) {
             shopCard.className = 'shop-card open';
-            statusBadge.textContent = d.shopOpen;
+            statusBadge.innerHTML = '<span class="status-dot"></span> ' + d.shopOpen;
             statusBadge.className = 'banner-status open';
             statusIcon.textContent = '🏪';
             statusTitle.textContent = d.bannerOpenTitle;
             statusSub.textContent = d.bannerOpenSub;
         } else {
             shopCard.className = 'shop-card closed';
-            statusBadge.textContent = d.shopClosed;
+            statusBadge.innerHTML = '<span class="status-dot"></span> ' + d.shopClosed;
             statusBadge.className = 'banner-status closed';
             statusIcon.textContent = '🔒';
             statusTitle.textContent = d.bannerClosedTitle;
@@ -844,7 +894,6 @@
         }
     }
 
-    // Check shop status every minute
     setInterval(updateShopUI, 60000);
 
     // ===== TOAST =====
