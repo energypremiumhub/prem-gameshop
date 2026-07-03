@@ -39,6 +39,7 @@
             --purple-glow: rgba(179,136,255,0.2);
             --glass-border: rgba(255,255,255,0.06);
             --glass-bg: rgba(16,16,50,0.3);
+            --warning: #ffab00;
         }
 
         body {
@@ -60,7 +61,6 @@
 
         .container{max-width:500px;margin:0 auto}
 
-        /* ===== HEADER ===== */
         .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
         .header .left{display:flex;flex-direction:column;gap:6px}
         .header .left .logo{font-size:0.9rem;font-weight:800;color:var(--primary);text-shadow:0 0 30px var(--primary-glow);letter-spacing:0.5px;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none;filter:drop-shadow(0 0 20px var(--primary-glow))}
@@ -99,11 +99,37 @@
         .double-box .arrow{color:var(--gold);font-size:1.2rem;transition:all 0.3s ease}
         .double-box:hover .arrow{transform:translateX(4px)}
 
+        /* ===== DOUBLE WARNING ===== */
+        .double-warning {
+            background: rgba(255,171,0,0.06);
+            border: 1px solid rgba(255,171,0,0.12);
+            border-radius: 10px;
+            padding: 10px 14px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .double-warning .icon {
+            color: var(--warning);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .double-warning .text {
+            font-size: 0.6rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            opacity: 0.8;
+        }
+        .double-warning .text strong {
+            color: var(--gold);
+        }
+
         .section-title{font-size:0.65rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;display:flex;align-items:center;gap:10px;opacity:0.5}
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
         .section-title i{color:var(--cyan);text-shadow:0 0 20px var(--cyan-glow)}
 
-        /* ===== PACKAGE LIST (အရင်ဒီဇိုင်းအတိုင်း) ===== */
         .package-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
         
         .package-item{display:flex;align-items:center;justify-content:space-between;background:var(--glass-bg);border:1px solid var(--glass-border);backdrop-filter:blur(20px);border-radius:12px;padding:12px 14px;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,0.2);position:relative;overflow:hidden}
@@ -138,7 +164,6 @@
         .package-item .right .btn.buy-mode{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;box-shadow:0 0 30px var(--gold-glow);animation:btnPulse 1s ease-in-out infinite}
         @keyframes btnPulse{0%,100%{box-shadow:0 0 20px var(--gold-glow)}50%{box-shadow:0 0 50px var(--gold-glow)}}
 
-        /* ===== BOTTOM NAV ===== */
         .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(8,8,26,0.92);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,0.04);display:flex;justify-content:space-around;padding:8px 0 12px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px rgba(0,0,0,0.4)}
         .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.3s ease;padding:6px 16px;border-radius:12px;position:relative;min-width:56px;border:1px solid transparent}
         .bottom-nav .nav-item:active{transform:scale(0.85);background:rgba(255,215,0,0.05)}
@@ -157,38 +182,6 @@
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
         @keyframes shimmer{0%,100%{transform:translate(0,0)}50%{transform:translate(-20%,-20%)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-
-        /* ===== MODAL ===== */
-        .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(12px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px}
-        .modal-overlay.show{display:flex;animation:fadeIn 0.3s ease}
-        .modal{background:rgba(30,30,70,0.95);border:1px solid rgba(255,255,255,0.08);backdrop-filter:blur(20px);border-radius:20px;padding:28px 24px;max-width:380px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.6);position:relative;overflow:hidden;max-height:90vh;overflow-y:auto}
-        .modal::before{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(68,136,255,0.04) 0%,transparent 70%);animation:shimmer 8s ease-in-out infinite}
-        .modal h2{font-size:1.2rem;color:var(--gold);margin-bottom:4px;text-align:center;position:relative;z-index:1;text-shadow:0 0 30px var(--gold-glow)}
-        .modal p{color:var(--text-secondary);font-size:0.75rem;text-align:center;margin-bottom:16px;position:relative;z-index:1;opacity:0.7}
-        .modal .form-group{margin-bottom:14px;position:relative;z-index:1}
-        .modal .form-group label{font-size:0.55rem;color:#8888bb;font-weight:500;display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px}
-        .modal .form-group label .required{color:var(--red);margin-left:2px}
-        .modal .form-group input{width:100%;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.03);color:var(--text-primary);font-size:0.85rem;outline:none;transition:all 0.3s ease}
-        .modal .form-group input:focus{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
-        .modal .form-group input::placeholder{color:#666699;font-size:0.7rem;font-weight:400;opacity:0.8}
-        .modal .form-group input.error{border-color:var(--red);box-shadow:0 0 20px var(--red-glow)}
-        .modal .form-group .error-text{font-size:0.5rem;color:var(--red);margin-top:3px;display:none}
-        .modal .form-group .error-text.show{display:block}
-        .modal .btn-primary{width:100%;padding:12px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:12px;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;position:relative;z-index:1;box-shadow:0 0 30px var(--gold-glow)}
-        .modal .btn-primary:hover{box-shadow:0 0 50px var(--gold-glow)}
-        .modal .btn-primary:active{transform:scale(0.96)}
-        .modal .switch-link{color:var(--cyan);cursor:pointer;font-weight:600;text-align:center;display:block;margin-top:12px;font-size:0.7rem;position:relative;z-index:1}
-        .modal .switch-link:active{opacity:0.7}
-        .modal .close-btn{position:absolute;top:12px;right:16px;background:none;border:none;color:var(--text-secondary);font-size:1.2rem;cursor:pointer;z-index:2;transition:all 0.3s ease}
-        .modal .close-btn:hover{color:var(--gold)}
-        .modal .login-error{font-size:0.55rem;color:var(--red);text-align:center;margin-bottom:10px;display:none;padding:6px 12px;background:rgba(255,0,68,0.08);border-radius:8px;border:1px solid rgba(255,0,68,0.1)}
-        .avatar-upload .preview{width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,0.03);border:2px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--text-secondary);cursor:pointer;transition:all 0.3s ease;overflow:hidden;position:relative;margin:0 auto 8px}
-        .avatar-upload .preview:hover{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
-        .avatar-upload .preview img{width:100%;height:100%;object-fit:cover}
-        .avatar-upload .preview input{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}
-        .avatar-upload .preview .upload-hint{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.7);padding:2px;font-size:0.4rem;color:var(--text-secondary);text-align:center;display:none}
-        .avatar-upload .preview:hover .upload-hint{display:block}
-        .avatar-upload .label{font-size:0.55rem;color:var(--text-secondary);text-align:center;display:block;opacity:0.5}
     </style>
 </head>
 <body>
@@ -241,6 +234,16 @@
 
     <!-- ===== DOUBLE TOP UP ===== -->
     <div class="section-title" id="doubleTitle"><i class="fas fa-star"></i> Double Top Up</div>
+    
+    <!-- ===== DOUBLE WARNING ===== -->
+    <div class="double-warning">
+        <span class="icon">⚠️</span>
+        <span class="text" id="doubleWarning">
+            <strong>Warning:</strong> အကောင့်တစ်ကောင့်မှာ တစ်ခုကို တစ်ခါပဲ နှစ်ဆရပါမယ်။<br>
+            ဥပမာ - ၅၀ နှစ်ဆဖြည့်ပြီးရင် ကျန်တဲ့ သုံးခုပဲ နှစ်ဆဖြည့်လို့ရပါတော့မယ်။
+        </span>
+    </div>
+    
     <div class="package-list" id="doubleList"></div>
 
     <div class="footer">&copy; 2026 Premium Game Shop</div>
@@ -256,67 +259,6 @@
 
 <!-- ===== TOAST ===== -->
 <div class="toast" id="toast"></div>
-
-<!-- ===== AUTH MODAL ===== -->
-<div class="modal-overlay" id="authModal">
-    <div class="modal">
-        <button class="close-btn" onclick="closeModal()">✕</button>
-        <h2 id="modalTitle">⚔️ ဝင်ရန်</h2>
-        <p id="modalSub">ပြန်လည်ကြိုဆိုပါတယ် စစ်သည်တော်!</p>
-        <div id="modalBody">
-            <div id="loginForm">
-                <div class="form-group">
-                    <label id="emailLabel">📧 အီးမေးလ် / အသုံးပြုသူအမည် / ဖုန်းနံပါတ်</label>
-                    <input type="text" id="loginEmail" placeholder="သင့်အီးမေးလ်၊ အသုံးပြုသူအမည် သို့မဟုတ် ဖုန်းနံပါတ်ထည့်ပါ">
-                </div>
-                <div class="form-group">
-                    <label id="passLabel">🔑 စကားဝှက်</label>
-                    <input type="password" id="loginPassword" placeholder="သင့်စကားဝှက်ထည့်ပါ">
-                </div>
-                <div class="login-error" id="loginError"></div>
-                <button class="btn-primary" id="loginBtn" onclick="handleLogin()">🔑 ဝင်ရန်</button>
-                <span class="switch-link" id="switchToRegister" onclick="switchAuthMode()">အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်</span>
-            </div>
-            <div id="registerForm" style="display:none;">
-                <div class="avatar-upload">
-                    <div class="preview" id="avatarPreview">
-                        👤
-                        <input type="file" id="avatarInput" accept="image/*" onchange="handleAvatarUpload(event)">
-                        <span class="upload-hint">Tap to change</span>
-                    </div>
-                    <span class="label">Profile Picture (optional)</span>
-                </div>
-                <div class="form-group">
-                    <label>👤 အသုံးပြုသူအမည် <span class="required">*</span></label>
-                    <input type="text" id="regUsername" placeholder="အသုံးပြုသူအမည်ရွေးပါ (နေရာလပ်မထည့်ရ)" oninput="this.value=this.value.replace(/\s/g,'')">
-                    <div class="error-text" id="usernameError">အသုံးပြုသူအမည် လိုအပ်ပါသည် (နေရာလပ်မထည့်ရ)</div>
-                </div>
-                <div class="form-group">
-                    <label>📧 အီးမေးလ်</label>
-                    <input type="email" id="regEmail" placeholder="သင့်အီးမေးလ်ထည့်ပါ (optional)">
-                    <div class="error-text" id="emailError">မှန်ကန်တဲ့ အီးမေးလ် လိုအပ်ပါသည်</div>
-                </div>
-                <div class="form-group">
-                    <label>📱 ဖုန်းနံပါတ်</label>
-                    <input type="tel" id="regPhone" placeholder="သင့်ဖုန်းနံပါတ်ထည့်ပါ (optional)">
-                    <div class="error-text" id="phoneError">ဖုန်းနံပါတ် လိုအပ်ပါသည်</div>
-                </div>
-                <div class="form-group">
-                    <label>🔑 စကားဝှက် <span class="required">*</span></label>
-                    <input type="password" id="regPassword" placeholder="အနည်းဆုံး ၄ လုံး">
-                    <div class="error-text" id="passwordError">စကားဝှက်သည် အနည်းဆုံး ၄ လုံးရှိရမယ်</div>
-                </div>
-                <div class="form-group">
-                    <label>🔐 စကားဝှက်အတည်ပြုရန် <span class="required">*</span></label>
-                    <input type="password" id="regConfirmPassword" placeholder="စကားဝှက်ပြန်ထည့်ပါ">
-                    <div class="error-text" id="confirmError">စကားဝှက်များ မတူညီပါ</div>
-                </div>
-                <button class="btn-primary" onclick="handleRegister()">🔑 မှတ်ပုံတင်ရန်</button>
-                <span class="switch-link" id="switchToLogin" onclick="switchAuthMode()">အကောင့်ရှိပြီးသား? ဝင်ရန်</span>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script>
     // ===== LANGUAGE DATA =====
@@ -334,25 +276,9 @@
             buy: 'ဝယ်ရန်',
             selected: 'ရွေးပြီး',
             selectFirst: '⚠️ ကျေးဇူးပြု၍ အထုပ်တစ်ခုကို ဦးစွာရွေးပါ!',
+            doubleWarning: '⚠️ Warning: အကောင့်တစ်ကောင့်မှာ တစ်ခုကို တစ်ခါပဲ နှစ်ဆရပါမယ်။ ဥပမာ - ၅၀ နှစ်ဆဖြည့်ပြီးရင် ကျန်တဲ့ သုံးခုပဲ နှစ်ဆဖြည့်လို့ရပါတော့မယ်။',
             home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
-            noti: '🔔 အသိပေးချက်အသစ်မရှိပါ',
-            modalLogin: '⚔️ ဝင်ရန်',
-            modalRegister: '🛡️ မှတ်ပုံတင်ရန်',
-            modalLoginSub: 'ပြန်လည်ကြိုဆိုပါတယ် စစ်သည်တော်!',
-            modalRegisterSub: 'အကောင့်ဖွင့်ပါ ချန်ပီယံ!',
-            email: '📧 အီးမေးလ် / အသုံးပြုသူအမည် / ဖုန်းနံပါတ်',
-            password: '🔑 စကားဝှက်',
-            switchLogin: 'အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်',
-            switchRegister: 'အကောင့်ရှိပြီးသား? ဝင်ရန်',
-            loginSuccess: '✅ ကြိုဆိုပါတယ် ချန်ပီယံ!',
-            registerSuccess: '✅ အကောင့်ဖွင့်ခြင်းအောင်မြင်ပါပြီ!',
-            enterEmail: 'ကျေးဇူးပြု၍ အီးမေးလ်၊ အသုံးပြုသူအမည် သို့မဟုတ် ဖုန်းနံပါတ်ထည့်ပါ',
-            enterPassword: 'ကျေးဇူးပြု၍ စကားဝှက်ထည့်ပါ',
-            enterUsername: 'ကျေးဇူးပြု၍ အသုံးပြုသူအမည်ထည့်ပါ',
-            noSpace: 'အသုံးပြုသူအမည်တွင် နေရာလွတ်မထည့်ရပါ',
-            invalidCredentials: '❌ အထောက်အထား မှားနေပါသည်',
-            userNotFound: '❌ အသုံးပြုသူ မတွေ့ပါ',
-            userExists: '❌ အသုံးပြုသူအမည်၊ အီးမေးလ် သို့မဟုတ် ဖုန်းနံပါတ် ရှိပြီးသားပါ'
+            noti: '🔔 အသိပေးချက်အသစ်မရှိပါ'
         },
         en: {
             appName: 'Premium Shop',
@@ -367,25 +293,9 @@
             buy: 'Buy',
             selected: 'Selected',
             selectFirst: '⚠️ Please select a package first!',
+            doubleWarning: '⚠️ Warning: Each account can only get double bonus once per package. Example: After buying 50 double, only the remaining 3 packages can be doubled.',
             home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
-            noti: '🔔 No new notifications',
-            modalLogin: '⚔️ Login',
-            modalRegister: '🛡️ Register',
-            modalLoginSub: 'Welcome back, warrior!',
-            modalRegisterSub: 'Create your account, champion!',
-            email: '📧 Email / Username / Phone',
-            password: '🔑 Password',
-            switchLogin: "Don't have an account? Register",
-            switchRegister: 'Already have an account? Login',
-            loginSuccess: '✅ Welcome back, Champion!',
-            registerSuccess: '✅ Account created! Welcome!',
-            enterEmail: 'Please enter your email, username or phone',
-            enterPassword: 'Please enter your password',
-            enterUsername: 'Please enter your username',
-            noSpace: 'Username cannot contain spaces',
-            invalidCredentials: '❌ Invalid credentials',
-            userNotFound: '❌ User not found',
-            userExists: '❌ Username, email or phone already exists'
+            noti: '🔔 No new notifications'
         }
     };
 
@@ -413,12 +323,12 @@
         document.getElementById('doubleTitle').innerHTML = '<i class="fas fa-star"></i> ' + d.doubleTitle;
         document.getElementById('doubleBoxTitle').textContent = d.doubleBoxTitle;
         document.getElementById('doubleBoxSub').textContent = d.doubleBoxSub;
+        document.getElementById('doubleWarning').innerHTML = d.doubleWarning;
         document.getElementById('navHome').textContent = d.home;
         document.getElementById('navShop').textContent = d.shop;
         document.getElementById('navPayment').textContent = d.payment;
         document.getElementById('navProfile').textContent = d.profile;
         updateAuthUI();
-        updateModalUI();
         renderPackages();
     }
 
@@ -471,189 +381,9 @@
         }
     }
 
-    // ===== PROFILE ကိုသွားမယ် =====
     function goToProfile() {
         window.location.href = 'profile.html';
     }
-
-    // ===== AUTH MODAL =====
-    let isLoginMode = true;
-    let tempAvatar = null;
-
-    function openModal(mode) {
-        isLoginMode = mode !== 'register';
-        const modal = document.getElementById('authModal');
-        modal.classList.add('show');
-        document.getElementById('loginForm').style.display = 'block';
-        document.getElementById('registerForm').style.display = 'none';
-        document.getElementById('loginError').style.display = 'none';
-        document.getElementById('loginError').textContent = '';
-        document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
-        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
-        if (!isLoginMode) {
-            document.getElementById('avatarPreview').innerHTML = 
-                '👤<input type="file" accept="image/*" onchange="handleAvatarUpload(event)"><span class="upload-hint">Tap to change</span>';
-            tempAvatar = null;
-        }
-        updateModalUI();
-    }
-
-    function closeModal() {
-        document.getElementById('authModal').classList.remove('show');
-        document.getElementById('loginForm').style.display = 'block';
-        document.getElementById('registerForm').style.display = 'none';
-        document.getElementById('loginError').style.display = 'none';
-        isLoginMode = true;
-        updateModalUI();
-    }
-
-    function switchAuthMode() {
-        isLoginMode = !isLoginMode;
-        document.getElementById('loginForm').style.display = isLoginMode ? 'block' : 'none';
-        document.getElementById('registerForm').style.display = isLoginMode ? 'none' : 'block';
-        document.getElementById('loginError').style.display = 'none';
-        updateModalUI();
-        document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
-        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
-        if (!isLoginMode) {
-            document.getElementById('avatarPreview').innerHTML = 
-                '👤<input type="file" accept="image/*" onchange="handleAvatarUpload(event)"><span class="upload-hint">Tap to change</span>';
-            tempAvatar = null;
-        }
-    }
-
-    function updateModalUI() {
-        const d = LANG_DATA[currentLang];
-        if (!d) return;
-        if (isLoginMode) {
-            document.getElementById('modalTitle').textContent = d.modalLogin || '⚔️ Login';
-            document.getElementById('modalSub').textContent = d.modalLoginSub || 'Welcome back, warrior!';
-            document.getElementById('loginBtn').innerHTML = '🔑 ' + (d.login || 'Login');
-            document.getElementById('emailLabel').textContent = d.email || '📧 Email / Username / Phone';
-            document.getElementById('passLabel').textContent = d.password || '🔑 Password';
-            document.getElementById('switchToRegister').textContent = d.switchLogin || "Don't have an account? Register";
-        } else {
-            document.getElementById('modalTitle').textContent = d.modalRegister || '📝 Register';
-            document.getElementById('modalSub').textContent = d.modalRegisterSub || 'Create your account!';
-            document.getElementById('switchToLogin').textContent = d.switchRegister || 'Already have an account? Login';
-        }
-    }
-
-    function handleLogin() {
-        const input = document.getElementById('loginEmail').value.trim();
-        const password = document.getElementById('loginPassword').value.trim();
-        const d = LANG_DATA[currentLang];
-
-        document.getElementById('loginError').style.display = 'none';
-        document.getElementById('loginError').textContent = '';
-
-        if (!input) {
-            document.getElementById('loginError').textContent = d.enterEmail || 'Please enter your email, username or phone';
-            document.getElementById('loginError').style.display = 'block';
-            return;
-        }
-        if (!password) {
-            document.getElementById('loginError').textContent = d.enterPassword || 'Please enter your password';
-            document.getElementById('loginError').style.display = 'block';
-            return;
-        }
-
-        if (loginUser(input, password)) {
-            closeModal();
-            showToast(d.loginSuccess || '✅ Welcome back, Champion!');
-            updateAuthUI();
-        } else {
-            document.getElementById('loginError').textContent = d.invalidCredentials || '❌ Invalid credentials';
-            document.getElementById('loginError').style.display = 'block';
-        }
-    }
-
-    function handleRegister() {
-        const username = document.getElementById('regUsername').value.trim();
-        const email = document.getElementById('regEmail').value.trim();
-        const phone = document.getElementById('regPhone').value.trim();
-        const password = document.getElementById('regPassword').value.trim();
-        const confirmPassword = document.getElementById('regConfirmPassword').value.trim();
-        const d = LANG_DATA[currentLang];
-
-        document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
-        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
-
-        let hasError = false;
-
-        if (!username) {
-            document.getElementById('usernameError').classList.add('show');
-            document.getElementById('regUsername').classList.add('error');
-            hasError = true;
-        } else if (/\s/.test(username)) {
-            document.getElementById('usernameError').textContent = d.noSpace || 'Username cannot contain spaces';
-            document.getElementById('usernameError').classList.add('show');
-            document.getElementById('regUsername').classList.add('error');
-            hasError = true;
-        }
-
-        if (email && (!email.includes('@') || !email.includes('.'))) {
-            document.getElementById('emailError').classList.add('show');
-            document.getElementById('regEmail').classList.add('error');
-            hasError = true;
-        }
-
-        if (phone && phone.length < 7) {
-            document.getElementById('phoneError').classList.add('show');
-            document.getElementById('regPhone').classList.add('error');
-            hasError = true;
-        }
-
-        if (!password || password.length < 4) {
-            document.getElementById('passwordError').classList.add('show');
-            document.getElementById('regPassword').classList.add('error');
-            hasError = true;
-        }
-
-        if (password !== confirmPassword) {
-            document.getElementById('confirmError').classList.add('show');
-            document.getElementById('regConfirmPassword').classList.add('error');
-            hasError = true;
-        }
-
-        if (hasError) return;
-
-        if (registerUser(username, password, email, phone)) {
-            closeModal();
-            showToast(d.registerSuccess || '✅ Account created! Welcome!');
-            updateAuthUI();
-        } else {
-            showToast(d.userExists || '❌ Username, email or phone already exists');
-        }
-    }
-
-    function handleAvatarUpload(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                tempAvatar = e.target.result;
-                document.getElementById('avatarPreview').innerHTML = 
-                    '<img src="' + e.target.result + '" alt="avatar"><input type="file" accept="image/*" onchange="handleAvatarUpload(event)"><span class="upload-hint">Tap to change</span>';
-            };
-            reader.readAsDataURL(file);
-        }
-    }
-
-    document.getElementById('authModal').addEventListener('click', function(e) {
-        if (e.target === this) closeModal();
-    });
-
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-            const modal = document.getElementById('authModal');
-            if (modal.classList.contains('show')) {
-                if (isLoginMode) handleLogin();
-                else handleRegister();
-            }
-        }
-        if (e.key === 'Escape') closeModal();
-    });
 
     // ===== PACKAGE DATA =====
     const PACKAGES = {
@@ -663,36 +393,36 @@
             { id: 'b3', name: 'Weekly Pass', price: 6500 }
         ],
         diamonds: [
-            { id: 'd1', name: '11 Diamonds', price: 1000 },
-            { id: 'd2', name: '22 Diamonds', price: 1750 },
-            { id: 'd3', name: '33 Diamonds', price: 2500 },
-            { id: 'd4', name: '44 Diamonds', price: 3300 },
-            { id: 'd5', name: '56 Diamonds', price: 4000 },
-            { id: 'd6', name: '86 Diamonds', price: 5500 },
-            { id: 'd7', name: '112 Diamonds', price: 7800 },
-            { id: 'd8', name: '172 Diamonds', price: 10700 },
-            { id: 'd9', name: '257 Diamonds', price: 15900 },
-            { id: 'd10', name: '343 Diamonds', price: 21100 },
-            { id: 'd11', name: '429 Diamonds', price: 26600 },
-            { id: 'd12', name: '514 Diamonds', price: 31200 },
-            { id: 'd13', name: '600 Diamonds', price: 36700 },
-            { id: 'd14', name: '706 Diamonds', price: 42800 },
-            { id: 'd15', name: '878 Diamonds', price: 53100 },
-            { id: 'd16', name: '963 Diamonds', price: 58500 },
-            { id: 'd17', name: '1,049 Diamonds', price: 63800 },
-            { id: 'd18', name: '1,135 Diamonds', price: 69300 },
-            { id: 'd19', name: '1,412 Diamonds', price: 84900 },
-            { id: 'd20', name: '2,195 Diamonds', price: 126000 },
-            { id: 'd21', name: '2,901 Diamonds', price: 166300 },
-            { id: 'd22', name: '3,688 Diamonds', price: 207500 },
-            { id: 'd23', name: '5,532 Diamonds', price: 312000 },
-            { id: 'd24', name: '9,288 Diamonds', price: 522000 }
+            { id: 'd1', name: '💎 11', price: 1000 },
+            { id: 'd2', name: '💎 22', price: 1750 },
+            { id: 'd3', name: '💎 33', price: 2500 },
+            { id: 'd4', name: '💎 44', price: 3300 },
+            { id: 'd5', name: '💎 56', price: 4000 },
+            { id: 'd6', name: '💎 86', price: 5500 },
+            { id: 'd7', name: '💎 112', price: 7800 },
+            { id: 'd8', name: '💎 172', price: 10700 },
+            { id: 'd9', name: '💎 257', price: 15900 },
+            { id: 'd10', name: '💎 343', price: 21100 },
+            { id: 'd11', name: '💎 429', price: 26600 },
+            { id: 'd12', name: '💎 514', price: 31200 },
+            { id: 'd13', name: '💎 600', price: 36700 },
+            { id: 'd14', name: '💎 706', price: 42800 },
+            { id: 'd15', name: '💎 878', price: 53100 },
+            { id: 'd16', name: '💎 963', price: 58500 },
+            { id: 'd17', name: '💎 1,049', price: 63800 },
+            { id: 'd18', name: '💎 1,135', price: 69300 },
+            { id: 'd19', name: '💎 1,412', price: 84900 },
+            { id: 'd20', name: '💎 2,195', price: 126000 },
+            { id: 'd21', name: '💎 2,901', price: 166300 },
+            { id: 'd22', name: '💎 3,688', price: 207500 },
+            { id: 'd23', name: '💎 5,532', price: 312000 },
+            { id: 'd24', name: '💎 9,288', price: 522000 }
         ],
         double: [
-            { id: 'x1', name: '50 + 50 (Double)', price: 3800, badge: '⭐ 2x Bonus' },
-            { id: 'x2', name: '150 + 150 (Double)', price: 10300, badge: '⭐ 2x Bonus' },
-            { id: 'x3', name: '250 + 250 (Double)', price: 16000, badge: '⭐ 2x Bonus' },
-            { id: 'x4', name: '500 + 500 (Double)', price: 32400, badge: '⭐ 2x Bonus' }
+            { id: 'x1', name: '💎 50 + 50 (Double)', price: 3800, badge: '⭐ 2x Bonus' },
+            { id: 'x2', name: '💎 150 + 150 (Double)', price: 10300, badge: '⭐ 2x Bonus' },
+            { id: 'x3', name: '💎 250 + 250 (Double)', price: 16000, badge: '⭐ 2x Bonus' },
+            { id: 'x4', name: '💎 500 + 500 (Double)', price: 32400, badge: '⭐ 2x Bonus' }
         ]
     };
 
@@ -714,7 +444,7 @@
                 }
                 const isSelected = selectedPackage && selectedPackage.id === pkg.id;
                 return `
-                    <div class="package-item ${isSelected ? 'selected' : ''}" data-id="${pkg.id}" onclick="handlePackageClick('${pkg.id}', '${pkg.name}', '${pkg.price}', '${type}')">
+                    <div class="package-item ${isSelected ? 'selected' : ''}" data-id="${pkg.id}" onclick="handlePackageClick('${pkg.id}', '${pkg.name}', ${pkg.price}, '${type}')">
                         <div class="glow-pulse"></div>
                         <div class="info">
                             <div class="name"><span class="dia-icon">💎</span> ${pkg.name}</div>
@@ -722,7 +452,7 @@
                         </div>
                         <div class="right">
                             <div class="price">${formatPrice(pkg.price)}</div>
-                            <button class="btn ${isSelected ? 'buy-mode' : 'select-mode'}" onclick="event.stopPropagation(); handlePackageClick('${pkg.id}', '${pkg.name}', '${pkg.price}', '${type}')">
+                            <button class="btn ${isSelected ? 'buy-mode' : 'select-mode'}" onclick="event.stopPropagation(); handlePackageClick('${pkg.id}', '${pkg.name}', ${pkg.price}, '${type}')">
                                 ${isSelected ? buyText : selectText}
                             </button>
                         </div>
