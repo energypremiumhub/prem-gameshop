@@ -64,7 +64,7 @@
         .package-item .info{display:flex;flex-direction:column;gap:2px;flex:1;position:relative;z-index:1}
         .package-item .info .name{font-size:0.75rem;font-weight:600;color:var(--text-primary)}
         .package-item .info .name .dia-icon{color:var(--text-secondary);margin-right:4px;transition:all 0.3s ease}
-        .package-item .info .double-badge{display:inline-block;font-size:0.4rem;color:var(--warning);background:rgba(245,158,11,0.12);padding:1px 8px;border-radius:10px;border:1px solid rgba(245,158,11,0.1);font-weight:600}
+        .package-item .info .double-badge{display:inline-block;font-size:0.45rem;color:var(--warning);background:rgba(245,158,11,0.1);padding:2px 10px;border-radius:12px;border:1px solid rgba(245,158,11,0.08);font-weight:600;margin-top:2px;letter-spacing:0.3px}
         .package-item .right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:3px;position:relative;z-index:1}
         .package-item .right .price{font-size:0.85rem;font-weight:700;color:var(--text-secondary);transition:all 0.4s ease}
         .package-item .right .btn{background:var(--bg-input);color:var(--text-secondary);border:none;padding:5px 16px;border-radius:20px;font-weight:700;font-size:0.6rem;cursor:pointer;transition:all 0.2s cubic-bezier(0.34,1.2,0.64,1);border:1px solid var(--border-color);-webkit-tap-highlight-color:transparent;user-select:none}
@@ -253,9 +253,6 @@
 
     function formatPrice(price){ return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' ' + getText('currency'); }
 
-    // ==========================================
-    // renderPackages() - ဒီမှာ button ကို onclick ထည့်ထား
-    // ==========================================
     function renderPackages(){
         const selectText = getText('select');
         const buyText = getText('buy');
@@ -263,6 +260,7 @@
             const isSelected = selectedPackage && selectedPackage.id === pkg.id;
             const btnText = isSelected ? buyText : selectText;
             const btnClass = isSelected ? 'buy-mode' : 'select-mode';
+            // ===== double badge အကုန်တူအောင်ပြင်ထား =====
             const badgeHtml = type === 'double' && pkg.badge ? `<span class="double-badge">${pkg.badge}</span>` : '';
             return `
                 <div class="package-item ${isSelected ? 'selected' : ''}" data-id="${pkg.id}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price},'${type}')">
@@ -273,7 +271,7 @@
                     </div>
                     <div class="right">
                         <div class="price">${formatPrice(pkg.price)}</div>
-                        <!-- ===== ဒီမှာ onclick ထည့်ထား - Buy နှိပ်ရင် checkout သွား ===== -->
+                        <!-- ===== Buy button ကို နှိပ်လို့ရအောင်ပြင်ထား ===== -->
                         <button class="btn ${btnClass}" onclick="event.stopPropagation(); goToCheckout('${pkg.id}','${pkg.name}',${pkg.price},'${type}')">${btnText}</button>
                     </div>
                 </div>
