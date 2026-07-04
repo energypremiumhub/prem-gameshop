@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🎮 Premium Shop</title>
+    <title>⚡ Premium Shop</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        /* ===== RESET & BASE (Home Page အတိုင်း) ===== */
+        /* ===== RESET & BASE ===== */
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
         
         :root {
@@ -146,7 +146,7 @@
             opacity: 0;
         }
 
-        /* ===== HEADER (Home Page အတိုင်း) ===== */
+        /* ===== HEADER (Login Button ဖျောက်ထား) ===== */
         .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
         .header .left{display:flex;flex-direction:column;gap:8px}
         .header .left .logo-wrap{display:flex;align-items:center;gap:10px}
@@ -155,12 +155,8 @@
         .header .left .logo-wrap .text-group .premium{font-size:1rem;font-weight:800;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
         .header .left .logo-wrap .text-group .shop{font-size:0.55rem;font-weight:600;color:var(--text-secondary);opacity:0.6;margin-top:-2px}
         
-        .header .left .auth-btn{background:var(--bg-card);border:1px solid var(--border-color);color:var(--text-secondary);padding:6px 16px;border-radius:10px;font-size:0.6rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;height:32px;width:fit-content;box-shadow:0 2px 10px var(--shadow);transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1)}
-        .header .left .auth-btn:active{transform:scale(0.92);opacity:0.7}
-        .header .left .auth-btn:hover{border-color:var(--primary);color:var(--primary)}
-        .header .left .auth-btn.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;border-color:var(--gold);box-shadow:0 4px 20px var(--gold-glow)}
-        .header .left .auth-btn.logged-in:active{transform:scale(0.92);opacity:0.7}
-        .header .left .auth-btn.logged-in img{width:22px;height:22px;border-radius:50%;object-fit:cover;margin-right:4px}
+        /* Login Button ဖျောက်ထား */
+        .header .left .auth-btn{display:none}
         
         .header .right{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
         .header .right .top{display:flex;gap:6px;align-items:center}
@@ -213,7 +209,7 @@
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
         .section-title i{color:var(--cyan);text-shadow:0 0 20px var(--cyan-glow)}
 
-        /* ===== BOTTOM NAV (Home Page အတိုင်း) ===== */
+        /* ===== BOTTOM NAV ===== */
         .bottom-nav {
             position: fixed;
             bottom: 16px;
@@ -268,7 +264,7 @@
 </head>
 <body>
 <div class="container">
-    <!-- ===== HEADER (Home Page အတိုင်း) ===== -->
+    <!-- ===== HEADER (Login Button ဖျောက်ထား) ===== -->
     <div class="header">
         <div class="left">
             <div class="logo-wrap">
@@ -278,7 +274,7 @@
                     <span class="shop" id="appSub">Game Shop</span>
                 </div>
             </div>
-            <div class="auth-btn" id="authBtn" onclick="handleAuthClick()"><i class="fas fa-key"></i> Login</div>
+            <!-- Login Button ဖျောက်ထား -->
         </div>
         <div class="right">
             <div class="top">
@@ -294,7 +290,7 @@
 
     <!-- ===== PAGE HEADER ===== -->
     <div class="page-header">
-        <h1><i class="fas fa-store"></i> <span id="pageTitle">ဂိမ်းဆိုင်</span></h1>
+        <h1><i class="fas fa-store"></i> <span id="pageTitle">Game Shop</span></h1>
         <p id="pageSub">ဂိမ်းတစ်ခုရွေးပြီး စိန်ဖြည့်လိုက်ပါ</p>
     </div>
 
@@ -322,26 +318,26 @@
             <span class="glow"></span>
             <span class="game-icon">🎮</span>
             <div class="game-name" id="cs1">Coming Soon</div>
-            <div class="game-sub" id="cs1sub">အသစ်ထွက်ရှု့မည်</div>
+            <div class="game-sub" id="cs1sub">အသစ်ထွက်ရှိမည်</div>
         </div>
         <div class="game-item glass-box" data-name="coming soon" onclick="showComingSoon()">
             <span class="glow"></span>
             <span class="game-icon">🎯</span>
             <div class="game-name" id="cs2">Coming Soon</div>
-            <div class="game-sub" id="cs2sub">အသစ်ထွက်ရှု့မည်</div>
+            <div class="game-sub" id="cs2sub">အသစ်ထွက်ရှိမည်</div>
         </div>
         <div class="game-item glass-box" data-name="coming soon" onclick="showComingSoon()">
             <span class="glow"></span>
             <span class="game-icon">🚀</span>
             <div class="game-name" id="cs3">Coming Soon</div>
-            <div class="game-sub" id="cs3sub">အသစ်ထွက်ရှု့မည်</div>
+            <div class="game-sub" id="cs3sub">အသစ်ထွက်ရှိမည်</div>
         </div>
     </div>
 
     <div class="footer-text">&copy; 2026 Premium Game Shop</div>
 </div>
 
-<!-- ===== BOTTOM NAV (Home Page အတိုင်း) ===== -->
+<!-- ===== BOTTOM NAV ===== -->
 <div class="bottom-nav">
     <a href="index.html" class="nav-item" onclick="handleNavClick(this, event)"><span class="icon"><i class="fas fa-home"></i></span><span class="label" id="navHome">ပင်မ</span></a>
     <a href="shop.html" class="nav-item active" onclick="handleNavClick(this, event)"><span class="icon"><i class="fas fa-shopping-bag"></i></span><span class="label" id="navShop">ဆိုင်</span></a>
@@ -358,17 +354,16 @@
             appName: 'Premium',
             appSub: 'Game Shop',
             home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
-            pageTitle: 'ဂိမ်းဆိုင်',
+            pageTitle: 'Game Shop',
             pageSub: 'ဂိမ်းတစ်ခုရွေးပြီး စိန်ဖြည့်လိုက်ပါ',
             gamesTitle: 'ဂိမ်းများ',
             popular: '🔥 Popular',
             comingSoon: 'Coming Soon',
-            comingSoonSub: 'အသစ်ထွက်ရှု့မည်',
+            comingSoonSub: 'အသစ်ထွက်ရှိမည်',
             searchPlaceholder: '🔍 ဂိမ်းနာမည်ရှာပါ...',
             noGames: '❌ ဂိမ်းမတွေ့ပါ',
             selectGame: 'ဂိမ်းရွေးပါ',
-            comingSoonMsg: '🎮 ဤဂိမ်းကို မကြာမီ ထည့်သွင်းပေးပါမည်။',
-            login: 'Login'
+            comingSoonMsg: '🎮 ဤဂိမ်းကို မကြာမီ ထည့်သွင်းပေးပါမည်။'
         },
         en: {
             appName: 'Premium',
@@ -383,15 +378,11 @@
             searchPlaceholder: '🔍 Search game name...',
             noGames: '❌ No games found',
             selectGame: 'Select Game',
-            comingSoonMsg: '🎮 This game will be added soon.',
-            login: 'Login'
+            comingSoonMsg: '🎮 This game will be added soon.'
         }
     };
 
     let currentLang = localStorage.getItem('lang') || 'my';
-    let currentUser = null;
-    const savedUser = localStorage.getItem('currentUser');
-    if (savedUser) currentUser = JSON.parse(savedUser);
 
     function getText(key) { return LANG_DATA[currentLang][key] || key; }
 
@@ -434,29 +425,6 @@
         document.getElementById('cs2sub').textContent = d.comingSoonSub;
         document.getElementById('cs3').textContent = d.comingSoon;
         document.getElementById('cs3sub').textContent = d.comingSoonSub;
-        
-        updateAuthUI();
-    }
-
-    // ===== AUTH =====
-    function updateAuthUI() {
-        const btn = document.getElementById('authBtn');
-        if (currentUser) {
-            const avatar = localStorage.getItem('userAvatar_' + currentUser.username);
-            btn.innerHTML = avatar ? '<img src="'+avatar+'" alt="avatar"> '+currentUser.username : '<i class="fas fa-user"></i> '+currentUser.username;
-            btn.className = 'auth-btn logged-in';
-        } else {
-            btn.innerHTML = '<i class="fas fa-key"></i> ' + getText('login');
-            btn.className = 'auth-btn';
-        }
-    }
-
-    function handleAuthClick() {
-        if (currentUser) {
-            window.location.href = 'profile.html';
-        } else {
-            window.location.href = 'index.html#login';
-        }
     }
 
     // ===== NIGHT MODE =====
@@ -555,7 +523,6 @@
     document.addEventListener('DOMContentLoaded', function() {
         const savedLang = localStorage.getItem('lang') || 'my';
         setLang(savedLang);
-        updateAuthUI();
         
         const nightMode = localStorage.getItem('nightMode') === 'true';
         if (nightMode) {
