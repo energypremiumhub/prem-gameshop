@@ -666,11 +666,11 @@
 
 <script>
     // ============================================================
-    //  🔧 EMAILJS CONFIG
+    //  🔧 EMAILJS CONFIG (ခင်ဗျားရဲ့ Data များ)
     // ============================================================
-    const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
-    const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
-    const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+    const EMAILJS_SERVICE_ID = 'service_ijkfhn1';
+    const EMAILJS_TEMPLATE_ID = 'template_amq9siq';
+    const EMAILJS_PUBLIC_KEY = '9o_QzoGMOd3284FSkQKRS';
     // ============================================================
 
     emailjs.init(EMAILJS_PUBLIC_KEY);
@@ -1288,18 +1288,28 @@
         storedOtp = otp;
         verifiedEmail = email;
 
+        // OTP ကုဒ်ကို ၅ မိနစ်အကြာမှာ သက်တမ်းကုန်စေရန်
+        localStorage.setItem('otpExpiry', Date.now() + (5 * 60 * 1000));
+
+        // EmailJS မှတစ်ဆင့် OTP ပို့ခြင်း
         try {
             const templateParams = {
                 to_email: email,
                 otp_code: otp,
                 subject: '🔑 Password Reset OTP - Premium Game Shop'
             };
-            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+                .then(function(response) {
+                    console.log('✅ OTP sent successfully!', response);
+                    showToast(d.otpSent || '✅ OTP ကုဒ်ပို့ထားပါသည်!');
+                }, function(error) {
+                    console.error('❌ OTP send failed:', error);
+                    showToast('⚠️ OTP ပို့ရာတွင် အဆင်မပြေပါ။ သင်၏ OTP ကုဒ်မှာ: ' + otp);
+                });
         } catch(e) {
             console.warn('EmailJS error, using fallback:', e);
+            showToast('⚠️ OTP ပို့ရာတွင် အဆင်မပြေပါ။ သင်၏ OTP ကုဒ်မှာ: ' + otp);
         }
-
-        showToast(d.otpSent || '✅ OTP ကုဒ်ပို့ထားပါသည်! (အတုအယောင်: ' + otp + ')');
 
         const btn = document.getElementById('resendOtpBtn');
         btn.disabled = true;
@@ -1335,10 +1345,20 @@
             return;
         }
 
+        // OTP သက်တမ်းကုန်မကုန် စစ်ဆေးခြင်း
+        const expiry = localStorage.getItem('otpExpiry');
+        if (expiry && Date.now() > parseInt(expiry)) {
+            showError('❌ OTP ကုဒ် သက်တမ်းကုန်သွားပါပြီ။ ထပ်မံတောင်းယူပါ။');
+            return;
+        }
+
         if (otp !== storedOtp) {
             showError(d.otpError || '❌ OTP ကုဒ် မှားနေပါသည်');
             return;
         }
+
+        // OTP အတည်ပြုပြီးရင် OTP ကို ဖျက်ပစ်ခြင်း
+        localStorage.removeItem('otpExpiry');
 
         document.getElementById('forgotStep1').style.display = 'none';
         document.getElementById('forgotStep2').style.display = 'block';
