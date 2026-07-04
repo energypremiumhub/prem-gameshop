@@ -9,28 +9,40 @@
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
         
         :root {
-            --bg-primary: #08081a;
-            --bg-secondary: #0c0c24;
-            --bg-card: #141c2b;
-            --bg-input: #1a2438;
-            --text-primary: #ffffff;
-            --text-secondary: #8899bb;
-            --border-color: rgba(255,255,255,0.08);
-            --shadow: rgba(0,0,0,0.6);
-            --gold: #ffd700;
-            --gold-glow: rgba(255,215,0,0.3);
-            --cyan: #00e5ff;
-            --cyan-glow: rgba(0,229,255,0.2);
+            --bg-primary: #e8eaf0;
+            --bg-secondary: #ffffff;
+            --bg-card: rgba(255,255,255,0.35);
+            --bg-input: rgba(255,255,255,0.7);
+            --text-primary: #1a1a2e;
+            --text-secondary: #6b7280;
+            --border-color: rgba(0,0,0,0.08);
+            --shadow: rgba(0,0,0,0.06);
+            --shadow-hover: rgba(0,0,0,0.1);
+            --primary: #6c5ce7;
+            --gold: #f5a623;
+            --gold-glow: rgba(245,166,35,0.2);
+            --cyan: #00b4d8;
+            --cyan-glow: rgba(0,180,216,0.15);
             --orange: #ff6a00;
-            --orange-glow: rgba(255,106,0,0.2);
+            --green: #00c853;
+            --green-glow: rgba(0,200,83,0.2);
             --red: #ff0044;
-            --red-glow: rgba(255,0,68,0.4);
-            --green: #00ff87;
-            --green-glow: rgba(0,255,135,0.2);
-            --pink: #ff2d78;
-            --pink-glow: rgba(255,45,120,0.2);
-            --purple: #b388ff;
-            --purple-glow: rgba(179,136,255,0.2);
+            --red-glow: rgba(255,0,68,0.2);
+        }
+
+        .night-mode {
+            --bg-primary: #0d0d1a;
+            --bg-secondary: #1a1a2e;
+            --bg-card: rgba(30,30,60,0.5);
+            --bg-input: rgba(40,40,80,0.5);
+            --text-primary: #e8eaf0;
+            --text-secondary: #a8a8c8;
+            --border-color: rgba(255,255,255,0.06);
+            --shadow: rgba(0,0,0,0.3);
+            --shadow-hover: rgba(0,0,0,0.4);
+            --primary: #8b7cf7;
+            --gold: #ffd700;
+            --gold-glow: rgba(255,215,0,0.2);
         }
 
         body {
@@ -39,170 +51,207 @@
             min-height: 100vh;
             padding: 16px;
             padding-bottom: 90px;
-            background-image: 
-                radial-gradient(ellipse at 20% 50%, rgba(255,215,0,0.04) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 20%, rgba(0,229,255,0.04) 0%, transparent 50%);
+            transition: all 0.4s ease;
         }
 
-        ::-webkit-scrollbar{width:0px;height:0px}
-        .container{max-width:500px;margin:0 auto}
+        .container{max-width:480px;margin:0 auto}
 
-        /* ===== HEADER ===== */
-        .header{display:flex;justify-content:space-between;align-items:center;padding:8px 0 14px}
-        .header .back{color:var(--text-secondary);font-size:1.2rem;cursor:pointer;text-decoration:none}
-        .header .back:active{transform:scale(0.85)}
-        .header .title{font-size:1.1rem;font-weight:700;color:var(--gold);text-shadow:0 0 20px var(--gold-glow)}
-        .header .title i{color:var(--cyan);margin-right:6px}
-        
-        .header .right{display:flex;gap:8px;align-items:center}
-        .header .right .lang-switcher{display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:10px;border:2px solid var(--border-color)}
-        .header .right .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;text-transform:uppercase}
-        .header .right .lang-switcher .lang-btn.active{background:var(--gold);color:#0a0e1a;box-shadow:0 0 20px var(--gold-glow)}
-        .header .right .lang-switcher .lang-btn:active{transform:scale(0.85)}
-        
-        .header .right .noti-btn{background:var(--bg-card);border:2px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none}
-        .header .right .noti-btn:active{transform:scale(0.85)}
-        .header .right .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none;box-shadow:0 0 15px var(--red-glow)}
+        .glass-box {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            box-shadow: 0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .glass-box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px var(--shadow-hover), inset 0 1px 0 rgba(255,255,255,0.15);
+        }
 
-        /* ===== NOTIFICATION LIST ===== */
-        .noti-list{display:flex;flex-direction:column;gap:8px;margin-top:10px}
-        .noti-item{background:var(--bg-card);border:2px solid var(--border-color);border-radius:14px;padding:14px;display:flex;align-items:flex-start;gap:12px;animation:slideUp 0.4s ease;box-shadow:0 4px 25px var(--shadow)}
-        .noti-item .icon{font-size:1.2rem;margin-top:2px;flex-shrink:0}
-        .noti-item .icon.success{color:var(--green)}
-        .noti-item .icon.pending{color:var(--gold)}
-        .noti-item .icon.fail{color:var(--red)}
-        .noti-item .content{flex:1}
-        .noti-item .content .msg{font-size:0.8rem;color:var(--text-primary);white-space:pre-line}
-        .noti-item .content .time{font-size:0.5rem;color:var(--text-secondary);margin-top:3px;opacity:0.5}
-        .noti-item .content .order-id{font-size:0.55rem;color:var(--gold);margin-top:2px}
+        .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
+        .header .left{display:flex;flex-direction:column;gap:8px}
+        .header .left .logo-wrap{display:flex;align-items:center;gap:10px}
+        .header .left .logo-wrap img{height:38px;width:auto;border-radius:10px}
+        .header .left .logo-wrap .text-group{display:flex;flex-direction:column;line-height:1.1}
+        .header .left .logo-wrap .text-group .premium{font-size:1rem;font-weight:800;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .header .left .logo-wrap .text-group .shop{font-size:0.55rem;font-weight:600;color:var(--text-secondary);opacity:0.6;margin-top:-2px}
         
-        .empty{text-align:center;padding:40px 0;color:var(--text-secondary)}
-        .empty .icon{font-size:3rem;display:block;margin-bottom:10px;opacity:0.3}
+        .header .left .auth-btn{display:none}
         
-        .clear-btn{background:var(--bg-input);border:2px solid var(--border-color);color:var(--text-secondary);padding:8px 20px;border-radius:10px;font-size:0.6rem;cursor:pointer;margin-top:10px;transition:all 0.3s ease}
-        .clear-btn:active{transform:scale(0.95)}
-        .clear-btn:hover{border-color:var(--red);color:var(--red)}
+        .header .right .top{display:flex;gap:6px;align-items:center}
+        .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:10px;border:1px solid var(--border-color);box-shadow:0 2px 10px var(--shadow)}
+        .header .right .top .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;text-transform:uppercase}
+        .header .right .top .lang-switcher .lang-btn.active{background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;box-shadow:0 4px 15px var(--gold-glow)}
+        .header .right .top .night-toggle{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;color:var(--text-secondary);box-shadow:0 2px 10px var(--shadow)}
+        .header .right .top .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;box-shadow:0 2px 10px var(--shadow)}
+        .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none;box-shadow:0 0 15px var(--red-glow)}
 
-        /* ===== BOTTOM NAV ===== */
+        .page-header{margin-bottom:16px;animation:slideUp 0.6s ease}
+        .page-header h1{font-size:1.3rem;font-weight:800;color:var(--text-primary)}
+        .page-header h1 span{background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .page-header h1 i{color:var(--cyan);-webkit-text-fill-color:initial;margin-right:6px}
+        .page-header p{color:var(--text-secondary);font-size:0.7rem;margin-top:2px}
+
+        .section-title{font-size:0.65rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;display:flex;align-items:center;gap:10px;opacity:0.5}
+        .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
+        .section-title i{color:var(--cyan);text-shadow:0 0 20px var(--cyan-glow)}
+
+        .noti-list{display:flex;flex-direction:column;gap:10px}
+        .noti-item{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:14px;padding:14px 16px;position:relative;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1)}
+        .noti-item:hover{transform:translateY(-4px);box-shadow:0 8px 30px var(--shadow-hover), inset 0 1px 0 rgba(255,255,255,0.15)}
+        .noti-item .status-badge{position:absolute;top:10px;right:12px;font-size:0.4rem;font-weight:700;padding:2px 10px;border-radius:12px}
+        .noti-item .status-badge.pending{background:rgba(245,166,35,0.1);color:var(--gold)}
+        .noti-item .status-badge.completed{background:rgba(0,200,83,0.1);color:var(--green)}
+        .noti-item .title{font-size:0.7rem;font-weight:600;color:var(--text-primary);margin-bottom:4px;padding-right:70px}
+        .noti-item .desc{font-size:0.55rem;color:var(--text-secondary);line-height:1.5;white-space:pre-wrap}
+        .noti-item .time{font-size:0.4rem;color:var(--text-secondary);margin-top:4px;opacity:0.5}
+        .noti-item .btn-done{background:linear-gradient(135deg,var(--green),#00b894);color:#fff;border:none;padding:4px 14px;border-radius:8px;font-size:0.45rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;margin-top:6px}
+        .noti-item .btn-done:active{transform:scale(0.90)}
+        .noti-item .btn-done:disabled{opacity:0.4;cursor:not-allowed}
+
+        .empty-state{text-align:center;padding:50px 0;color:var(--text-secondary);font-size:0.7rem}
+        .empty-state .icon{font-size:3rem;display:block;margin-bottom:10px;opacity:0.3}
+
         .bottom-nav {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: #111927;
-            backdrop-filter: blur(20px);
-            border-top: 2px solid rgba(255,255,255,0.06);
-            border-radius: 16px 16px 0 0;
+            bottom: 16px;
+            left: 16px;
+            right: 16px;
+            width: auto;
+            max-width: 480px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            backdrop-filter: blur(24px);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
             display: flex;
             justify-content: space-around;
-            padding: 8px 0 12px;
-            max-width: 500px;
-            margin: 0 auto;
+            padding: 8px 4px;
             z-index: 100;
-            box-shadow: 0 -8px 40px rgba(0,0,0,0.6);
+            box-shadow: 0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);
         }
         .bottom-nav .nav-item {
             text-align: center;
             cursor: pointer;
             text-decoration: none;
             color: var(--text-secondary);
-            transition: all 0.3s ease;
-            padding: 6px 16px;
+            transition: all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
+            padding: 6px 12px;
             border-radius: 12px;
-            position: relative;
-            min-width: 56px;
-            border: 2px solid transparent;
+            min-width: 48px;
+            border: 1px solid transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1px;
         }
-        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;transition:all 0.3s ease}
-        .bottom-nav .nav-item .label{font-size:0.4rem;margin-top:2px;font-weight:700;letter-spacing:0.5px;transition:all 0.3s ease}
-        .bottom-nav .nav-item.active {
-            color: var(--gold);
-            background: rgba(255,215,0,0.08);
-            border-color: rgba(255,215,0,0.2);
-            box-shadow: 0 0 30px rgba(255,215,0,0.08);
-        }
-        .bottom-nav .nav-item.active .icon{transform:translateY(-2px);color:var(--gold)}
-        .bottom-nav .nav-item.active .label{color:var(--gold)}
-        .bottom-nav .nav-item:not(.active):hover {
-            border-color: rgba(255,255,255,0.04);
-            background: rgba(255,255,255,0.02);
-        }
+        .bottom-nav .nav-item:active { transform: scale(0.88); }
+        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;animation:floatIcon 3s ease-in-out infinite}
+        .bottom-nav .nav-item .label{font-size:0.4rem;letter-spacing:0.5px;opacity:0.5;font-weight:400}
+        .bottom-nav .nav-item.active { background:rgba(108,92,231,0.06); border:1px solid rgba(108,92,231,0.08); box-shadow:0 0 30px rgba(108,92,231,0.02); color:var(--text-primary); }
+        .bottom-nav .nav-item.active .icon{transform:translateY(-2px) scale(1.1); color:var(--gold); text-shadow:0 0 30px var(--gold-glow); animation:selectBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) }
+        .bottom-nav .nav-item.active .label{color:var(--gold);opacity:1;font-weight:400}
+        @keyframes selectBounce { 0%{transform:scale(1)} 30%{transform:scale(1.3) rotate(-8deg)} 60%{transform:scale(0.9) rotate(4deg)} 100%{transform:scale(1.1) rotate(0deg)} }
 
-        .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-card);padding:10px 20px;border-radius:12px;border:2px solid rgba(255,215,0,0.15);color:var(--gold);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 8px 40px var(--shadow);animation:toastPop 0.3s cubic-bezier(0.34,1.2,0.64,1)}
+        .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-secondary);padding:10px 20px;border-radius:12px;border:1px solid var(--border-color);color:var(--primary);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 4px 20px var(--shadow)}
         .toast.show{display:block}
-        @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.9)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
-        @keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
+        @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+        @keyframes floatIcon {0%,100%{transform:translateY(0px)}50%{transform:translateY(-6px)}}
+
+        .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.3;letter-spacing:1px}
     </style>
 </head>
 <body>
 <div class="container">
-    <!-- ===== HEADER ===== -->
     <div class="header">
-        <a href="index.html" class="back"><i class="fas fa-arrow-left"></i></a>
-        <span class="title"><i class="fas fa-bell"></i> <span id="pageTitle">အသိပေးချက်များ</span></span>
+        <div class="left">
+            <div class="logo-wrap">
+                <img src="https://files.catbox.moe/lmq98x.jpg" alt="Premium Shop Logo">
+                <div class="text-group">
+                    <span class="premium" id="appName">Premium</span>
+                    <span class="shop" id="appSub">Game Shop</span>
+                </div>
+            </div>
+        </div>
         <div class="right">
-            <div class="lang-switcher">
-                <button class="lang-btn active" data-lang="my" onclick="setLang('my')">မြန်မာ</button>
-                <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+            <div class="top">
+                <div class="lang-switcher">
+                    <button class="lang-btn active" data-lang="my" onclick="setLang('my')">မြန်မာ</button>
+                    <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+                </div>
+                <button class="night-toggle" onclick="toggleNightMode()"><i class="fas fa-moon"></i></button>
+                <a href="notifications.html" class="noti-btn" id="notiBtn"><i class="fas fa-bell"></i><span class="badge" id="notiBadge">0</span></a>
             </div>
         </div>
     </div>
 
-    <!-- ===== NOTIFICATION LIST ===== -->
-    <div class="noti-list" id="notiList"></div>
-
-    <div style="text-align:center;margin-top:8px;">
-        <button class="clear-btn" onclick="clearAllNotifications()">🗑️ <span id="clearBtnText">အကုန်ရှင်းမည်</span></button>
+    <div class="page-header">
+        <h1><i class="fas fa-bell"></i> <span id="pageTitle">အကြောင်းကြားချက်များ</span></h1>
+        <p id="pageSub">သင့်အော်ဒါများ၏ အခြေအနေများ</p>
     </div>
 
-    <div class="toast" id="toast"></div>
+    <div id="notiContainer"></div>
+
+    <div class="footer-text">&copy; 2026 Premium Game Shop</div>
 </div>
 
-<!-- ===== BOTTOM NAV ===== -->
 <div class="bottom-nav">
-    <a href="index.html" class="nav-item active"><span class="icon">🏠</span><span class="label" id="navHome">ပင်မ</span></a>
-    <a href="shop.html" class="nav-item"><span class="icon">🛒</span><span class="label" id="navShop">ဆိုင်</span></a>
-    <a href="payment.html" class="nav-item"><span class="icon">💳</span><span class="label" id="navPayment">ငွေပေးချေ</span></a>
-    <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label" id="navProfile">ပရိုဖိုင်</span></a>
+    <a href="index.html" class="nav-item" onclick="handleNavClick(this, event)"><span class="icon"><i class="fas fa-home"></i></span><span class="label" id="navHome">ပင်မ</span></a>
+    <a href="shop.html" class="nav-item" onclick="handleNavClick(this, event)"><span class="icon"><i class="fas fa-shopping-bag"></i></span><span class="label" id="navShop">ဆိုင်</span></a>
+    <a href="payment.html" class="nav-item" onclick="handleNavClick(this, event)"><span class="icon"><i class="fas fa-credit-card"></i></span><span class="label" id="navPayment">ငွေပေးချေ</span></a>
+    <a href="profile.html" class="nav-item" onclick="handleNavClick(this, event)"><span class="icon"><i class="fas fa-user"></i></span><span class="label" id="navProfile">ပရိုဖိုင်</span></a>
 </div>
+
+<div class="toast" id="toast"></div>
 
 <script>
-    // ===== LANGUAGE DATA =====
     const LANG_DATA = {
         my: {
-            pageTitle: 'အသိပေးချက်များ',
-            clearBtn: 'အကုန်ရှင်းမည်',
-            noNotifications: 'အသိပေးချက်မရှိပါ',
+            appName: 'Premium', appSub: 'Game Shop',
             home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
-            clearConfirm: 'အသိပေးချက်အကုန်လုံးကို ရှင်းပစ်မှာလား?',
-            cleared: '🗑️ အကုန်ရှင်းပြီးပါပြီ'
+            pageTitle: 'အကြောင်းကြားချက်များ',
+            pageSub: 'သင့်အော်ဒါများ၏ အခြေအနေများ',
+            emptyTitle: '🔔 အကြောင်းကြားချက်မရှိသေးပါ',
+            emptyDesc: 'အော်ဒါတင်လိုက်တိုင်း ဤနေရာတွင် ပြသပေးပါမည်။',
+            pending: 'ဆောင်ရွက်နေဆဲ',
+            completed: 'ပြီးမြောက်',
+            doneBtn: '✅ ပြီးပြီ',
+            completedMsg: '✅ အော်ဒါအောင်မြင်ပါသည်!\nဝယ်ယူအားပေးမှုအတွက် ကျေးဇူးအထူးတင်ရှိပါသည်။'
         },
         en: {
-            pageTitle: 'Notifications',
-            clearBtn: 'Clear All',
-            noNotifications: 'No notifications',
+            appName: 'Premium', appSub: 'Game Shop',
             home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
-            clearConfirm: 'Clear all notifications?',
-            cleared: '🗑️ All cleared!'
+            pageTitle: 'Notifications',
+            pageSub: 'Your order status updates',
+            emptyTitle: '🔔 No notifications yet',
+            emptyDesc: 'You will see your order updates here.',
+            pending: 'Pending',
+            completed: 'Completed',
+            doneBtn: '✅ Done',
+            completedMsg: '✅ Order completed!\nThank you for your purchase!'
         }
     };
 
     let currentLang = localStorage.getItem('lang') || 'my';
 
-    function getText(key){ return LANG_DATA[currentLang][key] || key; }
+    function getText(key) { return LANG_DATA[currentLang][key] || key; }
 
-    function setLang(lang){
+    function setLang(lang) {
         currentLang = lang;
         localStorage.setItem('lang', lang);
         updateLanguage();
         document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
     }
 
-    function updateLanguage(){
+    function updateLanguage() {
         const d = LANG_DATA[currentLang];
+        document.getElementById('appName').textContent = d.appName;
+        document.getElementById('appSub').textContent = d.appSub;
         document.getElementById('pageTitle').textContent = d.pageTitle;
-        document.getElementById('clearBtnText').textContent = d.clearBtn;
+        document.getElementById('pageSub').textContent = d.pageSub;
         document.getElementById('navHome').textContent = d.home;
         document.getElementById('navShop').textContent = d.shop;
         document.getElementById('navPayment').textContent = d.payment;
@@ -210,81 +259,156 @@
         renderNotifications();
     }
 
-    function showToast(msg){
+    function toggleNightMode() {
+        document.body.classList.toggle('night-mode');
+        const icon = document.querySelector('.night-toggle i');
+        icon.className = document.body.classList.contains('night-mode') ? 'fas fa-sun' : 'fas fa-moon';
+        localStorage.setItem('nightMode', document.body.classList.contains('night-mode') ? 'true' : 'false');
+    }
+
+    function handleNavClick(el, e) {
+        e.preventDefault();
+        setTimeout(() => { window.location.href = el.getAttribute('href'); }, 300);
+    }
+
+    function showToast(msg) {
         const t = document.getElementById('toast');
         t.textContent = msg;
         t.classList.add('show');
         clearTimeout(t._timer);
-        t._timer = setTimeout(() => t.classList.remove('show'), 2000);
+        t._timer = setTimeout(() => t.classList.remove('show'), 3000);
     }
 
-    function renderNotifications(){
-        const list = document.getElementById('notiList');
-        const allNotis = JSON.parse(localStorage.getItem('allNotifications') || '[]');
-        const d = LANG_DATA[currentLang];
+    // ===== MARK ORDER AS COMPLETED =====
+    function completeOrder(orderId) {
+        const d = LANG_DATA[currentLang] || {};
         
-        if(allNotis.length === 0){
-            list.innerHTML = `
-                <div class="empty">
-                    <span class="icon">🔕</span>
-                    <span>${d.noNotifications || 'No notifications'}</span>
+        // Update notifications
+        const notis = JSON.parse(localStorage.getItem('notifications') || '[]');
+        const notiIndex = notis.findIndex(n => n.orderId === orderId);
+        if (notiIndex !== -1) {
+            notis[notiIndex].status = 'completed';
+            notis[notiIndex].message = d.completedMsg || '✅ အော်ဒါအောင်မြင်ပါသည်!';
+            localStorage.setItem('notifications', JSON.stringify(notis));
+        }
+        
+        // Update order history
+        const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+        const orderIndex = orders.findIndex(o => o.id === orderId);
+        if (orderIndex !== -1) {
+            orders[orderIndex].status = 'completed';
+            localStorage.setItem('orderHistory', JSON.stringify(orders));
+        }
+        
+        // Add new notification for completion
+        const newNoti = {
+            id: 'noti_' + Date.now(),
+            orderId: orderId,
+            type: 'completed',
+            status: 'completed',
+            message: d.completedMsg || '✅ အော်ဒါအောင်မြင်ပါသည်!\nဝယ်ယူအားပေးမှုအတွက် ကျေးဇူးအထူးတင်ရှိပါသည်။',
+            time: new Date().toLocaleString()
+        };
+        const allNotis = JSON.parse(localStorage.getItem('notifications') || '[]');
+        allNotis.unshift(newNoti);
+        localStorage.setItem('notifications', JSON.stringify(allNotis));
+        
+        // Update badge
+        localStorage.setItem('newOrderNotification', JSON.stringify({
+            show: true,
+            orderId: orderId,
+            message: newNoti.message
+        }));
+        window.dispatchEvent(new Event('storage'));
+        
+        renderNotifications();
+        showToast('✅ အော်ဒါ #' + orderId + ' ပြီးမြောက်ပါပြီ!', 'success');
+    }
+
+    // ===== RENDER NOTIFICATIONS =====
+    function renderNotifications() {
+        const container = document.getElementById('notiContainer');
+        const d = LANG_DATA[currentLang] || {};
+        const notis = JSON.parse(localStorage.getItem('notifications') || '[]');
+        
+        if (notis.length === 0) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <span class="icon">🔔</span>
+                    <div>${d.emptyTitle || 'No notifications yet'}</div>
+                    <div style="font-size:0.55rem;margin-top:4px;opacity:0.6">${d.emptyDesc || ''}</div>
                 </div>
             `;
             return;
         }
 
-        list.innerHTML = allNotis.map(noti => {
-            let icon = '📢';
-            let iconClass = '';
-            const msg = noti.message || '';
-            
-            if(msg.includes('အောင်မြင်ပါသည်') || msg.includes('completed') || msg.includes('စိန်ဖြည့်')){
-                icon = '✅';
-                iconClass = 'success';
-            } else if(msg.includes('မအောင်မြင်ပါ') || msg.includes('failed')){
-                icon = '❌';
-                iconClass = 'fail';
-            } else if(msg.includes('အော်ဒါအသစ်') || msg.includes('New order') || msg.includes('သင့်အော်ဒါ')){
-                icon = '🛒';
-                iconClass = 'pending';
-            }
-            
-            const time = noti.time ? new Date(noti.time).toLocaleString() : new Date().toLocaleString();
-            const orderId = noti.id || '';
+        container.innerHTML = `<div class="noti-list">` + notis.map(noti => {
+            const isPending = noti.status === 'pending';
+            const statusText = isPending ? d.pending : d.completed;
+            const statusClass = isPending ? 'pending' : 'completed';
+            const orderId = noti.orderId || noti.id.replace('noti_', '');
             
             return `
                 <div class="noti-item">
-                    <span class="icon ${iconClass}">${icon}</span>
-                    <div class="content">
-                        <div class="msg">${msg}</div>
-                        ${orderId ? `<div class="order-id">📋 ${orderId}</div>` : ''}
-                        <div class="time">${time}</div>
-                    </div>
+                    <span class="status-badge ${statusClass}">${statusText}</span>
+                    <div class="title">${noti.message ? noti.message.split('\n')[0] : 'Notification'}</div>
+                    <div class="desc">${noti.message || ''}</div>
+                    <div class="time">${noti.time || new Date().toLocaleString()}</div>
+                    ${isPending ? `
+                        <button class="btn-done" onclick="completeOrder('${orderId}')">
+                            ✅ ${d.doneBtn || 'Done'}
+                        </button>
+                    ` : ''}
                 </div>
             `;
-        }).join('');
+        }).join('') + `</div>`;
     }
 
-    function clearAllNotifications(){
-        const d = LANG_DATA[currentLang];
-        if(confirm(d.clearConfirm || 'Clear all notifications?')){
-            localStorage.setItem('allNotifications', JSON.stringify([]));
-            localStorage.setItem('newOrderNotification', JSON.stringify({show: false}));
-            renderNotifications();
-            showToast(d.cleared || '🗑️ All cleared!');
+    // ===== BADGE =====
+    function updateBadge() {
+        const notis = JSON.parse(localStorage.getItem('notifications') || '[]');
+        const pending = notis.filter(n => n.status === 'pending');
+        const badge = document.getElementById('notiBadge');
+        if (pending.length > 0) {
+            badge.style.display = 'block';
+            badge.textContent = pending.length;
+        } else {
+            badge.style.display = 'none';
         }
     }
 
-    // Listen for new notifications
-    window.addEventListener('storage', function(e) {
-        if(e.key === 'newOrderNotification' || e.key === 'allNotifications'){
-            renderNotifications();
+    function checkNotification() {
+        const noti = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
+        if (noti.show) {
+            setTimeout(() => {
+                localStorage.setItem('newOrderNotification', JSON.stringify({show: false}));
+                updateBadge();
+                renderNotifications();
+            }, 3000);
         }
-    });
+        updateBadge();
+    }
 
-    document.addEventListener('DOMContentLoaded', function(){
-        setLang(localStorage.getItem('lang') || 'my');
+    // ===== INIT =====
+    document.addEventListener('DOMContentLoaded', function() {
+        const savedLang = localStorage.getItem('lang') || 'my';
+        setLang(savedLang);
+        
+        const nightMode = localStorage.getItem('nightMode') === 'true';
+        if (nightMode) {
+            document.body.classList.add('night-mode');
+            document.querySelector('.night-toggle i').className = 'fas fa-sun';
+        }
+        
         renderNotifications();
+        checkNotification();
+        
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'newOrderNotification' || e.key === 'notifications') {
+                renderNotifications();
+                updateBadge();
+            }
+        });
     });
 </script>
 </body>
