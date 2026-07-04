@@ -413,7 +413,7 @@
         @keyframes shimmer{0%,100%{transform:translate(0,0)}50%{transform:translate(-20%,-20%)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
-        /* ===== MODAL အသစ် (ရိုးရှင်းပြီး သေချာအလုပ်ဖြစ်မယ်) ===== */
+        /* ===== MODAL အသစ် (ဘာသာစကားခလုတ်ပါ) ===== */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -453,6 +453,36 @@
         }
         .modal-box .close-btn:hover {
             color: #ffd700;
+        }
+        .modal-box .modal-lang-switcher {
+            display: flex;
+            gap: 2px;
+            background: #1a2438;
+            padding: 3px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.06);
+            margin-bottom: 12px;
+            justify-content: center;
+        }
+        .modal-box .modal-lang-switcher .lang-btn {
+            background: transparent;
+            border: none;
+            color: #8899bb;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 0.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+        }
+        .modal-box .modal-lang-switcher .lang-btn.active {
+            background: #ffd700;
+            color: #0a0e1a;
+            box-shadow: 0 0 20px rgba(255,215,0,0.3);
+        }
+        .modal-box .modal-lang-switcher .lang-btn:active {
+            transform: scale(0.85);
         }
         .modal-box h2 {
             color: #ffd700;
@@ -687,10 +717,17 @@
     </div>
 </div>
 
-<!-- ===== MODAL အသစ် ===== -->
+<!-- ===== MODAL အသစ် (ဘာသာစကားခလုတ်ပါ) ===== -->
 <div class="modal-overlay" id="authModal">
     <div class="modal-box">
         <button class="close-btn" onclick="closeModal()">✕</button>
+        
+        <!-- Modal ထဲက ဘာသာစကားပြောင်းခလုတ် -->
+        <div class="modal-lang-switcher">
+            <button class="lang-btn active" data-lang="my" onclick="setModalLang('my')">မြန်မာ</button>
+            <button class="lang-btn" data-lang="en" onclick="setModalLang('en')">EN</button>
+        </div>
+        
         <h2 id="modalTitle">⚔️ ဝင်ရန်</h2>
         <p class="sub" id="modalSub">ပြန်လည်ကြိုဆိုပါတယ်!</p>
         
@@ -871,7 +908,10 @@
         currentLang = lang;
         localStorage.setItem('lang', lang);
         updateLanguage();
-        document.querySelectorAll('.lang-btn').forEach(b => {
+        document.querySelectorAll('.lang-switcher .lang-btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.lang === lang);
+        });
+        document.querySelectorAll('.modal-lang-switcher .lang-btn').forEach(b => {
             b.classList.toggle('active', b.dataset.lang === lang);
         });
     }
@@ -1146,7 +1186,7 @@
         }
     }
 
-    // ===== MODAL အသစ် Functions =====
+    // ===== MODAL Functions =====
     let isLoginMode = true;
 
     function openModal(mode) {
@@ -1205,6 +1245,28 @@
             document.querySelector('.modal-box .sub').textContent = d.modalRegisterSub || 'အကောင့်ဖွင့်ပါ!';
             document.getElementById('switchToLogin').textContent = d.switchRegister || 'အကောင့်ရှိပြီးသား? ဝင်ရန်';
         }
+    }
+
+    // ===== Modal အတွက် ဘာသာစကားပြောင်း =====
+    function setModalLang(lang) {
+        currentLang = lang;
+        localStorage.setItem('lang', lang);
+        
+        // Header က ခလုတ်တွေကိုလည်း update လုပ်
+        document.querySelectorAll('.lang-switcher .lang-btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.lang === lang);
+        });
+        
+        // Modal ထဲက ခလုတ်တွေကိုလည်း update လုပ်
+        document.querySelectorAll('.modal-lang-switcher .lang-btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.lang === lang);
+        });
+        
+        // Modal စာသားတွေကို ပြောင်း
+        updateModalTexts();
+        
+        // ကျန်တဲ့ စာသားတွေကိုလည်း ပြောင်း
+        updateLanguage();
     }
 
     // ===== LOGIN =====
@@ -1314,7 +1376,6 @@
     function sendResetLink() {
         const email = document.getElementById('forgotEmail').value.trim();
         const errorEl = document.getElementById('loginError');
-        const d = LANG_DATA[currentLang];
         
         errorEl.classList.remove('show');
         errorEl.textContent = '';
@@ -1357,6 +1418,13 @@
     // ===== INIT =====
     document.addEventListener('DOMContentLoaded', function() {
         const savedLang = localStorage.getItem('lang') || 'my';
+        currentLang = savedLang;
+        document.querySelectorAll('.lang-switcher .lang-btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.lang === savedLang);
+        });
+        document.querySelectorAll('.modal-lang-switcher .lang-btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.lang === savedLang);
+        });
         setLang(savedLang);
         updateAuthUI();
         checkNotifications();
