@@ -17,7 +17,7 @@
             --bg-input: rgba(255,255,255,0.7);
             --text-primary: #1a1a2e;
             --text-secondary: #6b7280;
-            --border-color: rgba(255,255,255,0.2);
+            --border-color: rgba(0,0,0,0.08);
             --shadow: rgba(0,0,0,0.06);
             --shadow-hover: rgba(0,0,0,0.1);
             --primary: #6c5ce7;
@@ -33,9 +33,9 @@
             --orange: #ff6a00;
             --orange-glow: rgba(255,106,0,0.15);
             --green: #00c853;
-            --green-glow: rgba(0,200,83,0.15);
+            --green-glow: rgba(0,200,83,0.2);
             --red: #ff0044;
-            --red-glow: rgba(255,0,68,0.15);
+            --red-glow: rgba(255,0,68,0.2);
             --purple: #b388ff;
             --purple-glow: rgba(179,136,255,0.15);
         }
@@ -123,14 +123,14 @@
         ::-webkit-scrollbar-thumb{background:var(--primary);border-radius:10px}
 
         /* ===== HEADER ===== */
-        .header{display:flex;justify-content:space-between;align-items:center;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
-        .header .left{display:flex;align-items:center;gap:8px}
+        .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
+        .header .left{display:flex;flex-direction:column;gap:8px}
         
-        /* ===== LOGO (ပုံဘေးမှာ အပေါ်အောက်ခွဲ) ===== */
+        /* ===== LOGO ===== */
         .header .left .logo-wrap{
             display:flex;
             align-items:center;
-            gap:8px;
+            gap:10px;
         }
         .header .left .logo-wrap img{
             height:38px;
@@ -159,16 +159,35 @@
             margin-top:-2px;
         }
         
-        .header .left .auth-btn{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 14px;border-radius:10px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-flex;align-items:center;gap:6px;height:36px;width:fit-content;box-shadow:0 4px 15px var(--shadow),inset 0 1px 0 rgba(255,255,255,0.1)}
+        /* ===== LOGIN BUTTON (လိုဂိုအောက်မှာ) ===== */
+        .header .left .auth-btn{
+            background:var(--bg-card);
+            backdrop-filter:blur(20px);
+            border:1px solid var(--border-color);
+            color:var(--text-secondary);
+            padding:6px 16px;
+            border-radius:10px;
+            font-size:0.6rem;
+            font-weight:600;
+            cursor:pointer;
+            transition:all 0.3s ease;
+            text-decoration:none;
+            display:inline-flex;
+            align-items:center;
+            gap:6px;
+            height:32px;
+            width:fit-content;
+            box-shadow:0 2px 10px var(--shadow);
+        }
         .header .left .auth-btn:active{animation:pop 0.3s cubic-bezier(0.34,1.56,0.64,1)}
-        .header .left .auth-btn:hover{box-shadow:0 8px 25px var(--shadow-hover),inset 0 1px 0 rgba(255,255,255,0.15)}
+        .header .left .auth-btn:hover{box-shadow:0 4px 20px var(--shadow-hover);border-color:var(--primary);color:var(--primary)}
         .header .left .auth-btn.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;border-color:var(--gold);box-shadow:0 4px 20px var(--gold-glow)}
         .header .left .auth-btn.logged-in:active{animation:pop 0.3s cubic-bezier(0.34,1.56,0.64,1)}
         .header .left .auth-btn.logged-in img{width:22px;height:22px;border-radius:50%;object-fit:cover;margin-right:4px}
         
         .header .right{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
         .header .right .top{display:flex;gap:6px;align-items:center}
-        .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--bg-card);backdrop-filter:blur(20px);padding:3px;border-radius:10px;border:1px solid var(--border-color);box-shadow:0 4px 15px var(--shadow),inset 0 1px 0 rgba(255,255,255,0.1)}
+        .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--bg-card);backdrop-filter:blur(20px);padding:3px;border-radius:10px;border:1px solid var(--border-color);box-shadow:0 2px 10px var(--shadow)}
         .header .right .top .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;text-transform:uppercase}
         .header .right .top .lang-switcher .lang-btn:active{animation:pop 0.2s cubic-bezier(0.34,1.56,0.64,1)}
         .header .right .top .lang-switcher .lang-btn.active{background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;box-shadow:0 4px 15px var(--gold-glow)}
@@ -194,7 +213,7 @@
         .header .right .top .night-toggle .fa-moon{color:var(--text-secondary)}
         .night-mode .header .right .top .night-toggle .fa-sun{color:#ffd700;text-shadow:0 0 20px rgba(255,215,0,0.3)}
         
-        .header .right .top .noti-btn{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;box-shadow:0 4px 15px var(--shadow),inset 0 1px 0 rgba(255,255,255,0.1)}
+        .header .right .top .noti-btn{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;box-shadow:0 2px 10px var(--shadow)}
         .header .right .top .noti-btn:active{animation:pop 0.3s cubic-bezier(0.34,1.56,0.64,1)}
         .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none;box-shadow:0 0 15px var(--red-glow)}
 
@@ -207,7 +226,7 @@
         .welcome h2 i{color:var(--cyan);-webkit-text-fill-color:initial;text-shadow:0 0 20px var(--cyan-glow)}
         .welcome p{color:var(--text-secondary);font-size:0.75rem;margin-top:2px;font-weight:400;opacity:0.6}
 
-        /* ===== SHOP STATUS BANNER ===== */
+        /* ===== SHOP STATUS BANNER (Open/Closed Glow) ===== */
         .shop-status-banner {
             background: var(--bg-card);
             backdrop-filter: blur(20px);
@@ -245,20 +264,30 @@
             transition: all 0.5s ease;
             font-family: 'Segoe UI', sans-serif;
             text-align: center;
+            animation: glowPulse 1.5s ease-in-out infinite;
         }
         .shop-status-banner .banner-status.open {
-            background: rgba(0,200,83,0.08);
+            background: rgba(0,200,83,0.1);
             color: var(--green);
-            border: 1px solid rgba(0,200,83,0.1);
-            animation: pulseStatus 1.5s ease-in-out infinite;
-            box-shadow: 0 0 30px rgba(0,200,83,0.05);
+            border: 1px solid rgba(0,200,83,0.2);
+            box-shadow: 0 0 40px rgba(0,200,83,0.15);
+            text-shadow: 0 0 30px rgba(0,200,83,0.2);
         }
         .shop-status-banner .banner-status.closed {
-            background: rgba(255,0,68,0.08);
+            background: rgba(255,0,68,0.1);
             color: var(--red);
-            border: 1px solid rgba(255,0,68,0.1);
-            box-shadow: 0 0 40px var(--red-glow);
-            animation: closedPulse 1s ease-in-out infinite;
+            border: 1px solid rgba(255,0,68,0.2);
+            box-shadow: 0 0 40px rgba(255,0,68,0.15);
+            text-shadow: 0 0 30px rgba(255,0,68,0.2);
+            animation: glowPulseRed 1s ease-in-out infinite;
+        }
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(0,200,83,0.1); }
+            50% { box-shadow: 0 0 60px rgba(0,200,83,0.2); }
+        }
+        @keyframes glowPulseRed {
+            0%, 100% { box-shadow: 0 0 30px rgba(255,0,68,0.1); }
+            50% { box-shadow: 0 0 60px rgba(255,0,68,0.2); }
         }
         .shop-status-banner .banner-status.open .status-dot {
             display: inline-block;
@@ -280,29 +309,20 @@
             box-shadow: 0 0 20px var(--red-glow);
             animation: pulseDotRed 1s ease-in-out infinite;
         }
+        @keyframes pulseDot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.6); }
+        }
+        @keyframes pulseDotRed {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.2; transform: scale(0.5); }
+        }
         .shop-status-text {
             font-size: 0.6rem;
             color: var(--text-secondary);
             text-align: center;
             opacity: 0.6;
             letter-spacing: 0.5px;
-        }
-
-        @keyframes closedPulse {
-            0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 40px var(--red-glow); }
-            50% { opacity: 0.7; transform: scale(0.97); box-shadow: 0 0 60px var(--red-glow); }
-        }
-        @keyframes pulseDot {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.3; transform: scale(0.6); }
-        }
-        @keyframes pulseDotRed {
-            0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 20px var(--red-glow); }
-            50% { opacity: 0.2; transform: scale(0.5); box-shadow: 0 0 30px var(--red-glow); }
-        }
-        @keyframes pulseStatus {
-            0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 30px rgba(0,200,83,0.05); }
-            50% { opacity: 0.7; transform: scale(0.97); box-shadow: 0 0 50px rgba(0,200,83,0.08); }
         }
 
         /* ===== SHOP CARD ===== */
@@ -762,6 +782,7 @@
                     <span class="shop" id="appSub">Game Shop</span>
                 </div>
             </div>
+            <!-- Login Button (လိုဂိုအောက်မှာ) -->
             <div class="auth-btn" id="authBtn" onclick="handleAuthClick()"><i class="fas fa-key"></i> Login</div>
         </div>
         <div class="right">
@@ -958,6 +979,7 @@
             title: 'ဂိမ်းကို <span>မြှင့်တင်လိုက်ပါ!</span>',
             subtitle: 'စိန်တွေဖြည့်ပြီး စစ်မြေပြင်ကို အနိုင်ယူလိုက်ပါ',
             goToShop: '⚡ GO TO SHOP',
+            shopClosed: '🔒 SHOP CLOSED',
             shopSubText: 'ပက်ကေ့ခ်ျအားလုံးကိုကြည့်ပါ',
             servicesTitle: 'ဘာကြောင့် ကျွန်ုပ်တို့ကိုရွေးမလဲ?',
             s1: '၁၀ မိနစ်အတွင်း အော်ဒါပြီးမြောက်',
@@ -1013,6 +1035,7 @@
             title: 'Level Up Your <span>Game!</span>',
             subtitle: 'Top up diamonds and dominate the battlefield',
             goToShop: '⚡ GO TO SHOP',
+            shopClosed: '🔒 SHOP CLOSED',
             shopSubText: 'Browse all packages',
             servicesTitle: 'Why Choose Us?',
             s1: '10 mins delivery',
@@ -1088,8 +1111,6 @@
         document.getElementById('greeting').textContent = d.greeting;
         document.querySelector('.welcome h2').innerHTML = '<i class="fas fa-arrow-right"></i> ' + d.title;
         document.getElementById('subtitle').textContent = d.subtitle;
-        document.getElementById('goToShop').textContent = '⚡ GO TO SHOP';
-        document.getElementById('shopSubText').textContent = d.shopSubText;
         document.getElementById('servicesTitle').textContent = d.servicesTitle;
         document.getElementById('s1').textContent = d.s1;
         document.getElementById('s2').textContent = d.s2;
@@ -1110,6 +1131,20 @@
         document.getElementById('statusBadge').innerHTML = isOpen ? '<span class="status-dot"></span> ' + d.shopOpen : '<span class="status-dot"></span> ' + d.shopClosed;
         document.getElementById('statusBadge').className = 'banner-status ' + (isOpen ? 'open' : 'closed');
         document.getElementById('statusText').textContent = isOpen ? d.shopOpenText : d.shopClosedText;
+        
+        // Shop Card
+        const shopCard = document.getElementById('shopCard');
+        const goToShop = document.getElementById('goToShop');
+        const shopSubText = document.getElementById('shopSubText');
+        if (isOpen) {
+            shopCard.className = 'shop-card open';
+            goToShop.textContent = d.goToShop;
+            shopSubText.textContent = d.shopSubText;
+        } else {
+            shopCard.className = 'shop-card closed';
+            goToShop.textContent = d.shopClosed || '🔒 SHOP CLOSED';
+            shopSubText.textContent = d.shopClosedText || 'မနက် ၁၀ နာရီမှသာ ဆိုင်ဖွင့်ပါမည်';
+        }
         
         updateAuthUI();
         updateModalTexts();
@@ -1144,6 +1179,8 @@
         const shopCard = document.getElementById('shopCard');
         const statusBadge = document.getElementById('statusBadge');
         const statusText = document.getElementById('statusText');
+        const goToShop = document.getElementById('goToShop');
+        const shopSubText = document.getElementById('shopSubText');
         const d = LANG_DATA[currentLang];
         const isOpen = isShopOpen();
 
@@ -1152,11 +1189,15 @@
             statusBadge.innerHTML = '<span class="status-dot"></span> ' + d.shopOpen;
             statusBadge.className = 'banner-status open';
             statusText.textContent = d.shopOpenText;
+            goToShop.textContent = d.goToShop;
+            shopSubText.textContent = d.shopSubText;
         } else {
             shopCard.className = 'shop-card closed';
             statusBadge.innerHTML = '<span class="status-dot"></span> ' + d.shopClosed;
             statusBadge.className = 'banner-status closed';
             statusText.textContent = d.shopClosedText;
+            goToShop.textContent = d.shopClosed || '🔒 SHOP CLOSED';
+            shopSubText.textContent = d.shopClosedText || 'မနက် ၁၀ နာရီမှသာ ဆိုင်ဖွင့်ပါမည်';
         }
     }
 
