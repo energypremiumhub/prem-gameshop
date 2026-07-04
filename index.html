@@ -38,6 +38,10 @@
             --red-glow: rgba(255,0,68,0.15);
             --purple: #b388ff;
             --purple-glow: rgba(179,136,255,0.15);
+            --night-bg: #1a1a2e;
+            --night-card: rgba(30,30,60,0.6);
+            --night-text: #e8eaf0;
+            --night-border: rgba(255,255,255,0.06);
         }
 
         body {
@@ -46,7 +50,44 @@
             min-height: 100vh;
             padding-bottom: 90px;
             overflow-x: hidden;
+            transition: all 0.3s ease;
         }
+
+        /* ===== NIGHT MODE ===== */
+        body.night-mode {
+            background: var(--night-bg);
+            color: var(--night-text);
+        }
+        body.night-mode .glass-box {
+            background: var(--night-card);
+            border-color: var(--night-border);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        body.night-mode .glass-box:hover {
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+        }
+        body.night-mode .bottom-nav {
+            background: var(--night-card);
+            border-color: var(--night-border);
+        }
+        body.night-mode .section-title { color: var(--night-text); opacity: 0.5; }
+        body.night-mode .section-title::after { background: linear-gradient(90deg, var(--night-border), transparent); }
+        body.night-mode .footer-text { color: var(--night-text); }
+        body.night-mode .toast { background: var(--night-card); border-color: var(--night-border); color: var(--gold); }
+        body.night-mode .modal-box { background: var(--night-bg); border-color: var(--night-border); }
+        body.night-mode .modal-box input { background: rgba(255,255,255,0.05); border-color: var(--night-border); color: var(--night-text); }
+        body.night-mode .modal-box input::placeholder { color: rgba(255,255,255,0.3); }
+        body.night-mode .confirm-overlay .card { background: var(--night-bg); border-color: var(--night-border); }
+        body.night-mode .header .left .logo span { background: linear-gradient(135deg, var(--secondary), var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        body.night-mode .header .left .auth-btn { background: var(--night-card); border-color: var(--night-border); color: var(--night-text); }
+        body.night-mode .header .right .top .lang-switcher { background: var(--night-card); border-color: var(--night-border); }
+        body.night-mode .header .right .top .noti-btn { background: var(--night-card); border-color: var(--night-border); color: var(--night-text); }
+        body.night-mode .shop-status-banner .banner-status.open { background: rgba(0,200,83,0.08); }
+        body.night-mode .shop-status-banner .banner-status.closed { background: rgba(255,0,68,0.08); }
+        body.night-mode .services-grid .service { background: var(--night-card); border-color: var(--night-border); }
+        body.night-mode .telegram-card { background: var(--night-card); border-color: var(--night-border); }
+        body.night-mode .telegram-contact { background: var(--night-card); border-color: var(--night-border); }
+        body.night-mode .bottom-nav .nav-item.active { background: rgba(108,92,231,0.15); border-color: rgba(108,92,231,0.2); }
 
         .container {
             max-width: 480px;
@@ -56,7 +97,7 @@
             z-index: 1;
         }
 
-        /* ===== GLASS BOX (မီးခိုးရောင်နောက်ခံပေါ်မှာ ထင်ရှားတယ်) ===== */
+        /* ===== GLASS BOX ===== */
         .glass-box {
             background: var(--bg-card);
             backdrop-filter: blur(20px);
@@ -127,6 +168,26 @@
         .header .right .top .noti-btn{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;box-shadow:0 4px 15px var(--shadow),inset 0 1px 0 rgba(255,255,255,0.3)}
         .header .right .top .noti-btn:active{animation:pop 0.3s cubic-bezier(0.34,1.56,0.64,1)}
         .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none;box-shadow:0 0 15px var(--red-glow)}
+
+        /* Night Mode Toggle */
+        .night-toggle {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+        .night-toggle:active { animation: pop 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+        .night-toggle:hover { box-shadow: 0 4px 20px var(--shadow-hover); }
 
         /* ===== WELCOME ===== */
         .welcome{margin-bottom:16px;animation:slideUp 0.6s ease}
@@ -321,7 +382,7 @@
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
         .section-title i{color:var(--cyan);text-shadow:0 0 20px var(--cyan-glow)}
 
-        /* ===== SERVICES GRID (အိုင်ကွန်ထိပ်မပြတ်အောင်) ===== */
+        /* ===== SERVICES GRID ===== */
         .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;animation:slideUp 0.9s ease;margin-bottom:18px}
         .services-grid .service{
             background: var(--bg-card);
@@ -439,7 +500,7 @@
         .telegram-contact .arrow{color:var(--text-secondary);font-size:0.9rem;transition:all 0.3s ease}
         .telegram-contact:hover .arrow{color:var(--primary);transform:translateX(3px)}
 
-        /* ===== BOTTOM NAV (Glass Box Style) ===== */
+        /* ===== BOTTOM NAV ===== */
         .bottom-nav {
             position: fixed;
             bottom: 16px;
@@ -697,6 +758,9 @@
                     <button class="lang-btn active" data-lang="my" onclick="setLang('my')">မြန်မာ</button>
                     <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
                 </div>
+                <button class="night-toggle" onclick="toggleNightMode()" title="Night Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
                 <a href="notifications.html" class="noti-btn" id="notiBtn">
                     <i class="fas fa-bell"></i>
                     <span class="badge" id="notiBadge">0</span>
@@ -1023,6 +1087,19 @@
         updateAuthUI();
         updateModalTexts();
         updateShopUI();
+    }
+
+    // ===== NIGHT MODE =====
+    function toggleNightMode() {
+        document.body.classList.toggle('night-mode');
+        const icon = document.querySelector('.night-toggle i');
+        if (document.body.classList.contains('night-mode')) {
+            icon.className = 'fas fa-sun';
+            localStorage.setItem('nightMode', 'true');
+        } else {
+            icon.className = 'fas fa-moon';
+            localStorage.setItem('nightMode', 'false');
+        }
     }
 
     // ===== SHOP STATUS =====
@@ -1484,6 +1561,13 @@
         updateAuthUI();
         checkNotifications();
         updateShopUI();
+        
+        // Night Mode
+        const nightMode = localStorage.getItem('nightMode') === 'true';
+        if (nightMode) {
+            document.body.classList.add('night-mode');
+            document.querySelector('.night-toggle i').className = 'fas fa-sun';
+        }
     });
 </script>
 </body>
