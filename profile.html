@@ -1,326 +1,184 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="my">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>⚡ Premium Game Shop - Profile</title>
+    <title>👤 Profile</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <script src="lang.js"></script>
-    <script src="auth.js"></script>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
-        
-        :root {
-            --bg-primary: #0a0e1a;
-            --bg-secondary: #111927;
-            --bg-card: #141c2b;
-            --bg-input: #1a2438;
-            --text-primary: #ffffff;
-            --text-secondary: #8899bb;
-            --border-color: rgba(255,255,255,0.06);
-            --shadow: rgba(0,0,0,0.5);
-            --gold: #f5c842;
-            --gold-glow: rgba(245,200,66,0.3);
-            --cyan: #00d4ff;
-            --cyan-glow: rgba(0,212,255,0.2);
-            --orange: #f97316;
-            --green: #22d3ee;
-            --red: #ef4444;
-            --theme-color: #f5c842;
-        }
-
-        body {
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            min-height: 100vh;
-            padding: 16px;
-            padding-bottom: 90px;
-            background-image: 
-                radial-gradient(ellipse at 20% 50%, rgba(245,200,66,0.04) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 20%, rgba(0,212,255,0.04) 0%, transparent 50%);
-        }
-
-        ::-webkit-scrollbar{width:4px}
-        ::-webkit-scrollbar-track{background:var(--bg-primary)}
-        ::-webkit-scrollbar-thumb{background:var(--gold);border-radius:10px}
-
+        :root{--bg-primary:#0a0e1a;--bg-secondary:#111927;--bg-card:#141c2b;--bg-input:#1a2438;--text-primary:#ffffff;--text-secondary:#8899bb;--border-color:rgba(255,255,255,0.06);--shadow:rgba(0,0,0,0.5);--gold:#f5c842;--gold-glow:rgba(245,200,66,0.3);--cyan:#00d4ff;--cyan-glow:rgba(0,212,255,0.2);--orange:#f97316;--orange-glow:rgba(249,115,22,0.2);--red:#ef4444;--green:#22d3ee;--green-glow:rgba(34,211,238,0.2)}
+        body{background:var(--bg-primary);color:var(--text-primary);min-height:100vh;padding:16px;padding-bottom:90px;background-image:radial-gradient(ellipse at 20% 50%,rgba(245,200,66,0.04) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(0,212,255,0.04) 0%,transparent 50%)}
+        ::-webkit-scrollbar{width:0px;height:0px}
         .container{max-width:500px;margin:0 auto}
 
+        /* HEADER */
         .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
         .header .left{display:flex;flex-direction:column;gap:6px}
         .header .left .logo{font-size:1rem;font-weight:800;color:var(--gold);text-shadow:0 0 20px var(--gold-glow);letter-spacing:0.5px}
         .header .left .logo i{color:var(--cyan);margin-right:6px;text-shadow:0 0 20px var(--cyan-glow)}
-        
         .header .right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
         .header .right .top{display:flex;gap:8px;align-items:center}
         .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:8px;border:1px solid var(--border-color)}
         .header .right .top .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;text-transform:uppercase}
         .header .right .top .lang-switcher .lang-btn.active{background:var(--gold);color:#0a0e1a;box-shadow:0 0 20px var(--gold-glow)}
         .header .right .top .lang-switcher .lang-btn:active{transform:scale(0.85)}
-        
         .header .right .top .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:8px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none}
         .header .right .top .noti-btn:active{transform:scale(0.85)}
         .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none}
 
-        .profile-section{display:flex;align-items:center;gap:16px;margin-bottom:16px;animation:slideUp 0.6s ease;background:var(--bg-card);border:1px solid var(--border-color);border-radius:14px;padding:14px 16px;box-shadow:0 4px 25px var(--shadow)}
-        
-        .profile-section .left-side{display:flex;align-items:center;gap:14px;flex:1;min-width:0}
-        .profile-section .avatar-wrap{position:relative;width:64px;height:64px;flex-shrink:0}
-        .profile-section .avatar-wrap .avatar{width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,var(--theme-color),var(--orange));display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:#0a0e1a;border:2px solid var(--border-color);cursor:pointer;transition:all 0.3s ease;overflow:hidden;box-shadow:0 0 20px var(--gold-glow)}
-        .profile-section .avatar-wrap .avatar:active{transform:scale(0.95)}
+        /* PROFILE SECTION */
+        .profile-section{display:flex;align-items:center;gap:14px;margin-bottom:16px;animation:slideUp 0.6s ease;background:var(--bg-card);border:1px solid var(--border-color);border-radius:14px;padding:14px 16px;box-shadow:0 4px 25px var(--shadow)}
+        .profile-section .avatar-wrap{position:relative;width:60px;height:60px;flex-shrink:0}
+        .profile-section .avatar-wrap .avatar{width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--orange));display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:#0a0e1a;border:2px solid var(--border-color);cursor:pointer;transition:all 0.3s ease;overflow:hidden;box-shadow:0 0 20px var(--gold-glow)}
         .profile-section .avatar-wrap .avatar img{width:100%;height:100%;object-fit:cover}
-        .profile-section .avatar-wrap .camera-icon{position:absolute;bottom:-2px;right:-2px;width:22px;height:22px;background:linear-gradient(135deg,var(--gold),var(--orange));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.5rem;color:#0a0e1a;border:2px solid var(--bg-primary);cursor:pointer;transition:all 0.3s ease;box-shadow:0 0 15px var(--gold-glow)}
+        .profile-section .avatar-wrap .camera-icon{position:absolute;bottom:-2px;right:-2px;width:22px;height:22px;background:linear-gradient(135deg,var(--gold),var(--orange));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.45rem;color:#0a0e1a;border:2px solid var(--bg-primary);cursor:pointer;transition:all 0.3s ease;box-shadow:0 0 15px var(--gold-glow)}
         .profile-section .avatar-wrap .camera-icon:active{transform:scale(0.85)}
         .profile-section .avatar-wrap .camera-icon input{display:none}
-        
         .profile-section .info{flex:1;min-width:0}
-        .profile-section .info .name{font-size:1rem;font-weight:700;color:var(--text-primary);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-        .profile-section .info .name i{color:var(--theme-color)}
-        .profile-section .info .username{font-size:0.65rem;color:var(--text-secondary)}
-        .profile-section .info .user-id{font-size:0.5rem;color:var(--text-secondary);opacity:0.5;font-family:monospace}
-        
-        .diamond-display-box {
-            background: var(--bg-input);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 6px 12px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            cursor: default;
-            margin-top: 4px;
-        }
-        .diamond-display-box .diamond-icon {
-            color: var(--gold);
-            font-size: 0.8rem;
-        }
-        .diamond-display-box .diamond-amount {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--gold);
-            text-shadow: 0 0 20px var(--gold-glow);
-        }
-        .diamond-display-box .diamond-label {
-            font-size: 0.45rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .diamond-display-box .diamond-note {
-            font-size: 0.4rem;
-            color: var(--text-secondary);
-            opacity: 0.5;
-        }
+        .profile-section .info .name{font-size:0.95rem;font-weight:700;color:var(--text-primary);display:flex;align-items:center;gap:6px}
+        .profile-section .info .name i{color:var(--gold)}
+        .profile-section .info .email{font-size:0.6rem;color:var(--text-secondary);margin-top:1px}
+        .profile-section .info .phone{font-size:0.6rem;color:var(--text-secondary);margin-top:1px}
+        .profile-section .info .diamond-box{background:var(--bg-input);border:1px solid var(--border-color);border-radius:8px;padding:3px 10px;display:inline-flex;align-items:center;gap:4px;margin-top:4px}
+        .profile-section .info .diamond-box .icon{color:var(--gold);font-size:0.7rem}
+        .profile-section .info .diamond-box .amount{font-size:0.75rem;font-weight:700;color:var(--gold);text-shadow:0 0 20px var(--gold-glow)}
+        .profile-section .info .diamond-box .label{font-size:0.4rem;color:var(--text-secondary);text-transform:uppercase}
 
-        .profile-section .info .status{font-size:0.55rem;color:var(--green);margin-top:4px;display:inline-flex;align-items:center;gap:4px;background:rgba(34,211,238,0.08);padding:2px 12px;border-radius:20px;border:1px solid rgba(34,211,238,0.1);cursor:pointer;transition:all 0.3s ease;width:fit-content}
-        .profile-section .info .status:active{transform:scale(0.95)}
-        .profile-section .info .status.login-status{color:var(--text-secondary);border-color:var(--border-color);background:transparent}
-
-        .profile-section .right-side{flex-shrink:0;text-align:center}
-        .profile-section .right-side .level-badge{display:flex;flex-direction:column;align-items:center;background:linear-gradient(135deg,var(--bg-input),var(--bg-secondary));border:1px solid var(--border-color);padding:8px 14px;border-radius:14px;min-width:60px;box-shadow:0 4px 15px var(--shadow)}
-        .profile-section .right-side .level-badge .level-icon{font-size:1.2rem}
-        .profile-section .right-side .level-badge .level-number{font-size:1.3rem;font-weight:800;color:var(--theme-color);text-shadow:0 0 20px var(--gold-glow)}
-        .profile-section .right-side .level-badge .level-label{font-size:0.4rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px}
-        .profile-section .right-side .level-badge .level-xp{font-size:0.45rem;color:var(--text-secondary)}
-
-        .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:16px;animation:slideUp 0.7s ease}
-        .stats-grid .stat{background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;padding:12px 6px;text-align:center;box-shadow:0 4px 20px var(--shadow);transition:all 0.3s ease}
-        .stats-grid .stat:active{transform:scale(0.95)}
-        .stats-grid .stat .number{font-size:1.1rem;font-weight:700;color:var(--theme-color);text-shadow:0 0 20px var(--gold-glow)}
-        .stats-grid .stat .label{font-size:0.45rem;color:var(--text-secondary);margin-top:2px;text-transform:uppercase;letter-spacing:0.5px}
-        .stats-grid .stat .icon{font-size:0.8rem;display:block;margin-bottom:2px}
-
-        .glass-card{background:var(--bg-card);backdrop-filter:blur(10px);border:1px solid var(--border-color);border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:0 4px 25px var(--shadow);animation:slideUp 0.8s ease}
+        /* ORDER HISTORY */
+        .glass-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 4px 25px var(--shadow);animation:slideUp 0.7s ease}
         .glass-card .label{font-size:0.6rem;color:var(--text-secondary);font-weight:600;display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
         .glass-card .label i{color:var(--cyan);margin-right:4px}
-
-        .filter-bar{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
-        .filter-bar .filter-btn{background:var(--bg-input);border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 12px;border-radius:16px;font-size:0.5rem;font-weight:600;cursor:pointer;transition:all 0.3s ease}
+        .filter-bar{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}
+        .filter-bar .filter-btn{background:var(--bg-input);border:1px solid var(--border-color);color:var(--text-secondary);padding:3px 10px;border-radius:14px;font-size:0.45rem;font-weight:600;cursor:pointer;transition:all 0.3s ease}
         .filter-bar .filter-btn:active{transform:scale(0.90)}
-        .filter-bar .filter-btn.active{background:var(--theme-color);color:#0a0e1a;border-color:var(--theme-color);box-shadow:0 0 20px var(--gold-glow)}
-        .filter-bar .filter-btn:hover{border-color:var(--theme-color);color:var(--theme-color)}
-        
-        .search-bar{display:flex;gap:8px;margin-bottom:10px}
-        .search-bar input{flex:1;padding:6px 12px;border-radius:8px;border:1px solid var(--border-color);background:var(--bg-input);color:var(--text-primary);font-size:0.7rem;outline:none;transition:all 0.3s ease}
-        .search-bar input:focus{border-color:var(--theme-color);box-shadow:0 0 20px var(--gold-glow)}
-        .search-bar input::placeholder{color:var(--text-secondary);font-size:0.6rem}
-
-        .order-list{display:flex;flex-direction:column;gap:6px}
-        .order-item{display:flex;align-items:center;justify-content:space-between;background:var(--bg-input);border:1px solid var(--border-color);border-radius:10px;padding:8px 12px;transition:all 0.3s ease;cursor:pointer}
+        .filter-bar .filter-btn.active{background:var(--gold);color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 20px var(--gold-glow)}
+        .search-bar input{width:100%;padding:6px 12px;border-radius:8px;border:1px solid var(--border-color);background:var(--bg-input);color:var(--text-primary);font-size:0.65rem;outline:none;transition:all 0.3s ease;margin-bottom:8px}
+        .search-bar input:focus{border-color:var(--gold);box-shadow:0 0 20px var(--gold-glow)}
+        .search-bar input::placeholder{color:var(--text-secondary);font-size:0.55rem}
+        .order-list{display:flex;flex-direction:column;gap:4px}
+        .order-item{display:flex;align-items:center;justify-content:space-between;background:var(--bg-input);border:1px solid var(--border-color);border-radius:8px;padding:6px 10px;transition:all 0.3s ease;cursor:pointer}
         .order-item:active{transform:scale(0.97)}
-        .order-item .order-info{display:flex;flex-direction:column;gap:2px;flex:1}
-        .order-item .order-info .order-id{font-size:0.6rem;font-weight:600;color:var(--theme-color)}
-        .order-item .order-info .order-pkg{font-size:0.65rem;color:var(--text-primary)}
-        .order-item .order-info .order-date{font-size:0.45rem;color:var(--text-secondary)}
-        .order-item .order-status{font-size:0.45rem;font-weight:700;padding:2px 10px;border-radius:16px;text-transform:uppercase}
-        .order-item .order-status.pending{background:rgba(245,158,11,0.12);color:#f59e0b}
-        .order-item .order-status.completed{background:rgba(34,211,238,0.12);color:var(--green)}
-        .order-item .order-status.cancelled{background:rgba(239,68,68,0.12);color:var(--red)}
+        .order-item .info{display:flex;flex-direction:column;gap:1px;flex:1}
+        .order-item .info .id{font-size:0.5rem;font-weight:600;color:var(--gold)}
+        .order-item .info .pkg{font-size:0.6rem;color:var(--text-primary)}
+        .order-item .info .date{font-size:0.4rem;color:var(--text-secondary)}
+        .order-item .status{font-size:0.4rem;font-weight:700;padding:2px 8px;border-radius:12px;text-transform:uppercase}
+        .order-item .status.pending{background:rgba(245,158,11,0.12);color:#f59e0b}
+        .order-item .status.completed{background:rgba(34,211,238,0.12);color:var(--green)}
+        .order-item .status.cancelled{background:rgba(239,68,68,0.12);color:var(--red)}
+        .empty-orders{text-align:center;padding:20px;color:var(--text-secondary);font-size:0.7rem}
+        .empty-orders .icon{font-size:2rem;display:block;margin-bottom:6px;opacity:0.3}
+        .order-more{text-align:center;padding:6px 0;color:var(--cyan);font-size:0.55rem;font-weight:600;cursor:pointer;transition:all 0.3s ease}
+        .order-more:active{transform:scale(0.95);color:var(--gold)}
 
-        .order-more{text-align:center;padding:8px 0;color:var(--cyan);font-size:0.65rem;font-weight:600;cursor:pointer;transition:all 0.3s ease}
-        .order-more:active{transform:scale(0.95);color:var(--theme-color)}
-        .order-more i{margin-right:4px}
-
-        .empty-orders{text-align:center;padding:20px;color:var(--text-secondary);font-size:0.75rem}
-        .empty-orders .icon{font-size:2rem;display:block;margin-bottom:8px;opacity:0.3}
-
-        .menu-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border-color);cursor:pointer;transition:all 0.3s ease}
+        /* SETTINGS MENU */
+        .menu-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border-color);cursor:pointer;transition:all 0.3s ease}
         .menu-item:last-child{border-bottom:none}
         .menu-item:active{transform:scale(0.97)}
-        .menu-item .icon{font-size:1rem;color:var(--text-secondary);width:28px;text-align:center;transition:all 0.3s ease}
-        .menu-item:hover .icon{color:var(--theme-color)}
-        .menu-item .text{font-size:0.8rem;color:var(--text-primary);flex:1}
-        .menu-item .arrow{color:var(--text-secondary);font-size:0.6rem;transition:all 0.3s ease}
-        .menu-item:hover .arrow{color:var(--theme-color);transform:translateX(3px)}
-        .menu-item .badge{font-size:0.45rem;background:rgba(245,200,66,0.12);color:var(--theme-color);padding:2px 10px;border-radius:10px;font-weight:600}
-        .menu-item .badge.danger{background:rgba(239,68,68,0.12);color:var(--red)}
-        .menu-item .badge.success{background:rgba(34,211,238,0.12);color:var(--green)}
+        .menu-item .icon{font-size:0.9rem;color:var(--text-secondary);width:24px;text-align:center}
+        .menu-item .text{font-size:0.75rem;color:var(--text-primary);flex:1}
+        .menu-item .arrow{color:var(--text-secondary);font-size:0.6rem}
+        .menu-item:hover .icon{color:var(--gold)}
+        .menu-item.logout .icon{color:var(--red)}
+        .menu-item.logout .text{color:var(--red)}
 
-        .logout-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.9);backdrop-filter:blur(20px);display:none;z-index:600;align-items:center;justify-content:center;padding:20px;flex-direction:column;text-align:center}
-        .logout-overlay.show{display:flex;animation:fadeIn 0.5s ease}
-        .logout-overlay .card{background:linear-gradient(145deg,var(--bg-card),var(--bg-secondary));border:1px solid var(--border-color);border-radius:24px;padding:30px 24px;max-width:360px;width:100%;box-shadow:0 20px 60px var(--shadow);position:relative;overflow:hidden}
-        .logout-overlay .card::before{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(239,68,68,0.05) 0%,transparent 70%);animation:shimmer 8s ease-in-out infinite}
-        .logout-overlay .icon{font-size:3rem;color:var(--red);margin-bottom:12px;position:relative;z-index:1}
-        .logout-overlay .title{font-size:1.2rem;font-weight:700;color:var(--text-primary);margin-bottom:4px;position:relative;z-index:1}
-        .logout-overlay .desc{font-size:0.75rem;color:var(--text-secondary);margin-bottom:20px;position:relative;z-index:1}
-        .logout-overlay .btn-group{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;position:relative;z-index:1}
-        .logout-overlay .btn-confirm{background:linear-gradient(135deg,var(--red),#dc2626);color:#fff;border:none;padding:12px 28px;border-radius:12px;font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.3s ease;box-shadow:0 0 30px rgba(239,68,68,0.2);flex:1;min-width:100px}
-        .logout-overlay .btn-confirm:active{transform:scale(0.95)}
-        .logout-overlay .btn-cancel{background:transparent;border:2px solid var(--border-color);color:var(--text-secondary);padding:12px 28px;border-radius:12px;font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.3s ease;flex:1;min-width:100px}
-        .logout-overlay .btn-cancel:active{transform:scale(0.95)}
-        .logout-overlay .btn-cancel:hover{border-color:var(--gold);color:var(--gold)}
-        .logout-overlay .glow-ring{position:absolute;top:-20px;left:-20px;right:-20px;bottom:-20px;border-radius:50%;background:conic-gradient(from 0deg,transparent,rgba(239,68,68,0.05),transparent,rgba(0,212,255,0.05),transparent);animation:spin 10s linear infinite;pointer-events:none}
-
-        /* ===== BOTTOM NAV (လေးထောင့်ကွက်လေးတွေ) ===== */
-        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);border-top:1px solid var(--border-color);display:flex;justify-content:space-around;padding:8px 0 12px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px var(--shadow)}
-        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.3s ease;padding:6px 16px;border-radius:12px;position:relative;min-width:56px;border:1px solid transparent}
-        .bottom-nav .nav-item:active{transform:scale(0.85);background:rgba(245,200,66,0.05)}
-        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;transition:all 0.3s ease}
-        .bottom-nav .nav-item .label{font-size:0.4rem;margin-top:1px;font-weight:700;letter-spacing:0.5px;transition:all 0.3s ease}
-        .bottom-nav .nav-item.active{color:var(--gold);background:rgba(245,200,66,0.06);border-color:rgba(245,200,66,0.15);box-shadow:0 0 30px rgba(245,200,66,0.05)}
-        .bottom-nav .nav-item.active .icon{transform:translateY(-2px);color:var(--gold)}
-        .bottom-nav .nav-item.active .label{color:var(--gold)}
-        .bottom-nav .nav-item:not(.active):hover{border-color:rgba(255,255,255,0.04);background:rgba(255,255,255,0.02)}
-
-        .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.3;letter-spacing:1px}
-
-        .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-card);padding:10px 20px;border-radius:12px;border:1px solid rgba(245,200,66,0.15);color:var(--gold);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 8px 40px var(--shadow);animation:toastPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
-        .toast.show{display:block}
-        @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
-        @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes shimmer{0%,100%{transform:translate(0,0)}50%{transform:translate(-20%,-20%)}}
-        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-        @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-
-        .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(12px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px}
-        .modal-overlay.show{display:flex;animation:fadeIn 0.3s ease}
+        /* MODAL */
+        .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px;animation:fadeIn 0.3s ease}
+        .modal-overlay.show{display:flex}
         .modal{background:linear-gradient(145deg,var(--bg-card),var(--bg-secondary));border:1px solid var(--border-color);border-radius:18px;padding:24px 20px;max-width:380px;width:100%;box-shadow:0 20px 60px var(--shadow);position:relative;overflow:hidden;max-height:90vh;overflow-y:auto}
         .modal::before{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(245,200,66,0.04) 0%,transparent 70%);animation:shimmer 8s ease-in-out infinite}
-        .modal h2{font-size:1.2rem;color:var(--gold);margin-bottom:4px;text-align:center;position:relative;z-index:1;text-shadow:0 0 30px var(--gold-glow)}
-        .modal p{color:var(--text-secondary);font-size:0.75rem;text-align:center;margin-bottom:16px;position:relative;z-index:1}
-        .modal .form-group{margin-bottom:12px;position:relative;z-index:1}
-        .modal .form-group label{font-size:0.6rem;color:var(--text-secondary);font-weight:600;display:block;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px}
-        .modal .form-group input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border-color);background:var(--bg-input);color:var(--text-primary);font-size:0.85rem;outline:none;transition:all 0.3s ease}
+        .modal h2{font-size:1.1rem;color:var(--gold);margin-bottom:4px;text-align:center;position:relative;z-index:1;text-shadow:0 0 30px var(--gold-glow)}
+        .modal p{color:var(--text-secondary);font-size:0.7rem;text-align:center;margin-bottom:14px;position:relative;z-index:1}
+        .modal .form-group{margin-bottom:10px;position:relative;z-index:1}
+        .modal .form-group label{font-size:0.55rem;color:var(--text-secondary);font-weight:600;display:block;margin-bottom:2px;text-transform:uppercase;letter-spacing:0.5px}
+        .modal .form-group input{width:100%;padding:9px 12px;border-radius:8px;border:1px solid var(--border-color);background:var(--bg-input);color:var(--text-primary);font-size:0.8rem;outline:none;transition:all 0.3s ease}
         .modal .form-group input:focus{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
-        .modal .form-group input::placeholder{color:var(--text-secondary);font-size:0.7rem}
-        .modal .form-group input[readonly]{background:var(--bg-secondary);color:var(--text-secondary);cursor:not-allowed;opacity:0.7}
-        .modal .btn-primary{width:100%;padding:11px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:10px;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;position:relative;z-index:1}
+        .modal .form-group input::placeholder{color:var(--text-secondary);font-size:0.65rem}
+        .modal .btn-primary{width:100%;padding:10px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:8px;font-size:0.8rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;position:relative;z-index:1}
         .modal .btn-primary:active{transform:scale(0.96)}
         .modal .btn-primary:hover{box-shadow:0 0 40px var(--gold-glow)}
         .modal .close-btn{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--text-secondary);font-size:1.1rem;cursor:pointer;z-index:2}
-        .modal .switch-link{color:var(--cyan);cursor:pointer;font-weight:600;text-align:center;display:block;margin-top:10px;font-size:0.7rem;position:relative;z-index:1}
-        .modal .switch-link:active{opacity:0.7}
-        .modal .forgot-link{color:var(--text-secondary);cursor:pointer;font-size:0.55rem;text-align:right;display:block;margin-top:6px;position:relative;z-index:1;transition:all 0.3s ease}
-        .modal .forgot-link:hover{color:var(--gold)}
-        .modal .login-error{font-size:0.55rem;color:var(--red);text-align:center;margin-bottom:8px;display:none;padding:4px 8px;background:rgba(239,68,68,0.08);border-radius:6px;border:1px solid rgba(239,68,68,0.1)}
+        .modal .close-btn:active{transform:scale(0.85)}
+        .modal .error-text{font-size:0.5rem;color:var(--red);margin-top:2px;display:none}
 
-        .avatar-upload .preview{width:70px;height:70px;border-radius:50%;background:var(--bg-input);border:2px solid var(--border-color);display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--text-secondary);cursor:pointer;transition:all 0.3s ease;overflow:hidden;position:relative;margin:0 auto 8px}
-        .avatar-upload .preview:hover{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
-        .avatar-upload .preview img{width:100%;height:100%;object-fit:cover}
-        .avatar-upload .preview input{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}
-        .avatar-upload .preview .upload-hint{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.7);padding:2px;font-size:0.4rem;color:var(--text-secondary);text-align:center;display:none}
-        .avatar-upload .preview:hover .upload-hint{display:block}
-        .avatar-upload .label{font-size:0.55rem;color:var(--text-secondary);text-align:center;display:block}
-        .error-text{display:none;color:var(--red);font-size:0.55rem;margin-top:3px}
+        /* LOGOUT OVERLAY */
+        .logout-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.9);backdrop-filter:blur(20px);display:none;z-index:600;align-items:center;justify-content:center;padding:20px;flex-direction:column;text-align:center}
+        .logout-overlay.show{display:flex;animation:fadeIn 0.5s ease}
+        .logout-overlay .card{background:linear-gradient(145deg,var(--bg-card),var(--bg-secondary));border:1px solid var(--border-color);border-radius:24px;padding:30px 24px;max-width:360px;width:100%;box-shadow:0 20px 60px var(--shadow)}
+        .logout-overlay .icon{font-size:3rem;color:var(--red);margin-bottom:12px}
+        .logout-overlay .title{font-size:1.1rem;font-weight:700;color:var(--text-primary);margin-bottom:4px}
+        .logout-overlay .desc{font-size:0.7rem;color:var(--text-secondary);margin-bottom:18px}
+        .logout-overlay .btn-group{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+        .logout-overlay .btn-confirm{background:linear-gradient(135deg,var(--red),#dc2626);color:#fff;border:none;padding:10px 24px;border-radius:10px;font-weight:700;font-size:0.8rem;cursor:pointer;transition:all 0.3s ease;flex:1;min-width:80px}
+        .logout-overlay .btn-confirm:active{transform:scale(0.95)}
+        .logout-overlay .btn-cancel{background:transparent;border:2px solid var(--border-color);color:var(--text-secondary);padding:10px 24px;border-radius:10px;font-weight:700;font-size:0.8rem;cursor:pointer;transition:all 0.3s ease;flex:1;min-width:80px}
+        .logout-overlay .btn-cancel:active{transform:scale(0.95)}
+        .logout-overlay .btn-cancel:hover{border-color:var(--gold);color:var(--gold)}
 
-        .color-options{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:12px 0}
-        .color-dot{width:36px;height:36px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all 0.3s ease}
-        .color-dot:hover{transform:scale(1.1)}
-        .color-dot.active{border-color:var(--gold);box-shadow:0 0 20px var(--gold-glow)}
+        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);border-top:1px solid var(--border-color);display:flex;justify-content:space-around;padding:6px 0 10px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px var(--shadow)}
+        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.2s cubic-bezier(0.34,1.2,0.64,1);padding:4px 8px;border-radius:8px;position:relative;border:2px solid transparent;min-width:50px}
+        .bottom-nav .nav-item:active{transform:scale(0.85)}
+        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block}
+        .bottom-nav .nav-item .label{font-size:0.4rem;margin-top:1px;font-weight:700;letter-spacing:0.5px}
+        .bottom-nav .nav-item.active{color:var(--gold);border-color:var(--gold);background:rgba(245,200,66,0.05);box-shadow:0 0 30px rgba(245,200,66,0.05)}
+        .bottom-nav .nav-item.active .icon{transform:translateY(-6px) scale(1.15);text-shadow:0 0 30px var(--gold-glow)}
+        .bottom-nav .nav-item.active .label{color:var(--gold)}
+        .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:24px;height:2.5px;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:10px;box-shadow:0 0 20px var(--gold-glow)}
 
-        .username-change-row{display:flex;gap:8px;align-items:center}
-        .username-change-row input{flex:1;min-width:0}
-        .username-change-row .change-btn{padding:8px 16px;border:none;border-radius:8px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;font-weight:700;font-size:0.7rem;cursor:pointer;white-space:nowrap;transition:all 0.3s ease}
-        .username-change-row .change-btn:active{transform:scale(0.90)}
-        .username-change-row .change-btn:hover{box-shadow:0 0 25px var(--gold-glow)}
-        .username-result{font-size:0.55rem;margin-top:4px;display:none}
-        .username-result.success{display:block;color:var(--green)}
-        .username-result.error{display:block;color:var(--red)}
+        .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-card);padding:10px 20px;border-radius:12px;border:1px solid rgba(245,200,66,0.15);color:var(--gold);font-weight:600;font-size:0.7rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 8px 40px var(--shadow);animation:toastPop 0.3s cubic-bezier(0.34,1.2,0.64,1)}
+        .toast.show{display:block}
+        .toast.error{color:var(--red);border-color:rgba(239,68,68,0.15)}
+        .toast.success{color:var(--green);border-color:rgba(34,211,238,0.15)}
+
+        @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.9)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
+        @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+        @keyframes shimmer{0%,100%{transform:translate(0,0)}50%{transform:translate(-20%,-20%)}}
     </style>
 </head>
 <body>
 <div class="container">
+    <!-- HEADER -->
     <div class="header">
         <div class="left">
-            <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Game Shop</div>
+            <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Shop</div>
         </div>
         <div class="right">
             <div class="top">
                 <div class="lang-switcher">
-                    <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
-                    <button class="lang-btn" data-lang="my" onclick="setLang('my')">MY</button>
+                    <button class="lang-btn active" data-lang="my" onclick="setLang('my')">မြန်မာ</button>
+                    <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
                 </div>
-                <a href="notifications.html" class="noti-btn" id="notiBtn">
-                    🔔
-                    <span class="badge" id="notiBadge">0</span>
-                </a>
+                <a href="notifications.html" class="noti-btn" id="notiBtn">🔔<span class="badge" id="notiBadge">0</span></a>
             </div>
         </div>
     </div>
 
+    <!-- PROFILE SECTION -->
     <div class="profile-section">
-        <div class="left-side">
-            <div class="avatar-wrap">
-                <div class="avatar" id="avatarDisplay">⚔️</div>
-                <label class="camera-icon">
-                    <i class="fas fa-camera"></i>
-                    <input type="file" id="avatarInput" accept="image/*">
-                </label>
-            </div>
-            <div class="info">
-                <div class="name" id="displayName"><i class="fas fa-crown"></i> Guest</div>
-                <div class="username" id="displayUsername">@guest</div>
-                <div class="user-id" id="userIdDisplay">ID: ----------</div>
-                
-                <div class="diamond-display-box">
-                    <span class="diamond-icon"><i class="fas fa-gem"></i></span>
-                    <span class="diamond-amount" id="diamondCount">0</span>
-                    <span class="diamond-label">💎 Diamonds</span>
-                    <span class="diamond-note">(auto)</span>
-                </div>
-
-                <div class="status" id="statusDisplay" onclick="handleStatusClick()">
-                    <i class="fas fa-circle"></i> <span id="statusText">🔑 Login</span>
-                </div>
-            </div>
+        <div class="avatar-wrap">
+            <div class="avatar" id="avatarDisplay">👤</div>
+            <label class="camera-icon">
+                <i class="fas fa-camera"></i>
+                <input type="file" id="avatarInput" accept="image/*">
+            </label>
         </div>
-        <div class="right-side">
-            <div class="level-badge">
-                <span class="level-icon">🏆</span>
-                <span class="level-number" id="levelNumber">0</span>
-                <span class="level-label">Level</span>
-                <span class="level-xp" id="levelXp">0 XP</span>
+        <div class="info">
+            <div class="name" id="displayName"><i class="fas fa-crown"></i> Guest</div>
+            <div class="email" id="displayEmail">📧 No email</div>
+            <div class="phone" id="displayPhone">📱 No phone</div>
+            <div class="diamond-box">
+                <span class="icon">💎</span>
+                <span class="amount" id="diamondCount">0</span>
+                <span class="label">Diamonds</span>
             </div>
         </div>
     </div>
 
-    <div class="stats-grid">
-        <div class="stat"><span class="icon">💎</span><div class="number" id="diamondCountStat">0</div><div class="label" id="diamondLabel">Diamonds</div></div>
-        <div class="stat"><span class="icon">📦</span><div class="number" id="orderCountStat">0</div><div class="label" id="orderLabel">Orders</div></div>
-    </div>
-
+    <!-- ORDER HISTORY -->
     <div class="glass-card">
-        <span class="label"><i class="fas fa-list"></i> <span id="orderHistoryLabel">Order History</span></span>
+        <span class="label"><i class="fas fa-list"></i> <span id="orderHistoryLabel">အော်ဒါမှတ်တမ်း</span></span>
         <div class="filter-bar" id="filterBar">
             <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">All</button>
             <button class="filter-btn" data-filter="pending" onclick="setFilter('pending')">Pending</button>
@@ -328,799 +186,258 @@
             <button class="filter-btn" data-filter="cancelled" onclick="setFilter('cancelled')">Cancelled</button>
         </div>
         <div class="search-bar">
-            <input type="text" id="orderSearch" placeholder="🔍 Search by Order ID..." oninput="renderOrders()">
+            <input type="text" id="orderSearch" placeholder="🔍 Search Order ID..." oninput="renderOrders()">
         </div>
         <div id="orderHistoryContainer"></div>
     </div>
 
+    <!-- SETTINGS -->
     <div class="glass-card">
-        <span class="label"><i class="fas fa-cog"></i> <span id="settingsLabel">Settings</span></span>
-        <div class="menu-item" onclick="openSettingsModal()">
-            <span class="icon">⚙️</span>
-            <span class="text" id="accountSettingsText">Account Settings</span>
+        <span class="label"><i class="fas fa-cog"></i> <span id="settingsLabel">ဆက်တင်များ</span></span>
+        <div class="menu-item" onclick="openModal('email')">
+            <span class="icon">📧</span>
+            <span class="text" id="changeEmailText">အီးမေးလ်ပြောင်းရန်</span>
             <span class="arrow">›</span>
         </div>
-        <div class="menu-item" onclick="openThemeModal()">
-            <span class="icon">🎨</span>
-            <span class="text" id="themeSettingsText">Theme Color</span>
-            <span class="badge" id="themeBadge" style="background:var(--theme-color);color:#0a0e1a;">●</span>
+        <div class="menu-item" onclick="openModal('phone')">
+            <span class="icon">📱</span>
+            <span class="text" id="changePhoneText">ဖုန်းနံပါတ်ပြောင်းရန်</span>
             <span class="arrow">›</span>
         </div>
-        <div class="menu-item" onclick="openChangePassword()">
+        <div class="menu-item" onclick="openModal('password')">
             <span class="icon">🔑</span>
-            <span class="text" id="changePasswordText">Change Password</span>
-            <span class="badge success">Secure</span>
+            <span class="text" id="changePasswordText">စကားဝှက်ပြောင်းရန်</span>
             <span class="arrow">›</span>
         </div>
-        <div class="menu-item" onclick="showToast('🔔 No notifications')">
-            <span class="icon">🔔</span>
-            <span class="text" id="notiText">Notifications</span>
-            <span class="badge success">New</span>
-            <span class="arrow">›</span>
-        </div>
-        <div class="menu-item" onclick="showToast('🏆 Achievements coming soon!')">
-            <span class="icon">🏆</span>
-            <span class="text" id="achieveText">Achievements</span>
-            <span class="badge">0/10</span>
-            <span class="arrow">›</span>
-        </div>
-        <div class="menu-item" onclick="logout()" style="border-bottom:none;">
+        <div class="menu-item logout" onclick="logout()" style="border-bottom:none;margin-top:4px;padding-top:10px;border-top:1px solid var(--border-color)">
             <span class="icon">🚪</span>
-            <span class="text" id="logoutText" style="color:var(--red);">Logout</span>
-            <span class="badge danger">⛔</span>
+            <span class="text" id="logoutText">ထွက်မည်</span>
             <span class="arrow">›</span>
         </div>
     </div>
-
-    <div class="glass-card">
-        <span class="label"><i class="fas fa-info-circle"></i> <span id="aboutLabel">About</span></span>
-        <div class="menu-item"><span class="icon">📱</span><span class="text" id="versionText">App Version 1.0.0</span><span class="arrow">›</span></div>
-        <div class="menu-item"><span class="icon">❓</span><span class="text" id="helpText">Help & Support</span><span class="arrow">›</span></div>
-        <div class="menu-item" style="border-bottom:none;"><span class="icon">📄</span><span class="text" id="termsText">Terms & Privacy</span><span class="arrow">›</span></div>
-    </div>
-
-    <div class="footer-text">&copy; 2026 Premium Game Shop</div>
 </div>
 
-<!-- ===== BOTTOM NAV (လေးထောင့်ကွက်လေးတွေ) ===== -->
+<!-- BOTTOM NAV -->
 <div class="bottom-nav">
-    <a href="index.html" class="nav-item">
-        <span class="icon">🏠</span>
-        <span class="label" id="navHome">Home</span>
-    </a>
-    <a href="shop.html" class="nav-item">
-        <span class="icon">🛒</span>
-        <span class="label" id="navShop">Shop</span>
-    </a>
-    <a href="payment.html" class="nav-item">
-        <span class="icon">💳</span>
-        <span class="label" id="navPayment">Payment</span>
-    </a>
-    <a href="profile.html" class="nav-item active">
-        <span class="icon">👤</span>
-        <span class="label" id="navProfile">Profile</span>
-    </a>
+    <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label" id="navHome">ပင်မ</span></a>
+    <a href="shop.html" class="nav-item"><span class="icon">🛒</span><span class="label" id="navShop">ဆိုင်</span></a>
+    <a href="payment.html" class="nav-item"><span class="icon">💳</span><span class="label" id="navPayment">ငွေပေးချေ</span></a>
+    <a href="profile.html" class="nav-item active"><span class="icon">👤</span><span class="label" id="navProfile">ပရိုဖိုင်</span></a>
 </div>
 
 <div class="toast" id="toast"></div>
 
+<!-- LOGOUT OVERLAY -->
 <div class="logout-overlay" id="logoutOverlay">
     <div class="card">
-        <div class="glow-ring"></div>
         <div class="icon"><i class="fas fa-skull"></i></div>
-        <div class="title">⚠️ Confirm Logout</div>
-        <div class="desc">Are you sure you want to logout? Your session will be ended.</div>
+        <div class="title">⚠️ ထွက်မှာသေချာလား?</div>
+        <div class="desc">သင့်အကောင့်မှ ထွက်မှာဖြစ်ပါတယ်။</div>
         <div class="btn-group">
-            <button class="btn-confirm" id="logoutConfirmBtn">🚪 Yes, Logout</button>
-            <button class="btn-cancel" id="logoutCancelBtn">❌ Cancel</button>
+            <button class="btn-confirm" id="logoutConfirmBtn">🚪 ထွက်မည်</button>
+            <button class="btn-cancel" id="logoutCancelBtn">❌ မထွက်တော့ပါ</button>
         </div>
     </div>
 </div>
 
+<!-- SETTINGS MODAL -->
 <div class="modal-overlay" id="settingsModal">
     <div class="modal">
-        <button class="close-btn" onclick="closeSettingsModal()">✕</button>
-        <h2>⚙️ Account Settings</h2>
-        <p>Update your profile information</p>
-        <div>
-            <div class="avatar-upload">
-                <div class="preview" id="settingsAvatarPreview" onclick="document.getElementById('settingsAvatarInput').click()">
-                    👤
-                    <input type="file" id="settingsAvatarInput" accept="image/*" onchange="handleSettingsAvatar(event)">
-                    <span class="upload-hint">Tap to change</span>
-                </div>
-                <span class="label">Profile Picture</span>
-            </div>
-
-            <div class="form-group">
-                <label>👤 Display Name</label>
-                <input type="text" id="settingsName" placeholder="Enter your display name">
-            </div>
-
-            <div class="form-group" style="border-top:1px solid var(--border-color);padding-top:12px;margin-top:4px;">
-                <label>🔑 Username <span style="color:var(--text-secondary);font-size:0.5rem;font-weight:400;">(ပြောင်းလို့ရ)</span></label>
-                <div class="username-change-row">
-                    <input type="text" id="settingsUsername" placeholder="Enter new username (no spaces)" oninput="this.value=this.value.replace(/\s/g,'')">
-                    <button class="change-btn" onclick="changeUsernameFromSettings()">✏️ Change</button>
-                </div>
-                <div id="settingsUsernameResult" class="username-result"></div>
-            </div>
-
-            <div class="form-group">
-                <label>🆔 User ID <span style="color:var(--text-secondary);font-size:0.5rem;font-weight:400;">(ပုံသေ - မပြောင်းရ)</span></label>
-                <input type="text" id="settingsUserId" readonly placeholder="User ID">
-            </div>
-
-            <div class="form-group">
-                <label>📧 Email</label>
-                <input type="email" id="settingsEmail" placeholder="Enter your email">
-            </div>
-
-            <div class="form-group">
-                <label>📱 Phone Number</label>
-                <input type="tel" id="settingsPhone" placeholder="Enter your phone number">
-            </div>
-
-            <button class="btn-primary" onclick="saveSettings()">💾 Save Changes</button>
-        </div>
-    </div>
-</div>
-
-<div class="modal-overlay" id="themeModal">
-    <div class="modal">
-        <button class="close-btn" onclick="closeThemeModal()">✕</button>
-        <h2>🎨 Theme Color</h2>
-        <p>Choose your favorite color</p>
-        <div>
-            <div class="color-options">
-                <div class="color-dot" style="background:#f5c842;" onclick="setThemeColor('#f5c842', event)"></div>
-                <div class="color-dot" style="background:#ff6b9d;" onclick="setThemeColor('#ff6b9d', event)"></div>
-                <div class="color-dot" style="background:#00d4ff;" onclick="setThemeColor('#00d4ff', event)"></div>
-                <div class="color-dot" style="background:#22d3ee;" onclick="setThemeColor('#22d3ee', event)"></div>
-                <div class="color-dot" style="background:#8b5cf6;" onclick="setThemeColor('#8b5cf6', event)"></div>
-                <div class="color-dot" style="background:#f97316;" onclick="setThemeColor('#f97316', event)"></div>
-                <div class="color-dot" style="background:#ef4444;" onclick="setThemeColor('#ef4444', event)"></div>
-                <div class="color-dot" style="background:#10b981;" onclick="setThemeColor('#10b981', event)"></div>
-            </div>
-            <button class="btn-primary" onclick="closeThemeModal()" style="margin-top:12px;">✅ Done</button>
-        </div>
-    </div>
-</div>
-
-<div class="modal-overlay" id="passwordModal">
-    <div class="modal">
-        <button class="close-btn" onclick="closePasswordModal()">✕</button>
-        <h2>🔑 Change Password</h2>
-        <p>Enter your current password and new password</p>
-        <div>
-            <div class="form-group">
-                <label>🔐 Current Password</label>
-                <input type="password" id="currentPassword" placeholder="Enter your current password">
-                <div class="error-text" id="currentPassError">Current password is required</div>
-            </div>
-            <div class="form-group">
-                <label>🔑 New Password</label>
-                <input type="password" id="newPassword" placeholder="Min 4 characters">
-                <div class="error-text" id="newPassError">Password must be at least 4 characters</div>
-            </div>
-            <div class="form-group">
-                <label>🔐 Confirm New Password</label>
-                <input type="password" id="confirmNewPassword" placeholder="Re-enter new password">
-                <div class="error-text" id="confirmNewError">Passwords do not match</div>
-            </div>
-            <button class="btn-primary" onclick="changePassword()">🔑 Change Password</button>
-        </div>
-    </div>
-</div>
-
-<div class="modal-overlay" id="authModal">
-    <div class="modal">
-        <button class="close-btn" onclick="closeAuthModal()">✕</button>
-        <h2 id="modalTitle">⚔️ Login</h2>
-        <p id="modalSub">Welcome back, warrior!</p>
+        <button class="close-btn" onclick="closeModal()">✕</button>
+        <h2 id="modalTitle">🔑 ပြောင်းရန်</h2>
+        <p id="modalSub">အချက်အလက်အသစ်ထည့်ပါ</p>
         <div id="modalBody">
-            <div id="loginForm">
-                <div class="form-group">
-                    <label id="emailLabel">📧 Email / Username / Phone</label>
-                    <input type="text" id="loginEmail" placeholder="Enter your email, username or phone">
-                </div>
-                <div class="form-group">
-                    <label id="passLabel">🔑 Password</label>
-                    <input type="password" id="loginPassword" placeholder="Enter your password">
-                </div>
-                <div class="login-error" id="loginError"></div>
-                <button class="btn-primary" id="loginBtn" onclick="handleLogin()">🔑 Login</button>
-                <span class="forgot-link" onclick="openForgotPassword()">🔑 Forgot Password?</span>
-                <span class="switch-link" id="switchToRegister" onclick="switchAuthMode()">Don't have an account? Register</span>
+            <div class="form-group">
+                <label id="modalFieldLabel">အသစ်</label>
+                <input type="text" id="modalInput" placeholder="">
+                <div class="error-text" id="modalError">ကျေးဇူးပြု၍ ထည့်ပါ</div>
             </div>
-            <div id="registerForm" style="display:none;">
-                <div class="avatar-upload">
-                    <div class="preview" id="avatarPreview">
-                        👤
-                        <input type="file" accept="image/*" onchange="handleAvatarUpload(event)">
-                        <span class="upload-hint">Tap to change</span>
-                    </div>
-                    <span class="label">Profile Picture (optional)</span>
-                </div>
-                <div class="form-group">
-                    <label>👤 Username <span class="required">*</span></label>
-                    <input type="text" id="regUsername" placeholder="Choose a username (no spaces)" oninput="this.value=this.value.replace(/\s/g,'')">
-                    <div class="error-text" id="usernameError">Username is required (no spaces)</div>
-                </div>
-                <div class="form-group">
-                    <label>📧 Email</label>
-                    <input type="email" id="regEmail" placeholder="Enter your email (optional)">
-                    <div class="error-text" id="emailError">Valid email is required</div>
-                </div>
-                <div class="form-group">
-                    <label>📱 Phone Number</label>
-                    <input type="tel" id="regPhone" placeholder="Enter your phone number (optional)">
-                    <div class="error-text" id="phoneError">Phone number is required</div>
-                </div>
-                <div class="form-group">
-                    <label>🔑 Password <span class="required">*</span></label>
-                    <input type="password" id="regPassword" placeholder="Min 4 characters">
-                    <div class="error-text" id="passwordError">Password must be at least 4 characters</div>
-                </div>
-                <div class="form-group">
-                    <label>🔐 Confirm Password <span class="required">*</span></label>
-                    <input type="password" id="regConfirmPassword" placeholder="Re-enter password">
-                    <div class="error-text" id="confirmError">Passwords do not match</div>
-                </div>
-                <button class="btn-primary" onclick="handleRegister()">🔑 Register</button>
-                <span class="switch-link" id="switchToLogin" onclick="switchAuthMode()">Already have an account? Login</span>
+            <div class="form-group" id="confirmGroup" style="display:none;">
+                <label>အတည်ပြုရန်</label>
+                <input type="text" id="modalConfirmInput" placeholder="">
             </div>
-            <div id="forgotForm" style="display:none;">
-                <div class="form-group">
-                    <label>📧 Email or Phone</label>
-                    <input type="text" id="forgotEmail" placeholder="Enter your registered email or phone">
-                    <div class="error-text" id="forgotEmailError">Please enter your email or phone</div>
-                </div>
-                <div id="otpSection" style="display:none;">
-                    <div class="form-group">
-                        <label>🔑 OTP Code</label>
-                        <input type="text" id="otpCode" placeholder="Enter OTP code sent to your email">
-                        <div class="error-text" id="otpError">Invalid OTP code</div>
-                    </div>
-                    <div class="form-group">
-                        <label>🔑 New Password</label>
-                        <input type="password" id="newPasswordForgot" placeholder="Min 4 characters">
-                        <div class="error-text" id="newPasswordError">Password must be at least 4 characters</div>
-                    </div>
-                    <div class="form-group">
-                        <label>🔐 Confirm New Password</label>
-                        <input type="password" id="confirmNewPasswordForgot" placeholder="Re-enter password">
-                        <div class="error-text" id="confirmNewErrorForgot">Passwords do not match</div>
-                    </div>
-                    <button class="btn-primary" onclick="resetPassword()">🔄 Reset Password</button>
-                </div>
-                <button class="btn-primary" id="sendOtpBtn" onclick="sendOTP()" style="margin-bottom:8px;">📧 Send OTP</button>
-                <span class="switch-link" onclick="closeForgotPassword()">← Back to Login</span>
-            </div>
+            <button class="btn-primary" id="modalSaveBtn">💾 သိမ်းမည်</button>
         </div>
     </div>
 </div>
 
 <script>
-    function updateLanguage() {
-        const d = LANG_DATA[currentLang];
-        if (!d) return;
-        document.getElementById('appName').innerHTML = '<i class="fas fa-gamepad"></i> ' + d.appName;
-        document.getElementById('diamondLabel').textContent = d.diamondLabel || 'Diamonds';
-        document.getElementById('orderLabel').textContent = d.orderLabel || 'Orders';
-        document.getElementById('orderHistoryLabel').textContent = d.orderHistoryLabel || 'Order History';
-        document.getElementById('settingsLabel').innerHTML = '<i class="fas fa-cog"></i> ' + (d.settingsLabel || 'Settings');
-        document.getElementById('accountSettingsText').textContent = d.accountSettingsText || 'Account Settings';
-        document.getElementById('themeSettingsText').textContent = d.themeSettingsText || 'Theme Color';
-        document.getElementById('changePasswordText').textContent = d.changePasswordText || 'Change Password';
-        document.getElementById('notiText').textContent = d.notiText || 'Notifications';
-        document.getElementById('achieveText').textContent = d.achieveText || 'Achievements';
-        document.getElementById('logoutText').textContent = d.logoutText || 'Logout';
-        document.getElementById('aboutLabel').innerHTML = '<i class="fas fa-info-circle"></i> ' + (d.aboutLabel || 'About');
-        document.getElementById('versionText').textContent = d.versionText || 'App Version 1.0.0';
-        document.getElementById('helpText').textContent = d.helpText || 'Help & Support';
-        document.getElementById('termsText').textContent = d.termsText || 'Terms & Privacy';
-        document.getElementById('navHome').textContent = d.home || 'Home';
-        document.getElementById('navShop').textContent = d.shop || 'Shop';
-        document.getElementById('navPayment').textContent = d.payment || 'Payment';
-        document.getElementById('navProfile').textContent = d.profile || 'Profile';
-        updateAuthUI();
-        renderOrders();
+    const LANG_DATA = {
+        my: {
+            appName: 'Premium Shop',
+            orderHistoryLabel: 'အော်ဒါမှတ်တမ်း',
+            settingsLabel: 'ဆက်တင်များ',
+            changeEmailText: 'အီးမေးလ်ပြောင်းရန်',
+            changePhoneText: 'ဖုန်းနံပါတ်ပြောင်းရန်',
+            changePasswordText: 'စကားဝှက်ပြောင်းရန်',
+            logoutText: 'ထွက်မည်',
+            home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
+            noOrders: 'အော်ဒါမရှိသေးပါ',
+            showMore: 'အကုန်ကြည့်မည် →',
+            showLess: 'ပြန်ဖျောက်မည်',
+            orderStatusPending: 'ဆောင်ရွက်နေဆဲ',
+            orderStatusCompleted: 'ပြီးပြီ',
+            orderStatusCancelled: 'ပယ်ဖျက်ထား',
+            modalEmailTitle: '📧 အီးမေးလ်ပြောင်းရန်',
+            modalEmailSub: 'အီးမေးလ်အသစ်ထည့်ပါ',
+            modalPhoneTitle: '📱 ဖုန်းနံပါတ်ပြောင်းရန်',
+            modalPhoneSub: 'ဖုန်းနံပါတ်အသစ်ထည့်ပါ',
+            modalPassTitle: '🔑 စကားဝှက်ပြောင်းရန်',
+            modalPassSub: 'စကားဝှက်အသစ်ထည့်ပါ',
+            modalEmailLabel: 'အီးမေးလ်အသစ်',
+            modalPhoneLabel: 'ဖုန်းနံပါတ်အသစ်',
+            modalPassLabel: 'စကားဝှက်အသစ်',
+            modalConfirmLabel: 'စကားဝှက်အတည်ပြုရန်',
+            modalSave: '💾 သိမ်းမည်',
+            modalError: 'ကျေးဇူးပြု၍ ထည့်ပါ',
+            modalPassError: 'စကားဝှက်များတူညီရမည်',
+            saveSuccess: '✅ အောင်မြင်ပါသည်!',
+            saveError: '❌ မအောင်မြင်ပါ။ ထပ်ကြိုးစားပါ။',
+            logoutSuccess: '✅ ထွက်ပြီးပါပြီ!'
+        },
+        en: {
+            appName: 'Premium Shop',
+            orderHistoryLabel: 'Order History',
+            settingsLabel: 'Settings',
+            changeEmailText: 'Change Email',
+            changePhoneText: 'Change Phone',
+            changePasswordText: 'Change Password',
+            logoutText: 'Logout',
+            home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
+            noOrders: 'No orders yet',
+            showMore: 'Show More →',
+            showLess: 'Show Less',
+            orderStatusPending: 'Pending',
+            orderStatusCompleted: 'Completed',
+            orderStatusCancelled: 'Cancelled',
+            modalEmailTitle: '📧 Change Email',
+            modalEmailSub: 'Enter new email',
+            modalPhoneTitle: '📱 Change Phone',
+            modalPhoneSub: 'Enter new phone number',
+            modalPassTitle: '🔑 Change Password',
+            modalPassSub: 'Enter new password',
+            modalEmailLabel: 'New Email',
+            modalPhoneLabel: 'New Phone',
+            modalPassLabel: 'New Password',
+            modalConfirmLabel: 'Confirm Password',
+            modalSave: '💾 Save',
+            modalError: 'Please fill in',
+            modalPassError: 'Passwords must match',
+            saveSuccess: '✅ Success!',
+            saveError: '❌ Failed. Please try again.',
+            logoutSuccess: '✅ Logged out!'
+        }
+    };
+
+    let currentLang = localStorage.getItem('lang') || 'my';
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    let currentFilter = 'all';
+    let showAllOrders = false;
+
+    function getText(key){ return LANG_DATA[currentLang][key] || key; }
+
+    function setLang(lang){
+        currentLang = lang;
+        localStorage.setItem('lang', lang);
+        updateLanguage();
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
     }
 
-    function showToast(msg) {
+    function updateLanguage(){
+        const d = LANG_DATA[currentLang];
+        document.getElementById('appName').innerHTML = '<i class="fas fa-gamepad"></i> ' + d.appName;
+        document.getElementById('orderHistoryLabel').innerHTML = '<i class="fas fa-list"></i> ' + d.orderHistoryLabel;
+        document.getElementById('settingsLabel').innerHTML = '<i class="fas fa-cog"></i> ' + d.settingsLabel;
+        document.getElementById('changeEmailText').textContent = d.changeEmailText;
+        document.getElementById('changePhoneText').textContent = d.changePhoneText;
+        document.getElementById('changePasswordText').textContent = d.changePasswordText;
+        document.getElementById('logoutText').textContent = d.logoutText;
+        document.getElementById('navHome').textContent = d.home;
+        document.getElementById('navShop').textContent = d.shop;
+        document.getElementById('navPayment').textContent = d.payment;
+        document.getElementById('navProfile').textContent = d.profile;
+        renderOrders();
+        updateAuthUI();
+    }
+
+    function showToast(msg, type){
         const t = document.getElementById('toast');
         t.textContent = msg;
-        t.classList.add('show');
+        t.className = 'toast show';
+        if(type === 'error') t.classList.add('error');
+        else if(type === 'success') t.classList.add('success');
         clearTimeout(t._timer);
         t._timer = setTimeout(() => t.classList.remove('show'), 3000);
     }
 
-    document.getElementById('avatarInput').addEventListener('change', function(e) {
-        if (this.files && this.files[0]) {
+    function updateAuthUI(){
+        const avatarEl = document.getElementById('avatarDisplay');
+        const nameEl = document.getElementById('displayName');
+        const emailEl = document.getElementById('displayEmail');
+        const phoneEl = document.getElementById('displayPhone');
+        const diamondEl = document.getElementById('diamondCount');
+
+        if(currentUser){
+            const savedAvatar = localStorage.getItem('userAvatar_' + currentUser.username);
+            if(savedAvatar){
+                avatarEl.innerHTML = '<img src="'+savedAvatar+'" alt="avatar">';
+            } else {
+                avatarEl.textContent = '👤';
+            }
+            nameEl.innerHTML = '<i class="fas fa-crown"></i> ' + (currentUser.displayName || currentUser.username);
+            emailEl.textContent = '📧 ' + (currentUser.email || 'No email');
+            phoneEl.textContent = '📱 ' + (currentUser.phone || 'No phone');
+            diamondEl.textContent = currentUser.diamonds || 0;
+        } else {
+            avatarEl.textContent = '👤';
+            nameEl.innerHTML = '<i class="fas fa-crown"></i> Guest';
+            emailEl.textContent = '📧 No email';
+            phoneEl.textContent = '📱 No phone';
+            diamondEl.textContent = '0';
+        }
+    }
+
+    document.getElementById('avatarInput').addEventListener('change', function(e){
+        if(this.files && this.files[0]){
             const reader = new FileReader();
-            reader.onload = function(ev) {
-                document.getElementById('avatarDisplay').innerHTML = '<img src="' + ev.target.result + '" alt="avatar">';
-                if (isLoggedIn()) {
-                    const user = getCurrentUser();
-                    localStorage.setItem('userAvatar_' + user.username, ev.target.result);
+            reader.onload = function(ev){
+                document.getElementById('avatarDisplay').innerHTML = '<img src="'+ev.target.result+'" alt="avatar">';
+                if(currentUser){
+                    localStorage.setItem('userAvatar_' + currentUser.username, ev.target.result);
+                    showToast('✅ Avatar updated!', 'success');
                 }
-                showToast('✅ Avatar updated!');
             };
             reader.readAsDataURL(this.files[0]);
         }
     });
 
-    function handleAvatarUpload(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const preview = document.getElementById('avatarPreview');
-                preview.innerHTML = '<img src="' + e.target.result + '" alt="avatar"><input type="file" accept="image/*" onchange="handleAvatarUpload(event)"><span class="upload-hint">Tap to change</span>';
-                window.tempAvatar = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-    }
-
-    function updateAuthUI() {
-        const nameEl = document.getElementById('displayName');
-        const userEl = document.getElementById('displayUsername');
-        const statusEl = document.getElementById('statusText');
-        const statusDisplay = document.getElementById('statusDisplay');
-        const avatarEl = document.getElementById('avatarDisplay');
-        const levelNumber = document.getElementById('levelNumber');
-        const levelXp = document.getElementById('levelXp');
-        const userIdEl = document.getElementById('userIdDisplay');
-        const diamondCount = document.getElementById('diamondCount');
-        const diamondCountStat = document.getElementById('diamondCountStat');
-        const orderCountStat = document.getElementById('orderCountStat');
-
-        if (isLoggedIn()) {
-            const user = getCurrentUser();
-            const savedAvatar = localStorage.getItem('userAvatar_' + user.username);
-            if (savedAvatar) {
-                avatarEl.innerHTML = '<img src="' + savedAvatar + '" alt="avatar">';
-            } else {
-                avatarEl.textContent = '⚔️';
-            }
-            nameEl.innerHTML = '<i class="fas fa-crown"></i> ' + (user.displayName || user.username || 'Guest');
-            userEl.textContent = '@' + (user.username || 'guest');
-            statusEl.textContent = getText('statusOnline') || '🟢 Online';
-            statusDisplay.className = 'status';
-            statusDisplay.style.cursor = 'default';
-            userIdEl.textContent = 'ID: ' + (user.userId || 'N/A');
-            levelNumber.textContent = user.level || 1;
-            levelXp.textContent = (user.xp || 0) + ' XP';
-            const diamonds = user.diamonds || 0;
-            diamondCount.textContent = diamonds;
-            diamondCountStat.textContent = diamonds;
-            
-            const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
-            const userOrders = orders.filter(o => o.userId === user.username);
-            orderCountStat.textContent = userOrders.length;
-
-            const savedTheme = localStorage.getItem('userTheme_' + user.username);
-            if (savedTheme) {
-                document.documentElement.style.setProperty('--theme-color', savedTheme);
-                document.getElementById('themeBadge').style.background = savedTheme;
-            }
-        } else {
-            avatarEl.textContent = '⚔️';
-            nameEl.innerHTML = '<i class="fas fa-crown"></i> Guest';
-            userEl.textContent = '@guest';
-            statusEl.textContent = getText('statusLogin') || '🔑 Login';
-            statusDisplay.className = 'status login-status';
-            statusDisplay.style.cursor = 'pointer';
-            userIdEl.textContent = 'ID: ----------';
-            levelNumber.textContent = '0';
-            levelXp.textContent = '0 XP';
-            diamondCount.textContent = '0';
-            diamondCountStat.textContent = '0';
-            orderCountStat.textContent = '0';
-        }
-        renderOrders();
-    }
-
-    function handleStatusClick() {
-        if (!isLoggedIn()) {
-            openAuthModal('login');
-        }
-    }
-
-    let isLoginMode = true;
-    let tempAvatar = null;
-
-    function openAuthModal(mode) {
-        isLoginMode = mode !== 'register';
-        const modal = document.getElementById('authModal');
-        modal.classList.add('show');
-        document.getElementById('loginForm').style.display = 'block';
-        document.getElementById('registerForm').style.display = 'none';
-        document.getElementById('forgotForm').style.display = 'none';
-        document.getElementById('otpSection').style.display = 'none';
-        document.getElementById('sendOtpBtn').style.display = 'block';
-        document.getElementById('loginError').style.display = 'none';
-        document.getElementById('loginError').textContent = '';
-        document.querySelectorAll('.error-text').forEach(el => el.style.display = 'none');
-        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
-        if (!isLoginMode) {
-            document.getElementById('avatarPreview').innerHTML = 
-                '👤<input type="file" accept="image/*" onchange="handleAvatarUpload(event)"><span class="upload-hint">Tap to change</span>';
-            tempAvatar = null;
-        }
-        updateAuthModalUI();
-    }
-
-    function closeAuthModal() {
-        document.getElementById('authModal').classList.remove('show');
-        document.getElementById('forgotEmail').value = '';
-        document.getElementById('otpCode').value = '';
-        document.getElementById('newPasswordForgot').value = '';
-        document.getElementById('confirmNewPasswordForgot').value = '';
-        document.getElementById('otpSection').style.display = 'none';
-        document.getElementById('sendOtpBtn').style.display = 'block';
-        document.getElementById('loginForm').style.display = 'block';
-        document.getElementById('registerForm').style.display = 'none';
-        document.getElementById('forgotForm').style.display = 'none';
-        document.getElementById('loginError').style.display = 'none';
-        isLoginMode = true;
-        updateAuthModalUI();
-    }
-
-    function switchAuthMode() {
-        isLoginMode = !isLoginMode;
-        document.getElementById('loginForm').style.display = isLoginMode ? 'block' : 'none';
-        document.getElementById('registerForm').style.display = isLoginMode ? 'none' : 'block';
-        document.getElementById('forgotForm').style.display = 'none';
-        document.getElementById('otpSection').style.display = 'none';
-        document.getElementById('sendOtpBtn').style.display = 'block';
-        document.getElementById('loginError').style.display = 'none';
-        updateAuthModalUI();
-        document.querySelectorAll('.error-text').forEach(el => el.style.display = 'none');
-        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
-        if (!isLoginMode) {
-            document.getElementById('avatarPreview').innerHTML = 
-                '👤<input type="file" accept="image/*" onchange="handleAvatarUpload(event)"><span class="upload-hint">Tap to change</span>';
-            tempAvatar = null;
-        }
-    }
-
-    function updateAuthModalUI() {
-        const d = LANG_DATA[currentLang];
-        if (!d) return;
-        if (isLoginMode) {
-            document.getElementById('modalTitle').textContent = d.modalLogin || '⚔️ Login';
-            document.getElementById('modalSub').textContent = d.modalLoginSub || 'Welcome back, warrior!';
-            document.getElementById('loginBtn').innerHTML = '🔑 ' + (d.login || 'Login');
-            document.getElementById('emailLabel').textContent = d.email || '📧 Email / Username / Phone';
-            document.getElementById('passLabel').textContent = d.password || '🔑 Password';
-            document.getElementById('switchToRegister').textContent = d.switchLogin || "Don't have an account? Register";
-        } else {
-            document.getElementById('modalTitle').textContent = d.modalRegister || '📝 Register';
-            document.getElementById('modalSub').textContent = d.modalRegisterSub || 'Create your account!';
-            document.getElementById('switchToLogin').textContent = d.switchRegister || 'Already have an account? Login';
-        }
-    }
-
-    document.getElementById('authModal').addEventListener('click', function(e) {
-        if (e.target === this) closeAuthModal();
-    });
-
-    function handleLogin() {
-        const input = document.getElementById('loginEmail').value.trim();
-        const password = document.getElementById('loginPassword').value.trim();
-        const d = LANG_DATA[currentLang];
-
-        document.getElementById('loginError').style.display = 'none';
-        document.getElementById('loginError').textContent = '';
-
-        if (!input) {
-            document.getElementById('loginError').textContent = d.enterEmail || 'Please enter your email, username or phone';
-            document.getElementById('loginError').style.display = 'block';
-            return;
-        }
-        if (!password) {
-            document.getElementById('loginError').textContent = d.enterPassword || 'Please enter your password';
-            document.getElementById('loginError').style.display = 'block';
-            return;
-        }
-
-        const users = JSON.parse(localStorage.getItem('users') || '{}');
-        let foundUser = null;
-        let userExists = false;
-
-        for (const key in users) {
-            const user = users[key];
-            if (key === input || user.email === input || user.username === input || user.phone === input) {
-                userExists = true;
-                if (user.password === password) {
-                    foundUser = user;
-                    break;
-                }
-            }
-        }
-
-        if (foundUser) {
-            loginUser(input, password);
-            closeAuthModal();
-            showToast(d.loginSuccess || '✅ Login successful! Welcome!');
-            updateAuthUI();
-        } else if (userExists) {
-            document.getElementById('loginError').textContent = d.invalidCredentials || '❌ Invalid credentials';
-            document.getElementById('loginError').style.display = 'block';
-        } else {
-            document.getElementById('loginError').textContent = d.userNotFound || '❌ User not found';
-            document.getElementById('loginError').style.display = 'block';
-        }
-    }
-
-    function handleRegister() {
-        const username = document.getElementById('regUsername').value.trim();
-        const email = document.getElementById('regEmail').value.trim();
-        const phone = document.getElementById('regPhone').value.trim();
-        const password = document.getElementById('regPassword').value.trim();
-        const confirmPassword = document.getElementById('regConfirmPassword').value.trim();
-        const d = LANG_DATA[currentLang];
-
-        document.querySelectorAll('.error-text').forEach(el => el.style.display = 'none');
-        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
-
-        let hasError = false;
-
-        if (!username) {
-            document.getElementById('usernameError').style.display = 'block';
-            document.getElementById('regUsername').classList.add('error');
-            hasError = true;
-        } else if (/\s/.test(username)) {
-            document.getElementById('usernameError').textContent = d.noSpace || 'Username cannot contain spaces';
-            document.getElementById('usernameError').style.display = 'block';
-            document.getElementById('regUsername').classList.add('error');
-            hasError = true;
-        } else if (username.length < 2) {
-            document.getElementById('usernameError').textContent = 'Username must be at least 2 characters';
-            document.getElementById('usernameError').style.display = 'block';
-            document.getElementById('regUsername').classList.add('error');
-            hasError = true;
-        }
-
-        if (email && (!email.includes('@') || !email.includes('.'))) {
-            document.getElementById('emailError').style.display = 'block';
-            document.getElementById('regEmail').classList.add('error');
-            hasError = true;
-        }
-
-        if (phone && phone.length < 7) {
-            document.getElementById('phoneError').style.display = 'block';
-            document.getElementById('regPhone').classList.add('error');
-            hasError = true;
-        }
-
-        if (!password || password.length < 4) {
-            document.getElementById('passwordError').style.display = 'block';
-            document.getElementById('regPassword').classList.add('error');
-            hasError = true;
-        }
-
-        if (password !== confirmPassword) {
-            document.getElementById('confirmError').style.display = 'block';
-            document.getElementById('regConfirmPassword').classList.add('error');
-            hasError = true;
-        }
-
-        if (hasError) return;
-
-        const users = JSON.parse(localStorage.getItem('users') || '{}');
-        for (const key in users) {
-            const user = users[key];
-            if (key === username || (email && user.email === email) || (phone && user.phone === phone)) {
-                showToast(d.userExists || '❌ Username, email or phone already exists');
-                return;
-            }
-        }
-
-        const userId = 'UID' + String(Math.floor(10000000 + Math.random() * 90000000));
-        const newUser = {
-            username: username,
-            email: email || '',
-            phone: phone || '',
-            password: password,
-            displayName: username,
-            userId: userId,
-            level: 1,
-            xp: 0,
-            diamonds: 100,
-            createdAt: new Date().toISOString()
-        };
-        users[username] = newUser;
-        localStorage.setItem('users', JSON.stringify(users));
-
-        if (tempAvatar) {
-            localStorage.setItem('userAvatar_' + username, tempAvatar);
-        }
-
-        loginUser(username, password);
-        closeAuthModal();
-        showToast(d.registerSuccess || '✅ Registration successful! Welcome!');
-        updateAuthUI();
-    }
-
-    let otpStorage = {};
-
-    function openForgotPassword() {
-        document.getElementById('loginForm').style.display = 'none';
-        document.getElementById('registerForm').style.display = 'none';
-        document.getElementById('forgotForm').style.display = 'block';
-        document.getElementById('otpSection').style.display = 'none';
-        document.getElementById('sendOtpBtn').style.display = 'block';
-        const d = LANG_DATA[currentLang];
-        document.getElementById('modalTitle').textContent = d.forgotTitle || '🔑 Forgot Password';
-        document.getElementById('modalSub').textContent = d.forgotSub || 'Enter your email to reset password';
-        document.querySelectorAll('.error-text').forEach(el => el.style.display = 'none');
-        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
-        document.getElementById('forgotEmail').value = '';
-        document.getElementById('otpCode').value = '';
-        document.getElementById('newPasswordForgot').value = '';
-        document.getElementById('confirmNewPasswordForgot').value = '';
-    }
-
-    function closeForgotPassword() {
-        document.getElementById('forgotForm').style.display = 'none';
-        document.getElementById('loginForm').style.display = 'block';
-        document.getElementById('registerForm').style.display = 'none';
-        document.getElementById('otpSection').style.display = 'none';
-        document.getElementById('sendOtpBtn').style.display = 'block';
-        document.getElementById('loginError').style.display = 'none';
-        isLoginMode = true;
-        updateAuthModalUI();
-        document.querySelectorAll('.error-text').forEach(el => el.style.display = 'none');
-        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
-    }
-
-    function sendOTP() {
-        const input = document.getElementById('forgotEmail').value.trim();
-        const d = LANG_DATA[currentLang];
-
-        document.getElementById('forgotEmailError').style.display = 'none';
-        document.getElementById('forgotEmail').classList.remove('error');
-
-        if (!input) {
-            document.getElementById('forgotEmailError').style.display = 'block';
-            document.getElementById('forgotEmail').classList.add('error');
-            return;
-        }
-
-        const users = JSON.parse(localStorage.getItem('users') || '{}');
-        let userExists = false;
-        let foundEmail = '';
-
-        for (const key in users) {
-            const user = users[key];
-            if (user.email === input || key === input || user.phone === input) {
-                userExists = true;
-                foundEmail = user.email || key;
-                break;
-            }
-        }
-
-        if (!userExists) {
-            showToast(d.userNotFound || '❌ User not found');
-            return;
-        }
-
-        if (!foundEmail) {
-            showToast('❌ No email registered for this account');
-            return;
-        }
-
-        const otp = Math.floor(100000 + Math.random() * 900000).toString();
-        otpStorage[foundEmail] = {
-            otp: otp,
-            timestamp: Date.now()
-        };
-
-        document.getElementById('forgotEmail').dataset.email = foundEmail;
-
-        document.getElementById('otpSection').style.display = 'block';
-        document.getElementById('sendOtpBtn').style.display = 'none';
-        showToast('📧 ' + (d.otpSent || 'OTP sent to your email!') + ' (OTP: ' + otp + ')');
-
-        setTimeout(() => {
-            delete otpStorage[foundEmail];
-        }, 300000);
-    }
-
-    function resetPassword() {
-        const email = document.getElementById('forgotEmail').dataset.email;
-        const otp = document.getElementById('otpCode').value.trim();
-        const newPassword = document.getElementById('newPasswordForgot').value.trim();
-        const confirmNewPassword = document.getElementById('confirmNewPasswordForgot').value.trim();
-        const d = LANG_DATA[currentLang];
-
-        document.querySelectorAll('.error-text').forEach(el => el.style.display = 'none');
-        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
-
-        let hasError = false;
-
-        if (!otp) {
-            document.getElementById('otpError').style.display = 'block';
-            document.getElementById('otpCode').classList.add('error');
-            hasError = true;
-        }
-
-        if (!newPassword || newPassword.length < 4) {
-            document.getElementById('newPasswordError').style.display = 'block';
-            document.getElementById('newPasswordForgot').classList.add('error');
-            hasError = true;
-        }
-
-        if (newPassword !== confirmNewPassword) {
-            document.getElementById('confirmNewErrorForgot').style.display = 'block';
-            document.getElementById('confirmNewPasswordForgot').classList.add('error');
-            hasError = true;
-        }
-
-        if (hasError) return;
-
-        const stored = otpStorage[email];
-        if (!stored || stored.otp !== otp) {
-            document.getElementById('otpError').style.display = 'block';
-            document.getElementById('otpCode').classList.add('error');
-            return;
-        }
-
-        const users = JSON.parse(localStorage.getItem('users') || '{}');
-        for (const key in users) {
-            if (users[key].email === email || key === email) {
-                users[key].password = newPassword;
-                break;
-            }
-        }
-        localStorage.setItem('users', JSON.stringify(users));
-
-        delete otpStorage[email];
-
-        showToast(d.resetSuccess || '✅ Password reset successful!');
-        closeForgotPassword();
-        document.getElementById('loginEmail').value = email;
-        document.getElementById('loginPassword').value = '';
-    }
-
-    let currentFilter = 'all';
-    let showAllOrders = false;
-
-    function setFilter(filter) {
+    function setFilter(filter){
         currentFilter = filter;
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.filter === filter);
-        });
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === filter));
         renderOrders();
     }
 
-    function renderOrders() {
+    function renderOrders(){
         const container = document.getElementById('orderHistoryContainer');
         const d = LANG_DATA[currentLang];
         const searchTerm = document.getElementById('orderSearch').value.toLowerCase().trim();
         
-        if (!isLoggedIn()) {
-            container.innerHTML = `<div class="empty-orders"><span class="icon">🔒</span>Please login to view your orders</div>`;
+        if(!currentUser){
+            container.innerHTML = `<div class="empty-orders"><span class="icon">🔒</span>Please login to view orders</div>`;
             return;
         }
 
-        const user = getCurrentUser();
         const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
-        let userOrders = orders.filter(o => o.userId === user.username);
+        let userOrders = orders.filter(o => o.userId === currentUser.username);
 
-        if (currentFilter !== 'all') {
+        if(currentFilter !== 'all'){
             userOrders = userOrders.filter(o => o.status === currentFilter);
         }
-
-        if (searchTerm) {
+        if(searchTerm){
             userOrders = userOrders.filter(o => o.id.toLowerCase().includes(searchTerm));
         }
 
-        if (userOrders.length === 0) {
+        if(userOrders.length === 0){
             container.innerHTML = `<div class="empty-orders"><span class="icon">📭</span>${d.noOrders || 'No orders yet'}</div>`;
             return;
         }
@@ -1137,393 +454,193 @@
         container.innerHTML = `<div class="order-list">` + displayOrders.map(order => {
             const status = statusMap[order.status] || statusMap.pending;
             return `
-                <div class="order-item" onclick="showOrderDetail('${order.id}')">
-                    <div class="order-info">
-                        <span class="order-id">📋 #${order.id}</span>
-                        <span class="order-pkg">${order.package}</span>
-                        <span class="order-date">${new Date(order.date).toLocaleString()}</span>
+                <div class="order-item">
+                    <div class="info">
+                        <span class="id">📋 ${order.id}</span>
+                        <span class="pkg">${order.package}</span>
+                        <span class="date">${new Date(order.date).toLocaleString()}</span>
                     </div>
-                    <div>
-                        <span class="order-status ${status.class}">${status.text}</span>
-                    </div>
+                    <span class="status ${status.class}">${status.text}</span>
                 </div>
             `;
         }).join('') + `</div>`;
 
-        if (hasMore) {
+        if(hasMore){
             container.innerHTML += `
                 <div class="order-more" onclick="toggleOrders()">
                     <i class="fas ${showAllOrders ? 'fa-chevron-up' : 'fa-chevron-down'}"></i> 
-                    ${showAllOrders ? 'Show Less' : (d.showMore || 'Show More →')}
+                    ${showAllOrders ? (d.showLess || 'Show Less') : (d.showMore || 'Show More →')}
                 </div>
             `;
         }
     }
 
-    function toggleOrders() {
+    function toggleOrders(){
         showAllOrders = !showAllOrders;
         renderOrders();
     }
 
-    function showOrderDetail(id) {
-        showToast('📋 Order #' + id + ' - Tap to view details');
-    }
+    // ===== SETTINGS MODAL =====
+    let modalMode = '';
 
-    function openSettingsModal() {
-        if (!isLoggedIn()) {
-            showToast('❌ Please login first');
+    function openModal(mode){
+        if(!currentUser){
+            showToast('❌ Please login first', 'error');
             return;
         }
-        const user = getCurrentUser();
+        modalMode = mode;
         const modal = document.getElementById('settingsModal');
-        
-        document.getElementById('settingsName').value = user.displayName || user.username || '';
-        document.getElementById('settingsUsername').value = user.username || '';
-        document.getElementById('settingsUserId').value = user.userId || 'N/A';
-        document.getElementById('settingsEmail').value = user.email || '';
-        document.getElementById('settingsPhone').value = user.phone || '';
-        
-        const result = document.getElementById('settingsUsernameResult');
-        result.className = 'username-result';
-        result.textContent = '';
-        
-        const savedAvatar = localStorage.getItem('userAvatar_' + user.username);
-        const preview = document.getElementById('settingsAvatarPreview');
-        if (savedAvatar) {
-            preview.innerHTML = '<img src="' + savedAvatar + '" alt="avatar"><input type="file" id="settingsAvatarInput" accept="image/*" onchange="handleSettingsAvatar(event)"><span class="upload-hint">Tap to change</span>';
-        } else {
-            preview.innerHTML = '👤<input type="file" id="settingsAvatarInput" accept="image/*" onchange="handleSettingsAvatar(event)"><span class="upload-hint">Tap to change</span>';
+        const title = document.getElementById('modalTitle');
+        const sub = document.getElementById('modalSub');
+        const label = document.getElementById('modalFieldLabel');
+        const input = document.getElementById('modalInput');
+        const confirmGroup = document.getElementById('confirmGroup');
+        const confirmInput = document.getElementById('modalConfirmInput');
+        const error = document.getElementById('modalError');
+
+        error.style.display = 'none';
+        input.value = '';
+        confirmInput.value = '';
+
+        if(mode === 'email'){
+            title.textContent = getText('modalEmailTitle');
+            sub.textContent = getText('modalEmailSub');
+            label.textContent = getText('modalEmailLabel');
+            input.type = 'email';
+            input.placeholder = 'example@email.com';
+            confirmGroup.style.display = 'none';
+        } else if(mode === 'phone'){
+            title.textContent = getText('modalPhoneTitle');
+            sub.textContent = getText('modalPhoneSub');
+            label.textContent = getText('modalPhoneLabel');
+            input.type = 'tel';
+            input.placeholder = '09xxxxxxxxx';
+            confirmGroup.style.display = 'none';
+        } else if(mode === 'password'){
+            title.textContent = getText('modalPassTitle');
+            sub.textContent = getText('modalPassSub');
+            label.textContent = getText('modalPassLabel');
+            input.type = 'password';
+            input.placeholder = 'Min 4 characters';
+            confirmGroup.style.display = 'block';
+            document.querySelector('#confirmGroup label').textContent = getText('modalConfirmLabel');
+            confirmInput.type = 'password';
+            confirmInput.placeholder = 'Re-enter password';
         }
-        
+
+        document.getElementById('modalSaveBtn').textContent = getText('modalSave');
         modal.classList.add('show');
     }
 
-    function closeSettingsModal() {
+    function closeModal(){
         document.getElementById('settingsModal').classList.remove('show');
+        document.getElementById('modalError').style.display = 'none';
     }
 
-    function handleSettingsAvatar(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const preview = document.getElementById('settingsAvatarPreview');
-                preview.innerHTML = '<img src="' + e.target.result + '" alt="avatar"><input type="file" id="settingsAvatarInput" accept="image/*" onchange="handleSettingsAvatar(event)"><span class="upload-hint">Tap to change</span>';
-                const user = getCurrentUser();
-                localStorage.setItem('userAvatar_' + user.username, e.target.result);
-                showToast('✅ Avatar updated!');
-            };
-            reader.readAsDataURL(file);
-        }
-    }
+    document.getElementById('settingsModal').addEventListener('click', function(e){
+        if(e.target === this) closeModal();
+    });
 
-    function changeUsernameFromSettings() {
-        const input = document.getElementById('settingsUsername');
-        const result = document.getElementById('settingsUsernameResult');
-        const newUsername = input.value.trim();
-        const d = LANG_DATA[currentLang];
+    document.getElementById('modalSaveBtn').addEventListener('click', function(){
+        const input = document.getElementById('modalInput');
+        const value = input.value.trim();
+        const error = document.getElementById('modalError');
 
-        result.className = 'username-result';
-        result.textContent = '';
+        error.style.display = 'none';
 
-        if (!isLoggedIn()) {
-            result.className = 'username-result error';
-            result.textContent = '❌ Please login first';
+        if(!value){
+            error.textContent = getText('modalError');
+            error.style.display = 'block';
             return;
         }
 
-        if (!newUsername) {
-            result.className = 'username-result error';
-            result.textContent = '❌ ' + (d.usernameRequired || 'Please enter a username');
-            return;
-        }
-
-        if (/\s/.test(newUsername)) {
-            result.className = 'username-result error';
-            result.textContent = '❌ ' + (d.noSpace || 'Username cannot contain spaces');
-            return;
-        }
-
-        if (newUsername.length < 2) {
-            result.className = 'username-result error';
-            result.textContent = '❌ Username must be at least 2 characters';
-            return;
-        }
-
-        const users = JSON.parse(localStorage.getItem('users') || '{}');
-        const user = getCurrentUser();
-        const oldUsername = user.username;
-
-        if (newUsername === oldUsername) {
-            result.className = 'username-result error';
-            result.textContent = '❌ Same as current username';
-            return;
-        }
-
-        if (users[newUsername]) {
-            result.className = 'username-result error';
-            result.textContent = '❌ ' + (d.usernameExists || 'Username already exists');
-            return;
-        }
-
-        const userData = users[oldUsername];
-        if (!userData) {
-            result.className = 'username-result error';
-            result.textContent = '❌ User data not found';
-            return;
-        }
-
-        const userId = userData.userId;
-
-        const newUserData = { ...userData };
-        newUserData.username = newUsername;
-        newUserData.userId = userId;
-        if (newUserData.displayName === oldUsername) {
-            newUserData.displayName = newUsername;
-        }
-
-        delete users[oldUsername];
-        users[newUsername] = newUserData;
-
-        const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
-        orders.forEach(order => {
-            if (order.userId === oldUsername) {
-                order.userId = newUsername;
+        if(modalMode === 'password'){
+            const confirm = document.getElementById('modalConfirmInput').value.trim();
+            if(value !== confirm){
+                error.textContent = getText('modalPassError');
+                error.style.display = 'block';
+                return;
             }
-        });
-        localStorage.setItem('orderHistory', JSON.stringify(orders));
-
-        const oldAvatar = localStorage.getItem('userAvatar_' + oldUsername);
-        if (oldAvatar) {
-            localStorage.setItem('userAvatar_' + newUsername, oldAvatar);
-            localStorage.removeItem('userAvatar_' + oldUsername);
+            if(value.length < 4){
+                error.textContent = 'Password must be at least 4 characters';
+                error.style.display = 'block';
+                return;
+            }
         }
 
-        const oldTheme = localStorage.getItem('userTheme_' + oldUsername);
-        if (oldTheme) {
-            localStorage.setItem('userTheme_' + newUsername, oldTheme);
-            localStorage.removeItem('userTheme_' + oldUsername);
+        if(modalMode === 'email' && !value.includes('@')){
+            error.textContent = 'Please enter a valid email';
+            error.style.display = 'block';
+            return;
         }
-
-        localStorage.setItem('users', JSON.stringify(users));
-
-        loginUser(newUsername, newUserData.password);
-        result.className = 'username-result success';
-        result.textContent = '✅ ' + (d.usernameChanged || 'Username changed successfully!');
-
-        document.getElementById('settingsUsername').value = newUsername;
-        document.getElementById('settingsUserId').value = userId;
-
-        showToast('✅ ' + (d.usernameChanged || 'Username changed successfully!'));
-        updateAuthUI();
-    }
-
-    function saveSettings() {
-        const name = document.getElementById('settingsName').value.trim();
-        const email = document.getElementById('settingsEmail').value.trim();
-        const phone = document.getElementById('settingsPhone').value.trim();
-        const d = LANG_DATA[currentLang];
-
-        if (!name) { showToast('❌ Please enter your name'); return; }
 
         const users = JSON.parse(localStorage.getItem('users') || '{}');
-        const user = getCurrentUser();
-        const oldUsername = user.username;
-        
-        users[oldUsername].displayName = name;
-        users[oldUsername].email = email || users[oldUsername].email;
-        users[oldUsername].phone = phone || users[oldUsername].phone;
+        const userData = users[currentUser.username];
+        if(!userData){
+            showToast('❌ User not found', 'error');
+            return;
+        }
+
+        if(modalMode === 'email'){
+            userData.email = value;
+            currentUser.email = value;
+        } else if(modalMode === 'phone'){
+            userData.phone = value;
+            currentUser.phone = value;
+        } else if(modalMode === 'password'){
+            userData.password = value;
+        }
+
+        users[currentUser.username] = userData;
         localStorage.setItem('users', JSON.stringify(users));
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
-        const updatedUser = getCurrentUser();
-        updatedUser.displayName = name;
-        updatedUser.email = email || updatedUser.email;
-        updatedUser.phone = phone || updatedUser.phone;
-        localStorage.setItem('currentUser', JSON.stringify(updatedUser));
-
-        closeSettingsModal();
-        showToast(d.settingsSaved || '✅ Settings saved successfully!');
+        closeModal();
         updateAuthUI();
-    }
-
-    document.getElementById('settingsModal').addEventListener('click', function(e) {
-        if (e.target === this) closeSettingsModal();
+        showToast(getText('saveSuccess'), 'success');
     });
 
-    function openThemeModal() {
-        if (!isLoggedIn()) {
-            showToast('❌ Please login first');
+    // ===== LOGOUT =====
+    function logout(){
+        if(!currentUser){
+            showToast('❌ No user logged in', 'error');
             return;
         }
-        document.getElementById('themeModal').classList.add('show');
-    }
-
-    function closeThemeModal() {
-        document.getElementById('themeModal').classList.remove('show');
-    }
-
-    function setThemeColor(color, event) {
-        document.documentElement.style.setProperty('--theme-color', color);
-        document.getElementById('themeBadge').style.background = color;
-        if (isLoggedIn()) {
-            const user = getCurrentUser();
-            localStorage.setItem('userTheme_' + user.username, color);
-        }
-        document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
-        if (event && event.target) {
-            event.target.classList.add('active');
-        }
-        showToast('✅ Theme color updated!');
-    }
-
-    document.getElementById('themeModal').addEventListener('click', function(e) {
-        if (e.target === this) closeThemeModal();
-    });
-
-    function openChangePassword() {
-        if (!isLoggedIn()) {
-            showToast('❌ Please login first');
-            return;
-        }
-        const modal = document.getElementById('passwordModal');
-        document.getElementById('currentPassword').value = '';
-        document.getElementById('newPassword').value = '';
-        document.getElementById('confirmNewPassword').value = '';
-        document.querySelectorAll('.error-text').forEach(el => el.style.display = 'none');
-        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
-        modal.classList.add('show');
-    }
-
-    function closePasswordModal() {
-        document.getElementById('passwordModal').classList.remove('show');
-    }
-
-    function changePassword() {
-        const currentPass = document.getElementById('currentPassword').value.trim();
-        const newPass = document.getElementById('newPassword').value.trim();
-        const confirmPass = document.getElementById('confirmNewPassword').value.trim();
-        const d = LANG_DATA[currentLang];
-
-        document.querySelectorAll('.error-text').forEach(el => el.style.display = 'none');
-        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
-
-        let hasError = false;
-
-        if (!currentPass) {
-            document.getElementById('currentPassError').textContent = d.currentPassRequired || 'Current password is required';
-            document.getElementById('currentPassError').style.display = 'block';
-            document.getElementById('currentPassword').classList.add('error');
-            hasError = true;
-        }
-
-        if (!newPass || newPass.length < 4) {
-            document.getElementById('newPassError').textContent = d.newPassMin || 'New password must be at least 4 characters';
-            document.getElementById('newPassError').style.display = 'block';
-            document.getElementById('newPassword').classList.add('error');
-            hasError = true;
-        }
-
-        if (newPass !== confirmPass) {
-            document.getElementById('confirmNewError').textContent = d.passNotMatch || 'Passwords do not match';
-            document.getElementById('confirmNewError').style.display = 'block';
-            document.getElementById('confirmNewPassword').classList.add('error');
-            hasError = true;
-        }
-
-        if (hasError) return;
-
-        const users = JSON.parse(localStorage.getItem('users') || '{}');
-        const user = getCurrentUser();
-        let userData = users[user.username];
-
-        if (!userData || userData.password !== currentPass) {
-            document.getElementById('currentPassError').textContent = d.wrongCurrentPass || '❌ Current password is incorrect';
-            document.getElementById('currentPassError').style.display = 'block';
-            document.getElementById('currentPassword').classList.add('error');
-            return;
-        }
-
-        userData.password = newPass;
-        localStorage.setItem('users', JSON.stringify(users));
-
-        showToast(d.passChanged || '✅ Password changed successfully!');
-        closePasswordModal();
-    }
-
-    document.getElementById('passwordModal').addEventListener('click', function(e) {
-        if (e.target === this) closePasswordModal();
-    });
-
-    function logout() {
         document.getElementById('logoutOverlay').classList.add('show');
     }
 
-    document.getElementById('logoutConfirmBtn').addEventListener('click', function() {
+    document.getElementById('logoutConfirmBtn').addEventListener('click', function(){
         document.getElementById('logoutOverlay').classList.remove('show');
-        logoutUser();
+        localStorage.removeItem('currentUser');
+        currentUser = null;
         updateAuthUI();
-        showToast(getText('logoutSuccess') || '✅ Logout successful!');
+        renderOrders();
+        showToast(getText('logoutSuccess'), 'success');
         setTimeout(() => window.location.href = 'index.html', 1500);
     });
 
-    document.getElementById('logoutCancelBtn').addEventListener('click', function() {
+    document.getElementById('logoutCancelBtn').addEventListener('click', function(){
         document.getElementById('logoutOverlay').classList.remove('show');
     });
 
-    document.getElementById('logoutOverlay').addEventListener('click', function(e) {
-        if (e.target === this) {
-            this.classList.remove('show');
-        }
+    document.getElementById('logoutOverlay').addEventListener('click', function(e){
+        if(e.target === this) this.classList.remove('show');
     });
 
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-            const modal = document.getElementById('authModal');
-            if (modal.classList.contains('show')) {
-                if (document.getElementById('forgotForm').style.display === 'block') {
-                    if (document.getElementById('otpSection').style.display === 'block') {
-                        resetPassword();
-                    } else {
-                        sendOTP();
-                    }
-                } else if (isLoginMode) {
-                    handleLogin();
-                } else {
-                    handleRegister();
-                }
-            }
-            const passModal = document.getElementById('passwordModal');
-            if (passModal.classList.contains('show')) {
-                changePassword();
-            }
-        }
-        if (e.key === 'Escape') {
-            document.getElementById('authModal').classList.remove('show');
-            document.getElementById('logoutOverlay').classList.remove('show');
-            document.getElementById('settingsModal').classList.remove('show');
-            document.getElementById('themeModal').classList.remove('show');
-            document.getElementById('passwordModal').classList.remove('show');
-        }
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const savedLang = localStorage.getItem('lang') || 'en';
-        setLang(savedLang);
+    // ===== INIT =====
+    document.addEventListener('DOMContentLoaded', function(){
+        setLang(localStorage.getItem('lang') || 'my');
         updateAuthUI();
-        const savedTheme = localStorage.getItem('userTheme_' + (isLoggedIn() ? getCurrentUser().username : ''));
-        if (savedTheme) {
-            document.documentElement.style.setProperty('--theme-color', savedTheme);
-            document.getElementById('themeBadge').style.background = savedTheme;
-        }
-        const notiData = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
-        if (notiData.show) {
-            const badge = document.getElementById('notiBadge');
-            badge.style.display = 'block';
-            badge.textContent = '1';
-            setTimeout(() => {
-                badge.style.display = 'none';
-                localStorage.setItem('newOrderNotification', JSON.stringify({show: false}));
-            }, 5000);
+        renderOrders();
+        const noti = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
+        const badge = document.getElementById('notiBadge');
+        if(noti.show){ badge.style.display = 'block'; badge.textContent = '1'; setTimeout(() => { badge.style.display = 'none'; localStorage.setItem('newOrderNotification', JSON.stringify({show:false})); }, 5000); }
+    });
+
+    document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape'){
+            closeModal();
+            document.getElementById('logoutOverlay').classList.remove('show');
         }
     });
 </script>
