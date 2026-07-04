@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>⚡ Premium Game Shop</title>
+    <title>⚡ Premium Shop</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
@@ -94,7 +94,7 @@
         .welcome h2 i{color:var(--cyan);-webkit-text-fill-color:initial;text-shadow:0 0 20px var(--cyan-glow)}
         .welcome p{color:var(--text-secondary);font-size:0.75rem;margin-top:2px;font-weight:400;opacity:0.6}
 
-        /* ===== SHOP STATUS BANNER (Fanny Hero ပါ) ===== */
+        /* ===== SHOP STATUS BANNER (Fanny GIF ပါ) ===== */
         .shop-status-banner {
             background: var(--bg-card);
             border: 2px solid var(--border-color);
@@ -119,6 +119,10 @@
             overflow: hidden;
             border: 2px solid var(--gold);
             box-shadow: 0 0 30px var(--gold-glow);
+            background: var(--bg-input);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .shop-status-banner .banner-hero img {
             width: 100%;
@@ -594,8 +598,8 @@
         <div class="left">
             <!-- ===== LOGO ===== -->
             <div class="logo" id="appName">
-                <img src="https://files.catbox.moe/lmq98x.jpg" alt="Premium Game Shop Logo">
-                Premium Game Shop
+                <img src="https://files.catbox.moe/lmq98x.jpg" alt="Premium Shop Logo">
+                Premium Shop
             </div>
             <div class="auth-btn" id="authBtn" onclick="handleAuthClick()">🔑 Login</div>
         </div>
@@ -620,10 +624,10 @@
         <p id="subtitle">စိန်တွေဖြည့်ပြီး စစ်မြေပြင်ကို အနိုင်ယူလိုက်ပါ</p>
     </div>
 
-    <!-- ===== SHOP STATUS BANNER (Fanny Hero ပါ) ===== -->
+    <!-- ===== SHOP STATUS BANNER (Fanny GIF ပါ) ===== -->
     <div class="shop-status-banner" id="shopStatusBanner" onclick="handleBannerClick()">
         <div class="banner-hero">
-            <img src="https://i.pinimg.com/564x/00/1e/6b/001e6b2d9d2b4e0c9a9e8d6f0e2e1f3d.jpg" alt="Fanny Hero - Blade Dancer">
+            <img src="https://media.giphy.com/media/G2MuiZHSLv236JZA0L/giphy.gif" alt="Fanny Hero GIF">
         </div>
         <div class="banner-content">
             <div class="banner-status open" id="statusBadge">
@@ -671,7 +675,7 @@
         <span class="arrow"><i class="fas fa-chevron-right"></i></span>
     </div>
 
-    <div class="footer-text">&copy; 2026 Premium Game Shop</div>
+    <div class="footer-text">&copy; 2026 Premium Shop</div>
 </div>
 
 <!-- ===== BOTTOM NAV ===== -->
@@ -788,7 +792,7 @@
     // ===== LANGUAGE DATA =====
     const LANG_DATA = {
         my: {
-            appName: 'Premium Game Shop',
+            appName: 'Premium Shop',
             greeting: 'ဟေ့ကောင်လေး!',
             title: 'ဂိမ်းကို <span>မြှင့်တင်လိုက်ပါ!</span>',
             subtitle: 'စိန်တွေဖြည့်ပြီး စစ်မြေပြင်ကို အနိုင်ယူလိုက်ပါ',
@@ -836,7 +840,7 @@
             shopClosedText: 'မနက် ၁၀ နာရီမှသာ ဆိုင်ဖွင့်ပါမည်'
         },
         en: {
-            appName: 'Premium Game Shop',
+            appName: 'Premium Shop',
             greeting: 'Hey, Gamer!',
             title: 'Level Up Your <span>Game!</span>',
             subtitle: 'Top up diamonds and dominate the battlefield',
@@ -905,7 +909,7 @@
     function updateLanguage() {
         const d = LANG_DATA[currentLang];
         if (!d) return;
-        document.getElementById('appName').innerHTML = '<img src="https://files.catbox.moe/lmq98x.jpg" alt="Premium Game Shop Logo" style="height:38px;width:auto;vertical-align:middle;border-radius:8px;margin-right:6px;"> ' + d.appName;
+        document.getElementById('appName').innerHTML = '<img src="https://files.catbox.moe/lmq98x.jpg" alt="Premium Shop Logo" style="height:38px;width:auto;vertical-align:middle;border-radius:8px;margin-right:6px;"> ' + d.appName;
         document.getElementById('greeting').textContent = d.greeting;
         document.getElementById('title').innerHTML = '<i class="fas fa-arrow-right"></i> ' + d.title;
         document.getElementById('subtitle').textContent = d.subtitle;
