@@ -415,8 +415,21 @@
         @keyframes shimmer{0%,100%{transform:translate(0,0)}50%{transform:translate(-20%,-20%)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
-        /* ===== AUTH MODAL (Shop page checkout modal style အတိုင်း) ===== */
-        .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px}
+        /* ===== AUTH MODAL (ပြင်ထားတယ် - နောက်ခံဝါးတယ်၊ အပြာရောင်အကြောင်းရီးပျောက်တယ်) ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            display: none;
+            z-index: 300;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
         .modal-overlay.show{display:flex;animation:fadeIn 0.3s ease}
         .modal{
             background: var(--bg-card);
@@ -431,7 +444,7 @@
             max-height: 90vh;
             overflow-y: auto;
         }
-        /* ===== အပြာရောင် အပေါ်အောက် အကြောင်းရီးကို ဖျောက်ထား (သေချာဖျောက်တယ်) ===== */
+        /* ===== အပြာရောင် အပေါ်အောက် အကြောင်းရီးကို လုံးဝဖျောက်ထား ===== */
         .modal::before {
             display: none !important;
             content: none !important;
