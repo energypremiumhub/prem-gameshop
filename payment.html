@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>⚡ Premium Game Shop - Payment</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <script src="lang.js"></script>
-    <script src="auth.js"></script>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
         
@@ -23,12 +21,14 @@
             --gold-glow: rgba(245,200,66,0.3);
             --cyan: #00d4ff;
             --cyan-glow: rgba(0,212,255,0.2);
-            --pink: #ff6b9d;
             --orange: #f97316;
             --orange-glow: rgba(249,115,22,0.2);
+            --red: #ef4444;
+            --red-glow: rgba(239,68,68,0.3);
             --green: #22d3ee;
             --green-glow: rgba(34,211,238,0.2);
-            --red: #ef4444;
+            --pink: #ff6b9d;
+            --pink-glow: rgba(255,107,157,0.2);
             --purple: #8b5cf6;
             --purple-glow: rgba(139,92,246,0.2);
             --warning: #f59e0b;
@@ -51,6 +51,7 @@
 
         .container{max-width:500px;margin:0 auto}
 
+        /* ===== HEADER ===== */
         .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
         .header .left{display:flex;flex-direction:column;gap:6px}
         .header .left .logo{font-size:1rem;font-weight:800;color:var(--gold);text-shadow:0 0 20px var(--gold-glow);letter-spacing:0.5px}
@@ -68,59 +69,141 @@
         .header .right .top .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;text-transform:uppercase}
         .header .right .top .lang-switcher .lang-btn.active{background:var(--gold);color:#0a0e1a;box-shadow:0 0 20px var(--gold-glow)}
         .header .right .top .lang-switcher .lang-btn:active{transform:scale(0.85)}
-        
         .header .right .top .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:8px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none}
         .header .right .top .noti-btn:active{transform:scale(0.85)}
         .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none}
 
+        /* ===== PAGE HEADER ===== */
         .page-header{margin-bottom:20px;animation:slideUp 0.6s ease}
         .page-header h1{font-size:1.3rem;font-weight:800;color:var(--text-primary)}
-        .page-header h1 span{background:linear-gradient(135deg,var(--gold),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 40px var(--gold-glow)}
+        .page-header h1 span{background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
         .page-header h1 i{color:var(--cyan);-webkit-text-fill-color:initial;margin-right:6px}
         .page-header p{color:var(--text-secondary);font-size:0.75rem;margin-top:2px}
 
-        .glass-card{background:var(--bg-card);backdrop-filter:blur(10px);border:1px solid var(--border-color);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:0 4px 25px var(--shadow);animation:slideUp 0.7s ease}
-        .glass-card .label{font-size:0.6rem;color:var(--text-secondary);font-weight:600;display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px}
+        /* ===== GLASS CARD (shop.html style) ===== */
+        .glass-card{
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 14px;
+            box-shadow: 0 4px 20px var(--shadow);
+            animation: slideUp 0.7s ease;
+        }
+        .glass-card .label{
+            font-size:0.6rem;
+            color:var(--text-secondary);
+            font-weight:600;
+            display:block;
+            margin-bottom:8px;
+            text-transform:uppercase;
+            letter-spacing:1px;
+        }
         .glass-card .label i{color:var(--cyan);margin-right:4px}
 
-        .payment-account{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;border:1px solid var(--border-color);margin-bottom:8px;transition:all 0.3s ease;background:var(--bg-input)}
+        /* ===== PAYMENT ACCOUNT (shop.html package-item style) ===== */
+        .payment-account{
+            display:flex;
+            align-items:center;
+            gap:12px;
+            padding:10px 12px;
+            border-radius:10px;
+            border:1px solid var(--border-color);
+            margin-bottom:6px;
+            transition:all 0.3s ease;
+            background:var(--bg-input);
+        }
         .payment-account:active{transform:scale(0.97)}
-        .payment-account .icon-box{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;background:var(--bg-card);border:1px solid var(--border-color)}
+        .payment-account .icon-box{
+            width:38px;
+            height:38px;
+            border-radius:10px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:1.2rem;
+            flex-shrink:0;
+            background:var(--bg-card);
+            border:1px solid var(--border-color);
+        }
         .payment-account .info{flex:1}
-        .payment-account .info .name{font-size:0.85rem;font-weight:700;color:var(--text-primary)}
-        .payment-account .info .number{font-size:0.75rem;color:var(--text-secondary);margin-top:2px}
+        .payment-account .info .name{font-size:0.8rem;font-weight:700;color:var(--text-primary)}
+        .payment-account .info .number{font-size:0.7rem;color:var(--text-secondary);margin-top:1px}
         .payment-account .info .number i{margin-right:4px;color:var(--green)}
 
-        .copy-btn{background:var(--bg-card);border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 12px;border-radius:12px;font-size:0.55rem;cursor:pointer;transition:all 0.3s ease;font-weight:600}
+        .copy-btn{
+            background:var(--bg-card);
+            border:1px solid var(--border-color);
+            color:var(--text-secondary);
+            padding:4px 12px;
+            border-radius:12px;
+            font-size:0.5rem;
+            cursor:pointer;
+            transition:all 0.3s ease;
+            font-weight:600;
+        }
         .copy-btn:active{transform:scale(0.90);background:var(--gold);color:#0a0e1a}
         .copy-btn.copied{background:rgba(34,211,238,0.15);border-color:var(--green);color:var(--green)}
 
+        /* ===== INSTRUCTION LIST ===== */
         .instruction-list{display:flex;flex-direction:column;gap:6px}
-        .instruction-item{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--bg-input);border-radius:8px;border:1px solid var(--border-color)}
-        .instruction-item .step{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.55rem;flex-shrink:0}
-        .instruction-item .text{font-size:0.65rem;color:var(--text-secondary)}
+        .instruction-item{
+            display:flex;
+            align-items:center;
+            gap:10px;
+            padding:8px 12px;
+            background:var(--bg-input);
+            border-radius:8px;
+            border:1px solid var(--border-color);
+        }
+        .instruction-item .step{
+            width:22px;
+            height:22px;
+            border-radius:50%;
+            background:linear-gradient(135deg,var(--gold),var(--orange));
+            color:#0a0e1a;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-weight:700;
+            font-size:0.5rem;
+            flex-shrink:0;
+        }
+        .instruction-item .text{font-size:0.6rem;color:var(--text-secondary)}
         .instruction-item .text strong{color:var(--text-primary)}
 
-        .support-card{background:linear-gradient(135deg,rgba(0,136,204,0.08),rgba(0,136,204,0.02));border:1px solid rgba(0,136,204,0.12);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:14px;margin-top:10px;cursor:pointer;transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)}
+        /* ===== SUPPORT CARD ===== */
+        .support-card{
+            background:linear-gradient(135deg,rgba(0,136,204,0.08),rgba(0,136,204,0.02));
+            border:1px solid rgba(0,136,204,0.12);
+            border-radius:12px;
+            padding:12px 16px;
+            display:flex;
+            align-items:center;
+            gap:14px;
+            margin-top:10px;
+            cursor:pointer;
+            transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
         .support-card:active{transform:scale(0.96)}
         .support-card:hover{border-color:rgba(0,136,204,0.3);box-shadow:0 0 30px rgba(0,136,204,0.1)}
-        .support-card .icon{font-size:1.8rem;color:#0088cc;flex-shrink:0}
+        .support-card .icon{font-size:1.6rem;color:#0088cc;flex-shrink:0}
         .support-card .info{flex:1}
-        .support-card .info .title{font-size:0.8rem;font-weight:600;color:var(--text-primary)}
-        .support-card .info .desc{font-size:0.55rem;color:var(--text-secondary)}
-        .support-card .arrow{color:var(--text-secondary);font-size:1.2rem;transition:all 0.3s ease}
+        .support-card .info .title{font-size:0.75rem;font-weight:600;color:var(--text-primary)}
+        .support-card .info .desc{font-size:0.5rem;color:var(--text-secondary)}
+        .support-card .arrow{color:var(--text-secondary);font-size:1.1rem;transition:all 0.3s ease}
         .support-card:hover .arrow{color:var(--gold);transform:translateX(4px)}
 
-        /* ===== BOTTOM NAV (လေးထောင့်ကွက်လေးတွေ) ===== */
-        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);border-top:1px solid var(--border-color);display:flex;justify-content:space-around;padding:8px 0 12px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px var(--shadow)}
-        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.3s ease;padding:6px 16px;border-radius:12px;position:relative;min-width:56px;border:1px solid transparent}
-        .bottom-nav .nav-item:active{transform:scale(0.85);background:rgba(245,200,66,0.05)}
-        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;transition:all 0.3s ease}
-        .bottom-nav .nav-item .label{font-size:0.4rem;margin-top:1px;font-weight:700;letter-spacing:0.5px;transition:all 0.3s ease}
-        .bottom-nav .nav-item.active{color:var(--gold);background:rgba(245,200,66,0.06);border-color:rgba(245,200,66,0.15);box-shadow:0 0 30px rgba(245,200,66,0.05)}
-        .bottom-nav .nav-item.active .icon{transform:translateY(-2px);color:var(--gold)}
+        /* ===== BOTTOM NAV ===== */
+        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);border-top:1px solid var(--border-color);display:flex;justify-content:space-around;padding:6px 0 10px;max-width:500px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px var(--shadow)}
+        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.2s cubic-bezier(0.34,1.2,0.64,1);padding:4px 8px;border-radius:8px;position:relative;border:2px solid transparent;min-width:50px}
+        .bottom-nav .nav-item:active{transform:scale(0.85)}
+        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;transition:all 0.2s cubic-bezier(0.34,1.2,0.64,1)}
+        .bottom-nav .nav-item .label{font-size:0.4rem;margin-top:1px;font-weight:700;letter-spacing:0.5px;transition:all 0.2s ease}
+        .bottom-nav .nav-item.active{color:var(--gold);border-color:var(--gold);background:rgba(245,200,66,0.05);box-shadow:0 0 30px rgba(245,200,66,0.05)}
+        .bottom-nav .nav-item.active .icon{transform:translateY(-6px) scale(1.15);text-shadow:0 0 30px var(--gold-glow)}
         .bottom-nav .nav-item.active .label{color:var(--gold)}
-        .bottom-nav .nav-item:not(.active):hover{border-color:rgba(255,255,255,0.04);background:rgba(255,255,255,0.02)}
+        .bottom-nav .nav-item.active::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:24px;height:2.5px;background:linear-gradient(90deg,var(--gold),var(--orange));border-radius:10px;box-shadow:0 0 20px var(--gold-glow)}
 
         .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.3;letter-spacing:1px}
 
@@ -128,12 +211,12 @@
         .toast.show{display:block}
         @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes shimmer{0%,100%{transform:translate(0,0)}50%{transform:translate(-20%,-20%)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
     </style>
 </head>
 <body>
 <div class="container">
+    <!-- HEADER -->
     <div class="header">
         <div class="left">
             <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Game Shop</div>
@@ -153,11 +236,13 @@
         </div>
     </div>
 
+    <!-- PAGE HEADER -->
     <div class="page-header">
         <h1 id="paymentTitle"><i class="fas fa-credit-card"></i> Payment <span>Accounts</span></h1>
         <p id="paymentSub">Send payment to one of the following accounts</p>
     </div>
 
+    <!-- WAVE PAY -->
     <div class="glass-card">
         <span class="label"><i class="fas fa-university"></i> <span id="waveLabel">Wave Pay</span></span>
         <div class="payment-account">
@@ -170,6 +255,7 @@
         </div>
     </div>
 
+    <!-- KBZ PAY -->
     <div class="glass-card">
         <span class="label"><i class="fas fa-university"></i> <span id="kpayLabel">KBZ Pay</span></span>
         <div class="payment-account">
@@ -182,6 +268,7 @@
         </div>
     </div>
 
+    <!-- HOW TO PAY -->
     <div class="glass-card">
         <span class="label"><i class="fas fa-list"></i> <span id="howToLabel">How to Pay</span></span>
         <div class="instruction-list">
@@ -192,6 +279,7 @@
         </div>
     </div>
 
+    <!-- SUPPORT -->
     <div class="glass-card">
         <span class="label"><i class="fas fa-headset"></i> <span id="supportLabel">Need Help?</span></span>
         <div class="support-card" onclick="window.open('https://t.me/Energypremiumhub', '_blank')">
@@ -207,57 +295,101 @@
     <div class="footer-text">&copy; 2026 Premium Game Shop</div>
 </div>
 
-<!-- ===== BOTTOM NAV (လေးထောင့်ကွက်လေးတွေ) ===== -->
+<!-- BOTTOM NAV -->
 <div class="bottom-nav">
-    <a href="index.html" class="nav-item">
-        <span class="icon">🏠</span>
-        <span class="label" id="navHome">Home</span>
-    </a>
-    <a href="shop.html" class="nav-item">
-        <span class="icon">🛒</span>
-        <span class="label" id="navShop">Shop</span>
-    </a>
-    <a href="payment.html" class="nav-item active">
-        <span class="icon">💳</span>
-        <span class="label" id="navPayment">Payment</span>
-    </a>
-    <a href="profile.html" class="nav-item">
-        <span class="icon">👤</span>
-        <span class="label" id="navProfile">Profile</span>
-    </a>
+    <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label" id="navHome">Home</span></a>
+    <a href="shop.html" class="nav-item"><span class="icon">🛒</span><span class="label" id="navShop">Shop</span></a>
+    <a href="payment.html" class="nav-item active"><span class="icon">💳</span><span class="label" id="navPayment">Payment</span></a>
+    <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label" id="navProfile">Profile</span></a>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-    function updateLanguage() {
+    // ===== LANGUAGE DATA =====
+    const LANG_DATA = {
+        my: {
+            appName: 'Premium Shop',
+            paymentTitle: 'ငွေပေးချေရန် အကောင့်များ',
+            paymentSub: 'အောက်ပါအကောင့်များသို့ ငွေလွှဲပေးပါ',
+            wave: 'Wave Pay',
+            kpay: 'KBZ Pay',
+            howToLabel: 'ငွေပေးချေနည်း',
+            step1: '<strong>Wave Pay</strong> သို့မဟုတ် <strong>KBZ Pay</strong> ကိုရွေးပါ',
+            step2: 'အထက်ပါ <strong>ဖုန်းနံပါတ်</strong> ကိုကူးယူပါ',
+            step3: 'ပမာဏအတိအကျပို့ပြီး <strong>Screenshot</strong> ရိုက်ပါ',
+            step4: '<strong>ဆိုင်</strong> သို့သွားပြီး အော်ဒါတင်ပါ',
+            supportLabel: 'အကူအညီလိုပါသလား?',
+            supportTitle: 'Telegram မှ ဆက်သွယ်ပါ',
+            supportDesc: '@Energypremiumhub • ၂၄/၇ ဝန်ဆောင်မှု',
+            copy: 'ကူးမည်',
+            copied: '✅ ကူးပြီး',
+            home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
+            login: 'ဝင်ရန်',
+            logout: 'ထွက်မည်'
+        },
+        en: {
+            appName: 'Premium Shop',
+            paymentTitle: 'Payment Accounts',
+            paymentSub: 'Send payment to one of the following accounts',
+            wave: 'Wave Pay',
+            kpay: 'KBZ Pay',
+            howToLabel: 'How to Pay',
+            step1: 'Choose <strong>Wave Pay</strong> or <strong>KBZ Pay</strong>',
+            step2: 'Copy the <strong>phone number</strong> above',
+            step3: 'Send the exact amount and <strong>take a screenshot</strong>',
+            step4: 'Go to <strong>Shop</strong> and complete your order',
+            supportLabel: 'Need Help?',
+            supportTitle: 'Contact us on Telegram',
+            supportDesc: '@Energypremiumhub • 24/7 Support',
+            copy: 'Copy',
+            copied: '✅ Copied!',
+            home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
+            login: 'Login',
+            logout: 'Logout'
+        }
+    };
+
+    let currentLang = localStorage.getItem('lang') || 'en';
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+    function getText(key){ return LANG_DATA[currentLang][key] || key; }
+
+    function setLang(lang){
+        currentLang = lang;
+        localStorage.setItem('lang', lang);
+        updateLanguage();
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    }
+
+    function updateLanguage(){
         const d = LANG_DATA[currentLang];
-        if (!d) return;
+        if(!d) return;
         document.getElementById('appName').innerHTML = '<i class="fas fa-gamepad"></i> ' + d.appName;
-        document.getElementById('paymentTitle').innerHTML = '<i class="fas fa-credit-card"></i> ' + (d.paymentTitle || 'Payment Accounts');
-        document.getElementById('paymentSub').textContent = d.paymentSub || 'Send payment to one of the following accounts';
-        document.getElementById('waveLabel').textContent = d.wave || 'Wave Pay';
-        document.getElementById('waveName').textContent = d.wave || 'Wave Pay';
-        document.getElementById('kpayLabel').textContent = d.kpay || 'KBZ Pay';
-        document.getElementById('kpayName').textContent = d.kpay || 'KBZ Pay';
-        document.getElementById('howToLabel').textContent = d.howToLabel || 'How to Pay';
-        document.getElementById('step1').innerHTML = d.step1 || 'Choose <strong>Wave Pay</strong> or <strong>KBZ Pay</strong>';
-        document.getElementById('step2').innerHTML = d.step2 || 'Copy the <strong>phone number</strong> above';
-        document.getElementById('step3').innerHTML = d.step3 || 'Send the exact amount and <strong>take a screenshot</strong>';
-        document.getElementById('step4').innerHTML = d.step4 || 'Go to <strong>Shop</strong> and complete your order';
-        document.getElementById('supportLabel').textContent = d.supportLabel || 'Need Help?';
-        document.getElementById('supportTitle').textContent = d.supportTitle || 'Contact us on Telegram';
-        document.getElementById('supportDesc').textContent = d.supportDesc || '@Energypremiumhub • 24/7 Support';
-        document.getElementById('copyBtn1').textContent = d.copy || 'Copy';
-        document.getElementById('copyBtn2').textContent = d.copy || 'Copy';
-        document.getElementById('navHome').textContent = d.home || 'Home';
-        document.getElementById('navShop').textContent = d.shop || 'Shop';
-        document.getElementById('navPayment').textContent = d.payment || 'Payment';
-        document.getElementById('navProfile').textContent = d.profile || 'Profile';
+        document.getElementById('paymentTitle').innerHTML = '<i class="fas fa-credit-card"></i> ' + d.paymentTitle;
+        document.getElementById('paymentSub').textContent = d.paymentSub;
+        document.getElementById('waveLabel').textContent = d.wave;
+        document.getElementById('waveName').textContent = d.wave;
+        document.getElementById('kpayLabel').textContent = d.kpay;
+        document.getElementById('kpayName').textContent = d.kpay;
+        document.getElementById('howToLabel').textContent = d.howToLabel;
+        document.getElementById('step1').innerHTML = d.step1;
+        document.getElementById('step2').innerHTML = d.step2;
+        document.getElementById('step3').innerHTML = d.step3;
+        document.getElementById('step4').innerHTML = d.step4;
+        document.getElementById('supportLabel').textContent = d.supportLabel;
+        document.getElementById('supportTitle').textContent = d.supportTitle;
+        document.getElementById('supportDesc').textContent = d.supportDesc;
+        document.getElementById('copyBtn1').textContent = d.copy;
+        document.getElementById('copyBtn2').textContent = d.copy;
+        document.getElementById('navHome').textContent = d.home;
+        document.getElementById('navShop').textContent = d.shop;
+        document.getElementById('navPayment').textContent = d.payment;
+        document.getElementById('navProfile').textContent = d.profile;
         updateAuthUI();
     }
 
-    function showToast(msg) {
+    function showToast(msg){
         const t = document.getElementById('toast');
         t.textContent = msg;
         t.classList.add('show');
@@ -265,28 +397,23 @@
         t._timer = setTimeout(() => t.classList.remove('show'), 3000);
     }
 
-    function checkNotifications() {
-        const notiData = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
-        const badge = document.getElementById('notiBadge');
-        if (notiData.show) {
-            badge.style.display = 'block';
-            badge.textContent = '1';
-            setTimeout(() => {
-                badge.style.display = 'none';
-                localStorage.setItem('newOrderNotification', JSON.stringify({show: false}));
-            }, 5000);
+    function updateAuthUI(){
+        const p = document.getElementById('profileIcon');
+        if(currentUser){
+            const avatar = localStorage.getItem('userAvatar_' + currentUser.username);
+            p.innerHTML = avatar ? '<img src="'+avatar+'" alt="avatar"> '+currentUser.username : '👤 '+currentUser.username;
+            p.className = 'profile-icon logged-in';
         } else {
-            badge.style.display = 'none';
+            p.innerHTML = '👤 ' + (getText('login') || 'Profile');
+            p.className = 'profile-icon';
         }
     }
 
-    window.addEventListener('storage', function(e) {
-        if (e.key === 'newOrderNotification') {
-            checkNotifications();
-        }
-    });
+    function goToProfile(){
+        window.location.href = 'profile.html';
+    }
 
-    function copyNumber(number, btn) {
+    function copyNumber(number, btn){
         const d = LANG_DATA[currentLang] || {};
         navigator.clipboard.writeText(number).then(() => {
             btn.textContent = d.copied || '✅ Copied!';
@@ -305,28 +432,26 @@
         });
     }
 
-    function updateAuthUI() {
-        const profileIcon = document.getElementById('profileIcon');
-        if (isLoggedIn()) {
-            const user = getCurrentUser();
-            const savedAvatar = localStorage.getItem('userAvatar_' + user.username);
-            if (savedAvatar) {
-                profileIcon.innerHTML = '<img src="' + savedAvatar + '" alt="avatar"> ' + user.username;
-            } else {
-                profileIcon.innerHTML = '👤 ' + user.username;
-            }
-            profileIcon.className = 'profile-icon logged-in';
+    function checkNotifications(){
+        const notiData = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
+        const badge = document.getElementById('notiBadge');
+        if(notiData.show){
+            badge.style.display = 'block';
+            badge.textContent = '1';
+            setTimeout(() => {
+                badge.style.display = 'none';
+                localStorage.setItem('newOrderNotification', JSON.stringify({show: false}));
+            }, 5000);
         } else {
-            profileIcon.innerHTML = '👤 Profile';
-            profileIcon.className = 'profile-icon';
+            badge.style.display = 'none';
         }
     }
 
-    function goToProfile() {
-        window.location.href = 'profile.html';
-    }
+    window.addEventListener('storage', function(e) {
+        if(e.key === 'newOrderNotification') checkNotifications();
+    });
 
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function(){
         const savedLang = localStorage.getItem('lang') || 'en';
         setLang(savedLang);
         updateAuthUI();
