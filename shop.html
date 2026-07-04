@@ -113,7 +113,7 @@
         .modal .payment-option.selected{border-color:var(--gold);background:rgba(245,200,66,0.06);box-shadow:0 0 30px var(--gold-glow)}
         .modal .payment-option .icon{font-size:1.2rem;display:block;margin-bottom:2px}
         .modal .payment-option .name{font-size:0.7rem;font-weight:600;color:var(--text-primary)}
-        .modal .payment-option .detail{font-size:0.45rem;color:var(--text-secondary)}
+        .modal .payment-option .detail{display:none}
         .modal .account-info{background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.08);border-radius:10px;padding:10px 14px;margin-top:8px;display:none}
         .modal .account-info.show{display:block;animation:fadeIn 0.3s ease}
         .modal .account-info .acc-name{font-size:0.8rem;font-weight:600;color:var(--text-primary)}
@@ -201,8 +201,8 @@
 <div class="modal-overlay" id="checkoutModal">
     <div class="modal">
         <button class="close-btn" onclick="closeCheckoutModal()">✕</button>
-        <h2 id="modalTitle">🛒 အော်ဒါအတည်ပြုရန်</h2>
-        <p id="modalSub">သင့်ရွေးချယ်မှုကို အတည်ပြုပါ</p>
+        <h2 id="modalTitle">🛒 အော်ဒါတင်ရန်</h2>
+        <p id="modalSub">အချက်အလက်များကို မှန်ကန်စွာဖြည့်သွင်းပါ</p>
         
         <div class="selected-row">
             <span class="pkg" id="modalPackage">Loading...</span>
@@ -222,17 +222,17 @@
         </div>
 
         <div class="form-group">
-            <label><i class="fas fa-money-bill-wave"></i> <span id="paymentLabel">ငွေပေးချေနည်း</span></label>
+            <label><i class="fas fa-money-bill-wave"></i> <span id="paymentLabel">ငွေပေးချေရန်</span></label>
             <div class="payment-options" id="paymentOptions">
                 <div class="payment-option" data-payment="wave">
                     <span class="icon">🏦</span>
                     <span class="name" id="waveName">Wave Pay</span>
-                    <span class="detail" id="waveDetail">လမ်းပေါ်ငွေ</span>
+                    <span class="detail" id="waveDetail"></span>
                 </div>
                 <div class="payment-option" data-payment="kpay">
                     <span class="icon">🏦</span>
                     <span class="name" id="kpayName">KBZ Pay</span>
-                    <span class="detail" id="kpayDetail">KBZ ဘဏ်</span>
+                    <span class="detail" id="kpayDetail"></span>
                 </div>
             </div>
         </div>
@@ -256,7 +256,7 @@
             <label><i class="fas fa-image"></i> <span id="uploadLabel">ပြေစာတင်ပို့ရန်</span></label>
             <div class="file-upload" id="fileUpload">
                 <span class="icon">📁</span>
-                <span class="text" id="uploadText">နှိပ်ပြီး <strong>ဖိုင်တင်ပါ</strong></span>
+                <span class="text" id="uploadText">Screenshot ပို့ပေးပါ</span>
                 <span class="file-name" id="fileName">✅ image.png</span>
                 <input type="file" id="fileInput" accept="image/*">
             </div>
@@ -277,8 +277,8 @@
 
 <script>
     // ===== TELEGRAM BOT CONFIG =====
-    const TELEGRAM_BOT_TOKEN = '8751360822:AAFQNiWhfGWgUsjD7Bd5DzfHMfpkR4COHY8';
-    const TELEGRAM_CHAT_ID = '8745522082';
+    const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE';
+    const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID_HERE';
 
     const LANG_DATA = {
         my: {
@@ -294,19 +294,19 @@
             buy: 'ဝယ်ယူရန်',
             home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
             currency: 'ကျပ်',
-            modalTitle: '🛒 အော်ဒါအတည်ပြုရန်',
-            modalSub: 'သင့်ရွေးချယ်မှုကို အတည်ပြုပါ',
+            modalTitle: '🛒 အော်ဒါတင်ရန်',
+            modalSub: 'အချက်အလက်များကို မှန်ကန်စွာဖြည့်သွင်းပါ',
             gameId: 'ဂိမ်းအိုင်ဒီ',
             serverId: 'ဆာဗာအိုင်ဒီ',
             gameIdHint: 'Mobile Legends ID ထည့်ပါ',
             serverIdHint: 'Mobile Legends Server ID ထည့်ပါ',
-            paymentLabel: 'ငွေပေးချေနည်း',
+            paymentLabel: 'ငွေပေးချေရန်',
             wave: 'Wave Pay',
-            waveDetail: 'လမ်းပေါ်ငွေ',
+            waveDetail: '',
             kpay: 'KBZ Pay',
-            kpayDetail: 'KBZ ဘဏ်',
+            kpayDetail: '',
             uploadLabel: 'ပြေစာတင်ပို့ရန်',
-            uploadText: 'နှိပ်ပြီး ဖိုင်တင်ပါ',
+            uploadText: 'Screenshot ပို့ပေးပါ',
             submit: 'အော်ဒါတင်မည်',
             successTitle: 'အော်ဒါတင်ပြီးပါပြီ!',
             successDesc: 'သင့်အော်ဒါကို လက်ခံရရှိပါပြီ။ ကျွန်ုပ်တို့ မကြာမီ ဆောင်ရွက်ပေးပါမည်။',
@@ -314,7 +314,7 @@
             enterGameId: 'ကျေးဇူးပြု၍ ဂိမ်းအိုင်ဒီထည့်ပါ',
             enterServerId: 'ကျေးဇူးပြု၍ ဆာဗာအိုင်ဒီထည့်ပါ',
             selectPayment: 'ကျေးဇူးပြု၍ ငွေပေးချေနည်းရွေးပါ',
-            uploadSlip: 'ကျေးဇူးပြု၍ ပြေစာတင်ပါ',
+            uploadSlip: 'ကျေးဇူးပြု၍ Screenshot ပို့ပေးပါ',
             sending: '⏳ ပို့နေသည်...',
             notiNewOrder: '🛒 အော်ဒါအသစ်!',
             copy: 'ကူးယူမည်',
@@ -336,19 +336,19 @@
             buy: 'Buy',
             home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
             currency: 'Ks',
-            modalTitle: '🛒 Confirm Order',
-            modalSub: 'Confirm your selection',
+            modalTitle: '🛒 Submit Order',
+            modalSub: 'Fill in your details correctly',
             gameId: 'Game ID',
             serverId: 'Server ID',
             gameIdHint: 'Enter your Mobile Legends ID',
             serverIdHint: 'Enter your Mobile Legends Server ID',
             paymentLabel: 'Payment Method',
             wave: 'Wave Pay',
-            waveDetail: 'Mobile Money',
+            waveDetail: '',
             kpay: 'KBZ Pay',
-            kpayDetail: 'KBZ Bank',
+            kpayDetail: '',
             uploadLabel: 'Upload Payment Slip',
-            uploadText: 'Tap to upload file',
+            uploadText: 'Send Screenshot',
             submit: 'Submit Order',
             successTitle: 'Order Submitted!',
             successDesc: 'Your order has been received. We will process it shortly.',
@@ -356,7 +356,7 @@
             enterGameId: 'Please enter your Game ID',
             enterServerId: 'Please enter your Server ID',
             selectPayment: 'Please select a payment method',
-            uploadSlip: 'Please upload your payment slip',
+            uploadSlip: 'Please send your Screenshot',
             sending: '⏳ Sending...',
             notiNewOrder: '🛒 New order!',
             copy: 'Copy',
@@ -404,11 +404,9 @@
         document.getElementById('serverIdHint').textContent = d.serverIdHint;
         document.getElementById('paymentLabel').textContent = d.paymentLabel;
         document.getElementById('waveName').textContent = d.wave;
-        document.getElementById('waveDetail').textContent = d.waveDetail;
         document.getElementById('kpayName').textContent = d.kpay;
-        document.getElementById('kpayDetail').textContent = d.kpayDetail;
         document.getElementById('uploadLabel').textContent = d.uploadLabel;
-        document.getElementById('uploadText').innerHTML = d.uploadText + ' <strong>file</strong>';
+        document.getElementById('uploadText').textContent = d.uploadText;
         document.getElementById('submitBtn').textContent = '✅ ' + d.submit;
         document.getElementById('successTitle').textContent = d.successTitle;
         document.getElementById('successDesc').textContent = d.successDesc;
@@ -502,7 +500,6 @@
         if(icon){ icon.classList.remove('bounce'); void icon.offsetWidth; icon.classList.add('bounce'); }
     }
 
-    // ===== SELECT - Modal မပေါ်ဘူး =====
     function handlePackageClick(id, name, price, type){
         bounceIcon(id);
         if(selectedPackage && selectedPackage.id === id){
@@ -515,15 +512,10 @@
         renderPackages();
     }
 
-    // ===== BUY - Modal ပေါ်လာမယ် =====
     function handleBuyClick(id, name, price, type){
         bounceIcon(id);
-        
-        // ဒီ package ကို select လုပ်
         selectedPackage = { id, name, price, type };
         renderPackages();
-        
-        // Modal ပေါ်လာမယ်
         openCheckoutModal(name, price);
     }
 
@@ -612,7 +604,7 @@
         });
     }
 
-    // ===== SEND ORDER TO TELEGRAM =====
+    // ===== SEND ORDER TO TELEGRAM (Message format updated) =====
     async function sendOrderToTelegram(orderData) {
         if (!TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE') {
             console.warn('Telegram Bot Token not configured');
@@ -624,18 +616,21 @@
 ━━━━━━━━━━━━━━━━━
 📦 **Package:** ${orderData.package}
 💰 **Price:** ${orderData.price}
+━━━━━━━━━━━━━━━━━
 🎮 **Game ID:** ${orderData.gameId}
 🌐 **Server ID:** ${orderData.serverId}
-💳 **Payment:** ${orderData.payment}
-👤 **User:** ${orderData.user}
-🕐 **Time:** ${orderData.time}
+━━━━━━━━━━━━━━━━━
 📋 **Order ID:** ${orderData.orderId}
+🕐 **Time:** ${orderData.time}
+━━━━━━━━━━━━━━━━━
+👤 **User:** ${orderData.user}
+💳 **Payment:** ${orderData.payment}
 ━━━━━━━━━━━━━━━━━
 ⏳ *Status: Pending*
         `;
 
         try {
-            // ၁။ Message ပို့မယ် (Done/Fail ခလုတ်ပါ)
+            // Send message with Done/Fail buttons
             const textResponse = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -659,7 +654,7 @@
                 return false;
             }
 
-            // ၂။ ပြေစာပုံကိုပို့မယ်
+            // Send photo if exists
             if (orderData.photo) {
                 try {
                     const photoBlob = await fetch(orderData.photo).then(res => res.blob());
@@ -694,7 +689,7 @@
         if (!gameId) { showToast(d.enterGameId || 'Please enter your Game ID'); return; }
         if (!serverId) { showToast(d.enterServerId || 'Please enter your Server ID'); return; }
         if (!selectedPayment) { showToast(d.selectPayment || 'Please select a payment method'); return; }
-        if (!hasFile) { showToast(d.uploadSlip || 'Please upload your payment slip'); return; }
+        if (!hasFile) { showToast(d.uploadSlip || 'Please send your Screenshot'); return; }
 
         this.disabled = true;
         this.textContent = '⏳ ' + (d.sending || 'Sending...');
@@ -766,7 +761,7 @@
 
             const telegramSuccess = await sendOrderToTelegram(orderData);
 
-            // ===== အော်ဒါရောက်ပြီဆိုတာနဲ့ User ဆီ Notification ပို့မယ် =====
+            // Send notification to user
             if (telegramSuccess) {
                 localStorage.setItem('newOrderNotification', JSON.stringify({
                     show: true,
@@ -775,13 +770,6 @@
                 }));
                 window.dispatchEvent(new Event('storage'));
             }
-
-            localStorage.setItem('newOrderNotification', JSON.stringify({
-                show: true,
-                orderId: orderId,
-                message: d.notiNewOrder || '🛒 New order!'
-            }));
-            window.dispatchEvent(new Event('storage'));
 
             document.getElementById('orderIdDisplay').textContent = '📋 Order #' + orderId;
             document.getElementById('orderSuccess').classList.add('show');
@@ -858,12 +846,10 @@
                         const messageId = update.callback_query.message.message_id;
                         const chatId = update.callback_query.message.chat.id;
                         
-                        // ===== DONE နှိပ်ရင် =====
                         if (callbackData.startsWith('done_')) {
                             const orderId = callbackData.replace('done_', '');
                             await updateOrderStatus(orderId, 'completed');
                             
-                            // ၁။ Telegram ကိုပြန်ပို့
                             await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
                                 method: 'POST',
                                 headers: { 'Content-Type': 'application/json' },
@@ -874,7 +860,6 @@
                                 })
                             });
                             
-                            // ၂။ User ဆီကို စိန်ဖြည့်အောင်မြင်ကြောင်း Notification ပို့မယ်
                             localStorage.setItem('newOrderNotification', JSON.stringify({
                                 show: true,
                                 orderId: orderId,
@@ -882,7 +867,6 @@
                             }));
                             window.dispatchEvent(new Event('storage'));
                             
-                            // ၃။ ခလုတ်တွေကိုဖျက်မယ်
                             await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/editMessageReplyMarkup`, {
                                 method: 'POST',
                                 headers: { 'Content-Type': 'application/json' },
@@ -894,12 +878,10 @@
                             });
                         }
                         
-                        // ===== FAIL နှိပ်ရင် =====
                         else if (callbackData.startsWith('fail_')) {
                             const orderId = callbackData.replace('fail_', '');
                             await updateOrderStatus(orderId, 'cancelled');
                             
-                            // ၁။ Telegram ကိုပြန်ပို့
                             await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
                                 method: 'POST',
                                 headers: { 'Content-Type': 'application/json' },
@@ -910,7 +892,6 @@
                                 })
                             });
                             
-                            // ၂။ User ဆီကို Notification ပို့မယ်
                             localStorage.setItem('newOrderNotification', JSON.stringify({
                                 show: true,
                                 orderId: orderId,
@@ -918,7 +899,6 @@
                             }));
                             window.dispatchEvent(new Event('storage'));
                             
-                            // ၃။ ခလုတ်တွေကိုဖျက်မယ်
                             await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/editMessageReplyMarkup`, {
                                 method: 'POST',
                                 headers: { 'Content-Type': 'application/json' },
