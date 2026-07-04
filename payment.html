@@ -3,34 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>⚡ Premium Game Shop - Payment</title>
+    <title>⚡ Premium Shop - Payment</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
         
         :root {
-            --bg-primary: #08081a;
-            --bg-secondary: #0c0c24;
-            --bg-card: #141c2b;
-            --bg-input: #1a2438;
-            --text-primary: #ffffff;
-            --text-secondary: #8899bb;
-            --border-color: rgba(255,255,255,0.08);
-            --shadow: rgba(0,0,0,0.6);
-            --gold: #ffd700;
-            --gold-glow: rgba(255,215,0,0.3);
-            --cyan: #00e5ff;
-            --cyan-glow: rgba(0,229,255,0.2);
-            --orange: #ff6a00;
-            --orange-glow: rgba(255,106,0,0.2);
-            --red: #ff0044;
-            --red-glow: rgba(255,0,68,0.4);
-            --green: #00ff87;
-            --green-glow: rgba(0,255,135,0.2);
+            --bg-primary: #e8eaf0;
+            --bg-secondary: #ffffff;
+            --bg-card: rgba(255,255,255,0.35);
+            --bg-input: rgba(255,255,255,0.7);
+            --text-primary: #1a1a2e;
+            --text-secondary: #6b7280;
+            --border-color: rgba(0,0,0,0.08);
+            --shadow: rgba(0,0,0,0.06);
+            --shadow-hover: rgba(0,0,0,0.1);
+            --primary: #6c5ce7;
+            --primary-glow: rgba(108,92,231,0.2);
+            --secondary: #b388ff;
+            --gold: #f5a623;
+            --gold-glow: rgba(245,166,35,0.2);
+            --cyan: #00b4d8;
+            --cyan-glow: rgba(0,180,216,0.15);
             --pink: #ff2d78;
-            --pink-glow: rgba(255,45,120,0.2);
-            --purple: #b388ff;
-            --purple-glow: rgba(179,136,255,0.2);
+            --pink-glow: rgba(255,45,120,0.15);
+            --orange: #ff6a00;
+            --green: #00c853;
+            --green-glow: rgba(0,200,83,0.2);
+            --red: #ff0044;
+            --red-glow: rgba(255,0,68,0.2);
+        }
+
+        .night-mode {
+            --bg-primary: #0d0d1a;
+            --bg-secondary: #1a1a2e;
+            --bg-card: rgba(30,30,60,0.5);
+            --bg-input: rgba(40,40,80,0.5);
+            --text-primary: #e8eaf0;
+            --text-secondary: #a8a8c8;
+            --border-color: rgba(255,255,255,0.06);
+            --shadow: rgba(0,0,0,0.3);
+            --shadow-hover: rgba(0,0,0,0.4);
+            --primary: #8b7cf7;
+            --primary-glow: rgba(139,124,247,0.3);
+            --secondary: #c8b8ff;
+            --gold: #ffd700;
+            --gold-glow: rgba(255,215,0,0.2);
         }
 
         body {
@@ -39,145 +57,230 @@
             min-height: 100vh;
             padding: 16px;
             padding-bottom: 90px;
-            background-image: 
-                radial-gradient(ellipse at 20% 50%, rgba(255,215,0,0.04) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 20%, rgba(0,229,255,0.04) 0%, transparent 50%);
+            transition: all 0.4s ease;
         }
 
-        ::-webkit-scrollbar{width:4px}
-        ::-webkit-scrollbar-track{background:var(--bg-primary)}
-        ::-webkit-scrollbar-thumb{background:var(--gold);border-radius:10px}
+        ::-webkit-scrollbar{width:3px}
+        ::-webkit-scrollbar-track{background:transparent}
+        ::-webkit-scrollbar-thumb{background:var(--primary);border-radius:10px}
 
-        .container{max-width:500px;margin:0 auto}
+        .container{max-width:480px;margin:0 auto}
 
-        /* ===== HEADER ===== */
+        /* ===== GLASS BOX (Home Page အတိုင်း) ===== */
+        .glass-box {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            box-shadow: 0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .glass-box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px var(--shadow-hover), inset 0 1px 0 rgba(255,255,255,0.15);
+        }
+
+        .click-pop { animation: pop 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+        @keyframes pop {
+            0% { transform: scale(1); }
+            30% { transform: scale(0.92); }
+            60% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        /* ===== SOFT CLICK ANIMATIONS ===== */
+        .btn-click {
+            transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-click:active {
+            transform: scale(0.92) !important;
+            opacity: 0.7 !important;
+        }
+
+        .card-click {
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+            cursor: pointer;
+        }
+        .card-click:active {
+            transform: scale(0.96) translateY(2px) !important;
+        }
+
+        .nav-click {
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+            cursor: pointer;
+        }
+        .nav-click:active {
+            transform: scale(0.88) !important;
+        }
+
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+        .ripple::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            pointer-events: none;
+        }
+        .ripple:active::after {
+            width: 300px;
+            height: 300px;
+            opacity: 0;
+        }
+
+        /* ===== HEADER (Home Page အတိုင်း) ===== */
         .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
-        .header .left{display:flex;flex-direction:column;gap:6px}
-        .header .left .logo{font-size:1rem;font-weight:800;color:var(--gold);text-shadow:0 0 20px var(--gold-glow);letter-spacing:0.5px}
-        .header .left .logo i{color:var(--cyan);margin-right:6px;text-shadow:0 0 20px var(--cyan-glow)}
-        .header .left .profile-icon{background:var(--bg-card);border:2px solid var(--border-color);color:var(--text-secondary);padding:4px 14px;border-radius:10px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-flex;align-items:center;gap:6px;height:36px;width:fit-content}
-        .header .left .profile-icon:active{transform:scale(0.85)}
-        .header .left .profile-icon:hover{border-color:var(--gold);color:var(--gold)}
-        .header .left .profile-icon.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 25px var(--gold-glow);padding:4px 14px}
-        .header .left .profile-icon.logged-in:active{transform:scale(0.85)}
-        .header .left .profile-icon.logged-in img{width:22px;height:22px;border-radius:50%;object-fit:cover;margin-right:4px}
+        .header .left{display:flex;flex-direction:column;gap:8px}
+        .header .left .logo-wrap{display:flex;align-items:center;gap:10px}
+        .header .left .logo-wrap img{height:38px;width:auto;border-radius:10px}
+        .header .left .logo-wrap .text-group{display:flex;flex-direction:column;line-height:1.1}
+        .header .left .logo-wrap .text-group .premium{font-size:1rem;font-weight:800;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .header .left .logo-wrap .text-group .shop{font-size:0.55rem;font-weight:600;color:var(--text-secondary);opacity:0.6;margin-top:-2px}
         
-        .header .right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
-        .header .right .top{display:flex;gap:8px;align-items:center}
-        .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:10px;border:2px solid var(--border-color)}
-        .header .right .top .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;text-transform:uppercase}
-        .header .right .top .lang-switcher .lang-btn.active{background:var(--gold);color:#0a0e1a;box-shadow:0 0 20px var(--gold-glow)}
-        .header .right .top .lang-switcher .lang-btn:active{transform:scale(0.85)}
+        .header .left .auth-btn{background:var(--bg-card);border:1px solid var(--border-color);color:var(--text-secondary);padding:6px 16px;border-radius:10px;font-size:0.6rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;height:32px;width:fit-content;box-shadow:0 2px 10px var(--shadow);transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1)}
+        .header .left .auth-btn:active{transform:scale(0.92);opacity:0.7}
+        .header .left .auth-btn:hover{border-color:var(--primary);color:var(--primary)}
+        .header .left .auth-btn.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;border-color:var(--gold);box-shadow:0 4px 20px var(--gold-glow)}
+        .header .left .auth-btn.logged-in:active{transform:scale(0.92);opacity:0.7}
+        .header .left .auth-btn.logged-in img{width:22px;height:22px;border-radius:50%;object-fit:cover;margin-right:4px}
         
-        .header .right .top .noti-btn{background:var(--bg-card);border:2px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none}
-        .header .right .top .noti-btn:active{transform:scale(0.85)}
+        .header .right{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+        .header .right .top{display:flex;gap:6px;align-items:center}
+        .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:10px;border:1px solid var(--border-color);box-shadow:0 2px 10px var(--shadow)}
+        .header .right .top .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;text-transform:uppercase;transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1)}
+        .header .right .top .lang-switcher .lang-btn:active{transform:scale(0.92);opacity:0.7}
+        .header .right .top .lang-switcher .lang-btn.active{background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;box-shadow:0 4px 15px var(--gold-glow)}
+        
+        .header .right .top .night-toggle{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;color:var(--text-secondary);box-shadow:0 2px 10px var(--shadow);transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1)}
+        .header .right .top .night-toggle:active{transform:scale(0.92);opacity:0.7}
+        .night-mode .header .right .top .night-toggle .fa-sun{color:#ffd700;text-shadow:0 0 20px rgba(255,215,0,0.3)}
+        
+        .header .right .top .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;box-shadow:0 2px 10px var(--shadow);transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1)}
+        .header .right .top .noti-btn:active{transform:scale(0.92);opacity:0.7}
         .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none;box-shadow:0 0 15px var(--red-glow)}
 
         /* ===== PAGE HEADER ===== */
-        .page-header{margin-bottom:20px;animation:slideUp 0.6s ease}
+        .page-header{margin-bottom:16px;animation:slideUp 0.6s ease}
         .page-header h1{font-size:1.3rem;font-weight:800;color:var(--text-primary)}
-        .page-header h1 span{background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 40px var(--gold-glow)}
+        .page-header h1 span{background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
         .page-header h1 i{color:var(--cyan);-webkit-text-fill-color:initial;margin-right:6px}
-        .page-header p{color:var(--text-secondary);font-size:0.75rem;margin-top:2px}
-
-        /* ===== GLASS CARD ===== */
-        .glass-card{background:var(--bg-card);border:2px solid var(--border-color);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:0 4px 25px var(--shadow);animation:slideUp 0.7s ease}
-        .glass-card .label{font-size:0.6rem;color:var(--text-secondary);font-weight:600;display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px}
-        .glass-card .label i{color:var(--cyan);margin-right:4px}
+        .page-header p{color:var(--text-secondary);font-size:0.7rem;margin-top:2px}
 
         /* ===== PAYMENT ACCOUNT ===== */
-        .payment-account{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;border:2px solid var(--border-color);margin-bottom:8px;transition:all 0.3s ease;background:var(--bg-input)}
-        .payment-account:active{transform:scale(0.97)}
-        .payment-account .icon-box{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;background:var(--bg-card);border:2px solid var(--border-color)}
+        .payment-account{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:12px;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1)}
+        .payment-account:active{transform:scale(0.96)}
+        .payment-account:hover{transform:translateY(-4px);border-color:rgba(245,166,35,0.3);box-shadow:0 8px 30px var(--shadow-hover), inset 0 1px 0 rgba(255,255,255,0.15)}
+        .payment-account .icon-box{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;background:var(--bg-card);border:1px solid var(--border-color)}
         .payment-account .info{flex:1}
-        .payment-account .info .name{font-size:0.85rem;font-weight:700;color:var(--text-primary)}
-        .payment-account .info .number{font-size:0.75rem;color:var(--text-secondary);margin-top:2px}
+        .payment-account .info .name{font-size:0.8rem;font-weight:700;color:var(--text-primary)}
+        .payment-account .info .number{font-size:0.7rem;color:var(--text-secondary);margin-top:2px}
         .payment-account .info .number i{margin-right:4px;color:var(--green)}
 
-        .copy-btn{background:var(--bg-card);border:2px solid var(--border-color);color:var(--text-secondary);padding:4px 12px;border-radius:12px;font-size:0.55rem;cursor:pointer;transition:all 0.3s ease;font-weight:600}
-        .copy-btn:active{transform:scale(0.90);background:var(--gold);color:#0a0e1a}
-        .copy-btn.copied{background:rgba(0,229,255,0.15);border-color:var(--green);color:var(--green)}
+        .copy-btn{background:var(--bg-card);border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 14px;border-radius:10px;font-size:0.55rem;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);font-weight:600}
+        .copy-btn:active{transform:scale(0.88);background:var(--gold);color:#fff}
+        .copy-btn.copied{background:rgba(0,200,83,0.1);border-color:var(--green);color:var(--green)}
+
+        /* ===== SECTION TITLE ===== */
+        .section-title{font-size:0.65rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;display:flex;align-items:center;gap:10px;opacity:0.5}
+        .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
+        .section-title i{color:var(--cyan);text-shadow:0 0 20px var(--cyan-glow)}
 
         /* ===== INSTRUCTION ===== */
-        .instruction-list{display:flex;flex-direction:column;gap:6px}
-        .instruction-item{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--bg-input);border-radius:8px;border:2px solid var(--border-color)}
-        .instruction-item .step{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.55rem;flex-shrink:0}
+        .instruction-list{display:flex;flex-direction:column;gap:8px}
+        .instruction-item{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:12px;box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1)}
+        .instruction-item .step{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.55rem;flex-shrink:0}
         .instruction-item .text{font-size:0.65rem;color:var(--text-secondary)}
         .instruction-item .text strong{color:var(--text-primary)}
 
         /* ===== SUPPORT CARD ===== */
-        .support-card{background:var(--bg-card);border:2px solid var(--border-color);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:14px;margin-top:10px;cursor:pointer;transition:all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);box-shadow:0 4px 25px var(--shadow)}
+        .support-card{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:14px;margin-top:4px;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1)}
         .support-card:active{transform:scale(0.96)}
-        .support-card:hover{border-color:rgba(0,136,204,0.3);box-shadow:0 0 30px rgba(0,136,204,0.1)}
-        .support-card .icon{font-size:1.8rem;color:#0088cc;flex-shrink:0}
+        .support-card:hover{transform:translateY(-4px);border-color:rgba(0,180,216,0.3);box-shadow:0 8px 30px var(--shadow-hover), inset 0 1px 0 rgba(255,255,255,0.15)}
+        .support-card .icon{font-size:1.6rem;color:#0088cc;flex-shrink:0}
         .support-card .info{flex:1}
-        .support-card .info .title{font-size:0.8rem;font-weight:600;color:var(--text-primary)}
-        .support-card .info .desc{font-size:0.55rem;color:var(--text-secondary)}
-        .support-card .arrow{color:var(--text-secondary);font-size:1.2rem;transition:all 0.3s ease}
+        .support-card .info .title{font-size:0.75rem;font-weight:600;color:var(--text-primary)}
+        .support-card .info .desc{font-size:0.5rem;color:var(--text-secondary);margin-top:1px}
+        .support-card .arrow{color:var(--text-secondary);font-size:1rem;transition:all 0.3s ease}
         .support-card:hover .arrow{color:var(--gold);transform:translateX(4px)}
 
-        /* ===== BOTTOM NAV ===== */
+        /* ===== BOTTOM NAV (Home Page အတိုင်း) ===== */
         .bottom-nav {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: #111927;
-            backdrop-filter: blur(20px);
-            border-top: 2px solid rgba(255,255,255,0.06);
-            border-radius: 16px 16px 0 0;
+            bottom: 16px;
+            left: 16px;
+            right: 16px;
+            width: auto;
+            max-width: 480px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            backdrop-filter: blur(24px);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
             display: flex;
             justify-content: space-around;
-            padding: 8px 0 12px;
-            max-width: 500px;
-            margin: 0 auto;
+            padding: 8px 4px;
             z-index: 100;
-            box-shadow: 0 -8px 40px rgba(0,0,0,0.6);
+            box-shadow: 0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);
         }
         .bottom-nav .nav-item {
             text-align: center;
             cursor: pointer;
             text-decoration: none;
             color: var(--text-secondary);
-            transition: all 0.3s ease;
-            padding: 6px 16px;
+            transition: all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
+            padding: 6px 12px;
             border-radius: 12px;
-            position: relative;
-            min-width: 56px;
-            border: 2px solid transparent;
+            min-width: 48px;
+            border: 1px solid transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1px;
         }
-        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;transition:all 0.3s ease}
-        .bottom-nav .nav-item .label{font-size:0.4rem;margin-top:2px;font-weight:700;letter-spacing:0.5px;transition:all 0.3s ease}
-        .bottom-nav .nav-item.active {
-            color: var(--gold);
-            background: rgba(255,215,0,0.08);
-            border-color: rgba(255,215,0,0.2);
-            box-shadow: 0 0 30px rgba(255,215,0,0.08);
-        }
-        .bottom-nav .nav-item.active .icon{transform:translateY(-2px);color:var(--gold)}
-        .bottom-nav .nav-item.active .label{color:var(--gold)}
-        .bottom-nav .nav-item:not(.active):hover {
-            border-color: rgba(255,255,255,0.04);
-            background: rgba(255,255,255,0.02);
-        }
+        .bottom-nav .nav-item:active { transform: scale(0.88); transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1); }
+        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;animation:floatIcon 3s ease-in-out infinite}
+        .bottom-nav .nav-item .label{font-size:0.4rem;letter-spacing:0.5px;opacity:0.5;font-weight:400}
+        .bottom-nav .nav-item.active { background:rgba(108,92,231,0.06); border:1px solid rgba(108,92,231,0.08); box-shadow:0 0 30px rgba(108,92,231,0.02); color:var(--text-primary); }
+        .bottom-nav .nav-item.active .icon{transform:translateY(-2px) scale(1.1); color:var(--gold); text-shadow:0 0 30px var(--gold-glow); animation:selectBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) }
+        .bottom-nav .nav-item.active .label{color:var(--gold);opacity:1;font-weight:400}
+        .bottom-nav .nav-item:not(.active):hover { border-color:rgba(108,92,231,0.06); background:rgba(108,92,231,0.02); }
+        @keyframes selectBounce { 0%{transform:scale(1)} 30%{transform:scale(1.3) rotate(-8deg)} 60%{transform:scale(0.9) rotate(4deg)} 100%{transform:scale(1.1) rotate(0deg)} }
 
         .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.3;letter-spacing:1px}
 
-        .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-card);padding:10px 20px;border-radius:12px;border:2px solid rgba(255,215,0,0.15);color:var(--gold);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 8px 40px var(--shadow);animation:toastPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
+        .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-secondary);padding:10px 20px;border-radius:12px;border:1px solid var(--border-color);color:var(--primary);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 4px 20px var(--shadow);animation:toastPop 0.4s cubic-bezier(0.34,1.56,0.64,1)}
         .toast.show{display:block}
         @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes shimmer{0%,100%{transform:translate(0,0)}50%{transform:translate(-20%,-20%)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+        @keyframes floatIcon {0%,100%{transform:translateY(0px)}50%{transform:translateY(-6px)}}
     </style>
 </head>
 <body>
 <div class="container">
-    <!-- ===== HEADER ===== -->
+    <!-- ===== HEADER (Home Page အတိုင်း) ===== -->
     <div class="header">
         <div class="left">
-            <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Shop</div>
-            <div class="profile-icon" id="profileIcon" onclick="goToProfile()">👤 Profile</div>
+            <div class="logo-wrap">
+                <img src="https://files.catbox.moe/lmq98x.jpg" alt="Premium Shop Logo">
+                <div class="text-group">
+                    <span class="premium" id="appName">Premium</span>
+                    <span class="shop" id="appSub">Game Shop</span>
+                </div>
+            </div>
+            <div class="auth-btn" id="authBtn" onclick="handleAuthClick()"><i class="fas fa-key"></i> Login</div>
         </div>
         <div class="right">
             <div class="top">
@@ -185,79 +288,82 @@
                     <button class="lang-btn active" data-lang="my" onclick="setLang('my')">မြန်မာ</button>
                     <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
                 </div>
-                <a href="notifications.html" class="noti-btn" id="notiBtn">
-                    🔔
-                    <span class="badge" id="notiBadge">0</span>
-                </a>
+                <button class="night-toggle" onclick="toggleNightMode()"><i class="fas fa-moon"></i></button>
+                <a href="notifications.html" class="noti-btn" id="notiBtn"><i class="fas fa-bell"></i><span class="badge" id="notiBadge">0</span></a>
             </div>
         </div>
     </div>
 
     <!-- ===== PAGE HEADER ===== -->
     <div class="page-header">
-        <h1 id="paymentTitle"><i class="fas fa-credit-card"></i> ငွေပေးချေရန် <span>အကောင့်များ</span></h1>
+        <h1><i class="fas fa-credit-card"></i> <span id="paymentTitle">ငွေပေးချေရန်</span></h1>
         <p id="paymentSub">အောက်ပါအကောင့်များထဲမှ တစ်ခုခုသို့ ငွေပို့ပါ</p>
     </div>
 
-    <!-- ===== WAVE PAY ===== -->
-    <div class="glass-card">
-        <span class="label"><i class="fas fa-university"></i> <span id="waveLabel">Wave Pay</span></span>
-        <div class="payment-account">
-            <div class="icon-box">🏦</div>
-            <div class="info">
-                <div class="name" id="waveName">Wave Pay</div>
-                <div class="number"><i class="fas fa-phone"></i> 09682506493</div>
-            </div>
-            <button class="copy-btn" onclick="copyNumber('09682506493', this)" id="copyBtn1">ကူးယူမည်</button>
+    <!-- ===== PAYMENT ACCOUNTS ===== -->
+    <div class="section-title"><i class="fas fa-university"></i> <span id="accountsTitle">ငွေလက်ခံမည့်အကောင့်များ</span></div>
+    
+    <!-- Wave Pay -->
+    <div class="payment-account card-click" onclick="copyNumber('09682506493', document.getElementById('copyBtn1'))">
+        <div class="icon-box">🏦</div>
+        <div class="info">
+            <div class="name" id="waveName">Wave Pay</div>
+            <div class="number"><i class="fas fa-phone"></i> 09682506493</div>
         </div>
+        <button class="copy-btn" id="copyBtn1" onclick="event.stopPropagation(); copyNumber('09682506493', this)">ကူးယူမည်</button>
     </div>
 
-    <!-- ===== KBZ PAY ===== -->
-    <div class="glass-card">
-        <span class="label"><i class="fas fa-university"></i> <span id="kpayLabel">KBZ Pay</span></span>
-        <div class="payment-account">
-            <div class="icon-box">🏦</div>
-            <div class="info">
-                <div class="name" id="kpayName">KBZ Pay</div>
-                <div class="number"><i class="fas fa-phone"></i> 09682506493</div>
-            </div>
-            <button class="copy-btn" onclick="copyNumber('09682506493', this)" id="copyBtn2">ကူးယူမည်</button>
+    <!-- KBZ Pay -->
+    <div class="payment-account card-click" onclick="copyNumber('09682506493', document.getElementById('copyBtn2'))">
+        <div class="icon-box">🏦</div>
+        <div class="info">
+            <div class="name" id="kpayName">KBZ Pay</div>
+            <div class="number"><i class="fas fa-phone"></i> 09682506493</div>
         </div>
+        <button class="copy-btn" id="copyBtn2" onclick="event.stopPropagation(); copyNumber('09682506493', this)">ကူးယူမည်</button>
     </div>
 
     <!-- ===== HOW TO PAY ===== -->
-    <div class="glass-card">
-        <span class="label"><i class="fas fa-list"></i> <span id="howToLabel">ငွေပေးချေနည်း</span></span>
-        <div class="instruction-list">
-            <div class="instruction-item"><span class="step">၁</span><span class="text" id="step1"><strong>Wave Pay</strong> သို့မဟုတ် <strong>KBZ Pay</strong> ရွေးပါ</span></div>
-            <div class="instruction-item"><span class="step">၂</span><span class="text" id="step2">အပေါ်က <strong>ဖုန်းနံပါတ်</strong> ကိုကူးယူပါ</span></div>
-            <div class="instruction-item"><span class="step">၃</span><span class="text" id="step3">အတိအကျငွေပို့ပြီး <strong>Screenshot</strong> ရိုက်ပါ</span></div>
-            <div class="instruction-item"><span class="step">၄</span><span class="text" id="step4"><strong>ဆိုင်</strong> သို့သွားပြီး အော်ဒါအပြီးသတ်ပါ</span></div>
+    <div class="section-title"><i class="fas fa-list"></i> <span id="howToTitle">ငွေပေးချေနည်း</span></div>
+    <div class="instruction-list">
+        <div class="instruction-item">
+            <span class="step">၁</span>
+            <span class="text" id="step1"><strong>Wave Pay</strong> သို့မဟုတ် <strong>KBZ Pay</strong> ရွေးပါ</span>
+        </div>
+        <div class="instruction-item">
+            <span class="step">၂</span>
+            <span class="text" id="step2">အပေါ်က <strong>ဖုန်းနံပါတ်</strong> ကိုကူးယူပါ</span>
+        </div>
+        <div class="instruction-item">
+            <span class="step">၃</span>
+            <span class="text" id="step3">အတိအကျငွေပို့ပြီး <strong>Screenshot</strong> ရိုက်ပါ</span>
+        </div>
+        <div class="instruction-item">
+            <span class="step">၄</span>
+            <span class="text" id="step4"><strong>ဆိုင်</strong> သို့သွားပြီး အော်ဒါအပြီးသတ်ပါ</span>
         </div>
     </div>
 
     <!-- ===== SUPPORT ===== -->
-    <div class="glass-card">
-        <span class="label"><i class="fas fa-headset"></i> <span id="supportLabel">အကူအညီလိုပါသလား?</span></span>
-        <div class="support-card" onclick="window.open('https://t.me/Energypremiumhub', '_blank')">
-            <span class="icon"><i class="fab fa-telegram-plane"></i></span>
-            <div class="info">
-                <div class="title" id="supportTitle">Telegram မှ ဆက်သွယ်ပါ</div>
-                <div class="desc" id="supportDesc">@Energypremiumhub • ၂၄/၇ ဝန်ဆောင်မှု</div>
-            </div>
-            <span class="arrow"><i class="fas fa-chevron-right"></i></span>
+    <div class="section-title" style="margin-top:18px;"><i class="fas fa-headset"></i> <span id="supportTitle">အကူအညီ</span></div>
+    <div class="support-card card-click" onclick="window.open('https://t.me/Energypremiumhub', '_blank')">
+        <span class="icon"><i class="fab fa-telegram-plane"></i></span>
+        <div class="info">
+            <div class="title" id="supportLabel">Telegram မှ ဆက်သွယ်ပါ</div>
+            <div class="desc" id="supportDesc">@Energypremiumhub • ၂၄/၇ ဝန်ဆောင်မှု</div>
         </div>
+        <span class="arrow"><i class="fas fa-chevron-right"></i></span>
     </div>
 
-    <div class="footer-text">&copy; 2026 Premium Shop</div>
+    <div class="footer-text">&copy; 2026 Premium Game Shop</div>
 </div>
 
-<!-- ===== BOTTOM NAV ===== -->
+<!-- ===== BOTTOM NAV (Home Page အတိုင်း) ===== -->
 <div class="bottom-nav">
-    <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label" id="navHome">ပင်မ</span></a>
-    <a href="shop.html" class="nav-item"><span class="icon">🛒</span><span class="label" id="navShop">ဆိုင်</span></a>
-    <a href="payment.html" class="nav-item active"><span class="icon">💳</span><span class="label" id="navPayment">ငွေပေးချေ</span></a>
-    <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label" id="navProfile">ပရိုဖိုင်</span></a>
+    <a href="index.html" class="nav-item" onclick="handleNavClick(this, event)"><span class="icon"><i class="fas fa-home"></i></span><span class="label" id="navHome">ပင်မ</span></a>
+    <a href="shop.html" class="nav-item" onclick="handleNavClick(this, event)"><span class="icon"><i class="fas fa-shopping-bag"></i></span><span class="label" id="navShop">ဆိုင်</span></a>
+    <a href="payment.html" class="nav-item active" onclick="handleNavClick(this, event)"><span class="icon"><i class="fas fa-credit-card"></i></span><span class="label" id="navPayment">ငွေပေးချေ</span></a>
+    <a href="profile.html" class="nav-item" onclick="handleNavClick(this, event)"><span class="icon"><i class="fas fa-user"></i></span><span class="label" id="navProfile">ပရိုဖိုင်</span></a>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -266,48 +372,65 @@
     // ===== LANGUAGE DATA =====
     const LANG_DATA = {
         my: {
-            appName: 'Premium Shop',
-            paymentTitle: 'ငွေပေးချေရန် အကောင့်များ',
+            appName: 'Premium',
+            appSub: 'Game Shop',
+            home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
+            paymentTitle: 'ငွေပေးချေရန်',
             paymentSub: 'အောက်ပါအကောင့်များထဲမှ တစ်ခုခုသို့ ငွေပို့ပါ',
+            accountsTitle: 'ငွေလက်ခံမည့်အကောင့်များ',
             wave: 'Wave Pay',
             kpay: 'KBZ Pay',
-            howToLabel: 'ငွေပေးချေနည်း',
+            howToTitle: 'ငွေပေးချေနည်း',
             step1: '<strong>Wave Pay</strong> သို့မဟုတ် <strong>KBZ Pay</strong> ရွေးပါ',
             step2: 'အပေါ်က <strong>ဖုန်းနံပါတ်</strong> ကိုကူးယူပါ',
             step3: 'အတိအကျငွေပို့ပြီး <strong>Screenshot</strong> ရိုက်ပါ',
             step4: '<strong>ဆိုင်</strong> သို့သွားပြီး အော်ဒါအပြီးသတ်ပါ',
-            supportLabel: 'အကူအညီလိုပါသလား?',
-            supportTitle: 'Telegram မှ ဆက်သွယ်ပါ',
+            supportTitle: 'အကူအညီ',
+            supportLabel: 'Telegram မှ ဆက်သွယ်ပါ',
             supportDesc: '@Energypremiumhub • ၂၄/၇ ဝန်ဆောင်မှု',
             copy: 'ကူးယူမည်',
             copied: '✅ ကူးပြီး',
-            home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်'
+            login: 'Login'
         },
         en: {
-            appName: 'Premium Shop',
-            paymentTitle: 'Payment Accounts',
+            appName: 'Premium',
+            appSub: 'Game Shop',
+            home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
+            paymentTitle: 'Payment',
             paymentSub: 'Send payment to one of the following accounts',
+            accountsTitle: 'Payment Accounts',
             wave: 'Wave Pay',
             kpay: 'KBZ Pay',
-            howToLabel: 'How to Pay',
+            howToTitle: 'How to Pay',
             step1: 'Choose <strong>Wave Pay</strong> or <strong>KBZ Pay</strong>',
             step2: 'Copy the <strong>phone number</strong> above',
             step3: 'Send the exact amount and <strong>take a screenshot</strong>',
             step4: 'Go to <strong>Shop</strong> and complete your order',
-            supportLabel: 'Need Help?',
-            supportTitle: 'Contact us on Telegram',
+            supportTitle: 'Support',
+            supportLabel: 'Contact us on Telegram',
             supportDesc: '@Energypremiumhub • 24/7 Support',
             copy: 'Copy',
             copied: '✅ Copied!',
-            home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile'
+            login: 'Login'
         }
     };
 
     let currentLang = localStorage.getItem('lang') || 'my';
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    let currentUser = null;
+    const savedUser = localStorage.getItem('currentUser');
+    if (savedUser) currentUser = JSON.parse(savedUser);
 
     function getText(key) { return LANG_DATA[currentLang][key] || key; }
 
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        clearTimeout(t._timer);
+        t._timer = setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    // ===== LANGUAGE =====
     function setLang(lang) {
         currentLang = lang;
         localStorage.setItem('lang', lang);
@@ -319,66 +442,75 @@
 
     function updateLanguage() {
         const d = LANG_DATA[currentLang];
-        if (!d) return;
-        document.getElementById('appName').innerHTML = '<i class="fas fa-gamepad"></i> ' + d.appName;
-        document.getElementById('paymentTitle').innerHTML = '<i class="fas fa-credit-card"></i> ' + d.paymentTitle;
+        document.getElementById('appName').textContent = d.appName;
+        document.getElementById('appSub').textContent = d.appSub;
+        document.getElementById('paymentTitle').textContent = d.paymentTitle;
         document.getElementById('paymentSub').textContent = d.paymentSub;
-        document.getElementById('waveLabel').textContent = d.wave;
+        document.getElementById('accountsTitle').textContent = d.accountsTitle;
         document.getElementById('waveName').textContent = d.wave;
-        document.getElementById('kpayLabel').textContent = d.kpay;
         document.getElementById('kpayName').textContent = d.kpay;
-        document.getElementById('howToLabel').textContent = d.howToLabel;
+        document.getElementById('howToTitle').textContent = d.howToTitle;
         document.getElementById('step1').innerHTML = d.step1;
         document.getElementById('step2').innerHTML = d.step2;
         document.getElementById('step3').innerHTML = d.step3;
         document.getElementById('step4').innerHTML = d.step4;
-        document.getElementById('supportLabel').textContent = d.supportLabel;
         document.getElementById('supportTitle').textContent = d.supportTitle;
+        document.getElementById('supportLabel').textContent = d.supportLabel;
         document.getElementById('supportDesc').textContent = d.supportDesc;
-        document.getElementById('copyBtn1').textContent = d.copy;
-        document.getElementById('copyBtn2').textContent = d.copy;
         document.getElementById('navHome').textContent = d.home;
         document.getElementById('navShop').textContent = d.shop;
         document.getElementById('navPayment').textContent = d.payment;
         document.getElementById('navProfile').textContent = d.profile;
+        document.getElementById('copyBtn1').textContent = d.copy;
+        document.getElementById('copyBtn2').textContent = d.copy;
         updateAuthUI();
     }
 
-    function showToast(msg) {
-        const t = document.getElementById('toast');
-        t.textContent = msg;
-        t.classList.add('show');
-        clearTimeout(t._timer);
-        t._timer = setTimeout(() => t.classList.remove('show'), 3000);
-    }
-
-    function checkNotifications() {
-        const notiData = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
-        const badge = document.getElementById('notiBadge');
-        if (notiData.show) {
-            badge.style.display = 'block';
-            badge.textContent = '1';
-            setTimeout(() => {
-                badge.style.display = 'none';
-                localStorage.setItem('newOrderNotification', JSON.stringify({show: false}));
-            }, 5000);
+    // ===== AUTH =====
+    function updateAuthUI() {
+        const btn = document.getElementById('authBtn');
+        if (currentUser) {
+            const avatar = localStorage.getItem('userAvatar_' + currentUser.username);
+            btn.innerHTML = avatar ? '<img src="'+avatar+'" alt="avatar"> '+currentUser.username : '<i class="fas fa-user"></i> '+currentUser.username;
+            btn.className = 'auth-btn logged-in';
         } else {
-            badge.style.display = 'none';
+            btn.innerHTML = '<i class="fas fa-key"></i> ' + getText('login');
+            btn.className = 'auth-btn';
         }
     }
 
-    window.addEventListener('storage', function(e) {
-        if (e.key === 'newOrderNotification') {
-            checkNotifications();
+    function handleAuthClick() {
+        if (currentUser) {
+            window.location.href = 'profile.html';
+        } else {
+            window.location.href = 'index.html#login';
         }
-    });
+    }
 
+    // ===== NIGHT MODE =====
+    function toggleNightMode() {
+        document.body.classList.toggle('night-mode');
+        const icon = document.querySelector('.night-toggle i');
+        if (document.body.classList.contains('night-mode')) {
+            icon.className = 'fas fa-sun';
+            localStorage.setItem('nightMode', 'true');
+        } else {
+            icon.className = 'fas fa-moon';
+            localStorage.setItem('nightMode', 'false');
+        }
+    }
+
+    // ===== COPY =====
     function copyNumber(number, btn) {
         const d = LANG_DATA[currentLang] || {};
         navigator.clipboard.writeText(number).then(() => {
             btn.textContent = d.copied || '✅ Copied!';
             btn.classList.add('copied');
-            setTimeout(() => { btn.textContent = d.copy || 'Copy'; btn.classList.remove('copied'); }, 2500);
+            showToast('✅ ' + number + ' ' + (d.copied || 'Copied!'));
+            setTimeout(() => { 
+                btn.textContent = d.copy || 'Copy'; 
+                btn.classList.remove('copied'); 
+            }, 2500);
         }).catch(() => {
             const input = document.createElement('input');
             input.value = number;
@@ -388,35 +520,69 @@
             document.body.removeChild(input);
             btn.textContent = d.copied || '✅ Copied!';
             btn.classList.add('copied');
-            setTimeout(() => { btn.textContent = d.copy || 'Copy'; btn.classList.remove('copied'); }, 2500);
+            showToast('✅ ' + number + ' ' + (d.copied || 'Copied!'));
+            setTimeout(() => { 
+                btn.textContent = d.copy || 'Copy'; 
+                btn.classList.remove('copied'); 
+            }, 2500);
         });
     }
 
-    function updateAuthUI() {
-        const profileIcon = document.getElementById('profileIcon');
-        if (currentUser) {
-            const savedAvatar = localStorage.getItem('userAvatar_' + currentUser.username);
-            if (savedAvatar) {
-                profileIcon.innerHTML = '<img src="' + savedAvatar + '" alt="avatar"> ' + currentUser.username;
-            } else {
-                profileIcon.innerHTML = '👤 ' + currentUser.username;
-            }
-            profileIcon.className = 'profile-icon logged-in';
-        } else {
-            profileIcon.innerHTML = '👤 Profile';
-            profileIcon.className = 'profile-icon';
+    // ===== NAV =====
+    function handleNavClick(el, e) {
+        e.preventDefault();
+        const icon = el.querySelector('.icon');
+        if (icon) {
+            icon.style.animation = 'none';
+            void icon.offsetWidth;
+            icon.style.animation = 'selectBounce 0.5s cubic-bezier(0.34,1.56,0.64,1)';
+        }
+        setTimeout(() => { window.location.href = el.getAttribute('href'); }, 400);
+    }
+
+    // ===== NOTIFICATION =====
+    function checkNotification() {
+        const noti = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
+        const badge = document.getElementById('notiBadge');
+        if (noti.show) {
+            badge.style.display = 'block';
+            badge.textContent = '1';
+            setTimeout(() => {
+                badge.style.display = 'none';
+                localStorage.setItem('newOrderNotification', JSON.stringify({show: false}));
+            }, 5000);
         }
     }
 
-    function goToProfile() {
-        window.location.href = 'profile.html';
-    }
-
+    // ===== INIT =====
     document.addEventListener('DOMContentLoaded', function() {
         const savedLang = localStorage.getItem('lang') || 'my';
         setLang(savedLang);
         updateAuthUI();
-        checkNotifications();
+        
+        const nightMode = localStorage.getItem('nightMode') === 'true';
+        if (nightMode) {
+            document.body.classList.add('night-mode');
+            document.querySelector('.night-toggle i').className = 'fas fa-sun';
+        }
+        
+        checkNotification();
+        
+        // Update currentUser if changed
+        const user = localStorage.getItem('currentUser');
+        if (user) currentUser = JSON.parse(user);
+        else currentUser = null;
+        updateAuthUI();
+    });
+
+    window.addEventListener('storage', function(e) {
+        if (e.key === 'newOrderNotification') checkNotification();
+        if (e.key === 'currentUser') {
+            const user = localStorage.getItem('currentUser');
+            if (user) currentUser = JSON.parse(user);
+            else currentUser = null;
+            updateAuthUI();
+        }
     });
 </script>
 </body>
