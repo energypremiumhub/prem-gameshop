@@ -84,7 +84,10 @@
         .header .right .top .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;text-transform:uppercase}
         .header .right .top .lang-switcher .lang-btn.active{background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;box-shadow:0 4px 15px var(--gold-glow)}
         .header .right .top .night-toggle{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;color:var(--text-secondary);box-shadow:0 2px 10px var(--shadow)}
+        .header .right .top .night-toggle:active{transform:scale(0.85)}
+        .night-mode .header .right .top .night-toggle .fa-sun{color:#ffd700}
         .header .right .top .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;box-shadow:0 2px 10px var(--shadow)}
+        .header .right .top .noti-btn:active{transform:scale(0.85)}
         .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none;box-shadow:0 0 15px var(--red-glow)}
 
         .page-header{margin-bottom:16px;animation:slideUp 0.6s ease}
@@ -106,9 +109,6 @@
         .noti-item .title{font-size:0.7rem;font-weight:600;color:var(--text-primary);margin-bottom:4px;padding-right:70px}
         .noti-item .desc{font-size:0.55rem;color:var(--text-secondary);line-height:1.5;white-space:pre-wrap}
         .noti-item .time{font-size:0.4rem;color:var(--text-secondary);margin-top:4px;opacity:0.5}
-        .noti-item .btn-done{background:linear-gradient(135deg,var(--green),#00b894);color:#fff;border:none;padding:4px 14px;border-radius:8px;font-size:0.45rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;margin-top:6px}
-        .noti-item .btn-done:active{transform:scale(0.90)}
-        .noti-item .btn-done:disabled{opacity:0.4;cursor:not-allowed}
 
         .empty-state{text-align:center;padding:50px 0;color:var(--text-secondary);font-size:0.7rem}
         .empty-state .icon{font-size:3rem;display:block;margin-bottom:10px;opacity:0.3}
@@ -217,9 +217,7 @@
             emptyTitle: '🔔 အကြောင်းကြားချက်မရှိသေးပါ',
             emptyDesc: 'အော်ဒါတင်လိုက်တိုင်း ဤနေရာတွင် ပြသပေးပါမည်။',
             pending: 'ဆောင်ရွက်နေဆဲ',
-            completed: 'ပြီးမြောက်',
-            doneBtn: '✅ ပြီးပြီ',
-            completedMsg: '✅ အော်ဒါအောင်မြင်ပါသည်!\nဝယ်ယူအားပေးမှုအတွက် ကျေးဇူးအထူးတင်ရှိပါသည်။'
+            completed: 'ပြီးမြောက်'
         },
         en: {
             appName: 'Premium', appSub: 'Game Shop',
@@ -229,9 +227,7 @@
             emptyTitle: '🔔 No notifications yet',
             emptyDesc: 'You will see your order updates here.',
             pending: 'Pending',
-            completed: 'Completed',
-            doneBtn: '✅ Done',
-            completedMsg: '✅ Order completed!\nThank you for your purchase!'
+            completed: 'Completed'
         }
     };
 
@@ -279,53 +275,7 @@
         t._timer = setTimeout(() => t.classList.remove('show'), 3000);
     }
 
-    // ===== MARK ORDER AS COMPLETED =====
-    function completeOrder(orderId) {
-        const d = LANG_DATA[currentLang] || {};
-        
-        // Update notifications
-        const notis = JSON.parse(localStorage.getItem('notifications') || '[]');
-        const notiIndex = notis.findIndex(n => n.orderId === orderId);
-        if (notiIndex !== -1) {
-            notis[notiIndex].status = 'completed';
-            notis[notiIndex].message = d.completedMsg || '✅ အော်ဒါအောင်မြင်ပါသည်!';
-            localStorage.setItem('notifications', JSON.stringify(notis));
-        }
-        
-        // Update order history
-        const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
-        const orderIndex = orders.findIndex(o => o.id === orderId);
-        if (orderIndex !== -1) {
-            orders[orderIndex].status = 'completed';
-            localStorage.setItem('orderHistory', JSON.stringify(orders));
-        }
-        
-        // Add new notification for completion
-        const newNoti = {
-            id: 'noti_' + Date.now(),
-            orderId: orderId,
-            type: 'completed',
-            status: 'completed',
-            message: d.completedMsg || '✅ အော်ဒါအောင်မြင်ပါသည်!\nဝယ်ယူအားပေးမှုအတွက် ကျေးဇူးအထူးတင်ရှိပါသည်။',
-            time: new Date().toLocaleString()
-        };
-        const allNotis = JSON.parse(localStorage.getItem('notifications') || '[]');
-        allNotis.unshift(newNoti);
-        localStorage.setItem('notifications', JSON.stringify(allNotis));
-        
-        // Update badge
-        localStorage.setItem('newOrderNotification', JSON.stringify({
-            show: true,
-            orderId: orderId,
-            message: newNoti.message
-        }));
-        window.dispatchEvent(new Event('storage'));
-        
-        renderNotifications();
-        showToast('✅ အော်ဒါ #' + orderId + ' ပြီးမြောက်ပါပြီ!', 'success');
-    }
-
-    // ===== RENDER NOTIFICATIONS =====
+    // ===== RENDER NOTIFICATIONS (ခလုတ်မပါ) =====
     function renderNotifications() {
         const container = document.getElementById('notiContainer');
         const d = LANG_DATA[currentLang] || {};
@@ -346,7 +296,6 @@
             const isPending = noti.status === 'pending';
             const statusText = isPending ? d.pending : d.completed;
             const statusClass = isPending ? 'pending' : 'completed';
-            const orderId = noti.orderId || noti.id.replace('noti_', '');
             
             return `
                 <div class="noti-item">
@@ -354,11 +303,6 @@
                     <div class="title">${noti.message ? noti.message.split('\n')[0] : 'Notification'}</div>
                     <div class="desc">${noti.message || ''}</div>
                     <div class="time">${noti.time || new Date().toLocaleString()}</div>
-                    ${isPending ? `
-                        <button class="btn-done" onclick="completeOrder('${orderId}')">
-                            ✅ ${d.doneBtn || 'Done'}
-                        </button>
-                    ` : ''}
                 </div>
             `;
         }).join('') + `</div>`;
