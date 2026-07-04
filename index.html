@@ -73,11 +73,11 @@
             z-index: 1;
         }
 
-        /* ===== GLASS BOX (Standard) ===== */
+        /* ===== GLASS BOX (Standard - Navigation Bar Style) ===== */
         .glass-box {
-            background: linear-gradient(145deg, rgba(108,92,231,0.08), rgba(0,180,216,0.08));
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: linear-gradient(145deg, rgba(16,16,50,0.4), rgba(10,10,30,0.4));
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255,255,255,0.06);
             border-radius: 16px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.3);
@@ -96,7 +96,7 @@
         .header .left .logo img{height:38px;width:auto;vertical-align:middle;border-radius:10px}
         .header .left .logo span{background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 40px var(--primary-glow)}
         
-        .header .left .auth-btn{background:linear-gradient(145deg,rgba(108,92,231,0.15),rgba(0,180,216,0.15));backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.06);color:var(--text-secondary);padding:4px 14px;border-radius:10px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-flex;align-items:center;gap:6px;height:36px;width:fit-content}
+        .header .left .auth-btn{background:linear-gradient(145deg,rgba(16,16,50,0.4),rgba(10,10,30,0.4));backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.06);color:var(--text-secondary);padding:4px 14px;border-radius:10px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-flex;align-items:center;gap:6px;height:36px;width:fit-content}
         .header .left .auth-btn:active{transform:scale(0.85)}
         .header .left .auth-btn:hover{border-color:var(--gold);color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
         .header .left .auth-btn.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow);padding:4px 14px}
@@ -105,12 +105,12 @@
         
         .header .right{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
         .header .right .top{display:flex;gap:6px;align-items:center}
-        .header .right .top .lang-switcher{display:flex;gap:2px;background:linear-gradient(145deg,rgba(108,92,231,0.1),rgba(0,180,216,0.1));backdrop-filter:blur(12px);padding:3px;border-radius:10px;border:1px solid rgba(255,255,255,0.06)}
+        .header .right .top .lang-switcher{display:flex;gap:2px;background:linear-gradient(145deg,rgba(16,16,50,0.4),rgba(10,10,30,0.4));backdrop-filter:blur(16px);padding:3px;border-radius:10px;border:1px solid rgba(255,255,255,0.06)}
         .header .right .top .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;text-transform:uppercase}
         .header .right .top .lang-switcher .lang-btn.active{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;box-shadow:0 0 20px var(--gold-glow)}
         .header .right .top .lang-switcher .lang-btn:active{transform:scale(0.85)}
         
-        .header .right .top .noti-btn{background:linear-gradient(145deg,rgba(108,92,231,0.1),rgba(0,180,216,0.1));backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.06);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none}
+        .header .right .top .noti-btn{background:linear-gradient(145deg,rgba(16,16,50,0.4),rgba(10,10,30,0.4));backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.06);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none}
         .header .right .top .noti-btn:active{transform:scale(0.85)}
         .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none;box-shadow:0 0 15px var(--red-glow)}
 
@@ -123,11 +123,11 @@
         .welcome h2 i{color:var(--cyan);-webkit-text-fill-color:initial;text-shadow:0 0 20px var(--cyan-glow)}
         .welcome p{color:var(--text-secondary);font-size:0.75rem;margin-top:2px;font-weight:400;opacity:0.6}
 
-        /* ===== SHOP STATUS BANNER ===== */
+        /* ===== SHOP STATUS BANNER (Glass Box) ===== */
         .shop-status-banner {
-            background: linear-gradient(145deg, rgba(108,92,231,0.06), rgba(0,180,216,0.06));
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.05);
+            background: linear-gradient(145deg, rgba(16,16,50,0.4), rgba(10,10,30,0.4));
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.06);
             border-radius: 16px;
             padding: 16px 20px;
             margin-bottom: 16px;
@@ -136,7 +136,7 @@
             animation: slideUp 0.7s ease;
             transition: all 0.5s ease;
             cursor: pointer;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
             min-height: 80px;
             display: flex;
             align-items: center;
@@ -220,18 +220,18 @@
             50% { opacity: 0.7; transform: scale(0.97); box-shadow: 0 0 50px rgba(0,255,135,0.08); }
         }
 
-        /* ===== SHOP CARD ===== */
+        /* ===== SHOP CARD (Glass Box) ===== */
         .shop-card {
-            background: linear-gradient(145deg, rgba(108,92,231,0.08), rgba(0,180,216,0.08));
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.05);
+            background: linear-gradient(145deg, rgba(16,16,50,0.4), rgba(10,10,30,0.4));
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.06);
             border-radius: 16px;
             padding: 18px 14px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
             margin-bottom: 16px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
             position: relative;
             overflow: hidden;
             text-decoration: none;
@@ -313,12 +313,12 @@
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(255,255,255,0.06),transparent)}
         .section-title i{color:var(--cyan);text-shadow:0 0 20px var(--cyan-glow)}
 
-        /* ===== SERVICES GRID ===== */
+        /* ===== SERVICES GRID (Glass Box) ===== */
         .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;animation:slideUp 0.9s ease;margin-bottom:18px}
         .services-grid .service{
-            background: linear-gradient(145deg, rgba(108,92,231,0.06), rgba(0,180,216,0.06));
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.05);
+            background: linear-gradient(145deg, rgba(16,16,50,0.4), rgba(10,10,30,0.4));
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.06);
             border-radius: 14px;
             padding: 16px 10px;
             text-align: center;
@@ -326,12 +326,12 @@
             transition: all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
         }
         .services-grid .service:active {
             transform: scale(0.97);
         }
-        .services-grid .service .icon{font-size:1.8rem;display:block;margin-bottom:6px;transition:all 0.3s ease}
+        .services-grid .service .icon{font-size:1.8rem;display:block;margin-bottom:6px;transition:all 0.3s ease;animation:floatIcon 3s ease-in-out infinite}
         .services-grid .service .icon i{background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
         .services-grid .service .label{font-size:0.55rem;color:var(--text-secondary);font-weight:600;line-height:1.3;transition:all 0.3s ease}
         .services-grid .service .glow{position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(108,92,231,0.04) 0%,transparent 70%);opacity:0;transition:all 0.5s ease}
@@ -345,11 +345,11 @@
         .services-grid .service:nth-child(5) .icon i{color:var(--pink);background:linear-gradient(135deg,var(--pink),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
         .services-grid .service:nth-child(6) .icon i{color:var(--orange);background:linear-gradient(135deg,var(--orange),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 
-        /* ===== TELEGRAM CARD ===== */
+        /* ===== TELEGRAM CARD (Glass Box) ===== */
         .telegram-card{
-            background: linear-gradient(145deg, rgba(108,92,231,0.06), rgba(0,180,216,0.06));
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.05);
+            background: linear-gradient(145deg, rgba(16,16,50,0.4), rgba(10,10,30,0.4));
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.06);
             border-radius: 14px;
             padding: 12px 14px;
             display: flex;
@@ -359,7 +359,7 @@
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
             animation: slideUp 0.85s ease;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
         }
         .telegram-card:active {
             transform: scale(0.97);
@@ -371,11 +371,11 @@
         .telegram-card .arrow{color:var(--text-secondary);font-size:1rem;transition:all 0.3s ease}
         .telegram-card:hover .arrow{color:var(--primary);transform:translateX(4px)}
 
-        /* ===== TELEGRAM CONTACT ===== */
+        /* ===== TELEGRAM CONTACT (Glass Box) ===== */
         .telegram-contact{
-            background: linear-gradient(145deg, rgba(108,92,231,0.06), rgba(0,180,216,0.06));
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.05);
+            background: linear-gradient(145deg, rgba(16,16,50,0.4), rgba(10,10,30,0.4));
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.06);
             border-radius: 14px;
             padding: 10px 14px;
             display: flex;
@@ -385,7 +385,7 @@
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
             animation: slideUp 0.85s ease;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
         }
         .telegram-contact:active {
             transform: scale(0.97);
@@ -393,11 +393,11 @@
         .telegram-contact .icon{font-size:1.2rem;color:var(--cyan);flex-shrink:0;text-shadow:0 0 20px var(--cyan-glow)}
         .telegram-contact .info{flex:1}
         .telegram-contact .info .label{font-size:0.55rem;color:var(--text-secondary);font-weight:500;opacity:0.6}
-        .telegram-contact .info .username{font-size:0.7rem;font-weight:600;color:var(--primary);text-shadow:0 0 20px var(--primary-glow)}
+        .telegram-contact .info .username{font-size:0.7rem;font-weight:600;color:var(--gold);text-shadow:0 0 20px var(--gold-glow)}
         .telegram-contact .arrow{color:var(--text-secondary);font-size:0.9rem;transition:all 0.3s ease}
         .telegram-contact:hover .arrow{color:var(--primary);transform:translateX(3px)}
 
-        /* ===== BOTTOM NAV (အောက်ခြေနဲ့ကွာ၊ ဘေးတွေနဲ့မထိ) ===== */
+        /* ===== BOTTOM NAV (Glass Box - အောက်ခြေနဲ့ကွာ) ===== */
         .bottom-nav {
             position: fixed;
             bottom: 16px;
@@ -406,9 +406,9 @@
             width: auto;
             max-width: 480px;
             margin: 0 auto;
-            background: linear-gradient(145deg, rgba(16,16,50,0.7), rgba(10,10,30,0.7));
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
+            background: linear-gradient(145deg, rgba(16,16,50,0.5), rgba(10,10,30,0.5));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255,255,255,0.06);
             border-radius: 18px;
             display: flex;
@@ -433,7 +433,7 @@
             align-items: center;
             gap: 1px;
         }
-        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;transition:all 0.3s ease}
+        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;transition:all 0.3s ease;animation:floatIcon 3s ease-in-out infinite}
         .bottom-nav .nav-item .label{font-size:0.4rem;font-weight:700;letter-spacing:0.5px;transition:all 0.3s ease;opacity:0.5}
         .bottom-nav .nav-item.active {
             background: linear-gradient(145deg, rgba(108,92,231,0.2), rgba(0,180,216,0.15));
@@ -442,9 +442,10 @@
             color: var(--text-primary);
         }
         .bottom-nav .nav-item.active .icon{
-            transform:translateY(-2px);
+            transform:translateY(-2px) scale(1.1);
             color:var(--gold);
-            text-shadow:0 0 30px var(--gold-glow)
+            text-shadow:0 0 30px var(--gold-glow);
+            animation:selectBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)
         }
         .bottom-nav .nav-item.active .label{
             color:var(--gold);
@@ -453,6 +454,13 @@
         .bottom-nav .nav-item:not(.active):hover {
             border-color: rgba(255,255,255,0.04);
             background: rgba(255,255,255,0.02);
+        }
+
+        @keyframes selectBounce {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.3) rotate(-8deg); }
+            60% { transform: scale(0.9) rotate(4deg); }
+            100% { transform: scale(1.1) rotate(0deg); }
         }
 
         .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.2;letter-spacing:1px}
@@ -464,7 +472,7 @@
         @keyframes shimmer{0%,100%{transform:translate(0,0)}50%{transform:translate(-20%,-20%)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
-        /* ===== MODAL ===== */
+        /* ===== MODAL (Glass Box) ===== */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -689,12 +697,12 @@
         <span class="arrow"><i class="fas fa-chevron-right"></i></span>
     </div>
 
-    <!-- ===== TELEGRAM CONTACT ===== -->
+    <!-- ===== TELEGRAM CONTACT (Username ပြောင်းထား) ===== -->
     <div class="telegram-contact" onclick="handleTelegramContactClick()">
         <span class="icon"><i class="fas fa-headset"></i></span>
         <div class="info">
             <div class="label" id="contactLabel">💬 အကူအညီလိုပါသလား?</div>
-            <div class="username">@Energypremiumhub</div>
+            <div class="username">@PremEnergy</div>
         </div>
         <span class="arrow"><i class="fas fa-chevron-right"></i></span>
     </div>
@@ -728,7 +736,7 @@
 <!-- ===== CONFIRM OVERLAY ===== -->
 <div class="confirm-overlay" id="confirmOverlay">
     <div class="card">
-        <div class="avatar-box" id="confirmAvatar">⚔️</div>
+        <div class="avatar-box" id="confirmAvatar"><i class="fas fa-user-circle"></i></div>
         <div class="username" id="confirmUsername">Username</div>
         <div class="email" id="confirmEmail">email@example.com</div>
         <div class="status"><i class="fas fa-circle" style="color:var(--green);font-size:0.4rem;margin-right:4px;"></i> Online</div>
@@ -831,7 +839,7 @@
             telegramTitle: '📢 ကျွန်ုပ်တို့ Telegram ချန်နယ်သို့လာရောက်ပါ',
             telegramDesc: 'နောက်ဆုံးရသတင်းများ၊ ပရိုမိုးရှင်းများနှင့် အကူအညီရယူပါ',
             contactLabel: '💬 အကူအညီလိုပါသလား?',
-            contactUsername: '@Energypremiumhub',
+            contactUsername: '@PremEnergy',
             home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
             noti: '🔔 အသိပေးချက်အသစ်မရှိပါ',
             modalLogin: '⚔️ ဝင်ရန်',
@@ -879,7 +887,7 @@
             telegramTitle: '📢 Join Our Telegram Channel',
             telegramDesc: 'Get latest updates, promos and support',
             contactLabel: '💬 Need Help?',
-            contactUsername: '@Energypremiumhub',
+            contactUsername: '@PremEnergy',
             home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
             noti: '🔔 No new notifications',
             modalLogin: '⚔️ Login',
@@ -1032,8 +1040,8 @@
         icon.style.transform = 'scale(1.2)';
         
         setTimeout(() => {
-            el.style.borderColor = 'rgba(255,255,255,0.05)';
-            el.style.boxShadow = '0 8px 32px rgba(0,0,0,0.15)';
+            el.style.borderColor = 'rgba(255,255,255,0.06)';
+            el.style.boxShadow = '0 8px 32px rgba(0,0,0,0.3)';
             icon.style.transform = 'scale(1)';
         }, 500);
     }
@@ -1047,15 +1055,22 @@
     function handleTelegramContactClick() {
         const contact = document.querySelector('.telegram-contact');
         applySoftClick(contact);
-        window.open('https://t.me/Energypremiumhub', '_blank');
+        window.open('https://t.me/PremEnergy', '_blank');
     }
 
     function handleNavClick(el, event) {
         event.preventDefault();
         applySoftClick(el);
+        // အိုင်ကွန် select animation
+        const icon = el.querySelector('.icon');
+        if (icon) {
+            icon.style.animation = 'none';
+            void icon.offsetWidth;
+            icon.style.animation = 'selectBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        }
         setTimeout(() => {
             window.location.href = el.getAttribute('href');
-        }, 350);
+        }, 400);
     }
 
     // ===== TOAST =====
