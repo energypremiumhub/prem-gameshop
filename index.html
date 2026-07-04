@@ -11,15 +11,15 @@
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
         
         :root {
-            --bg-primary: #f0f2f5;
+            --bg-primary: #e8eaf0;
             --bg-secondary: #ffffff;
-            --bg-card: rgba(255,255,255,0.3);
-            --bg-input: rgba(255,255,255,0.6);
+            --bg-card: rgba(255,255,255,0.35);
+            --bg-input: rgba(255,255,255,0.7);
             --text-primary: #1a1a2e;
             --text-secondary: #6b7280;
-            --border-color: rgba(255,255,255,0.15);
+            --border-color: rgba(255,255,255,0.2);
             --shadow: rgba(0,0,0,0.06);
-            --shadow-hover: rgba(0,0,0,0.08);
+            --shadow-hover: rgba(0,0,0,0.1);
             --primary: #6c5ce7;
             --primary-glow: rgba(108,92,231,0.2);
             --secondary: #b388ff;
@@ -56,7 +56,7 @@
             z-index: 1;
         }
 
-        /* ===== GLASS BOX (ထင်ရှားတဲ့ Glass Effect) ===== */
+        /* ===== GLASS BOX (မီးခိုးရောင်နောက်ခံပေါ်မှာ ထင်ရှားတယ်) ===== */
         .glass-box {
             background: var(--bg-card);
             backdrop-filter: blur(20px);
@@ -65,7 +65,7 @@
             border-radius: 16px;
             box-shadow: 
                 0 4px 20px var(--shadow),
-                0 8px 40px rgba(0,0,0,0.04),
+                0 8px 40px rgba(0,0,0,0.03),
                 inset 0 1px 0 rgba(255,255,255,0.3);
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
@@ -75,6 +75,27 @@
                 0 8px 30px var(--shadow-hover),
                 0 16px 60px rgba(0,0,0,0.06),
                 inset 0 1px 0 rgba(255,255,255,0.4);
+        }
+
+        /* ===== SMOOTH CLICK ANIMATION ===== */
+        .click-pop {
+            animation: pop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes pop {
+            0% { transform: scale(1); }
+            30% { transform: scale(0.92); }
+            60% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        .click-bounce {
+            animation: bounce 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes bounce {
+            0% { transform: scale(1); }
+            40% { transform: scale(0.88); }
+            70% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         ::-webkit-scrollbar{width:3px}
@@ -90,21 +111,21 @@
         .header .left .logo span{background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
         
         .header .left .auth-btn{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 14px;border-radius:10px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-flex;align-items:center;gap:6px;height:36px;width:fit-content;box-shadow:0 4px 15px var(--shadow),inset 0 1px 0 rgba(255,255,255,0.3)}
-        .header .left .auth-btn:active{transform:scale(0.85)}
+        .header .left .auth-btn:active{animation:pop 0.3s cubic-bezier(0.34,1.56,0.64,1)}
         .header .left .auth-btn:hover{box-shadow:0 8px 25px var(--shadow-hover),inset 0 1px 0 rgba(255,255,255,0.4)}
         .header .left .auth-btn.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;border-color:var(--gold);box-shadow:0 4px 20px var(--gold-glow)}
-        .header .left .auth-btn.logged-in:active{transform:scale(0.85)}
+        .header .left .auth-btn.logged-in:active{animation:pop 0.3s cubic-bezier(0.34,1.56,0.64,1)}
         .header .left .auth-btn.logged-in img{width:22px;height:22px;border-radius:50%;object-fit:cover;margin-right:4px}
         
         .header .right{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
         .header .right .top{display:flex;gap:6px;align-items:center}
         .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--bg-card);backdrop-filter:blur(20px);padding:3px;border-radius:10px;border:1px solid var(--border-color);box-shadow:0 4px 15px var(--shadow),inset 0 1px 0 rgba(255,255,255,0.3)}
         .header .right .top .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;text-transform:uppercase}
+        .header .right .top .lang-switcher .lang-btn:active{animation:pop 0.2s cubic-bezier(0.34,1.56,0.64,1)}
         .header .right .top .lang-switcher .lang-btn.active{background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;box-shadow:0 4px 15px var(--gold-glow)}
-        .header .right .top .lang-switcher .lang-btn:active{transform:scale(0.85)}
         
         .header .right .top .noti-btn{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;box-shadow:0 4px 15px var(--shadow),inset 0 1px 0 rgba(255,255,255,0.3)}
-        .header .right .top .noti-btn:active{transform:scale(0.85)}
+        .header .right .top .noti-btn:active{animation:pop 0.3s cubic-bezier(0.34,1.56,0.64,1)}
         .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none;box-shadow:0 0 15px var(--red-glow)}
 
         /* ===== WELCOME ===== */
@@ -129,11 +150,14 @@
             animation: slideUp 0.7s ease;
             transition: all 0.3s ease;
             cursor: pointer;
-            box-shadow: 0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.3);
+            box-shadow: 0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.03), inset 0 1px 0 rgba(255,255,255,0.3);
         }
         .shop-status-banner:hover {
             transform: translateY(-4px);
             box-shadow: 0 8px 30px var(--shadow-hover), 0 16px 60px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.4);
+        }
+        .shop-status-banner:active {
+            animation: pop 0.3s cubic-bezier(0.34,1.56,0.64,1);
         }
         .shop-status-banner .banner-content {
             display: flex;
@@ -222,7 +246,7 @@
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
             margin-bottom: 16px;
-            box-shadow: 0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.3);
+            box-shadow: 0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.03), inset 0 1px 0 rgba(255,255,255,0.3);
             position: relative;
             overflow: hidden;
             text-decoration: none;
@@ -233,7 +257,7 @@
             box-shadow: 0 8px 30px var(--shadow-hover), 0 16px 60px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.4);
         }
         .shop-card:active {
-            transform: scale(0.97);
+            animation: pop 0.3s cubic-bezier(0.34,1.56,0.64,1);
         }
         .shop-card .icon {
             font-size: 2.2rem;
@@ -293,45 +317,57 @@
             animation: none;
         }
 
-        .click-soft {
-            animation: softClick 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        @keyframes softClick {
-            0% { transform: scale(1); }
-            40% { transform: scale(0.95); }
-            70% { transform: scale(1.03); }
-            100% { transform: scale(1); }
-        }
-
         .section-title{font-size:0.65rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;display:flex;align-items:center;gap:10px;opacity:0.5}
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
         .section-title i{color:var(--cyan);text-shadow:0 0 20px var(--cyan-glow)}
 
-        /* ===== SERVICES GRID ===== */
+        /* ===== SERVICES GRID (အိုင်ကွန်ထိပ်မပြတ်အောင်) ===== */
         .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;animation:slideUp 0.9s ease;margin-bottom:18px}
         .services-grid .service{
             background: var(--bg-card);
             backdrop-filter: blur(20px);
             border: 1px solid var(--border-color);
             border-radius: 14px;
-            padding: 16px 10px;
+            padding: 18px 10px 12px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.3);
+            box-shadow: 0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.03), inset 0 1px 0 rgba(255,255,255,0.3);
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
         .services-grid .service:hover {
             transform: translateY(-4px);
             box-shadow: 0 8px 30px var(--shadow-hover), 0 16px 60px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.4);
         }
         .services-grid .service:active {
-            transform: scale(0.97);
+            animation: pop 0.3s cubic-bezier(0.34,1.56,0.64,1);
         }
-        .services-grid .service .icon{font-size:1.8rem;display:block;margin-bottom:6px;transition:all 0.3s ease;animation:floatIcon 3s ease-in-out infinite}
-        .services-grid .service .icon i{background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-        .services-grid .service .label{font-size:0.55rem;color:var(--text-secondary);font-weight:600;line-height:1.3;transition:all 0.3s ease}
+        .services-grid .service .icon{
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 6px;
+            transition: all 0.3s ease;
+            animation: floatIcon 3s ease-in-out infinite;
+            line-height: 1;
+        }
+        .services-grid .service .icon i{
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .services-grid .service .label{
+            font-size: 0.55rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            line-height: 1.3;
+            transition: all 0.3s ease;
+        }
         .services-grid .service .glow{position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(108,92,231,0.03) 0%,transparent 70%);opacity:0;transition:all 0.5s ease}
         .services-grid .service:hover .glow{opacity:1}
         .services-grid .service:hover .icon{transform:scale(1.08)}
@@ -357,14 +393,14 @@
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
             animation: slideUp 0.85s ease;
-            box-shadow: 0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.3);
+            box-shadow: 0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.03), inset 0 1px 0 rgba(255,255,255,0.3);
         }
         .telegram-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 8px 30px var(--shadow-hover), 0 16px 60px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.4);
         }
         .telegram-card:active {
-            transform: scale(0.97);
+            animation: pop 0.3s cubic-bezier(0.34,1.56,0.64,1);
         }
         .telegram-card .icon{font-size:1.6rem;color:#0088cc;flex-shrink:0}
         .telegram-card .info{flex:1}
@@ -387,14 +423,14 @@
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
             animation: slideUp 0.85s ease;
-            box-shadow: 0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.3);
+            box-shadow: 0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.03), inset 0 1px 0 rgba(255,255,255,0.3);
         }
         .telegram-contact:hover {
             transform: translateY(-4px);
             box-shadow: 0 8px 30px var(--shadow-hover), 0 16px 60px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.4);
         }
         .telegram-contact:active {
-            transform: scale(0.97);
+            animation: pop 0.3s cubic-bezier(0.34,1.56,0.64,1);
         }
         .telegram-contact .icon{font-size:1.2rem;color:var(--cyan);flex-shrink:0;text-shadow:0 0 20px var(--cyan-glow)}
         .telegram-contact .info{flex:1}
@@ -403,7 +439,7 @@
         .telegram-contact .arrow{color:var(--text-secondary);font-size:0.9rem;transition:all 0.3s ease}
         .telegram-contact:hover .arrow{color:var(--primary);transform:translateX(3px)}
 
-        /* ===== BOTTOM NAV ===== */
+        /* ===== BOTTOM NAV (Glass Box Style) ===== */
         .bottom-nav {
             position: fixed;
             bottom: 16px;
@@ -412,7 +448,7 @@
             width: auto;
             max-width: 480px;
             margin: 0 auto;
-            background: var(--bg-secondary);
+            background: var(--bg-card);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
             border: 1px solid var(--border-color);
@@ -421,7 +457,7 @@
             justify-content: space-around;
             padding: 8px 4px;
             z-index: 100;
-            box-shadow: 0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.3);
+            box-shadow: 0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.03), inset 0 1px 0 rgba(255,255,255,0.3);
         }
         .bottom-nav .nav-item {
             text-align: center;
@@ -438,6 +474,9 @@
             flex-direction: column;
             align-items: center;
             gap: 1px;
+        }
+        .bottom-nav .nav-item:active {
+            animation: pop 0.3s cubic-bezier(0.34,1.56,0.64,1);
         }
         .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;transition:all 0.3s ease;animation:floatIcon 3s ease-in-out infinite}
         .bottom-nav .nav-item .label{
@@ -502,6 +541,7 @@
         }
         .modal-overlay.show {
             display: flex;
+            animation: fadeIn 0.3s ease;
         }
         .modal-box {
             background: var(--bg-secondary);
@@ -560,6 +600,7 @@
             color: var(--text-primary);
             font-size: 0.85rem;
             outline: none;
+            transition: all 0.3s ease;
         }
         .modal-box .form-group input:focus {
             border-color: var(--primary);
@@ -1018,20 +1059,26 @@
     setInterval(updateShopUI, 60000);
 
     // ===== SOFT CLICK =====
-    function applySoftClick(element) {
-        element.classList.remove('click-soft');
+    function applyPop(element) {
+        element.classList.remove('click-pop');
         void element.offsetWidth;
-        element.classList.add('click-soft');
+        element.classList.add('click-pop');
+    }
+
+    function applyBounce(element) {
+        element.classList.remove('click-bounce');
+        void element.offsetWidth;
+        element.classList.add('click-bounce');
     }
 
     function handleBannerClick() {
         const banner = document.getElementById('shopStatusBanner');
-        applySoftClick(banner);
+        applyPop(banner);
     }
 
     function handleShopClick(event) {
         const shopCard = document.getElementById('shopCard');
-        applySoftClick(shopCard);
+        applyPop(shopCard);
         if (!isShopOpen()) {
             event.preventDefault();
             return false;
@@ -1040,9 +1087,7 @@
     }
 
     function handleServiceClick(el) {
-        el.classList.remove('click-soft');
-        void el.offsetWidth;
-        el.classList.add('click-soft');
+        applyBounce(el);
         
         el.style.boxShadow = '0 8px 30px var(--shadow-hover), 0 16px 60px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.4)';
         el.style.transition = 'all 0.3s ease';
@@ -1052,7 +1097,7 @@
         icon.style.transform = 'scale(1.2)';
         
         setTimeout(() => {
-            el.style.boxShadow = '0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.3)';
+            el.style.boxShadow = '0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.03), inset 0 1px 0 rgba(255,255,255,0.3)';
             el.style.transform = 'translateY(0)';
             icon.style.transform = 'scale(1)';
         }, 500);
@@ -1060,19 +1105,19 @@
 
     function handleTelegramClick() {
         const card = document.querySelector('.telegram-card');
-        applySoftClick(card);
+        applyPop(card);
         window.open('https://t.me/Premium_GameShop', '_blank');
     }
 
     function handleTelegramContactClick() {
         const contact = document.querySelector('.telegram-contact');
-        applySoftClick(contact);
+        applyPop(contact);
         window.open('https://t.me/PremEnergy', '_blank');
     }
 
     function handleNavClick(el, event) {
         event.preventDefault();
-        applySoftClick(el);
+        applyPop(el);
         const icon = el.querySelector('.icon');
         if (icon) {
             icon.style.animation = 'none';
