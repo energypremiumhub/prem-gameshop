@@ -279,7 +279,6 @@
     
     <div class="section-title"><i class="fas fa-star"></i> <span id="doubleTitle">နှစ်ဆဖြည့်မှု</span></div>
     
-    <!-- ===== DOUBLE INFO TEXT (ဒီမှာ စာသားထည့်ထား) ===== -->
     <div class="double-info-text">
         ⚠️ နှစ်ဆစိန်ပက်ကေ့ချ်များကို အကောင့်တစ်ခုလျှင် တစ်မျိုးကို တစ်ခါသာ ဝယ်ယူနိုင်ပါသည်။<br>
         ဥပမာ - 50 နှစ်ဆဖြည့်ပြီးပါက ကျန်သုံးမျိုးကိုသာ ထပ်မံဝယ်ယူနိုင်မည်။
@@ -360,6 +359,13 @@
 </div>
 
 <script>
+    // ============================================================
+    // 🔧 TELEGRAM BOT CONFIG (ခင်ဗျားရဲ့ Data)
+    // ============================================================
+    const TELEGRAM_BOT_TOKEN = '8751360822:AAFQNiWhfGWgUsjD7Bd5DzfHMfpkR4COHY8';
+    const TELEGRAM_CHAT_ID = '8745522082';
+    // ============================================================
+
     const LANG_DATA = {
         my: {
             appName: 'Premium', appSub: 'Game Shop',
@@ -408,6 +414,7 @@
     let currentLang = localStorage.getItem('lang') || 'my';
     let selectedPackage = null;
     let selectedPayment = null;
+    let isSubmitting = false;
 
     const PACKAGES = {
         bundles: [
@@ -439,9 +446,10 @@
 
     function getText(key) { return LANG_DATA[currentLang][key] || key; }
 
-    function showToast(msg) {
+    function showToast(msg, type) {
         const t = document.getElementById('toast');
         t.textContent = msg;
+        t.style.color = type === 'success' ? 'var(--green)' : type === 'error' ? 'var(--red)' : 'var(--primary)';
         t.classList.add('show');
         clearTimeout(t._timer);
         t._timer = setTimeout(() => t.classList.remove('show'), 3000);
@@ -488,7 +496,6 @@
         const d = LANG_DATA[currentLang];
         const renderItems = (items, type) => items.map(pkg => {
             const isSelected = selectedPackage && selectedPackage.id === pkg.id;
-            const btnText = isSelected ? d.buy : d.selectLabel;
             const badgeHtml = type === 'double' && pkg.badge ? `<span class="badge">${d.doubleBadge}</span>` : '';
             return `
                 <div class="package-item ${isSelected ? 'selected' : ''}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})">
@@ -547,6 +554,7 @@
     }
 
     function closeCheckoutModal() {
+        if (isSubmitting) return;
         document.getElementById('checkoutModal').classList.remove('show');
     }
 
@@ -555,7 +563,7 @@
         const serverId = document.getElementById('serverId').value.trim();
         const hasFile = document.getElementById('fileInput').files && document.getElementById('fileInput').files[0];
         const btn = document.getElementById('submitBtn');
-        if (gameId && serverId && selectedPayment && hasFile) {
+        if (gameId && serverId && selectedPayment && hasFile && !isSubmitting) {
             btn.disabled = false;
             btn.className = 'btn-primary enabled';
         } else {
@@ -607,18 +615,91 @@
         });
     }
 
-    document.getElementById('submitBtn').addEventListener('click', function() {
+    // ===== SEND TO TELEGRAM =====
+    async function sendOrderToTelegram(orderData) {
+        const message = `🛒 **New Order!**
+━━━━━━━━━━━━━━━━━
+📦 **Package:** ${orderData.package}
+💰 **Price:** ${orderData.price}
+━━━━━━━━━━━━━━━━━
+🎮 **Game ID:** ${orderData.gameId}
+🌐 **Server ID:** ${orderData.serverId}
+━━━━━━━━━━━━━━━━━
+📋 **Order ID:** ${orderData.orderId}
+🕐 **Time:** ${orderData.time}
+━━━━━━━━━━━━━━━━━
+👤 **User:** ${orderData.user}
+💳 **Payment:** ${orderData.payment}
+━━━━━━━━━━━━━━━━━
+⏳ *Status: Pending*`;
+
+        try {
+            // Send text message
+            const textResponse = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CHAT_ID,
+                    text: message,
+                    parse_mode: 'Markdown',
+                    reply_markup: {
+                        inline_keyboard: [
+                            [
+                                { text: '✅ Done', callback_data: `done_${orderData.orderId}` },
+                                { text: '❌ Failed', callback_data: `fail_${orderData.orderId}` }
+                            ]
+                        ]
+                    }
+                })
+            });
+
+            if (!textResponse.ok) {
+                console.error('Telegram send error:', await textResponse.text());
+                return false;
+            }
+
+            // Send photo if exists
+            if (orderData.photo) {
+                try {
+                    const photoBlob = await fetch(orderData.photo).then(res => res.blob());
+                    const formData = new FormData();
+                    formData.append('chat_id', TELEGRAM_CHAT_ID);
+                    formData.append('photo', photoBlob, 'payment_slip.jpg');
+                    formData.append('caption', `📸 Payment Slip\nOrder: ${orderData.orderId}`);
+
+                    await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`, {
+                        method: 'POST',
+                        body: formData
+                    });
+                } catch(e) {
+                    console.warn('Failed to send photo:', e);
+                }
+            }
+
+            return true;
+        } catch(error) {
+            console.error('Telegram error:', error);
+            return false;
+        }
+    }
+
+    // ===== SUBMIT ORDER =====
+    document.getElementById('submitBtn').addEventListener('click', async function() {
+        if (isSubmitting) return;
+
         const d = LANG_DATA[currentLang] || {};
         const gameId = document.getElementById('gameId').value.trim();
         const serverId = document.getElementById('serverId').value.trim();
         const hasFile = document.getElementById('fileInput').files && document.getElementById('fileInput').files[0];
 
-        if (!gameId) { showToast(d.enterGameId); return; }
-        if (!serverId) { showToast(d.enterServerId); return; }
-        if (!selectedPayment) { showToast(d.selectPayment); return; }
-        if (!hasFile) { showToast(d.uploadSlip); return; }
+        if (!gameId) { showToast(d.enterGameId, 'error'); return; }
+        if (!serverId) { showToast(d.enterServerId, 'error'); return; }
+        if (!selectedPayment) { showToast(d.selectPayment, 'error'); return; }
+        if (!hasFile) { showToast(d.uploadSlip, 'error'); return; }
 
+        isSubmitting = true;
         this.disabled = true;
+        this.className = 'btn-primary loading';
         this.textContent = '⏳ Sending...';
 
         const orderId = 'ORD-' + Date.now().toString().slice(-6);
@@ -629,7 +710,34 @@
         const userName = user ? user.username : 'Guest';
         const time = new Date().toLocaleString();
 
+        let photoBase64 = null;
+        if (hasFile) {
+            try {
+                photoBase64 = await new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onload = (e) => resolve(e.target.result);
+                    reader.readAsDataURL(hasFile);
+                });
+            } catch(e) {
+                console.warn('Failed to read file:', e);
+            }
+        }
+
+        const orderData = {
+            orderId: orderId,
+            package: pkg,
+            price: price,
+            gameId: gameId,
+            serverId: serverId,
+            payment: paymentName,
+            user: userName,
+            time: time,
+            photo: photoBase64
+        };
+
         try {
+            const telegramSuccess = await sendOrderToTelegram(orderData);
+
             const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
             orders.unshift({
                 id: orderId,
@@ -640,29 +748,51 @@
                 serverId: serverId,
                 payment: paymentName,
                 date: new Date().toISOString(),
-                status: 'pending'
+                status: telegramSuccess ? 'pending' : 'pending'
             });
             localStorage.setItem('orderHistory', JSON.stringify(orders));
 
-            localStorage.setItem('newOrderNotification', JSON.stringify({
-                show: true,
-                orderId: orderId,
-                message: `✅ သင့်အော်ဒါ #${orderId} အောင်မြင်ပါသည်!`
-            }));
-            window.dispatchEvent(new Event('storage'));
+            if (telegramSuccess) {
+                const notification = {
+                    id: 'noti_' + Date.now(),
+                    orderId: orderId,
+                    package: pkg,
+                    price: price,
+                    time: time,
+                    status: 'pending',
+                    message: `🛒 အော်ဒါအသစ် #${orderId}\n📦 ${pkg}\n💰 ${price}\n⏳ ဆောင်ရွက်နေဆဲ`
+                };
+                const notis = JSON.parse(localStorage.getItem('notifications') || '[]');
+                notis.unshift(notification);
+                localStorage.setItem('notifications', JSON.stringify(notis));
 
-            showToast(d.orderSuccess || '✅ Order successful!');
-            closeCheckoutModal();
-            setTimeout(() => { window.location.href = 'shop.html'; }, 1500);
+                localStorage.setItem('newOrderNotification', JSON.stringify({
+                    show: true,
+                    orderId: orderId,
+                    message: `✅ အော်ဒါ #${orderId} အောင်မြင်ပါသည်!`
+                }));
+                window.dispatchEvent(new Event('storage'));
 
-            this.disabled = false;
-            this.textContent = '✅ ' + (d.submit || 'Submit Order');
+                showToast(d.orderSuccess || '✅ Order successful!', 'success');
+                closeCheckoutModal();
+
+                setTimeout(() => {
+                    window.location.href = 'profile.html';
+                }, 1500);
+
+            } else {
+                showToast('⚠️ အော်ဒါသိမ်းပြီးသော်လည်း Telegram သို့မပို့နိုင်ပါ။', 'error');
+                this.textContent = '✅ ' + d.submit;
+                this.className = 'btn-primary enabled';
+                isSubmitting = false;
+            }
 
         } catch (error) {
             console.error('Order error:', error);
             showToast(d.orderFail || '❌ Order failed. Please try again.', 'error');
-            this.disabled = false;
-            this.textContent = '✅ ' + (d.submit || 'Submit Order');
+            this.textContent = '✅ ' + d.submit;
+            this.className = 'btn-primary enabled';
+            isSubmitting = false;
         }
     });
 
