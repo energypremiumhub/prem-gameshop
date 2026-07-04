@@ -13,11 +13,11 @@
         :root {
             --bg-primary: #08081a;
             --bg-secondary: #0c0c24;
-            --bg-card: rgba(16,16,50,0.6);
-            --bg-input: rgba(25,25,60,0.4);
+            --bg-card: #141c2b;
+            --bg-input: #1a2438;
             --text-primary: #ffffff;
-            --text-secondary: #9999cc;
-            --border-color: rgba(255,255,255,0.06);
+            --text-secondary: #8899bb;
+            --border-color: rgba(255,255,255,0.08);
             --shadow: rgba(0,0,0,0.6);
             --primary: #4488ff;
             --primary-glow: rgba(68,136,255,0.3);
@@ -66,7 +66,7 @@
         .header .left{display:flex;flex-direction:column;gap:6px}
         .header .left .logo{font-size:0.9rem;font-weight:800;color:var(--primary);text-shadow:0 0 30px var(--primary-glow);letter-spacing:0.5px;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none;filter:drop-shadow(0 0 20px var(--primary-glow))}
         .header .left .logo i{color:var(--cyan);-webkit-text-fill-color:initial;margin-right:4px;text-shadow:0 0 20px var(--cyan-glow)}
-        .header .left .auth-btn{background:var(--glass-bg);border:1px solid var(--glass-border);color:var(--text-secondary);padding:4px 14px;border-radius:10px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);text-decoration:none;display:inline-flex;align-items:center;gap:6px;height:36px;width:fit-content;backdrop-filter:blur(20px)}
+        .header .left .auth-btn{background:var(--bg-card);border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 14px;border-radius:10px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);text-decoration:none;display:inline-flex;align-items:center;gap:6px;height:36px;width:fit-content}
         .header .left .auth-btn:active{transform:scale(0.85)}
         .header .left .auth-btn:hover{border-color:var(--gold);color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
         .header .left .auth-btn.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow);padding:4px 14px}
@@ -75,12 +75,12 @@
         
         .header .right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
         .header .right .top{display:flex;gap:8px;align-items:center}
-        .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--glass-bg);padding:3px;border-radius:10px;border:1px solid var(--glass-border);backdrop-filter:blur(20px)}
+        .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:10px;border:1px solid var(--border-color)}
         .header .right .top .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;text-transform:uppercase}
         .header .right .top .lang-switcher .lang-btn.active{background:var(--gold);color:#0a0e1a;box-shadow:0 0 20px var(--gold-glow)}
         .header .right .top .lang-switcher .lang-btn:active{transform:scale(0.85)}
         
-        .header .right .top .noti-btn{background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;backdrop-filter:blur(20px)}
+        .header .right .top .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none}
         .header .right .top .noti-btn:active{transform:scale(0.85)}
         .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none;box-shadow:0 0 15px var(--red-glow)}
 
@@ -95,10 +95,9 @@
 
         /* ===== SHOP STATUS BANNER ===== */
         .shop-status-banner {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(20px);
-            border-radius: 16px;
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 14px;
             padding: 18px 20px;
             margin-bottom: 16px;
             position: relative;
@@ -106,7 +105,7 @@
             animation: slideUp 0.7s ease;
             transition: all 0.5s ease;
             cursor: pointer;
-            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 25px var(--shadow);
         }
         .shop-status-banner .banner-content {
             display: flex;
@@ -129,9 +128,9 @@
             text-align: center;
         }
         .shop-status-banner .banner-status.open {
-            background: rgba(0,255,135,0.08);
+            background: rgba(0,255,135,0.1);
             color: var(--green);
-            border: 1px solid rgba(0,255,135,0.15);
+            border: 1px solid rgba(0,255,135,0.2);
             animation: pulseStatus 1.5s ease-in-out infinite;
             box-shadow: 0 0 30px rgba(0,255,135,0.1);
             text-shadow: 0 0 30px rgba(0,255,135,0.2);
@@ -190,17 +189,17 @@
             margin-top: 2px;
         }
 
-        /* ===== SHOP CARD (Box style = shop.html အတိုင်း) ===== */
+        /* ===== SHOP CARD ===== */
         .shop-card {
             background: var(--bg-card);
             border: 2px solid var(--border-color);
-            border-radius: 12px;
-            padding: 12px 14px;
+            border-radius: 14px;
+            padding: 18px 14px;
             text-align: center;
             cursor: pointer;
             transition: all 0.2s cubic-bezier(0.34, 1.2, 0.64, 1);
             margin-bottom: 16px;
-            box-shadow: 0 4px 20px var(--shadow);
+            box-shadow: 0 4px 25px var(--shadow);
             position: relative;
             overflow: hidden;
             text-decoration: none;
@@ -282,19 +281,19 @@
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
         .section-title i{color:var(--cyan);text-shadow:0 0 20px var(--cyan-glow)}
 
-        /* ===== SERVICES GRID (Box style = shop.html အတိုင်း) ===== */
+        /* ===== SERVICES GRID ===== */
         .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;animation:slideUp 0.9s ease;margin-bottom:18px}
         .services-grid .service{
             background: var(--bg-card);
             border: 2px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 14px;
             padding: 16px 10px;
             text-align: center;
             cursor: pointer;
             transition: all 0.2s cubic-bezier(0.34, 1.2, 0.64, 1);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 20px var(--shadow);
+            box-shadow: 0 4px 25px var(--shadow);
         }
         .services-grid .service:active {
             transform: scale(0.97);
@@ -312,11 +311,11 @@
         .services-grid .service:nth-child(5) .icon{color:var(--pink)}
         .services-grid .service:nth-child(6) .icon{color:var(--orange)}
 
-        /* ===== TELEGRAM CARD (Box style = shop.html အတိုင်း) ===== */
+        /* ===== TELEGRAM CARD ===== */
         .telegram-card{
             background: var(--bg-card);
             border: 2px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 14px;
             padding: 12px 14px;
             display: flex;
             align-items: center;
@@ -325,7 +324,7 @@
             cursor: pointer;
             transition: all 0.2s cubic-bezier(0.34, 1.2, 0.64, 1);
             animation: slideUp 0.85s ease;
-            box-shadow: 0 4px 20px var(--shadow);
+            box-shadow: 0 4px 25px var(--shadow);
         }
         .telegram-card:active {
             transform: scale(0.97);
@@ -341,7 +340,7 @@
         .telegram-contact{
             background: var(--bg-card);
             border: 2px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 14px;
             padding: 10px 14px;
             display: flex;
             align-items: center;
@@ -350,7 +349,7 @@
             cursor: pointer;
             transition: all 0.2s cubic-bezier(0.34, 1.2, 0.64, 1);
             animation: slideUp 0.85s ease;
-            box-shadow: 0 4px 20px var(--shadow);
+            box-shadow: 0 4px 25px var(--shadow);
         }
         .telegram-contact:active {
             transform: scale(0.97);
@@ -362,26 +361,61 @@
         .telegram-contact .arrow{color:var(--text-secondary);font-size:0.9rem;transition:all 0.3s ease}
         .telegram-contact:hover .arrow{color:var(--primary);transform:translateX(3px)}
 
-        /* ===== BOTTOM NAV (index ဟောင်းအတိုင်း) ===== */
-        .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(8,8,26,0.92);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,0.04);display:flex;justify-content:space-around;padding:8px 0 12px;max-width:480px;margin:0 auto;z-index:100;border-radius:16px 16px 0 0;box-shadow:0 -8px 40px rgba(0,0,0,0.4)}
-        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.3s ease;padding:6px 16px;border-radius:12px;position:relative;min-width:56px;border:1px solid transparent}
+        /* ===== BOTTOM NAV (ထင်ရှားအောင်ပြင်ထား) ===== */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #111927;
+            backdrop-filter: blur(20px);
+            border-top: 2px solid rgba(255,255,255,0.06);
+            border-radius: 16px 16px 0 0;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0 12px;
+            max-width: 480px;
+            margin: 0 auto;
+            z-index: 100;
+            box-shadow: 0 -8px 40px rgba(0,0,0,0.6);
+        }
+        .bottom-nav .nav-item {
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            padding: 6px 16px;
+            border-radius: 12px;
+            position: relative;
+            min-width: 56px;
+            border: 2px solid transparent;
+        }
         .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;transition:all 0.3s ease}
-        .bottom-nav .nav-item .label{font-size:0.4rem;margin-top:1px;font-weight:700;letter-spacing:0.5px;transition:all 0.3s ease}
-        .bottom-nav .nav-item.active{color:var(--gold);background:rgba(255,215,0,0.06);border-color:rgba(255,215,0,0.12);box-shadow:0 0 30px rgba(255,215,0,0.05)}
+        .bottom-nav .nav-item .label{font-size:0.4rem;margin-top:2px;font-weight:700;letter-spacing:0.5px;transition:all 0.3s ease}
+        .bottom-nav .nav-item.active {
+            color: var(--gold);
+            background: rgba(255,215,0,0.08);
+            border-color: rgba(255,215,0,0.2);
+            box-shadow: 0 0 30px rgba(255,215,0,0.08);
+        }
         .bottom-nav .nav-item.active .icon{transform:translateY(-2px);color:var(--gold)}
         .bottom-nav .nav-item.active .label{color:var(--gold)}
-        .bottom-nav .nav-item:not(.active):hover{border-color:rgba(255,255,255,0.04);background:rgba(255,255,255,0.02)}
+        .bottom-nav .nav-item:not(.active):hover {
+            border-color: rgba(255,255,255,0.04);
+            background: rgba(255,255,255,0.02);
+        }
 
         .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.2;letter-spacing:1px}
 
-        .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:rgba(8,8,26,0.95);backdrop-filter:blur(20px);padding:10px 20px;border-radius:12px;border:1px solid rgba(68,136,255,0.1);color:var(--primary);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 8px 40px rgba(0,0,0,0.5);animation:toastPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
+        .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-card);backdrop-filter:blur(20px);padding:10px 20px;border-radius:12px;border:1px solid var(--border-color);color:var(--primary);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 8px 40px var(--shadow);animation:toastPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
         .toast.show{display:block}
         @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
         @keyframes shimmer{0%,100%{transform:translate(0,0)}50%{transform:translate(-20%,-20%)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
-        /* ===== AUTH MODAL (index ဟောင်းအတိုင်း) ===== */
+        /* ===== AUTH MODAL ===== */
         .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(12px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px}
         .modal-overlay.show{display:flex;animation:fadeIn 0.3s ease}
         .modal{
@@ -431,7 +465,7 @@
 
         .confirm-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.9);backdrop-filter:blur(20px);display:none;z-index:600;align-items:center;justify-content:center;padding:20px;flex-direction:column;text-align:center}
         .confirm-overlay.show{display:flex;animation:fadeIn 0.5s ease}
-        .confirm-overlay .card{background:var(--glass-bg);border:1px solid var(--glass-border);backdrop-filter:blur(20px);border-radius:24px;padding:30px 24px;max-width:360px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.6);position:relative;overflow:hidden}
+        .confirm-overlay .card{background:var(--bg-card);border:2px solid var(--border-color);border-radius:24px;padding:30px 24px;max-width:360px;width:100%;box-shadow:0 20px 60px var(--shadow);position:relative;overflow:hidden}
         .confirm-overlay .card::before{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(68,136,255,0.04) 0%,transparent 70%);animation:shimmer 8s ease-in-out infinite}
         .confirm-overlay .avatar-box{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--orange));display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#0a0e1a;margin:0 auto 12px;overflow:hidden;box-shadow:0 0 40px var(--gold-glow)}
         .confirm-overlay .avatar-box img{width:100%;height:100%;object-fit:cover}
@@ -487,7 +521,7 @@
         </div>
     </div>
 
-    <!-- ===== SHOP CARD (Box style ပြောင်းထားတယ်) ===== -->
+    <!-- ===== SHOP CARD ===== -->
     <a href="shop.html" class="shop-card open" id="shopCard" onclick="handleShopClick(event)">
         <span class="icon">🎮</span>
         <div class="label" id="goToShop">⚡ GO TO SHOP</div>
@@ -913,8 +947,8 @@
         icon.style.color = 'var(--primary)';
         
         setTimeout(() => {
-            el.style.borderColor = 'var(--glass-border)';
-            el.style.boxShadow = '0 4px 20px rgba(0,0,0,0.2)';
+            el.style.borderColor = 'var(--border-color)';
+            el.style.boxShadow = '0 4px 25px var(--shadow)';
             icon.style.transform = 'scale(1)';
         }, 500);
     }
