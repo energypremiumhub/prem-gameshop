@@ -13,11 +13,11 @@
         :root {
             --bg-primary: #0a0a1a;
             --bg-secondary: #0c0c24;
-            --bg-card: rgba(16,16,50,0.4);
+            --bg-card: rgba(20,20,60,0.5);
             --bg-input: rgba(25,25,60,0.5);
             --text-primary: #ffffff;
             --text-secondary: #c8c8e8;
-            --border-color: rgba(255,255,255,0.06);
+            --border-color: rgba(255,255,255,0.12);
             --shadow: rgba(0,0,0,0.5);
             --primary: #6c5ce7;
             --primary-glow: rgba(108,92,231,0.3);
@@ -82,19 +82,24 @@
             z-index: 1;
         }
 
-        /* ===== GLASS BOX ===== */
+        /* ===== GLASS BOX (ပိုပြီးမြင်သာအောင် ပြင်ထား) ===== */
         .glass-box {
-            background: linear-gradient(145deg, rgba(16,16,50,0.4), rgba(10,10,30,0.4));
+            background: linear-gradient(145deg, rgba(20,20,60,0.5), rgba(10,10,30,0.5));
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 2px solid rgba(255,255,255,0.12);
             border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            box-shadow: 
+                0 4px 20px rgba(0,0,0,0.4),
+                0 0 30px rgba(108,92,231,0.04);
             transition: all 0.3s ease;
         }
         .glass-box:hover {
-            border-color: rgba(108,92,231,0.15);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 30px rgba(108,92,231,0.05);
+            border-color: rgba(108,92,231,0.3);
+            box-shadow: 
+                0 4px 30px rgba(0,0,0,0.5),
+                0 0 50px rgba(108,92,231,0.08);
+            transform: translateY(-2px);
         }
 
         ::-webkit-scrollbar{width:3px}
@@ -109,21 +114,21 @@
         .header .left .logo img{height:38px;width:auto;vertical-align:middle;border-radius:10px}
         .header .left .logo span{background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 40px var(--primary-glow)}
         
-        .header .left .auth-btn{background:linear-gradient(145deg,rgba(16,16,50,0.4),rgba(10,10,30,0.4));backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.06);color:var(--text-secondary);padding:4px 14px;border-radius:10px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-flex;align-items:center;gap:6px;height:36px;width:fit-content}
+        .header .left .auth-btn{background:linear-gradient(145deg,rgba(20,20,60,0.5),rgba(10,10,30,0.5));backdrop-filter:blur(16px);border:2px solid rgba(255,255,255,0.12);color:var(--text-secondary);padding:4px 14px;border-radius:10px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-flex;align-items:center;gap:6px;height:36px;width:fit-content;box-shadow:0 4px 20px rgba(0,0,0,0.3)}
         .header .left .auth-btn:active{transform:scale(0.85)}
-        .header .left .auth-btn:hover{border-color:var(--gold);color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
+        .header .left .auth-btn:hover{border-color:var(--gold);color:var(--gold);box-shadow:0 4px 30px rgba(0,0,0,0.4),0 0 30px var(--gold-glow)}
         .header .left .auth-btn.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow);padding:4px 14px}
         .header .left .auth-btn.logged-in:active{transform:scale(0.85)}
         .header .left .auth-btn.logged-in img{width:22px;height:22px;border-radius:50%;object-fit:cover;margin-right:4px}
         
         .header .right{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
         .header .right .top{display:flex;gap:6px;align-items:center}
-        .header .right .top .lang-switcher{display:flex;gap:2px;background:linear-gradient(145deg,rgba(16,16,50,0.4),rgba(10,10,30,0.4));backdrop-filter:blur(16px);padding:3px;border-radius:10px;border:1px solid rgba(255,255,255,0.06)}
+        .header .right .top .lang-switcher{display:flex;gap:2px;background:linear-gradient(145deg,rgba(20,20,60,0.5),rgba(10,10,30,0.5));backdrop-filter:blur(16px);padding:3px;border-radius:10px;border:2px solid rgba(255,255,255,0.12);box-shadow:0 4px 20px rgba(0,0,0,0.3)}
         .header .right .top .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;text-transform:uppercase}
         .header .right .top .lang-switcher .lang-btn.active{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;box-shadow:0 0 20px var(--gold-glow)}
         .header .right .top .lang-switcher .lang-btn:active{transform:scale(0.85)}
         
-        .header .right .top .noti-btn{background:linear-gradient(145deg,rgba(16,16,50,0.4),rgba(10,10,30,0.4));backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.06);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none}
+        .header .right .top .noti-btn{background:linear-gradient(145deg,rgba(20,20,60,0.5),rgba(10,10,30,0.5));backdrop-filter:blur(16px);border:2px solid rgba(255,255,255,0.12);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;box-shadow:0 4px 20px rgba(0,0,0,0.3)}
         .header .right .top .noti-btn:active{transform:scale(0.85)}
         .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none;box-shadow:0 0 15px var(--red-glow)}
 
@@ -138,9 +143,9 @@
 
         /* ===== SHOP STATUS BANNER ===== */
         .shop-status-banner {
-            background: linear-gradient(145deg, rgba(16,16,50,0.4), rgba(10,10,30,0.4));
+            background: linear-gradient(145deg, rgba(20,20,60,0.5), rgba(10,10,30,0.5));
             backdrop-filter: blur(16px);
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 2px solid rgba(255,255,255,0.12);
             border-radius: 16px;
             padding: 16px 20px;
             margin-bottom: 16px;
@@ -149,11 +154,12 @@
             animation: slideUp 0.7s ease;
             transition: all 0.5s ease;
             cursor: pointer;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 30px rgba(108,92,231,0.04);
         }
         .shop-status-banner:hover {
-            border-color: rgba(108,92,231,0.15);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 30px rgba(108,92,231,0.05);
+            border-color: rgba(108,92,231,0.3);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.5), 0 0 50px rgba(108,92,231,0.08);
+            transform: translateY(-2px);
         }
         .shop-status-banner .banner-content {
             display: flex;
@@ -235,24 +241,25 @@
 
         /* ===== SHOP CARD ===== */
         .shop-card {
-            background: linear-gradient(145deg, rgba(16,16,50,0.4), rgba(10,10,30,0.4));
+            background: linear-gradient(145deg, rgba(20,20,60,0.5), rgba(10,10,30,0.5));
             backdrop-filter: blur(16px);
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 2px solid rgba(255,255,255,0.12);
             border-radius: 16px;
             padding: 18px 14px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
             margin-bottom: 16px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 30px rgba(108,92,231,0.04);
             position: relative;
             overflow: hidden;
             text-decoration: none;
             display: block;
         }
         .shop-card:hover {
-            border-color: rgba(108,92,231,0.15);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 30px rgba(108,92,231,0.05);
+            border-color: rgba(108,92,231,0.3);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.5), 0 0 50px rgba(108,92,231,0.08);
+            transform: translateY(-2px);
         }
         .shop-card:active {
             transform: scale(0.97);
@@ -333,9 +340,9 @@
         /* ===== SERVICES GRID ===== */
         .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;animation:slideUp 0.9s ease;margin-bottom:18px}
         .services-grid .service{
-            background: linear-gradient(145deg, rgba(16,16,50,0.4), rgba(10,10,30,0.4));
+            background: linear-gradient(145deg, rgba(20,20,60,0.5), rgba(10,10,30,0.5));
             backdrop-filter: blur(16px);
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 2px solid rgba(255,255,255,0.12);
             border-radius: 14px;
             padding: 16px 10px;
             text-align: center;
@@ -343,11 +350,12 @@
             transition: all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 30px rgba(108,92,231,0.04);
         }
         .services-grid .service:hover {
-            border-color: rgba(108,92,231,0.15);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 30px rgba(108,92,231,0.05);
+            border-color: rgba(108,92,231,0.3);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.5), 0 0 50px rgba(108,92,231,0.08);
+            transform: translateY(-2px);
         }
         .services-grid .service:active {
             transform: scale(0.97);
@@ -368,9 +376,9 @@
 
         /* ===== TELEGRAM CARD ===== */
         .telegram-card{
-            background: linear-gradient(145deg, rgba(16,16,50,0.4), rgba(10,10,30,0.4));
+            background: linear-gradient(145deg, rgba(20,20,60,0.5), rgba(10,10,30,0.5));
             backdrop-filter: blur(16px);
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 2px solid rgba(255,255,255,0.12);
             border-radius: 14px;
             padding: 12px 14px;
             display: flex;
@@ -380,11 +388,12 @@
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
             animation: slideUp 0.85s ease;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 30px rgba(108,92,231,0.04);
         }
         .telegram-card:hover {
-            border-color: rgba(108,92,231,0.15);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 30px rgba(108,92,231,0.05);
+            border-color: rgba(108,92,231,0.3);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.5), 0 0 50px rgba(108,92,231,0.08);
+            transform: translateY(-2px);
         }
         .telegram-card:active {
             transform: scale(0.97);
@@ -398,9 +407,9 @@
 
         /* ===== TELEGRAM CONTACT ===== */
         .telegram-contact{
-            background: linear-gradient(145deg, rgba(16,16,50,0.4), rgba(10,10,30,0.4));
+            background: linear-gradient(145deg, rgba(20,20,60,0.5), rgba(10,10,30,0.5));
             backdrop-filter: blur(16px);
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 2px solid rgba(255,255,255,0.12);
             border-radius: 14px;
             padding: 10px 14px;
             display: flex;
@@ -410,11 +419,12 @@
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
             animation: slideUp 0.85s ease;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 30px rgba(108,92,231,0.04);
         }
         .telegram-contact:hover {
-            border-color: rgba(108,92,231,0.15);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 30px rgba(108,92,231,0.05);
+            border-color: rgba(108,92,231,0.3);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.5), 0 0 50px rgba(108,92,231,0.08);
+            transform: translateY(-2px);
         }
         .telegram-contact:active {
             transform: scale(0.97);
@@ -426,7 +436,7 @@
         .telegram-contact .arrow{color:var(--text-secondary);font-size:0.9rem;transition:all 0.3s ease}
         .telegram-contact:hover .arrow{color:var(--primary);transform:translateX(3px)}
 
-        /* ===== BOTTOM NAV (မူလ Glass Box အတိုင်း) ===== */
+        /* ===== BOTTOM NAV (ပိုပြီးမြင်သာအောင်) ===== */
         .bottom-nav {
             position: fixed;
             bottom: 16px;
@@ -435,16 +445,16 @@
             width: auto;
             max-width: 480px;
             margin: 0 auto;
-            background: linear-gradient(145deg, rgba(16,16,50,0.5), rgba(10,10,30,0.5));
+            background: linear-gradient(145deg, rgba(20,20,60,0.6), rgba(10,10,30,0.6));
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 2px solid rgba(255,255,255,0.08);
             border-radius: 18px;
             display: flex;
             justify-content: space-around;
             padding: 8px 4px;
             z-index: 100;
-            box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.5), 0 0 40px rgba(108,92,231,0.04);
         }
         .bottom-nav .nav-item {
             text-align: center;
@@ -456,7 +466,7 @@
             border-radius: 12px;
             position: relative;
             min-width: 48px;
-            border: 1px solid transparent;
+            border: 2px solid transparent;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -465,9 +475,9 @@
         .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;transition:all 0.3s ease;animation:floatIcon 3s ease-in-out infinite}
         .bottom-nav .nav-item .label{font-size:0.4rem;font-weight:700;letter-spacing:0.5px;transition:all 0.3s ease;opacity:0.5}
         .bottom-nav .nav-item.active {
-            background: linear-gradient(145deg, rgba(108,92,231,0.2), rgba(0,180,216,0.15));
-            border-color: rgba(108,92,231,0.2);
-            box-shadow: 0 0 40px rgba(108,92,231,0.05);
+            background: linear-gradient(145deg, rgba(108,92,231,0.25), rgba(0,180,216,0.15));
+            border: 2px solid rgba(108,92,231,0.3);
+            box-shadow: 0 0 30px rgba(108,92,231,0.1);
             color: var(--text-primary);
         }
         .bottom-nav .nav-item.active .icon{
@@ -481,8 +491,8 @@
             opacity:1
         }
         .bottom-nav .nav-item:not(.active):hover {
-            border-color: rgba(108,92,231,0.1);
-            background: rgba(108,92,231,0.03);
+            border-color: rgba(108,92,231,0.15);
+            background: rgba(108,92,231,0.04);
         }
 
         @keyframes selectBounce {
@@ -494,7 +504,7 @@
 
         .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.2;letter-spacing:1px}
 
-        .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:linear-gradient(145deg,rgba(16,16,50,0.9),rgba(10,10,30,0.9));backdrop-filter:blur(20px);padding:10px 20px;border-radius:12px;border:1px solid rgba(255,215,0,0.1);color:var(--gold);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 8px 40px rgba(0,0,0,0.5);animation:toastPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
+        .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:linear-gradient(145deg,rgba(20,20,60,0.9),rgba(10,10,30,0.9));backdrop-filter:blur(20px);padding:10px 20px;border-radius:12px;border:2px solid rgba(255,215,0,0.1);color:var(--gold);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 4px 30px rgba(0,0,0,0.5);animation:toastPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
         .toast.show{display:block}
         @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
@@ -520,14 +530,14 @@
             display: flex;
         }
         .modal-box {
-            background: linear-gradient(145deg, rgba(16,16,50,0.95), rgba(10,10,30,0.95));
+            background: linear-gradient(145deg, rgba(20,20,60,0.95), rgba(10,10,30,0.95));
             backdrop-filter: blur(24px);
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 2px solid rgba(255,255,255,0.08);
             border-radius: 16px;
             padding: 24px 20px;
             max-width: 380px;
             width: 100%;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.5), 0 20px 60px rgba(0,0,0,0.6);
             position: relative;
         }
         .modal-box .close-btn {
@@ -571,7 +581,7 @@
             width: 100%;
             padding: 10px 14px;
             border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 2px solid rgba(255,255,255,0.06);
             background: rgba(255,255,255,0.03);
             color: #ffffff;
             font-size: 0.85rem;
@@ -641,7 +651,7 @@
 
         .confirm-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.9);backdrop-filter:blur(20px);display:none;z-index:600;align-items:center;justify-content:center;padding:20px;flex-direction:column;text-align:center}
         .confirm-overlay.show{display:flex;animation:fadeIn 0.5s ease}
-        .confirm-overlay .card{background:linear-gradient(145deg,rgba(16,16,50,0.95),rgba(10,10,30,0.95));backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.06);border-radius:24px;padding:30px 24px;max-width:360px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.6)}
+        .confirm-overlay .card{background:linear-gradient(145deg,rgba(20,20,60,0.95),rgba(10,10,30,0.95));backdrop-filter:blur(24px);border:2px solid rgba(255,255,255,0.08);border-radius:24px;padding:30px 24px;max-width:360px;width:100%;box-shadow:0 4px 30px rgba(0,0,0,0.5),0 20px 60px rgba(0,0,0,0.6)}
         .confirm-overlay .avatar-box{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--orange));display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#0a0e1a;margin:0 auto 12px;overflow:hidden;box-shadow:0 0 40px var(--gold-glow)}
         .confirm-overlay .avatar-box img{width:100%;height:100%;object-fit:cover}
         .confirm-overlay .username{font-size:1.2rem;font-weight:700;color:var(--gold);margin-bottom:2px;text-shadow:0 0 20px var(--gold-glow)}
@@ -650,7 +660,7 @@
         .confirm-overlay .btn-group{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
         .confirm-overlay .btn-confirm{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;padding:10px 28px;border-radius:12px;font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.3s ease;box-shadow:0 0 30px var(--gold-glow)}
         .confirm-overlay .btn-confirm:active{transform:scale(0.95)}
-        .confirm-overlay .btn-cancel{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text-secondary);padding:10px 28px;border-radius:12px;font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.3s ease}
+        .confirm-overlay .btn-cancel{background:transparent;border:2px solid rgba(255,255,255,0.06);color:var(--text-secondary);padding:10px 28px;border-radius:12px;font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.3s ease}
         .confirm-overlay .btn-cancel:active{transform:scale(0.95)}
         .confirm-overlay .btn-cancel:hover{border-color:var(--red);color:var(--red)}
     </style>
@@ -1060,16 +1070,16 @@
         void el.offsetWidth;
         el.classList.add('click-soft');
         
-        el.style.borderColor = 'rgba(108,92,231,0.25)';
-        el.style.boxShadow = '0 8px 32px rgba(0,0,0,0.3), 0 0 30px rgba(108,92,231,0.08)';
+        el.style.borderColor = 'rgba(108,92,231,0.4)';
+        el.style.boxShadow = '0 4px 30px rgba(0,0,0,0.5), 0 0 60px rgba(108,92,231,0.12)';
         el.style.transition = 'all 0.3s ease';
         
         const icon = el.querySelector('.icon');
         icon.style.transform = 'scale(1.2)';
         
         setTimeout(() => {
-            el.style.borderColor = 'rgba(255,255,255,0.06)';
-            el.style.boxShadow = '0 8px 32px rgba(0,0,0,0.3)';
+            el.style.borderColor = 'rgba(255,255,255,0.12)';
+            el.style.boxShadow = '0 4px 20px rgba(0,0,0,0.4), 0 0 30px rgba(108,92,231,0.04)';
             icon.style.transform = 'scale(1)';
         }, 500);
     }
