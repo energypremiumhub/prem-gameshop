@@ -69,7 +69,6 @@
             z-index: 1;
         }
 
-        /* ===== GLASS BOX ===== */
         .glass-box {
             background: var(--bg-card);
             backdrop-filter: blur(20px);
@@ -84,6 +83,69 @@
             box-shadow: 0 8px 30px var(--shadow-hover), inset 0 1px 0 rgba(255,255,255,0.15);
         }
 
+        .click-pop { animation: pop 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+        @keyframes pop {
+            0% { transform: scale(1); }
+            30% { transform: scale(0.92); }
+            60% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        ::-webkit-scrollbar{width:3px}
+        ::-webkit-scrollbar-track{background:transparent}
+        ::-webkit-scrollbar-thumb{background:var(--primary);border-radius:10px}
+
+        /* ===== SOFT CLICK ANIMATIONS ===== */
+        .btn-click {
+            transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-click:active {
+            transform: scale(0.92) !important;
+            opacity: 0.7 !important;
+        }
+
+        .card-click {
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+            cursor: pointer;
+        }
+        .card-click:active {
+            transform: scale(0.96) translateY(2px) !important;
+        }
+
+        .nav-click {
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+            cursor: pointer;
+        }
+        .nav-click:active {
+            transform: scale(0.88) !important;
+        }
+
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+        .ripple::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            pointer-events: none;
+        }
+        .ripple:active::after {
+            width: 300px;
+            height: 300px;
+            opacity: 0;
+        }
+
         /* ===== HEADER ===== */
         .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
         .header .left{display:flex;flex-direction:column;gap:8px}
@@ -93,7 +155,6 @@
         .header .left .logo-wrap .text-group .premium{font-size:1rem;font-weight:800;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
         .header .left .logo-wrap .text-group .shop{font-size:0.55rem;font-weight:600;color:var(--text-secondary);opacity:0.6;margin-top:-2px}
         
-        /* Login Button ဖျောက်ထား */
         .header .left .auth-btn{display:none}
         
         .header .right{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
@@ -126,6 +187,7 @@
         .package-item .info{display:flex;flex-direction:column;gap:2px}
         .package-item .info .name{font-size:0.8rem;font-weight:600;color:var(--text-primary)}
         .package-item .info .sub{font-size:0.5rem;color:var(--text-secondary)}
+        .package-item .info .badge{display:inline-block;font-size:0.4rem;color:var(--gold);background:rgba(245,166,35,0.1);padding:2px 10px;border-radius:10px;border:1px solid rgba(245,166,35,0.08);font-weight:600;margin-top:2px;width:fit-content}
         .package-item .right{display:flex;align-items:center;gap:12px}
         .package-item .right .price{font-size:0.85rem;font-weight:700;color:var(--gold)}
         .package-item .right .btn{background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;border:none;padding:6px 16px;border-radius:10px;font-size:0.6rem;font-weight:700;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 15px var(--gold-glow)}
@@ -220,9 +282,15 @@
         <p id="pageSub">ပက်ကေ့ချ်တစ်ခုရွေးပြီး ဝယ်ယူပါ</p>
     </div>
 
-    <!-- ===== PACKAGE LIST ===== -->
-    <div class="section-title"><i class="fas fa-gift"></i> <span id="packagesTitle">ပက်ကေ့ချ်များ</span></div>
-    <div class="package-grid" id="packageGrid"></div>
+    <!-- ===== PACKAGE LISTS ===== -->
+    <div class="section-title"><i class="fas fa-gift"></i> <span id="bundlesTitle">ပက်ကေ့ချ်များ</span></div>
+    <div class="package-grid" id="bundlesList"></div>
+    
+    <div class="section-title"><i class="fas fa-diamond"></i> <span id="diamondsTitle">စိန်များ</span></div>
+    <div class="package-grid" id="diamondsList"></div>
+    
+    <div class="section-title"><i class="fas fa-star"></i> <span id="doubleTitle">နှစ်ဆဖြည့်မှု</span></div>
+    <div class="package-grid" id="doubleList"></div>
 
     <div class="footer-text">&copy; 2026 Premium Game Shop</div>
 </div>
@@ -246,9 +314,12 @@
             home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
             pageTitle: 'MLBB Packages',
             pageSub: 'ပက်ကေ့ချ်တစ်ခုရွေးပြီး ဝယ်ယူပါ',
-            packagesTitle: 'ပက်ကေ့ချ်များ',
+            bundlesTitle: 'ပက်ကေ့ချ်များ',
+            diamondsTitle: 'စိန်များ',
+            doubleTitle: 'နှစ်ဆဖြည့်မှု',
             buy: 'ဝယ်ယူရန်',
-            currency: 'Ks'
+            currency: 'Ks',
+            doubleBadge: '⭐ 2x Bonus'
         },
         en: {
             appName: 'Premium',
@@ -256,23 +327,44 @@
             home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
             pageTitle: 'MLBB Packages',
             pageSub: 'Select a package and buy',
-            packagesTitle: 'Packages',
+            bundlesTitle: 'Packages',
+            diamondsTitle: 'Diamonds',
+            doubleTitle: 'Double Top Up',
             buy: 'Buy',
-            currency: 'Ks'
+            currency: 'Ks',
+            doubleBadge: '⭐ 2x Bonus'
         }
     };
 
     let currentLang = localStorage.getItem('lang') || 'my';
 
-    const PACKAGES = [
-        { id: 'p1', name: 'Weekly Pass', price: 6500 },
-        { id: 'p2', name: 'Monthly Epic', price: 17200 },
-        { id: 'p3', name: '50 Diamonds', price: 1000 },
-        { id: 'p4', name: '100 Diamonds', price: 2000 },
-        { id: 'p5', name: '250 Diamonds', price: 5000 },
-        { id: 'p6', name: '500 Diamonds', price: 10000 },
-        { id: 'p7', name: '1000 Diamonds', price: 20000 }
-    ];
+    const PACKAGES = {
+        bundles: [
+            { id: 'b1', name: 'Monthly Epic Bundle', price: 17200 },
+            { id: 'b2', name: 'Weekly Elite Bundle', price: 3350 },
+            { id: 'b3', name: 'Weekly Pass', price: 6500 }
+        ],
+        diamonds: [
+            { id: 'd1', name: '11', price: 1000 }, { id: 'd2', name: '22', price: 1750 },
+            { id: 'd3', name: '33', price: 2500 }, { id: 'd4', name: '44', price: 3300 },
+            { id: 'd5', name: '56', price: 4000 }, { id: 'd6', name: '86', price: 5500 },
+            { id: 'd7', name: '112', price: 7800 }, { id: 'd8', name: '172', price: 10700 },
+            { id: 'd9', name: '257', price: 15900 }, { id: 'd10', name: '343', price: 21100 },
+            { id: 'd11', name: '429', price: 26600 }, { id: 'd12', name: '514', price: 31200 },
+            { id: 'd13', name: '600', price: 36700 }, { id: 'd14', name: '706', price: 42800 },
+            { id: 'd15', name: '878', price: 53100 }, { id: 'd16', name: '963', price: 58500 },
+            { id: 'd17', name: '1,049', price: 63800 }, { id: 'd18', name: '1,135', price: 69300 },
+            { id: 'd19', name: '1,412', price: 84900 }, { id: 'd20', name: '2,195', price: 126000 },
+            { id: 'd21', name: '2,901', price: 166300 }, { id: 'd22', name: '3,688', price: 207500 },
+            { id: 'd23', name: '5,532', price: 312000 }, { id: 'd24', name: '9,288', price: 522000 }
+        ],
+        double: [
+            { id: 'x1', name: '50 + 50 (Double)', price: 3800, badge: true },
+            { id: 'x2', name: '150 + 150 (Double)', price: 10300, badge: true },
+            { id: 'x3', name: '250 + 250 (Double)', price: 16000, badge: true },
+            { id: 'x4', name: '500 + 500 (Double)', price: 32400, badge: true }
+        ]
+    };
 
     function getText(key) { return LANG_DATA[currentLang][key] || key; }
 
@@ -300,7 +392,9 @@
         document.getElementById('appSub').textContent = d.appSub;
         document.getElementById('pageTitle').textContent = d.pageTitle;
         document.getElementById('pageSub').textContent = d.pageSub;
-        document.getElementById('packagesTitle').textContent = d.packagesTitle;
+        document.getElementById('bundlesTitle').textContent = d.bundlesTitle;
+        document.getElementById('diamondsTitle').textContent = d.diamondsTitle;
+        document.getElementById('doubleTitle').textContent = d.doubleTitle;
         document.getElementById('navHome').textContent = d.home;
         document.getElementById('navShop').textContent = d.shop;
         document.getElementById('navPayment').textContent = d.payment;
@@ -310,20 +404,27 @@
 
     // ===== RENDER PACKAGES =====
     function renderPackages() {
-        const grid = document.getElementById('packageGrid');
         const d = LANG_DATA[currentLang];
-        grid.innerHTML = PACKAGES.map(pkg => `
-            <div class="package-item glass-box" onclick="buyPackage('${pkg.id}', '${pkg.name}', ${pkg.price})">
-                <div class="info">
-                    <div class="name">${pkg.name}</div>
-                    <div class="sub">MLBB</div>
+        const renderItems = (items, type) => items.map(pkg => {
+            const badgeHtml = type === 'double' && pkg.badge ? `<span class="badge">${d.doubleBadge}</span>` : '';
+            return `
+                <div class="package-item glass-box" onclick="buyPackage('${pkg.id}', '${pkg.name}', ${pkg.price})">
+                    <div class="info">
+                        <div class="name">${pkg.name}</div>
+                        <div class="sub">MLBB</div>
+                        ${badgeHtml}
+                    </div>
+                    <div class="right">
+                        <span class="price">${pkg.price.toLocaleString()} ${d.currency}</span>
+                        <button class="btn">${d.buy}</button>
+                    </div>
                 </div>
-                <div class="right">
-                    <span class="price">${pkg.price.toLocaleString()} ${d.currency}</span>
-                    <button class="btn">${d.buy}</button>
-                </div>
-            </div>
-        `).join('');
+            `;
+        }).join('');
+        
+        document.getElementById('bundlesList').innerHTML = renderItems(PACKAGES.bundles, 'bundle');
+        document.getElementById('diamondsList').innerHTML = renderItems(PACKAGES.diamonds, 'diamond');
+        document.getElementById('doubleList').innerHTML = renderItems(PACKAGES.double, 'double');
     }
 
     // ===== BUY PACKAGE =====
