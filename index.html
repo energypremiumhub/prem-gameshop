@@ -415,7 +415,7 @@
         @keyframes shimmer{0%,100%{transform:translate(0,0)}50%{transform:translate(-20%,-20%)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
-        /* ===== AUTH MODAL (ပြင်ထားတယ် - နောက်ခံဝါးတယ်၊ အပြာရောင်အကြောင်းရီးပျောက်တယ်) ===== */
+        /* ===== AUTH MODAL (ပြင်ထားတယ်) ===== */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -444,17 +444,18 @@
             max-height: 90vh;
             overflow-y: auto;
         }
-        /* ===== အပြာရောင် အပေါ်အောက် အကြောင်းရီးကို လုံးဝဖျောက်ထား (သေချာတဲ့နည်းနဲ့) ===== */
+        /* ===== အပြာရောင် အပေါ်အောက် အကြောင်းရီးကို လုံးဝဖျောက်ထား ===== */
         .modal::before {
+            display: none !important;
+            content: none !important;
             visibility: hidden !important;
             opacity: 0 !important;
-            content: none !important;
-            display: none !important;
-            animation: none !important;
+            width: 0 !important;
+            height: 0 !important;
         }
-        .modal h2{font-size:1.2rem;color:var(--gold);margin-bottom:4px;text-align:center;position:relative;z-index:1;text-shadow:0 0 30px var(--gold-glow)}
-        .modal p{color:var(--text-secondary);font-size:0.75rem;text-align:center;margin-bottom:16px;position:relative;z-index:1}
-        .modal .form-group{margin-bottom:12px;position:relative;z-index:1}
+        .modal h2{font-size:1.2rem;color:var(--gold);margin-bottom:4px;text-align:center;text-shadow:0 0 30px var(--gold-glow)}
+        .modal p{color:var(--text-secondary);font-size:0.75rem;text-align:center;margin-bottom:16px}
+        .modal .form-group{margin-bottom:12px}
         .modal .form-group label{font-size:0.6rem;color:var(--text-secondary);font-weight:600;display:block;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px}
         .modal .form-group label .required{color:var(--red);margin-left:2px}
         .modal .form-group input{width:100%;padding:10px 14px;border-radius:10px;border:2px solid var(--border-color);background:var(--bg-input);color:var(--text-primary);font-size:0.85rem;outline:none;transition:all 0.3s ease}
@@ -463,15 +464,15 @@
         .modal .form-group input.error{border-color:var(--red);box-shadow:0 0 20px var(--red-glow)}
         .modal .form-group .error-text{font-size:0.5rem;color:var(--red);margin-top:3px;display:none}
         .modal .form-group .error-text.show{display:block}
-        .modal .btn-primary{width:100%;padding:11px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:10px;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;position:relative;z-index:1;box-shadow:0 0 30px var(--gold-glow)}
+        .modal .btn-primary{width:100%;padding:11px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:10px;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;box-shadow:0 0 30px var(--gold-glow)}
         .modal .btn-primary:hover{box-shadow:0 0 40px var(--gold-glow)}
         .modal .btn-primary:active{transform:scale(0.96)}
         .modal .btn-primary:disabled{opacity:0.4;cursor:not-allowed;box-shadow:none}
-        .modal .switch-link{color:var(--cyan);cursor:pointer;font-weight:600;text-align:center;display:block;margin-top:12px;font-size:0.7rem;position:relative;z-index:1}
+        .modal .switch-link{color:var(--cyan);cursor:pointer;font-weight:600;text-align:center;display:block;margin-top:12px;font-size:0.7rem}
         .modal .switch-link:active{opacity:0.7}
-        .modal .close-btn{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--text-secondary);font-size:1.1rem;cursor:pointer;z-index:2;transition:all 0.3s ease}
+        .modal .close-btn{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--text-secondary);font-size:1.1rem;cursor:pointer;z-index:10}
         .modal .close-btn:hover{color:var(--gold)}
-        .modal .forgot-link{color:var(--text-secondary);cursor:pointer;font-size:0.55rem;text-align:right;display:block;margin-top:6px;position:relative;z-index:1;transition:all 0.3s ease}
+        .modal .forgot-link{color:var(--text-secondary);cursor:pointer;font-size:0.55rem;text-align:right;display:block;margin-top:6px;transition:all 0.3s ease}
         .modal .forgot-link:hover{color:var(--gold)}
         .modal .login-error{font-size:0.55rem;color:var(--red);text-align:center;margin-bottom:10px;display:none;padding:6px 12px;background:rgba(255,0,68,0.08);border-radius:8px;border:1px solid rgba(255,0,68,0.1)}
 
@@ -489,10 +490,10 @@
         .confirm-overlay .card::before{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(68,136,255,0.04) 0%,transparent 70%);animation:shimmer 8s ease-in-out infinite}
         .confirm-overlay .avatar-box{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--orange));display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#0a0e1a;margin:0 auto 12px;overflow:hidden;box-shadow:0 0 40px var(--gold-glow)}
         .confirm-overlay .avatar-box img{width:100%;height:100%;object-fit:cover}
-        .confirm-overlay .username{font-size:1.2rem;font-weight:700;color:var(--gold);margin-bottom:2px;position:relative;z-index:1;text-shadow:0 0 20px var(--gold-glow)}
-        .confirm-overlay .email{font-size:0.75rem;color:var(--text-secondary);margin-bottom:4px;position:relative;z-index:1;opacity:0.7}
-        .confirm-overlay .status{display:inline-block;font-size:0.5rem;color:var(--green);background:rgba(0,255,135,0.08);padding:2px 14px;border-radius:20px;border:1px solid rgba(0,255,135,0.1);margin-bottom:16px;position:relative;z-index:1}
-        .confirm-overlay .btn-group{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;position:relative;z-index:1}
+        .confirm-overlay .username{font-size:1.2rem;font-weight:700;color:var(--gold);margin-bottom:2px;text-shadow:0 0 20px var(--gold-glow)}
+        .confirm-overlay .email{font-size:0.75rem;color:var(--text-secondary);margin-bottom:4px;opacity:0.7}
+        .confirm-overlay .status{display:inline-block;font-size:0.5rem;color:var(--green);background:rgba(0,255,135,0.08);padding:2px 14px;border-radius:20px;border:1px solid rgba(0,255,135,0.1);margin-bottom:16px}
+        .confirm-overlay .btn-group{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
         .confirm-overlay .btn-confirm{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;padding:10px 28px;border-radius:12px;font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.3s ease;box-shadow:0 0 30px var(--gold-glow)}
         .confirm-overlay .btn-confirm:active{transform:scale(0.95)}
         .confirm-overlay .btn-cancel{background:transparent;border:2px solid var(--border-color);color:var(--text-secondary);padding:10px 28px;border-radius:12px;font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.3s ease}
@@ -627,6 +628,7 @@
         <h2 id="modalTitle">⚔️ ဝင်ရန်</h2>
         <p id="modalSub">ပြန်လည်ကြိုဆိုပါတယ် စစ်သည်တော်!</p>
         <div id="modalBody">
+            <!-- Login Form -->
             <div id="loginForm">
                 <div class="form-group">
                     <label id="emailLabel">📧 အီးမေးလ် / အသုံးပြုသူအမည် / ဖုန်းနံပါတ်</label>
@@ -641,6 +643,7 @@
                 <span class="forgot-link" onclick="openForgotPassword()">🔑 စကားဝှက်မေ့နေပါသလား?</span>
                 <span class="switch-link" id="switchToRegister" onclick="switchAuthMode()">အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်</span>
             </div>
+            <!-- Register Form -->
             <div id="registerForm" style="display:none;">
                 <div class="avatar-upload">
                     <div class="preview" id="avatarPreview">
@@ -678,6 +681,7 @@
                 <button class="btn-primary" onclick="handleRegister()">🔑 မှတ်ပုံတင်ရန်</button>
                 <span class="switch-link" id="switchToLogin" onclick="switchAuthMode()">အကောင့်ရှိပြီးသား? ဝင်ရန်</span>
             </div>
+            <!-- Forgot Password Form -->
             <div id="forgotForm" style="display:none;">
                 <div class="form-group">
                     <label>📧 အီးမေးလ် သို့မဟုတ် ဖုန်းနံပါတ်</label>
@@ -752,6 +756,8 @@
             phone: '📱 ဖုန်းနံပါတ်',
             switchLogin: 'အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်',
             switchRegister: 'အကောင့်ရှိပြီးသား? ဝင်ရန်',
+            login: 'ဝင်ရန်',
+            register: 'မှတ်ပုံတင်ရန်',
             loginSuccess: '✅ ကြိုဆိုပါတယ် ချန်ပီယံ!',
             registerSuccess: '✅ အကောင့်ဖွင့်ခြင်းအောင်မြင်ပါပြီ!',
             logoutSuccess: '🚪 ထွက်ခြင်းအောင်မြင်ပါပြီ!',
@@ -815,6 +821,8 @@
             phone: '📱 Phone Number',
             switchLogin: "Don't have an account? Register",
             switchRegister: 'Already have an account? Login',
+            login: 'Login',
+            register: 'Register',
             loginSuccess: '✅ Welcome back, Champion!',
             registerSuccess: '✅ Account created! Welcome!',
             logoutSuccess: '🚪 Logged out successfully!',
@@ -861,6 +869,8 @@
         document.querySelectorAll('.lang-btn').forEach(b => {
             b.classList.toggle('active', b.dataset.lang === lang);
         });
+        // Modal စာသားတွေကို ပြန်ပြောင်းဖို့
+        updateModalUI();
     }
 
     function updateLanguage() {
@@ -1199,6 +1209,7 @@
     function updateModalUI() {
         const d = LANG_DATA[currentLang];
         if (!d) return;
+        
         if (isLoginMode) {
             document.getElementById('modalTitle').textContent = d.modalLogin || '⚔️ Login';
             document.getElementById('modalSub').textContent = d.modalLoginSub || 'Welcome back, warrior!';
