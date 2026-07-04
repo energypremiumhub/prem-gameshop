@@ -62,8 +62,8 @@
         /* ===== HEADER ===== */
         .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
         .header .left{display:flex;flex-direction:column;gap:6px}
-        .header .left .logo{font-size:0.9rem;font-weight:800;color:var(--primary);text-shadow:0 0 30px var(--primary-glow);letter-spacing:0.5px;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none;filter:drop-shadow(0 0 20px var(--primary-glow))}
-        .header .left .logo i{color:var(--cyan);-webkit-text-fill-color:initial;margin-right:4px;text-shadow:0 0 20px var(--cyan-glow)}
+        .header .left .logo{font-size:0.9rem;font-weight:800;color:var(--primary);text-shadow:0 0 30px var(--primary-glow);letter-spacing:0.5px;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none;filter:drop-shadow(0 0 20px var(--primary-glow));display:flex;align-items:center;gap:8px}
+        .header .left .logo img{height:30px;width:auto;vertical-align:middle}
         .header .left .auth-btn{background:var(--bg-card);border:2px solid var(--border-color);color:var(--text-secondary);padding:4px 14px;border-radius:10px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);text-decoration:none;display:inline-flex;align-items:center;gap:6px;height:36px;width:fit-content}
         .header .left .auth-btn:active{transform:scale(0.85)}
         .header .left .auth-btn:hover{border-color:var(--gold);color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
@@ -574,7 +574,11 @@
     <!-- ===== HEADER ===== -->
     <div class="header">
         <div class="left">
-            <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Shop</div>
+            <!-- ===== LOGO (ပုံ + စာသား) ===== -->
+            <div class="logo" id="appName">
+                <img src="https://files.catbox.moe/lmq98x.jpg" alt="Premium Shop Logo">
+                Premium Shop
+            </div>
             <div class="auth-btn" id="authBtn" onclick="handleAuthClick()">🔑 Login</div>
         </div>
         <div class="right">
@@ -874,14 +878,13 @@
         document.querySelectorAll('.lang-btn').forEach(b => {
             b.classList.toggle('active', b.dataset.lang === lang);
         });
-        // Modal စာသားတွေကိုလည်း ပြောင်းဖို့
         updateModalTexts();
     }
 
     function updateLanguage() {
         const d = LANG_DATA[currentLang];
         if (!d) return;
-        document.getElementById('appName').innerHTML = '<i class="fas fa-gamepad"></i> ' + d.appName;
+        document.getElementById('appName').innerHTML = '<img src="https://files.catbox.moe/lmq98x.jpg" alt="Premium Shop Logo" style="height:30px;width:auto;vertical-align:middle;margin-right:8px;"> ' + d.appName;
         document.getElementById('greeting').textContent = d.greeting;
         document.getElementById('title').innerHTML = '<i class="fas fa-arrow-right"></i> ' + d.title;
         document.getElementById('subtitle').textContent = d.subtitle;
