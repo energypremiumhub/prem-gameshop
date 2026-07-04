@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>⚡ MLBB Packages</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
         /* ===== RESET & BASE ===== */
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
@@ -172,6 +173,17 @@
         .header .right .top .noti-btn:active{transform:scale(0.92);opacity:0.7}
         .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none;box-shadow:0 0 15px var(--red-glow)}
 
+        /* ===== DOUBLE BOX ===== */
+        .double-box{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:16px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1)}
+        .double-box:hover{transform:translateY(-4px);border-color:rgba(245,166,35,0.3);box-shadow:0 8px 30px var(--shadow-hover), inset 0 1px 0 rgba(255,255,255,0.15)}
+        .double-box:active{transform:scale(0.96)}
+        .double-box .left{display:flex;align-items:center;gap:12px}
+        .double-box .left .icon{font-size:1.8rem;color:var(--gold)}
+        .double-box .left .text{font-size:0.8rem;font-weight:600;color:var(--text-primary)}
+        .double-box .left .sub{font-size:0.55rem;color:var(--text-secondary);margin-top:2px}
+        .double-box .arrow{color:var(--gold);font-size:1.2rem;transition:all 0.3s ease}
+        .double-box:hover .arrow{transform:translateX(4px)}
+
         /* ===== PAGE HEADER ===== */
         .page-header{margin-bottom:16px;animation:slideUp 0.6s ease}
         .page-header h1{font-size:1.3rem;font-weight:800;color:var(--text-primary)}
@@ -181,17 +193,23 @@
 
         /* ===== PACKAGE LIST ===== */
         .package-grid{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
-        .package-item{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:16px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1)}
+        .package-item{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:16px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);position:relative;overflow:hidden}
         .package-item:active{transform:scale(0.96)}
         .package-item:hover{transform:translateY(-4px);border-color:rgba(245,166,35,0.3);box-shadow:0 8px 30px var(--shadow-hover), inset 0 1px 0 rgba(255,255,255,0.15)}
-        .package-item .info{display:flex;flex-direction:column;gap:2px}
+        .package-item.selected{border-color:var(--gold);background:rgba(245,166,35,0.08);box-shadow:0 0 40px var(--gold-glow), inset 0 0 40px rgba(245,166,35,0.03)}
+        .package-item.selected::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(from 0deg,transparent,rgba(245,166,35,0.05),transparent,rgba(0,180,216,0.05),transparent);animation:spinGlow 6s linear infinite;pointer-events:none}
+        .package-item.selected .price{color:var(--gold);text-shadow:0 0 30px var(--gold-glow)}
+        .package-item .info{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1}
         .package-item .info .name{font-size:0.8rem;font-weight:600;color:var(--text-primary)}
         .package-item .info .sub{font-size:0.5rem;color:var(--text-secondary)}
         .package-item .info .badge{display:inline-block;font-size:0.4rem;color:var(--gold);background:rgba(245,166,35,0.1);padding:2px 10px;border-radius:10px;border:1px solid rgba(245,166,35,0.08);font-weight:600;margin-top:2px;width:fit-content}
-        .package-item .right{display:flex;align-items:center;gap:12px}
-        .package-item .right .price{font-size:0.85rem;font-weight:700;color:var(--gold)}
-        .package-item .right .btn{background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;border:none;padding:6px 16px;border-radius:10px;font-size:0.6rem;font-weight:700;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 15px var(--gold-glow)}
-        .package-item .right .btn:active{transform:scale(0.88)}
+        .package-item .right{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+        .package-item .right .price{font-size:0.85rem;font-weight:700;color:var(--text-secondary);transition:all 0.4s ease}
+        .package-item .right .btn{background:var(--bg-input);color:var(--text-secondary);border:1px solid var(--border-color);padding:6px 16px;border-radius:10px;font-size:0.6rem;font-weight:700;cursor:default;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);opacity:0.5}
+        .package-item.selected .right .btn{background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;border-color:var(--gold);box-shadow:0 4px 15px var(--gold-glow);cursor:pointer;opacity:1}
+        .package-item.selected .right .btn:active{transform:scale(0.88)}
+
+        @keyframes spinGlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 
         /* ===== SECTION TITLE ===== */
         .section-title{font-size:0.65rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;display:flex;align-items:center;gap:10px;opacity:0.5}
@@ -249,6 +267,49 @@
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
         @keyframes floatIcon {0%,100%{transform:translateY(0px)}50%{transform:translateY(-6px)}}
+
+        /* ===== CHECKOUT MODAL ===== */
+        .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(12px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px;animation:fadeIn 0.3s ease}
+        .modal-overlay.show{display:flex}
+        .modal{background:var(--bg-secondary);backdrop-filter:blur(24px);border:1px solid var(--border-color);border-radius:16px;padding:24px 20px;max-width:420px;width:100%;box-shadow:0 4px 30px var(--shadow),0 20px 60px rgba(0,0,0,0.06),inset 0 1px 0 rgba(255,255,255,0.1);position:relative;max-height:90vh;overflow-y:auto}
+        .modal .close-btn{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--text-secondary);font-size:1.1rem;cursor:pointer;z-index:2;transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1)}
+        .modal .close-btn:active{transform:scale(0.88)}
+        .modal h2{font-size:1.2rem;color:var(--text-primary);text-align:center;margin-bottom:4px}
+        .modal .sub{color:var(--text-secondary);font-size:0.75rem;text-align:center;margin-bottom:16px}
+        .modal .form-group{margin-bottom:12px}
+        .modal .form-group label{display:block;color:var(--text-secondary);font-size:0.6rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px}
+        .modal .form-group input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border-color);background:var(--bg-input);color:var(--text-primary);font-size:0.85rem;outline:none;transition:all 0.3s ease}
+        .modal .form-group input:focus{border-color:var(--primary);box-shadow:0 0 20px var(--primary-glow)}
+        .modal .form-group input::placeholder{color:var(--text-secondary);font-size:0.7rem}
+        .modal .form-group .input-hint{font-size:0.5rem;color:var(--text-secondary);margin-top:3px;opacity:0.5}
+        .modal .selected-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg-input);border-radius:10px;border:1px solid var(--border-color);margin-bottom:12px}
+        .modal .selected-row .pkg{font-size:0.85rem;font-weight:600;color:var(--text-primary)}
+        .modal .selected-row .price{font-size:0.9rem;font-weight:700;color:var(--gold);text-shadow:0 0 20px var(--gold-glow)}
+        .modal .payment-options{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
+        .modal .payment-option{background:var(--bg-input);border:1px solid var(--border-color);border-radius:10px;padding:10px;text-align:center;cursor:pointer;transition:all 0.3s ease}
+        .modal .payment-option:active{transform:scale(0.95)}
+        .modal .payment-option.selected{border-color:var(--gold);background:rgba(245,166,35,0.06);box-shadow:0 0 30px var(--gold-glow)}
+        .modal .payment-option .icon{font-size:1.2rem;display:block;margin-bottom:2px}
+        .modal .payment-option .name{font-size:0.7rem;font-weight:600;color:var(--text-primary)}
+        .modal .account-info{background:rgba(0,180,216,0.04);border:1px solid rgba(0,180,216,0.08);border-radius:10px;padding:10px 14px;margin-top:8px;display:none}
+        .modal .account-info.show{display:block;animation:fadeIn 0.3s ease}
+        .modal .account-info .acc-name{font-size:0.8rem;font-weight:600;color:var(--text-primary)}
+        .modal .account-info .acc-number{font-size:0.75rem;color:var(--green);font-weight:500;margin-top:2px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+        .modal .account-info .acc-number .copy-btn{background:var(--bg-card);border:1px solid var(--border-color);color:var(--text-secondary);padding:2px 10px;border-radius:10px;font-size:0.45rem;cursor:pointer;transition:all 0.3s ease;font-weight:600}
+        .modal .account-info .acc-number .copy-btn:active{transform:scale(0.85)}
+        .modal .file-upload{border:2px dashed var(--border-color);border-radius:10px;padding:14px;text-align:center;cursor:pointer;transition:all 0.3s ease;position:relative}
+        .modal .file-upload:active{transform:scale(0.97)}
+        .modal .file-upload.has-file{border-color:var(--green);background:rgba(0,200,83,0.04)}
+        .modal .file-upload .icon{font-size:1.5rem;display:block;margin-bottom:2px;color:var(--text-secondary)}
+        .modal .file-upload .text{font-size:0.6rem;color:var(--text-secondary)}
+        .modal .file-upload .text strong{color:var(--gold)}
+        .modal .file-upload input[type="file"]{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}
+        .modal .file-upload .file-name{font-size:0.5rem;color:var(--green);margin-top:3px;display:none}
+        .modal .file-upload .file-name.show{display:block}
+        .modal .btn-primary{width:100%;padding:11px;background:var(--bg-input);color:var(--text-secondary);border:1px solid var(--border-color);border-radius:10px;font-size:0.85rem;font-weight:700;cursor:not-allowed;transition:all 0.3s ease;position:relative;z-index:1;margin-top:6px;opacity:0.4}
+        .modal .btn-primary:active{transform:scale(0.96)}
+        .modal .btn-primary.enabled{background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;border-color:var(--gold);box-shadow:0 4px 20px var(--gold-glow);cursor:pointer;opacity:1}
+        .modal .btn-primary.enabled:hover{box-shadow:0 4px 30px var(--gold-glow)}
     </style>
 </head>
 <body>
@@ -282,6 +343,18 @@
         <p id="pageSub">ပက်ကေ့ချ်တစ်ခုရွေးပြီး ဝယ်ယူပါ</p>
     </div>
 
+    <!-- ===== DOUBLE BOX ===== -->
+    <div class="double-box" onclick="scrollToDouble()">
+        <div class="left">
+            <span class="icon">⭐</span>
+            <div>
+                <div class="text" id="doubleBoxTitle">နှစ်ဆစိန်များ</div>
+                <div class="sub" id="doubleBoxSub">နှစ်ဆစိန်ပက်ကေ့ချ်များကိုကြည့်ရန် နှိပ်ပါ</div>
+            </div>
+        </div>
+        <span class="arrow"><i class="fas fa-chevron-down"></i></span>
+    </div>
+
     <!-- ===== PACKAGE LISTS ===== -->
     <div class="section-title"><i class="fas fa-gift"></i> <span id="bundlesTitle">ပက်ကေ့ချ်များ</span></div>
     <div class="package-grid" id="bundlesList"></div>
@@ -289,7 +362,7 @@
     <div class="section-title"><i class="fas fa-diamond"></i> <span id="diamondsTitle">စိန်များ</span></div>
     <div class="package-grid" id="diamondsList"></div>
     
-    <div class="section-title"><i class="fas fa-star"></i> <span id="doubleTitle">နှစ်ဆဖြည့်မှု</span></div>
+    <div class="section-title" id="doubleSection"><i class="fas fa-star"></i> <span id="doubleTitle">နှစ်ဆဖြည့်မှု</span></div>
     <div class="package-grid" id="doubleList"></div>
 
     <div class="footer-text">&copy; 2026 Premium Game Shop</div>
@@ -305,7 +378,88 @@
 
 <div class="toast" id="toast"></div>
 
+<!-- ===== CHECKOUT MODAL ===== -->
+<div class="modal-overlay" id="checkoutModal">
+    <div class="modal">
+        <button class="close-btn" onclick="closeCheckoutModal()">✕</button>
+        <h2 id="modalTitle">🛒 အော်ဒါတင်ရန်</h2>
+        <p class="sub" id="modalSub">အချက်အလက်များကို မှန်ကန်စွာဖြည့်သွင်းပါ</p>
+        
+        <div class="selected-row">
+            <span class="pkg" id="modalPackage">Loading...</span>
+            <span class="price" id="modalPrice">0 Ks</span>
+        </div>
+
+        <div class="form-group">
+            <label><i class="fas fa-gamepad"></i> <span id="gameIdLabel">ဂိမ်းအိုင်ဒီ</span></label>
+            <input type="text" id="gameId" placeholder="သင့်ဂိမ်းအိုင်ဒီထည့်ပါ (e.g. 12345678)">
+            <div class="input-hint" id="gameIdHint">Mobile Legends ID ထည့်ပါ</div>
+        </div>
+        
+        <div class="form-group">
+            <label><i class="fas fa-server"></i> <span id="serverIdLabel">ဆာဗာအိုင်ဒီ</span></label>
+            <input type="text" id="serverId" placeholder="သင့်ဆာဗာအိုင်ဒီထည့်ပါ (e.g. 9876)">
+            <div class="input-hint" id="serverIdHint">Mobile Legends Server ID ထည့်ပါ</div>
+        </div>
+
+        <div class="form-group">
+            <label><i class="fas fa-money-bill-wave"></i> <span id="paymentLabel">ငွေပေးချေရန်</span></label>
+            <div class="payment-options" id="paymentOptions">
+                <div class="payment-option" data-payment="wave">
+                    <span class="icon">🏦</span>
+                    <span class="name" id="waveName">Wave Pay</span>
+                </div>
+                <div class="payment-option" data-payment="kpay">
+                    <span class="icon">🏦</span>
+                    <span class="name" id="kpayName">KBZ Pay</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="account-info" id="waveInfo">
+            <div class="acc-name">🏦 Wave Pay</div>
+            <div class="acc-number">
+                📞 09682506493
+                <button class="copy-btn" onclick="copyNumber('09682506493', this)">ကူးယူမည်</button>
+            </div>
+        </div>
+        <div class="account-info" id="kpayInfo">
+            <div class="acc-name">🏦 KBZ Pay</div>
+            <div class="acc-number">
+                📞 09682506493
+                <button class="copy-btn" onclick="copyNumber('09682506493', this)">ကူးယူမည်</button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label><i class="fas fa-image"></i> <span id="uploadLabel">ပြေစာတင်ပို့ရန်</span></label>
+            <div class="file-upload" id="fileUpload">
+                <span class="icon">📁</span>
+                <span class="text" id="uploadText">Screenshot ပို့ပေးပါ</span>
+                <span class="file-name" id="fileName">✅ image.png</span>
+                <input type="file" id="fileInput" accept="image/*">
+            </div>
+        </div>
+
+        <button class="btn-primary" id="submitBtn" disabled>✅ အော်ဒါတင်မည်</button>
+    </div>
+</div>
+
 <script>
+    // ============================================================
+    //  🔧 EMAILJS CONFIG
+    // ============================================================
+    const EMAILJS_SERVICE_ID = 'service_jikfhn1';
+    const EMAILJS_TEMPLATE_ID = 'template_amq9siq';
+    const EMAILJS_PUBLIC_KEY = 'XBJ-AXVEGDJOEgnfr';
+    // ============================================================
+
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+
+    // ===== TELEGRAM BOT CONFIG =====
+    const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE';
+    const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID_HERE';
+
     // ===== LANGUAGE DATA =====
     const LANG_DATA = {
         my: {
@@ -317,9 +471,32 @@
             bundlesTitle: 'ပက်ကေ့ချ်များ',
             diamondsTitle: 'စိန်များ',
             doubleTitle: 'နှစ်ဆဖြည့်မှု',
+            doubleBoxTitle: 'နှစ်ဆစိန်များ',
+            doubleBoxSub: 'နှစ်ဆစိန်ပက်ကေ့ချ်များကိုကြည့်ရန် နှိပ်ပါ',
             buy: 'ဝယ်ယူရန်',
+            select: 'ရွေးရန်',
             currency: 'Ks',
-            doubleBadge: '⭐ 2x Bonus'
+            doubleBadge: '⭐ 2x Bonus',
+            modalTitle: '🛒 အော်ဒါတင်ရန်',
+            modalSub: 'အချက်အလက်များကို မှန်ကန်စွာဖြည့်သွင်းပါ',
+            gameId: 'ဂိမ်းအိုင်ဒီ',
+            serverId: 'ဆာဗာအိုင်ဒီ',
+            gameIdHint: 'Mobile Legends ID ထည့်ပါ',
+            serverIdHint: 'Mobile Legends Server ID ထည့်ပါ',
+            paymentLabel: 'ငွေပေးချေရန်',
+            wave: 'Wave Pay',
+            kpay: 'KBZ Pay',
+            uploadLabel: 'ပြေစာတင်ပို့ရန်',
+            uploadText: 'Screenshot ပို့ပေးပါ',
+            submit: 'အော်ဒါတင်မည်',
+            enterGameId: 'ကျေးဇူးပြု၍ ဂိမ်းအိုင်ဒီထည့်ပါ',
+            enterServerId: 'ကျေးဇူးပြု၍ ဆာဗာအိုင်ဒီထည့်ပါ',
+            selectPayment: 'ကျေးဇူးပြု၍ ငွေပေးချေနည်းရွေးပါ',
+            uploadSlip: 'ကျေးဇူးပြု၍ Screenshot ပို့ပေးပါ',
+            orderSuccess: '✅ အော်ဒါအောင်မြင်ပါသည်!',
+            orderFail: '❌ အော်ဒါမအောင်မြင်ပါ။ ထပ်မံကြိုးစားပါ။',
+            copy: 'ကူးယူမည်',
+            copied: '✅ ကူးပြီး'
         },
         en: {
             appName: 'Premium',
@@ -330,13 +507,38 @@
             bundlesTitle: 'Packages',
             diamondsTitle: 'Diamonds',
             doubleTitle: 'Double Top Up',
+            doubleBoxTitle: 'Double Diamonds',
+            doubleBoxSub: 'Tap to view double diamond packages',
             buy: 'Buy',
+            select: 'Select',
             currency: 'Ks',
-            doubleBadge: '⭐ 2x Bonus'
+            doubleBadge: '⭐ 2x Bonus',
+            modalTitle: '🛒 Submit Order',
+            modalSub: 'Fill in your details correctly',
+            gameId: 'Game ID',
+            serverId: 'Server ID',
+            gameIdHint: 'Enter your Mobile Legends ID',
+            serverIdHint: 'Enter your Mobile Legends Server ID',
+            paymentLabel: 'Payment Method',
+            wave: 'Wave Pay',
+            kpay: 'KBZ Pay',
+            uploadLabel: 'Upload Payment Slip',
+            uploadText: 'Send Screenshot',
+            submit: 'Submit Order',
+            enterGameId: 'Please enter your Game ID',
+            enterServerId: 'Please enter your Server ID',
+            selectPayment: 'Please select a payment method',
+            uploadSlip: 'Please send your Screenshot',
+            orderSuccess: '✅ Order successful!',
+            orderFail: '❌ Order failed. Please try again.',
+            copy: 'Copy',
+            copied: '✅ Copied!'
         }
     };
 
     let currentLang = localStorage.getItem('lang') || 'my';
+    let selectedPackage = null;
+    let selectedPayment = null;
 
     const PACKAGES = {
         bundles: [
@@ -395,10 +597,24 @@
         document.getElementById('bundlesTitle').textContent = d.bundlesTitle;
         document.getElementById('diamondsTitle').textContent = d.diamondsTitle;
         document.getElementById('doubleTitle').textContent = d.doubleTitle;
+        document.getElementById('doubleBoxTitle').textContent = d.doubleBoxTitle;
+        document.getElementById('doubleBoxSub').textContent = d.doubleBoxSub;
         document.getElementById('navHome').textContent = d.home;
         document.getElementById('navShop').textContent = d.shop;
         document.getElementById('navPayment').textContent = d.payment;
         document.getElementById('navProfile').textContent = d.profile;
+        document.getElementById('modalTitle').textContent = d.modalTitle;
+        document.getElementById('modalSub').textContent = d.modalSub;
+        document.getElementById('gameIdLabel').textContent = d.gameId;
+        document.getElementById('serverIdLabel').textContent = d.serverId;
+        document.getElementById('gameIdHint').textContent = d.gameIdHint;
+        document.getElementById('serverIdHint').textContent = d.serverIdHint;
+        document.getElementById('paymentLabel').textContent = d.paymentLabel;
+        document.getElementById('waveName').textContent = d.wave;
+        document.getElementById('kpayName').textContent = d.kpay;
+        document.getElementById('uploadLabel').textContent = d.uploadLabel;
+        document.getElementById('uploadText').textContent = d.uploadText;
+        document.getElementById('submitBtn').textContent = '✅ ' + d.submit;
         renderPackages();
     }
 
@@ -406,9 +622,11 @@
     function renderPackages() {
         const d = LANG_DATA[currentLang];
         const renderItems = (items, type) => items.map(pkg => {
+            const isSelected = selectedPackage && selectedPackage.id === pkg.id;
+            const btnText = isSelected ? d.buy : d.select;
             const badgeHtml = type === 'double' && pkg.badge ? `<span class="badge">${d.doubleBadge}</span>` : '';
             return `
-                <div class="package-item glass-box" onclick="buyPackage('${pkg.id}', '${pkg.name}', ${pkg.price})">
+                <div class="package-item ${isSelected ? 'selected' : ''}" data-id="${pkg.id}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price},'${type}')">
                     <div class="info">
                         <div class="name">${pkg.name}</div>
                         <div class="sub">MLBB</div>
@@ -416,7 +634,7 @@
                     </div>
                     <div class="right">
                         <span class="price">${pkg.price.toLocaleString()} ${d.currency}</span>
-                        <button class="btn">${d.buy}</button>
+                        <button class="btn" onclick="event.stopPropagation(); handleBuyClick('${pkg.id}','${pkg.name}',${pkg.price},'${type}')">${btnText}</button>
                     </div>
                 </div>
             `;
@@ -427,11 +645,206 @@
         document.getElementById('doubleList').innerHTML = renderItems(PACKAGES.double, 'double');
     }
 
-    // ===== BUY PACKAGE =====
-    function buyPackage(id, name, price) {
-        showToast(`✅ ${name} - ${price.toLocaleString()} Ks ကိုရွေးချယ်ပြီးပါပြီ!`);
-        localStorage.setItem('selectedPackage', JSON.stringify({ id, name, price }));
-        setTimeout(() => { window.location.href = 'payment.html'; }, 500);
+    // ===== PACKAGE SELECTION =====
+    function handlePackageClick(id, name, price, type) {
+        if (selectedPackage && selectedPackage.id === id) {
+            selectedPackage = null;
+            renderPackages();
+            return;
+        }
+        selectedPackage = { id, name, price, type };
+        renderPackages();
+    }
+
+    function handleBuyClick(id, name, price, type) {
+        if (!selectedPackage || selectedPackage.id !== id) {
+            selectedPackage = { id, name, price, type };
+            renderPackages();
+        }
+        openCheckoutModal(name, price);
+    }
+
+    // ===== CHECKOUT MODAL =====
+    function openCheckoutModal(name, price) {
+        document.getElementById('modalPackage').textContent = name;
+        document.getElementById('modalPrice').textContent = price.toLocaleString() + ' ' + getText('currency');
+        document.getElementById('checkoutModal').classList.add('show');
+        document.getElementById('gameId').value = '';
+        document.getElementById('serverId').value = '';
+        document.getElementById('fileInput').value = '';
+        document.getElementById('fileUpload').classList.remove('has-file');
+        document.getElementById('fileName').classList.remove('show');
+        document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+        document.getElementById('waveInfo').classList.remove('show');
+        document.getElementById('kpayInfo').classList.remove('show');
+        selectedPayment = null;
+        document.getElementById('submitBtn').disabled = true;
+        document.getElementById('submitBtn').className = 'btn-primary';
+        document.getElementById('submitBtn').textContent = '✅ ' + (getText('submit') || 'Submit Order');
+        checkForm();
+    }
+
+    function closeCheckoutModal() {
+        document.getElementById('checkoutModal').classList.remove('show');
+    }
+
+    function checkForm() {
+        const gameId = document.getElementById('gameId').value.trim();
+        const serverId = document.getElementById('serverId').value.trim();
+        const hasFile = document.getElementById('fileInput').files && document.getElementById('fileInput').files[0];
+        const btn = document.getElementById('submitBtn');
+        
+        if (gameId && serverId && selectedPayment && hasFile) {
+            btn.disabled = false;
+            btn.className = 'btn-primary enabled';
+        } else {
+            btn.disabled = true;
+            btn.className = 'btn-primary';
+        }
+    }
+
+    document.getElementById('gameId').addEventListener('input', checkForm);
+    document.getElementById('serverId').addEventListener('input', checkForm);
+
+    document.querySelectorAll('.payment-option').forEach(el => {
+        el.addEventListener('click', function() {
+            document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedPayment = this.dataset.payment;
+            document.getElementById('waveInfo').classList.remove('show');
+            document.getElementById('kpayInfo').classList.remove('show');
+            if (selectedPayment === 'wave') document.getElementById('waveInfo').classList.add('show');
+            else if (selectedPayment === 'kpay') document.getElementById('kpayInfo').classList.add('show');
+            checkForm();
+        });
+    });
+
+    const fileInput = document.getElementById('fileInput');
+    const fileUpload = document.getElementById('fileUpload');
+    const fileName = document.getElementById('fileName');
+    fileInput.addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+            fileUpload.classList.add('has-file');
+            fileName.textContent = '✅ ' + this.files[0].name;
+            fileName.classList.add('show');
+            checkForm();
+        }
+    });
+
+    function copyNumber(number, btn) {
+        const d = LANG_DATA[currentLang] || {};
+        navigator.clipboard.writeText(number).then(() => {
+            btn.textContent = d.copied || '✅ Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => { btn.textContent = d.copy || 'Copy'; btn.classList.remove('copied'); }, 2500);
+        }).catch(() => {
+            const input = document.createElement('input');
+            input.value = number;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+            btn.textContent = d.copied || '✅ Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => { btn.textContent = d.copy || 'Copy'; btn.classList.remove('copied'); }, 2500);
+        });
+    }
+
+    // ===== SUBMIT ORDER =====
+    document.getElementById('submitBtn').addEventListener('click', async function() {
+        const d = LANG_DATA[currentLang] || {};
+        const gameId = document.getElementById('gameId').value.trim();
+        const serverId = document.getElementById('serverId').value.trim();
+        const hasFile = fileInput.files && fileInput.files[0];
+
+        if (!gameId) { showToast(d.enterGameId || 'Please enter your Game ID'); return; }
+        if (!serverId) { showToast(d.enterServerId || 'Please enter your Server ID'); return; }
+        if (!selectedPayment) { showToast(d.selectPayment || 'Please select a payment method'); return; }
+        if (!hasFile) { showToast(d.uploadSlip || 'Please send your Screenshot'); return; }
+
+        this.disabled = true;
+        this.textContent = '⏳ Sending...';
+
+        const orderId = 'ORD-' + Date.now().toString().slice(-6);
+        const pkg = document.getElementById('modalPackage').textContent;
+        const price = document.getElementById('modalPrice').textContent;
+        const paymentName = selectedPayment === 'wave' ? 'Wave Pay' : 'KBZ Pay';
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        const userName = user ? user.username : 'Guest';
+        const time = new Date().toLocaleString();
+
+        let photoBase64 = null;
+        if (hasFile) {
+            try {
+                photoBase64 = await new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onload = (e) => resolve(e.target.result);
+                    reader.readAsDataURL(hasFile);
+                });
+            } catch(e) {
+                console.warn('Failed to read file:', e);
+            }
+        }
+
+        const orderData = {
+            orderId: orderId,
+            package: pkg,
+            price: price,
+            gameId: gameId,
+            serverId: serverId,
+            payment: paymentName,
+            user: userName,
+            time: time,
+            photo: photoBase64
+        };
+
+        try {
+            const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+            orders.unshift({
+                id: orderId,
+                userId: user ? user.username : 'guest',
+                package: pkg,
+                price: price,
+                gameId: gameId,
+                serverId: serverId,
+                payment: paymentName,
+                date: new Date().toISOString(),
+                status: 'pending'
+            });
+            localStorage.setItem('orderHistory', JSON.stringify(orders));
+
+            localStorage.setItem('newOrderNotification', JSON.stringify({
+                show: true,
+                orderId: orderId,
+                message: `✅ သင့်အော်ဒါ #${orderId} အောင်မြင်ပါသည်!`
+            }));
+            window.dispatchEvent(new Event('storage'));
+
+            showToast(d.orderSuccess || '✅ Order successful!');
+            closeCheckoutModal();
+            setTimeout(() => { window.location.href = 'shop.html'; }, 1500);
+
+            this.disabled = false;
+            this.textContent = '✅ ' + (d.submit || 'Submit Order');
+
+        } catch (error) {
+            console.error('Order error:', error);
+            showToast(d.orderFail || '❌ Order failed. Please try again.', 'error');
+            this.disabled = false;
+            this.textContent = '✅ ' + (d.submit || 'Submit Order');
+        }
+    });
+
+    // ===== DOUBLE BOX SCROLL =====
+    function scrollToDouble() {
+        const el = document.getElementById('doubleList');
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setTimeout(() => {
+            el.style.border = '2px solid var(--gold)';
+            el.style.borderRadius = '12px';
+            el.style.padding = '4px';
+            setTimeout(() => { el.style.border = 'none'; el.style.padding = '0'; }, 1000);
+        }, 500);
     }
 
     // ===== NIGHT MODE =====
