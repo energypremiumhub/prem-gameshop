@@ -431,8 +431,11 @@
             max-height: 90vh;
             overflow-y: auto;
         }
-        /* ===== အပြာရောင် အပေါ်အောက် အကြောင်းရီးကို ဖျောက်ထား ===== */
-        .modal::before{display:none}
+        /* ===== အပြာရောင် အပေါ်အောက် အကြောင်းရီးကို ဖျောက်ထား (သေချာဖျောက်တယ်) ===== */
+        .modal::before {
+            display: none !important;
+            content: none !important;
+        }
         .modal h2{font-size:1.2rem;color:var(--gold);margin-bottom:4px;text-align:center;position:relative;z-index:1;text-shadow:0 0 30px var(--gold-glow)}
         .modal p{color:var(--text-secondary);font-size:0.75rem;text-align:center;margin-bottom:16px;position:relative;z-index:1}
         .modal .form-group{margin-bottom:12px;position:relative;z-index:1}
@@ -1176,6 +1179,7 @@
         }
     }
 
+    // ===== ဘာသာစကားအတိုင်း Modal စာသားကို သေချာပြောင်းပေးတယ် =====
     function updateModalUI() {
         const d = LANG_DATA[currentLang];
         if (!d) return;
