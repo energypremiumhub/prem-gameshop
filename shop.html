@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>⚡ Premium Shop</title>
+    <title>🎮 MLBB Packages</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         /* ===== RESET & BASE ===== */
@@ -180,16 +180,6 @@
         .page-header h1 i{color:var(--cyan);-webkit-text-fill-color:initial;margin-right:6px}
         .page-header p{color:var(--text-secondary);font-size:0.7rem;margin-top:2px}
 
-        /* ===== SEARCH BAR ===== */
-        .search-box{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:14px;padding:10px 16px;display:flex;align-items:center;gap:12px;margin-bottom:20px;transition:all 0.3s ease;box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1)}
-        .search-box:focus-within{border-color:var(--gold);box-shadow:0 0 40px var(--gold-glow)}
-        .search-box .icon{color:var(--text-secondary);font-size:1rem}
-        .search-box input{background:transparent;border:none;color:var(--text-primary);font-size:0.85rem;flex:1;outline:none;padding:4px 0}
-        .search-box input::placeholder{color:var(--text-secondary);font-size:0.75rem}
-        .search-box .clear-btn{color:var(--text-secondary);font-size:0.8rem;cursor:pointer;padding:4px;display:none;transition:all 0.2s ease}
-        .search-box .clear-btn:active{transform:scale(0.85)}
-        .search-box .clear-btn.show{display:block}
-
         /* ===== GAME GRID ===== */
         .game-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
         .game-item{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:16px;padding:20px 14px;text-align:center;cursor:pointer;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);position:relative;overflow:hidden}
@@ -203,6 +193,34 @@
         .game-item .glow{position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(245,166,35,0.05) 0%,transparent 70%);opacity:0;transition:all 0.6s ease}
         .game-item:hover .glow{opacity:1}
         .game-item.hidden{display:none}
+
+        /* ===== GAME ITEM WITH IMAGE ===== */
+        .game-item .game-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto 10px;
+            border: 2px solid var(--border-color);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+        .game-item:hover .game-img {
+            transform: scale(1.08) rotate(-4deg);
+            border-color: var(--gold);
+            box-shadow: 0 0 30px var(--gold-glow);
+        }
+        .game-item .game-img-placeholder {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 8px;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: floatIcon 3s ease-in-out infinite;
+        }
+        .game-item:hover .game-img-placeholder {
+            transform: scale(1.15) rotate(-8deg);
+        }
 
         /* ===== SECTION TITLE ===== */
         .section-title{font-size:0.65rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;display:flex;align-items:center;gap:10px;opacity:0.5}
@@ -264,7 +282,7 @@
 </head>
 <body>
 <div class="container">
-    <!-- ===== HEADER (Login Button ဖျောက်ထား) ===== -->
+    <!-- ===== HEADER ===== -->
     <div class="header">
         <div class="left">
             <div class="logo-wrap">
@@ -274,7 +292,6 @@
                     <span class="shop" id="appSub">Game Shop</span>
                 </div>
             </div>
-            <!-- Login Button ဖျောက်ထား -->
         </div>
         <div class="right">
             <div class="top">
@@ -294,41 +311,35 @@
         <p id="pageSub">ဂိမ်းတစ်ခုရွေးပြီး စိန်ဖြည့်လိုက်ပါ</p>
     </div>
 
-    <!-- ===== SEARCH BAR ===== -->
-    <div class="search-box glass-box">
-        <span class="icon"><i class="fas fa-search"></i></span>
-        <input type="text" id="searchInput" placeholder="🔍 ဂိမ်းနာမည်ရှာပါ..." oninput="searchGames(this.value)">
-        <span class="clear-btn" id="clearBtn" onclick="clearSearch()"><i class="fas fa-times-circle"></i></span>
-    </div>
-
     <!-- ===== GAME GRID ===== -->
     <div class="section-title"><i class="fas fa-gamepad"></i> <span id="gamesTitle">ဂိမ်းများ</span></div>
     <div class="game-grid" id="gameGrid">
-        <!-- Mobile Legends -->
+        <!-- Mobile Legends (with image) -->
         <div class="game-item glass-box" data-name="mobile legends mlbb" onclick="selectGame('Mobile Legends', 'mlbb')">
             <span class="glow"></span>
             <span class="badge" id="popularBadge">🔥 Popular</span>
-            <span class="game-icon">⚔️</span>
+            <img src="https://i.ibb.co/cKsDX2Nt/x.jpg" alt="Mobile Legends" class="game-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="game-img-placeholder" style="display:none;">⚔️</span>
             <div class="game-name">Mobile Legends</div>
-            <div class="game-sub">MLBB • စိန်ဖြည့်မှု</div>
+            <div class="game-sub" id="mlbbSub">ဆိုင်</div>
         </div>
 
         <!-- Coming Soon -->
         <div class="game-item glass-box" data-name="coming soon" onclick="showComingSoon()">
             <span class="glow"></span>
-            <span class="game-icon">🎮</span>
+            <span class="game-img-placeholder">🎮</span>
             <div class="game-name" id="cs1">Coming Soon</div>
             <div class="game-sub" id="cs1sub">အသစ်ထွက်ရှိမည်</div>
         </div>
         <div class="game-item glass-box" data-name="coming soon" onclick="showComingSoon()">
             <span class="glow"></span>
-            <span class="game-icon">🎯</span>
+            <span class="game-img-placeholder">🎯</span>
             <div class="game-name" id="cs2">Coming Soon</div>
             <div class="game-sub" id="cs2sub">အသစ်ထွက်ရှိမည်</div>
         </div>
         <div class="game-item glass-box" data-name="coming soon" onclick="showComingSoon()">
             <span class="glow"></span>
-            <span class="game-icon">🚀</span>
+            <span class="game-img-placeholder">🚀</span>
             <div class="game-name" id="cs3">Coming Soon</div>
             <div class="game-sub" id="cs3sub">အသစ်ထွက်ရှိမည်</div>
         </div>
@@ -360,8 +371,7 @@
             popular: '🔥 Popular',
             comingSoon: 'Coming Soon',
             comingSoonSub: 'အသစ်ထွက်ရှိမည်',
-            searchPlaceholder: '🔍 ဂိမ်းနာမည်ရှာပါ...',
-            noGames: '❌ ဂိမ်းမတွေ့ပါ',
+            mlbbSub: 'ဆိုင်',
             selectGame: 'ဂိမ်းရွေးပါ',
             comingSoonMsg: '🎮 ဤဂိမ်းကို မကြာမီ ထည့်သွင်းပေးပါမည်။'
         },
@@ -375,8 +385,7 @@
             popular: '🔥 Popular',
             comingSoon: 'Coming Soon',
             comingSoonSub: 'Coming Soon',
-            searchPlaceholder: '🔍 Search game name...',
-            noGames: '❌ No games found',
+            mlbbSub: 'Shop',
             selectGame: 'Select Game',
             comingSoonMsg: '🎮 This game will be added soon.'
         }
@@ -416,7 +425,7 @@
         document.getElementById('navShop').textContent = d.shop;
         document.getElementById('navPayment').textContent = d.payment;
         document.getElementById('navProfile').textContent = d.profile;
-        document.getElementById('searchInput').placeholder = d.searchPlaceholder;
+        document.getElementById('mlbbSub').textContent = d.mlbbSub;
         
         // Coming Soon
         document.getElementById('cs1').textContent = d.comingSoon;
@@ -440,53 +449,11 @@
         }
     }
 
-    // ===== SEARCH =====
-    function searchGames(query) {
-        const q = query.toLowerCase().trim();
-        const items = document.querySelectorAll('.game-item');
-        const clearBtn = document.getElementById('clearBtn');
-        let found = false;
-
-        items.forEach(item => {
-            const name = item.dataset.name || '';
-            if (name.includes(q) || q === '') {
-                item.classList.remove('hidden');
-                found = true;
-            } else {
-                item.classList.add('hidden');
-            }
-        });
-
-        if (q.length > 0) clearBtn.classList.add('show');
-        else clearBtn.classList.remove('show');
-
-        let noMsg = document.getElementById('noGamesMsg');
-        if (!found && q.length > 0) {
-            if (!noMsg) {
-                noMsg = document.createElement('div');
-                noMsg.id = 'noGamesMsg';
-                noMsg.style.cssText = 'text-align:center;padding:40px 0;color:var(--text-secondary);font-size:0.85rem;grid-column:1/-1';
-                document.getElementById('gameGrid').appendChild(noMsg);
-            }
-            noMsg.textContent = getText('noGames');
-            noMsg.style.display = 'block';
-        } else if (noMsg) {
-            noMsg.style.display = 'none';
-        }
-    }
-
-    function clearSearch() {
-        document.getElementById('searchInput').value = '';
-        searchGames('');
-        document.getElementById('clearBtn').classList.remove('show');
-        document.getElementById('searchInput').focus();
-    }
-
     // ===== SELECT GAME =====
     function selectGame(gameName) {
         showToast('🎮 ' + gameName + ' ' + getText('selectGame') + '!');
         localStorage.setItem('selectedGame', JSON.stringify({ name: gameName, id: 'mlbb' }));
-        setTimeout(() => { window.location.href = 'packages.html'; }, 500);
+        setTimeout(() => { window.location.href = 'mlbb-packages.html'; }, 500);
     }
 
     function showComingSoon() {
@@ -531,18 +498,6 @@
         }
         
         checkNotification();
-
-        // Keyboard shortcut: / to focus search
-        document.addEventListener('keydown', function(e) {
-            if (e.key === '/' && !e.ctrlKey && !e.metaKey && !e.target.matches('input')) {
-                e.preventDefault();
-                document.getElementById('searchInput').focus();
-            }
-            if (e.key === 'Escape') {
-                clearSearch();
-                document.getElementById('searchInput').blur();
-            }
-        });
     });
 
     window.addEventListener('storage', function(e) {
