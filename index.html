@@ -13,12 +13,12 @@
         :root {
             --bg-primary: #f0f2f5;
             --bg-secondary: #ffffff;
-            --bg-card: rgba(255,255,255,0.8);
-            --bg-input: rgba(255,255,255,0.9);
+            --bg-card: rgba(255,255,255,0.3);
+            --bg-input: rgba(255,255,255,0.6);
             --text-primary: #1a1a2e;
             --text-secondary: #6b7280;
-            --border-color: rgba(0,0,0,0.06);
-            --shadow: rgba(0,0,0,0.05);
+            --border-color: rgba(255,255,255,0.15);
+            --shadow: rgba(0,0,0,0.06);
             --shadow-hover: rgba(0,0,0,0.08);
             --primary: #6c5ce7;
             --primary-glow: rgba(108,92,231,0.2);
@@ -56,25 +56,25 @@
             z-index: 1;
         }
 
-        /* ===== GLASS BOX (Border မပါ) ===== */
+        /* ===== GLASS BOX (ထင်ရှားတဲ့ Glass Effect) ===== */
         .glass-box {
             background: var(--bg-card);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: none;
+            border: 1px solid var(--border-color);
             border-radius: 16px;
             box-shadow: 
                 0 4px 20px var(--shadow),
-                0 8px 40px rgba(0,0,0,0.03),
-                inset 0 1px 0 rgba(255,255,255,0.6);
+                0 8px 40px rgba(0,0,0,0.04),
+                inset 0 1px 0 rgba(255,255,255,0.3);
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .glass-box:hover {
-            transform: translateY(-4px) scale(1.01);
+            transform: translateY(-4px);
             box-shadow: 
                 0 8px 30px var(--shadow-hover),
                 0 16px 60px rgba(0,0,0,0.06),
-                inset 0 1px 0 rgba(255,255,255,0.7);
+                inset 0 1px 0 rgba(255,255,255,0.4);
         }
 
         ::-webkit-scrollbar{width:3px}
@@ -89,21 +89,21 @@
         .header .left .logo img{height:38px;width:auto;vertical-align:middle;border-radius:10px}
         .header .left .logo span{background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
         
-        .header .left .auth-btn{background:var(--bg-card);backdrop-filter:blur(20px);border:none;color:var(--text-secondary);padding:4px 14px;border-radius:10px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-flex;align-items:center;gap:6px;height:36px;width:fit-content;box-shadow:0 4px 15px var(--shadow),inset 0 1px 0 rgba(255,255,255,0.5)}
+        .header .left .auth-btn{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 14px;border-radius:10px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-decoration:none;display:inline-flex;align-items:center;gap:6px;height:36px;width:fit-content;box-shadow:0 4px 15px var(--shadow),inset 0 1px 0 rgba(255,255,255,0.3)}
         .header .left .auth-btn:active{transform:scale(0.85)}
-        .header .left .auth-btn:hover{box-shadow:0 8px 25px var(--shadow-hover),inset 0 1px 0 rgba(255,255,255,0.6)}
-        .header .left .auth-btn.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;box-shadow:0 4px 20px var(--gold-glow)}
+        .header .left .auth-btn:hover{box-shadow:0 8px 25px var(--shadow-hover),inset 0 1px 0 rgba(255,255,255,0.4)}
+        .header .left .auth-btn.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;border-color:var(--gold);box-shadow:0 4px 20px var(--gold-glow)}
         .header .left .auth-btn.logged-in:active{transform:scale(0.85)}
         .header .left .auth-btn.logged-in img{width:22px;height:22px;border-radius:50%;object-fit:cover;margin-right:4px}
         
         .header .right{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
         .header .right .top{display:flex;gap:6px;align-items:center}
-        .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--bg-card);backdrop-filter:blur(20px);padding:3px;border-radius:10px;border:none;box-shadow:0 4px 15px var(--shadow),inset 0 1px 0 rgba(255,255,255,0.5)}
+        .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--bg-card);backdrop-filter:blur(20px);padding:3px;border-radius:10px;border:1px solid var(--border-color);box-shadow:0 4px 15px var(--shadow),inset 0 1px 0 rgba(255,255,255,0.3)}
         .header .right .top .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;text-transform:uppercase}
         .header .right .top .lang-switcher .lang-btn.active{background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;box-shadow:0 4px 15px var(--gold-glow)}
         .header .right .top .lang-switcher .lang-btn:active{transform:scale(0.85)}
         
-        .header .right .top .noti-btn{background:var(--bg-card);backdrop-filter:blur(20px);border:none;border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;box-shadow:0 4px 15px var(--shadow),inset 0 1px 0 rgba(255,255,255,0.5)}
+        .header .right .top .noti-btn{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;box-shadow:0 4px 15px var(--shadow),inset 0 1px 0 rgba(255,255,255,0.3)}
         .header .right .top .noti-btn:active{transform:scale(0.85)}
         .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none;box-shadow:0 0 15px var(--red-glow)}
 
@@ -120,7 +120,7 @@
         .shop-status-banner {
             background: var(--bg-card);
             backdrop-filter: blur(20px);
-            border: none;
+            border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 16px 20px;
             margin-bottom: 16px;
@@ -129,11 +129,11 @@
             animation: slideUp 0.7s ease;
             transition: all 0.3s ease;
             cursor: pointer;
-            box-shadow: 0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.03), inset 0 1px 0 rgba(255,255,255,0.6);
+            box-shadow: 0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.3);
         }
         .shop-status-banner:hover {
-            transform: translateY(-4px) scale(1.01);
-            box-shadow: 0 8px 30px var(--shadow-hover), 0 16px 60px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.7);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px var(--shadow-hover), 0 16px 60px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.4);
         }
         .shop-status-banner .banner-content {
             display: flex;
@@ -215,22 +215,22 @@
         .shop-card {
             background: var(--bg-card);
             backdrop-filter: blur(20px);
-            border: none;
+            border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 18px 14px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
             margin-bottom: 16px;
-            box-shadow: 0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.03), inset 0 1px 0 rgba(255,255,255,0.6);
+            box-shadow: 0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.3);
             position: relative;
             overflow: hidden;
             text-decoration: none;
             display: block;
         }
         .shop-card:hover {
-            transform: translateY(-4px) scale(1.01);
-            box-shadow: 0 8px 30px var(--shadow-hover), 0 16px 60px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.7);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px var(--shadow-hover), 0 16px 60px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.4);
         }
         .shop-card:active {
             transform: scale(0.97);
@@ -312,7 +312,7 @@
         .services-grid .service{
             background: var(--bg-card);
             backdrop-filter: blur(20px);
-            border: none;
+            border: 1px solid var(--border-color);
             border-radius: 14px;
             padding: 16px 10px;
             text-align: center;
@@ -320,11 +320,11 @@
             transition: all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.03), inset 0 1px 0 rgba(255,255,255,0.6);
+            box-shadow: 0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.3);
         }
         .services-grid .service:hover {
-            transform: translateY(-4px) scale(1.01);
-            box-shadow: 0 8px 30px var(--shadow-hover), 0 16px 60px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.7);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px var(--shadow-hover), 0 16px 60px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.4);
         }
         .services-grid .service:active {
             transform: scale(0.97);
@@ -347,7 +347,7 @@
         .telegram-card{
             background: var(--bg-card);
             backdrop-filter: blur(20px);
-            border: none;
+            border: 1px solid var(--border-color);
             border-radius: 14px;
             padding: 12px 14px;
             display: flex;
@@ -357,11 +357,11 @@
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
             animation: slideUp 0.85s ease;
-            box-shadow: 0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.03), inset 0 1px 0 rgba(255,255,255,0.6);
+            box-shadow: 0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.3);
         }
         .telegram-card:hover {
-            transform: translateY(-4px) scale(1.01);
-            box-shadow: 0 8px 30px var(--shadow-hover), 0 16px 60px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.7);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px var(--shadow-hover), 0 16px 60px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.4);
         }
         .telegram-card:active {
             transform: scale(0.97);
@@ -377,7 +377,7 @@
         .telegram-contact{
             background: var(--bg-card);
             backdrop-filter: blur(20px);
-            border: none;
+            border: 1px solid var(--border-color);
             border-radius: 14px;
             padding: 10px 14px;
             display: flex;
@@ -387,11 +387,11 @@
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
             animation: slideUp 0.85s ease;
-            box-shadow: 0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.03), inset 0 1px 0 rgba(255,255,255,0.6);
+            box-shadow: 0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.3);
         }
         .telegram-contact:hover {
-            transform: translateY(-4px) scale(1.01);
-            box-shadow: 0 8px 30px var(--shadow-hover), 0 16px 60px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.7);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px var(--shadow-hover), 0 16px 60px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.4);
         }
         .telegram-contact:active {
             transform: scale(0.97);
@@ -415,13 +415,13 @@
             background: var(--bg-secondary);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border: none;
+            border: 1px solid var(--border-color);
             border-radius: 18px;
             display: flex;
             justify-content: space-around;
             padding: 8px 4px;
             z-index: 100;
-            box-shadow: 0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.03), inset 0 1px 0 rgba(255,255,255,0.6);
+            box-shadow: 0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.3);
         }
         .bottom-nav .nav-item {
             text-align: center;
@@ -478,7 +478,7 @@
 
         .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.3;letter-spacing:1px}
 
-        .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-secondary);backdrop-filter:blur(20px);padding:10px 20px;border-radius:12px;border:none;color:var(--primary);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 4px 20px var(--shadow),inset 0 1px 0 rgba(255,255,255,0.5);animation:toastPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
+        .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-secondary);backdrop-filter:blur(20px);padding:10px 20px;border-radius:12px;border:1px solid var(--border-color);color:var(--primary);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 4px 20px var(--shadow),inset 0 1px 0 rgba(255,255,255,0.3);animation:toastPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
         .toast.show{display:block}
         @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
@@ -506,12 +506,12 @@
         .modal-box {
             background: var(--bg-secondary);
             backdrop-filter: blur(24px);
-            border: none;
+            border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 24px 20px;
             max-width: 380px;
             width: 100%;
-            box-shadow: 0 4px 30px var(--shadow), 0 20px 60px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.6);
+            box-shadow: 0 4px 30px var(--shadow), 0 20px 60px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.3);
             position: relative;
         }
         .modal-box .close-btn {
@@ -625,7 +625,7 @@
 
         .confirm-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(20px);display:none;z-index:600;align-items:center;justify-content:center;padding:20px;flex-direction:column;text-align:center}
         .confirm-overlay.show{display:flex;animation:fadeIn 0.5s ease}
-        .confirm-overlay .card{background:var(--bg-secondary);backdrop-filter:blur(24px);border:none;border-radius:24px;padding:30px 24px;max-width:360px;width:100%;box-shadow:0 4px 30px var(--shadow),0 20px 60px rgba(0,0,0,0.06),inset 0 1px 0 rgba(255,255,255,0.6)}
+        .confirm-overlay .card{background:var(--bg-secondary);backdrop-filter:blur(24px);border:1px solid var(--border-color);border-radius:24px;padding:30px 24px;max-width:360px;width:100%;box-shadow:0 4px 30px var(--shadow),0 20px 60px rgba(0,0,0,0.06),inset 0 1px 0 rgba(255,255,255,0.3)}
         .confirm-overlay .avatar-box{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--secondary));display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#fff;margin:0 auto 12px;overflow:hidden;box-shadow:0 0 40px var(--primary-glow)}
         .confirm-overlay .avatar-box img{width:100%;height:100%;object-fit:cover}
         .confirm-overlay .username{font-size:1.2rem;font-weight:700;color:var(--text-primary);margin-bottom:2px}
@@ -1044,16 +1044,16 @@
         void el.offsetWidth;
         el.classList.add('click-soft');
         
-        el.style.boxShadow = '0 8px 30px var(--shadow-hover), 0 16px 60px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.7)';
+        el.style.boxShadow = '0 8px 30px var(--shadow-hover), 0 16px 60px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.4)';
         el.style.transition = 'all 0.3s ease';
-        el.style.transform = 'translateY(-4px) scale(1.01)';
+        el.style.transform = 'translateY(-4px)';
         
         const icon = el.querySelector('.icon');
         icon.style.transform = 'scale(1.2)';
         
         setTimeout(() => {
-            el.style.boxShadow = '0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.03), inset 0 1px 0 rgba(255,255,255,0.6)';
-            el.style.transform = 'translateY(0) scale(1)';
+            el.style.boxShadow = '0 4px 20px var(--shadow), 0 8px 40px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.3)';
+            el.style.transform = 'translateY(0)';
             icon.style.transform = 'scale(1)';
         }, 500);
     }
