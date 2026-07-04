@@ -39,8 +39,6 @@
             --purple-glow: rgba(179,136,255,0.2);
             --glass-border: rgba(255,255,255,0.06);
             --glass-bg: rgba(16,16,50,0.3);
-            --modal-bg: rgba(30,30,70,0.95);
-            --modal-border: rgba(255,255,255,0.08);
         }
 
         body {
@@ -415,74 +413,142 @@
         @keyframes shimmer{0%,100%{transform:translate(0,0)}50%{transform:translate(-20%,-20%)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
-        /* ===== AUTH MODAL (ပြင်ထားတယ်) ===== */
+        /* ===== MODAL အသစ် (ရိုးရှင်းပြီး သေချာအလုပ်ဖြစ်မယ်) ===== */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(6px);
             display: none;
-            z-index: 300;
+            z-index: 999;
             align-items: center;
             justify-content: center;
             padding: 20px;
         }
-        .modal-overlay.show{display:flex;animation:fadeIn 0.3s ease}
-        .modal{
-            background: var(--bg-card);
-            border: 2px solid var(--border-color);
-            border-radius: 18px;
-            padding: 28px 24px;
+        .modal-overlay.show {
+            display: flex;
+        }
+        .modal-box {
+            background: #141c2b;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 24px 20px;
             max-width: 380px;
             width: 100%;
-            box-shadow: 0 20px 60px var(--shadow);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
             position: relative;
-            overflow: hidden;
-            max-height: 90vh;
-            overflow-y: auto;
         }
-        /* ===== အပြာရောင် အပေါ်အောက် အကြောင်းရီးကို လုံးဝဖျောက်ထား ===== */
-        .modal::before {
-            display: none !important;
-            content: none !important;
-            visibility: hidden !important;
-            opacity: 0 !important;
-            width: 0 !important;
-            height: 0 !important;
+        .modal-box .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            background: none;
+            border: none;
+            color: #8899bb;
+            font-size: 1.2rem;
+            cursor: pointer;
         }
-        .modal h2{font-size:1.2rem;color:var(--gold);margin-bottom:4px;text-align:center;text-shadow:0 0 30px var(--gold-glow)}
-        .modal p{color:var(--text-secondary);font-size:0.75rem;text-align:center;margin-bottom:16px}
-        .modal .form-group{margin-bottom:12px}
-        .modal .form-group label{font-size:0.6rem;color:var(--text-secondary);font-weight:600;display:block;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px}
-        .modal .form-group label .required{color:var(--red);margin-left:2px}
-        .modal .form-group input{width:100%;padding:10px 14px;border-radius:10px;border:2px solid var(--border-color);background:var(--bg-input);color:var(--text-primary);font-size:0.85rem;outline:none;transition:all 0.3s ease}
-        .modal .form-group input:focus{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
-        .modal .form-group input::placeholder{color:var(--text-secondary);font-size:0.7rem}
-        .modal .form-group input.error{border-color:var(--red);box-shadow:0 0 20px var(--red-glow)}
-        .modal .form-group .error-text{font-size:0.5rem;color:var(--red);margin-top:3px;display:none}
-        .modal .form-group .error-text.show{display:block}
-        .modal .btn-primary{width:100%;padding:11px;background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border:none;border-radius:10px;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.3s ease;box-shadow:0 0 30px var(--gold-glow)}
-        .modal .btn-primary:hover{box-shadow:0 0 40px var(--gold-glow)}
-        .modal .btn-primary:active{transform:scale(0.96)}
-        .modal .btn-primary:disabled{opacity:0.4;cursor:not-allowed;box-shadow:none}
-        .modal .switch-link{color:var(--cyan);cursor:pointer;font-weight:600;text-align:center;display:block;margin-top:12px;font-size:0.7rem}
-        .modal .switch-link:active{opacity:0.7}
-        .modal .close-btn{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--text-secondary);font-size:1.1rem;cursor:pointer;z-index:10}
-        .modal .close-btn:hover{color:var(--gold)}
-        .modal .forgot-link{color:var(--text-secondary);cursor:pointer;font-size:0.55rem;text-align:right;display:block;margin-top:6px;transition:all 0.3s ease}
-        .modal .forgot-link:hover{color:var(--gold)}
-        .modal .login-error{font-size:0.55rem;color:var(--red);text-align:center;margin-bottom:10px;display:none;padding:6px 12px;background:rgba(255,0,68,0.08);border-radius:8px;border:1px solid rgba(255,0,68,0.1)}
-
-        .avatar-upload .preview{width:70px;height:70px;border-radius:50%;background:var(--bg-input);border:2px solid var(--border-color);display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--text-secondary);cursor:pointer;transition:all 0.3s ease;overflow:hidden;position:relative;margin:0 auto 8px}
-        .avatar-upload .preview:hover{border-color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
-        .avatar-upload .preview img{width:100%;height:100%;object-fit:cover}
-        .avatar-upload .preview input{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}
-        .avatar-upload .preview .upload-hint{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.7);padding:2px;font-size:0.4rem;color:var(--text-secondary);text-align:center;display:none}
-        .avatar-upload .preview:hover .upload-hint{display:block}
-        .avatar-upload .label{font-size:0.55rem;color:var(--text-secondary);text-align:center;display:block;opacity:0.5}
+        .modal-box .close-btn:hover {
+            color: #ffd700;
+        }
+        .modal-box h2 {
+            color: #ffd700;
+            font-size: 1.2rem;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+        .modal-box .sub {
+            color: #8899bb;
+            font-size: 0.75rem;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        .modal-box .form-group {
+            margin-bottom: 12px;
+        }
+        .modal-box .form-group label {
+            display: block;
+            color: #8899bb;
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 3px;
+        }
+        .modal-box .form-group input {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 2px solid rgba(255,255,255,0.06);
+            background: #1a2438;
+            color: #ffffff;
+            font-size: 0.85rem;
+            outline: none;
+        }
+        .modal-box .form-group input:focus {
+            border-color: #ffd700;
+            box-shadow: 0 0 20px rgba(255,215,0,0.15);
+        }
+        .modal-box .form-group input::placeholder {
+            color: #8899bb;
+            font-size: 0.7rem;
+        }
+        .modal-box .btn-primary {
+            width: 100%;
+            padding: 11px;
+            background: linear-gradient(135deg, #ffd700, #ff6a00);
+            color: #0a0e1a;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 30px rgba(255,215,0,0.2);
+        }
+        .modal-box .btn-primary:active {
+            transform: scale(0.96);
+        }
+        .modal-box .switch-link {
+            color: #00e5ff;
+            cursor: pointer;
+            font-weight: 600;
+            text-align: center;
+            display: block;
+            margin-top: 12px;
+            font-size: 0.7rem;
+        }
+        .modal-box .switch-link:active {
+            opacity: 0.7;
+        }
+        .modal-box .error-msg {
+            color: #ff0044;
+            font-size: 0.55rem;
+            text-align: center;
+            margin-bottom: 10px;
+            display: none;
+            padding: 6px 12px;
+            background: rgba(255,0,68,0.08);
+            border-radius: 8px;
+            border: 1px solid rgba(255,0,68,0.1);
+        }
+        .modal-box .error-msg.show {
+            display: block;
+        }
+        .modal-box .forgot-link {
+            color: #8899bb;
+            cursor: pointer;
+            font-size: 0.55rem;
+            text-align: right;
+            display: block;
+            margin-top: 6px;
+        }
+        .modal-box .forgot-link:hover {
+            color: #ffd700;
+        }
 
         .confirm-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.9);backdrop-filter:blur(20px);display:none;z-index:600;align-items:center;justify-content:center;padding:20px;flex-direction:column;text-align:center}
         .confirm-overlay.show{display:flex;animation:fadeIn 0.5s ease}
@@ -621,94 +687,64 @@
     </div>
 </div>
 
-<!-- ===== AUTH MODAL ===== -->
+<!-- ===== MODAL အသစ် ===== -->
 <div class="modal-overlay" id="authModal">
-    <div class="modal">
+    <div class="modal-box">
         <button class="close-btn" onclick="closeModal()">✕</button>
         <h2 id="modalTitle">⚔️ ဝင်ရန်</h2>
-        <p id="modalSub">ပြန်လည်ကြိုဆိုပါတယ် စစ်သည်တော်!</p>
-        <div id="modalBody">
-            <!-- Login Form -->
-            <div id="loginForm">
-                <div class="form-group">
-                    <label id="emailLabel">📧 အီးမေးလ် / အသုံးပြုသူအမည် / ဖုန်းနံပါတ်</label>
-                    <input type="text" id="loginEmail" placeholder="သင့်အီးမေးလ်၊ အသုံးပြုသူအမည် သို့မဟုတ် ဖုန်းနံပါတ်ထည့်ပါ">
-                </div>
-                <div class="form-group">
-                    <label id="passLabel">🔑 စကားဝှက်</label>
-                    <input type="password" id="loginPassword" placeholder="သင့်စကားဝှက်ထည့်ပါ">
-                </div>
-                <div class="login-error" id="loginError"></div>
-                <button class="btn-primary" id="loginBtn" onclick="handleLogin()">🔑 ဝင်ရန်</button>
-                <span class="forgot-link" onclick="openForgotPassword()">🔑 စကားဝှက်မေ့နေပါသလား?</span>
-                <span class="switch-link" id="switchToRegister" onclick="switchAuthMode()">အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်</span>
+        <p class="sub" id="modalSub">ပြန်လည်ကြိုဆိုပါတယ်!</p>
+        
+        <div class="error-msg" id="loginError"></div>
+        
+        <!-- Login Form -->
+        <div id="loginForm">
+            <div class="form-group">
+                <label id="emailLabel">📧 အီးမေးလ် / အသုံးပြုသူအမည်</label>
+                <input type="text" id="loginInput" placeholder="သင့်အီးမေးလ် သို့မဟုတ် အသုံးပြုသူအမည်ထည့်ပါ">
             </div>
-            <!-- Register Form -->
-            <div id="registerForm" style="display:none;">
-                <div class="avatar-upload">
-                    <div class="preview" id="avatarPreview">
-                        👤
-                        <input type="file" id="avatarInput" accept="image/*" onchange="handleAvatarUpload(event)">
-                        <span class="upload-hint">Tap to change</span>
-                    </div>
-                    <span class="label">Profile Picture (optional)</span>
-                </div>
-                <div class="form-group">
-                    <label>👤 အသုံးပြုသူအမည် <span class="required">*</span></label>
-                    <input type="text" id="regUsername" placeholder="အသုံးပြုသူအမည်ရွေးပါ (နေရာလပ်မထည့်ရ)" oninput="this.value=this.value.replace(/\s/g,'')">
-                    <div class="error-text" id="usernameError">အသုံးပြုသူအမည် လိုအပ်ပါသည် (နေရာလပ်မထည့်ရ)</div>
-                </div>
-                <div class="form-group">
-                    <label>📧 အီးမေးလ်</label>
-                    <input type="email" id="regEmail" placeholder="သင့်အီးမေးလ်ထည့်ပါ (optional)">
-                    <div class="error-text" id="emailError">မှန်ကန်တဲ့ အီးမေးလ် လိုအပ်ပါသည်</div>
-                </div>
-                <div class="form-group">
-                    <label>📱 ဖုန်းနံပါတ်</label>
-                    <input type="tel" id="regPhone" placeholder="သင့်ဖုန်းနံပါတ်ထည့်ပါ (optional)">
-                    <div class="error-text" id="phoneError">ဖုန်းနံပါတ် လိုအပ်ပါသည်</div>
-                </div>
-                <div class="form-group">
-                    <label>🔑 စကားဝှက် <span class="required">*</span></label>
-                    <input type="password" id="regPassword" placeholder="အနည်းဆုံး ၄ လုံး">
-                    <div class="error-text" id="passwordError">စကားဝှက်သည် အနည်းဆုံး ၄ လုံးရှိရမယ်</div>
-                </div>
-                <div class="form-group">
-                    <label>🔐 စကားဝှက်အတည်ပြုရန် <span class="required">*</span></label>
-                    <input type="password" id="regConfirmPassword" placeholder="စကားဝှက်ပြန်ထည့်ပါ">
-                    <div class="error-text" id="confirmError">စကားဝှက်များ မတူညီပါ</div>
-                </div>
-                <button class="btn-primary" onclick="handleRegister()">🔑 မှတ်ပုံတင်ရန်</button>
-                <span class="switch-link" id="switchToLogin" onclick="switchAuthMode()">အကောင့်ရှိပြီးသား? ဝင်ရန်</span>
+            <div class="form-group">
+                <label id="passLabel">🔑 စကားဝှက်</label>
+                <input type="password" id="loginPassword" placeholder="သင့်စကားဝှက်ထည့်ပါ">
             </div>
-            <!-- Forgot Password Form -->
-            <div id="forgotForm" style="display:none;">
-                <div class="form-group">
-                    <label>📧 အီးမေးလ် သို့မဟုတ် ဖုန်းနံပါတ်</label>
-                    <input type="text" id="forgotEmail" placeholder="သင့်မှတ်ပုံတင်ထားတဲ့ အီးမေးလ် သို့မဟုတ် ဖုန်းနံပါတ်ထည့်ပါ">
-                    <div class="error-text" id="forgotEmailError">ကျေးဇူးပြု၍ အီးမေးလ် သို့မဟုတ် ဖုန်းနံပါတ်ထည့်ပါ</div>
-                </div>
-                <div id="otpSection" style="display:none;">
-                    <div class="form-group">
-                        <label>🔑 OTP ကုဒ်</label>
-                        <input type="text" id="otpCode" placeholder="သင့်အီးမေးလ်သို့ ပို့ထားတဲ့ OTP ကုဒ်ထည့်ပါ">
-                        <div class="error-text" id="otpError">OTP ကုဒ် မမှန်ပါ</div>
-                    </div>
-                    <div class="form-group">
-                        <label>🔑 စကားဝှက်အသစ်</label>
-                        <input type="password" id="newPassword" placeholder="အနည်းဆုံး ၄ လုံး">
-                        <div class="error-text" id="newPasswordError">စကားဝှက်သည် အနည်းဆုံး ၄ လုံးရှိရမယ်</div>
-                    </div>
-                    <div class="form-group">
-                        <label>🔐 စကားဝှက်အသစ်အတည်ပြုရန်</label>
-                        <input type="password" id="confirmNewPassword" placeholder="စကားဝှက်ပြန်ထည့်ပါ">
-                        <div class="error-text" id="confirmNewError">စကားဝှက်များ မတူညီပါ</div>
-                    </div>
-                    <button class="btn-primary" onclick="resetPassword()">🔄 စကားဝှက်ပြန်သတ်မှတ်ရန်</button>
-                </div>
-                <button class="btn-primary" id="sendOtpBtn" onclick="sendOTP()" style="margin-bottom:8px;">📧 OTP ပို့ရန်</button>
-                <span class="switch-link" onclick="closeForgotPassword()">← ဝင်ရန်စာမျက်နှာသို့</span>
+            <span class="forgot-link" onclick="showForgot()">🔑 စကားဝှက်မေ့နေပါသလား?</span>
+            <button class="btn-primary" id="loginBtn" onclick="handleLogin()">🔑 ဝင်ရန်</button>
+            <span class="switch-link" id="switchToRegister" onclick="switchMode()">အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်</span>
+        </div>
+        
+        <!-- Register Form -->
+        <div id="registerForm" style="display:none;">
+            <div class="form-group">
+                <label>👤 အသုံးပြုသူအမည် <span style="color:#ef4444;">*</span></label>
+                <input type="text" id="regUsername" placeholder="အသုံးပြုသူအမည်ရွေးပါ">
             </div>
+            <div class="form-group">
+                <label>📧 အီးမေးလ်</label>
+                <input type="email" id="regEmail" placeholder="သင့်အီးမေးလ်ထည့်ပါ (optional)">
+            </div>
+            <div class="form-group">
+                <label>📱 ဖုန်းနံပါတ်</label>
+                <input type="tel" id="regPhone" placeholder="သင့်ဖုန်းနံပါတ်ထည့်ပါ (optional)">
+            </div>
+            <div class="form-group">
+                <label>🔑 စကားဝှက် <span style="color:#ef4444;">*</span></label>
+                <input type="password" id="regPassword" placeholder="အနည်းဆုံး ၄ လုံး">
+            </div>
+            <div class="form-group">
+                <label>🔐 စကားဝှက်အတည်ပြုရန် <span style="color:#ef4444;">*</span></label>
+                <input type="password" id="regConfirmPassword" placeholder="စကားဝှက်ပြန်ထည့်ပါ">
+            </div>
+            <button class="btn-primary" onclick="handleRegister()">📝 မှတ်ပုံတင်ရန်</button>
+            <span class="switch-link" id="switchToLogin" onclick="switchMode()">အကောင့်ရှိပြီးသား? ဝင်ရန်</span>
+        </div>
+        
+        <!-- Forgot Password -->
+        <div id="forgotForm" style="display:none;">
+            <div class="form-group">
+                <label>📧 အီးမေးလ်</label>
+                <input type="email" id="forgotEmail" placeholder="သင့်အီးမေးလ်ထည့်ပါ">
+            </div>
+            <button class="btn-primary" onclick="sendResetLink()" style="margin-bottom:8px;">📧 စကားဝှက်ပြန်သတ်မှတ်ရန် လင့်ခ်ပို့မည်</button>
+            <span class="switch-link" onclick="backToLogin()">← ဝင်ရန်စာမျက်နှာသို့</span>
         </div>
     </div>
 </div>
@@ -747,45 +783,28 @@
             home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
             noti: '🔔 အသိပေးချက်အသစ်မရှိပါ',
             modalLogin: '⚔️ ဝင်ရန်',
-            modalRegister: '🛡️ မှတ်ပုံတင်ရန်',
-            modalLoginSub: 'ပြန်လည်ကြိုဆိုပါတယ် စစ်သည်တော်!',
-            modalRegisterSub: 'အကောင့်ဖွင့်ပါ ချန်ပီယံ!',
-            email: '📧 အီးမေးလ် / အသုံးပြုသူအမည် / ဖုန်းနံပါတ်',
+            modalRegister: '📝 မှတ်ပုံတင်ရန်',
+            modalLoginSub: 'ပြန်လည်ကြိုဆိုပါတယ်!',
+            modalRegisterSub: 'အကောင့်ဖွင့်ပါ!',
+            email: '📧 အီးမေးလ် / အသုံးပြုသူအမည်',
             password: '🔑 စကားဝှက်',
-            username: '👤 အသုံးပြုသူအမည်',
-            phone: '📱 ဖုန်းနံပါတ်',
             switchLogin: 'အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်',
             switchRegister: 'အကောင့်ရှိပြီးသား? ဝင်ရန်',
             login: 'ဝင်ရန်',
             register: 'မှတ်ပုံတင်ရန်',
-            loginSuccess: '✅ ကြိုဆိုပါတယ် ချန်ပီယံ!',
+            loginSuccess: '✅ ကြိုဆိုပါတယ်!',
             registerSuccess: '✅ အကောင့်ဖွင့်ခြင်းအောင်မြင်ပါပြီ!',
             logoutSuccess: '🚪 ထွက်ခြင်းအောင်မြင်ပါပြီ!',
-            logoutConfirm: 'ထွက်မှာသေချာလား?',
-            enterEmail: 'ကျေးဇူးပြု၍ အီးမေးလ်၊ အသုံးပြုသူအမည် သို့မဟုတ် ဖုန်းနံပါတ်ထည့်ပါ',
+            enterEmail: 'ကျေးဇူးပြု၍ အီးမေးလ် သို့မဟုတ် အသုံးပြုသူအမည်ထည့်ပါ',
             enterPassword: 'ကျေးဇူးပြု၍ စကားဝှက်ထည့်ပါ',
             enterUsername: 'ကျေးဇူးပြု၍ အသုံးပြုသူအမည်ထည့်ပါ',
-            enterValidEmail: 'ကျေးဇူးပြု၍ မှန်ကန်တဲ့ အီးမေးလ်ထည့်ပါ',
-            enterPhone: 'ကျေးဇူးပြု၍ ဖုန်းနံပါတ်ထည့်ပါ',
+            enterValidEmail: 'မှန်ကန်တဲ့ အီးမေးလ်ထည့်ပါ',
+            enterPhone: 'ဖုန်းနံပါတ်ထည့်ပါ',
             passwordMin: 'စကားဝှက်သည် အနည်းဆုံး ၄ လုံးရှိရမယ်',
             passwordMatch: 'စကားဝှက်များ မတူညီပါ',
             userExists: '❌ အသုံးပြုသူအမည်၊ အီးမေးလ် သို့မဟုတ် ဖုန်းနံပါတ် ရှိပြီးသားပါ',
-            userNotFound: '❌ အကောင့်မရှိပါ။ ကျေးဇူးပြု၍ မှတ်ပုံတင်ပါ။',
-            invalidCredentials: '❌ အီးမေးလ်/အသုံးပြုသူအမည်/ဖုန်းနံပါတ် သို့မဟုတ် စကားဝှက် မှားနေပါသည်',
-            forgotTitle: '🔑 စကားဝှက်မေ့နေပါသလား',
-            forgotSub: 'စကားဝှက်ပြန်သတ်မှတ်ရန် သင့်အီးမေးလ် သို့မဟုတ် ဖုန်းနံပါတ်ကိုထည့်ပါ',
-            sendOtp: '📧 OTP ပို့ရန်',
-            resetPassword: '🔄 စကားဝှက်ပြန်သတ်မှတ်ရန်',
-            otpSent: '✅ သင့်အီးမေးလ်သို့ OTP ပို့ထားပါသည်!',
-            otpError: '❌ OTP ကုဒ် မှားနေပါသည်',
-            resetSuccess: '✅ စကားဝှက်ပြန်သတ်မှတ်ခြင်းအောင်မြင်ပါပြီ!',
-            resetError: '❌ စကားဝှက်ပြန်သတ်မှတ်ခြင်းမအောင်မြင်ပါ။ ကျေးဇူးပြု၍ ပြန်စမ်းပါ။',
-            backToLogin: '← ဝင်ရန်စာမျက်နှာသို့',
-            emailSentError: '❌ OTP ပို့ရန်မအောင်မြင်ပါ။ ကျေးဇူးပြု၍ ပြန်စမ်းပါ။',
-            noSpace: 'အသုံးပြုသူအမည်တွင် နေရာလွတ်မထည့်ရပါ',
-            confirmYes: '✅ ဟုတ်ကဲ့ ကျွန်တော်ပါ',
-            confirmNo: '❌ မဟုတ်ပါ၊ ပယ်ဖျက်မည်',
-            forgotBack: '← ဝင်ရန်စာမျက်နှာသို့',
+            userNotFound: '❌ အကောင့်မရှိပါ',
+            invalidCredentials: '❌ အီးမေးလ် သို့မဟုတ် စကားဝှက် မှားနေပါသည်',
             shopOpen: 'OPEN',
             shopClosed: 'CLOSED',
             shopOpenText: 'မနက် ၁၀ နာရီမှ ည ၁၀ နာရီအတွင်းသာ ဆိုင်ဖွင့်မည်',
@@ -812,22 +831,19 @@
             home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
             noti: '🔔 No new notifications',
             modalLogin: '⚔️ Login',
-            modalRegister: '🛡️ Register',
-            modalLoginSub: 'Welcome back, warrior!',
-            modalRegisterSub: 'Create your account, champion!',
-            email: '📧 Email / Username / Phone',
+            modalRegister: '📝 Register',
+            modalLoginSub: 'Welcome back!',
+            modalRegisterSub: 'Create your account!',
+            email: '📧 Email / Username',
             password: '🔑 Password',
-            username: '👤 Username',
-            phone: '📱 Phone Number',
             switchLogin: "Don't have an account? Register",
             switchRegister: 'Already have an account? Login',
             login: 'Login',
             register: 'Register',
-            loginSuccess: '✅ Welcome back, Champion!',
-            registerSuccess: '✅ Account created! Welcome!',
-            logoutSuccess: '🚪 Logged out successfully!',
-            logoutConfirm: 'Are you sure you want to logout?',
-            enterEmail: 'Please enter your email, username or phone',
+            loginSuccess: '✅ Welcome back!',
+            registerSuccess: '✅ Account created!',
+            logoutSuccess: '🚪 Logged out!',
+            enterEmail: 'Please enter your email or username',
             enterPassword: 'Please enter your password',
             enterUsername: 'Please enter your username',
             enterValidEmail: 'Please enter a valid email',
@@ -835,22 +851,8 @@
             passwordMin: 'Password must be at least 4 characters',
             passwordMatch: 'Passwords do not match',
             userExists: '❌ Username, email or phone already exists',
-            userNotFound: '❌ Account not found. Please register first.',
-            invalidCredentials: '❌ Invalid email/username/phone or password',
-            forgotTitle: '🔑 Forgot Password',
-            forgotSub: 'Enter your email or phone to reset password',
-            sendOtp: '📧 Send OTP',
-            resetPassword: '🔄 Reset Password',
-            otpSent: '✅ OTP sent to your email!',
-            otpError: '❌ Invalid OTP code',
-            resetSuccess: '✅ Password reset successfully!',
-            resetError: '❌ Failed to reset password. Please try again.',
-            backToLogin: '← Back to Login',
-            emailSentError: '❌ Failed to send OTP. Please try again.',
-            noSpace: 'Username cannot contain spaces',
-            confirmYes: '✅ Yes, that\'s me',
-            confirmNo: '❌ No, cancel',
-            forgotBack: '← Back to Login',
+            userNotFound: '❌ Account not found',
+            invalidCredentials: '❌ Invalid email or password',
             shopOpen: 'OPEN',
             shopClosed: 'CLOSED',
             shopOpenText: 'Open from 10:00 AM to 10:00 PM',
@@ -859,6 +861,9 @@
     };
 
     let currentLang = localStorage.getItem('lang') || 'my';
+    let currentUser = null;
+    const savedUser = localStorage.getItem('currentUser');
+    if (savedUser) currentUser = JSON.parse(savedUser);
 
     function getText(key) { return LANG_DATA[currentLang][key] || key; }
 
@@ -869,8 +874,6 @@
         document.querySelectorAll('.lang-btn').forEach(b => {
             b.classList.toggle('active', b.dataset.lang === lang);
         });
-        // Modal စာသားတွေကို ပြန်ပြောင်းဖို့
-        updateModalUI();
     }
 
     function updateLanguage() {
@@ -904,7 +907,7 @@
         document.getElementById('statusText').textContent = isOpen ? d.shopOpenText : d.shopClosedText;
         
         updateAuthUI();
-        updateModalUI();
+        updateModalTexts();
         updateShopUI();
     }
 
@@ -1098,10 +1101,6 @@
     });
 
     // ===== AUTH SYSTEM =====
-    let currentUser = null;
-    const savedUser = localStorage.getItem('currentUser');
-    if (savedUser) currentUser = JSON.parse(savedUser);
-
     function isLoggedIn() { return currentUser !== null; }
 
     function updateAuthUI() {
@@ -1147,111 +1146,89 @@
         }
     }
 
-    // ===== AUTH MODAL =====
+    // ===== MODAL အသစ် Functions =====
     let isLoginMode = true;
 
     function openModal(mode) {
         isLoginMode = mode !== 'register';
         const modal = document.getElementById('authModal');
         modal.classList.add('show');
-        document.getElementById('loginForm').style.display = 'block';
-        document.getElementById('registerForm').style.display = 'none';
+        document.getElementById('loginForm').style.display = isLoginMode ? 'block' : 'none';
+        document.getElementById('registerForm').style.display = isLoginMode ? 'none' : 'block';
         document.getElementById('forgotForm').style.display = 'none';
-        document.getElementById('otpSection').style.display = 'none';
-        document.getElementById('sendOtpBtn').style.display = 'block';
-        document.getElementById('loginError').style.display = 'none';
+        document.getElementById('loginError').classList.remove('show');
         document.getElementById('loginError').textContent = '';
-        document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
-        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
-        if (!isLoginMode) {
-            document.getElementById('avatarPreview').innerHTML = 
-                '👤<input type="file" accept="image/*" onchange="handleAvatarUpload(event)"><span class="upload-hint">Tap to change</span>';
-            tempAvatar = null;
-        }
-        updateModalUI();
+        updateModalTexts();
     }
 
     function closeModal() {
         document.getElementById('authModal').classList.remove('show');
-        document.getElementById('forgotEmail').value = '';
-        document.getElementById('otpCode').value = '';
-        document.getElementById('newPassword').value = '';
-        document.getElementById('confirmNewPassword').value = '';
-        document.getElementById('otpSection').style.display = 'none';
-        document.getElementById('sendOtpBtn').style.display = 'block';
-        document.getElementById('loginForm').style.display = 'block';
-        document.getElementById('registerForm').style.display = 'none';
-        document.getElementById('forgotForm').style.display = 'none';
-        document.getElementById('loginError').style.display = 'none';
-        isLoginMode = true;
-        updateModalUI();
     }
 
-    function switchAuthMode() {
+    function switchMode() {
         isLoginMode = !isLoginMode;
         document.getElementById('loginForm').style.display = isLoginMode ? 'block' : 'none';
         document.getElementById('registerForm').style.display = isLoginMode ? 'none' : 'block';
         document.getElementById('forgotForm').style.display = 'none';
-        document.getElementById('otpSection').style.display = 'none';
-        document.getElementById('sendOtpBtn').style.display = 'block';
-        document.getElementById('loginError').style.display = 'none';
-        updateModalUI();
-        document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
-        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
-        if (!isLoginMode) {
-            document.getElementById('avatarPreview').innerHTML = 
-                '👤<input type="file" accept="image/*" onchange="handleAvatarUpload(event)"><span class="upload-hint">Tap to change</span>';
-            tempAvatar = null;
-        }
+        document.getElementById('loginError').classList.remove('show');
+        updateModalTexts();
     }
 
-    // ===== ဘာသာစကားအတိုင်း Modal စာသားကို သေချာပြောင်းပေးတယ် =====
-    function updateModalUI() {
+    function showForgot() {
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('registerForm').style.display = 'none';
+        document.getElementById('forgotForm').style.display = 'block';
+        document.getElementById('modalTitle').textContent = '🔑 စကားဝှက်မေ့နေပါသလား';
+        document.querySelector('.modal-box .sub').textContent = 'သင့်အီးမေးလ်ထည့်ပါ';
+    }
+
+    function backToLogin() {
+        document.getElementById('forgotForm').style.display = 'none';
+        document.getElementById('loginForm').style.display = 'block';
+        document.getElementById('registerForm').style.display = 'none';
+        isLoginMode = true;
+        updateModalTexts();
+    }
+
+    function updateModalTexts() {
         const d = LANG_DATA[currentLang];
         if (!d) return;
-        
         if (isLoginMode) {
-            document.getElementById('modalTitle').textContent = d.modalLogin || '⚔️ Login';
-            document.getElementById('modalSub').textContent = d.modalLoginSub || 'Welcome back, warrior!';
-            document.getElementById('loginBtn').innerHTML = '🔑 ' + (d.login || 'Login');
-            document.getElementById('emailLabel').textContent = d.email || '📧 Email / Username / Phone';
-            document.getElementById('passLabel').textContent = d.password || '🔑 Password';
-            document.getElementById('switchToRegister').textContent = d.switchLogin || "Don't have an account? Register";
+            document.getElementById('modalTitle').textContent = d.modalLogin || '⚔️ ဝင်ရန်';
+            document.querySelector('.modal-box .sub').textContent = d.modalLoginSub || 'ပြန်လည်ကြိုဆိုပါတယ်!';
+            document.getElementById('emailLabel').textContent = d.email || '📧 အီးမေးလ် / အသုံးပြုသူအမည်';
+            document.getElementById('passLabel').textContent = d.password || '🔑 စကားဝှက်';
+            document.getElementById('loginBtn').innerHTML = '🔑 ' + (d.login || 'ဝင်ရန်');
+            document.getElementById('switchToRegister').textContent = d.switchLogin || "အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်";
         } else {
-            document.getElementById('modalTitle').textContent = d.modalRegister || '📝 Register';
-            document.getElementById('modalSub').textContent = d.modalRegisterSub || 'Create your account!';
-            document.getElementById('switchToLogin').textContent = d.switchRegister || 'Already have an account? Login';
+            document.getElementById('modalTitle').textContent = d.modalRegister || '📝 မှတ်ပုံတင်ရန်';
+            document.querySelector('.modal-box .sub').textContent = d.modalRegisterSub || 'အကောင့်ဖွင့်ပါ!';
+            document.getElementById('switchToLogin').textContent = d.switchRegister || 'အကောင့်ရှိပြီးသား? ဝင်ရန်';
         }
     }
 
     // ===== LOGIN =====
     function handleLogin() {
-        const input = document.getElementById('loginEmail').value.trim();
+        const input = document.getElementById('loginInput').value.trim();
         const password = document.getElementById('loginPassword').value.trim();
+        const errorEl = document.getElementById('loginError');
         const d = LANG_DATA[currentLang];
 
-        document.getElementById('loginError').style.display = 'none';
-        document.getElementById('loginError').textContent = '';
+        errorEl.classList.remove('show');
+        errorEl.textContent = '';
 
-        if (!input) {
-            document.getElementById('loginError').textContent = d.enterEmail || 'Please enter your email, username or phone';
-            document.getElementById('loginError').style.display = 'block';
-            return;
-        }
-        if (!password) {
-            document.getElementById('loginError').textContent = d.enterPassword || 'Please enter your password';
-            document.getElementById('loginError').style.display = 'block';
+        if (!input || !password) {
+            errorEl.textContent = 'ကျေးဇူးပြု၍ အချက်အလက်အားလုံးဖြည့်ပါ';
+            errorEl.classList.add('show');
             return;
         }
 
         const users = JSON.parse(localStorage.getItem('users') || '{}');
         let foundUser = null;
-        let userExists = false;
 
         for (const key in users) {
             const user = users[key];
             if (key === input || user.email === input || user.username === input || user.phone === input) {
-                userExists = true;
                 if (user.password === password) {
                     foundUser = user;
                     break;
@@ -1263,14 +1240,14 @@
             currentUser = foundUser;
             localStorage.setItem('currentUser', JSON.stringify(currentUser));
             closeModal();
-            showToast(d.loginSuccess || '✅ Login successful! Welcome!');
+            showToast(d.loginSuccess || '✅ ကြိုဆိုပါတယ်!');
             updateAuthUI();
-        } else if (userExists) {
-            document.getElementById('loginError').textContent = d.invalidCredentials || '❌ Invalid credentials';
-            document.getElementById('loginError').style.display = 'block';
+            if (window.location.pathname.includes('profile.html')) {
+                window.location.reload();
+            }
         } else {
-            document.getElementById('loginError').textContent = d.userNotFound || '❌ User not found';
-            document.getElementById('loginError').style.display = 'block';
+            errorEl.textContent = d.invalidCredentials || '❌ အီးမေးလ် သို့မဟုတ် စကားဝှက် မှားနေပါသည်';
+            errorEl.classList.add('show');
         }
     }
 
@@ -1281,273 +1258,100 @@
         const phone = document.getElementById('regPhone').value.trim();
         const password = document.getElementById('regPassword').value.trim();
         const confirmPassword = document.getElementById('regConfirmPassword').value.trim();
+        const errorEl = document.getElementById('loginError');
         const d = LANG_DATA[currentLang];
 
-        document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
-        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
+        errorEl.classList.remove('show');
+        errorEl.textContent = '';
 
-        let hasError = false;
-
-        if (!username) {
-            document.getElementById('usernameError').classList.add('show');
-            document.getElementById('regUsername').classList.add('error');
-            hasError = true;
-        } else if (/\s/.test(username)) {
-            document.getElementById('usernameError').textContent = d.noSpace || 'Username cannot contain spaces';
-            document.getElementById('usernameError').classList.add('show');
-            document.getElementById('regUsername').classList.add('error');
-            hasError = true;
+        if (!username || !password || !confirmPassword) {
+            errorEl.textContent = 'ကျေးဇူးပြု၍ လိုအပ်တဲ့အချက်တွေဖြည့်ပါ';
+            errorEl.classList.add('show');
+            return;
         }
 
-        if (email && (!email.includes('@') || !email.includes('.'))) {
-            document.getElementById('emailError').classList.add('show');
-            document.getElementById('regEmail').classList.add('error');
-            hasError = true;
-        }
-
-        if (phone && phone.length < 7) {
-            document.getElementById('phoneError').classList.add('show');
-            document.getElementById('regPhone').classList.add('error');
-            hasError = true;
-        }
-
-        if (!password || password.length < 4) {
-            document.getElementById('passwordError').classList.add('show');
-            document.getElementById('regPassword').classList.add('error');
-            hasError = true;
+        if (password.length < 4) {
+            errorEl.textContent = d.passwordMin || 'စကားဝှက်သည် အနည်းဆုံး ၄ လုံးရှိရမယ်';
+            errorEl.classList.add('show');
+            return;
         }
 
         if (password !== confirmPassword) {
-            document.getElementById('confirmError').classList.add('show');
-            document.getElementById('regConfirmPassword').classList.add('error');
-            hasError = true;
+            errorEl.textContent = d.passwordMatch || 'စကားဝှက်များ မတူညီပါ';
+            errorEl.classList.add('show');
+            return;
         }
-
-        if (hasError) return;
 
         const users = JSON.parse(localStorage.getItem('users') || '{}');
         for (const key in users) {
-            const user = users[key];
-            if (key === username || (email && user.email === email) || (phone && user.phone === phone)) {
-                showToast(d.userExists || '❌ Username, email or phone already exists');
+            if (key === username || (email && users[key].email === email) || (phone && users[key].phone === phone)) {
+                errorEl.textContent = d.userExists || '❌ အသုံးပြုသူအမည်၊ အီးမေးလ် သို့မဟုတ် ဖုန်းနံပါတ် ရှိပြီးသားပါ';
+                errorEl.classList.add('show');
                 return;
             }
         }
 
-        const userId = 'UID' + String(Math.floor(10000000 + Math.random() * 90000000));
         const newUser = {
             username: username,
             email: email || '',
             phone: phone || '',
             password: password,
             displayName: username,
-            userId: userId,
-            level: 1,
-            xp: 0,
             diamonds: 100,
             createdAt: new Date().toISOString()
         };
         users[username] = newUser;
         localStorage.setItem('users', JSON.stringify(users));
 
-        if (tempAvatar) {
-            localStorage.setItem('userAvatar_' + username, tempAvatar);
-        }
-
         currentUser = newUser;
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
         closeModal();
-        showToast(d.registerSuccess || '✅ Registration successful! Welcome!');
+        showToast(d.registerSuccess || '✅ အကောင့်ဖွင့်ခြင်းအောင်မြင်ပါပြီ!');
         updateAuthUI();
     }
 
-    // ===== FORGOT PASSWORD =====
-    let otpStorage = {};
-
-    function openForgotPassword() {
-        document.getElementById('loginForm').style.display = 'none';
-        document.getElementById('registerForm').style.display = 'none';
-        document.getElementById('forgotForm').style.display = 'block';
-        document.getElementById('otpSection').style.display = 'none';
-        document.getElementById('sendOtpBtn').style.display = 'block';
+    // ===== SEND RESET LINK =====
+    function sendResetLink() {
+        const email = document.getElementById('forgotEmail').value.trim();
+        const errorEl = document.getElementById('loginError');
         const d = LANG_DATA[currentLang];
-        document.getElementById('modalTitle').textContent = d.forgotTitle || '🔑 Forgot Password';
-        document.getElementById('modalSub').textContent = d.forgotSub || 'Enter your email to reset password';
-        document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
-        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
-        document.getElementById('forgotEmail').value = '';
-        document.getElementById('otpCode').value = '';
-        document.getElementById('newPassword').value = '';
-        document.getElementById('confirmNewPassword').value = '';
-    }
-
-    function closeForgotPassword() {
-        document.getElementById('forgotForm').style.display = 'none';
-        document.getElementById('loginForm').style.display = 'block';
-        document.getElementById('registerForm').style.display = 'none';
-        document.getElementById('otpSection').style.display = 'none';
-        document.getElementById('sendOtpBtn').style.display = 'block';
-        document.getElementById('loginError').style.display = 'none';
-        isLoginMode = true;
-        updateModalUI();
-        document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
-        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
-    }
-
-    async function sendOTP() {
-        const input = document.getElementById('forgotEmail').value.trim();
-        const d = LANG_DATA[currentLang];
-
-        document.getElementById('forgotEmailError').classList.remove('show');
-        document.getElementById('forgotEmail').classList.remove('error');
-
-        if (!input) {
-            document.getElementById('forgotEmailError').classList.add('show');
-            document.getElementById('forgotEmail').classList.add('error');
+        
+        errorEl.classList.remove('show');
+        errorEl.textContent = '';
+        
+        if (!email) {
+            errorEl.textContent = 'ကျေးဇူးပြု၍ အီးမေးလ်ထည့်ပါ';
+            errorEl.classList.add('show');
             return;
         }
-
+        
         const users = JSON.parse(localStorage.getItem('users') || '{}');
-        let userExists = false;
-        let foundUser = null;
-        let foundEmail = '';
-
+        let found = false;
         for (const key in users) {
-            const user = users[key];
-            if (user.email === input || key === input || user.phone === input) {
-                userExists = true;
-                foundUser = user;
-                foundEmail = user.email || key;
-                break;
-            }
-        }
-
-        if (!userExists) {
-            showToast(d.userNotFound || '❌ User not found');
-            return;
-        }
-
-        if (!foundEmail) {
-            showToast('❌ No email registered for this account');
-            return;
-        }
-
-        const otp = Math.floor(100000 + Math.random() * 900000).toString();
-        otpStorage[foundEmail] = {
-            otp: otp,
-            timestamp: Date.now()
-        };
-
-        document.getElementById('forgotEmail').dataset.email = foundEmail;
-
-        try {
-            const templateParams = {
-                to_email: foundEmail,
-                to_name: foundUser.username || 'User',
-                otp_code: otp,
-                subject: '🔑 Password Reset OTP - Premium Game Shop'
-            };
-
-            await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
-
-            document.getElementById('otpSection').style.display = 'block';
-            document.getElementById('sendOtpBtn').style.display = 'none';
-            showToast(d.otpSent || '✅ OTP sent to your email!');
-
-            setTimeout(() => {
-                delete otpStorage[foundEmail];
-            }, 300000);
-
-        } catch (error) {
-            console.error('EmailJS error:', error);
-            showToast(d.emailSentError || '❌ Failed to send OTP. Please try again.');
-            document.getElementById('otpSection').style.display = 'block';
-            document.getElementById('sendOtpBtn').style.display = 'none';
-            showToast('📧 OTP: ' + otp + ' (Email failed, use this)');
-        }
-    }
-
-    function resetPassword() {
-        const email = document.getElementById('forgotEmail').dataset.email;
-        const otp = document.getElementById('otpCode').value.trim();
-        const newPassword = document.getElementById('newPassword').value.trim();
-        const confirmNewPassword = document.getElementById('confirmNewPassword').value.trim();
-        const d = LANG_DATA[currentLang];
-
-        document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
-        document.querySelectorAll('.form-group input').forEach(el => el.classList.remove('error'));
-
-        let hasError = false;
-
-        if (!otp) {
-            document.getElementById('otpError').classList.add('show');
-            document.getElementById('otpCode').classList.add('error');
-            hasError = true;
-        }
-
-        if (!newPassword || newPassword.length < 4) {
-            document.getElementById('newPasswordError').classList.add('show');
-            document.getElementById('newPassword').classList.add('error');
-            hasError = true;
-        }
-
-        if (newPassword !== confirmNewPassword) {
-            document.getElementById('confirmNewError').classList.add('show');
-            document.getElementById('confirmNewPassword').classList.add('error');
-            hasError = true;
-        }
-
-        if (hasError) return;
-
-        const stored = otpStorage[email];
-        if (!stored || stored.otp !== otp) {
-            document.getElementById('otpError').classList.add('show');
-            document.getElementById('otpCode').classList.add('error');
-            return;
-        }
-
-        const users = JSON.parse(localStorage.getItem('users') || '{}');
-        for (const key in users) {
-            if (users[key].email === email || key === email) {
+            if (users[key].email === email) {
+                found = true;
+                const newPassword = '123456';
                 users[key].password = newPassword;
-                break;
+                localStorage.setItem('users', JSON.stringify(users));
+                showToast('✅ စကားဝှက်ကို 123456 သို့ ပြောင်းထားပါသည်။ ပြန်လည်ဝင်ရောက်ပါ။');
+                backToLogin();
+                return;
             }
         }
-        localStorage.setItem('users', JSON.stringify(users));
-
-        delete otpStorage[email];
-
-        showToast(d.resetSuccess || '✅ Password reset successful!');
-        closeForgotPassword();
-        document.getElementById('loginEmail').value = email;
-        document.getElementById('loginPassword').value = '';
+        
+        if (!found) {
+            errorEl.textContent = '❌ ဒီအီးမေးလ်နဲ့ အကောင့်မရှိပါ';
+            errorEl.classList.add('show');
+        }
     }
 
+    // ===== Modal Events =====
     document.getElementById('authModal').addEventListener('click', function(e) {
         if (e.target === this) closeModal();
     });
 
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-            const modal = document.getElementById('authModal');
-            if (modal.classList.contains('show')) {
-                if (document.getElementById('forgotForm').style.display === 'block') {
-                    if (document.getElementById('otpSection').style.display === 'block') {
-                        resetPassword();
-                    } else {
-                        sendOTP();
-                    }
-                } else if (isLoginMode) {
-                    handleLogin();
-                } else {
-                    handleRegister();
-                }
-            }
-        }
-        if (e.key === 'Escape') {
-            closeModal();
-            hideConfirm();
-        }
+        if (e.key === 'Escape') closeModal();
     });
 
     // ===== INIT =====
