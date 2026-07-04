@@ -513,7 +513,7 @@
     <div class="shop-status-banner" id="shopStatusBanner" onclick="handleBannerClick()">
         <div class="banner-content">
             <div class="banner-status open" id="statusBadge"><span class="status-dot"></span> OPEN</div>
-            <div class="shop-status-text" id="statusText">မနက် ၁၀ နာရီမှ ည ၁၀ နာရီအတွင်းသာ ဆိုင်ဖွင့်မည်</div>
+            <div class="shop-status-text" id="statusText">မနက် ၉:၃၀ မှ ည ၉:၃၀ အတွင်းသာ ဆိုင်ဖွင့်မည် (မြန်မာစံတော်ချိန်)</div>
         </div>
     </div>
 
@@ -528,7 +528,7 @@
         <div class="service" onclick="handleServiceClick(this)"><span class="glow"></span><span class="icon"><i class="fas fa-bolt"></i></span><span class="label" id="s1">၁၀ မိနစ်အတွင်း အော်ဒါပြီးမြောက်</span></div>
         <div class="service" onclick="handleServiceClick(this)"><span class="glow"></span><span class="icon"><i class="fas fa-rocket"></i></span><span class="label" id="s2">လျှင်မြန် • လွယ်ကူ • ယုံကြည်စိတ်ချရ</span></div>
         <div class="service" onclick="handleServiceClick(this)"><span class="glow"></span><span class="icon"><i class="fas fa-gem"></i></span><span class="label" id="s3">အတန်ဆုံးဈေးနဲ့ အကောင်းဆုံး Service</span></div>
-        <div class="service" onclick="handleServiceClick(this)"><span class="glow"></span><span class="icon"><i class="fas fa-clock"></i></span><span class="label" id="s4">မနက် ၁၀ နာရီမှ ည ၁၀ နာရီအထိ</span></div>
+        <div class="service" onclick="handleServiceClick(this)"><span class="glow"></span><span class="icon"><i class="fas fa-clock"></i></span><span class="label" id="s4">မနက် ၉:၃၀ မှ ည ၉:၃၀ အထိ</span></div>
         <div class="service" onclick="handleServiceClick(this)"><span class="glow"></span><span class="icon"><i class="fas fa-gamepad"></i></span><span class="label" id="s5">Mobile Legends</span></div>
         <div class="service" onclick="handleServiceClick(this)"><span class="glow"></span><span class="icon"><i class="fas fa-star"></i></span><span class="label" id="s6">Coming Soon</span></div>
     </div>
@@ -690,7 +690,7 @@
             s1: '၁၀ မိနစ်အတွင်း အော်ဒါပြီးမြောက်',
             s2: 'လျှင်မြန် • လွယ်ကူ • ယုံကြည်စိတ်ချရ',
             s3: 'အတန်ဆုံးဈေးနဲ့ အကောင်းဆုံး Service',
-            s4: 'မနက် ၁၀ နာရီမှ ည ၁၀ နာရီအထိ',
+            s4: 'မနက် ၉:၃၀ မှ ည ၉:၃၀ အထိ',
             s5: 'Mobile Legends',
             s6: 'Coming Soon',
             telegramTitle: '📢 ကျွန်ုပ်တို့ Telegram ချန်နယ်သို့လာရောက်ပါ',
@@ -723,8 +723,8 @@
             invalidCredentials: '❌ အီးမေးလ်/အသုံးပြုသူအမည်/ဖုန်းနံပါတ် သို့မဟုတ် စကားဝှက် မှားနေပါသည်',
             shopOpen: 'OPEN',
             shopClosed: 'CLOSED',
-            shopOpenText: 'မနက် ၁၀ နာရီမှ ည ၁၀ နာရီအတွင်းသာ ဆိုင်ဖွင့်မည်',
-            shopClosedText: 'မနက် ၁၀ နာရီမှသာ ဆိုင်ဖွင့်ပါမည်',
+            shopOpenText: 'မနက် ၉:၃၀ မှ ည ၉:၃၀ အတွင်းသာ ဆိုင်ဖွင့်မည် (မြန်မာစံတော်ချိန်)',
+            shopClosedText: 'မနက် ၉:၃၀ မှသာ ဆိုင်ဖွင့်ပါမည် (မြန်မာစံတော်ချိန်)',
             forgotTitle: 'စကားဝှက်မေ့နေပါသလား',
             forgotSub: 'သင့်အီးမေးလ်ထည့်ပြီး OTP ကုဒ်ရယူပါ',
             sendOtp: 'OTP ပို့မည်',
@@ -752,7 +752,7 @@
             s1: '10 mins delivery',
             s2: 'Fast • Easy • Trusted',
             s3: 'Best Price & Best Service',
-            s4: '10 AM - 10 PM',
+            s4: '9:30 AM - 9:30 PM',
             s5: 'Mobile Legends',
             s6: 'Coming Soon',
             telegramTitle: '📢 Join Our Telegram Channel',
@@ -785,8 +785,8 @@
             invalidCredentials: '❌ Invalid email/username/phone or password',
             shopOpen: 'OPEN',
             shopClosed: 'CLOSED',
-            shopOpenText: 'Open from 10:00 AM to 10:00 PM',
-            shopClosedText: 'Will open at 10:00 AM',
+            shopOpenText: 'Open from 9:30 AM to 9:30 PM (Myanmar Time)',
+            shopClosedText: 'Will open at 9:30 AM (Myanmar Time)',
             forgotTitle: 'Forgot Password?',
             forgotSub: 'Enter your email and get OTP',
             sendOtp: 'Send OTP',
@@ -939,7 +939,7 @@
         } else {
             document.getElementById('shopCard').className = 'shop-card closed';
             goToShop.textContent = d.shopClosed || '🔒 SHOP CLOSED';
-            shopSubText.textContent = d.shopClosedText || 'မနက် ၁၀ နာရီမှသာ ဆိုင်ဖွင့်ပါမည်';
+            shopSubText.textContent = d.shopClosedText || 'မနက် ၉:၃၀ မှသာ ဆိုင်ဖွင့်ပါမည် (မြန်မာစံတော်ချိန်)';
         }
         
         updateAuthUI();
@@ -948,11 +948,17 @@
 
     // ===== SHOP STATUS =====
     function isShopOpen() {
+        // Server Time (UTC) ကို အခြေခံပြီး မြန်မာနိုင်ငံ အချိန် (UTC+6:30) သို့ ပြောင်းလဲတွက်ချက်ခြင်း
         const now = new Date();
-        const hours = now.getHours();
-        const minutes = now.getMinutes();
+        // UTC အချိန်ကို မြန်မာနိုင်ငံ အချိန် (UTC+6:30) သို့ ပြောင်းလဲခြင်း
+        const myanmarTime = new Date(now.getTime() + (6.5 * 60 * 60 * 1000));
+        
+        const hours = myanmarTime.getUTCHours();
+        const minutes = myanmarTime.getUTCMinutes();
         const time = hours * 60 + minutes;
-        return time >= 10 * 60 && time < 22 * 60;
+        
+        // မနက် 9:30 (570 မိနစ်) မှ ည 9:30 (1290 မိနစ်) အထိ ဆိုင်ဖွင့်မည်
+        return time >= 570 && time < 1290;
     }
 
     setInterval(() => {
@@ -971,7 +977,7 @@
         } else {
             document.getElementById('shopCard').className = 'shop-card closed';
             goToShop.textContent = d.shopClosed || '🔒 SHOP CLOSED';
-            shopSubText.textContent = d.shopClosedText || 'မနက် ၁၀ နာရီမှသာ ဆိုင်ဖွင့်ပါမည်';
+            shopSubText.textContent = d.shopClosedText || 'မနက် ၉:၃၀ မှသာ ဆိုင်ဖွင့်ပါမည် (မြန်မာစံတော်ချိန်)';
         }
     }, 60000);
 
