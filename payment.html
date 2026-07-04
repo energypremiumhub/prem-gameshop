@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="my">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -116,7 +116,7 @@
         .support-card .arrow{color:var(--text-secondary);font-size:1.2rem;transition:all 0.3s ease}
         .support-card:hover .arrow{color:var(--gold);transform:translateX(4px)}
 
-        /* ===== BOTTOM NAV (Home page အတိုင်း) ===== */
+        /* ===== BOTTOM NAV ===== */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -182,8 +182,8 @@
         <div class="right">
             <div class="top">
                 <div class="lang-switcher">
-                    <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
-                    <button class="lang-btn" data-lang="my" onclick="setLang('my')">MY</button>
+                    <button class="lang-btn active" data-lang="my" onclick="setLang('my')">မြန်မာ</button>
+                    <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
                 </div>
                 <a href="notifications.html" class="noti-btn" id="notiBtn">
                     🔔
@@ -195,8 +195,8 @@
 
     <!-- ===== PAGE HEADER ===== -->
     <div class="page-header">
-        <h1 id="paymentTitle"><i class="fas fa-credit-card"></i> Payment <span>Accounts</span></h1>
-        <p id="paymentSub">Send payment to one of the following accounts</p>
+        <h1 id="paymentTitle"><i class="fas fa-credit-card"></i> ငွေပေးချေရန် <span>အကောင့်များ</span></h1>
+        <p id="paymentSub">အောက်ပါအကောင့်များထဲမှ တစ်ခုခုသို့ ငွေပို့ပါ</p>
     </div>
 
     <!-- ===== WAVE PAY ===== -->
@@ -208,7 +208,7 @@
                 <div class="name" id="waveName">Wave Pay</div>
                 <div class="number"><i class="fas fa-phone"></i> 09682506493</div>
             </div>
-            <button class="copy-btn" onclick="copyNumber('09682506493', this)" id="copyBtn1">Copy</button>
+            <button class="copy-btn" onclick="copyNumber('09682506493', this)" id="copyBtn1">ကူးယူမည်</button>
         </div>
     </div>
 
@@ -221,29 +221,29 @@
                 <div class="name" id="kpayName">KBZ Pay</div>
                 <div class="number"><i class="fas fa-phone"></i> 09682506493</div>
             </div>
-            <button class="copy-btn" onclick="copyNumber('09682506493', this)" id="copyBtn2">Copy</button>
+            <button class="copy-btn" onclick="copyNumber('09682506493', this)" id="copyBtn2">ကူးယူမည်</button>
         </div>
     </div>
 
     <!-- ===== HOW TO PAY ===== -->
     <div class="glass-card">
-        <span class="label"><i class="fas fa-list"></i> <span id="howToLabel">How to Pay</span></span>
+        <span class="label"><i class="fas fa-list"></i> <span id="howToLabel">ငွေပေးချေနည်း</span></span>
         <div class="instruction-list">
-            <div class="instruction-item"><span class="step">1</span><span class="text" id="step1">Choose <strong>Wave Pay</strong> or <strong>KBZ Pay</strong></span></div>
-            <div class="instruction-item"><span class="step">2</span><span class="text" id="step2">Copy the <strong>phone number</strong> above</span></div>
-            <div class="instruction-item"><span class="step">3</span><span class="text" id="step3">Send the exact amount and <strong>take a screenshot</strong></span></div>
-            <div class="instruction-item"><span class="step">4</span><span class="text" id="step4">Go to <strong>Shop</strong> and complete your order</span></div>
+            <div class="instruction-item"><span class="step">၁</span><span class="text" id="step1"><strong>Wave Pay</strong> သို့မဟုတ် <strong>KBZ Pay</strong> ရွေးပါ</span></div>
+            <div class="instruction-item"><span class="step">၂</span><span class="text" id="step2">အပေါ်က <strong>ဖုန်းနံပါတ်</strong> ကိုကူးယူပါ</span></div>
+            <div class="instruction-item"><span class="step">၃</span><span class="text" id="step3">အတိအကျငွေပို့ပြီး <strong>Screenshot</strong> ရိုက်ပါ</span></div>
+            <div class="instruction-item"><span class="step">၄</span><span class="text" id="step4"><strong>ဆိုင်</strong> သို့သွားပြီး အော်ဒါအပြီးသတ်ပါ</span></div>
         </div>
     </div>
 
     <!-- ===== SUPPORT ===== -->
     <div class="glass-card">
-        <span class="label"><i class="fas fa-headset"></i> <span id="supportLabel">Need Help?</span></span>
+        <span class="label"><i class="fas fa-headset"></i> <span id="supportLabel">အကူအညီလိုပါသလား?</span></span>
         <div class="support-card" onclick="window.open('https://t.me/Energypremiumhub', '_blank')">
             <span class="icon"><i class="fab fa-telegram-plane"></i></span>
             <div class="info">
-                <div class="title" id="supportTitle">Contact us on Telegram</div>
-                <div class="desc" id="supportDesc">@Energypremiumhub • 24/7 Support</div>
+                <div class="title" id="supportTitle">Telegram မှ ဆက်သွယ်ပါ</div>
+                <div class="desc" id="supportDesc">@Energypremiumhub • ၂၄/၇ ဝန်ဆောင်မှု</div>
             </div>
             <span class="arrow"><i class="fas fa-chevron-right"></i></span>
         </div>
@@ -252,12 +252,12 @@
     <div class="footer-text">&copy; 2026 Premium Shop</div>
 </div>
 
-<!-- ===== BOTTOM NAV (Payment active) ===== -->
+<!-- ===== BOTTOM NAV ===== -->
 <div class="bottom-nav">
-    <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label" id="navHome">Home</span></a>
-    <a href="shop.html" class="nav-item"><span class="icon">🛒</span><span class="label" id="navShop">Shop</span></a>
-    <a href="payment.html" class="nav-item active"><span class="icon">💳</span><span class="label" id="navPayment">Payment</span></a>
-    <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label" id="navProfile">Profile</span></a>
+    <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label" id="navHome">ပင်မ</span></a>
+    <a href="shop.html" class="nav-item"><span class="icon">🛒</span><span class="label" id="navShop">ဆိုင်</span></a>
+    <a href="payment.html" class="nav-item active"><span class="icon">💳</span><span class="label" id="navPayment">ငွေပေးချေ</span></a>
+    <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label" id="navProfile">ပရိုဖိုင်</span></a>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -265,24 +265,6 @@
 <script>
     // ===== LANGUAGE DATA =====
     const LANG_DATA = {
-        en: {
-            appName: 'Premium Shop',
-            paymentTitle: 'Payment Accounts',
-            paymentSub: 'Send payment to one of the following accounts',
-            wave: 'Wave Pay',
-            kpay: 'KBZ Pay',
-            howToLabel: 'How to Pay',
-            step1: 'Choose <strong>Wave Pay</strong> or <strong>KBZ Pay</strong>',
-            step2: 'Copy the <strong>phone number</strong> above',
-            step3: 'Send the exact amount and <strong>take a screenshot</strong>',
-            step4: 'Go to <strong>Shop</strong> and complete your order',
-            supportLabel: 'Need Help?',
-            supportTitle: 'Contact us on Telegram',
-            supportDesc: '@Energypremiumhub • 24/7 Support',
-            copy: 'Copy',
-            copied: '✅ Copied!',
-            home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile'
-        },
         my: {
             appName: 'Premium Shop',
             paymentTitle: 'ငွေပေးချေရန် အကောင့်များ',
@@ -300,10 +282,28 @@
             copy: 'ကူးယူမည်',
             copied: '✅ ကူးပြီး',
             home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်'
+        },
+        en: {
+            appName: 'Premium Shop',
+            paymentTitle: 'Payment Accounts',
+            paymentSub: 'Send payment to one of the following accounts',
+            wave: 'Wave Pay',
+            kpay: 'KBZ Pay',
+            howToLabel: 'How to Pay',
+            step1: 'Choose <strong>Wave Pay</strong> or <strong>KBZ Pay</strong>',
+            step2: 'Copy the <strong>phone number</strong> above',
+            step3: 'Send the exact amount and <strong>take a screenshot</strong>',
+            step4: 'Go to <strong>Shop</strong> and complete your order',
+            supportLabel: 'Need Help?',
+            supportTitle: 'Contact us on Telegram',
+            supportDesc: '@Energypremiumhub • 24/7 Support',
+            copy: 'Copy',
+            copied: '✅ Copied!',
+            home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile'
         }
     };
 
-    let currentLang = localStorage.getItem('lang') || 'en';
+    let currentLang = localStorage.getItem('lang') || 'my';
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
     function getText(key) { return LANG_DATA[currentLang][key] || key; }
@@ -413,7 +413,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        const savedLang = localStorage.getItem('lang') || 'en';
+        const savedLang = localStorage.getItem('lang') || 'my';
         setLang(savedLang);
         updateAuthUI();
         checkNotifications();
