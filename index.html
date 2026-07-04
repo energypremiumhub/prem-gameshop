@@ -123,33 +123,35 @@
         ::-webkit-scrollbar-thumb{background:var(--primary);border-radius:10px}
 
         /* ===== HEADER ===== */
-        .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
-        .header .left{display:flex;flex-direction:column;gap:6px}
+        .header{display:flex;justify-content:space-between;align-items:center;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
+        .header .left{display:flex;align-items:center;gap:8px}
         
-        /* ===== LOGO (အပေါ်အောက်ခွဲ) ===== */
-        .header .left .logo{
+        /* ===== LOGO (ပုံဘေးမှာ အပေါ်အောက်ခွဲ) ===== */
+        .header .left .logo-wrap{
             display:flex;
-            flex-direction:column;
-            align-items:flex-start;
-            line-height:1.1;
+            align-items:center;
+            gap:8px;
         }
-        .header .left .logo img{
+        .header .left .logo-wrap img{
             height:38px;
             width:auto;
-            vertical-align:middle;
             border-radius:10px;
-            margin-bottom:2px;
         }
-        .header .left .logo .premium{
-            font-size:1.1rem;
+        .header .left .logo-wrap .text-group{
+            display:flex;
+            flex-direction:column;
+            line-height:1.1;
+        }
+        .header .left .logo-wrap .text-group .premium{
+            font-size:1rem;
             font-weight:800;
             letter-spacing:0.5px;
             background:linear-gradient(135deg,var(--primary),var(--secondary));
             -webkit-background-clip:text;
             -webkit-text-fill-color:transparent;
         }
-        .header .left .logo .shop{
-            font-size:0.65rem;
+        .header .left .logo-wrap .text-group .shop{
+            font-size:0.55rem;
             font-weight:600;
             color:var(--text-secondary);
             letter-spacing:1px;
@@ -753,10 +755,12 @@
     <!-- ===== HEADER ===== -->
     <div class="header">
         <div class="left">
-            <div class="logo">
+            <div class="logo-wrap">
                 <img src="https://files.catbox.moe/lmq98x.jpg" alt="Premium Shop Logo">
-                <span class="premium">Premium</span>
-                <span class="shop">Game Shop</span>
+                <div class="text-group">
+                    <span class="premium" id="appName">Premium</span>
+                    <span class="shop" id="appSub">Game Shop</span>
+                </div>
             </div>
             <div class="auth-btn" id="authBtn" onclick="handleAuthClick()"><i class="fas fa-key"></i> Login</div>
         </div>
@@ -876,7 +880,7 @@
 <div class="modal-overlay" id="authModal">
     <div class="modal-box">
         <button class="close-btn" onclick="closeModal()"><i class="fas fa-times"></i></button>
-        <h2 id="modalTitle"><i class="fas fa-shield-alt"></i> ဝင်ရန်</h2>
+        <h2 id="modalTitle">ဝင်ရန်</h2>
         <p class="sub" id="modalSub">ပြန်လည်ကြိုဆိုပါတယ်!</p>
         
         <div class="error-msg" id="loginError"></div>
@@ -884,52 +888,52 @@
         <!-- Login Form -->
         <div id="loginForm">
             <div class="form-group">
-                <label id="emailLabel"><i class="fas fa-envelope"></i> အီးမေးလ် / အသုံးပြုသူအမည်</label>
+                <label id="emailLabel">အီးမေးလ် / အသုံးပြုသူအမည်</label>
                 <input type="text" id="loginInput" placeholder="သင့်အီးမေးလ် သို့မဟုတ် အသုံးပြုသူအမည်ထည့်ပါ">
             </div>
             <div class="form-group">
-                <label id="passLabel"><i class="fas fa-lock"></i> စကားဝှက်</label>
+                <label id="passLabel">စကားဝှက်</label>
                 <input type="password" id="loginPassword" placeholder="သင့်စကားဝှက်ထည့်ပါ">
             </div>
-            <span class="forgot-link" onclick="showForgot()"><i class="fas fa-key"></i> စကားဝှက်မေ့နေပါသလား?</span>
-            <button class="btn-primary" id="loginBtn" onclick="handleLogin()"><i class="fas fa-sign-in-alt"></i> ဝင်ရန်</button>
+            <span class="forgot-link" onclick="showForgot()">စကားဝှက်မေ့နေပါသလား?</span>
+            <button class="btn-primary" id="loginBtn" onclick="handleLogin()">ဝင်ရန်</button>
             <span class="switch-link" id="switchToRegister" onclick="switchMode()">အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်</span>
         </div>
         
         <!-- Register Form -->
         <div id="registerForm" style="display:none;">
             <div class="form-group">
-                <label><i class="fas fa-user"></i> အသုံးပြုသူအမည် <span style="color:#ef4444;">*</span></label>
+                <label>အသုံးပြုသူအမည် <span style="color:#ef4444;">*</span></label>
                 <input type="text" id="regUsername" placeholder="အသုံးပြုသူအမည်ရွေးပါ">
             </div>
             <div class="form-group">
-                <label><i class="fas fa-envelope"></i> အီးမေးလ်</label>
+                <label>အီးမေးလ်</label>
                 <input type="email" id="regEmail" placeholder="သင့်အီးမေးလ်ထည့်ပါ (optional)">
             </div>
             <div class="form-group">
-                <label><i class="fas fa-phone"></i> ဖုန်းနံပါတ်</label>
+                <label>ဖုန်းနံပါတ်</label>
                 <input type="tel" id="regPhone" placeholder="သင့်ဖုန်းနံပါတ်ထည့်ပါ (optional)">
             </div>
             <div class="form-group">
-                <label><i class="fas fa-lock"></i> စကားဝှက် <span style="color:#ef4444;">*</span></label>
+                <label>စကားဝှက် <span style="color:#ef4444;">*</span></label>
                 <input type="password" id="regPassword" placeholder="အနည်းဆုံး ၄ လုံး">
             </div>
             <div class="form-group">
-                <label><i class="fas fa-check-circle"></i> စကားဝှက်အတည်ပြုရန် <span style="color:#ef4444;">*</span></label>
+                <label>စကားဝှက်အတည်ပြုရန် <span style="color:#ef4444;">*</span></label>
                 <input type="password" id="regConfirmPassword" placeholder="စကားဝှက်ပြန်ထည့်ပါ">
             </div>
-            <button class="btn-primary" onclick="handleRegister()"><i class="fas fa-user-plus"></i> မှတ်ပုံတင်ရန်</button>
+            <button class="btn-primary" onclick="handleRegister()">မှတ်ပုံတင်ရန်</button>
             <span class="switch-link" id="switchToLogin" onclick="switchMode()">အကောင့်ရှိပြီးသား? ဝင်ရန်</span>
         </div>
         
         <!-- Forgot Password -->
         <div id="forgotForm" style="display:none;">
             <div class="form-group">
-                <label><i class="fas fa-envelope"></i> အီးမေးလ်</label>
+                <label>အီးမေးလ်</label>
                 <input type="email" id="forgotEmail" placeholder="သင့်အီးမေးလ်ထည့်ပါ">
             </div>
-            <button class="btn-primary" onclick="sendResetLink()" style="margin-bottom:8px;"><i class="fas fa-paper-plane"></i> စကားဝှက်ပြန်သတ်မှတ်ရန် လင့်ခ်ပို့မည်</button>
-            <span class="switch-link" onclick="backToLogin()"><i class="fas fa-arrow-left"></i> ဝင်ရန်စာမျက်နှာသို့</span>
+            <button class="btn-primary" onclick="sendResetLink()" style="margin-bottom:8px;">စကားဝှက်ပြန်သတ်မှတ်ရန် လင့်ခ်ပို့မည်</button>
+            <span class="switch-link" onclick="backToLogin()">← ဝင်ရန်စာမျက်နှာသို့</span>
         </div>
     </div>
 </div>
@@ -968,12 +972,12 @@
             contactUsername: '@PremEnergy',
             home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
             noti: '🔔 အသိပေးချက်အသစ်မရှိပါ',
-            modalLogin: '⚔️ ဝင်ရန်',
-            modalRegister: '📝 မှတ်ပုံတင်ရန်',
+            modalLogin: 'ဝင်ရန်',
+            modalRegister: 'မှတ်ပုံတင်ရန်',
             modalLoginSub: 'ပြန်လည်ကြိုဆိုပါတယ်!',
             modalRegisterSub: 'အကောင့်ဖွင့်ပါ!',
-            email: '📧 အီးမေးလ် / အသုံးပြုသူအမည်',
-            password: '🔑 စကားဝှက်',
+            email: 'အီးမေးလ် / အသုံးပြုသူအမည်',
+            password: 'စကားဝှက်',
             switchLogin: 'အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်',
             switchRegister: 'အကောင့်ရှိပြီးသား? ဝင်ရန်',
             login: 'ဝင်ရန်',
@@ -994,7 +998,13 @@
             shopOpen: 'OPEN',
             shopClosed: 'CLOSED',
             shopOpenText: 'မနက် ၁၀ နာရီမှ ည ၁၀ နာရီအတွင်းသာ ဆိုင်ဖွင့်မည်',
-            shopClosedText: 'မနက် ၁၀ နာရီမှသာ ဆိုင်ဖွင့်ပါမည်'
+            shopClosedText: 'မနက် ၁၀ နာရီမှသာ ဆိုင်ဖွင့်ပါမည်',
+            forgotTitle: 'စကားဝှက်မေ့နေပါသလား',
+            forgotSub: 'သင့်အီးမေးလ်ထည့်ပါ',
+            sendOtp: 'စကားဝှက်ပြန်သတ်မှတ်ရန် လင့်ခ်ပို့မည်',
+            backToLogin: '← ဝင်ရန်စာမျက်နှာသို့',
+            otpSent: '✅ သင့်အီးမေးလ်သို့ OTP ပို့ထားပါသည်!',
+            resetSuccess: '✅ စကားဝှက်ပြန်သတ်မှတ်ခြင်းအောင်မြင်ပါပြီ!'
         },
         en: {
             appName: 'Premium',
@@ -1017,12 +1027,12 @@
             contactUsername: '@PremEnergy',
             home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
             noti: '🔔 No new notifications',
-            modalLogin: '⚔️ Login',
-            modalRegister: '📝 Register',
+            modalLogin: 'Login',
+            modalRegister: 'Register',
             modalLoginSub: 'Welcome back!',
             modalRegisterSub: 'Create your account!',
-            email: '📧 Email / Username',
-            password: '🔑 Password',
+            email: 'Email / Username',
+            password: 'Password',
             switchLogin: "Don't have an account? Register",
             switchRegister: 'Already have an account? Login',
             login: 'Login',
@@ -1043,7 +1053,13 @@
             shopOpen: 'OPEN',
             shopClosed: 'CLOSED',
             shopOpenText: 'Open from 10:00 AM to 10:00 PM',
-            shopClosedText: 'Will open at 10:00 AM'
+            shopClosedText: 'Will open at 10:00 AM',
+            forgotTitle: 'Forgot Password?',
+            forgotSub: 'Enter your email',
+            sendOtp: 'Send Reset Link',
+            backToLogin: '← Back to Login',
+            otpSent: '✅ OTP sent to your email!',
+            resetSuccess: '✅ Password reset successfully!'
         }
     };
 
@@ -1067,8 +1083,8 @@
     function updateLanguage() {
         const d = LANG_DATA[currentLang];
         if (!d) return;
-        document.querySelector('.logo .premium').textContent = d.appName;
-        document.querySelector('.logo .shop').textContent = d.appSub;
+        document.getElementById('appName').textContent = d.appName;
+        document.getElementById('appSub').textContent = d.appSub;
         document.getElementById('greeting').textContent = d.greeting;
         document.querySelector('.welcome h2').innerHTML = '<i class="fas fa-arrow-right"></i> ' + d.title;
         document.getElementById('subtitle').textContent = d.subtitle;
@@ -1386,11 +1402,13 @@
     }
 
     function showForgot() {
+        const d = LANG_DATA[currentLang];
         document.getElementById('loginForm').style.display = 'none';
         document.getElementById('registerForm').style.display = 'none';
         document.getElementById('forgotForm').style.display = 'block';
-        document.getElementById('modalTitle').innerHTML = '<i class="fas fa-key"></i> စကားဝှက်မေ့နေပါသလား';
-        document.querySelector('.modal-box .sub').textContent = 'သင့်အီးမေးလ်ထည့်ပါ';
+        document.getElementById('modalTitle').textContent = d.forgotTitle || 'စကားဝှက်မေ့နေပါသလား';
+        document.querySelector('.modal-box .sub').textContent = d.forgotSub || 'သင့်အီးမေးလ်ထည့်ပါ';
+        document.getElementById('sendOtpBtn').textContent = d.sendOtp || 'စကားဝှက်ပြန်သတ်မှတ်ရန် လင့်ခ်ပို့မည်';
     }
 
     function backToLogin() {
@@ -1405,16 +1423,16 @@
         const d = LANG_DATA[currentLang];
         if (!d) return;
         if (isLoginMode) {
-            document.getElementById('modalTitle').innerHTML = '<i class="fas fa-shield-alt"></i> ' + d.modalLogin;
-            document.querySelector('.modal-box .sub').textContent = d.modalLoginSub;
-            document.getElementById('emailLabel').innerHTML = '<i class="fas fa-envelope"></i> ' + d.email;
-            document.getElementById('passLabel').innerHTML = '<i class="fas fa-lock"></i> ' + d.password;
-            document.getElementById('loginBtn').innerHTML = '<i class="fas fa-sign-in-alt"></i> ' + d.login;
-            document.getElementById('switchToRegister').textContent = d.switchLogin;
+            document.getElementById('modalTitle').textContent = d.modalLogin || 'ဝင်ရန်';
+            document.querySelector('.modal-box .sub').textContent = d.modalLoginSub || 'ပြန်လည်ကြိုဆိုပါတယ်!';
+            document.getElementById('emailLabel').textContent = d.email || 'အီးမေးလ် / အသုံးပြုသူအမည်';
+            document.getElementById('passLabel').textContent = d.password || 'စကားဝှက်';
+            document.getElementById('loginBtn').textContent = d.login || 'ဝင်ရန်';
+            document.getElementById('switchToRegister').textContent = d.switchLogin || 'အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်';
         } else {
-            document.getElementById('modalTitle').innerHTML = '<i class="fas fa-user-plus"></i> ' + d.modalRegister;
-            document.querySelector('.modal-box .sub').textContent = d.modalRegisterSub;
-            document.getElementById('switchToLogin').textContent = d.switchRegister;
+            document.getElementById('modalTitle').textContent = d.modalRegister || 'မှတ်ပုံတင်ရန်';
+            document.querySelector('.modal-box .sub').textContent = d.modalRegisterSub || 'အကောင့်ဖွင့်ပါ!';
+            document.getElementById('switchToLogin').textContent = d.switchRegister || 'အကောင့်ရှိပြီးသား? ဝင်ရန်';
         }
     }
 
@@ -1429,7 +1447,7 @@
         errorEl.textContent = '';
 
         if (!input || !password) {
-            errorEl.textContent = 'ကျေးဇူးပြု၍ အချက်အလက်အားလုံးဖြည့်ပါ';
+            errorEl.textContent = d.enterEmail || 'ကျေးဇူးပြု၍ အီးမေးလ် သို့မဟုတ် အသုံးပြုသူအမည်ထည့်ပါ';
             errorEl.classList.add('show');
             return;
         }
@@ -1525,6 +1543,7 @@
     function sendResetLink() {
         const email = document.getElementById('forgotEmail').value.trim();
         const errorEl = document.getElementById('loginError');
+        const d = LANG_DATA[currentLang];
         
         errorEl.classList.remove('show');
         errorEl.textContent = '';
@@ -1543,7 +1562,7 @@
                 const newPassword = '123456';
                 users[key].password = newPassword;
                 localStorage.setItem('users', JSON.stringify(users));
-                showToast('✅ စကားဝှက်ကို 123456 သို့ ပြောင်းထားပါသည်။ ပြန်လည်ဝင်ရောက်ပါ။');
+                showToast(d.resetSuccess || '✅ စကားဝှက်ပြန်သတ်မှတ်ခြင်းအောင်မြင်ပါပြီ!');
                 backToLogin();
                 return;
             }
