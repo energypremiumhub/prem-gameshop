@@ -431,7 +431,8 @@
             max-height: 90vh;
             overflow-y: auto;
         }
-        .modal::before{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(255,215,0,0.04) 0%,transparent 70%);animation:shimmer 8s ease-in-out infinite}
+        /* ===== အပြာရောင် အပေါ်အောက် အကြောင်းရီးကို ဖျောက်ထား ===== */
+        .modal::before{display:none}
         .modal h2{font-size:1.2rem;color:var(--gold);margin-bottom:4px;text-align:center;position:relative;z-index:1;text-shadow:0 0 30px var(--gold-glow)}
         .modal p{color:var(--text-secondary);font-size:0.75rem;text-align:center;margin-bottom:16px;position:relative;z-index:1}
         .modal .form-group{margin-bottom:12px;position:relative;z-index:1}
@@ -600,7 +601,7 @@
     </div>
 </div>
 
-<!-- ===== AUTH MODAL (Shop page checkout modal style အတိုင်း) ===== -->
+<!-- ===== AUTH MODAL ===== -->
 <div class="modal-overlay" id="authModal">
     <div class="modal">
         <button class="close-btn" onclick="closeModal()">✕</button>
