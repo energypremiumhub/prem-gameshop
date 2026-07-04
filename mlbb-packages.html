@@ -125,7 +125,6 @@
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
         .section-title i{color:var(--cyan)}
 
-        /* ===== DOUBLE INFO TEXT ===== */
         .double-info-text{font-size:0.6rem;color:var(--text-secondary);opacity:0.6;margin-bottom:12px;padding:0 4px;text-align:center;letter-spacing:0.3px;line-height:1.5}
 
         .bottom-nav {
@@ -311,14 +310,14 @@
 
         <div class="form-group">
             <label><i class="fas fa-gamepad"></i> <span id="gameIdLabel">ဂိမ်းအိုင်ဒီ</span></label>
-            <input type="text" id="gameId" placeholder="သင့်ဂိမ်းအိုင်ဒီထည့်ပါ (e.g. 12345678)">
-            <div class="input-hint" id="gameIdHint">Mobile Legends ID ထည့်ပါ</div>
+            <input type="text" id="gameId" placeholder="ဂိမ်းအိုင်ဒီ နံပါတ်ထည့်ပါ (e.g. 12345678)" inputmode="numeric" pattern="[0-9]*">
+            <div class="input-hint" id="gameIdHint">Mobile Legends ID (နံပါတ်သာ)</div>
         </div>
         
         <div class="form-group">
             <label><i class="fas fa-server"></i> <span id="serverIdLabel">ဆာဗာအိုင်ဒီ</span></label>
-            <input type="text" id="serverId" placeholder="သင့်ဆာဗာအိုင်ဒီထည့်ပါ (e.g. 9876)">
-            <div class="input-hint" id="serverIdHint">Mobile Legends Server ID ထည့်ပါ</div>
+            <input type="text" id="serverId" placeholder="ဆာဗာအိုင်ဒီ နံပါတ်ထည့်ပါ (e.g. 9876)" inputmode="numeric" pattern="[0-9]*">
+            <div class="input-hint" id="serverIdHint">Mobile Legends Server ID (နံပါတ်သာ)</div>
         </div>
 
         <div class="form-group">
@@ -376,12 +375,13 @@
             buy: 'ဝယ်ယူရန်', selectLabel: 'ရွေးရန်', currency: 'Ks', doubleBadge: '⭐ 2x Bonus',
             modalTitle: '🛒 အော်ဒါတင်ရန်', modalSub: 'အချက်အလက်များကို မှန်ကန်စွာဖြည့်သွင်းပါ',
             gameId: 'ဂိမ်းအိုင်ဒီ', serverId: 'ဆာဗာအိုင်ဒီ',
-            gameIdHint: 'Mobile Legends ID ထည့်ပါ', serverIdHint: 'Mobile Legends Server ID ထည့်ပါ',
+            gameIdHint: 'နံပါတ်သာ ထည့်ပါ', serverIdHint: 'နံပါတ်သာ ထည့်ပါ',
             paymentLabel: 'ငွေပေးချေရန်', wave: 'Wave Pay', kpay: 'KBZ Pay',
             uploadLabel: 'ပြေစာတင်ပို့ရန်', uploadText: 'Screenshot ပို့ပေးပါ', 
             submit: 'အော်ဒါတင်မည်',
-            enterGameId: 'ကျေးဇူးပြု၍ ဂိမ်းအိုင်ဒီထည့်ပါ',
-            enterServerId: 'ကျေးဇူးပြု၍ ဆာဗာအိုင်ဒီထည့်ပါ',
+            enterGameId: 'ကျေးဇူးပြု၍ ဂိမ်းအိုင်ဒီ နံပါတ်ထည့်ပါ',
+            enterServerId: 'ကျေးဇူးပြု၍ ဆာဗာအိုင်ဒီ နံပါတ်ထည့်ပါ',
+            enterNumberOnly: 'နံပါတ်သာ ထည့်ပါ (အက္ခရာမထည့်ရ)',
             selectPayment: 'ကျေးဇူးပြု၍ ငွေပေးချေနည်းရွေးပါ',
             uploadSlip: 'ကျေးဇူးပြု၍ Screenshot ပို့ပေးပါ',
             orderSuccess: '✅ အော်ဒါအောင်မြင်ပါသည်!',
@@ -397,12 +397,13 @@
             buy: 'Buy', selectLabel: 'Select', currency: 'Ks', doubleBadge: '⭐ 2x Bonus',
             modalTitle: '🛒 Submit Order', modalSub: 'Fill in your details correctly',
             gameId: 'Game ID', serverId: 'Server ID',
-            gameIdHint: 'Enter your Mobile Legends ID', serverIdHint: 'Enter your Mobile Legends Server ID',
+            gameIdHint: 'Numbers only', serverIdHint: 'Numbers only',
             paymentLabel: 'Payment Method', wave: 'Wave Pay', kpay: 'KBZ Pay',
             uploadLabel: 'Upload Payment Slip', uploadText: 'Send Screenshot',
             submit: 'Submit Order',
-            enterGameId: 'Please enter your Game ID',
-            enterServerId: 'Please enter your Server ID',
+            enterGameId: 'Please enter your Game ID (numbers only)',
+            enterServerId: 'Please enter your Server ID (numbers only)',
+            enterNumberOnly: 'Please enter numbers only',
             selectPayment: 'Please select a payment method',
             uploadSlip: 'Please send your Screenshot',
             orderSuccess: '✅ Order successful!',
@@ -414,7 +415,6 @@
     let currentLang = localStorage.getItem('lang') || 'my';
     let selectedPackage = null;
     let selectedPayment = null;
-    let isSubmitting = false;
 
     const PACKAGES = {
         bundles: [
@@ -492,6 +492,11 @@
         renderPackages();
     }
 
+    // ===== CHECK IF INPUT IS NUMBER ONLY =====
+    function isNumberOnly(value) {
+        return /^[0-9]+$/.test(value);
+    }
+
     function renderPackages() {
         const d = LANG_DATA[currentLang];
         const renderItems = (items, type) => items.map(pkg => {
@@ -554,7 +559,6 @@
     }
 
     function closeCheckoutModal() {
-        if (isSubmitting) return;
         document.getElementById('checkoutModal').classList.remove('show');
     }
 
@@ -563,7 +567,12 @@
         const serverId = document.getElementById('serverId').value.trim();
         const hasFile = document.getElementById('fileInput').files && document.getElementById('fileInput').files[0];
         const btn = document.getElementById('submitBtn');
-        if (gameId && serverId && selectedPayment && hasFile && !isSubmitting) {
+        
+        // Check if both are numbers only (if not empty)
+        const isGameIdValid = gameId === '' || isNumberOnly(gameId);
+        const isServerIdValid = serverId === '' || isNumberOnly(serverId);
+        
+        if (gameId && serverId && selectedPayment && hasFile && isGameIdValid && isServerIdValid) {
             btn.disabled = false;
             btn.className = 'btn-primary enabled';
         } else {
@@ -572,8 +581,37 @@
         }
     }
 
-    document.getElementById('gameId').addEventListener('input', checkForm);
-    document.getElementById('serverId').addEventListener('input', checkForm);
+    document.getElementById('gameId').addEventListener('input', function() {
+        const val = this.value.trim();
+        if (val && !isNumberOnly(val)) {
+            this.style.borderColor = 'var(--red)';
+            this.style.boxShadow = '0 0 20px var(--red-glow)';
+            document.querySelector('#gameIdHint').style.color = 'var(--red)';
+            document.querySelector('#gameIdHint').textContent = '⚠️ ' + getText('enterNumberOnly');
+        } else {
+            this.style.borderColor = 'var(--border-color)';
+            this.style.boxShadow = 'none';
+            document.querySelector('#gameIdHint').style.color = 'var(--text-secondary)';
+            document.querySelector('#gameIdHint').textContent = getText('gameIdHint');
+        }
+        checkForm();
+    });
+
+    document.getElementById('serverId').addEventListener('input', function() {
+        const val = this.value.trim();
+        if (val && !isNumberOnly(val)) {
+            this.style.borderColor = 'var(--red)';
+            this.style.boxShadow = '0 0 20px var(--red-glow)';
+            document.querySelector('#serverIdHint').style.color = 'var(--red)';
+            document.querySelector('#serverIdHint').textContent = '⚠️ ' + getText('enterNumberOnly');
+        } else {
+            this.style.borderColor = 'var(--border-color)';
+            this.style.boxShadow = 'none';
+            document.querySelector('#serverIdHint').style.color = 'var(--text-secondary)';
+            document.querySelector('#serverIdHint').textContent = getText('serverIdHint');
+        }
+        checkForm();
+    });
 
     document.querySelectorAll('.payment-option').forEach(el => {
         el.addEventListener('click', function() {
@@ -634,7 +672,6 @@
 ⏳ *Status: Pending*`;
 
         try {
-            // Send text message
             const textResponse = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -658,7 +695,6 @@
                 return false;
             }
 
-            // Send photo if exists
             if (orderData.photo) {
                 try {
                     const photoBlob = await fetch(orderData.photo).then(res => res.blob());
@@ -685,21 +721,20 @@
 
     // ===== SUBMIT ORDER =====
     document.getElementById('submitBtn').addEventListener('click', async function() {
-        if (isSubmitting) return;
-
         const d = LANG_DATA[currentLang] || {};
         const gameId = document.getElementById('gameId').value.trim();
         const serverId = document.getElementById('serverId').value.trim();
         const hasFile = document.getElementById('fileInput').files && document.getElementById('fileInput').files[0];
 
+        // Validate numbers only
         if (!gameId) { showToast(d.enterGameId, 'error'); return; }
+        if (!isNumberOnly(gameId)) { showToast(d.enterNumberOnly, 'error'); return; }
         if (!serverId) { showToast(d.enterServerId, 'error'); return; }
+        if (!isNumberOnly(serverId)) { showToast(d.enterNumberOnly, 'error'); return; }
         if (!selectedPayment) { showToast(d.selectPayment, 'error'); return; }
         if (!hasFile) { showToast(d.uploadSlip, 'error'); return; }
 
-        isSubmitting = true;
         this.disabled = true;
-        this.className = 'btn-primary loading';
         this.textContent = '⏳ Sending...';
 
         const orderId = 'ORD-' + Date.now().toString().slice(-6);
@@ -784,7 +819,6 @@
                 showToast('⚠️ အော်ဒါသိမ်းပြီးသော်လည်း Telegram သို့မပို့နိုင်ပါ။', 'error');
                 this.textContent = '✅ ' + d.submit;
                 this.className = 'btn-primary enabled';
-                isSubmitting = false;
             }
 
         } catch (error) {
@@ -792,7 +826,6 @@
             showToast(d.orderFail || '❌ Order failed. Please try again.', 'error');
             this.textContent = '✅ ' + d.submit;
             this.className = 'btn-primary enabled';
-            isSubmitting = false;
         }
     });
 
