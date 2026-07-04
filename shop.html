@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🎮 Game Shop</title>
+    <title>🎮 Premium Shop</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        /* ===== RESET & BASE ===== */
+        /* ===== RESET & BASE (Home Page အတိုင်း) ===== */
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
         
-        /* ===== LIGHT & DARK MODE ===== */
         :root {
             --bg-primary: #08081a;
             --bg-secondary: #0c0c24;
@@ -20,7 +19,7 @@
             --text-secondary: #8899bb;
             --border-color: rgba(255,255,255,0.08);
             --shadow: rgba(0,0,0,0.6);
-            --shadow-light: rgba(0,0,0,0.3);
+            --glass-shadow: 0 8px 32px rgba(0,0,0,0.3);
             --gold: #ffd700;
             --gold-glow: rgba(255,215,0,0.3);
             --cyan: #00e5ff;
@@ -33,26 +32,6 @@
             --green-glow: rgba(0,255,135,0.2);
             --pink: #ff2d78;
             --purple: #b388ff;
-            --glass-bg: rgba(255,255,255,0.05);
-            --glass-border: rgba(255,255,255,0.08);
-            --glass-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        }
-
-        /* ===== LIGHT MODE ===== */
-        .light-mode {
-            --bg-primary: #eef2f7;
-            --bg-secondary: #ffffff;
-            --bg-card: rgba(255,255,255,0.55);
-            --bg-card-hover: rgba(255,255,255,0.75);
-            --bg-input: rgba(255,255,255,0.8);
-            --text-primary: #1a1a2e;
-            --text-secondary: #6b7280;
-            --border-color: rgba(0,0,0,0.08);
-            --shadow: rgba(0,0,0,0.08);
-            --shadow-light: rgba(0,0,0,0.04);
-            --glass-bg: rgba(255,255,255,0.25);
-            --glass-border: rgba(255,255,255,0.3);
-            --glass-shadow: 0 8px 32px rgba(0,0,0,0.08);
         }
 
         body {
@@ -61,28 +40,22 @@
             min-height: 100vh;
             padding: 16px;
             padding-bottom: 90px;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             background-image: 
                 radial-gradient(ellipse at 20% 50%, rgba(255,215,0,0.04) 0%, transparent 60%),
                 radial-gradient(ellipse at 80% 20%, rgba(0,229,255,0.04) 0%, transparent 50%);
-        }
-        .light-mode body {
-            background-image: 
-                radial-gradient(ellipse at 20% 50%, rgba(255,215,0,0.06) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 20%, rgba(0,229,255,0.06) 0%, transparent 50%);
         }
 
         ::-webkit-scrollbar{width:0px;height:0px}
         .container{max-width:500px;margin:0 auto}
 
-        /* ===== GLASS BOX EFFECT ===== */
+        /* ===== GLASS BOX (Home Page အတိုင်း) ===== */
         .glass-box {
             background: var(--bg-card);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,0.1);
+            box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,0.05);
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .glass-box:hover {
@@ -93,12 +66,12 @@
         /* ===== HEADER ===== */
         .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
         .header .left{display:flex;flex-direction:column;gap:6px}
-        .header .left .logo{font-size:1rem;font-weight:800;color:var(--gold);text-shadow:0 0 20px var(--gold-glow);letter-spacing:0.5px;transition:all 0.3s ease}
+        .header .left .logo{font-size:1rem;font-weight:800;color:var(--gold);text-shadow:0 0 20px var(--gold-glow);letter-spacing:0.5px}
         .header .left .logo i{color:var(--cyan);margin-right:6px;text-shadow:0 0 20px var(--cyan-glow)}
         .header .left .profile-icon{background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 14px;border-radius:10px;font-size:0.6rem;font-weight:600;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);text-decoration:none;display:inline-flex;align-items:center;gap:6px;height:36px;width:fit-content;box-shadow:var(--glass-shadow)}
         .header .left .profile-icon:active{transform:scale(0.88)}
         .header .left .profile-icon:hover{border-color:var(--gold);color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
-        .header .left .profile-icon.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 25px var(--gold-glow);padding:4px 14px}
+        .header .left .profile-icon.logged-in{background:linear-gradient(135deg,var(--gold),var(--orange));color:#0a0e1a;border-color:var(--gold);box-shadow:0 0 25px var(--gold-glow)}
         .header .left .profile-icon.logged-in:active{transform:scale(0.88)}
         .header .left .profile-icon.logged-in img{width:22px;height:22px;border-radius:50%;object-fit:cover;margin-right:4px}
         
@@ -109,21 +82,20 @@
         .header .right .top .lang-switcher .lang-btn:active{transform:scale(0.85)}
         .header .right .top .lang-switcher .lang-btn.active{background:var(--gold);color:#0a0e1a;box-shadow:0 0 20px var(--gold-glow)}
         
+        .header .right .top .night-toggle{background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);font-size:1rem;color:var(--text-secondary);box-shadow:var(--glass-shadow)}
+        .header .right .top .night-toggle:active{transform:scale(0.85)}
+        .header .right .top .night-toggle:hover{border-color:var(--gold);color:var(--gold)}
+        
         .header .right .top .noti-btn{background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;box-shadow:var(--glass-shadow)}
         .header .right .top .noti-btn:active{transform:scale(0.85)}
         .header .right .top .noti-btn:hover{border-color:var(--gold);color:var(--gold);box-shadow:0 0 30px var(--gold-glow)}
         .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none;box-shadow:0 0 15px var(--red-glow)}
 
-        /* ===== NIGHT/LIGHT TOGGLE ===== */
-        .theme-toggle{background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);font-size:1rem;color:var(--text-secondary);box-shadow:var(--glass-shadow)}
-        .theme-toggle:active{transform:scale(0.85)}
-        .theme-toggle:hover{border-color:var(--gold);color:var(--gold)}
-
         /* ===== PAGE HEADER ===== */
         .page-header{margin-bottom:16px;animation:slideUp 0.6s ease}
         .page-header h1{font-size:1.3rem;font-weight:800;color:var(--text-primary)}
         .page-header h1 span{background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 40px var(--gold-glow)}
-        .page-header h1 i{color:var(--cyan);-webkit-text-fill-color:initial;margin-right:6px}
+        .page-header h1 i{color:var(--cyan);-webkit-text-fill-color:initial;margin-right:6px;text-shadow:0 0 20px var(--cyan-glow)}
         .page-header p{color:var(--text-secondary);font-size:0.7rem;margin-top:2px}
 
         /* ===== SEARCH BAR ===== */
@@ -149,18 +121,6 @@
         .game-item .glow{position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,215,0,0.05) 0%,transparent 70%);opacity:0;transition:all 0.6s ease}
         .game-item:hover .glow{opacity:1}
         .game-item.hidden{display:none}
-
-        /* ===== ANIMATIONS ===== */
-        @keyframes floatIcon {0%,100%{transform:translateY(0px)}50%{transform:translateY(-8px)}}
-        @keyframes glowPulse {0%,100%{box-shadow:0 0 10px var(--gold-glow)}50%{box-shadow:0 0 30px var(--gold-glow)}}
-        @keyframes slideUp {from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes pop {0%{transform:scale(1)}30%{transform:scale(0.92)}60%{transform:scale(1.03)}100%{transform:scale(1)}}
-        @keyframes shimmer {0%{background-position:-200% center}100%{background-position:200% center}}
-
-        /* ===== RIPPLE EFFECT ===== */
-        .ripple{position:relative;overflow:hidden}
-        .ripple::after{content:'';position:absolute;top:50%;left:50%;width:0;height:0;border-radius:50%;background:rgba(255,215,0,0.2);transform:translate(-50%,-50%);transition:all 0.6s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none}
-        .ripple:active::after{width:300px;height:300px;opacity:0}
 
         /* ===== SECTION TITLE ===== */
         .section-title{font-size:0.65rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;display:flex;align-items:center;gap:10px}
@@ -219,23 +179,18 @@
         .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-card);backdrop-filter:blur(20px);padding:10px 20px;border-radius:12px;border:1px solid rgba(255,215,0,0.15);color:var(--gold);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:var(--glass-shadow);animation:toastPop 0.4s cubic-bezier(0.34,1.56,0.64,1)}
         .toast.show{display:block}
         @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.9)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
+        @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
         @keyframes fadeIn{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 400px) {
-            .game-grid{grid-template-columns:1fr 1fr;gap:8px}
-            .game-item{padding:14px 10px}
-            .game-item .game-icon{font-size:2.2rem}
-            .game-item .game-name{font-size:0.7rem}
-        }
+        @keyframes floatIcon {0%,100%{transform:translateY(0px)}50%{transform:translateY(-8px)}}
+        @keyframes glowPulse {0%,100%{box-shadow:0 0 10px var(--gold-glow)}50%{box-shadow:0 0 30px var(--gold-glow)}}
     </style>
 </head>
 <body>
 <div class="container">
-    <!-- ===== HEADER ===== -->
+    <!-- ===== HEADER (Home Page အတိုင်း) ===== -->
     <div class="header">
         <div class="left">
-            <div class="logo" id="appName"><i class="fas fa-gamepad"></i> Premium Shop</div>
+            <div class="logo"><i class="fas fa-gamepad"></i> Premium Shop</div>
             <div class="profile-icon" id="profileIcon" onclick="goToProfile()">👤 Profile</div>
         </div>
         <div class="right">
@@ -244,57 +199,51 @@
                     <button class="lang-btn active" data-lang="my" onclick="setLang('my')">မြန်မာ</button>
                     <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
                 </div>
-                <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">
-                    <i class="fas fa-moon" id="themeIcon"></i>
-                </button>
-                <a href="notifications.html" class="noti-btn" id="notiBtn">🔔<span class="badge" id="notiBadge">0</span></a>
+                <button class="night-toggle" onclick="toggleNightMode()"><i class="fas fa-moon"></i></button>
+                <a href="notifications.html" class="noti-btn" id="notiBtn"><i class="fas fa-bell"></i><span class="badge" id="notiBadge">0</span></a>
             </div>
         </div>
     </div>
 
     <!-- ===== PAGE HEADER ===== -->
     <div class="page-header">
-        <h1 id="shopTitle"><i class="fas fa-store"></i> <span>ဂိမ်းဆိုင်</span></h1>
+        <h1><i class="fas fa-store"></i> <span>ဂိမ်းဆိုင်</span></h1>
         <p id="shopSub">ဂိမ်းတစ်ခုရွေးပြီး စိန်ဖြည့်လိုက်ပါ</p>
     </div>
 
     <!-- ===== SEARCH BAR ===== -->
-    <div class="search-box glass-box">
+    <div class="search-box">
         <span class="icon"><i class="fas fa-search"></i></span>
         <input type="text" id="searchInput" placeholder="🔍 ဂိမ်းနာမည်ရှာပါ..." oninput="searchGames(this.value)">
         <span class="clear-btn" id="clearBtn" onclick="clearSearch()"><i class="fas fa-times-circle"></i></span>
     </div>
 
     <!-- ===== GAME GRID ===== -->
-    <div class="section-title"><i class="fas fa-gamepad"></i> <span id="gamesTitle">ဂိမ်းများ</span></div>
+    <div class="section-title"><i class="fas fa-gamepad"></i> ဂိမ်းများ</div>
     <div class="game-grid" id="gameGrid">
         <!-- Mobile Legends -->
-        <div class="game-item glass-box ripple" data-name="mobile legends mlbb" onclick="selectGame('Mobile Legends', 'mlbb')">
+        <div class="game-item" data-name="mobile legends mlbb" onclick="selectGame('Mobile Legends', 'mlbb')">
             <span class="glow"></span>
-            <span class="badge" id="popularBadge">🔥 Popular</span>
+            <span class="badge">🔥 Popular</span>
             <span class="game-icon">⚔️</span>
             <div class="game-name">Mobile Legends</div>
             <div class="game-sub">MLBB • စိန်ဖြည့်မှု</div>
         </div>
 
-        <!-- Coming Soon 1 -->
-        <div class="game-item glass-box ripple" data-name="coming soon" onclick="showComingSoon()">
+        <!-- Coming Soon -->
+        <div class="game-item" data-name="coming soon" onclick="showComingSoon()">
             <span class="glow"></span>
             <span class="game-icon">🎮</span>
             <div class="game-name">Coming Soon</div>
             <div class="game-sub">အသစ်ထွက်ရှု့မည်</div>
         </div>
-
-        <!-- Coming Soon 2 -->
-        <div class="game-item glass-box ripple" data-name="coming soon" onclick="showComingSoon()">
+        <div class="game-item" data-name="coming soon" onclick="showComingSoon()">
             <span class="glow"></span>
             <span class="game-icon">🎯</span>
             <div class="game-name">Coming Soon</div>
             <div class="game-sub">အသစ်ထွက်ရှု့မည်</div>
         </div>
-
-        <!-- Coming Soon 3 -->
-        <div class="game-item glass-box ripple" data-name="coming soon" onclick="showComingSoon()">
+        <div class="game-item" data-name="coming soon" onclick="showComingSoon()">
             <span class="glow"></span>
             <span class="game-icon">🚀</span>
             <div class="game-name">Coming Soon</div>
@@ -307,10 +256,10 @@
 
 <!-- ===== BOTTOM NAV ===== -->
 <div class="bottom-nav">
-    <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label" id="navHome">ပင်မ</span></a>
-    <a href="shop.html" class="nav-item active"><span class="icon">🛒</span><span class="label" id="navShop">ဆိုင်</span></a>
-    <a href="payment.html" class="nav-item"><span class="icon">💳</span><span class="label" id="navPayment">ငွေပေးချေ</span></a>
-    <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label" id="navProfile">ပရိုဖိုင်</span></a>
+    <a href="index.html" class="nav-item"><span class="icon">🏠</span><span class="label">ပင်မ</span></a>
+    <a href="shop.html" class="nav-item active"><span class="icon">🛒</span><span class="label">ဆိုင်</span></a>
+    <a href="payment.html" class="nav-item"><span class="icon">💳</span><span class="label">ငွေပေးချေ</span></a>
+    <a href="profile.html" class="nav-item"><span class="icon">👤</span><span class="label">ပရိုဖိုင်</span></a>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -318,96 +267,40 @@
 <script>
     // ===== LANGUAGE DATA =====
     const LANG_DATA = {
-        my: {
-            appName: 'Premium Shop',
-            shopTitle: 'ဂိမ်းဆိုင်',
-            shopSub: 'ဂိမ်းတစ်ခုရွေးပြီး စိန်ဖြည့်လိုက်ပါ',
-            gamesTitle: 'ဂိမ်းများ',
-            searchPlaceholder: '🔍 ဂိမ်းနာမည်ရှာပါ...',
-            home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
-            popular: '🔥 Popular',
-            comingSoon: 'Coming Soon',
-            comingSoonSub: 'အသစ်ထွက်ရှု့မည်',
-            selectGame: 'ဂိမ်းရွေးပါ',
-            comingSoonMsg: '🎮 ဤဂိမ်းကို မကြာမီ ထည့်သွင်းပေးပါမည်။',
-            noGames: '❌ ဂိမ်းမတွေ့ပါ'
-        },
-        en: {
-            appName: 'Premium Shop',
-            shopTitle: 'Game Shop',
-            shopSub: 'Choose a game and top up diamonds',
-            gamesTitle: 'Games',
-            searchPlaceholder: '🔍 Search game name...',
-            home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
-            popular: '🔥 Popular',
-            comingSoon: 'Coming Soon',
-            comingSoonSub: 'Coming Soon',
-            selectGame: 'Select Game',
-            comingSoonMsg: '🎮 This game will be added soon.',
-            noGames: '❌ No games found'
-        }
+        my: { home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်' },
+        en: { home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile' }
     };
 
     let currentLang = localStorage.getItem('lang') || 'my';
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    let isLightMode = localStorage.getItem('lightMode') === 'true';
 
-    function getText(key){ return LANG_DATA[currentLang][key] || key; }
-
-    function setLang(lang){
+    function setLang(lang) {
         currentLang = lang;
         localStorage.setItem('lang', lang);
-        updateLanguage();
         document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+        updateLanguage();
     }
 
-    function updateLanguage(){
+    function updateLanguage() {
         const d = LANG_DATA[currentLang];
-        document.getElementById('appName').innerHTML = '<i class="fas fa-gamepad"></i> ' + d.appName;
-        document.getElementById('shopTitle').innerHTML = '<i class="fas fa-store"></i> <span>' + d.shopTitle + '</span>';
-        document.getElementById('shopSub').textContent = d.shopSub;
-        document.getElementById('gamesTitle').textContent = d.gamesTitle;
-        document.getElementById('searchInput').placeholder = d.searchPlaceholder;
-        document.getElementById('navHome').textContent = d.home;
-        document.getElementById('navShop').textContent = d.shop;
-        document.getElementById('navPayment').textContent = d.payment;
-        document.getElementById('navProfile').textContent = d.profile;
-        document.getElementById('popularBadge').textContent = d.popular;
-        
-        const gameItems = document.querySelectorAll('.game-item');
-        gameItems.forEach(item => {
-            const name = item.querySelector('.game-name');
-            const sub = item.querySelector('.game-sub');
-            if (name.textContent !== 'Mobile Legends') {
-                name.textContent = d.comingSoon;
-                sub.textContent = d.comingSoonSub;
-            }
+        document.querySelectorAll('.bottom-nav .nav-item .label').forEach((el, i) => {
+            const keys = ['home', 'shop', 'payment', 'profile'];
+            if (i < keys.length) el.textContent = d[keys[i]] || el.textContent;
         });
-
         updateAuthUI();
     }
 
-    // ===== THEME TOGGLE =====
-    function toggleTheme(){
-        isLightMode = !isLightMode;
-        document.body.classList.toggle('light-mode', isLightMode);
-        localStorage.setItem('lightMode', isLightMode);
-        const icon = document.getElementById('themeIcon');
-        icon.className = isLightMode ? 'fas fa-sun' : 'fas fa-moon';
-    }
-
-    function showToast(msg, type){
+    function showToast(msg) {
         const t = document.getElementById('toast');
         t.textContent = msg;
-        t.style.color = type === 'success' ? 'var(--green)' : type === 'error' ? 'var(--red)' : 'var(--gold)';
         t.classList.add('show');
         clearTimeout(t._timer);
         t._timer = setTimeout(() => t.classList.remove('show'), 3000);
     }
 
-    function updateAuthUI(){
+    function updateAuthUI() {
         const p = document.getElementById('profileIcon');
-        if(currentUser){
+        if (currentUser) {
             const avatar = localStorage.getItem('userAvatar_' + currentUser.username);
             p.innerHTML = avatar ? '<img src="'+avatar+'" alt="avatar"> '+currentUser.username : '👤 '+currentUser.username;
             p.className = 'profile-icon logged-in';
@@ -419,8 +312,21 @@
 
     function goToProfile(){ window.location.href = 'profile.html'; }
 
-    // ===== SEARCH FUNCTION =====
-    function searchGames(query){
+    // ===== NIGHT MODE =====
+    function toggleNightMode() {
+        document.body.classList.toggle('night-mode');
+        const icon = document.querySelector('.night-toggle i');
+        if (document.body.classList.contains('night-mode')) {
+            icon.className = 'fas fa-sun';
+            localStorage.setItem('nightMode', 'true');
+        } else {
+            icon.className = 'fas fa-moon';
+            localStorage.setItem('nightMode', 'false');
+        }
+    }
+
+    // ===== SEARCH =====
+    function searchGames(query) {
         const q = query.toLowerCase().trim();
         const items = document.querySelectorAll('.game-item');
         const clearBtn = document.getElementById('clearBtn');
@@ -436,11 +342,8 @@
             }
         });
 
-        if (q.length > 0) {
-            clearBtn.classList.add('show');
-        } else {
-            clearBtn.classList.remove('show');
-        }
+        if (q.length > 0) clearBtn.classList.add('show');
+        else clearBtn.classList.remove('show');
 
         let noMsg = document.getElementById('noGamesMsg');
         if (!found && q.length > 0) {
@@ -450,45 +353,34 @@
                 noMsg.style.cssText = 'text-align:center;padding:40px 0;color:var(--text-secondary);font-size:0.85rem;grid-column:1/-1';
                 document.getElementById('gameGrid').appendChild(noMsg);
             }
-            noMsg.textContent = getText('noGames');
+            noMsg.textContent = '❌ ဂိမ်းမတွေ့ပါ';
             noMsg.style.display = 'block';
         } else if (noMsg) {
             noMsg.style.display = 'none';
         }
     }
 
-    function clearSearch(){
+    function clearSearch() {
         document.getElementById('searchInput').value = '';
         searchGames('');
         document.getElementById('clearBtn').classList.remove('show');
-        document.getElementById('searchInput').focus();
     }
 
-    // ===== SELECT GAME =====
-    function selectGame(gameName, gameId){
-        const d = LANG_DATA[currentLang];
-        showToast('🎮 ' + gameName + ' ' + (d.selectGame || 'selected!'), 'success');
-        
-        localStorage.setItem('selectedGame', JSON.stringify({
-            name: gameName,
-            id: gameId
-        }));
-
-        setTimeout(() => {
-            window.location.href = 'packages.html';
-        }, 500);
+    function selectGame(gameName) {
+        showToast('🎮 ' + gameName + ' ကိုရွေးချယ်ပြီးပါပြီ!');
+        localStorage.setItem('selectedGame', JSON.stringify({ name: gameName }));
+        setTimeout(() => { window.location.href = 'packages.html'; }, 500);
     }
 
-    function showComingSoon(){
-        const d = LANG_DATA[currentLang];
-        showToast(d.comingSoonMsg || '🎮 This game will be added soon.', 'error');
+    function showComingSoon() {
+        showToast('🎮 ဤဂိမ်းကို မကြာမီ ထည့်သွင်းပေးပါမည်။');
     }
 
     // ===== NOTIFICATION =====
-    function checkNotification(){
+    function checkNotification() {
         const noti = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
         const badge = document.getElementById('notiBadge');
-        if(noti.show){
+        if (noti.show) {
             badge.style.display = 'block';
             badge.textContent = '1';
             setTimeout(() => {
@@ -499,26 +391,22 @@
     }
 
     // ===== INIT =====
-    document.addEventListener('DOMContentLoaded', function(){
-        setLang(localStorage.getItem('lang') || 'my');
+    document.addEventListener('DOMContentLoaded', function() {
+        const savedLang = localStorage.getItem('lang') || 'my';
+        setLang(savedLang);
         updateAuthUI();
         currentUser = JSON.parse(localStorage.getItem('currentUser'));
         checkNotification();
 
-        // Load theme
-        if (isLightMode) {
-            document.body.classList.add('light-mode');
-            document.getElementById('themeIcon').className = 'fas fa-sun';
+        const nightMode = localStorage.getItem('nightMode') === 'true';
+        if (nightMode) {
+            document.body.classList.add('night-mode');
+            document.querySelector('.night-toggle i').className = 'fas fa-sun';
         }
 
-        const params = new URLSearchParams(window.location.search);
-        const fromPackage = params.get('from');
-        if (fromPackage === 'package') {
-            showToast('🛒 အော်ဒါတင်ပြီးပါပြီ!', 'success');
-        }
-
+        // Keyboard shortcut: / to focus search
         document.addEventListener('keydown', function(e) {
-            if ((e.ctrlKey && e.key === 'k') || (e.key === '/' && !e.ctrlKey && !e.metaKey)) {
+            if (e.key === '/' && !e.ctrlKey && !e.metaKey && !e.target.matches('input')) {
                 e.preventDefault();
                 document.getElementById('searchInput').focus();
             }
@@ -530,9 +418,7 @@
     });
 
     window.addEventListener('storage', function(e) {
-        if (e.key === 'newOrderNotification') {
-            checkNotification();
-        }
+        if (e.key === 'newOrderNotification') checkNotification();
     });
 </script>
 </body>
