@@ -338,7 +338,7 @@
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
-        /* ===== MODAL (အသစ်) ===== */
+        /* ===== MODAL ===== */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -469,10 +469,6 @@
             border: 1px solid rgba(0,200,83,0.08);
         }
         .modal-box .success-msg.show { display: block; }
-        .modal-box .step-indicator { display: flex; justify-content: center; gap: 8px; margin-bottom: 16px; }
-        .modal-box .step-indicator .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border-color); transition: all 0.3s ease; }
-        .modal-box .step-indicator .dot.active { background: var(--primary); box-shadow: 0 0 20px var(--primary-glow); }
-        .modal-box .step-indicator .dot.done { background: var(--green); }
 
         .confirm-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(20px);display:none;z-index:600;align-items:center;justify-content:center;padding:20px;flex-direction:column;text-align:center}
         .confirm-overlay.show{display:flex;animation:fadeIn 0.5s ease}
@@ -596,18 +592,11 @@
 </div>
 
 <!-- ============================================================ -->
-<!-- ===== MODAL (အသစ် - Login/Register/Forgot) ===== -->
+<!-- ===== MODAL ===== -->
 <!-- ============================================================ -->
 <div class="modal-overlay" id="authModal">
     <div class="modal-box">
         <button class="close-btn" onclick="closeModal()"><i class="fas fa-times"></i></button>
-        
-        <!-- Step Indicator -->
-        <div class="step-indicator" id="stepIndicator">
-            <span class="dot active" id="stepDot1"></span>
-            <span class="dot" id="stepDot2"></span>
-            <span class="dot" id="stepDot3"></span>
-        </div>
         
         <h2 id="modalTitle">ဝင်ရန်</h2>
         <p class="sub" id="modalSub">ပြန်လည်ကြိုဆိုပါတယ်!</p>
@@ -615,9 +604,7 @@
         <div class="error-msg" id="loginError"></div>
         <div class="success-msg" id="loginSuccess"></div>
         
-        <!-- ========================================================== -->
         <!-- ===== FORM 1: LOGIN ===== -->
-        <!-- ========================================================== -->
         <div id="loginForm">
             <div class="form-group">
                 <label id="emailLabel">အီးမေးလ် / အသုံးပြုသူအမည် / ဖုန်းနံပါတ်</label>
@@ -632,9 +619,7 @@
             <span class="switch-link" id="switchToRegister" onclick="switchToRegisterForm()">အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်</span>
         </div>
         
-        <!-- ========================================================== -->
         <!-- ===== FORM 2: REGISTER ===== -->
-        <!-- ========================================================== -->
         <div id="registerForm" style="display:none;">
             <div class="form-group">
                 <label>အသုံးပြုသူအမည် <span style="color:var(--red);">*</span></label>
@@ -661,10 +646,9 @@
             <span class="switch-link" id="switchToLogin" onclick="switchToLoginForm()">အကောင့်ရှိပြီးသား? ဝင်ရန်</span>
         </div>
         
-        <!-- ========================================================== -->
-        <!-- ===== FORM 3: FORGOT PASSWORD (Step 1 - Email + OTP) ===== -->
-        <!-- ========================================================== -->
+        <!-- ===== FORM 3: FORGOT PASSWORD ===== -->
         <div id="forgotForm" style="display:none;">
+            <!-- Step 1: Email + OTP -->
             <div id="forgotStep1">
                 <div class="form-group">
                     <label>အီးမေးလ်</label>
@@ -681,7 +665,7 @@
                 <span class="switch-link" onclick="backToLoginFromForgot()">← ဝင်ရန်စာမျက်နှာသို့</span>
             </div>
             
-            <!-- ===== FORGOT PASSWORD (Step 2 - New Password) ===== -->
+            <!-- Step 2: New Password -->
             <div id="forgotStep2" style="display:none;">
                 <div class="form-group">
                     <label>စကားဝှက်အသစ်</label>
@@ -769,7 +753,6 @@
             otpError: '❌ OTP ကုဒ် မှားနေပါသည်',
             resetSuccess: '✅ စကားဝှက်ပြန်သတ်မှတ်ခြင်းအောင်မြင်ပါပြီ!',
             otpResend: 'ထပ်ပို့မည်',
-            otpResendIn: 'စက္ကန့်အကြာတွင်ထပ်ပို့နိုင်မည်',
             enterOtp: 'ကျေးဇူးပြု၍ OTP ကုဒ်ထည့်ပါ',
             enterNewPass: 'စကားဝှက်အသစ်ထည့်ပါ',
             enterConfirmPass: 'စကားဝှက်အတည်ပြုထည့်ပါ'
@@ -832,7 +815,6 @@
             otpError: '❌ Invalid OTP code',
             resetSuccess: '✅ Password reset successfully!',
             otpResend: 'Resend',
-            otpResendIn: 's',
             enterOtp: 'Please enter OTP code',
             enterNewPass: 'Enter new password',
             enterConfirmPass: 'Confirm new password'
@@ -886,11 +868,8 @@
         const input = document.getElementById('loginInput').value.trim();
         const pass = document.getElementById('loginPassword').value.trim();
         const btn = document.getElementById('loginBtn');
-        if (input && pass) {
-            btn.classList.add('enabled');
-        } else {
-            btn.classList.remove('enabled');
-        }
+        if (input && pass) btn.classList.add('enabled');
+        else btn.classList.remove('enabled');
     }
 
     function checkRegisterForm() {
@@ -898,46 +877,34 @@
         const pass = document.getElementById('regPassword').value.trim();
         const confirm = document.getElementById('regConfirmPassword').value.trim();
         const btn = document.getElementById('registerBtn');
-        if (username && pass && confirm && pass === confirm) {
-            btn.classList.add('enabled');
-        } else {
-            btn.classList.remove('enabled');
-        }
+        if (username && pass && confirm && pass === confirm) btn.classList.add('enabled');
+        else btn.classList.remove('enabled');
     }
 
     function checkForgotStep1() {
         const email = document.getElementById('forgotEmail').value.trim();
         const otp = document.getElementById('otpCode').value.trim();
         const btn = document.getElementById('forgotStep1Btn');
-        if (email && otp) {
-            btn.classList.add('enabled');
-        } else {
-            btn.classList.remove('enabled');
-        }
+        if (email && otp) btn.classList.add('enabled');
+        else btn.classList.remove('enabled');
     }
 
     function checkForgotStep2() {
         const pass = document.getElementById('newPassword').value.trim();
         const confirm = document.getElementById('confirmNewPassword').value.trim();
         const btn = document.getElementById('forgotStep2Btn');
-        if (pass && confirm && pass === confirm && pass.length >= 4) {
-            btn.classList.add('enabled');
-        } else {
-            btn.classList.remove('enabled');
-        }
+        if (pass && confirm && pass === confirm && pass.length >= 4) btn.classList.add('enabled');
+        else btn.classList.remove('enabled');
     }
 
     // ===== EVENT LISTENERS =====
     document.getElementById('loginInput').addEventListener('input', checkLoginForm);
     document.getElementById('loginPassword').addEventListener('input', checkLoginForm);
-
     document.getElementById('regUsername').addEventListener('input', checkRegisterForm);
     document.getElementById('regPassword').addEventListener('input', checkRegisterForm);
     document.getElementById('regConfirmPassword').addEventListener('input', checkRegisterForm);
-
     document.getElementById('forgotEmail').addEventListener('input', checkForgotStep1);
     document.getElementById('otpCode').addEventListener('input', checkForgotStep1);
-
     document.getElementById('newPassword').addEventListener('input', checkForgotStep2);
     document.getElementById('confirmNewPassword').addEventListener('input', checkForgotStep2);
 
@@ -1118,7 +1085,6 @@
         hideError();
         hideSuccess();
         updateModalTexts();
-        updateStepIndicator();
         checkLoginForm();
         checkRegisterForm();
     }
@@ -1167,6 +1133,7 @@
     }
 
     function showForgot() {
+        const d = LANG_DATA[currentLang];
         isForgotStep1 = true;
         document.getElementById('loginForm').style.display = 'none';
         document.getElementById('registerForm').style.display = 'none';
@@ -1175,12 +1142,10 @@
         document.getElementById('forgotStep2').style.display = 'none';
         hideError();
         hideSuccess();
-        const d = LANG_DATA[currentLang];
         document.getElementById('modalTitle').textContent = d.forgotTitle || 'စကားဝှက်မေ့နေပါသလား';
         document.querySelector('.modal-box .sub').textContent = d.forgotSub || 'သင့်အီးမေးလ်ထည့်ပြီး OTP ကုဒ်ရယူပါ';
         document.getElementById('resendOtpBtn').textContent = d.sendOtp || 'OTP ပို့မည်';
         document.getElementById('forgotStep1Btn').textContent = d.verifyOtp || 'အတည်ပြုမည်';
-        updateStepIndicator();
         checkForgotStep1();
     }
 
@@ -1214,31 +1179,6 @@
             document.querySelector('.modal-box .sub').textContent = d.modalRegisterSub || 'အကောင့်ဖွင့်ပါ!';
             document.getElementById('switchToLogin').textContent = d.switchRegister || 'အကောင့်ရှိပြီးသား? ဝင်ရန်';
             document.getElementById('registerBtn').textContent = d.register || 'မှတ်ပုံတင်ရန်';
-        }
-    }
-
-    function updateStepIndicator() {
-        const dot1 = document.getElementById('stepDot1');
-        const dot2 = document.getElementById('stepDot2');
-        const dot3 = document.getElementById('stepDot3');
-        if (document.getElementById('forgotForm').style.display === 'block') {
-            dot1.classList.add('active');
-            dot1.classList.remove('done');
-            if (!isForgotStep1) {
-                dot1.classList.add('done');
-                dot2.classList.add('active');
-            } else {
-                dot2.classList.remove('active');
-                dot2.classList.remove('done');
-            }
-            dot3.classList.remove('active');
-            dot3.classList.remove('done');
-        } else {
-            dot1.classList.add('active');
-            dot2.classList.remove('active');
-            dot2.classList.remove('done');
-            dot3.classList.remove('active');
-            dot3.classList.remove('done');
         }
     }
 
@@ -1358,7 +1298,6 @@
         storedOtp = otp;
         verifiedEmail = email;
 
-        // Send via EmailJS
         try {
             const templateParams = {
                 to_email: email,
@@ -1372,7 +1311,6 @@
 
         showToast(d.otpSent || '✅ OTP ကုဒ်ပို့ထားပါသည်! (အတုအယောင်: ' + otp + ')');
 
-        // Start countdown
         const btn = document.getElementById('resendOtpBtn');
         btn.disabled = true;
         btn.classList.remove('active');
@@ -1412,7 +1350,6 @@
             return;
         }
 
-        // OTP correct, go to step 2
         document.getElementById('forgotStep1').style.display = 'none';
         document.getElementById('forgotStep2').style.display = 'block';
         isForgotStep1 = false;
@@ -1420,7 +1357,6 @@
         document.getElementById('modalTitle').textContent = d2.forgotTitle || 'စကားဝှက်မေ့နေပါသလား';
         document.querySelector('.modal-box .sub').textContent = 'စကားဝှက်အသစ်ထည့်ပါ';
         document.getElementById('forgotStep2Btn').textContent = d2.resetPass || 'စကားဝှက်ပြန်သတ်မှတ်မည်';
-        updateStepIndicator();
         checkForgotStep2();
         showSuccess('✅ OTP အတည်ပြုပြီးပါပြီ!');
     }
@@ -1478,10 +1414,11 @@
             if (!modal.classList.contains('show')) return;
             if (document.getElementById('forgotForm').style.display === 'block') {
                 if (!isForgotStep1) {
-                    resetPassword();
+                    const btn2 = document.getElementById('forgotStep2Btn');
+                    if (btn2.classList.contains('enabled')) resetPassword();
                 } else {
-                    const btn = document.getElementById('forgotStep1Btn');
-                    if (btn.classList.contains('enabled')) verifyOTP();
+                    const btn1 = document.getElementById('forgotStep1Btn');
+                    if (btn1.classList.contains('enabled')) verifyOTP();
                 }
             } else if (isLoginMode) {
                 const btn = document.getElementById('loginBtn');
@@ -1493,7 +1430,7 @@
         }
     });
 
-    // ===== RESEND OTP BUTTON CLICK =====
+    // ===== RESEND OTP BUTTON =====
     document.getElementById('resendOtpBtn').addEventListener('click', function() {
         if (!this.disabled) sendOTP();
     });
@@ -1510,7 +1447,6 @@
             document.querySelector('.night-toggle i').className = 'fas fa-sun';
         }
         
-        // Notification badge
         const noti = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
         const badge = document.getElementById('notiBadge');
         if (noti.show) {
@@ -1522,7 +1458,6 @@
             }, 5000);
         }
         
-        // Check notifications on storage change
         window.addEventListener('storage', function(e) {
             if (e.key === 'newOrderNotification') {
                 const data = JSON.parse(e.newValue || '{"show":false}');
