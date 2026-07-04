@@ -63,7 +63,7 @@
         .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
         .header .left{display:flex;flex-direction:column;gap:6px}
         
-        /* ===== LOGO (ပြင်ထားတယ်) ===== */
+        /* ===== LOGO ===== */
         .header .left .logo{font-size:1.1rem;font-weight:800;color:var(--primary);text-shadow:0 0 30px var(--primary-glow);letter-spacing:0.5px;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none;filter:drop-shadow(0 0 20px var(--primary-glow));display:flex;align-items:center;gap:6px}
         .header .left .logo img{height:38px;width:auto;vertical-align:middle;border-radius:8px}
         
@@ -94,12 +94,12 @@
         .welcome h2 i{color:var(--cyan);-webkit-text-fill-color:initial;text-shadow:0 0 20px var(--cyan-glow)}
         .welcome p{color:var(--text-secondary);font-size:0.75rem;margin-top:2px;font-weight:400;opacity:0.6}
 
-        /* ===== SHOP STATUS BANNER ===== */
+        /* ===== SHOP STATUS BANNER (Fanny Hero ပါ) ===== */
         .shop-status-banner {
             background: var(--bg-card);
             border: 2px solid var(--border-color);
             border-radius: 14px;
-            padding: 18px 20px;
+            padding: 12px 16px;
             margin-bottom: 16px;
             position: relative;
             overflow: hidden;
@@ -107,19 +107,35 @@
             transition: all 0.5s ease;
             cursor: pointer;
             box-shadow: 0 4px 25px var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .shop-status-banner .banner-hero {
+            flex-shrink: 0;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--gold);
+            box-shadow: 0 0 30px var(--gold-glow);
+        }
+        .shop-status-banner .banner-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         .shop-status-banner .banner-content {
+            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: relative;
-            z-index: 1;
-            gap: 8px;
+            gap: 4px;
         }
         .shop-status-banner .banner-status {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 900;
-            padding: 8px 30px;
+            padding: 4px 24px;
             border-radius: 30px;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -144,29 +160,37 @@
             text-shadow: 0 0 40px var(--red-glow);
             animation: closedPulse 1s ease-in-out infinite;
         }
-        @keyframes closedPulse {
-            0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 40px var(--red-glow); }
-            50% { opacity: 0.7; transform: scale(0.97); box-shadow: 0 0 60px var(--red-glow); }
-        }
         .shop-status-banner .banner-status.open .status-dot {
             display: inline-block;
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             background: var(--green);
             border-radius: 50%;
-            margin-right: 10px;
+            margin-right: 8px;
             animation: pulseDot 1s ease-in-out infinite;
             box-shadow: 0 0 20px var(--green-glow);
         }
         .shop-status-banner .banner-status.closed .status-dot {
             display: inline-block;
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             background: var(--red);
             border-radius: 50%;
-            margin-right: 10px;
+            margin-right: 8px;
             box-shadow: 0 0 20px var(--red-glow);
             animation: pulseDotRed 1s ease-in-out infinite;
+        }
+        .shop-status-text {
+            font-size: 0.55rem;
+            color: var(--text-secondary);
+            text-align: center;
+            opacity: 0.5;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes closedPulse {
+            0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 40px var(--red-glow); }
+            50% { opacity: 0.7; transform: scale(0.97); box-shadow: 0 0 60px var(--red-glow); }
         }
         @keyframes pulseDot {
             0%, 100% { opacity: 1; transform: scale(1); }
@@ -179,15 +203,6 @@
         @keyframes pulseStatus {
             0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 30px rgba(0,255,135,0.1); }
             50% { opacity: 0.7; transform: scale(0.97); box-shadow: 0 0 40px rgba(0,255,135,0.2); }
-        }
-
-        .shop-status-text {
-            font-size: 0.6rem;
-            color: var(--text-secondary);
-            text-align: center;
-            opacity: 0.5;
-            letter-spacing: 0.5px;
-            margin-top: 2px;
         }
 
         /* ===== SHOP CARD ===== */
@@ -577,7 +592,7 @@
     <!-- ===== HEADER ===== -->
     <div class="header">
         <div class="left">
-            <!-- ===== LOGO (ပြင်ထားတယ်) ===== -->
+            <!-- ===== LOGO ===== -->
             <div class="logo" id="appName">
                 <img src="https://files.catbox.moe/lmq98x.jpg" alt="Premium Game Shop Logo">
                 Premium Game Shop
@@ -605,8 +620,11 @@
         <p id="subtitle">စိန်တွေဖြည့်ပြီး စစ်မြေပြင်ကို အနိုင်ယူလိုက်ပါ</p>
     </div>
 
-    <!-- ===== SHOP STATUS BANNER ===== -->
+    <!-- ===== SHOP STATUS BANNER (Fanny Hero ပါ) ===== -->
     <div class="shop-status-banner" id="shopStatusBanner" onclick="handleBannerClick()">
+        <div class="banner-hero">
+            <img src="https://files.catbox.moe/lmq98x.jpg" alt="Fanny Hero">
+        </div>
         <div class="banner-content">
             <div class="banner-status open" id="statusBadge">
                 <span class="status-dot"></span> OPEN
