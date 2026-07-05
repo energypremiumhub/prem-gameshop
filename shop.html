@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🎮 MLBB Packages</title>
+    <title>🎮 Game Shop</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        /* ===== RESET & BASE ===== */
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
         
         :root {
@@ -20,19 +19,13 @@
             --shadow: rgba(0,0,0,0.06);
             --shadow-hover: rgba(0,0,0,0.1);
             --primary: #6c5ce7;
-            --primary-glow: rgba(108,92,231,0.2);
-            --secondary: #b388ff;
             --gold: #f5a623;
             --gold-glow: rgba(245,166,35,0.2);
             --cyan: #00b4d8;
             --cyan-glow: rgba(0,180,216,0.15);
-            --pink: #ff2d78;
-            --pink-glow: rgba(255,45,120,0.15);
             --orange: #ff6a00;
             --green: #00c853;
-            --green-glow: rgba(0,200,83,0.2);
             --red: #ff0044;
-            --red-glow: rgba(255,0,68,0.2);
         }
 
         .night-mode {
@@ -44,10 +37,6 @@
             --text-secondary: #a8a8c8;
             --border-color: rgba(255,255,255,0.06);
             --shadow: rgba(0,0,0,0.3);
-            --shadow-hover: rgba(0,0,0,0.4);
-            --primary: #8b7cf7;
-            --primary-glow: rgba(139,124,247,0.3);
-            --secondary: #c8b8ff;
             --gold: #ffd700;
             --gold-glow: rgba(255,215,0,0.2);
         }
@@ -56,18 +45,16 @@
             background: var(--bg-primary);
             color: var(--text-primary);
             min-height: 100vh;
+            padding: 16px;
             padding-bottom: 90px;
-            overflow-x: hidden;
             transition: all 0.4s ease;
         }
 
-        .container {
-            max-width: 480px;
-            margin: 0 auto;
-            padding: 16px 16px 0;
-            position: relative;
-            z-index: 1;
-        }
+        ::-webkit-scrollbar{width:3px}
+        ::-webkit-scrollbar-track{background:transparent}
+        ::-webkit-scrollbar-thumb{background:var(--primary);border-radius:10px}
+
+        .container{max-width:480px;margin:0 auto}
 
         .glass-box {
             background: var(--bg-card);
@@ -91,11 +78,6 @@
             100% { transform: scale(1); }
         }
 
-        ::-webkit-scrollbar{width:3px}
-        ::-webkit-scrollbar-track{background:transparent}
-        ::-webkit-scrollbar-thumb{background:var(--primary);border-radius:10px}
-
-        /* ===== SOFT CLICK ANIMATIONS ===== */
         .btn-click {
             transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
             cursor: pointer;
@@ -146,7 +128,6 @@
             opacity: 0;
         }
 
-        /* ===== HEADER (Login Button ဖျောက်ထား) ===== */
         .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
         .header .left{display:flex;flex-direction:column;gap:8px}
         .header .left .logo-wrap{display:flex;align-items:center;gap:10px}
@@ -154,33 +135,34 @@
         .header .left .logo-wrap .text-group{display:flex;flex-direction:column;line-height:1.1}
         .header .left .logo-wrap .text-group .premium{font-size:1rem;font-weight:800;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
         .header .left .logo-wrap .text-group .shop{font-size:0.55rem;font-weight:600;color:var(--text-secondary);opacity:0.6;margin-top:-2px}
-        
-        /* Login Button ဖျောက်ထား */
         .header .left .auth-btn{display:none}
         
-        .header .right{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
         .header .right .top{display:flex;gap:6px;align-items:center}
         .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:10px;border:1px solid var(--border-color);box-shadow:0 2px 10px var(--shadow)}
-        .header .right .top .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;text-transform:uppercase;transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1)}
-        .header .right .top .lang-switcher .lang-btn:active{transform:scale(0.92);opacity:0.7}
+        .header .right .top .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;text-transform:uppercase}
         .header .right .top .lang-switcher .lang-btn.active{background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;box-shadow:0 4px 15px var(--gold-glow)}
-        
         .header .right .top .night-toggle{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;color:var(--text-secondary);box-shadow:0 2px 10px var(--shadow);transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1)}
-        .header .right .top .night-toggle:active{transform:scale(0.92);opacity:0.7}
-        .night-mode .header .right .top .night-toggle .fa-sun{color:#ffd700;text-shadow:0 0 20px rgba(255,215,0,0.3)}
-        
-        .header .right .top .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;box-shadow:0 2px 10px var(--shadow);transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1)}
-        .header .right .top .noti-btn:active{transform:scale(0.92);opacity:0.7}
+        .header .right .top .night-toggle:active{transform:scale(0.92)}
+        .night-mode .header .right .top .night-toggle .fa-sun{color:#ffd700}
+        .header .right .top .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;box-shadow:0 2px 10px var(--shadow)}
+        .header .right .top .noti-btn:active{transform:scale(0.92)}
         .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none;box-shadow:0 0 15px var(--red-glow)}
 
-        /* ===== PAGE HEADER ===== */
         .page-header{margin-bottom:16px;animation:slideUp 0.6s ease}
         .page-header h1{font-size:1.3rem;font-weight:800;color:var(--text-primary)}
         .page-header h1 span{background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
         .page-header h1 i{color:var(--cyan);-webkit-text-fill-color:initial;margin-right:6px}
         .page-header p{color:var(--text-secondary);font-size:0.7rem;margin-top:2px}
 
-        /* ===== GAME GRID ===== */
+        .search-box{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:14px;padding:10px 16px;display:flex;align-items:center;gap:12px;margin-bottom:20px;transition:all 0.3s ease;box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1)}
+        .search-box:focus-within{border-color:var(--gold);box-shadow:0 0 40px var(--gold-glow)}
+        .search-box .icon{color:var(--text-secondary);font-size:1rem}
+        .search-box input{background:transparent;border:none;color:var(--text-primary);font-size:0.85rem;flex:1;outline:none;padding:4px 0}
+        .search-box input::placeholder{color:var(--text-secondary);font-size:0.75rem}
+        .search-box .clear-btn{color:var(--text-secondary);font-size:0.8rem;cursor:pointer;padding:4px;display:none;transition:all 0.2s ease}
+        .search-box .clear-btn:active{transform:scale(0.85)}
+        .search-box .clear-btn.show{display:block}
+
         .game-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
         .game-item{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:16px;padding:20px 14px;text-align:center;cursor:pointer;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);position:relative;overflow:hidden}
         .game-item:active{transform:scale(0.92)}
@@ -189,12 +171,11 @@
         .game-item:hover .game-icon{transform:scale(1.15) rotate(-8deg)}
         .game-item .game-name{font-size:0.8rem;font-weight:700;color:var(--text-primary)}
         .game-item .game-sub{font-size:0.55rem;color:var(--text-secondary);margin-top:2px}
-        .game-item .badge{position:absolute;top:8px;right:8px;background:var(--gold);color:#fff;font-size:0.4rem;font-weight:700;padding:2px 10px;border-radius:12px;box-shadow:0 0 20px var(--gold-glow)}
+        .game-item .badge{position:absolute;top:8px;right:8px;background:var(--gold);color:#fff;font-size:0.4rem;font-weight:700;padding:2px 10px;border-radius:12px;box-shadow:0 0 20px var(--gold-glow);animation:glowPulse 2s ease-in-out infinite}
         .game-item .glow{position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(245,166,35,0.05) 0%,transparent 70%);opacity:0;transition:all 0.6s ease}
         .game-item:hover .glow{opacity:1}
         .game-item.hidden{display:none}
 
-        /* ===== GAME ITEM WITH IMAGE ===== */
         .game-item .game-img {
             width: 80px;
             height: 80px;
@@ -211,23 +192,11 @@
             border-color: var(--gold);
             box-shadow: 0 0 30px var(--gold-glow);
         }
-        .game-item .game-img-placeholder {
-            font-size: 3rem;
-            display: block;
-            margin-bottom: 8px;
-            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-            animation: floatIcon 3s ease-in-out infinite;
-        }
-        .game-item:hover .game-img-placeholder {
-            transform: scale(1.15) rotate(-8deg);
-        }
 
-        /* ===== SECTION TITLE ===== */
         .section-title{font-size:0.65rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;display:flex;align-items:center;gap:10px;opacity:0.5}
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
         .section-title i{color:var(--cyan);text-shadow:0 0 20px var(--cyan-glow)}
 
-        /* ===== BOTTOM NAV ===== */
         .bottom-nav {
             position: fixed;
             bottom: 16px;
@@ -278,11 +247,11 @@
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
         @keyframes floatIcon {0%,100%{transform:translateY(0px)}50%{transform:translateY(-6px)}}
+        @keyframes glowPulse {0%,100%{box-shadow:0 0 10px var(--gold-glow)}50%{box-shadow:0 0 30px var(--gold-glow)}}
     </style>
 </head>
 <body>
 <div class="container">
-    <!-- ===== HEADER ===== -->
     <div class="header">
         <div class="left">
             <div class="logo-wrap">
@@ -305,16 +274,19 @@
         </div>
     </div>
 
-    <!-- ===== PAGE HEADER ===== -->
     <div class="page-header">
         <h1><i class="fas fa-store"></i> <span id="pageTitle">Game Shop</span></h1>
         <p id="pageSub">ဂိမ်းတစ်ခုရွေးပြီး စိန်ဖြည့်လိုက်ပါ</p>
     </div>
 
-    <!-- ===== GAME GRID ===== -->
+    <div class="search-box">
+        <span class="icon"><i class="fas fa-search"></i></span>
+        <input type="text" id="searchInput" placeholder="🔍 ဂိမ်းနာမည်ရှာပါ..." oninput="searchGames(this.value)">
+        <span class="clear-btn" id="clearBtn" onclick="clearSearch()"><i class="fas fa-times-circle"></i></span>
+    </div>
+
     <div class="section-title"><i class="fas fa-gamepad"></i> <span id="gamesTitle">ဂိမ်းများ</span></div>
     <div class="game-grid" id="gameGrid">
-        <!-- Mobile Legends (with image) -->
         <div class="game-item glass-box" data-name="mobile legends mlbb" onclick="selectGame('Mobile Legends', 'mlbb')">
             <span class="glow"></span>
             <span class="badge" id="popularBadge">🔥 Popular</span>
@@ -323,8 +295,6 @@
             <div class="game-name">Mobile Legends</div>
             <div class="game-sub" id="mlbbSub">MLBB စိန်ဖြည့်မှု</div>
         </div>
-
-        <!-- Coming Soon -->
         <div class="game-item glass-box" data-name="coming soon" onclick="showComingSoon()">
             <span class="glow"></span>
             <span class="game-img-placeholder">🎮</span>
@@ -348,7 +318,6 @@
     <div class="footer-text">&copy; 2026 Premium Game Shop</div>
 </div>
 
-<!-- ===== BOTTOM NAV ===== -->
 <div class="bottom-nav">
     <a href="index.html" class="nav-item" onclick="handleNavClick(this, event)"><span class="icon"><i class="fas fa-home"></i></span><span class="label" id="navHome">ပင်မ</span></a>
     <a href="shop.html" class="nav-item active" onclick="handleNavClick(this, event)"><span class="icon"><i class="fas fa-shopping-bag"></i></span><span class="label" id="navShop">ဆိုင်</span></a>
@@ -359,41 +328,34 @@
 <div class="toast" id="toast"></div>
 
 <script>
-    // ===== LANGUAGE DATA =====
     const LANG_DATA = {
         my: {
-            appName: 'Premium',
-            appSub: 'Game Shop',
+            appName: 'Premium', appSub: 'Game Shop',
             home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
-            pageTitle: 'Game Shop',
-            pageSub: 'ဂိမ်းတစ်ခုရွေးပြီး စိန်ဖြည့်လိုက်ပါ',
-            gamesTitle: 'ဂိမ်းများ',
-            popular: '🔥 Popular',
-            comingSoon: 'Coming Soon',
-            comingSoonSub: 'အသစ်ထွက်ရှိမည်',
+            pageTitle: 'Game Shop', pageSub: 'ဂိမ်းတစ်ခုရွေးပြီး စိန်ဖြည့်လိုက်ပါ',
+            gamesTitle: 'ဂိမ်းများ', popular: '🔥 Popular',
+            comingSoon: 'Coming Soon', comingSoonSub: 'အသစ်ထွက်ရှိမည်',
             mlbbSub: 'MLBB စိန်ဖြည့်မှု',
-            selectGame: 'ဂိမ်းရွေးပါ',
-            comingSoonMsg: '🎮 ဤဂိမ်းကို မကြာမီ ထည့်သွင်းပေးပါမည်။'
+            searchPlaceholder: '🔍 ဂိမ်းနာမည်ရှာပါ...',
+            noGames: '❌ ဂိမ်းမတွေ့ပါ',
+            selectGame: 'ဂိမ်းရွေးပါ', comingSoonMsg: '🎮 ဤဂိမ်းကို မကြာမီ ထည့်သွင်းပေးပါမည်။'
         },
         en: {
-            appName: 'Premium',
-            appSub: 'Game Shop',
+            appName: 'Premium', appSub: 'Game Shop',
             home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
-            pageTitle: 'Game Shop',
-            pageSub: 'Choose a game and top up diamonds',
-            gamesTitle: 'Games',
-            popular: '🔥 Popular',
-            comingSoon: 'Coming Soon',
-            comingSoonSub: 'Coming Soon',
+            pageTitle: 'Game Shop', pageSub: 'Choose a game and top up diamonds',
+            gamesTitle: 'Games', popular: '🔥 Popular',
+            comingSoon: 'Coming Soon', comingSoonSub: 'Coming Soon',
             mlbbSub: 'MLBB Diamond Top Up',
-            selectGame: 'Select Game',
-            comingSoonMsg: '🎮 This game will be added soon.'
+            searchPlaceholder: '🔍 Search game name...',
+            noGames: '❌ No games found',
+            selectGame: 'Select Game', comingSoonMsg: '🎮 This game will be added soon.'
         }
     };
 
     let currentLang = localStorage.getItem('lang') || 'my';
 
-    function getText(key) { return LANG_DATA[currentLang][key] || key; }
+    function getText(key) { return LANG_DATA[currentLang]?.[key] || key; }
 
     function showToast(msg) {
         const t = document.getElementById('toast');
@@ -403,64 +365,44 @@
         t._timer = setTimeout(() => t.classList.remove('show'), 3000);
     }
 
-    // ===== LANGUAGE =====
     function setLang(lang) {
         currentLang = lang;
         localStorage.setItem('lang', lang);
         updateLanguage();
-        document.querySelectorAll('.lang-btn').forEach(b => {
-            b.classList.toggle('active', b.dataset.lang === lang);
-        });
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
     }
 
     function updateLanguage() {
         const d = LANG_DATA[currentLang];
+        if (!d) return;
         document.getElementById('appName').textContent = d.appName;
         document.getElementById('appSub').textContent = d.appSub;
         document.getElementById('pageTitle').textContent = d.pageTitle;
         document.getElementById('pageSub').textContent = d.pageSub;
         document.getElementById('gamesTitle').textContent = d.gamesTitle;
         document.getElementById('popularBadge').textContent = d.popular;
-        document.getElementById('navHome').textContent = d.home;
-        document.getElementById('navShop').textContent = d.shop;
-        document.getElementById('navPayment').textContent = d.payment;
-        document.getElementById('navProfile').textContent = d.profile;
         document.getElementById('mlbbSub').textContent = d.mlbbSub;
-        
-        // Coming Soon
         document.getElementById('cs1').textContent = d.comingSoon;
         document.getElementById('cs1sub').textContent = d.comingSoonSub;
         document.getElementById('cs2').textContent = d.comingSoon;
         document.getElementById('cs2sub').textContent = d.comingSoonSub;
         document.getElementById('cs3').textContent = d.comingSoon;
         document.getElementById('cs3sub').textContent = d.comingSoonSub;
+        document.getElementById('searchInput').placeholder = d.searchPlaceholder;
+        document.getElementById('navHome').textContent = d.home;
+        document.getElementById('navShop').textContent = d.shop;
+        document.getElementById('navPayment').textContent = d.payment;
+        document.getElementById('navProfile').textContent = d.profile;
+        updateBadge();
     }
 
-    // ===== NIGHT MODE =====
     function toggleNightMode() {
         document.body.classList.toggle('night-mode');
         const icon = document.querySelector('.night-toggle i');
-        if (document.body.classList.contains('night-mode')) {
-            icon.className = 'fas fa-sun';
-            localStorage.setItem('nightMode', 'true');
-        } else {
-            icon.className = 'fas fa-moon';
-            localStorage.setItem('nightMode', 'false');
-        }
+        icon.className = document.body.classList.contains('night-mode') ? 'fas fa-sun' : 'fas fa-moon';
+        localStorage.setItem('nightMode', document.body.classList.contains('night-mode') ? 'true' : 'false');
     }
 
-    // ===== SELECT GAME =====
-    function selectGame(gameName) {
-        showToast('🎮 ' + gameName + ' ' + getText('selectGame') + '!');
-        localStorage.setItem('selectedGame', JSON.stringify({ name: gameName, id: 'mlbb' }));
-        setTimeout(() => { window.location.href = 'mlbb-packages.html'; }, 500);
-    }
-
-    function showComingSoon() {
-        showToast(getText('comingSoonMsg'));
-    }
-
-    // ===== NAV =====
     function handleNavClick(el, e) {
         e.preventDefault();
         const icon = el.querySelector('.icon');
@@ -472,36 +414,103 @@
         setTimeout(() => { window.location.href = el.getAttribute('href'); }, 400);
     }
 
-    // ===== NOTIFICATION =====
-    function checkNotification() {
-        const noti = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
+    // ===== BADGE FUNCTIONS =====
+    function getPendingCount() {
+        const notis = JSON.parse(localStorage.getItem('notifications') || '[]');
+        return notis.filter(n => n.status === 'pending').length;
+    }
+
+    function updateBadge() {
+        const count = getPendingCount();
         const badge = document.getElementById('notiBadge');
-        if (noti.show) {
-            badge.style.display = 'block';
-            badge.textContent = '1';
-            setTimeout(() => {
+        if (badge) {
+            if (count > 0) {
+                badge.style.display = 'block';
+                badge.textContent = count;
+            } else {
                 badge.style.display = 'none';
-                localStorage.setItem('newOrderNotification', JSON.stringify({show: false}));
-            }, 5000);
+            }
         }
+    }
+
+    function searchGames(query) {
+        const q = query.toLowerCase().trim();
+        const items = document.querySelectorAll('.game-item');
+        const clearBtn = document.getElementById('clearBtn');
+        let found = false;
+
+        items.forEach(item => {
+            const name = item.dataset.name || '';
+            if (name.includes(q) || q === '') {
+                item.classList.remove('hidden');
+                found = true;
+            } else {
+                item.classList.add('hidden');
+            }
+        });
+
+        if (q.length > 0) clearBtn.classList.add('show');
+        else clearBtn.classList.remove('show');
+
+        let noMsg = document.getElementById('noGamesMsg');
+        if (!found && q.length > 0) {
+            if (!noMsg) {
+                noMsg = document.createElement('div');
+                noMsg.id = 'noGamesMsg';
+                noMsg.style.cssText = 'text-align:center;padding:40px 0;color:var(--text-secondary);font-size:0.85rem;grid-column:1/-1';
+                document.getElementById('gameGrid').appendChild(noMsg);
+            }
+            noMsg.textContent = getText('noGames');
+            noMsg.style.display = 'block';
+        } else if (noMsg) {
+            noMsg.style.display = 'none';
+        }
+    }
+
+    function clearSearch() {
+        document.getElementById('searchInput').value = '';
+        searchGames('');
+        document.getElementById('clearBtn').classList.remove('show');
+        document.getElementById('searchInput').focus();
+    }
+
+    function selectGame(gameName) {
+        showToast('🎮 ' + gameName + ' ' + getText('selectGame') + '!');
+        localStorage.setItem('selectedGame', JSON.stringify({ name: gameName, id: 'mlbb' }));
+        setTimeout(() => { window.location.href = 'mlbb-packages.html'; }, 500);
+    }
+
+    function showComingSoon() {
+        showToast(getText('comingSoonMsg'));
     }
 
     // ===== INIT =====
     document.addEventListener('DOMContentLoaded', function() {
         const savedLang = localStorage.getItem('lang') || 'my';
         setLang(savedLang);
-        
         const nightMode = localStorage.getItem('nightMode') === 'true';
         if (nightMode) {
             document.body.classList.add('night-mode');
             document.querySelector('.night-toggle i').className = 'fas fa-sun';
         }
-        
-        checkNotification();
-    });
+        updateBadge();
 
-    window.addEventListener('storage', function(e) {
-        if (e.key === 'newOrderNotification') checkNotification();
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'newOrderNotification' || e.key === 'notifications') {
+                updateBadge();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === '/' && !e.ctrlKey && !e.metaKey && !e.target.matches('input')) {
+                e.preventDefault();
+                document.getElementById('searchInput').focus();
+            }
+            if (e.key === 'Escape') {
+                clearSearch();
+                document.getElementById('searchInput').blur();
+            }
+        });
     });
 </script>
 </body>
