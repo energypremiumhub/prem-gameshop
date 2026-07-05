@@ -44,19 +44,17 @@
             background: var(--bg-primary);
             color: var(--text-primary);
             min-height: 100vh;
+            padding: 16px;
             padding-bottom: 90px;
             transition: all 0.4s ease;
         }
 
-        .container {
-            max-width: 480px;
-            margin: 0 auto;
-            padding: 16px 16px 0;
-        }
+        .container{max-width:480px;margin:0 auto}
 
         .glass-box {
             background: var(--bg-card);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--border-color);
             border-radius: 16px;
             box-shadow: 0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);
@@ -183,14 +181,17 @@
 
         .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-secondary);padding:10px 20px;border-radius:12px;border:1px solid var(--border-color);color:var(--primary);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 4px 20px var(--shadow)}
         .toast.show{display:block}
+        .toast.success{color:var(--green)}
+        .toast.error{color:var(--red)}
         @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
         @keyframes floatIcon {0%,100%{transform:translateY(0px)}50%{transform:translateY(-6px)}}
 
+        /* ===== MODAL ===== */
         .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(12px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px}
         .modal-overlay.show{display:flex}
-        .modal{background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:16px;padding:24px 20px;max-width:420px;width:100%;box-shadow:0 4px 30px var(--shadow),0 20px 60px rgba(0,0,0,0.06);position:relative;max-height:90vh;overflow-y:auto}
+        .modal{background:var(--bg-secondary);backdrop-filter:blur(24px);border:1px solid var(--border-color);border-radius:16px;padding:24px 20px;max-width:420px;width:100%;box-shadow:0 4px 30px var(--shadow),0 20px 60px rgba(0,0,0,0.06);position:relative;max-height:90vh;overflow-y:auto}
         .modal::before{display:none}
         .modal .close-btn{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--text-secondary);font-size:1.1rem;cursor:pointer}
         .modal .close-btn:active{transform:scale(0.88)}
@@ -205,29 +206,37 @@
         .modal .selected-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg-input);border-radius:10px;border:1px solid var(--border-color);margin-bottom:12px}
         .modal .selected-row .pkg{font-size:0.85rem;font-weight:600;color:var(--text-primary)}
         .modal .selected-row .price{font-size:0.9rem;font-weight:700;color:var(--gold)}
-        .modal .payment-options{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
-        .modal .payment-option{background:var(--bg-input);border:1px solid var(--border-color);border-radius:10px;padding:10px;text-align:center;cursor:pointer;transition:all 0.3s ease}
-        .modal .payment-option:active{transform:scale(0.95)}
-        .modal .payment-option.selected{border-color:var(--gold);background:rgba(245,166,35,0.06);box-shadow:0 0 30px var(--gold-glow)}
-        .modal .payment-option .icon{font-size:1.2rem;display:block;margin-bottom:2px}
-        .modal .payment-option .name{font-size:0.7rem;font-weight:600;color:var(--text-primary)}
-        .modal .account-info{background:rgba(0,180,216,0.04);border:1px solid rgba(0,180,216,0.08);border-radius:10px;padding:10px 14px;margin-top:8px;display:none}
-        .modal .account-info.show{display:block}
-        .modal .account-info .acc-name{font-size:0.8rem;font-weight:600;color:var(--text-primary)}
-        .modal .account-info .acc-number{font-size:0.75rem;color:var(--green);font-weight:500;margin-top:2px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-        .modal .account-info .acc-number .copy-btn{background:var(--bg-card);border:1px solid var(--border-color);color:var(--text-secondary);padding:2px 10px;border-radius:10px;font-size:0.45rem;cursor:pointer;transition:all 0.3s ease;font-weight:600}
-        .modal .account-info .acc-number .copy-btn:active{transform:scale(0.85)}
-        .modal .file-upload{border:2px dashed var(--border-color);border-radius:10px;padding:14px;text-align:center;cursor:pointer;transition:all 0.3s ease;position:relative}
-        .modal .file-upload:active{transform:scale(0.97)}
-        .modal .file-upload.has-file{border-color:var(--green);background:rgba(0,200,83,0.04)}
-        .modal .file-upload .icon{font-size:1.5rem;display:block;margin-bottom:2px;color:var(--text-secondary)}
-        .modal .file-upload .text{font-size:0.6rem;color:var(--text-secondary)}
-        .modal .file-upload input[type="file"]{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}
-        .modal .file-upload .file-name{font-size:0.5rem;color:var(--green);margin-top:3px;display:none}
-        .modal .file-upload .file-name.show{display:block}
-        .modal .btn-primary{width:100%;padding:11px;background:var(--bg-input);color:var(--text-secondary);border:1px solid var(--border-color);border-radius:10px;font-size:0.85rem;font-weight:700;cursor:not-allowed;transition:all 0.3s ease;margin-top:6px;opacity:0.4}
-        .modal .btn-primary:active{transform:scale(0.96)}
-        .modal .btn-primary.enabled{background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;border-color:var(--gold);box-shadow:0 4px 20px var(--gold-glow);cursor:pointer;opacity:1}
+
+        /* ===== PAYMENT OPTIONS WITH IMAGES ===== */
+        .payment-options{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
+        .payment-option{background:var(--bg-input);border:1px solid var(--border-color);border-radius:10px;padding:10px;text-align:center;cursor:pointer;transition:all 0.3s ease}
+        .payment-option:active{transform:scale(0.95)}
+        .payment-option.selected{border-color:var(--gold);background:rgba(245,166,35,0.06);box-shadow:0 0 30px var(--gold-glow)}
+        .payment-option .icon-box{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;border:1px solid var(--border-color);background:var(--bg-input);margin:0 auto 4px}
+        .payment-option .icon-box img{width:100%;height:100%;object-fit:cover;border-radius:10px}
+        .payment-option .icon-box .icon{font-size:1.3rem;color:var(--text-secondary)}
+        .payment-option .name{font-size:0.7rem;font-weight:600;color:var(--text-primary);display:block;margin-top:2px}
+
+        .account-info{background:rgba(0,180,216,0.04);border:1px solid rgba(0,180,216,0.08);border-radius:10px;padding:10px 14px;margin-top:8px;display:none}
+        .account-info.show{display:block}
+        .account-info .acc-name{font-size:0.8rem;font-weight:600;color:var(--text-primary)}
+        .account-info .acc-number{font-size:0.75rem;color:var(--green);font-weight:500;margin-top:2px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+        .account-info .acc-number .copy-btn{background:var(--bg-card);border:1px solid var(--border-color);color:var(--text-secondary);padding:2px 10px;border-radius:10px;font-size:0.45rem;cursor:pointer;transition:all 0.3s ease;font-weight:600}
+        .account-info .acc-number .copy-btn:active{transform:scale(0.85)}
+
+        .file-upload{border:2px dashed var(--border-color);border-radius:10px;padding:14px;text-align:center;cursor:pointer;transition:all 0.3s ease;position:relative}
+        .file-upload:active{transform:scale(0.97)}
+        .file-upload.has-file{border-color:var(--green);background:rgba(0,200,83,0.04)}
+        .file-upload .icon{font-size:1.5rem;display:block;margin-bottom:2px;color:var(--text-secondary)}
+        .file-upload .text{font-size:0.6rem;color:var(--text-secondary)}
+        .file-upload input[type="file"]{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}
+        .file-upload .file-name{font-size:0.5rem;color:var(--green);margin-top:3px;display:none}
+        .file-upload .file-name.show{display:block}
+
+        .btn-primary{width:100%;padding:11px;background:var(--bg-input);color:var(--text-secondary);border:1px solid var(--border-color);border-radius:10px;font-size:0.85rem;font-weight:700;cursor:not-allowed;transition:all 0.3s ease;margin-top:6px;opacity:0.4}
+        .btn-primary:active{transform:scale(0.96)}
+        .btn-primary.enabled{background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;border-color:var(--gold);box-shadow:0 4px 20px var(--gold-glow);cursor:pointer;opacity:1}
+        .btn-primary.loading{background:var(--bg-input);color:var(--text-secondary);border-color:var(--border-color);box-shadow:none;cursor:wait;opacity:0.6}
     </style>
 </head>
 <body>
@@ -311,24 +320,28 @@
         <div class="form-group">
             <label><i class="fas fa-gamepad"></i> <span id="gameIdLabel">ဂိမ်းအိုင်ဒီ</span></label>
             <input type="text" id="gameId" placeholder="ဂိမ်းအိုင်ဒီ နံပါတ်ထည့်ပါ (e.g. 12345678)" inputmode="numeric" pattern="[0-9]*">
-            <div class="input-hint" id="gameIdHint">Mobile Legends ID (နံပါတ်သာ)</div>
+            <div class="input-hint" id="gameIdHint">နံပါတ်သာ ထည့်ပါ</div>
         </div>
         
         <div class="form-group">
             <label><i class="fas fa-server"></i> <span id="serverIdLabel">ဆာဗာအိုင်ဒီ</span></label>
             <input type="text" id="serverId" placeholder="ဆာဗာအိုင်ဒီ နံပါတ်ထည့်ပါ (e.g. 9876)" inputmode="numeric" pattern="[0-9]*">
-            <div class="input-hint" id="serverIdHint">Mobile Legends Server ID (နံပါတ်သာ)</div>
+            <div class="input-hint" id="serverIdHint">နံပါတ်သာ ထည့်ပါ</div>
         </div>
 
         <div class="form-group">
             <label><i class="fas fa-money-bill-wave"></i> <span id="paymentLabel">ငွေပေးချေရန်</span></label>
             <div class="payment-options" id="paymentOptions">
                 <div class="payment-option" data-payment="wave">
-                    <span class="icon">🏦</span>
+                    <div class="icon-box">
+                        <img src="https://i.ibb.co/GvstPZx4/x.jpg" alt="Wave Pay">
+                    </div>
                     <span class="name" id="waveName">Wave Pay</span>
                 </div>
                 <div class="payment-option" data-payment="kpay">
-                    <span class="icon">🏦</span>
+                    <div class="icon-box">
+                        <img src="https://i.ibb.co/fdWfXwVC/x.jpg" alt="KBZ Pay">
+                    </div>
                     <span class="name" id="kpayName">KBZ Pay</span>
                 </div>
             </div>
@@ -359,7 +372,7 @@
 
 <script>
     // ============================================================
-    // 🔧 TELEGRAM BOT CONFIG (ခင်ဗျားရဲ့ Data)
+    // 🔧 TELEGRAM BOT CONFIG
     // ============================================================
     const TELEGRAM_BOT_TOKEN = '8751360822:AAFQNiWhfGWgUsjD7Bd5DzfHMfpkR4COHY8';
     const TELEGRAM_CHAT_ID = '8745522082';
@@ -378,7 +391,7 @@
             gameIdHint: 'နံပါတ်သာ ထည့်ပါ', serverIdHint: 'နံပါတ်သာ ထည့်ပါ',
             paymentLabel: 'ငွေပေးချေရန်', wave: 'Wave Pay', kpay: 'KBZ Pay',
             uploadLabel: 'ပြေစာတင်ပို့ရန်', uploadText: 'Screenshot ပို့ပေးပါ', 
-            submit: 'အော်ဒါတင်မည်',
+            submit: 'အော်ဒါတင်မည်', submitting: '⏳ အော်ဒါတင်နေသည်...',
             enterGameId: 'ကျေးဇူးပြု၍ ဂိမ်းအိုင်ဒီ နံပါတ်ထည့်ပါ',
             enterServerId: 'ကျေးဇူးပြု၍ ဆာဗာအိုင်ဒီ နံပါတ်ထည့်ပါ',
             enterNumberOnly: 'နံပါတ်သာ ထည့်ပါ (အက္ခရာမထည့်ရ)',
@@ -400,7 +413,7 @@
             gameIdHint: 'Numbers only', serverIdHint: 'Numbers only',
             paymentLabel: 'Payment Method', wave: 'Wave Pay', kpay: 'KBZ Pay',
             uploadLabel: 'Upload Payment Slip', uploadText: 'Send Screenshot',
-            submit: 'Submit Order',
+            submit: 'Submit Order', submitting: '⏳ Submitting...',
             enterGameId: 'Please enter your Game ID (numbers only)',
             enterServerId: 'Please enter your Server ID (numbers only)',
             enterNumberOnly: 'Please enter numbers only',
@@ -415,6 +428,7 @@
     let currentLang = localStorage.getItem('lang') || 'my';
     let selectedPackage = null;
     let selectedPayment = null;
+    let isSubmitting = false;
 
     const PACKAGES = {
         bundles: [
@@ -449,8 +463,9 @@
     function showToast(msg, type) {
         const t = document.getElementById('toast');
         t.textContent = msg;
-        t.style.color = type === 'success' ? 'var(--green)' : type === 'error' ? 'var(--red)' : 'var(--primary)';
-        t.classList.add('show');
+        t.className = 'toast show';
+        if (type === 'success') t.classList.add('success');
+        else if (type === 'error') t.classList.add('error');
         clearTimeout(t._timer);
         t._timer = setTimeout(() => t.classList.remove('show'), 3000);
     }
@@ -490,11 +505,7 @@
         document.getElementById('uploadText').textContent = d.uploadText;
         document.getElementById('submitBtn').textContent = '✅ ' + d.submit;
         renderPackages();
-    }
-
-    // ===== CHECK IF INPUT IS NUMBER ONLY =====
-    function isNumberOnly(value) {
-        return /^[0-9]+$/.test(value);
+        updateBadge();
     }
 
     function renderPackages() {
@@ -559,7 +570,12 @@
     }
 
     function closeCheckoutModal() {
+        if (isSubmitting) return;
         document.getElementById('checkoutModal').classList.remove('show');
+    }
+
+    function isNumberOnly(value) {
+        return /^[0-9]+$/.test(value);
     }
 
     function checkForm() {
@@ -568,11 +584,10 @@
         const hasFile = document.getElementById('fileInput').files && document.getElementById('fileInput').files[0];
         const btn = document.getElementById('submitBtn');
         
-        // Check if both are numbers only (if not empty)
         const isGameIdValid = gameId === '' || isNumberOnly(gameId);
         const isServerIdValid = serverId === '' || isNumberOnly(serverId);
         
-        if (gameId && serverId && selectedPayment && hasFile && isGameIdValid && isServerIdValid) {
+        if (gameId && serverId && selectedPayment && hasFile && isGameIdValid && isServerIdValid && !isSubmitting) {
             btn.disabled = false;
             btn.className = 'btn-primary enabled';
         } else {
@@ -585,12 +600,10 @@
         const val = this.value.trim();
         if (val && !isNumberOnly(val)) {
             this.style.borderColor = 'var(--red)';
-            this.style.boxShadow = '0 0 20px var(--red-glow)';
             document.querySelector('#gameIdHint').style.color = 'var(--red)';
             document.querySelector('#gameIdHint').textContent = '⚠️ ' + getText('enterNumberOnly');
         } else {
             this.style.borderColor = 'var(--border-color)';
-            this.style.boxShadow = 'none';
             document.querySelector('#gameIdHint').style.color = 'var(--text-secondary)';
             document.querySelector('#gameIdHint').textContent = getText('gameIdHint');
         }
@@ -601,12 +614,10 @@
         const val = this.value.trim();
         if (val && !isNumberOnly(val)) {
             this.style.borderColor = 'var(--red)';
-            this.style.boxShadow = '0 0 20px var(--red-glow)';
             document.querySelector('#serverIdHint').style.color = 'var(--red)';
             document.querySelector('#serverIdHint').textContent = '⚠️ ' + getText('enterNumberOnly');
         } else {
             this.style.borderColor = 'var(--border-color)';
-            this.style.boxShadow = 'none';
             document.querySelector('#serverIdHint').style.color = 'var(--text-secondary)';
             document.querySelector('#serverIdHint').textContent = getText('serverIdHint');
         }
@@ -651,6 +662,25 @@
             btn.textContent = d.copied || '✅ Copied!';
             setTimeout(() => { btn.textContent = d.copy || 'Copy'; }, 2500);
         });
+    }
+
+    // ===== BADGE FUNCTIONS =====
+    function getPendingCount() {
+        const notis = JSON.parse(localStorage.getItem('notifications') || '[]');
+        return notis.filter(n => n.status === 'pending').length;
+    }
+
+    function updateBadge() {
+        const count = getPendingCount();
+        const badge = document.getElementById('notiBadge');
+        if (badge) {
+            if (count > 0) {
+                badge.style.display = 'block';
+                badge.textContent = count;
+            } else {
+                badge.style.display = 'none';
+            }
+        }
     }
 
     // ===== SEND TO TELEGRAM =====
@@ -721,12 +751,13 @@
 
     // ===== SUBMIT ORDER =====
     document.getElementById('submitBtn').addEventListener('click', async function() {
+        if (isSubmitting) return;
+
         const d = LANG_DATA[currentLang] || {};
         const gameId = document.getElementById('gameId').value.trim();
         const serverId = document.getElementById('serverId').value.trim();
         const hasFile = document.getElementById('fileInput').files && document.getElementById('fileInput').files[0];
 
-        // Validate numbers only
         if (!gameId) { showToast(d.enterGameId, 'error'); return; }
         if (!isNumberOnly(gameId)) { showToast(d.enterNumberOnly, 'error'); return; }
         if (!serverId) { showToast(d.enterServerId, 'error'); return; }
@@ -734,8 +765,10 @@
         if (!selectedPayment) { showToast(d.selectPayment, 'error'); return; }
         if (!hasFile) { showToast(d.uploadSlip, 'error'); return; }
 
+        isSubmitting = true;
         this.disabled = true;
-        this.textContent = '⏳ Sending...';
+        this.className = 'btn-primary loading';
+        this.textContent = d.submitting || '⏳ အော်ဒါတင်နေသည်...';
 
         const orderId = 'ORD-' + Date.now().toString().slice(-6);
         const pkg = document.getElementById('modalPackage').textContent;
@@ -783,49 +816,48 @@
                 serverId: serverId,
                 payment: paymentName,
                 date: new Date().toISOString(),
-                status: telegramSuccess ? 'pending' : 'pending'
+                status: 'pending'
             });
             localStorage.setItem('orderHistory', JSON.stringify(orders));
 
+            const notifications = JSON.parse(localStorage.getItem('notifications') || '[]');
+            notifications.unshift({
+                id: 'noti_' + Date.now(),
+                orderId: orderId,
+                package: pkg,
+                price: price,
+                time: new Date().toLocaleString(),
+                status: 'pending',
+                message: `🛒 အော်ဒါအသစ် #${orderId}\n📦 ${pkg}\n💰 ${price}\n⏳ ဆောင်ရွက်နေဆဲ`
+            });
+            localStorage.setItem('notifications', JSON.stringify(notifications));
+
+            updateBadge();
+
+            localStorage.setItem('newOrderNotification', JSON.stringify({
+                show: true,
+                orderId: orderId,
+                count: getPendingCount()
+            }));
+            window.dispatchEvent(new Event('storage'));
+
             if (telegramSuccess) {
-                const notification = {
-                    id: 'noti_' + Date.now(),
-                    orderId: orderId,
-                    package: pkg,
-                    price: price,
-                    time: time,
-                    status: 'pending',
-                    message: `🛒 အော်ဒါအသစ် #${orderId}\n📦 ${pkg}\n💰 ${price}\n⏳ ဆောင်ရွက်နေဆဲ`
-                };
-                const notis = JSON.parse(localStorage.getItem('notifications') || '[]');
-                notis.unshift(notification);
-                localStorage.setItem('notifications', JSON.stringify(notis));
-
-                localStorage.setItem('newOrderNotification', JSON.stringify({
-                    show: true,
-                    orderId: orderId,
-                    message: `✅ အော်ဒါ #${orderId} အောင်မြင်ပါသည်!`
-                }));
-                window.dispatchEvent(new Event('storage'));
-
                 showToast(d.orderSuccess || '✅ Order successful!', 'success');
-                closeCheckoutModal();
-
-                setTimeout(() => {
-                    window.location.href = 'profile.html';
-                }, 1500);
-
             } else {
                 showToast('⚠️ အော်ဒါသိမ်းပြီးသော်လည်း Telegram သို့မပို့နိုင်ပါ။', 'error');
-                this.textContent = '✅ ' + d.submit;
-                this.className = 'btn-primary enabled';
             }
+
+            closeCheckoutModal();
+            setTimeout(() => { window.location.href = 'profile.html'; }, 1500);
 
         } catch (error) {
             console.error('Order error:', error);
             showToast(d.orderFail || '❌ Order failed. Please try again.', 'error');
-            this.textContent = '✅ ' + d.submit;
+        } finally {
+            this.disabled = false;
             this.className = 'btn-primary enabled';
+            this.textContent = '✅ ' + d.submit;
+            isSubmitting = false;
         }
     });
 
@@ -854,15 +886,13 @@
 
     function checkNotification() {
         const noti = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
-        const badge = document.getElementById('notiBadge');
         if (noti.show) {
-            badge.style.display = 'block';
-            badge.textContent = '1';
             setTimeout(() => {
-                badge.style.display = 'none';
                 localStorage.setItem('newOrderNotification', JSON.stringify({show: false}));
+                updateBadge();
             }, 5000);
         }
+        updateBadge();
     }
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -874,10 +904,12 @@
             document.querySelector('.night-toggle i').className = 'fas fa-sun';
         }
         checkNotification();
-    });
 
-    window.addEventListener('storage', function(e) {
-        if (e.key === 'newOrderNotification') checkNotification();
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'newOrderNotification' || e.key === 'notifications') {
+                updateBadge();
+            }
+        });
     });
 </script>
 </body>
