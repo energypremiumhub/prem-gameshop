@@ -109,7 +109,13 @@
         .package-item:hover{transform:translateY(-4px);border-color:rgba(245,166,35,0.3)}
         .package-item.selected{border-color:var(--gold);background:rgba(245,166,35,0.08);box-shadow:0 0 40px var(--gold-glow)}
         .package-item.selected .price{color:var(--gold)}
-        .package-item .info{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1}
+        
+        /* ===== PACKAGE IMAGE ===== */
+        .package-item .pkg-img{width:100%;height:auto;border-radius:8px;display:block;margin-bottom:4px;border:1px solid var(--border-color);transition:all 0.3s ease}
+        .package-item:hover .pkg-img{transform:scale(1.04);border-color:rgba(245,166,35,0.3)}
+        .package-item.selected .pkg-img{border-color:var(--gold);box-shadow:0 0 20px var(--gold-glow)}
+        
+        .package-item .info{display:flex;flex-direction:column;gap:1px;position:relative;z-index:1}
         .package-item .info .name{font-size:0.65rem;font-weight:700;color:var(--text-primary)}
         .package-item .info .sub{font-size:0.4rem;color:var(--text-secondary)}
         .package-item .info .badge{display:inline-block;font-size:0.35rem;color:var(--gold);background:rgba(245,166,35,0.1);padding:1px 8px;border-radius:8px;border:1px solid rgba(245,166,35,0.08);font-weight:600;margin-top:2px;width:fit-content;margin-left:auto;margin-right:auto}
@@ -437,18 +443,30 @@
             { id: 'b3', name: 'Weekly Pass', price: 6500 }
         ],
         diamonds: [
-            { id: 'd1', name: '11', price: 1000 }, { id: 'd2', name: '22', price: 1750 },
-            { id: 'd3', name: '33', price: 2500 }, { id: 'd4', name: '44', price: 3300 },
-            { id: 'd5', name: '56', price: 4000 }, { id: 'd6', name: '86', price: 5500 },
-            { id: 'd7', name: '112', price: 7800 }, { id: 'd8', name: '172', price: 10700 },
-            { id: 'd9', name: '257', price: 15900 }, { id: 'd10', name: '343', price: 21100 },
-            { id: 'd11', name: '429', price: 26600 }, { id: 'd12', name: '514', price: 31200 },
-            { id: 'd13', name: '600', price: 36700 }, { id: 'd14', name: '706', price: 42800 },
-            { id: 'd15', name: '878', price: 53100 }, { id: 'd16', name: '963', price: 58500 },
-            { id: 'd17', name: '1,049', price: 63800 }, { id: 'd18', name: '1,135', price: 69300 },
-            { id: 'd19', name: '1,412', price: 84900 }, { id: 'd20', name: '2,195', price: 126000 },
-            { id: 'd21', name: '2,901', price: 166300 }, { id: 'd22', name: '3,688', price: 207500 },
-            { id: 'd23', name: '5,532', price: 312000 }, { id: 'd24', name: '9,288', price: 522000 }
+            { id: 'd1', name: '11', price: 1000 },
+            { id: 'd2', name: '22', price: 1750 },
+            { id: 'd3', name: '33', price: 2500 },
+            { id: 'd4', name: '44', price: 3300 },
+            { id: 'd5', name: '56', price: 4000 },
+            { id: 'd6', name: '86', price: 5500 },
+            { id: 'd7', name: '112', price: 7800 },
+            { id: 'd8', name: '172', price: 10700 },
+            { id: 'd9', name: '257', price: 15900 },
+            { id: 'd10', name: '343', price: 21100 },
+            { id: 'd11', name: '429', price: 26600 },
+            { id: 'd12', name: '514', price: 31200 },
+            { id: 'd13', name: '600', price: 36700 },
+            { id: 'd14', name: '706', price: 42800 },
+            { id: 'd15', name: '878', price: 53100 },
+            { id: 'd16', name: '963', price: 58500 },
+            { id: 'd17', name: '1,049', price: 63800 },
+            { id: 'd18', name: '1,135', price: 69300 },
+            { id: 'd19', name: '1,412', price: 84900 },
+            { id: 'd20', name: '2,195', price: 126000 },
+            { id: 'd21', name: '2,901', price: 166300 },
+            { id: 'd22', name: '3,688', price: 207500 },
+            { id: 'd23', name: '5,532', price: 312000 },
+            { id: 'd24', name: '9,288', price: 522000 }
         ],
         double: [
             { id: 'x1', name: '50 + 50 (Double)', price: 3800, badge: true },
@@ -516,6 +534,7 @@
             return `
                 <div class="package-item ${isSelected ? 'selected' : ''}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})">
                     <div class="info">
+                        <img src="https://i.ibb.co/0yYJwC32/x.jpg" alt="${pkg.name}" class="pkg-img" onerror="this.style.display='none'">
                         <div class="name">${pkg.name}</div>
                         <div class="sub">MLBB</div>
                         ${badgeHtml}
