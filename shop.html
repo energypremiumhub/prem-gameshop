@@ -146,7 +146,7 @@
         .night-mode .header .right .top .night-toggle .fa-sun{color:#ffd700}
         .header .right .top .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;box-shadow:0 2px 10px var(--shadow)}
         .header .right .top .noti-btn:active{transform:scale(0.92)}
-        .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none;box-shadow:0 0 15px var(--red-glow)}
+        .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none}
 
         .page-header{margin-bottom:16px;animation:slideUp 0.6s ease}
         .page-header h1{font-size:1.3rem;font-weight:800;color:var(--text-primary)}
@@ -287,6 +287,7 @@
 
     <div class="section-title"><i class="fas fa-gamepad"></i> <span id="gamesTitle">ဂိမ်းများ</span></div>
     <div class="game-grid" id="gameGrid">
+        <!-- Mobile Legends -->
         <div class="game-item glass-box" data-name="mobile legends mlbb" onclick="selectGame('Mobile Legends', 'mlbb')">
             <span class="glow"></span>
             <span class="badge" id="popularBadge">🔥 Popular</span>
@@ -295,6 +296,17 @@
             <div class="game-name">Mobile Legends</div>
             <div class="game-sub" id="mlbbSub">MLBB စိန်ဖြည့်မှု</div>
         </div>
+
+        <!-- MCGG (Magic Chess) -->
+        <div class="game-item glass-box" data-name="mcgg magic chess" onclick="selectGame('MCGG', 'mcgg')">
+            <span class="glow"></span>
+            <span class="badge" id="mcggBadge">🆕 New</span>
+            <div class="game-img-placeholder">♟️</div>
+            <div class="game-name" id="mcggName">Magic Chess</div>
+            <div class="game-sub" id="mcggSub">MCGG စိန်ဖြည့်မှု</div>
+        </div>
+
+        <!-- Coming Soon -->
         <div class="game-item glass-box" data-name="coming soon" onclick="showComingSoon()">
             <span class="glow"></span>
             <span class="game-img-placeholder">🎮</span>
@@ -306,12 +318,6 @@
             <span class="game-img-placeholder">🎯</span>
             <div class="game-name" id="cs2">Coming Soon</div>
             <div class="game-sub" id="cs2sub">အသစ်ထွက်ရှိမည်</div>
-        </div>
-        <div class="game-item glass-box" data-name="coming soon" onclick="showComingSoon()">
-            <span class="glow"></span>
-            <span class="game-img-placeholder">🚀</span>
-            <div class="game-name" id="cs3">Coming Soon</div>
-            <div class="game-sub" id="cs3sub">အသစ်ထွက်ရှိမည်</div>
         </div>
     </div>
 
@@ -334,6 +340,9 @@
             home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
             pageTitle: 'Game Shop', pageSub: 'ဂိမ်းတစ်ခုရွေးပြီး စိန်ဖြည့်လိုက်ပါ',
             gamesTitle: 'ဂိမ်းများ', popular: '🔥 Popular',
+            mcggBadge: '🆕 New',
+            mcggName: 'Magic Chess',
+            mcggSub: 'MCGG စိန်ဖြည့်မှု',
             comingSoon: 'Coming Soon', comingSoonSub: 'အသစ်ထွက်ရှိမည်',
             mlbbSub: 'MLBB စိန်ဖြည့်မှု',
             searchPlaceholder: '🔍 ဂိမ်းနာမည်ရှာပါ...',
@@ -345,6 +354,9 @@
             home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
             pageTitle: 'Game Shop', pageSub: 'Choose a game and top up diamonds',
             gamesTitle: 'Games', popular: '🔥 Popular',
+            mcggBadge: '🆕 New',
+            mcggName: 'Magic Chess',
+            mcggSub: 'MCGG Diamond Top Up',
             comingSoon: 'Coming Soon', comingSoonSub: 'Coming Soon',
             mlbbSub: 'MLBB Diamond Top Up',
             searchPlaceholder: '🔍 Search game name...',
@@ -381,13 +393,14 @@
         document.getElementById('pageSub').textContent = d.pageSub;
         document.getElementById('gamesTitle').textContent = d.gamesTitle;
         document.getElementById('popularBadge').textContent = d.popular;
+        document.getElementById('mcggBadge').textContent = d.mcggBadge;
+        document.getElementById('mcggName').textContent = d.mcggName;
+        document.getElementById('mcggSub').textContent = d.mcggSub;
         document.getElementById('mlbbSub').textContent = d.mlbbSub;
         document.getElementById('cs1').textContent = d.comingSoon;
         document.getElementById('cs1sub').textContent = d.comingSoonSub;
         document.getElementById('cs2').textContent = d.comingSoon;
         document.getElementById('cs2sub').textContent = d.comingSoonSub;
-        document.getElementById('cs3').textContent = d.comingSoon;
-        document.getElementById('cs3sub').textContent = d.comingSoonSub;
         document.getElementById('searchInput').placeholder = d.searchPlaceholder;
         document.getElementById('navHome').textContent = d.home;
         document.getElementById('navShop').textContent = d.shop;
@@ -474,10 +487,18 @@
         document.getElementById('searchInput').focus();
     }
 
-    function selectGame(gameName) {
+    function selectGame(gameName, gameId) {
         showToast('🎮 ' + gameName + ' ' + getText('selectGame') + '!');
-        localStorage.setItem('selectedGame', JSON.stringify({ name: gameName, id: 'mlbb' }));
-        setTimeout(() => { window.location.href = 'mlbb-packages.html'; }, 500);
+        localStorage.setItem('selectedGame', JSON.stringify({ name: gameName, id: gameId }));
+        
+        // MLBB ဆိုရင် mlbb-packages.html ကိုသွားမယ်
+        if (gameId === 'mlbb') {
+            setTimeout(() => { window.location.href = 'mlbb-packages.html'; }, 500);
+        } 
+        // MCGG ဆိုရင် mcgg-packages.html ကိုသွားမယ်
+        else if (gameId === 'mcgg') {
+            setTimeout(() => { window.location.href = 'mcgg-packages.html'; }, 500);
+        }
     }
 
     function showComingSoon() {
