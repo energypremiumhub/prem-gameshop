@@ -59,6 +59,7 @@
         .glass-box {
             background: var(--bg-card);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--border-color);
             border-radius: 16px;
             box-shadow: 0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);
@@ -79,7 +80,6 @@
         
         .header .left .auth-btn{display:none}
         
-        .header .right{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
         .header .right .top{display:flex;gap:6px;align-items:center}
         .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:10px;border:1px solid var(--border-color);box-shadow:0 2px 10px var(--shadow)}
         .header .right .top .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;text-transform:uppercase}
@@ -88,7 +88,7 @@
         .header .right .top .night-toggle:active{transform:scale(0.85)}
         .night-mode .header .right .top .night-toggle .fa-sun{color:#ffd700}
         
-        /* ===== NOTI BUTTON ဖျောက်ထား (နိုတီထဲရောက်နေပြီမို့) ===== */
+        /* Noti Button ဖျောက်ထား */
         .header .right .top .noti-btn{display:none}
 
         .page-header{margin-bottom:16px;animation:slideUp 0.6s ease}
@@ -184,7 +184,6 @@
                     <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
                 </div>
                 <button class="night-toggle" onclick="toggleNightMode()"><i class="fas fa-moon"></i></button>
-                <!-- Noti Button ဖျောက်ထား -->
             </div>
         </div>
     </div>
@@ -222,10 +221,7 @@
             emptyTitle: '🔔 အကြောင်းကြားချက်မရှိသေးပါ',
             emptyDesc: 'အော်ဒါတင်လိုက်တိုင်း ဤနေရာတွင် ပြသပေးပါမည်။',
             pending: 'ဆောင်ရွက်နေဆဲ',
-            completed: 'ပြီးမြောက်',
-            orderNew: '🛒 အော်ဒါအသစ်',
-            orderCompleted: '✅ အော်ဒါအောင်မြင်ပါသည်!',
-            thankYou: 'ဝယ်ယူအားပေးမှုအတွက် ကျေးဇူးအထူးတင်ရှိပါသည်။'
+            completed: 'ပြီးမြောက်'
         },
         en: {
             appName: 'Premium',
@@ -239,10 +235,7 @@
             emptyTitle: '🔔 No notifications yet',
             emptyDesc: 'You will see your order updates here.',
             pending: 'Pending',
-            completed: 'Completed',
-            orderNew: '🛒 New Order',
-            orderCompleted: '✅ Order Completed!',
-            thankYou: 'Thank you for your purchase!'
+            completed: 'Completed'
         }
     };
 
@@ -291,4 +284,93 @@
         t._timer = setTimeout(() => t.classList.remove('show'), 3000);
     }
 
-    // ===== COMP
+    // ===== BADGE FUNCTIONS =====
+    function getPendingCount() {
+        const notis = JSON.parse(localStorage.getItem('notifications') || '[]');
+        return notis.filter(n => n.status === 'pending').length;
+    }
+
+    function updateBadge() {
+        const count = getPendingCount();
+        const badge = document.getElementById('notiBadge');
+        if (badge) {
+            if (count > 0) {
+                badge.style.display = 'block';
+                badge.textContent = count;
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+    }
+
+    function clearBadge() {
+        const badge = document.getElementById('notiBadge');
+        if (badge) {
+            badge.style.display = 'none';
+            badge.textContent = '0';
+        }
+        localStorage.setItem('newOrderNotification', JSON.stringify({
+            show: false,
+            count: 0
+        }));
+    }
+
+    // ===== RENDER NOTIFICATIONS =====
+    function renderNotifications() {
+        const container = document.getElementById('notiContainer');
+        const d = LANG_DATA[currentLang] || {};
+        const notis = JSON.parse(localStorage.getItem('notifications') || '[]');
+        
+        // Clear badge when viewing notifications
+        clearBadge();
+
+        if (notis.length === 0) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <span class="icon">🔔</span>
+                    <div>${d.emptyTitle || 'No notifications yet'}</div>
+                    <div style="font-size:0.55rem;margin-top:4px;opacity:0.6">${d.emptyDesc || ''}</div>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = `<div class="noti-list">` + notis.map(noti => {
+            const isPending = noti.status === 'pending';
+            const statusText = isPending ? d.pending : d.completed;
+            const statusClass = isPending ? 'pending' : 'completed';
+            
+            return `
+                <div class="noti-item">
+                    <span class="status-badge ${statusClass}">${statusText}</span>
+                    <div class="title">${noti.message ? noti.message.split('\n')[0] : 'Notification'}</div>
+                    <div class="desc">${noti.message || ''}</div>
+                    <div class="time">${noti.time || new Date().toLocaleString()}</div>
+                </div>
+            `;
+        }).join('') + `</div>`;
+    }
+
+    // ===== INIT =====
+    document.addEventListener('DOMContentLoaded', function() {
+        const savedLang = localStorage.getItem('lang') || 'my';
+        setLang(savedLang);
+        
+        const nightMode = localStorage.getItem('nightMode') === 'true';
+        if (nightMode) {
+            document.body.classList.add('night-mode');
+            document.querySelector('.night-toggle i').className = 'fas fa-sun';
+        }
+        
+        renderNotifications();
+        
+        // Listen for storage changes
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'newOrderNotification' || e.key === 'notifications') {
+                renderNotifications();
+            }
+        });
+    });
+</script>
+</body>
+</html>
