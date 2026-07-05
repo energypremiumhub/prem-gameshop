@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>⚡ MLBB Packages</title>
+    <title>⚡ MLBB Global Packages</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
@@ -92,6 +92,14 @@
         .page-header h1 i{color:var(--cyan);-webkit-text-fill-color:initial;margin-right:6px}
         .page-header p{color:var(--text-secondary);font-size:0.7rem;margin-top:2px}
 
+        /* ===== SERVER SELECTOR ===== */
+        .server-selector{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:14px;padding:10px 14px;display:flex;align-items:center;gap:12px;margin-bottom:16px;box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1)}
+        .server-selector .label{font-size:0.55rem;color:var(--text-secondary);font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+        .server-selector .options{display:flex;gap:6px;flex-wrap:wrap}
+        .server-selector .options .opt{background:var(--bg-input);border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 14px;border-radius:8px;font-size:0.55rem;font-weight:600;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)}
+        .server-selector .options .opt:active{transform:scale(0.92)}
+        .server-selector .options .opt.active{background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;border-color:var(--gold);box-shadow:0 0 20px var(--gold-glow)}
+
         .package-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
         .package-item{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:14px;padding:12px 8px;text-align:center;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);position:relative;overflow:hidden}
         .package-item:active{transform:scale(0.94)}
@@ -118,11 +126,6 @@
         .section-title{font-size:0.65rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;display:flex;align-items:center;gap:10px;opacity:0.5}
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
         .section-title i{color:var(--cyan)}
-
-        /* ===== DOUBLE INFO BOX (အလျားလိုက်အရှည်) ===== */
-        .double-info-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px}
-        .double-info-text{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:14px;padding:12px 16px;box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;grid-column:span 2;min-height:60px}
-        .double-info-text .text{font-size:0.6rem;color:var(--text-secondary);opacity:0.8;text-align:center;letter-spacing:0.3px;line-height:1.5}
 
         .bottom-nav {
             position: fixed;
@@ -261,26 +264,22 @@
     </div>
 
     <div class="page-header">
-        <h1><i class="fas fa-gem"></i> <span id="pageTitle">MLBB Packages</span></h1>
+        <h1><i class="fas fa-gem"></i> <span id="pageTitle">MLBB Global Packages</span></h1>
         <p id="pageSub">ပက်ကေ့ချ်တစ်ခုရွေးပြီး ဝယ်ယူပါ</p>
+    </div>
+
+    <!-- ===== SERVER SELECTOR ===== -->
+    <div class="server-selector">
+        <span class="label"><i class="fas fa-server"></i> Server</span>
+        <div class="options">
+            <span class="opt active" data-server="global">Global</span>
+        </div>
     </div>
 
     <div class="section-title"><i class="fas fa-gift"></i> <span id="bundlesTitle">ပက်ကေ့ချ်များ</span></div>
     <div class="package-grid" id="bundlesList"></div>
     
-    <!-- ===== နှစ်ဆဖြည့်မှု (၄ ခု - အပေါ် ၃ ခု၊ အောက် ၁ ခု) ===== -->
     <div class="section-title"><i class="fas fa-star"></i> <span id="doubleTitle">နှစ်ဆဖြည့်မှု</span></div>
-    
-    <!-- ===== သတိပေးစာ (500+500 ဘေးက နှစ်ခုစာလွတ်နေရာမှာ) ===== -->
-    <div class="double-info-wrapper">
-        <div class="double-info-text">
-            <div class="text" id="doubleWarning">
-                ⚠️ နှစ်ဆစိန်ပက်ကေ့ချ်များကို အကောင့်တစ်ခုလျှင် တစ်မျိုးကို တစ်ခါသာ ဝယ်ယူနိုင်ပါသည်။<br>
-                ဥပမာ - 50 နှစ်ဆဖြည့်ပြီးပါက ကျန်သုံးမျိုးကိုသာ ထပ်မံဝယ်ယူနိုင်မည်။
-            </div>
-        </div>
-    </div>
-    
     <div class="package-grid" id="doubleList"></div>
     
     <div class="section-title"><i class="fas fa-diamond"></i> <span id="diamondsTitle">စိန်များ</span></div>
@@ -374,7 +373,7 @@
         my: {
             appName: 'Premium', appSub: 'Game Shop',
             home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
-            pageTitle: 'MLBB Packages', pageSub: 'ပက်ကေ့ချ်တစ်ခုရွေးပြီး ဝယ်ယူပါ',
+            pageTitle: 'MLBB Global Packages', pageSub: 'ပက်ကေ့ချ်တစ်ခုရွေးပြီး ဝယ်ယူပါ',
             bundlesTitle: 'ပက်ကေ့ချ်များ', diamondsTitle: 'စိန်များ', doubleTitle: 'နှစ်ဆဖြည့်မှု',
             buy: 'ဝယ်ယူရန်', selectLabel: 'ရွေးရန်', currency: 'Ks', doubleBadge: '⭐ 2x Bonus',
             modalTitle: '🛒 အော်ဒါတင်ရန်', modalSub: 'အချက်အလက်များကို မှန်ကန်စွာဖြည့်သွင်းပါ',
@@ -390,13 +389,12 @@
             uploadSlip: 'ကျေးဇူးပြု၍ Screenshot ပို့ပေးပါ',
             orderSuccess: '✅ အော်ဒါအောင်မြင်ပါသည်!',
             orderFail: '❌ အော်ဒါမအောင်မြင်ပါ။ ထပ်မံကြိုးစားပါ။',
-            copy: 'ကူးယူမည်', copied: '✅ ကူးပြီး',
-            doubleWarning: '⚠️ နှစ်ဆစိန်ပက်ကေ့ချ်များကို အကောင့်တစ်ခုလျှင် တစ်မျိုးကို တစ်ခါသာ ဝယ်ယူနိုင်ပါသည်။<br>ဥပမာ - 50 နှစ်ဆဖြည့်ပြီးပါက ကျန်သုံးမျိုးကိုသာ ထပ်မံဝယ်ယူနိုင်မည်။'
+            copy: 'ကူးယူမည်', copied: '✅ ကူးပြီး'
         },
         en: {
             appName: 'Premium', appSub: 'Game Shop',
             home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
-            pageTitle: 'MLBB Packages', pageSub: 'Select a package and buy',
+            pageTitle: 'MLBB Global Packages', pageSub: 'Select a package and buy',
             bundlesTitle: 'Packages', diamondsTitle: 'Diamonds', doubleTitle: 'Double Top Up',
             buy: 'Buy', selectLabel: 'Select', currency: 'Ks', doubleBadge: '⭐ 2x Bonus',
             modalTitle: '🛒 Submit Order', modalSub: 'Fill in your details correctly',
@@ -412,8 +410,7 @@
             uploadSlip: 'Please send your Screenshot',
             orderSuccess: '✅ Order successful!',
             orderFail: '❌ Order failed. Please try again.',
-            copy: 'Copy', copied: '✅ Copied!',
-            doubleWarning: '⚠️ Double diamond packages can only be purchased once per account per type.<br>Example - After buying 50+50, you can only buy the remaining three types.'
+            copy: 'Copy', copied: '✅ Copied!'
         }
     };
 
@@ -506,8 +503,6 @@
         document.getElementById('uploadLabel').textContent = d.uploadLabel;
         document.getElementById('uploadText').textContent = d.uploadText;
         document.getElementById('submitBtn').textContent = '✅ ' + d.submit;
-        document.getElementById('doubleWarning').innerHTML = d.doubleWarning;
-        
         renderPackages();
         updateBadge();
     }
