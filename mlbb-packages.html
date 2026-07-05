@@ -110,8 +110,8 @@
         .package-item.selected{border-color:var(--gold);background:rgba(245,166,35,0.08);box-shadow:0 0 40px var(--gold-glow)}
         .package-item.selected .price{color:var(--gold)}
         
-        /* ===== PACKAGE IMAGE ===== */
-        .package-item .pkg-img{width:100%;height:auto;border-radius:8px;display:block;margin-bottom:4px;border:1px solid var(--border-color);transition:all 0.3s ease}
+        /* ===== PACKAGE IMAGE (Background ဖျောက်ထား) ===== */
+        .package-item .pkg-img{width:100%;height:auto;border-radius:8px;display:block;margin-bottom:4px;border:1px solid var(--border-color);transition:all 0.3s ease;mix-blend-mode:multiply}
         .package-item:hover .pkg-img{transform:scale(1.04);border-color:rgba(245,166,35,0.3)}
         .package-item.selected .pkg-img{border-color:var(--gold);box-shadow:0 0 20px var(--gold-glow)}
         
@@ -443,12 +443,14 @@
             { id: 'b3', name: 'Weekly Pass', price: 6500 }
         ],
         diamonds: [
-            { id: 'd1', name: '11', price: 1000 },
-            { id: 'd2', name: '22', price: 1750 },
-            { id: 'd3', name: '33', price: 2500 },
-            { id: 'd4', name: '44', price: 3300 },
-            { id: 'd5', name: '56', price: 4000 },
-            { id: 'd6', name: '86', price: 5500 },
+            // ===== ပုံပါမယ့် စိန် ၁၁ လုံးကနေ ၈၆ လုံးအထိ =====
+            { id: 'd1', name: '11', price: 1000, hasImage: true },
+            { id: 'd2', name: '22', price: 1750, hasImage: true },
+            { id: 'd3', name: '33', price: 2500, hasImage: true },
+            { id: 'd4', name: '44', price: 3300, hasImage: true },
+            { id: 'd5', name: '56', price: 4000, hasImage: true },
+            { id: 'd6', name: '86', price: 5500, hasImage: true },
+            // ===== ပုံမပါတော့တဲ့ ကျန်စိန်များ =====
             { id: 'd7', name: '112', price: 7800 },
             { id: 'd8', name: '172', price: 10700 },
             { id: 'd9', name: '257', price: 15900 },
@@ -531,10 +533,12 @@
         const renderItems = (items, type) => items.map(pkg => {
             const isSelected = selectedPackage && selectedPackage.id === pkg.id;
             const badgeHtml = type === 'double' && pkg.badge ? `<span class="badge">${d.doubleBadge}</span>` : '';
+            // hasImage ရှိရင် ပုံပြမယ်၊ မရှိရင် မပြဘူး
+            const imageHtml = pkg.hasImage ? `<img src="https://i.ibb.co/0yYJwC32/x.jpg" alt="${pkg.name}" class="pkg-img" onerror="this.style.display='none'">` : '';
             return `
                 <div class="package-item ${isSelected ? 'selected' : ''}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})">
                     <div class="info">
-                        <img src="https://i.ibb.co/0yYJwC32/x.jpg" alt="${pkg.name}" class="pkg-img" onerror="this.style.display='none'">
+                        ${imageHtml}
                         <div class="name">${pkg.name}</div>
                         <div class="sub">MLBB</div>
                         ${badgeHtml}
