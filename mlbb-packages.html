@@ -85,9 +85,8 @@
         .header .right .top .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;box-shadow:0 2px 10px var(--shadow)}
         .header .right .top .noti-btn:active{transform:scale(0.92)}
         .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none}
-        .header .right .top .menu-icon{width:34px;height:34px;border-radius:10px;overflow:hidden;border:1px solid var(--border-color);cursor:pointer;transition:all 0.3s ease;display:flex;align-items:center;justify-content:center;margin-left:4px}
-        .header .right .top .menu-icon img{width:100%;height:100%;object-fit:cover}
-        .header .right .top .menu-icon:active{transform:scale(0.92)}
+        /* Menu Icon ဖျောက်ထား */
+        .header .right .top .menu-icon{display:none}
 
         .page-header{margin-bottom:16px;animation:slideUp 0.6s ease}
         .page-header h1{font-size:1.3rem;font-weight:800;color:var(--text-primary)}
@@ -95,7 +94,6 @@
         .page-header h1 i{color:var(--cyan);-webkit-text-fill-color:initial;margin-right:6px}
         .page-header p{color:var(--text-secondary);font-size:0.7rem;margin-top:2px}
 
-        /* ===== PACKAGE GRID ===== */
         .package-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
         .package-item{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:14px;padding:12px 8px;text-align:center;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);position:relative;overflow:hidden}
         .package-item:active{transform:scale(0.94)}
@@ -258,9 +256,6 @@
                 </div>
                 <button class="night-toggle" onclick="toggleNightMode()"><i class="fas fa-moon"></i></button>
                 <a href="notifications.html" class="noti-btn" id="notiBtn"><i class="fas fa-bell"></i><span class="badge" id="notiBadge">0</span></a>
-                <div class="menu-icon" onclick="window.location.href='profile.html'">
-                    <img src="https://files.catbox.moe/shg88t.png" alt="Menu">
-                </div>
             </div>
         </div>
     </div>
@@ -273,13 +268,9 @@
     <div class="section-title"><i class="fas fa-gift"></i> <span id="bundlesTitle">ပက်ကေ့ချ်များ</span></div>
     <div class="package-grid" id="bundlesList"></div>
     
-    <div class="section-title"><i class="fas fa-diamond"></i> <span id="diamondsTitle">စိန်များ</span></div>
-    <div class="package-grid" id="diamondsList"></div>
-    
-    <!-- ===== နှစ်ဆဖြည့်မှု (စိန်များရဲ့အောက်မှာ) ===== -->
+    <!-- ===== နှစ်ဆဖြည့်မှု (ပက်ကေ့ချ်နဲ့ စိန်များကြားမှာ) ===== -->
     <div class="section-title"><i class="fas fa-star"></i> <span id="doubleTitle">နှစ်ဆဖြည့်မှု</span></div>
     
-    <!-- ===== သတိပေးစာ ဘောက်စ်ရှည် (အောက်မှာ) ===== -->
     <div class="double-info-text">
         <div class="text">
             ⚠️ နှစ်ဆစိန်ပက်ကေ့ချ်များကို အကောင့်တစ်ခုလျှင် တစ်မျိုးကို တစ်ခါသာ ဝယ်ယူနိုင်ပါသည်။<br>
@@ -288,6 +279,9 @@
     </div>
     
     <div class="package-grid" id="doubleList"></div>
+    
+    <div class="section-title"><i class="fas fa-diamond"></i> <span id="diamondsTitle">စိန်များ</span></div>
+    <div class="package-grid" id="diamondsList"></div>
 
     <div class="footer-text">&copy; 2026 Premium Game Shop</div>
 </div>
@@ -423,7 +417,6 @@
     let selectedPayment = null;
     let isSubmitting = false;
 
-    // ===== PACKAGE DATA WITH IMAGES =====
     const PACKAGES = {
         bundles: [
             { id: 'b1', name: 'Monthly Epic', price: 17200, img: 'https://files.catbox.moe/z2j5uo.png' },
