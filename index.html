@@ -96,7 +96,6 @@
         ::-webkit-scrollbar-track{background:transparent}
         ::-webkit-scrollbar-thumb{background:var(--primary);border-radius:10px}
 
-        /* ===== SOFT CLICK ANIMATIONS ===== */
         .btn-click {
             transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
             cursor: pointer;
@@ -145,16 +144,6 @@
             width: 300px;
             height: 300px;
             opacity: 0;
-        }
-
-        .bounce-click:active {
-            animation: bounceSoft 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        @keyframes bounceSoft {
-            0% { transform: scale(1); }
-            30% { transform: scale(0.92); }
-            60% { transform: scale(1.05); }
-            100% { transform: scale(1); }
         }
 
         .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
@@ -397,7 +386,6 @@
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
-        /* ===== MODAL ===== */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -1237,7 +1225,6 @@
         document.getElementById('resendOtpBtn').classList.remove('active');
     }
 
-    // ===== ဘာသာစကားအတိုင်း Modal စာသား သေချာပြောင်းတယ် =====
     function updateModalTexts() {
         const d = LANG_DATA[currentLang];
         if (!d) return;
