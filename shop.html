@@ -133,7 +133,7 @@
         .header .left .logo-wrap{display:flex;align-items:center;gap:10px}
         .header .left .logo-wrap img{height:38px;width:auto;border-radius:10px}
         .header .left .logo-wrap .text-group{display:flex;flex-direction:column;line-height:1.1}
-        .header .left .logo-wrap .text-group .premium{font-size:1rem;font-weight:800;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .header .left .logo-wrap .text-group .premium{font-size:1rem;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 20px var(--gold-glow)}
         .header .left .logo-wrap .text-group .shop{font-size:0.55rem;font-weight:600;color:var(--text-secondary);opacity:0.6;margin-top:-2px}
         .header .left .auth-btn{display:none}
         
@@ -163,35 +163,22 @@
         .search-box .clear-btn:active{transform:scale(0.85)}
         .search-box .clear-btn.show{display:block}
 
+        /* ===== GAME GRID (New Design) ===== */
         .game-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
-        .game-item{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:16px;padding:20px 14px;text-align:center;cursor:pointer;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);position:relative;overflow:hidden}
-        .game-item:active{transform:scale(0.92)}
+        .game-item{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:16px;padding:14px 12px;cursor:pointer;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);display:flex;align-items:center;gap:12px;position:relative;overflow:hidden;min-height:80px}
+        .game-item:active{transform:scale(0.94)}
         .game-item:hover{transform:translateY(-4px);border-color:rgba(245,166,35,0.3);box-shadow:0 8px 30px var(--shadow-hover), inset 0 1px 0 rgba(255,255,255,0.15)}
-        .game-item .game-icon{font-size:3rem;display:block;margin-bottom:8px;transition:all 0.5s cubic-bezier(0.34,1.56,0.64,1);animation:floatIcon 3s ease-in-out infinite}
-        .game-item:hover .game-icon{transform:scale(1.15) rotate(-8deg)}
-        .game-item .game-name{font-size:0.8rem;font-weight:700;color:var(--text-primary)}
-        .game-item .game-sub{font-size:0.55rem;color:var(--text-secondary);margin-top:2px}
-        .game-item .badge{position:absolute;top:8px;right:8px;background:var(--gold);color:#fff;font-size:0.4rem;font-weight:700;padding:2px 10px;border-radius:12px;box-shadow:0 0 20px var(--gold-glow);animation:glowPulse 2s ease-in-out infinite}
+        .game-item .badge{position:absolute;top:6px;right:8px;background:var(--gold);color:#fff;font-size:0.4rem;font-weight:700;padding:2px 10px;border-radius:12px;box-shadow:0 0 20px var(--gold-glow);animation:glowPulse 2s ease-in-out infinite}
+        .game-item .game-img{width:44px;height:44px;border-radius:12px;object-fit:cover;flex-shrink:0;border:2px solid var(--border-color);transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1)}
+        .game-item:hover .game-img{transform:scale(1.08) rotate(-4deg);border-color:var(--gold);box-shadow:0 0 20px var(--gold-glow)}
+        .game-item .game-img-placeholder{font-size:1.8rem;flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:12px;border:2px solid var(--border-color);background:var(--bg-input);transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1)}
+        .game-item:hover .game-img-placeholder{transform:scale(1.08) rotate(-4deg);border-color:var(--gold);box-shadow:0 0 20px var(--gold-glow)}
+        .game-item .info{flex:1;min-width:0}
+        .game-item .info .name{font-size:0.8rem;font-weight:700;color:var(--text-primary)}
+        .game-item .info .sub{font-size:0.5rem;color:var(--text-secondary);margin-top:1px}
         .game-item .glow{position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(245,166,35,0.05) 0%,transparent 70%);opacity:0;transition:all 0.6s ease}
         .game-item:hover .glow{opacity:1}
         .game-item.hidden{display:none}
-
-        .game-item .game-img {
-            width: 80px;
-            height: 80px;
-            border-radius: 16px;
-            object-fit: cover;
-            display: block;
-            margin: 0 auto 10px;
-            border: 2px solid var(--border-color);
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 4px 15px var(--shadow);
-        }
-        .game-item:hover .game-img {
-            transform: scale(1.08) rotate(-4deg);
-            border-color: var(--gold);
-            box-shadow: 0 0 30px var(--gold-glow);
-        }
 
         .section-title{font-size:0.65rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;display:flex;align-items:center;gap:10px;opacity:0.5}
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
@@ -291,33 +278,42 @@
         <div class="game-item glass-box" data-name="mobile legends mlbb" onclick="selectGame('Mobile Legends', 'mlbb')">
             <span class="glow"></span>
             <span class="badge" id="popularBadge">🔥 Popular</span>
-            <img src="https://i.ibb.co/cKsDX2Nt/x.jpg" alt="Mobile Legends" class="game-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <img src="https://i.ibb.co/cKsDX2Nt/x.jpg" alt="Mobile Legends" class="game-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="game-img-placeholder" style="display:none;">⚔️</span>
-            <div class="game-name">Mobile Legends</div>
-            <div class="game-sub" id="mlbbSub">MLBB စိန်ဖြည့်မှု</div>
+            <div class="info">
+                <div class="name">Mobile Legends</div>
+                <div class="sub" id="mlbbSub">MLBB စိန်ဖြည့်မှု</div>
+            </div>
         </div>
 
         <!-- MCGG (Magic Chess) -->
         <div class="game-item glass-box" data-name="mcgg magic chess" onclick="selectGame('MCGG', 'mcgg')">
             <span class="glow"></span>
             <span class="badge" id="mcggBadge">🆕 New</span>
-            <div class="game-img-placeholder">♟️</div>
-            <div class="game-name" id="mcggName">Magic Chess</div>
-            <div class="game-sub" id="mcggSub">MCGG စိန်ဖြည့်မှု</div>
+            <img src="https://files.catbox.moe/8lxv1s.jpg" alt="MCGG" class="game-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="game-img-placeholder" style="display:none;">♟️</span>
+            <div class="info">
+                <div class="name" id="mcggName">Magic Chess</div>
+                <div class="sub" id="mcggSub">MCGG စိန်ဖြည့်မှု</div>
+            </div>
         </div>
 
         <!-- Coming Soon -->
         <div class="game-item glass-box" data-name="coming soon" onclick="showComingSoon()">
             <span class="glow"></span>
             <span class="game-img-placeholder">🎮</span>
-            <div class="game-name" id="cs1">Coming Soon</div>
-            <div class="game-sub" id="cs1sub">အသစ်ထွက်ရှိမည်</div>
+            <div class="info">
+                <div class="name" id="cs1">Coming Soon</div>
+                <div class="sub" id="cs1sub">အသစ်ထွက်ရှိမည်</div>
+            </div>
         </div>
         <div class="game-item glass-box" data-name="coming soon" onclick="showComingSoon()">
             <span class="glow"></span>
             <span class="game-img-placeholder">🎯</span>
-            <div class="game-name" id="cs2">Coming Soon</div>
-            <div class="game-sub" id="cs2sub">အသစ်ထွက်ရှိမည်</div>
+            <div class="info">
+                <div class="name" id="cs2">Coming Soon</div>
+                <div class="sub" id="cs2sub">အသစ်ထွက်ရှိမည်</div>
+            </div>
         </div>
     </div>
 
@@ -491,12 +487,9 @@
         showToast('🎮 ' + gameName + ' ' + getText('selectGame') + '!');
         localStorage.setItem('selectedGame', JSON.stringify({ name: gameName, id: gameId }));
         
-        // MLBB ဆိုရင် mlbb-packages.html ကိုသွားမယ်
         if (gameId === 'mlbb') {
             setTimeout(() => { window.location.href = 'mlbb-packages.html'; }, 500);
-        } 
-        // MCGG ဆိုရင် mcgg-packages.html ကိုသွားမယ်
-        else if (gameId === 'mcgg') {
+        } else if (gameId === 'mcgg') {
             setTimeout(() => { window.location.href = 'mcgg-packages.html'; }, 500);
         }
     }
@@ -536,3 +529,4 @@
 </script>
 </body>
 </html>
+```
