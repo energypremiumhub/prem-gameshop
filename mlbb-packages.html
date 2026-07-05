@@ -92,7 +92,6 @@
         .page-header h1 i{color:var(--cyan);-webkit-text-fill-color:initial;margin-right:6px}
         .page-header p{color:var(--text-secondary);font-size:0.7rem;margin-top:2px}
 
-        /* ===== SERVER SELECTOR ===== */
         .server-selector{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:14px;padding:10px 14px;display:flex;align-items:center;gap:12px;margin-bottom:16px;box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1)}
         .server-selector .label{font-size:0.55rem;color:var(--text-secondary);font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
         .server-selector .options{display:flex;gap:6px;flex-wrap:wrap}
@@ -112,11 +111,11 @@
         .package-item.selected .pkg-img{box-shadow:0 0 8px var(--gold-glow)}
         
         .package-item .info{display:flex;flex-direction:column;gap:1px;position:relative;z-index:1}
-        .package-item .info .name{font-size:0.75rem;font-weight:700;color:var(--text-primary)}
-        .package-item .info .sub{font-size:0.4rem;color:var(--text-secondary)}
+        .package-item .info .name{font-size:0.65rem;font-weight:700;color:var(--text-primary)}
+        .package-item .info .sub{font-size:0.4rem;color:var(--text-secondary);line-height:1.2}
         .package-item .info .badge{display:inline-block;font-size:0.35rem;color:var(--gold);background:rgba(245,166,35,0.1);padding:1px 8px;border-radius:8px;border:1px solid rgba(245,166,35,0.08);font-weight:600;margin-top:2px;width:fit-content;margin-left:auto;margin-right:auto}
         .package-item .right{display:flex;flex-direction:column;align-items:center;gap:4px;position:relative;z-index:1;margin-top:4px}
-        .package-item .right .price{font-size:0.7rem;font-weight:700;color:var(--text-secondary);transition:all 0.4s ease}
+        .package-item .right .price{font-size:0.65rem;font-weight:700;color:var(--text-secondary);transition:all 0.4s ease}
         .package-item .right .btn-label{font-size:0.45rem;color:var(--text-secondary);font-weight:500;opacity:0.6;letter-spacing:0.3px}
         .package-item .right .buy-btn{display:none;background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;border:none;padding:4px 12px;border-radius:8px;font-size:0.45rem;font-weight:700;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 15px var(--gold-glow)}
         .package-item .right .buy-btn:active{transform:scale(0.88)}
@@ -268,7 +267,6 @@
         <p id="pageSub">ပက်ကေ့ချ်တစ်ခုရွေးပြီး ဝယ်ယူပါ</p>
     </div>
 
-    <!-- ===== SERVER SELECTOR ===== -->
     <div class="server-selector">
         <span class="label"><i class="fas fa-server"></i> Server</span>
         <div class="options">
@@ -419,43 +417,51 @@
     let selectedPayment = null;
     let isSubmitting = false;
 
+    // ===== UPDATED PACKAGES =====
     const PACKAGES = {
         bundles: [
-            { id: 'b1', name: 'Monthly Epic', price: 17200, img: 'https://files.catbox.moe/z2j5uo.png' },
-            { id: 'b2', name: 'Weekly Elite', price: 3350, img: 'https://files.catbox.moe/i3uywg.png' },
-            { id: 'b3', name: 'Weekly Pass', price: 6500, img: 'https://files.catbox.moe/zylral.png' }
+            { id: 'b1', name: 'Monthly Epic Bundle', price: 17300, img: 'https://files.catbox.moe/z2j5uo.png', sub: '💎275 + ⭐180' },
+            { id: 'b2', name: 'Weekly Elite Bundle', price: 3600, img: 'https://files.catbox.moe/i3uywg.png', sub: '💎55 + ⭐20' },
+            { id: 'b3', name: 'Weekly Pass', price: 6500, img: 'https://files.catbox.moe/zylral.png', sub: 'Weekly Pass' },
+            { id: 'b4', name: 'Twilight Pass', price: 34000, img: 'https://files.catbox.moe/ccau72.png', sub: '🆕 New' }
         ],
         diamonds: [
-            { id: 'd1', name: '11', price: 1000, img: 'https://files.catbox.moe/21aenq.png' },
-            { id: 'd2', name: '22', price: 1750, img: 'https://files.catbox.moe/21aenq.png' },
-            { id: 'd3', name: '33', price: 2500, img: 'https://files.catbox.moe/21aenq.png' },
-            { id: 'd4', name: '44', price: 3300, img: 'https://files.catbox.moe/21aenq.png' },
-            { id: 'd5', name: '56', price: 4000, img: 'https://files.catbox.moe/21aenq.png' },
-            { id: 'd6', name: '86', price: 5500, img: 'https://files.catbox.moe/21aenq.png' },
-            { id: 'd7', name: '112', price: 7800, img: 'https://files.catbox.moe/1y3vf9.png' },
-            { id: 'd8', name: '172', price: 10700, img: 'https://files.catbox.moe/1y3vf9.png' },
-            { id: 'd9', name: '257', price: 15900, img: 'https://files.catbox.moe/1y3vf9.png' },
-            { id: 'd10', name: '343', price: 21100, img: 'https://files.catbox.moe/1y3vf9.png' },
-            { id: 'd11', name: '429', price: 26600, img: 'https://files.catbox.moe/1y3vf9.png' },
-            { id: 'd12', name: '514', price: 31200, img: 'https://files.catbox.moe/1y3vf9.png' },
-            { id: 'd13', name: '600', price: 36700, img: 'https://files.catbox.moe/by4nvj.png' },
-            { id: 'd14', name: '706', price: 42800, img: 'https://files.catbox.moe/by4nvj.png' },
-            { id: 'd15', name: '878', price: 53100, img: 'https://files.catbox.moe/by4nvj.png' },
-            { id: 'd16', name: '963', price: 58500, img: 'https://files.catbox.moe/by4nvj.png' },
-            { id: 'd17', name: '1,049', price: 63800, img: 'https://files.catbox.moe/by4nvj.png' },
-            { id: 'd18', name: '1,135', price: 69300, img: 'https://files.catbox.moe/by4nvj.png' },
-            { id: 'd19', name: '1,412', price: 84900, img: 'https://files.catbox.moe/ccau72.png' },
-            { id: 'd20', name: '2,195', price: 126000, img: 'https://files.catbox.moe/ccau72.png' },
-            { id: 'd21', name: '2,901', price: 166300, img: 'https://files.catbox.moe/ccau72.png' },
-            { id: 'd22', name: '3,688', price: 207500, img: 'https://files.catbox.moe/ccau72.png' },
-            { id: 'd23', name: '5,532', price: 312000, img: 'https://files.catbox.moe/ccau72.png' },
-            { id: 'd24', name: '9,288', price: 522000, img: 'https://files.catbox.moe/ccau72.png' }
+            { id: 'd1', name: '11', price: 750, img: 'https://files.catbox.moe/21aenq.png' },
+            { id: 'd2', name: '22', price: 1500, img: 'https://files.catbox.moe/21aenq.png' },
+            { id: 'd3', name: '33', price: 2250, img: 'https://files.catbox.moe/21aenq.png' },
+            { id: 'd4', name: '44', price: 3100, img: 'https://files.catbox.moe/21aenq.png' },
+            { id: 'd5', name: '56', price: 3800, img: 'https://files.catbox.moe/21aenq.png' },
+            { id: 'd6', name: '112', price: 7500, img: 'https://files.catbox.moe/1y3vf9.png' },
+            { id: 'd7', name: '172', price: 10300, img: 'https://files.catbox.moe/1y3vf9.png' },
+            { id: 'd8', name: '257', price: 14850, img: 'https://files.catbox.moe/1y3vf9.png' },
+            { id: 'd9', name: '343', price: 20000, img: 'https://files.catbox.moe/1y3vf9.png' },
+            { id: 'd10', name: '429', price: 25000, img: 'https://files.catbox.moe/1y3vf9.png' },
+            { id: 'd11', name: '514', price: 29600, img: 'https://files.catbox.moe/1y3vf9.png' },
+            { id: 'd12', name: '600', price: 34800, img: 'https://files.catbox.moe/by4nvj.png' },
+            { id: 'd13', name: '706', price: 34000, img: 'https://files.catbox.moe/by4nvj.png' },
+            { id: 'd14', name: '878', price: 50000, img: 'https://files.catbox.moe/by4nvj.png' },
+            { id: 'd15', name: '963', price: 54700, img: 'https://files.catbox.moe/by4nvj.png' },
+            { id: 'd16', name: '1049', price: 59800, img: 'https://files.catbox.moe/by4nvj.png' },
+            { id: 'd17', name: '1135', price: 64800, img: 'https://files.catbox.moe/by4nvj.png' },
+            { id: 'd18', name: '1412', price: 79800, img: 'https://files.catbox.moe/ccau72.png' },
+            { id: 'd19', name: '1500', price: 86100, img: 'https://files.catbox.moe/ccau72.png' },
+            { id: 'd20', name: '1584', price: 89800, img: 'https://files.catbox.moe/ccau72.png' },
+            { id: 'd21', name: '1755', price: 99500, img: 'https://files.catbox.moe/ccau72.png' },
+            { id: 'd22', name: '2195', price: 120500, img: 'https://files.catbox.moe/ccau72.png' },
+            { id: 'd23', name: '2367', price: 130700, img: 'https://files.catbox.moe/ccau72.png' },
+            { id: 'd24', name: '2538', price: 140400, img: 'https://files.catbox.moe/ccau72.png' },
+            { id: 'd25', name: '3244', price: 181000, img: 'https://files.catbox.moe/ccau72.png' },
+            { id: 'd26', name: '3688', price: 200800, img: 'https://files.catbox.moe/ccau72.png' },
+            { id: 'd27', name: '4394', price: 240500, img: 'https://files.catbox.moe/ccau72.png' },
+            { id: 'd28', name: '5100', price: 280100, img: 'https://files.catbox.moe/ccau72.png' },
+            { id: 'd29', name: '5532', price: 302900, img: 'https://files.catbox.moe/ccau72.png' },
+            { id: 'd30', name: '9288', price: 503000, img: 'https://files.catbox.moe/ccau72.png' }
         ],
         double: [
-            { id: 'x1', name: '50+50', price: 3800, img: 'https://files.catbox.moe/21aenq.png', badge: true },
-            { id: 'x2', name: '150+150', price: 10300, img: 'https://files.catbox.moe/21aenq.png', badge: true },
-            { id: 'x3', name: '250+250', price: 16000, img: 'https://files.catbox.moe/1y3vf9.png', badge: true },
-            { id: 'x4', name: '500+500', price: 32400, img: 'https://files.catbox.moe/1y3vf9.png', badge: true }
+            { id: 'x1', name: '50+50', price: 3550, img: 'https://files.catbox.moe/21aenq.png', badge: true },
+            { id: 'x2', name: '150+150', price: 9900, img: 'https://files.catbox.moe/21aenq.png', badge: true },
+            { id: 'x3', name: '250+250', price: 15800, img: 'https://files.catbox.moe/1y3vf9.png', badge: true },
+            { id: 'x4', name: '500+500', price: 32100, img: 'https://files.catbox.moe/1y3vf9.png', badge: true }
         ]
     };
 
@@ -509,15 +515,16 @@
 
     function renderPackages() {
         const d = LANG_DATA[currentLang];
-        const renderItems = (items) => items.map(pkg => {
+        const renderItems = (items, type) => items.map(pkg => {
             const isSelected = selectedPackage && selectedPackage.id === pkg.id;
             const badgeHtml = pkg.badge ? `<span class="badge">${d.doubleBadge}</span>` : '';
+            const subHtml = pkg.sub ? `<div class="sub">${pkg.sub}</div>` : '<div class="sub">MLBB</div>';
             return `
                 <div class="package-item ${isSelected ? 'selected' : ''}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})">
                     <div class="info">
                         <img src="${pkg.img}" alt="${pkg.name}" class="pkg-img" onerror="this.style.display='none'">
                         <div class="name">${pkg.name}</div>
-                        <div class="sub">MLBB</div>
+                        ${subHtml}
                         ${badgeHtml}
                     </div>
                     <div class="right">
@@ -528,9 +535,9 @@
                 </div>
             `;
         }).join('');
-        document.getElementById('bundlesList').innerHTML = renderItems(PACKAGES.bundles);
-        document.getElementById('diamondsList').innerHTML = renderItems(PACKAGES.diamonds);
-        document.getElementById('doubleList').innerHTML = renderItems(PACKAGES.double);
+        document.getElementById('bundlesList').innerHTML = renderItems(PACKAGES.bundles, 'bundle');
+        document.getElementById('diamondsList').innerHTML = renderItems(PACKAGES.diamonds, 'diamond');
+        document.getElementById('doubleList').innerHTML = renderItems(PACKAGES.double, 'double');
     }
 
     function handlePackageClick(id, name, price) {
