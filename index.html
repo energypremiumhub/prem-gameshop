@@ -736,7 +736,7 @@
 
 <script>
     // ============================================================
-    //  🔧 EMAILJS CONFIG (ပြင်ဆင်ပြီး)
+    //  🔧 EMAILJS CONFIG
     // ============================================================
     const EMAILJS_SERVICE_ID = 'service_jikfhn1';
     const EMAILJS_TEMPLATE_ID = 'template_amq9siq';
@@ -915,6 +915,25 @@
         document.getElementById('loginSuccess').classList.remove('show');
     }
 
+    // ===== BADGE FUNCTIONS =====
+    function getPendingCount() {
+        const notis = JSON.parse(localStorage.getItem('notifications') || '[]');
+        return notis.filter(n => n.status === 'pending').length;
+    }
+
+    function updateBadge() {
+        const count = getPendingCount();
+        const badge = document.getElementById('notiBadge');
+        if (badge) {
+            if (count > 0) {
+                badge.style.display = 'block';
+                badge.textContent = count;
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+    }
+
     // ===== CHECK FORM VALIDATION =====
     function checkLoginForm() {
         const input = document.getElementById('loginInput').value.trim();
@@ -1014,6 +1033,7 @@
         
         updateAuthUI();
         updateModalTexts();
+        updateBadge();
     }
 
     // ===== SHOP STATUS =====
@@ -1217,6 +1237,7 @@
         document.getElementById('resendOtpBtn').classList.remove('active');
     }
 
+    // ===== ဘာသာစကားအတိုင်း Modal စာသား သေချာပြောင်းတယ် =====
     function updateModalTexts() {
         const d = LANG_DATA[currentLang];
         if (!d) return;
@@ -1267,6 +1288,7 @@
             closeModal();
             showToast(d.loginSuccess || '✅ ကြိုဆိုပါတယ်!');
             updateAuthUI();
+            updateBadge();
         } else {
             showError(d.invalidCredentials || '❌ အီးမေးလ်/အသုံးပြုသူအမည်/ဖုန်းနံပါတ် သို့မဟုတ် စကားဝှက် မှားနေပါသည်');
         }
@@ -1321,6 +1343,7 @@
         closeModal();
         showToast(d.registerSuccess || '✅ အကောင့်ဖွင့်ခြင်းအောင်မြင်ပါပြီ!');
         updateAuthUI();
+        updateBadge();
     }
 
     // ===== FORGOT PASSWORD - SEND OTP =====
@@ -1505,6 +1528,18 @@
         if (!this.disabled) sendOTP();
     });
 
+    // ===== NOTIFICATION =====
+    function checkNotification() {
+        const noti = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
+        if (noti.show) {
+            setTimeout(() => {
+                localStorage.setItem('newOrderNotification', JSON.stringify({show: false}));
+                updateBadge();
+            }, 5000);
+        }
+        updateBadge();
+    }
+
     // ===== INIT =====
     document.addEventListener('DOMContentLoaded', function() {
         const savedLang = localStorage.getItem('lang') || 'my';
@@ -1517,28 +1552,17 @@
             document.querySelector('.night-toggle i').className = 'fas fa-sun';
         }
         
-        const noti = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
-        const badge = document.getElementById('notiBadge');
-        if (noti.show) {
-            badge.style.display = 'block';
-            badge.textContent = '1';
-            setTimeout(() => {
-                badge.style.display = 'none';
-                localStorage.setItem('newOrderNotification', JSON.stringify({show: false}));
-            }, 5000);
-        }
+        checkNotification();
         
         window.addEventListener('storage', function(e) {
-            if (e.key === 'newOrderNotification') {
-                const data = JSON.parse(e.newValue || '{"show":false}');
-                if (data.show) {
-                    badge.style.display = 'block';
-                    badge.textContent = '1';
-                    setTimeout(() => {
-                        badge.style.display = 'none';
-                        localStorage.setItem('newOrderNotification', JSON.stringify({show: false}));
-                    }, 5000);
-                }
+            if (e.key === 'newOrderNotification' || e.key === 'notifications') {
+                updateBadge();
+            }
+            if (e.key === 'currentUser') {
+                const user = localStorage.getItem('currentUser');
+                if (user) currentUser = JSON.parse(user);
+                else currentUser = null;
+                updateAuthUI();
             }
         });
     });
