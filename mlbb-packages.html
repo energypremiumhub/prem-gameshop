@@ -85,19 +85,9 @@
         .header .right .top .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;box-shadow:0 2px 10px var(--shadow)}
         .header .right .top .noti-btn:active{transform:scale(0.92)}
         .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none}
-        .header .right .top .menu-icon{width:34px;height:34px;border-radius:10px;overflow:hidden;border:1px solid var(--border-color);cursor:pointer;transition:all 0.3s ease;display:flex;align-items:center;justify-content:center}
+        .header .right .top .menu-icon{width:34px;height:34px;border-radius:10px;overflow:hidden;border:1px solid var(--border-color);cursor:pointer;transition:all 0.3s ease;display:flex;align-items:center;justify-content:center;margin-left:4px}
         .header .right .top .menu-icon img{width:100%;height:100%;object-fit:cover}
         .header .right .top .menu-icon:active{transform:scale(0.92)}
-
-        .double-box{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:16px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1)}
-        .double-box:hover{transform:translateY(-4px);border-color:rgba(245,166,35,0.3)}
-        .double-box:active{transform:scale(0.96)}
-        .double-box .left{display:flex;align-items:center;gap:12px}
-        .double-box .left .icon{font-size:1.8rem;color:var(--gold)}
-        .double-box .left .text{font-size:0.8rem;font-weight:600;color:var(--text-primary)}
-        .double-box .left .sub{font-size:0.55rem;color:var(--text-secondary);margin-top:2px}
-        .double-box .arrow{color:var(--gold);font-size:1.2rem;transition:all 0.3s ease}
-        .double-box:hover .arrow{transform:translateX(4px)}
 
         .page-header{margin-bottom:16px;animation:slideUp 0.6s ease}
         .page-header h1{font-size:1.3rem;font-weight:800;color:var(--text-primary)}
@@ -105,19 +95,22 @@
         .page-header h1 i{color:var(--cyan);-webkit-text-fill-color:initial;margin-right:6px}
         .page-header p{color:var(--text-secondary);font-size:0.7rem;margin-top:2px}
 
-        /* ===== PACKAGE GRID (အလျားလိုက် ၃ ကဒ်) ===== */
+        /* ===== DOUBLE BOX ဖျောက်ထား ===== */
+        .double-box{display:none}
+
+        /* ===== PACKAGE GRID ===== */
         .package-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
-        .package-item{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:14px;padding:12px 8px;text-align:center;cursor:pointer;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);position:relative;overflow:hidden}
+        .package-item{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:14px;padding:12px 8px;text-align:center;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);position:relative;overflow:hidden}
         .package-item:active{transform:scale(0.94)}
         .package-item:hover{transform:translateY(-4px);border-color:rgba(245,166,35,0.3)}
-        /* Select ဖြစ်တဲ့အခါ ဘောင်ဒါမပါတော့ဘူး */
-        .package-item.selected{border-color:transparent;background:var(--bg-card)}
+        /* Select ဖြစ်တဲ့အခါ ဘောင်ဒါသေးသေးလေး + အရောင်နည်းနည်းပြောင်း */
+        .package-item.selected{border-color:var(--gold);background:rgba(245,166,35,0.06);box-shadow:0 0 20px var(--gold-glow)}
         .package-item.selected .price{color:var(--gold)}
         
-        /* ===== PACKAGE IMAGE (ဘောင်ဒါဖျောက်ထား) ===== */
+        /* ===== PACKAGE IMAGE ===== */
         .package-item .pkg-img{width:100%;height:auto;border-radius:8px;display:block;margin-bottom:4px;transition:all 0.3s ease;animation:floatIcon 3s ease-in-out infinite}
         .package-item:hover .pkg-img{transform:scale(1.04)}
-        .package-item.selected .pkg-img{box-shadow:0 0 20px var(--gold-glow)}
+        .package-item.selected .pkg-img{box-shadow:0 0 15px var(--gold-glow)}
         
         .package-item .info{display:flex;flex-direction:column;gap:1px;position:relative;z-index:1}
         .package-item .info .name{font-size:0.75rem;font-weight:700;color:var(--text-primary)}
@@ -135,7 +128,8 @@
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
         .section-title i{color:var(--cyan)}
 
-        .double-info-text{font-size:0.6rem;color:var(--text-secondary);opacity:0.6;margin-bottom:12px;padding:0 4px;text-align:center;letter-spacing:0.3px;line-height:1.5}
+        .double-info-text{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:14px;padding:12px 16px;margin-bottom:12px;box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1)}
+        .double-info-text .text{font-size:0.6rem;color:var(--text-secondary);opacity:0.8;text-align:center;letter-spacing:0.3px;line-height:1.5}
 
         .bottom-nav {
             position: fixed;
@@ -256,7 +250,7 @@
             <div class="logo-wrap">
                 <img src="https://files.catbox.moe/lmq98x.jpg" alt="Premium Shop Logo">
                 <div class="text-group">
-                    <span class="premium" id="appName">Premium</span>
+                    <span class="premium" id="appName" style="color:var(--gold);text-shadow:0 0 20px var(--gold-glow);">Premium</span>
                     <span class="shop" id="appSub">Game Shop</span>
                 </div>
             </div>
@@ -281,16 +275,7 @@
         <p id="pageSub">ပက်ကေ့ချ်တစ်ခုရွေးပြီး ဝယ်ယူပါ</p>
     </div>
 
-    <div class="double-box" onclick="scrollToDouble()">
-        <div class="left">
-            <span class="icon">⭐</span>
-            <div>
-                <div class="text" id="doubleBoxTitle">နှစ်ဆစိန်များ</div>
-                <div class="sub" id="doubleBoxSub">နှစ်ဆစိန်ပက်ကေ့ချ်များကိုကြည့်ရန် နှိပ်ပါ</div>
-            </div>
-        </div>
-        <span class="arrow"><i class="fas fa-chevron-down"></i></span>
-    </div>
+    <!-- ===== DOUBLE BOX ဖျောက်ထား ===== -->
 
     <div class="section-title"><i class="fas fa-gift"></i> <span id="bundlesTitle">ပက်ကေ့ချ်များ</span></div>
     <div class="package-grid" id="bundlesList"></div>
@@ -298,11 +283,12 @@
     <div class="section-title"><i class="fas fa-diamond"></i> <span id="diamondsTitle">စိန်များ</span></div>
     <div class="package-grid" id="diamondsList"></div>
     
+    <!-- ===== နှစ်ဆဖြည့်မှုကို အလယ်မှာ ထားမယ် ===== -->
     <div class="section-title"><i class="fas fa-star"></i> <span id="doubleTitle">နှစ်ဆဖြည့်မှု</span></div>
     
-    <!-- ===== DOUBLE INFO BOX (ဘောက်စ် ၂ ခုစာ တစ်ခုတည်းနဲ့) ===== -->
-    <div class="double-info-text glass-box" style="padding:12px 16px;margin-bottom:12px;">
-        <div style="font-size:0.6rem;color:var(--text-secondary);opacity:0.8;text-align:center;letter-spacing:0.3px;line-height:1.5;">
+    <!-- ===== သတိပေးစာ ဘောက်စ်ရှည် (500+500 ဘေးမှာ) ===== -->
+    <div class="double-info-text" style="display:flex;align-items:center;justify-content:center;min-height:50px;">
+        <div class="text">
             ⚠️ နှစ်ဆစိန်ပက်ကေ့ချ်များကို အကောင့်တစ်ခုလျှင် တစ်မျိုးကို တစ်ခါသာ ဝယ်ယူနိုင်ပါသည်။<br>
             ဥပမာ - 50 နှစ်ဆဖြည့်ပြီးပါက ကျန်သုံးမျိုးကိုသာ ထပ်မံဝယ်ယူနိုင်မည်။
         </div>
@@ -515,8 +501,6 @@
         document.getElementById('bundlesTitle').textContent = d.bundlesTitle;
         document.getElementById('diamondsTitle').textContent = d.diamondsTitle;
         document.getElementById('doubleTitle').textContent = d.doubleTitle;
-        document.getElementById('doubleBoxTitle').textContent = d.doubleBoxTitle;
-        document.getElementById('doubleBoxSub').textContent = d.doubleBoxSub;
         document.getElementById('navHome').textContent = d.home;
         document.getElementById('navShop').textContent = d.shop;
         document.getElementById('navPayment').textContent = d.payment;
@@ -890,17 +874,6 @@
             isSubmitting = false;
         }
     });
-
-    function scrollToDouble() {
-        const el = document.getElementById('doubleList');
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        setTimeout(() => {
-            el.style.border = '2px solid var(--gold)';
-            el.style.borderRadius = '12px';
-            el.style.padding = '4px';
-            setTimeout(() => { el.style.border = 'none'; el.style.padding = '0'; }, 1000);
-        }, 500);
-    }
 
     function toggleNightMode() {
         document.body.classList.toggle('night-mode');
