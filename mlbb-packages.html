@@ -95,22 +95,17 @@
         .page-header h1 i{color:var(--cyan);-webkit-text-fill-color:initial;margin-right:6px}
         .page-header p{color:var(--text-secondary);font-size:0.7rem;margin-top:2px}
 
-        /* ===== DOUBLE BOX ဖျောက်ထား ===== */
-        .double-box{display:none}
-
         /* ===== PACKAGE GRID ===== */
         .package-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
         .package-item{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:14px;padding:12px 8px;text-align:center;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);position:relative;overflow:hidden}
         .package-item:active{transform:scale(0.94)}
         .package-item:hover{transform:translateY(-4px);border-color:rgba(245,166,35,0.3)}
-        /* Select ဖြစ်တဲ့အခါ ဘောင်ဒါသေးသေးလေး + အရောင်နည်းနည်းပြောင်း */
-        .package-item.selected{border-color:var(--gold);background:rgba(245,166,35,0.06);box-shadow:0 0 20px var(--gold-glow)}
+        .package-item.selected{border-color:var(--gold);background:rgba(245,166,35,0.06);box-shadow:0 0 15px var(--gold-glow)}
         .package-item.selected .price{color:var(--gold)}
         
-        /* ===== PACKAGE IMAGE ===== */
         .package-item .pkg-img{width:100%;height:auto;border-radius:8px;display:block;margin-bottom:4px;transition:all 0.3s ease;animation:floatIcon 3s ease-in-out infinite}
         .package-item:hover .pkg-img{transform:scale(1.04)}
-        .package-item.selected .pkg-img{box-shadow:0 0 15px var(--gold-glow)}
+        .package-item.selected .pkg-img{box-shadow:0 0 10px var(--gold-glow)}
         
         .package-item .info{display:flex;flex-direction:column;gap:1px;position:relative;z-index:1}
         .package-item .info .name{font-size:0.75rem;font-weight:700;color:var(--text-primary)}
@@ -250,7 +245,7 @@
             <div class="logo-wrap">
                 <img src="https://files.catbox.moe/lmq98x.jpg" alt="Premium Shop Logo">
                 <div class="text-group">
-                    <span class="premium" id="appName" style="color:var(--gold);text-shadow:0 0 20px var(--gold-glow);">Premium</span>
+                    <span class="premium" id="appName">Premium</span>
                     <span class="shop" id="appSub">Game Shop</span>
                 </div>
             </div>
@@ -275,19 +270,17 @@
         <p id="pageSub">ပက်ကေ့ချ်တစ်ခုရွေးပြီး ဝယ်ယူပါ</p>
     </div>
 
-    <!-- ===== DOUBLE BOX ဖျောက်ထား ===== -->
-
     <div class="section-title"><i class="fas fa-gift"></i> <span id="bundlesTitle">ပက်ကေ့ချ်များ</span></div>
     <div class="package-grid" id="bundlesList"></div>
     
     <div class="section-title"><i class="fas fa-diamond"></i> <span id="diamondsTitle">စိန်များ</span></div>
     <div class="package-grid" id="diamondsList"></div>
     
-    <!-- ===== နှစ်ဆဖြည့်မှုကို အလယ်မှာ ထားမယ် ===== -->
+    <!-- ===== နှစ်ဆဖြည့်မှု (စိန်များရဲ့အောက်၊ ပက်ကေ့ချ်များရဲ့အလယ်) ===== -->
     <div class="section-title"><i class="fas fa-star"></i> <span id="doubleTitle">နှစ်ဆဖြည့်မှု</span></div>
     
-    <!-- ===== သတိပေးစာ ဘောက်စ်ရှည် (500+500 ဘေးမှာ) ===== -->
-    <div class="double-info-text" style="display:flex;align-items:center;justify-content:center;min-height:50px;">
+    <!-- ===== သတိပေးစာ ဘောက်စ်ရှည် ===== -->
+    <div class="double-info-text">
         <div class="text">
             ⚠️ နှစ်ဆစိန်ပက်ကေ့ချ်များကို အကောင့်တစ်ခုလျှင် တစ်မျိုးကို တစ်ခါသာ ဝယ်ယူနိုင်ပါသည်။<br>
             ဥပမာ - 50 နှစ်ဆဖြည့်ပြီးပါက ကျန်သုံးမျိုးကိုသာ ထပ်မံဝယ်ယူနိုင်မည်။
@@ -386,7 +379,6 @@
             home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
             pageTitle: 'MLBB Packages', pageSub: 'ပက်ကေ့ချ်တစ်ခုရွေးပြီး ဝယ်ယူပါ',
             bundlesTitle: 'ပက်ကေ့ချ်များ', diamondsTitle: 'စိန်များ', doubleTitle: 'နှစ်ဆဖြည့်မှု',
-            doubleBoxTitle: 'နှစ်ဆစိန်များ', doubleBoxSub: 'နှစ်ဆစိန်ပက်ကေ့ချ်များကိုကြည့်ရန် နှိပ်ပါ',
             buy: 'ဝယ်ယူရန်', selectLabel: 'ရွေးရန်', currency: 'Ks', doubleBadge: '⭐ 2x Bonus',
             modalTitle: '🛒 အော်ဒါတင်ရန်', modalSub: 'အချက်အလက်များကို မှန်ကန်စွာဖြည့်သွင်းပါ',
             gameId: 'ဂိမ်းအိုင်ဒီ', serverId: 'ဆာဗာအိုင်ဒီ',
@@ -408,7 +400,6 @@
             home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
             pageTitle: 'MLBB Packages', pageSub: 'Select a package and buy',
             bundlesTitle: 'Packages', diamondsTitle: 'Diamonds', doubleTitle: 'Double Top Up',
-            doubleBoxTitle: 'Double Diamonds', doubleBoxSub: 'Tap to view double diamond packages',
             buy: 'Buy', selectLabel: 'Select', currency: 'Ks', doubleBadge: '⭐ 2x Bonus',
             modalTitle: '🛒 Submit Order', modalSub: 'Fill in your details correctly',
             gameId: 'Game ID', serverId: 'Server ID',
