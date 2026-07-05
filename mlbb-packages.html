@@ -71,7 +71,7 @@
         .header .left .logo-wrap{display:flex;align-items:center;gap:10px}
         .header .left .logo-wrap img{height:38px;width:auto;border-radius:10px}
         .header .left .logo-wrap .text-group{display:flex;flex-direction:column;line-height:1.1}
-        .header .left .logo-wrap .text-group .premium{font-size:1rem;font-weight:800;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .header .left .logo-wrap .text-group .premium{font-size:1rem;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 20px var(--gold-glow)}
         .header .left .logo-wrap .text-group .shop{font-size:0.55rem;font-weight:600;color:var(--text-secondary);opacity:0.6;margin-top:-2px}
         .header .left .auth-btn{display:none}
         
@@ -85,8 +85,6 @@
         .header .right .top .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;box-shadow:0 2px 10px var(--shadow)}
         .header .right .top .noti-btn:active{transform:scale(0.92)}
         .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none}
-        /* Menu Icon ဖျောက်ထား */
-        .header .right .top .menu-icon{display:none}
 
         .page-header{margin-bottom:16px;animation:slideUp 0.6s ease}
         .page-header h1{font-size:1.3rem;font-weight:800;color:var(--text-primary)}
@@ -121,7 +119,9 @@
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
         .section-title i{color:var(--cyan)}
 
-        .double-info-text{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:14px;padding:12px 16px;margin-bottom:12px;box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1)}
+        /* ===== DOUBLE INFO BOX (500+500 ဘေးက နှစ်ကွက်လွတ်နေရာ) ===== */
+        .double-info-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px}
+        .double-info-text{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:14px;padding:12px 16px;box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;grid-column:span 2}
         .double-info-text .text{font-size:0.6rem;color:var(--text-secondary);opacity:0.8;text-align:center;letter-spacing:0.3px;line-height:1.5}
 
         .bottom-nav {
@@ -271,10 +271,13 @@
     <!-- ===== နှစ်ဆဖြည့်မှု (ပက်ကေ့ချ်နဲ့ စိန်များကြားမှာ) ===== -->
     <div class="section-title"><i class="fas fa-star"></i> <span id="doubleTitle">နှစ်ဆဖြည့်မှု</span></div>
     
-    <div class="double-info-text">
-        <div class="text">
-            ⚠️ နှစ်ဆစိန်ပက်ကေ့ချ်များကို အကောင့်တစ်ခုလျှင် တစ်မျိုးကို တစ်ခါသာ ဝယ်ယူနိုင်ပါသည်။<br>
-            ဥပမာ - 50 နှစ်ဆဖြည့်ပြီးပါက ကျန်သုံးမျိုးကိုသာ ထပ်မံဝယ်ယူနိုင်မည်။
+    <!-- ===== သတိပေးစာ နှစ်ကွက်လွတ်နေရာမှာ (500+500 ဘေးမှာ) ===== -->
+    <div class="double-info-wrapper">
+        <div class="double-info-text" style="grid-column:span 2;">
+            <div class="text">
+                ⚠️ နှစ်ဆစိန်ပက်ကေ့ချ်များကို အကောင့်တစ်ခုလျှင် တစ်မျိုးကို တစ်ခါသာ ဝယ်ယူနိုင်ပါသည်။<br>
+                ဥပမာ - 50 နှစ်ဆဖြည့်ပြီးပါက ကျန်သုံးမျိုးကိုသာ ထပ်မံဝယ်ယူနိုင်မည်။
+            </div>
         </div>
     </div>
     
