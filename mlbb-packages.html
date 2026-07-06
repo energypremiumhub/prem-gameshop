@@ -210,20 +210,22 @@
             transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow:0 4px 20px var(--shadow);
             display:flex;
-            flex-direction:column;
+            align-items:center;
+            gap:10px;
             position:relative;
-            overflow:hidden
+            overflow:hidden;
+            min-height:72px
         }
         .package-item:active{transform:scale(0.96)!important}
         .package-item:hover{transform:translateY(-3px);box-shadow:0 8px 30px var(--shadow-hover)}
         
-        /* 16:9 Image */
+        /* ===== IMAGE LEFT ===== */
         .package-item .pkg-img-wrap{
-            width:100%;
-            aspect-ratio: 16/9;
+            width:60px;
+            height:60px;
+            flex-shrink:0;
             border-radius:10px;
             overflow:hidden;
-            margin-bottom:6px;
             background:var(--bg-input)
         }
         .package-item .pkg-img-wrap img{
@@ -233,9 +235,16 @@
             display:block;
             transition:all 0.3s ease
         }
-        .package-item:hover .pkg-img-wrap img{transform:scale(1.03)}
+        .package-item:hover .pkg-img-wrap img{transform:scale(1.05)}
         
-        .package-item .info{display:flex;flex-direction:column;gap:2px}
+        /* ===== INFO CENTER ===== */
+        .package-item .info{
+            flex:1;
+            min-width:0;
+            display:flex;
+            flex-direction:column;
+            gap:2px
+        }
         .package-item .info .name{
             font-size:0.7rem;
             font-weight:700;
@@ -255,45 +264,45 @@
             border-radius:8px;
             border:1px solid rgba(245,166,35,0.08);
             font-weight:600;
-            margin-top:2px;
             width:fit-content
         }
-        .package-item .bottom{
+        
+        /* ===== RIGHT SIDE ===== */
+        .package-item .right{
             display:flex;
-            justify-content:space-between;
-            align-items:center;
-            margin-top:6px;
-            padding-top:6px;
-            border-top:1px solid var(--border-color)
+            flex-direction:column;
+            align-items:flex-end;
+            gap:4px;
+            flex-shrink:0
         }
-        .package-item .bottom .price{
+        .package-item .right .price{
             font-size:0.65rem;
             font-weight:700;
             background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));
             -webkit-background-clip:text;
             -webkit-text-fill-color:transparent
         }
-        .package-item .bottom .action-btn{
+        .package-item .right .action-btn{
             background:var(--bg-input);
             border:1px solid var(--border-color);
             color:var(--text-secondary);
-            padding:4px 14px;
+            padding:4px 12px;
             border-radius:8px;
             font-size:0.5rem;
             font-weight:600;
             cursor:pointer;
             transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            min-width:60px;
+            min-width:55px;
             text-align:center
         }
-        .package-item .bottom .action-btn:active{transform:scale(0.88)!important}
-        .package-item .bottom .action-btn.topup{
+        .package-item .right .action-btn:active{transform:scale(0.88)!important}
+        .package-item .right .action-btn.topup{
             background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));
             color:#fff;
             border-color:var(--cyan);
             box-shadow:0 4px 15px var(--cyan-glow)
         }
-        .package-item .bottom .action-btn.topup:active{transform:scale(0.88)!important}
+        .package-item .right .action-btn.topup:active{transform:scale(0.88)!important}
 
         /* ===== BOTTOM NAV - GLASS ===== */
         .bottom-nav {
@@ -741,7 +750,7 @@
                         ${subHtml}
                         ${badgeHtml}
                     </div>
-                    <div class="bottom">
+                    <div class="right">
                         <span class="price">${pkg.price.toLocaleString()} ${d.currency}</span>
                         <span class="action-btn ${isSelected?'topup':''}" onclick="event.stopPropagation(); ${isSelected ? `openCheckoutModal('${pkg.id}','${pkg.name}',${pkg.price})` : `handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})`}">
                             ${isSelected ? d.topUp : d.select}
