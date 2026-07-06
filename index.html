@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>⚡ Premium Shop</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
         
@@ -104,7 +105,7 @@
             box-shadow:0 4px 20px var(--cyan-glow)
         }
         .header .left .auth-btn.logged-in:active{transform:scale(0.92)!important}
-        .header .left .auth-btn .avatar{
+        .header .left .auth-btn .avatar-small{
             width:22px;
             height:22px;
             border-radius:50%;
@@ -406,7 +407,6 @@
         .telegram-contact .arrow{color:var(--text-secondary);font-size:0.9rem;transition:all 0.3s ease}
         .telegram-contact:hover .arrow{color:var(--cyan);transform:translateX(3px)}
 
-        /* ===== BOTTOM NAV - SHOP PAGE STYLE (အတိအကျ) ===== */
         .bottom-nav {
             position:fixed;
             bottom:16px;
@@ -546,7 +546,6 @@
 </head>
 <body>
 <div class="container">
-    <!-- HEADER -->
     <div class="header">
         <div class="left">
             <div class="logo-wrap">
@@ -570,14 +569,12 @@
         </div>
     </div>
 
-    <!-- WELCOME -->
     <div class="welcome">
         <div class="greeting"><i class="fas fa-fire"></i> <span id="greeting">ဟေ့ကောင်လေး!</span></div>
         <h2><i class="fas fa-arrow-right"></i> ဂိမ်းကို <span>မြှင့်တင်လိုက်ပါ!</span></h2>
         <p id="subtitle">စိန်တွေဖြည့်ပြီး စစ်မြေပြင်ကို အနိုင်ယူလိုက်ပါ</p>
     </div>
 
-    <!-- BANNER -->
     <div class="shop-status-banner" id="shopStatusBanner">
         <div class="banner-content">
             <div class="banner-status open" id="statusBadge"><span class="status-dot"></span> OPEN</div>
@@ -585,14 +582,12 @@
         </div>
     </div>
 
-    <!-- SHOP CARD -->
     <a href="shop.html" class="shop-card open" id="shopCard">
         <span class="icon"><i class="fas fa-store-alt"></i></span>
         <div class="label" id="goToShop">⚡ GO TO SHOP</div>
         <div class="sub" id="shopSubText">ပက်ကေ့ခ်ျအားလုံးကိုကြည့်ပါ</div>
     </a>
 
-    <!-- SERVICES -->
     <div class="section-title"><i class="fas fa-bolt"></i> <span id="servicesTitle">ဘာကြောင့် ကျွန်ုပ်တို့ကိုရွေးမလဲ?</span></div>
     <div class="services-grid">
         <div class="service"><span class="icon"><i class="fas fa-bolt"></i></span><span class="label" id="s1">၁၀ မိနစ်အတွင်း အော်ဒါပြီးမြောက်</span></div>
@@ -603,7 +598,6 @@
         <div class="service"><span class="icon"><i class="fas fa-star"></i></span><span class="label" id="s6">Coming Soon</span></div>
     </div>
 
-    <!-- TELEGRAM -->
     <div class="telegram-card">
         <span class="icon"><i class="fab fa-telegram-plane"></i></span>
         <div class="info">
@@ -625,7 +619,6 @@
     <div class="footer-text">&copy; 2026 Premium Game Shop</div>
 </div>
 
-<!-- ===== BOTTOM NAV - SHOP PAGE STYLE (အတိအကျ) ===== -->
 <div class="bottom-nav">
     <a href="index.html" class="nav-item active"><span class="icon"><i class="fas fa-home"></i></span><span class="label" id="navHome">ပင်မ</span></a>
     <a href="shop.html" class="nav-item"><span class="icon"><i class="fas fa-shopping-bag"></i></span><span class="label" id="navShop">ဆိုင်</span></a>
@@ -653,7 +646,6 @@
                 <label id="passLabel">စကားဝှက်</label>
                 <input type="password" id="loginPassword" placeholder="သင့်စကားဝှက်ထည့်ပါ">
             </div>
-            <span class="forgot-link" id="forgotLink">စကားဝှက်မေ့နေပါသလား?</span>
             <button class="btn-primary" id="loginBtn">ဝင်ရန်</button>
             <span class="switch-link" id="switchToRegister">အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်</span>
         </div>
@@ -690,6 +682,7 @@
     const LANG_DATA = {
         my: {
             appName:'Premium',appSub:'Game Shop',
+            home:'ပင်မ',shop:'ဆိုင်',payment:'ငွေပေးချေ',profile:'ပရိုဖိုင်',
             greeting:'ဟေ့ကောင်လေး!',
             title:'ဂိမ်းကို <span>မြှင့်တင်လိုက်ပါ!</span>',
             subtitle:'စိန်တွေဖြည့်ပြီး စစ်မြေပြင်ကို အနိုင်ယူလိုက်ပါ',
@@ -707,7 +700,6 @@
             telegramDesc:'နောက်ဆုံးရသတင်းများ၊ ပရိုမိုးရှင်းများနှင့် အကူအညီရယူပါ',
             contactLabel:'💬 အကူအညီလိုပါသလား?',
             contactUsername:'@PremEnergy',
-            home:'ပင်မ',shop:'ဆိုင်',payment:'ငွေပေးချေ',profile:'ပရိုဖိုင်',
             shopOpen:'OPEN',
             shopClosed:'CLOSED',
             shopOpenText:'မနက် ၉:၃၀ မှ ည ၉:၃၀ အတွင်းသာ ဆိုင်ဖွင့်မည် (မြန်မာစံတော်ချိန်)',
@@ -730,21 +722,11 @@
             passwordMin:'စကားဝှက်သည် အနည်းဆုံး ၄ လုံးရှိရမယ်',
             passwordMatch:'စကားဝှက်များ မတူညီပါ',
             userExists:'❌ အသုံးပြုသူအမည်၊ အီးမေးလ် သို့မဟုတ် ဖုန်းနံပါတ် ရှိပြီးသားပါ',
-            invalidCredentials:'❌ အီးမေးလ်/အသုံးပြုသူအမည်/ဖုန်းနံပါတ် သို့မဟုတ် စကားဝှက် မှားနေပါသည်',
-            forgot:'စကားဝှက်မေ့နေပါသလား?',
-            regUsername:'အသုံးပြုသူအမည်',
-            regEmail:'အီးမေးလ်',
-            regPhone:'ဖုန်းနံပါတ်',
-            regPass:'စကားဝှက်',
-            regConfirm:'စကားဝှက်အတည်ပြုရန်',
-            regUsernamePlace:'အသုံးပြုသူအမည်ရွေးပါ',
-            regEmailPlace:'သင့်အီးမေးလ်ထည့်ပါ',
-            regPhonePlace:'သင့်ဖုန်းနံပါတ်ထည့်ပါ',
-            regPassPlace:'အနည်းဆုံး ၄ လုံး',
-            regConfirmPlace:'စကားဝှက်ပြန်ထည့်ပါ'
+            invalidCredentials:'❌ အီးမေးလ်/အသုံးပြုသူအမည်/ဖုန်းနံပါတ် သို့မဟုတ် စကားဝှက် မှားနေပါသည်'
         },
         en: {
             appName:'Premium',appSub:'Game Shop',
+            home:'Home',shop:'Shop',payment:'Payment',profile:'Profile',
             greeting:'Hey, Gamer!',
             title:'Level Up Your <span>Game!</span>',
             subtitle:'Top up diamonds and dominate the battlefield',
@@ -762,7 +744,6 @@
             telegramDesc:'Get latest updates, promos and support',
             contactLabel:'💬 Need Help?',
             contactUsername:'@PremEnergy',
-            home:'Home',shop:'Shop',payment:'Payment',profile:'Profile',
             shopOpen:'OPEN',
             shopClosed:'CLOSED',
             shopOpenText:'Open from 9:30 AM to 9:30 PM (Myanmar Time)',
@@ -785,18 +766,7 @@
             passwordMin:'Password must be at least 4 characters',
             passwordMatch:'Passwords do not match',
             userExists:'❌ Username, email or phone already exists',
-            invalidCredentials:'❌ Invalid email/username/phone or password',
-            forgot:'Forgot password?',
-            regUsername:'Username',
-            regEmail:'Email',
-            regPhone:'Phone Number',
-            regPass:'Password',
-            regConfirm:'Confirm Password',
-            regUsernamePlace:'Choose a username',
-            regEmailPlace:'Enter your email',
-            regPhonePlace:'Enter your phone number',
-            regPassPlace:'At least 4 characters',
-            regConfirmPlace:'Re-enter password'
+            invalidCredentials:'❌ Invalid email/username/phone or password'
         }
     };
 
@@ -805,10 +775,10 @@
 
     function getText(key){return LANG_DATA[currentLang]?.[key]||key}
 
-    function showToast(msg){
+    function showToast(msg, type){
         const t=document.getElementById('toast');
         t.textContent=msg;
-        t.classList.add('show');
+        t.className='toast show';
         clearTimeout(t._timer);
         t._timer=setTimeout(()=>t.classList.remove('show'),3000);
     }
@@ -866,12 +836,10 @@
         
         document.getElementById('modalTitle').textContent=isLogin?d.modalLogin:d.modalRegister;
         document.querySelector('.modal-box .sub').textContent=isLogin?d.modalLoginSub:d.modalRegisterSub;
-        
         document.getElementById('emailLabel').textContent=d.email;
         document.getElementById('passLabel').textContent=d.password;
         document.getElementById('loginBtn').textContent=d.login;
         document.getElementById('switchToRegister').textContent=d.switchLogin;
-        document.getElementById('forgotLink').textContent=d.forgot;
         document.getElementById('loginInput').placeholder=d.enterEmail;
         document.getElementById('loginPassword').placeholder=d.enterPassword;
         
@@ -882,12 +850,9 @@
         document.getElementById('regConfirmLabel').innerHTML=d.regConfirm+' <span style="color:var(--red);">*</span>';
         document.getElementById('registerBtn').textContent=d.register;
         document.getElementById('switchToLogin').textContent=d.switchRegister;
-        
-        document.getElementById('regUsername').placeholder=d.regUsernamePlace;
-        document.getElementById('regEmail').placeholder=d.regEmailPlace;
-        document.getElementById('regPhone').placeholder=d.regPhonePlace;
-        document.getElementById('regPassword').placeholder=d.regPassPlace;
-        document.getElementById('regConfirmPassword').placeholder=d.regConfirmPlace;
+        document.getElementById('regUsername').placeholder=d.enterUsername;
+        document.getElementById('regPassword').placeholder=d.passwordMin;
+        document.getElementById('regConfirmPassword').placeholder=d.passwordMatch;
     }
 
     function isShopOpen(){
@@ -919,8 +884,8 @@
     function updateAuthUI(){
         const btn=document.getElementById('authBtn');
         if(currentUser){
-            const firstChar = (currentUser.displayName || currentUser.username || 'U').charAt(0).toUpperCase();
-            btn.innerHTML='<span class="avatar">'+firstChar+'</span> '+(currentUser.displayName || currentUser.username);
+            const firstChar=(currentUser.displayName||currentUser.username||'U').charAt(0).toUpperCase();
+            btn.innerHTML='<span class="avatar-small">'+firstChar+'</span> '+(currentUser.displayName||currentUser.username);
             btn.className='auth-btn logged-in';
         }else{
             btn.innerHTML='<i class="fas fa-key"></i> Login';
@@ -939,6 +904,8 @@
             document.getElementById('loginForm').style.display='block';
             document.getElementById('registerForm').style.display='none';
         }
+        document.getElementById('loginError').classList.remove('show');
+        document.getElementById('loginSuccess').classList.remove('show');
         updateModalTexts();
         checkLoginForm();
         checkRegisterForm();
@@ -960,6 +927,8 @@
     function switchToRegister(){
         document.getElementById('loginForm').style.display='none';
         document.getElementById('registerForm').style.display='block';
+        document.getElementById('loginError').classList.remove('show');
+        document.getElementById('loginSuccess').classList.remove('show');
         updateModalTexts();
         checkRegisterForm();
     }
@@ -967,6 +936,8 @@
     function switchToLogin(){
         document.getElementById('loginForm').style.display='block';
         document.getElementById('registerForm').style.display='none';
+        document.getElementById('loginError').classList.remove('show');
+        document.getElementById('loginSuccess').classList.remove('show');
         updateModalTexts();
         checkLoginForm();
     }
@@ -1007,6 +978,7 @@
         let found=null;
         for(const key in users){
             const user=users[key];
+            // Check by username, email, or phone
             if(key===input || user.email===input || user.username===input || user.phone===input){
                 if(user.password===password){
                     found=user;
@@ -1019,7 +991,7 @@
             currentUser=found;
             localStorage.setItem('currentUser',JSON.stringify(currentUser));
             closeModal();
-            showToast(d.loginSuccess || '✅ Welcome back!');
+            showToast(d.loginSuccess || '✅ Welcome back!','success');
             updateAuthUI();
             updateBadge();
         }else{
@@ -1057,6 +1029,7 @@
         }
 
         const users=JSON.parse(localStorage.getItem('users')||'{}');
+        // Check if username, email or phone already exists
         for(const key in users){
             if(key===username || (email && users[key].email===email) || (phone && users[key].phone===phone)){
                 err.textContent=d.userExists || '❌ Username, email or phone already exists';
@@ -1072,38 +1045,10 @@
         currentUser=newUser;
         localStorage.setItem('currentUser',JSON.stringify(currentUser));
         closeModal();
-        showToast(d.registerSuccess || '✅ Account created!');
+        showToast(d.registerSuccess || '✅ Account created!','success');
         updateAuthUI();
         updateBadge();
     }
-
-    // ===== CLICK EFFECTS =====
-    document.querySelectorAll('.service, .telegram-card, .telegram-contact, .shop-status-banner, .shop-card').forEach(el=>{
-        el.addEventListener('click', function(e){
-            this.style.transition='all 0.12s cubic-bezier(0.34, 1.2, 0.64, 1)';
-            this.style.transform='scale(0.96)';
-            setTimeout(()=>{
-                this.style.transform='';
-                this.style.transition='all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
-            }, 150);
-        });
-    });
-
-    // Telegram links
-    document.querySelector('.telegram-card').addEventListener('click', ()=>window.open('https://t.me/Premium_GameShop', '_blank'));
-    document.querySelector('.telegram-contact').addEventListener('click', ()=>window.open('https://t.me/PremEnergy', '_blank'));
-
-    // ===== NAV BAR CLICK (Shop page အတိုင်း) =====
-    document.querySelectorAll('.bottom-nav .nav-item').forEach(item=>{
-        item.addEventListener('click', function(e){
-            document.querySelectorAll('.bottom-nav .nav-item').forEach(n=>n.classList.remove('active'));
-            this.classList.add('active');
-            const icon = this.querySelector('.icon');
-            icon.style.animation = 'none';
-            void icon.offsetWidth;
-            icon.style.animation = 'selectBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
-        });
-    });
 
     // ===== EVENT LISTENERS =====
     document.getElementById('loginInput').addEventListener('input', checkLoginForm);
@@ -1116,16 +1061,89 @@
     document.getElementById('switchToRegister').addEventListener('click', switchToRegister);
     document.getElementById('switchToLogin').addEventListener('click', switchToLogin);
     document.querySelector('.night-toggle').addEventListener('click', toggleNightMode);
-    document.getElementById('authBtn').addEventListener('click', ()=>{
-        if(currentUser) window.location.href='profile.html';
-        else openModal('login');
+
+    // ===== AUTH BUTTON =====
+    document.getElementById('authBtn').addEventListener('click', function(){
+        if(currentUser){
+            window.location.href='profile.html';
+        }else{
+            openModal('login');
+        }
+    });
+
+    // ===== CLICK EFFECTS =====
+    document.querySelectorAll('.service, .telegram-card, .telegram-contact, .shop-status-banner, .shop-card').forEach(el=>{
+        el.addEventListener('click', function(e){
+            this.style.transition='all 0.12s cubic-bezier(0.34, 1.2, 0.64, 1)';
+            this.style.transform='scale(0.96)';
+            setTimeout(()=>{
+                this.style.transform='';
+                this.style.transition='all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            },150);
+        });
+    });
+
+    // ===== NAV BAR CLICK =====
+    document.querySelectorAll('.bottom-nav .nav-item').forEach(item=>{
+        item.addEventListener('click', function(e){
+            document.querySelectorAll('.bottom-nav .nav-item').forEach(n=>n.classList.remove('active'));
+            this.classList.add('active');
+            const icon=this.querySelector('.icon');
+            icon.style.animation='none';
+            void icon.offsetWidth;
+            icon.style.animation='selectBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        });
+    });
+
+    // Telegram links
+    document.querySelector('.telegram-card').addEventListener('click', ()=>window.open('https://t.me/Premium_GameShop', '_blank'));
+    document.querySelector('.telegram-contact').addEventListener('click', ()=>window.open('https://t.me/PremEnergy', '_blank'));
+
+    // ===== MODAL OVERLAY =====
+    document.getElementById('authModal').addEventListener('click', function(e){
+        if(e.target===this) closeModal();
+    });
+
+    // ===== KEYBOARD SHORTCUTS =====
+    document.addEventListener('keydown', function(e){
+        if(e.key==='Escape') closeModal();
+        if(e.key==='Enter'){
+            const modal=document.getElementById('authModal');
+            if(!modal.classList.contains('show')) return;
+            if(document.getElementById('registerForm').style.display==='block'){
+                const btn=document.getElementById('registerBtn');
+                if(btn.classList.contains('enabled')) handleRegister();
+            }else{
+                const btn=document.getElementById('loginBtn');
+                if(btn.classList.contains('enabled')) handleLogin();
+            }
+        }
+    });
+
+    // ===== LANGUAGE SWITCHER =====
+    document.querySelectorAll('.lang-btn').forEach(btn=>{
+        btn.addEventListener('click', function(){
+            const lang=this.dataset.lang;
+            currentLang=lang;
+            localStorage.setItem('lang',lang);
+            document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
+            updateLanguage();
+        });
     });
 
     // ===== INIT =====
     document.addEventListener('DOMContentLoaded', function(){
+        // Load saved language
         const savedLang=localStorage.getItem('lang')||'my';
         currentLang=savedLang;
         document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===savedLang));
+        
+        // Load current user from localStorage
+        const savedUser=localStorage.getItem('currentUser');
+        if(savedUser){
+            currentUser=JSON.parse(savedUser);
+        }
+        
         updateLanguage();
         
         if(localStorage.getItem('nightMode')==='true'){
@@ -1135,35 +1153,7 @@
         updateAuthUI();
         updateBadge();
 
-        document.querySelectorAll('.lang-btn').forEach(btn=>{
-            btn.addEventListener('click', function(){
-                const lang=this.dataset.lang;
-                currentLang=lang;
-                localStorage.setItem('lang',lang);
-                document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
-                updateLanguage();
-            });
-        });
-
-        document.getElementById('authModal').addEventListener('click', function(e){
-            if(e.target===this) closeModal();
-        });
-
-        document.addEventListener('keydown', function(e){
-            if(e.key==='Escape') closeModal();
-            if(e.key==='Enter'){
-                const modal=document.getElementById('authModal');
-                if(!modal.classList.contains('show')) return;
-                if(document.getElementById('registerForm').style.display==='block'){
-                    const btn=document.getElementById('registerBtn');
-                    if(btn.classList.contains('enabled')) handleRegister();
-                }else{
-                    const btn=document.getElementById('loginBtn');
-                    if(btn.classList.contains('enabled')) handleLogin();
-                }
-            }
-        });
-
+        // Shop status interval
         setInterval(()=>{
             const isOpen=isShopOpen();
             const d=LANG_DATA[currentLang];
@@ -1181,7 +1171,20 @@
                 goToShop.textContent=d.shopClosed||'🔒 SHOP CLOSED';
                 shopSubText.textContent=d.shopClosedText||'Will open at 9:30 AM (Myanmar Time)';
             }
-        }, 60000);
+        },60000);
+
+        // Storage event for cross-tab sync
+        window.addEventListener('storage', function(e){
+            if(e.key==='newOrderNotification'||e.key==='notifications'){
+                updateBadge();
+            }
+            if(e.key==='currentUser'){
+                const user=localStorage.getItem('currentUser');
+                if(user) currentUser=JSON.parse(user);
+                else currentUser=null;
+                updateAuthUI();
+            }
+        });
     });
 </script>
 </body>
