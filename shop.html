@@ -64,32 +64,52 @@
             font-weight:800;
             background:linear-gradient(135deg, var(--purple), var(--violet), var(--indigo));
             -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent
+            -webkit-text-fill-color:transparent;
+            animation:colorShift 3s ease-in-out infinite
+        }
+        @keyframes colorShift {
+            0%{background-position:0% 50%}
+            50%{background-position:100% 50%}
+            100%{background-position:0% 50%}
         }
         .header .left .logo-wrap .text-group .shop{font-size:0.55rem;font-weight:600;color:var(--text-secondary);opacity:0.6;margin-top:-2px}
         
         .header .right .top{display:flex;gap:6px;align-items:center}
         .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:10px;border:1px solid var(--border-color);backdrop-filter:blur(20px)}
-        .header .right .top .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;text-transform:uppercase}
+        .header .right .top .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;text-transform:uppercase;transition:all .3s ease}
         .header .right .top .lang-switcher .lang-btn.active{background:linear-gradient(135deg,var(--purple),var(--violet));color:#fff;box-shadow:0 4px 15px rgba(124,58,237,0.3)}
-        .header .right .top .night-toggle{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;color:var(--text-secondary);backdrop-filter:blur(20px)}
+        .header .right .top .night-toggle{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;color:var(--text-secondary);backdrop-filter:blur(20px);transition:all .3s ease}
         .header .right .top .night-toggle:active{transform:scale(0.92)}
         .night-mode .header .right .top .night-toggle .fa-sun{color:#ffd700}
-        .header .right .top .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;backdrop-filter:blur(20px)}
+        .header .right .top .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;backdrop-filter:blur(20px);transition:all .3s ease}
         .header .right .top .noti-btn:active{transform:scale(0.92)}
         .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none}
 
         .page-header{margin-bottom:16px}
         .page-header h1{font-size:1.3rem;font-weight:800;color:var(--text-primary)}
         .page-header h1 span{
-            background:linear-gradient(135deg,var(--purple),var(--violet),var(--indigo));
+            background:linear-gradient(135deg,var(--purple),var(--violet),var(--indigo),var(--cyan));
             -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent
+            -webkit-text-fill-color:transparent;
+            background-size:300% 300%;
+            animation:gradientMove 4s ease-in-out infinite
+        }
+        @keyframes gradientMove {
+            0%{background-position:0% 50%}
+            50%{background-position:100% 50%}
+            100%{background-position:0% 50%}
         }
         .page-header h1 i{color:var(--purple);margin-right:6px}
-        .page-header p{color:var(--text-secondary);font-size:0.7rem;margin-top:2px}
+        .page-header p{
+            color:var(--text-secondary);
+            font-size:0.7rem;
+            margin-top:2px;
+            background:linear-gradient(135deg,var(--purple),var(--violet));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            font-weight:600
+        }
 
-        /* Search Box - မှန်ဘီလူးဖျောက်ထား */
         .search-box{
             background:var(--bg-card);
             backdrop-filter:blur(20px);
@@ -103,10 +123,11 @@
             transition:all .3s ease
         }
         .search-box:focus-within{border-color:var(--purple);box-shadow:0 0 40px rgba(124,58,237,0.15)}
-        .search-box .icon{display:none} /* မှန်ဘီလူးဖျောက် */
+        .search-box .icon{display:none}
         .search-box input{background:transparent;border:none;color:var(--text-primary);font-size:.85rem;flex:1;outline:none;padding:4px 0}
         .search-box input::placeholder{color:var(--text-secondary);font-size:.75rem}
-        .search-box .clear-btn{color:var(--text-secondary);font-size:.8rem;cursor:pointer;padding:4px;display:none}
+        .search-box .clear-btn{color:var(--text-secondary);font-size:.8rem;cursor:pointer;padding:4px;display:none;transition:all .3s ease}
+        .search-box .clear-btn:active{transform:scale(0.85)}
         .search-box .clear-btn.show{display:block}
 
         .section-title{
@@ -123,6 +144,11 @@
         }
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
         .section-title i{
+            background:linear-gradient(135deg,var(--purple),var(--violet));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent
+        }
+        .section-title span{
             background:linear-gradient(135deg,var(--purple),var(--violet));
             -webkit-background-clip:text;
             -webkit-text-fill-color:transparent
@@ -196,7 +222,9 @@
             font-weight:800;
             background:linear-gradient(135deg,var(--purple),var(--violet),var(--indigo));
             -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent
+            -webkit-text-fill-color:transparent;
+            background-size:200% 200%;
+            animation:gradientMove 3s ease-in-out infinite
         }
         .game-item .info .name .line2{
             font-size:0.6rem;
@@ -210,7 +238,9 @@
             font-weight:800;
             background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));
             -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent
+            -webkit-text-fill-color:transparent;
+            background-size:200% 200%;
+            animation:gradientMove 3s ease-in-out infinite
         }
         .game-item .info .name .line2.mcgg{
             font-size:0.6rem;
@@ -231,7 +261,6 @@
         .game-item.bounce-click{animation:bounceSoft .35s cubic-bezier(.34,1.2,.64,1)}
         @keyframes bounceSoft{0%{transform:scale(1)}35%{transform:scale(.94)}70%{transform:scale(1.02)}100%{transform:scale(1)}}
 
-        /* Nav Bar - ပုံမှန်လှုပ်ရှားမယ် */
         .bottom-nav {
             position:fixed;
             bottom:16px;
@@ -394,7 +423,7 @@
             <span class="game-img-placeholder">🎮</span>
             <div class="info">
                 <div class="name">
-                    <span class="line1" id="cs1" style="font-size:0.8rem;background:var(--text-secondary);-webkit-background-clip:text;-webkit-text-fill-color:var(--text-secondary)">Coming Soon</span>
+                    <span class="line1" id="cs1" style="font-size:0.8rem;background:linear-gradient(135deg,var(--purple),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Coming Soon</span>
                 </div>
                 <div class="sub" id="cs1sub">⏳ အသစ်ထွက်ရှိမည်</div>
             </div>
@@ -406,7 +435,7 @@
             <span class="game-img-placeholder">🎯</span>
             <div class="info">
                 <div class="name">
-                    <span class="line1" id="cs2" style="font-size:0.8rem;background:var(--text-secondary);-webkit-background-clip:text;-webkit-text-fill-color:var(--text-secondary)">Coming Soon</span>
+                    <span class="line1" id="cs2" style="font-size:0.8rem;background:linear-gradient(135deg,var(--purple),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Coming Soon</span>
                 </div>
                 <div class="sub" id="cs2sub">⏳ အသစ်ထွက်ရှိမည်</div>
             </div>
