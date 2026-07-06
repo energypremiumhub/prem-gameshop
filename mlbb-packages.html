@@ -217,8 +217,30 @@
             min-height:70px
         }
         /* Click effect */
-        .package-item:active{transform:scale(0.95)!important;transition:transform 0.12s cubic-bezier(0.34, 1.2, 0.64, 1)!important}
-        .package-item:hover{transform:translateY(-3px);box-shadow:0 8px 30px var(--shadow-hover)}
+        .package-item:active{
+            transform:scale(0.95)!important;
+            transition:transform 0.12s cubic-bezier(0.34, 1.2, 0.64, 1)!important
+        }
+        .package-item:hover{
+            transform:translateY(-3px);
+            box-shadow:0 8px 30px var(--shadow-hover)
+        }
+        /* Selected border */
+        .package-item.selected{
+            border:2px solid var(--gold);
+            box-shadow:0 0 30px var(--gold-glow)
+        }
+        
+        /* Double items - border bigger */
+        .package-grid.double-grid .package-item{
+            border-width:2px;
+            padding:12px 14px;
+            min-height:80px
+        }
+        .package-grid.double-grid .package-item .pkg-img-wrap{
+            width:70px;
+            height:70px
+        }
         
         /* ===== IMAGE LEFT - 1:1 ===== */
         .package-item .pkg-img-wrap{
@@ -252,6 +274,21 @@
             align-items:flex-start;
             gap:2px
         }
+        /* Monthly Epic + Bundle (အပေါ်အောက်) */
+        .package-item .right .name-line1{
+            font-size:0.75rem;
+            font-weight:800;
+            color:var(--text-primary);
+            line-height:1.1
+        }
+        .package-item .right .name-line2{
+            font-size:0.65rem;
+            font-weight:600;
+            color:var(--text-secondary);
+            opacity:0.6;
+            line-height:1.1
+        }
+        /* Normal name (တစ်လိုင်းတည်း) */
         .package-item .right .diamonds{
             font-size:0.85rem;
             font-weight:800;
@@ -266,6 +303,18 @@
             font-weight:600;
             color:var(--text-secondary);
             opacity:0.7
+        }
+        /* 2x Bonus badge - Top Up အပေါ်မှာ */
+        .package-item .right .bonus-badge{
+            display:inline-block;
+            font-size:0.45rem;
+            font-weight:700;
+            color:var(--gold);
+            background:rgba(245,166,35,0.12);
+            padding:1px 10px;
+            border-radius:10px;
+            border:1px solid rgba(245,166,35,0.15);
+            margin-bottom:1px
         }
         .package-item .right .action-btn{
             background:var(--bg-input);
@@ -289,19 +338,6 @@
             box-shadow:0 4px 15px var(--cyan-glow)
         }
         .package-item .right .action-btn.topup:active{transform:scale(0.88)!important}
-
-        /* Badge - သေးသေးလေးထားမယ် */
-        .package-item .right .badge{
-            display:inline-block;
-            font-size:0.35rem;
-            color:var(--gold);
-            background:rgba(245,166,35,0.1);
-            padding:1px 8px;
-            border-radius:8px;
-            border:1px solid rgba(245,166,35,0.08);
-            font-weight:600;
-            margin-top:2px
-        }
 
         /* ===== BOTTOM NAV - GLASS ===== */
         .bottom-nav {
@@ -497,7 +533,7 @@
 
     <!-- DOUBLE TOP UP (ဒုတိယ) -->
     <div class="section-title"><i class="fas fa-star"></i> <span id="doubleTitle">နှစ်ဆဖြည့်မှု</span></div>
-    <div class="package-grid" id="doubleList"></div>
+    <div class="package-grid double-grid" id="doubleList"></div>
 
     <!-- DIAMONDS (အောက်ဆုံး) -->
     <div class="section-title"><i class="fas fa-diamond"></i> <span id="diamondsTitle">စိန်များ</span></div>
@@ -688,8 +724,8 @@
     // ===== PACKAGES DATA =====
     const PACKAGES = {
         bundles: [
-            { id: 'b1', name: 'Monthly Epic Bundle', price: 17300, img: 'https://files.catbox.moe/z2j5uo.png' },
-            { id: 'b2', name: 'Weekly Elite Bundle', price: 3600, img: 'https://files.catbox.moe/i3uywg.png' },
+            { id: 'b1', name: 'Monthly Epic', sub: 'Bundle', price: 17300, img: 'https://files.catbox.moe/z2j5uo.png' },
+            { id: 'b2', name: 'Weekly Elite', sub: 'Bundle', price: 3600, img: 'https://files.catbox.moe/i3uywg.png' },
             { id: 'b3', name: 'Weekly Pass', price: 6500, img: 'https://files.catbox.moe/zylral.png' },
             { id: 'b4', name: 'Twilight Pass', price: 34000, img: 'https://files.catbox.moe/jshuuy.png' }
         ],
@@ -726,20 +762,46 @@
             { id: 'd30', name: '9288', price: 503000, img: 'https://files.catbox.moe/pn69zi.png' }
         ],
         double: [
-            { id: 'x1', name: '50+50', price: 3550, img: 'https://files.catbox.moe/z376wd.png', badge: true },
-            { id: 'x2', name: '150+150', price: 9900, img: 'https://files.catbox.moe/kf0960.png', badge: true },
-            { id: 'x3', name: '250+250', price: 15800, img: 'https://files.catbox.moe/jm3ty7.png', badge: true },
-            { id: 'x4', name: '500+500', price: 32100, img: 'https://files.catbox.moe/aprnoc.png', badge: true }
+            { id: 'x1', name: '50+50', price: 3550, img: 'https://files.catbox.moe/z376wd.png', bonus: true },
+            { id: 'x2', name: '150+150', price: 9900, img: 'https://files.catbox.moe/kf0960.png', bonus: true },
+            { id: 'x3', name: '250+250', price: 15800, img: 'https://files.catbox.moe/jm3ty7.png', bonus: true },
+            { id: 'x4', name: '500+500', price: 32100, img: 'https://files.catbox.moe/aprnoc.png', bonus: true }
         ]
     };
 
     function renderPackages(){
         const d=LANG_DATA[currentLang];
-        const renderItems=(items)=>items.map(pkg=>{
-            const isSelected=selectedPackage && selectedPackage.id===pkg.id;
-            const badgeHtml=pkg.badge?`<span class="badge">${d.doubleBadge}</span>`:'';
+        
+        // Bundles render (အပေါ်အောက်စာသားခွဲ)
+        const renderBundles = () => PACKAGES.bundles.map(pkg => {
+            const isSelected = selectedPackage && selectedPackage.id === pkg.id;
+            const hasSub = pkg.sub;
             return `
-                <div class="package-item" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})">
+                <div class="package-item ${isSelected?'selected':''}" onclick="handlePackageClick('${pkg.id}','${pkg.name} ${pkg.sub||''}',${pkg.price})">
+                    <div class="pkg-img-wrap">
+                        <img src="${pkg.img}" alt="${pkg.name}" onerror="this.style.display='none'">
+                    </div>
+                    <div class="right">
+                        ${hasSub ? `
+                            <div class="name-line1">${pkg.name}</div>
+                            <div class="name-line2">${pkg.sub}</div>
+                        ` : `
+                            <div class="diamonds">${pkg.name}</div>
+                        `}
+                        <div class="price">${pkg.price.toLocaleString()} ${d.currency}</div>
+                        <span class="action-btn ${isSelected?'topup':''}" onclick="event.stopPropagation(); ${isSelected ? `openCheckoutModal('${pkg.id}','${pkg.name} ${pkg.sub||''}',${pkg.price})` : `handlePackageClick('${pkg.id}','${pkg.name} ${pkg.sub||''}',${pkg.price})`}">
+                            ${isSelected ? d.topUp : d.select}
+                        </span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        
+        // Diamonds render (တစ်လိုင်းတည်း)
+        const renderDiamonds = () => PACKAGES.diamonds.map(pkg => {
+            const isSelected = selectedPackage && selectedPackage.id === pkg.id;
+            return `
+                <div class="package-item ${isSelected?'selected':''}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})">
                     <div class="pkg-img-wrap">
                         <img src="${pkg.img}" alt="${pkg.name}" onerror="this.style.display='none'">
                     </div>
@@ -749,14 +811,34 @@
                         <span class="action-btn ${isSelected?'topup':''}" onclick="event.stopPropagation(); ${isSelected ? `openCheckoutModal('${pkg.id}','${pkg.name}',${pkg.price})` : `handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})`}">
                             ${isSelected ? d.topUp : d.select}
                         </span>
-                        ${badgeHtml}
                     </div>
                 </div>
             `;
         }).join('');
-        document.getElementById('bundlesList').innerHTML=renderItems(PACKAGES.bundles);
-        document.getElementById('diamondsList').innerHTML=renderItems(PACKAGES.diamonds);
-        document.getElementById('doubleList').innerHTML=renderItems(PACKAGES.double);
+        
+        // Double render (ဘောင်ဒါပိုကျယ် + 2x Bonus)
+        const renderDouble = () => PACKAGES.double.map(pkg => {
+            const isSelected = selectedPackage && selectedPackage.id === pkg.id;
+            return `
+                <div class="package-item ${isSelected?'selected':''}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})">
+                    <div class="pkg-img-wrap">
+                        <img src="${pkg.img}" alt="${pkg.name}" onerror="this.style.display='none'">
+                    </div>
+                    <div class="right">
+                        <div class="diamonds">${pkg.name}</div>
+                        <div class="price">${pkg.price.toLocaleString()} ${d.currency}</div>
+                        <span class="bonus-badge">${d.doubleBadge}</span>
+                        <span class="action-btn ${isSelected?'topup':''}" onclick="event.stopPropagation(); ${isSelected ? `openCheckoutModal('${pkg.id}','${pkg.name}',${pkg.price})` : `handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})`}">
+                            ${isSelected ? d.topUp : d.select}
+                        </span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        
+        document.getElementById('bundlesList').innerHTML = renderBundles();
+        document.getElementById('diamondsList').innerHTML = renderDiamonds();
+        document.getElementById('doubleList').innerHTML = renderDouble();
     }
 
     function handlePackageClick(id,name,price){
