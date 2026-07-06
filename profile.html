@@ -198,7 +198,6 @@
         }
         .section-title span{color:var(--text-secondary);opacity:0.5}
 
-        /* ===== PROFILE SECTION ===== */
         .profile-section{
             background:var(--bg-card);
             backdrop-filter:blur(20px);
@@ -262,7 +261,6 @@
         .profile-section .info .phone{font-size:0.6rem;color:var(--text-secondary);margin-top:1px}
         .profile-section .info .phone i{color:var(--cyan);margin-right:4px}
 
-        /* ===== LOGIN BUTTON ===== */
         .auth-btn-profile{
             background:var(--bg-card);
             border:1px solid var(--border-color);
@@ -306,7 +304,6 @@
             text-transform:uppercase
         }
 
-        /* ===== ORDER HISTORY ===== */
         .filter-bar{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}
         .filter-bar .filter-btn{
             background:var(--bg-card);
@@ -373,7 +370,6 @@
         .order-more{text-align:center;padding:6px 0;color:var(--gold);font-size:0.55rem;font-weight:600;cursor:pointer;transition:all 0.3s ease}
         .order-more:active{transform:scale(0.95)!important;opacity:0.7}
 
-        /* ===== SETTINGS MENU ===== */
         .menu-item{
             display:flex;
             align-items:center;
@@ -394,7 +390,6 @@
         .menu-item.logout:hover .icon{color:var(--red)}
         .menu-item.logout:hover .text{color:var(--red)}
 
-        /* ===== BOTTOM NAV - SHOP PAGE STYLE ===== */
         .bottom-nav {
             position:fixed;
             bottom:16px;
@@ -538,6 +533,9 @@
         .modal .btn-primary:hover{box-shadow:0 4px 30px var(--cyan-glow)}
         .modal .error-text{font-size:0.55rem;color:var(--red);margin-top:4px;display:none}
 
+        .settings-modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.4);backdrop-filter:blur(8px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px}
+        .settings-modal.show{display:flex;animation:fadeIn 0.3s ease}
+
         .logout-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(20px);display:none;z-index:600;align-items:center;justify-content:center;padding:20px;flex-direction:column;text-align:center}
         .logout-overlay.show{display:flex;animation:fadeIn 0.5s ease}
         .logout-overlay .card{background:var(--bg-secondary);backdrop-filter:blur(24px);border:1px solid var(--border-color);border-radius:24px;padding:30px 24px;max-width:360px;width:100%;box-shadow:0 4px 30px var(--shadow)}
@@ -643,27 +641,27 @@
     <!-- SETTINGS -->
     <div class="section-title"><i class="fas fa-cog"></i> <span id="settingsLabel">အကောင့်ဆက်တင်များ</span></div>
     <div class="glass-box" style="padding:14px 16px;">
-        <div class="menu-item" onclick="openModal('name')">
+        <div class="menu-item" onclick="openSettingsModal('name')">
             <span class="icon"><i class="fas fa-user-edit"></i></span>
             <span class="text" id="changeNameText">နာမည်ပြောင်းရန်</span>
             <span class="arrow">›</span>
         </div>
-        <div class="menu-item" onclick="openModal('username')">
+        <div class="menu-item" onclick="openSettingsModal('username')">
             <span class="icon"><i class="fas fa-at"></i></span>
             <span class="text" id="changeUsernameText">အသုံးပြုသူအမည်ပြောင်းရန်</span>
             <span class="arrow">›</span>
         </div>
-        <div class="menu-item" onclick="openModal('email')">
+        <div class="menu-item" onclick="openSettingsModal('email')">
             <span class="icon"><i class="fas fa-envelope"></i></span>
             <span class="text" id="changeEmailText">အီးမေးလ်ပြောင်းရန်</span>
             <span class="arrow">›</span>
         </div>
-        <div class="menu-item" onclick="openModal('phone')">
+        <div class="menu-item" onclick="openSettingsModal('phone')">
             <span class="icon"><i class="fas fa-phone"></i></span>
             <span class="text" id="changePhoneText">ဖုန်းနံပါတ်ပြောင်းရန်</span>
             <span class="arrow">›</span>
         </div>
-        <div class="menu-item" onclick="openModal('password')">
+        <div class="menu-item" onclick="openSettingsModal('password')">
             <span class="icon"><i class="fas fa-key"></i></span>
             <span class="text" id="changePasswordText">စကားဝှက်ပြောင်းရန်</span>
             <span class="arrow">›</span>
@@ -688,6 +686,73 @@
 
 <div class="toast" id="toast"></div>
 
+<!-- ===== AUTH MODAL (Home page အတိုင်း) ===== -->
+<div class="modal-overlay" id="authModal">
+    <div class="modal">
+        <button class="close-btn" onclick="closeAuthModal()">✕</button>
+        <h2 id="authModalTitle">ဝင်ရန်</h2>
+        <p class="sub" id="authModalSub">ပြန်လည်ကြိုဆိုပါတယ်!</p>
+        <div class="error-text" id="authError" style="display:none;text-align:center;margin-bottom:10px;color:var(--red);font-size:0.55rem;"></div>
+        <div id="loginForm">
+            <div class="form-group">
+                <label id="authEmailLabel">အီးမေးလ် / အသုံးပြုသူအမည် / ဖုန်းနံပါတ်</label>
+                <input type="text" id="authLoginInput" placeholder="သင့်အီးမေးလ်၊ အသုံးပြုသူအမည် သို့မဟုတ် ဖုန်းနံပါတ်ထည့်ပါ">
+            </div>
+            <div class="form-group">
+                <label id="authPassLabel">စကားဝှက်</label>
+                <input type="password" id="authLoginPassword" placeholder="သင့်စကားဝှက်ထည့်ပါ">
+            </div>
+            <button class="btn-primary" id="authLoginBtn" onclick="handleAuthLogin()">ဝင်ရန်</button>
+            <span class="switch-link" id="authSwitchToRegister" style="display:block;text-align:center;margin-top:12px;font-size:0.7rem;color:var(--cyan);cursor:pointer;">အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်</span>
+        </div>
+        <div id="registerForm" style="display:none;">
+            <div class="form-group">
+                <label>အသုံးပြုသူအမည် <span style="color:var(--red);">*</span></label>
+                <input type="text" id="authRegUsername" placeholder="အသုံးပြုသူအမည်ရွေးပါ">
+            </div>
+            <div class="form-group">
+                <label>အီးမေးလ်</label>
+                <input type="email" id="authRegEmail" placeholder="သင့်အီးမေးလ်ထည့်ပါ (optional)">
+            </div>
+            <div class="form-group">
+                <label>ဖုန်းနံပါတ်</label>
+                <input type="tel" id="authRegPhone" placeholder="သင့်ဖုန်းနံပါတ်ထည့်ပါ (optional)">
+            </div>
+            <div class="form-group">
+                <label>စကားဝှက် <span style="color:var(--red);">*</span></label>
+                <input type="password" id="authRegPassword" placeholder="အနည်းဆုံး ၄ လုံး">
+            </div>
+            <div class="form-group">
+                <label>စကားဝှက်အတည်ပြုရန် <span style="color:var(--red);">*</span></label>
+                <input type="password" id="authRegConfirmPassword" placeholder="စကားဝှက်ပြန်ထည့်ပါ">
+            </div>
+            <button class="btn-primary" id="authRegisterBtn" onclick="handleAuthRegister()">မှတ်ပုံတင်ရန်</button>
+            <span class="switch-link" id="authSwitchToLogin" style="display:block;text-align:center;margin-top:12px;font-size:0.7rem;color:var(--cyan);cursor:pointer;">အကောင့်ရှိပြီးသား? ဝင်ရန်</span>
+        </div>
+    </div>
+</div>
+
+<!-- ===== SETTINGS MODAL ===== -->
+<div class="settings-modal" id="settingsModal">
+    <div class="modal">
+        <button class="close-btn" onclick="closeSettingsModal()">✕</button>
+        <h2 id="settingsModalTitle">🔑 ပြောင်းရန်</h2>
+        <p class="sub" id="settingsModalSub">အချက်အလက်အသစ်ထည့်ပါ</p>
+        <div id="settingsModalBody">
+            <div class="form-group">
+                <label id="settingsFieldLabel">အသစ်</label>
+                <input type="text" id="settingsInput" placeholder="">
+                <div class="error-text" id="settingsError">ကျေးဇူးပြု၍ ထည့်ပါ</div>
+            </div>
+            <div class="form-group" id="settingsConfirmGroup" style="display:none;">
+                <label>အတည်ပြုရန်</label>
+                <input type="text" id="settingsConfirmInput" placeholder="">
+            </div>
+            <button class="btn-primary" id="settingsSaveBtn">💾 သိမ်းမည်</button>
+        </div>
+    </div>
+</div>
+
 <!-- LOGOUT OVERLAY -->
 <div class="logout-overlay" id="logoutOverlay">
     <div class="card">
@@ -697,27 +762,6 @@
         <div class="btn-group">
             <button class="btn-confirm" id="logoutConfirmBtn">🚪 ထွက်မည်</button>
             <button class="btn-cancel" id="logoutCancelBtn">❌ မထွက်တော့ပါ</button>
-        </div>
-    </div>
-</div>
-
-<!-- SETTINGS MODAL -->
-<div class="modal-overlay" id="settingsModal">
-    <div class="modal">
-        <button class="close-btn" onclick="closeModal()">✕</button>
-        <h2 id="modalTitle">🔑 ပြောင်းရန်</h2>
-        <p class="sub" id="modalSub">အချက်အလက်အသစ်ထည့်ပါ</p>
-        <div id="modalBody">
-            <div class="form-group">
-                <label id="modalFieldLabel">အသစ်</label>
-                <input type="text" id="modalInput" placeholder="">
-                <div class="error-text" id="modalError">ကျေးဇူးပြု၍ ထည့်ပါ</div>
-            </div>
-            <div class="form-group" id="confirmGroup" style="display:none;">
-                <label>အတည်ပြုရန်</label>
-                <input type="text" id="modalConfirmInput" placeholder="">
-            </div>
-            <button class="btn-primary" id="modalSaveBtn">💾 သိမ်းမည်</button>
         </div>
     </div>
 </div>
@@ -744,30 +788,47 @@
             orderStatusPending:'ဆောင်ရွက်နေဆဲ',
             orderStatusCompleted:'ပြီးပြီ',
             orderStatusCancelled:'ပယ်ဖျက်ထား',
-            modalNameTitle:'✏️ နာမည်ပြောင်းရန်',
-            modalNameSub:'နာမည်အသစ်ထည့်ပါ',
-            modalUsernameTitle:'✏️ အသုံးပြုသူအမည်ပြောင်းရန်',
-            modalUsernameSub:'အသုံးပြုသူအမည်အသစ်ထည့်ပါ',
-            modalEmailTitle:'📧 အီးမေးလ်ပြောင်းရန်',
-            modalEmailSub:'အီးမေးလ်အသစ်ထည့်ပါ',
-            modalPhoneTitle:'📱 ဖုန်းနံပါတ်ပြောင်းရန်',
-            modalPhoneSub:'ဖုန်းနံပါတ်အသစ်ထည့်ပါ',
-            modalPassTitle:'🔑 စကားဝှက်ပြောင်းရန်',
-            modalPassSub:'စကားဝှက်အသစ်ထည့်ပါ',
-            modalNameLabel:'နာမည်အသစ်',
-            modalUsernameLabel:'အသုံးပြုသူအမည်အသစ်',
-            modalEmailLabel:'အီးမေးလ်အသစ်',
-            modalPhoneLabel:'ဖုန်းနံပါတ်အသစ်',
-            modalPassLabel:'စကားဝှက်အသစ်',
-            modalConfirmLabel:'စကားဝှက်အတည်ပြုရန်',
-            modalSave:'💾 သိမ်းမည်',
-            modalError:'ကျေးဇူးပြု၍ ထည့်ပါ',
-            modalPassError:'စကားဝှက်များတူညီရမည်',
-            modalUsernameExists:'❌ ဤအသုံးပြုသူအမည်ရှိပြီးသားပါ',
+            modalLogin:'ဝင်ရန်',
+            modalRegister:'မှတ်ပုံတင်ရန်',
+            modalLoginSub:'ပြန်လည်ကြိုဆိုပါတယ်!',
+            modalRegisterSub:'အကောင့်ဖွင့်ပါ!',
+            email:'အီးမေးလ် / အသုံးပြုသူအမည် / ဖုန်းနံပါတ်',
+            password:'စကားဝှက်',
+            switchLogin:'အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်',
+            switchRegister:'အကောင့်ရှိပြီးသား? ဝင်ရန်',
+            login:'ဝင်ရန်',
+            register:'မှတ်ပုံတင်ရန်',
+            loginSuccess:'✅ ကြိုဆိုပါတယ်!',
+            registerSuccess:'✅ အကောင့်ဖွင့်ခြင်းအောင်မြင်ပါပြီ!',
+            enterEmail:'ကျေးဇူးပြု၍ အီးမေးလ်၊ အသုံးပြုသူအမည် သို့မဟုတ် ဖုန်းနံပါတ်ထည့်ပါ',
+            enterPassword:'ကျေးဇူးပြု၍ စကားဝှက်ထည့်ပါ',
+            enterUsername:'ကျေးဇူးပြု၍ အသုံးပြုသူအမည်ထည့်ပါ',
+            passwordMin:'စကားဝှက်သည် အနည်းဆုံး ၄ လုံးရှိရမယ်',
+            passwordMatch:'စကားဝှက်များ မတူညီပါ',
+            userExists:'❌ အသုံးပြုသူအမည်၊ အီးမေးလ် သို့မဟုတ် ဖုန်းနံပါတ် ရှိပြီးသားပါ',
+            invalidCredentials:'❌ အီးမေးလ်/အသုံးပြုသူအမည်/ဖုန်းနံပါတ် သို့မဟုတ် စကားဝှက် မှားနေပါသည်',
+            settingsNameTitle:'✏️ နာမည်ပြောင်းရန်',
+            settingsNameSub:'နာမည်အသစ်ထည့်ပါ',
+            settingsUsernameTitle:'✏️ အသုံးပြုသူအမည်ပြောင်းရန်',
+            settingsUsernameSub:'အသုံးပြုသူအမည်အသစ်ထည့်ပါ',
+            settingsEmailTitle:'📧 အီးမေးလ်ပြောင်းရန်',
+            settingsEmailSub:'အီးမေးလ်အသစ်ထည့်ပါ',
+            settingsPhoneTitle:'📱 ဖုန်းနံပါတ်ပြောင်းရန်',
+            settingsPhoneSub:'ဖုန်းနံပါတ်အသစ်ထည့်ပါ',
+            settingsPassTitle:'🔑 စကားဝှက်ပြောင်းရန်',
+            settingsPassSub:'စကားဝှက်အသစ်ထည့်ပါ',
+            settingsNameLabel:'နာမည်အသစ်',
+            settingsUsernameLabel:'အသုံးပြုသူအမည်အသစ်',
+            settingsEmailLabel:'အီးမေးလ်အသစ်',
+            settingsPhoneLabel:'ဖုန်းနံပါတ်အသစ်',
+            settingsPassLabel:'စကားဝှက်အသစ်',
+            settingsConfirmLabel:'စကားဝှက်အတည်ပြုရန်',
+            settingsSave:'💾 သိမ်းမည်',
+            settingsError:'ကျေးဇူးပြု၍ ထည့်ပါ',
+            settingsPassError:'စကားဝှက်များတူညီရမည်',
+            settingsUsernameExists:'❌ ဤအသုံးပြုသူအမည်ရှိပြီးသားပါ',
             saveSuccess:'✅ အောင်မြင်ပါသည်!',
-            logoutSuccess:'✅ ထွက်ပြီးပါပြီ!',
-            login:'Login',
-            loggedIn:'အကောင့်ဝင်ထားပါပြီ'
+            logoutSuccess:'✅ ထွက်ပြီးပါပြီ!'
         },
         en: {
             appName:'Premium',appSub:'Game Shop',
@@ -788,30 +849,47 @@
             orderStatusPending:'Pending',
             orderStatusCompleted:'Completed',
             orderStatusCancelled:'Cancelled',
-            modalNameTitle:'✏️ Change Name',
-            modalNameSub:'Enter new name',
-            modalUsernameTitle:'✏️ Change Username',
-            modalUsernameSub:'Enter new username',
-            modalEmailTitle:'📧 Change Email',
-            modalEmailSub:'Enter new email',
-            modalPhoneTitle:'📱 Change Phone',
-            modalPhoneSub:'Enter new phone number',
-            modalPassTitle:'🔑 Change Password',
-            modalPassSub:'Enter new password',
-            modalNameLabel:'New Name',
-            modalUsernameLabel:'New Username',
-            modalEmailLabel:'New Email',
-            modalPhoneLabel:'New Phone',
-            modalPassLabel:'New Password',
-            modalConfirmLabel:'Confirm Password',
-            modalSave:'💾 Save',
-            modalError:'Please fill in',
-            modalPassError:'Passwords must match',
-            modalUsernameExists:'❌ Username already exists',
-            saveSuccess:'✅ Success!',
-            logoutSuccess:'✅ Logged out!',
+            modalLogin:'Login',
+            modalRegister:'Register',
+            modalLoginSub:'Welcome back!',
+            modalRegisterSub:'Create your account!',
+            email:'Email / Username / Phone',
+            password:'Password',
+            switchLogin:"Don't have an account? Register",
+            switchRegister:'Already have an account? Login',
             login:'Login',
-            loggedIn:'Logged In'
+            register:'Register',
+            loginSuccess:'✅ Welcome back!',
+            registerSuccess:'✅ Account created!',
+            enterEmail:'Please enter your email, username or phone',
+            enterPassword:'Please enter your password',
+            enterUsername:'Please enter your username',
+            passwordMin:'Password must be at least 4 characters',
+            passwordMatch:'Passwords do not match',
+            userExists:'❌ Username, email or phone already exists',
+            invalidCredentials:'❌ Invalid email/username/phone or password',
+            settingsNameTitle:'✏️ Change Name',
+            settingsNameSub:'Enter new name',
+            settingsUsernameTitle:'✏️ Change Username',
+            settingsUsernameSub:'Enter new username',
+            settingsEmailTitle:'📧 Change Email',
+            settingsEmailSub:'Enter new email',
+            settingsPhoneTitle:'📱 Change Phone',
+            settingsPhoneSub:'Enter new phone number',
+            settingsPassTitle:'🔑 Change Password',
+            settingsPassSub:'Enter new password',
+            settingsNameLabel:'New Name',
+            settingsUsernameLabel:'New Username',
+            settingsEmailLabel:'New Email',
+            settingsPhoneLabel:'New Phone',
+            settingsPassLabel:'New Password',
+            settingsConfirmLabel:'Confirm Password',
+            settingsSave:'💾 Save',
+            settingsError:'Please fill in',
+            settingsPassError:'Passwords must match',
+            settingsUsernameExists:'❌ Username already exists',
+            saveSuccess:'✅ Success!',
+            logoutSuccess:'✅ Logged out!'
         }
     };
 
@@ -819,7 +897,7 @@
     let currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
     let currentFilter = 'all';
     let showAllOrders = false;
-    let modalMode = '';
+    let settingsModalMode = '';
 
     function getText(key){return LANG_DATA[currentLang]?.[key]||key}
 
@@ -855,6 +933,7 @@
         updateAuthUI();
         renderOrders();
         updateBadge();
+        updateAuthModalTexts();
     }
 
     function toggleNightMode(){
@@ -922,13 +1001,164 @@
         }
     });
 
-    // ===== AUTH BUTTON =====
+    // ===== AUTH MODAL =====
+    function openAuthModal(){
+        document.getElementById('authModal').classList.add('show');
+        document.getElementById('loginForm').style.display='block';
+        document.getElementById('registerForm').style.display='none';
+        document.getElementById('authError').style.display='none';
+        updateAuthModalTexts();
+    }
+
+    function closeAuthModal(){
+        document.getElementById('authModal').classList.remove('show');
+        document.getElementById('authLoginInput').value='';
+        document.getElementById('authLoginPassword').value='';
+        document.getElementById('authRegUsername').value='';
+        document.getElementById('authRegEmail').value='';
+        document.getElementById('authRegPhone').value='';
+        document.getElementById('authRegPassword').value='';
+        document.getElementById('authRegConfirmPassword').value='';
+        document.getElementById('authError').style.display='none';
+    }
+
+    function updateAuthModalTexts(){
+        const d=LANG_DATA[currentLang];
+        const isLogin=document.getElementById('registerForm').style.display==='none';
+        document.getElementById('authModalTitle').textContent=isLogin?d.modalLogin:d.modalRegister;
+        document.getElementById('authModalSub').textContent=isLogin?d.modalLoginSub:d.modalRegisterSub;
+        document.getElementById('authEmailLabel').textContent=d.email;
+        document.getElementById('authPassLabel').textContent=d.password;
+        document.getElementById('authLoginBtn').textContent=d.login;
+        document.getElementById('authRegisterBtn').textContent=d.register;
+        document.getElementById('authSwitchToRegister').textContent=d.switchLogin;
+        document.getElementById('authSwitchToLogin').textContent=d.switchRegister;
+        document.getElementById('authLoginInput').placeholder=d.enterEmail;
+        document.getElementById('authLoginPassword').placeholder=d.enterPassword;
+        document.getElementById('authRegUsername').placeholder=d.enterUsername;
+        document.getElementById('authRegPassword').placeholder=d.passwordMin;
+        document.getElementById('authRegConfirmPassword').placeholder=d.passwordMatch;
+    }
+
+    // Switch to register
+    document.getElementById('authSwitchToRegister').addEventListener('click', function(){
+        document.getElementById('loginForm').style.display='none';
+        document.getElementById('registerForm').style.display='block';
+        document.getElementById('authError').style.display='none';
+        updateAuthModalTexts();
+    });
+
+    // Switch to login
+    document.getElementById('authSwitchToLogin').addEventListener('click', function(){
+        document.getElementById('loginForm').style.display='block';
+        document.getElementById('registerForm').style.display='none';
+        document.getElementById('authError').style.display='none';
+        updateAuthModalTexts();
+    });
+
+    // ===== AUTH LOGIN =====
+    function handleAuthLogin(){
+        const input=document.getElementById('authLoginInput').value.trim();
+        const password=document.getElementById('authLoginPassword').value.trim();
+        const d=LANG_DATA[currentLang];
+        const error=document.getElementById('authError');
+
+        error.style.display='none';
+
+        if(!input || !password){
+            error.textContent=d.enterEmail || 'Please enter all fields';
+            error.style.display='block';
+            return;
+        }
+
+        const users=JSON.parse(localStorage.getItem('users')||'{}');
+        let found=null;
+        for(const key in users){
+            const user=users[key];
+            if(key===input || user.email===input || user.username===input || user.phone===input){
+                if(user.password===password){
+                    found=user;
+                    break;
+                }
+            }
+        }
+
+        if(found){
+            currentUser=found;
+            localStorage.setItem('currentUser',JSON.stringify(currentUser));
+            closeAuthModal();
+            showToast(d.loginSuccess || '✅ Welcome back!','success');
+            updateAuthUI();
+            updateBadge();
+            renderOrders();
+        }else{
+            error.textContent=d.invalidCredentials || '❌ Invalid credentials';
+            error.style.display='block';
+        }
+    }
+
+    // ===== AUTH REGISTER =====
+    function handleAuthRegister(){
+        const username=document.getElementById('authRegUsername').value.trim();
+        const email=document.getElementById('authRegEmail').value.trim();
+        const phone=document.getElementById('authRegPhone').value.trim();
+        const password=document.getElementById('authRegPassword').value.trim();
+        const confirm=document.getElementById('authRegConfirmPassword').value.trim();
+        const d=LANG_DATA[currentLang];
+        const error=document.getElementById('authError');
+
+        error.style.display='none';
+
+        if(!username || !password || !confirm){
+            error.textContent='Please fill all required fields';
+            error.style.display='block';
+            return;
+        }
+        if(password.length<4){
+            error.textContent=d.passwordMin || 'Password must be at least 4 characters';
+            error.style.display='block';
+            return;
+        }
+        if(password!==confirm){
+            error.textContent=d.passwordMatch || 'Passwords do not match';
+            error.style.display='block';
+            return;
+        }
+
+        const users=JSON.parse(localStorage.getItem('users')||'{}');
+        for(const key in users){
+            if(key===username || (email && users[key].email===email) || (phone && users[key].phone===phone)){
+                error.textContent=d.userExists || '❌ Username, email or phone already exists';
+                error.style.display='block';
+                return;
+            }
+        }
+
+        const newUser={username, email:email||'', phone:phone||'', password, displayName:username, diamonds:100, createdAt:new Date().toISOString()};
+        users[username]=newUser;
+        localStorage.setItem('users',JSON.stringify(users));
+
+        currentUser=newUser;
+        localStorage.setItem('currentUser',JSON.stringify(currentUser));
+        closeAuthModal();
+        showToast(d.registerSuccess || '✅ Account created!','success');
+        updateAuthUI();
+        updateBadge();
+        renderOrders();
+    }
+
+    // ===== AUTH BUTTON CLICK =====
     document.getElementById('authBtn').addEventListener('click', function(){
         if(currentUser){
-            // Already logged in - do nothing or show profile
+            // Already logged in - do nothing
         }else{
-            window.location.href='index.html';
+            openAuthModal();
         }
+    });
+
+    // Close modal on overlay click
+    document.getElementById('authModal').addEventListener('click', function(e){
+        if(e.target===this) closeAuthModal();
     });
 
     // ===== ORDER HISTORY =====
@@ -1005,21 +1235,21 @@
         renderOrders();
     }
 
-    // ===== MODAL =====
-    function openModal(mode){
+    // ===== SETTINGS MODAL =====
+    function openSettingsModal(mode){
         if(!currentUser){
             showToast('❌ Please login first','error');
             return;
         }
-        modalMode=mode;
+        settingsModalMode=mode;
         const modal=document.getElementById('settingsModal');
-        const title=document.getElementById('modalTitle');
-        const sub=document.getElementById('modalSub');
-        const label=document.getElementById('modalFieldLabel');
-        const input=document.getElementById('modalInput');
-        const confirmGroup=document.getElementById('confirmGroup');
-        const confirmInput=document.getElementById('modalConfirmInput');
-        const error=document.getElementById('modalError');
+        const title=document.getElementById('settingsModalTitle');
+        const sub=document.getElementById('settingsModalSub');
+        const label=document.getElementById('settingsFieldLabel');
+        const input=document.getElementById('settingsInput');
+        const confirmGroup=document.getElementById('settingsConfirmGroup');
+        const confirmInput=document.getElementById('settingsConfirmInput');
+        const error=document.getElementById('settingsError');
 
         error.style.display='none';
         input.value='';
@@ -1028,76 +1258,76 @@
         const d=LANG_DATA[currentLang];
         
         if(mode==='name'){
-            title.textContent=d.modalNameTitle;
-            sub.textContent=d.modalNameSub;
-            label.textContent=d.modalNameLabel;
+            title.textContent=d.settingsNameTitle;
+            sub.textContent=d.settingsNameSub;
+            label.textContent=d.settingsNameLabel;
             input.type='text';
             input.placeholder='New name';
             confirmGroup.style.display='none';
         }else if(mode==='username'){
-            title.textContent=d.modalUsernameTitle;
-            sub.textContent=d.modalUsernameSub;
-            label.textContent=d.modalUsernameLabel;
+            title.textContent=d.settingsUsernameTitle;
+            sub.textContent=d.settingsUsernameSub;
+            label.textContent=d.settingsUsernameLabel;
             input.type='text';
             input.placeholder='New username';
             confirmGroup.style.display='none';
         }else if(mode==='email'){
-            title.textContent=d.modalEmailTitle;
-            sub.textContent=d.modalEmailSub;
-            label.textContent=d.modalEmailLabel;
+            title.textContent=d.settingsEmailTitle;
+            sub.textContent=d.settingsEmailSub;
+            label.textContent=d.settingsEmailLabel;
             input.type='email';
             input.placeholder='example@email.com';
             confirmGroup.style.display='none';
         }else if(mode==='phone'){
-            title.textContent=d.modalPhoneTitle;
-            sub.textContent=d.modalPhoneSub;
-            label.textContent=d.modalPhoneLabel;
+            title.textContent=d.settingsPhoneTitle;
+            sub.textContent=d.settingsPhoneSub;
+            label.textContent=d.settingsPhoneLabel;
             input.type='tel';
             input.placeholder='09xxxxxxxxx';
             confirmGroup.style.display='none';
         }else if(mode==='password'){
-            title.textContent=d.modalPassTitle;
-            sub.textContent=d.modalPassSub;
-            label.textContent=d.modalPassLabel;
+            title.textContent=d.settingsPassTitle;
+            sub.textContent=d.settingsPassSub;
+            label.textContent=d.settingsPassLabel;
             input.type='password';
             input.placeholder='Min 4 characters';
             confirmGroup.style.display='block';
-            document.querySelector('#confirmGroup label').textContent=d.modalConfirmLabel;
+            document.querySelector('#settingsConfirmGroup label').textContent=d.settingsConfirmLabel;
             confirmInput.type='password';
             confirmInput.placeholder='Re-enter password';
         }
 
-        document.getElementById('modalSaveBtn').textContent=d.modalSave;
+        document.getElementById('settingsSaveBtn').textContent=d.settingsSave;
         modal.classList.add('show');
     }
 
-    function closeModal(){
+    function closeSettingsModal(){
         document.getElementById('settingsModal').classList.remove('show');
-        document.getElementById('modalError').style.display='none';
+        document.getElementById('settingsError').style.display='none';
     }
 
     document.getElementById('settingsModal').addEventListener('click', function(e){
-        if(e.target===this) closeModal();
+        if(e.target===this) closeSettingsModal();
     });
 
-    document.getElementById('modalSaveBtn').addEventListener('click', function(){
-        const input=document.getElementById('modalInput');
+    document.getElementById('settingsSaveBtn').addEventListener('click', function(){
+        const input=document.getElementById('settingsInput');
         const value=input.value.trim();
-        const error=document.getElementById('modalError');
+        const error=document.getElementById('settingsError');
         const d=LANG_DATA[currentLang];
 
         error.style.display='none';
 
         if(!value){
-            error.textContent=d.modalError;
+            error.textContent=d.settingsError;
             error.style.display='block';
             return;
         }
 
-        if(modalMode==='password'){
-            const confirm=document.getElementById('modalConfirmInput').value.trim();
+        if(settingsModalMode==='password'){
+            const confirm=document.getElementById('settingsConfirmInput').value.trim();
             if(value!==confirm){
-                error.textContent=d.modalPassError;
+                error.textContent=d.settingsPassError;
                 error.style.display='block';
                 return;
             }
@@ -1108,7 +1338,7 @@
             }
         }
 
-        if(modalMode==='email' && !value.includes('@')){
+        if(settingsModalMode==='email' && !value.includes('@')){
             error.textContent='Please enter a valid email';
             error.style.display='block';
             return;
@@ -1121,39 +1351,37 @@
             return;
         }
 
-        if(modalMode==='name'){
+        if(settingsModalMode==='name'){
             userData.displayName=value;
             currentUser.displayName=value;
-        }else if(modalMode==='username'){
-            // Check if username already exists
+        }else if(settingsModalMode==='username'){
             if(value!==currentUser.username && users[value]){
-                error.textContent=d.modalUsernameExists;
+                error.textContent=d.settingsUsernameExists;
                 error.style.display='block';
                 return;
             }
-            // Update user
             const newUsername=value;
             users[newUsername]=userData;
             delete users[currentUser.username];
             currentUser.username=newUsername;
             localStorage.setItem('users',JSON.stringify(users));
-        }else if(modalMode==='email'){
+        }else if(settingsModalMode==='email'){
             userData.email=value;
             currentUser.email=value;
-        }else if(modalMode==='phone'){
+        }else if(settingsModalMode==='phone'){
             userData.phone=value;
             currentUser.phone=value;
-        }else if(modalMode==='password'){
+        }else if(settingsModalMode==='password'){
             userData.password=value;
         }
 
-        if(modalMode!=='username'){
+        if(settingsModalMode!=='username'){
             users[currentUser.username]=userData;
             localStorage.setItem('users',JSON.stringify(users));
         }
         localStorage.setItem('currentUser',JSON.stringify(currentUser));
 
-        closeModal();
+        closeSettingsModal();
         updateAuthUI();
         showToast(d.saveSuccess,'success');
     });
@@ -1209,6 +1437,25 @@
         });
     });
 
+    // ===== KEYBOARD SHORTCUTS =====
+    document.addEventListener('keydown', function(e){
+        if(e.key==='Escape'){
+            closeAuthModal();
+            closeSettingsModal();
+            document.getElementById('logoutOverlay').classList.remove('show');
+        }
+        if(e.key==='Enter'){
+            const authModal=document.getElementById('authModal');
+            if(authModal.classList.contains('show')){
+                if(document.getElementById('registerForm').style.display==='block'){
+                    handleAuthRegister();
+                }else{
+                    handleAuthLogin();
+                }
+            }
+        }
+    });
+
     // ===== INIT =====
     document.addEventListener('DOMContentLoaded', function(){
         const savedLang=localStorage.getItem('lang')||'my';
@@ -1221,13 +1468,6 @@
             document.querySelector('.night-toggle i').className='fas fa-sun';
         }
         updateBadge();
-
-        document.addEventListener('keydown', function(e){
-            if(e.key==='Escape'){
-                closeModal();
-                document.getElementById('logoutOverlay').classList.remove('show');
-            }
-        });
 
         window.addEventListener('storage', function(e){
             if(e.key==='newOrderNotification'||e.key==='notifications'){
