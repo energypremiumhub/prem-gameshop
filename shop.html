@@ -28,6 +28,10 @@
             --red: #ff0044;
             --purple: #7c3aed;
             --pink: #ec4899;
+            --indigo: #4f46e5;
+            --rose: #f43f5e;
+            --amber: #f59e0b;
+            --emerald: #10b981;
         }
 
         .night-mode {
@@ -89,7 +93,7 @@
 
         .page-header{margin-bottom:16px;animation:slideUp 0.6s ease}
         .page-header h1{font-size:1.3rem;font-weight:800;color:var(--text-primary)}
-        .page-header h1 span{background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .page-header h1 span{background:linear-gradient(135deg,var(--gold),var(--orange),var(--rose),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
         .page-header h1 i{color:var(--cyan);-webkit-text-fill-color:initial;margin-right:6px}
         .page-header p{color:var(--text-secondary);font-size:0.7rem;margin-top:2px}
 
@@ -139,19 +143,22 @@
             line-height: 1.2;
         }
         .game-item .info .name .line1{
-            font-size: 0.75rem;
+            font-size: 0.65rem;
+            opacity: 0.7;
+            font-weight: 600;
         }
         .game-item .info .name .line2{
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 800;
+            margin-top: 1px;
         }
         .game-item .info .name .line2.mlbb{
-            background: linear-gradient(135deg, var(--gold), var(--orange));
+            background: linear-gradient(135deg, var(--gold), var(--orange), var(--rose));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .game-item .info .name .line2.mcgg{
-            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            background: linear-gradient(135deg, var(--cyan), var(--purple), var(--indigo));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -160,6 +167,7 @@
             color: var(--text-secondary);
             margin-top: 3px;
             opacity: 0.6;
+            font-weight: 500;
         }
         .game-item .glow{position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(245,166,35,0.04) 0%,transparent 70%);opacity:0;transition:all 0.6s ease;pointer-events:none}
         .game-item:active .glow{opacity:1}
@@ -168,9 +176,30 @@
         .game-item.bounce-click{animation:bounceSoft 0.35s cubic-bezier(0.34, 1.2, 0.64, 1)}
         @keyframes bounceSoft{0%{transform:scale(1)}35%{transform:scale(0.94)}70%{transform:scale(1.02)}100%{transform:scale(1)}}
 
-        .section-title{font-size:0.65rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;display:flex;align-items:center;gap:10px;opacity:0.5}
-        .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
-        .section-title i{color:var(--cyan);text-shadow:0 0 20px var(--cyan-glow)}
+        .section-title{
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0.5;
+        }
+        .section-title::after{
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--border-color), transparent);
+        }
+        .section-title i{
+            background: linear-gradient(135deg, var(--gold), var(--orange), var(--rose));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 8px var(--gold-glow));
+        }
 
         .bottom-nav {
             position: fixed;
@@ -206,11 +235,33 @@
             gap: 1px;
         }
         .bottom-nav .nav-item:active { transform: scale(0.88); transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1); }
-        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;animation:floatIcon 3s ease-in-out infinite}
+        .bottom-nav .nav-item .icon{
+            font-size: 1.2rem;
+            display: block;
+            animation: floatIcon 3s ease-in-out infinite;
+        }
         .bottom-nav .nav-item .label{font-size:0.4rem;letter-spacing:0.5px;opacity:0.5;font-weight:400}
-        .bottom-nav .nav-item.active { background:rgba(108,92,231,0.06); border:1px solid rgba(108,92,231,0.08); box-shadow:0 0 30px rgba(108,92,231,0.02); color:var(--text-primary); }
-        .bottom-nav .nav-item.active .icon{transform:translateY(-2px) scale(1.1); color:var(--gold); text-shadow:0 0 30px var(--gold-glow); animation:selectBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) }
-        .bottom-nav .nav-item.active .label{color:var(--gold);opacity:1;font-weight:400}
+        .bottom-nav .nav-item.active {
+            background: rgba(108,92,231,0.06);
+            border: 1px solid rgba(108,92,231,0.08);
+            box-shadow: 0 0 30px rgba(108,92,231,0.02);
+            color: var(--text-primary);
+        }
+        .bottom-nav .nav-item.active .icon{
+            transform: translateY(-2px) scale(1.1);
+            background: linear-gradient(135deg, var(--gold), var(--orange), var(--rose));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px var(--gold-glow));
+            animation: selectBounce 0.5s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        .bottom-nav .nav-item.active .label{
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 1;
+            font-weight: 600;
+        }
         @keyframes selectBounce { 0%{transform:scale(1)} 30%{transform:scale(1.3) rotate(-8deg)} 60%{transform:scale(0.9) rotate(4deg)} 100%{transform:scale(1.1) rotate(0deg)} }
 
         .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.3;letter-spacing:1px}
@@ -222,12 +273,35 @@
         @keyframes floatIcon {0%,100%{transform:translateY(0px)}50%{transform:translateY(-6px)}}
 
         .gradient-text {
-            background: linear-gradient(135deg, var(--gold), var(--orange), var(--pink));
+            background: linear-gradient(135deg, var(--gold), var(--orange), var(--rose), var(--purple), var(--cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-size: 300% 300%;
+            animation: gradientMove 4s ease-in-out infinite;
         }
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .premium-icon {
             filter: drop-shadow(0 0 8px var(--gold-glow));
+        }
+
+        .game-item .gradient-glow {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(245,166,35,0.05) 0%, transparent 70%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+        .game-item:active .gradient-glow {
+            opacity: 1;
         }
     </style>
 </head>
@@ -270,7 +344,7 @@
     <div class="game-grid" id="gameGrid">
         <!-- Mobile Legends: Bang Bang -->
         <div class="game-item glass-box" data-name="mobile legends bang bang mlbb" onclick="selectGame('Mobile Legends: Bang Bang', 'mlbb', event)">
-            <span class="glow"></span>
+            <span class="gradient-glow"></span>
             <img src="https://i.ibb.co/cKsDX2Nt/x.jpg" alt="Mobile Legends" class="game-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="game-img-placeholder" style="display:none;">⚔️</span>
             <div class="info">
@@ -284,7 +358,7 @@
 
         <!-- Magic Chess: Go Go -->
         <div class="game-item glass-box" data-name="magic chess go go mcgg" onclick="selectGame('Magic Chess: Go Go', 'mcgg', event)">
-            <span class="glow"></span>
+            <span class="gradient-glow"></span>
             <img src="https://files.catbox.moe/8lxv1s.jpg" alt="MCGG" class="game-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="game-img-placeholder" style="display:none;">♟️</span>
             <div class="info">
@@ -298,7 +372,7 @@
 
         <!-- Coming Soon 1 -->
         <div class="game-item glass-box" data-name="coming soon" onclick="showComingSoon()">
-            <span class="glow"></span>
+            <span class="gradient-glow"></span>
             <span class="game-img-placeholder">🎮</span>
             <div class="info">
                 <div class="name">
@@ -309,7 +383,7 @@
         </div>
         <!-- Coming Soon 2 -->
         <div class="game-item glass-box" data-name="coming soon" onclick="showComingSoon()">
-            <span class="glow"></span>
+            <span class="gradient-glow"></span>
             <span class="game-img-placeholder">🎯</span>
             <div class="info">
                 <div class="name">
