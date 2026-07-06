@@ -163,22 +163,31 @@
         .search-box .clear-btn:active{transform:scale(0.85)}
         .search-box .clear-btn.show{display:block}
 
-        /* ===== GAME GRID (New Design) ===== */
+        /* ===== GAME GRID ===== */
         .game-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
         .game-item{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:14px;padding:12px 14px;cursor:pointer;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;min-height:72px}
-        .game-item:active{transform:scale(0.95)}
+        .game-item:active{transform:scale(0.94);transition:transform 0.15s ease}
         .game-item:hover{transform:translateY(-3px);border-color:rgba(245,166,35,0.3);box-shadow:0 8px 30px var(--shadow-hover), inset 0 1px 0 rgba(255,255,255,0.15)}
-        .game-item .badge{position:absolute;top:6px;right:8px;background:var(--gold);color:#fff;font-size:0.4rem;font-weight:700;padding:2px 10px;border-radius:12px;box-shadow:0 0 20px var(--gold-glow);animation:glowPulse 2s ease-in-out infinite}
-        .game-item .game-img{width:44px;height:44px;border-radius:12px;object-fit:cover;flex-shrink:0;border:2px solid var(--border-color);transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1)}
+        
+        /* ===== CLICK RIPPLE EFFECT ===== */
+        .game-item .ripple-effect{position:absolute;border-radius:50%;background:rgba(245,166,35,0.3);transform:scale(0);animation:rippleAnim 0.6s linear;pointer-events:none}
+        @keyframes rippleAnim{to{transform:scale(4);opacity:0}}
+        
+        .game-item .badge{position:absolute;top:6px;right:8px;background:var(--gold);color:#fff;font-size:0.4rem;font-weight:700;padding:2px 10px;border-radius:12px;box-shadow:0 0 20px var(--gold-glow);animation:glowPulse 2s ease-in-out infinite;z-index:2}
+        .game-item .game-img{width:44px;height:44px;border-radius:12px;object-fit:cover;flex-shrink:0;border:2px solid var(--border-color);transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);position:relative;z-index:1}
         .game-item:hover .game-img{transform:scale(1.08) rotate(-4deg);border-color:var(--gold);box-shadow:0 0 20px var(--gold-glow)}
-        .game-item .game-img-placeholder{font-size:1.8rem;flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:12px;border:2px solid var(--border-color);background:var(--bg-input);transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1)}
+        .game-item .game-img-placeholder{font-size:1.8rem;flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:12px;border:2px solid var(--border-color);background:var(--bg-input);transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);position:relative;z-index:1}
         .game-item:hover .game-img-placeholder{transform:scale(1.08) rotate(-4deg);border-color:var(--gold);box-shadow:0 0 20px var(--gold-glow)}
-        .game-item .info{flex:1;min-width:0}
+        .game-item .info{flex:1;min-width:0;position:relative;z-index:1}
         .game-item .info .name{font-size:0.8rem;font-weight:700;color:var(--text-primary)}
         .game-item .info .sub{font-size:0.5rem;color:var(--text-secondary);margin-top:1px}
-        .game-item .glow{position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(245,166,35,0.05) 0%,transparent 70%);opacity:0;transition:all 0.6s ease}
+        .game-item .glow{position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(245,166,35,0.05) 0%,transparent 70%);opacity:0;transition:all 0.6s ease;pointer-events:none}
         .game-item:hover .glow{opacity:1}
         .game-item.hidden{display:none}
+
+        /* ===== CLICK ANIMATION (Bounce) ===== */
+        .game-item.bounce-click{animation:bounceClick 0.4s cubic-bezier(0.34,1.56,0.64,1)}
+        @keyframes bounceClick{0%{transform:scale(1)}30%{transform:scale(0.92)}60%{transform:scale(1.04)}100%{transform:scale(1)}}
 
         .section-title{font-size:0.65rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;display:flex;align-items:center;gap:10px;opacity:0.5}
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
@@ -275,31 +284,31 @@
     <div class="section-title"><i class="fas fa-gamepad"></i> <span id="gamesTitle">ဂိမ်းများ</span></div>
     <div class="game-grid" id="gameGrid">
         <!-- Mobile Legends -->
-        <div class="game-item glass-box" data-name="mobile legends mlbb" onclick="selectGame('Mobile Legends', 'mlbb')">
+        <div class="game-item glass-box ripple" data-name="mobile legends mlbb" onclick="selectGame('Mobile Legends', 'mlbb', event)">
             <span class="glow"></span>
-            <span class="badge" id="popularBadge">🔥 Popular</span>
+            <span class="badge" id="popularBadge" style="position:absolute;top:-2px;right:-2px;background:var(--gold);color:#fff;font-size:0.4rem;font-weight:700;padding:2px 10px;border-radius:12px;box-shadow:0 0 20px var(--gold-glow);animation:glowPulse 2s ease-in-out infinite;z-index:2">🔥 Popular</span>
             <img src="https://i.ibb.co/cKsDX2Nt/x.jpg" alt="Mobile Legends" class="game-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="game-img-placeholder" style="display:none;">⚔️</span>
             <div class="info">
                 <div class="name">Mobile Legends</div>
-                <div class="sub" id="mlbbSub">MLBB စိန်ဖြည့်မှု</div>
+                <div class="sub" id="mlbbSub">Diamond Top Up</div>
             </div>
         </div>
 
         <!-- MCGG (Magic Chess) -->
-        <div class="game-item glass-box" data-name="mcgg magic chess" onclick="selectGame('MCGG', 'mcgg')">
+        <div class="game-item glass-box ripple" data-name="mcgg magic chess" onclick="selectGame('MCGG', 'mcgg', event)">
             <span class="glow"></span>
-            <span class="badge" id="mcggBadge">🆕 New</span>
+            <span class="badge" id="mcggBadge" style="position:absolute;top:-2px;right:-2px;background:var(--gold);color:#fff;font-size:0.4rem;font-weight:700;padding:2px 10px;border-radius:12px;box-shadow:0 0 20px var(--gold-glow);animation:glowPulse 2s ease-in-out infinite;z-index:2">🆕 New</span>
             <img src="https://files.catbox.moe/8lxv1s.jpg" alt="MCGG" class="game-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="game-img-placeholder" style="display:none;">♟️</span>
             <div class="info">
                 <div class="name" id="mcggName">Magic Chess</div>
-                <div class="sub" id="mcggSub">MCGG စိန်ဖြည့်မှု</div>
+                <div class="sub" id="mcggSub">Diamond Top Up</div>
             </div>
         </div>
 
         <!-- Coming Soon -->
-        <div class="game-item glass-box" data-name="coming soon" onclick="showComingSoon()">
+        <div class="game-item glass-box ripple" data-name="coming soon" onclick="showComingSoon()">
             <span class="glow"></span>
             <span class="game-img-placeholder">🎮</span>
             <div class="info">
@@ -307,7 +316,7 @@
                 <div class="sub" id="cs1sub">အသစ်ထွက်ရှိမည်</div>
             </div>
         </div>
-        <div class="game-item glass-box" data-name="coming soon" onclick="showComingSoon()">
+        <div class="game-item glass-box ripple" data-name="coming soon" onclick="showComingSoon()">
             <span class="glow"></span>
             <span class="game-img-placeholder">🎯</span>
             <div class="info">
@@ -338,9 +347,9 @@
             gamesTitle: 'ဂိမ်းများ', popular: '🔥 Popular',
             mcggBadge: '🆕 New',
             mcggName: 'Magic Chess',
-            mcggSub: 'MCGG စိန်ဖြည့်မှု',
+            mcggSub: 'Diamond Top Up',
             comingSoon: 'Coming Soon', comingSoonSub: 'အသစ်ထွက်ရှိမည်',
-            mlbbSub: 'MLBB စိန်ဖြည့်မှု',
+            mlbbSub: 'Diamond Top Up',
             searchPlaceholder: '🔍 ဂိမ်းနာမည်ရှာပါ...',
             noGames: '❌ ဂိမ်းမတွေ့ပါ',
             selectGame: 'ဂိမ်းရွေးပါ', comingSoonMsg: '🎮 ဤဂိမ်းကို မကြာမီ ထည့်သွင်းပေးပါမည်။'
@@ -352,9 +361,9 @@
             gamesTitle: 'Games', popular: '🔥 Popular',
             mcggBadge: '🆕 New',
             mcggName: 'Magic Chess',
-            mcggSub: 'MCGG Diamond Top Up',
+            mcggSub: 'Diamond Top Up',
             comingSoon: 'Coming Soon', comingSoonSub: 'Coming Soon',
-            mlbbSub: 'MLBB Diamond Top Up',
+            mlbbSub: 'Diamond Top Up',
             searchPlaceholder: '🔍 Search game name...',
             noGames: '❌ No games found',
             selectGame: 'Select Game', comingSoonMsg: '🎮 This game will be added soon.'
@@ -483,7 +492,25 @@
         document.getElementById('searchInput').focus();
     }
 
-    function selectGame(gameName, gameId) {
+    // ===== SELECT GAME WITH RIPPLE EFFECT =====
+    function selectGame(gameName, gameId, event) {
+        // Ripple effect
+        const item = event.currentTarget;
+        const rect = item.getBoundingClientRect();
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple-effect';
+        const size = Math.max(rect.width, rect.height);
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = (event.clientX - rect.left - size/2) + 'px';
+        ripple.style.top = (event.clientY - rect.top - size/2) + 'px';
+        item.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+        
+        // Bounce animation
+        item.classList.remove('bounce-click');
+        void item.offsetWidth;
+        item.classList.add('bounce-click');
+        
         showToast('🎮 ' + gameName + ' ' + getText('selectGame') + '!');
         localStorage.setItem('selectedGame', JSON.stringify({ name: gameName, id: gameId }));
         
