@@ -28,6 +28,7 @@
             --indigo: #4f46e5;
             --red: #ff0044;
             --violet: #8b5cf6;
+            --pink: #ec4899;
         }
 
         .night-mode {
@@ -62,10 +63,11 @@
         .header .left .logo-wrap .text-group .premium{
             font-size:1rem;
             font-weight:800;
-            background:linear-gradient(135deg, var(--cyan), var(--purple), var(--violet));
+            background:linear-gradient(135deg, var(--cyan), var(--purple), var(--violet), var(--pink));
             -webkit-background-clip:text;
             -webkit-text-fill-color:transparent;
-            animation:colorShift 3s ease-in-out infinite
+            background-size:300% 300%;
+            animation:colorShift 2s ease-in-out infinite
         }
         @keyframes colorShift {
             0%{background-position:0% 50%}
@@ -88,11 +90,11 @@
         .page-header{margin-bottom:16px}
         .page-header h1{font-size:1.3rem;font-weight:800;color:var(--text-primary)}
         .page-header h1 span{
-            background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet),var(--indigo));
+            background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet),var(--pink));
             -webkit-background-clip:text;
             -webkit-text-fill-color:transparent;
             background-size:300% 300%;
-            animation:gradientMove 4s ease-in-out infinite
+            animation:gradientMove 2s ease-in-out infinite
         }
         @keyframes gradientMove {
             0%{background-position:0% 50%}
@@ -104,10 +106,7 @@
             color:var(--text-secondary);
             font-size:0.7rem;
             margin-top:2px;
-            background:linear-gradient(135deg,var(--cyan),var(--purple));
-            -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent;
-            font-weight:600
+            font-weight:500
         }
 
         .search-box{
@@ -130,6 +129,7 @@
         .search-box .clear-btn:active{transform:scale(0.85)}
         .search-box .clear-btn.show{display:block}
 
+        /* Section Title - မီးခိုးရောင်ပဲထား */
         .section-title{
             font-size:.65rem;
             font-weight:700;
@@ -144,14 +144,12 @@
         }
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
         .section-title i{
-            background:linear-gradient(135deg,var(--cyan),var(--purple));
-            -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent
+            color:var(--text-secondary);
+            opacity:0.5
         }
         .section-title span{
-            background:linear-gradient(135deg,var(--cyan),var(--purple));
-            -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent
+            color:var(--text-secondary);
+            opacity:0.5
         }
 
         .game-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
@@ -179,7 +177,7 @@
             left:-50%;
             width:200%;
             height:200%;
-            background:radial-gradient(circle,rgba(0,180,216,.05),transparent 70%);
+            background:radial-gradient(circle,rgba(0,180,216,.08),transparent 70%);
             pointer-events:none;
             opacity:0;
             transition:opacity .6s ease
@@ -217,34 +215,17 @@
             flex-direction:column;
             line-height:1.2
         }
-        /* Mobile Legends နဲ့ Magic Chess နှစ်ခုလုံး Cyan → Purple → Violet */
+        /* အရောင်ပိုသိသာအောင် ပြင်ထား */
         .game-item .info .name .line1{
             font-size:0.85rem;
             font-weight:800;
-            background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));
+            background:linear-gradient(135deg, var(--cyan), var(--purple), var(--violet), var(--pink));
             -webkit-background-clip:text;
             -webkit-text-fill-color:transparent;
-            background-size:200% 200%;
-            animation:gradientMove 3s ease-in-out infinite
+            background-size:300% 300%;
+            animation:gradientMove 1.5s ease-in-out infinite
         }
         .game-item .info .name .line2{
-            font-size:0.6rem;
-            font-weight:600;
-            color:var(--text-secondary);
-            opacity:0.7;
-            margin-top:-1px
-        }
-        /* Magic Chess အတွက် သီးသန့် class ဖြုတ်လိုက်ပြီ (အပေါ်က line1 ပဲသုံး) */
-        .game-item .info .name .line1.mcgg{
-            font-size:0.85rem;
-            font-weight:800;
-            background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));
-            -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent;
-            background-size:200% 200%;
-            animation:gradientMove 3s ease-in-out infinite
-        }
-        .game-item .info .name .line2.mcgg{
             font-size:0.6rem;
             font-weight:600;
             color:var(--text-secondary);
@@ -388,6 +369,7 @@
         <span class="clear-btn" id="clearBtn" onclick="clearSearch()"><i class="fas fa-times-circle"></i></span>
     </div>
 
+    <!-- Game ဆိုတဲ့စာသား မီးခိုးရောင်ပဲထား -->
     <div class="section-title"><i class="fas fa-gamepad"></i> <span id="gamesTitle">ဂိမ်းများ</span></div>
 
     <div class="game-grid" id="gameGrid">
@@ -401,7 +383,7 @@
                     <span class="line1">Mobile Legends</span>
                     <span class="line2">Bang Bang</span>
                 </div>
-                <div class="sub" id="mlbbSub">Diamond Top Up</div>
+                <div class="sub" id="mlbbSub">စိန်ဖြည့်မှု</div>
             </div>
         </div>
 
@@ -415,7 +397,7 @@
                     <span class="line1">Magic Chess</span>
                     <span class="line2">Go Go</span>
                 </div>
-                <div class="sub" id="mcggSub">Diamond Top Up</div>
+                <div class="sub" id="mcggSub">စိန်ဖြည့်မှု</div>
             </div>
         </div>
 
@@ -469,8 +451,8 @@
             noGames:'❌ ဂိမ်းမတွေ့ပါ',
             selectGame:'ရွေးချယ်လိုက်ပါ',
             comingSoonMsg:'🎮 ဤဂိမ်းကို မကြာမီ ထည့်သွင်းပေးပါမည်။',
-            mlbbSub:'Diamond Top Up',
-            mcggSub:'Diamond Top Up'
+            mlbbSub:'စိန်ဖြည့်မှု',
+            mcggSub:'စိန်ဖြည့်မှု'
         },
         en: {
             appName:'Premium',appSub:'Game Shop',
