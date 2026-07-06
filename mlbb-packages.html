@@ -211,22 +211,23 @@
             box-shadow:0 4px 20px var(--shadow);
             display:flex;
             align-items:center;
-            gap:10px;
+            gap:12px;
             position:relative;
             overflow:hidden;
-            min-height:72px
+            min-height:70px
         }
         .package-item:active{transform:scale(0.96)!important}
         .package-item:hover{transform:translateY(-3px);box-shadow:0 8px 30px var(--shadow-hover)}
         
-        /* ===== IMAGE LEFT ===== */
+        /* ===== IMAGE LEFT - 1:1 ===== */
         .package-item .pkg-img-wrap{
-            width:60px;
-            height:60px;
+            width:50px;
+            height:50px;
             flex-shrink:0;
             border-radius:10px;
             overflow:hidden;
-            background:var(--bg-input)
+            background:var(--bg-input);
+            border:1px solid var(--border-color)
         }
         .package-item .pkg-img-wrap img{
             width:100%;
@@ -237,63 +238,43 @@
         }
         .package-item:hover .pkg-img-wrap img{transform:scale(1.05)}
         
-        /* ===== INFO CENTER ===== */
-        .package-item .info{
+        /* ===== RIGHT SIDE ===== */
+        .package-item .right{
             flex:1;
             min-width:0;
             display:flex;
             flex-direction:column;
+            align-items:flex-start;
             gap:2px
         }
-        .package-item .info .name{
-            font-size:0.7rem;
-            font-weight:700;
-            color:var(--text-primary)
-        }
-        .package-item .info .sub{
-            font-size:0.5rem;
-            color:var(--text-secondary);
-            opacity:0.6
-        }
-        .package-item .info .badge{
-            display:inline-block;
-            font-size:0.35rem;
-            color:var(--gold);
-            background:rgba(245,166,35,0.1);
-            padding:1px 8px;
-            border-radius:8px;
-            border:1px solid rgba(245,166,35,0.08);
-            font-weight:600;
-            width:fit-content
-        }
-        
-        /* ===== RIGHT SIDE ===== */
-        .package-item .right{
-            display:flex;
-            flex-direction:column;
-            align-items:flex-end;
-            gap:4px;
-            flex-shrink:0
+        .package-item .right .diamonds{
+            font-size:0.85rem;
+            font-weight:800;
+            background:linear-gradient(135deg, var(--cyan), var(--purple), var(--violet), var(--pink));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            background-size:300% 300%;
+            animation:gradientMove 1.5s ease-in-out infinite
         }
         .package-item .right .price{
-            font-size:0.65rem;
-            font-weight:700;
-            background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));
-            -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent
+            font-size:0.6rem;
+            font-weight:600;
+            color:var(--text-secondary);
+            opacity:0.7
         }
         .package-item .right .action-btn{
             background:var(--bg-input);
             border:1px solid var(--border-color);
             color:var(--text-secondary);
-            padding:4px 12px;
+            padding:2px 14px;
             border-radius:8px;
-            font-size:0.5rem;
+            font-size:0.45rem;
             font-weight:600;
             cursor:pointer;
             transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            min-width:55px;
-            text-align:center
+            min-width:50px;
+            text-align:center;
+            margin-top:2px
         }
         .package-item .right .action-btn:active{transform:scale(0.88)!important}
         .package-item .right .action-btn.topup{
@@ -739,22 +720,20 @@
         const renderItems=(items)=>items.map(pkg=>{
             const isSelected=selectedPackage && selectedPackage.id===pkg.id;
             const badgeHtml=pkg.badge?`<span class="badge">${d.doubleBadge}</span>`:'';
-            const subHtml=pkg.sub?`<div class="sub">${pkg.sub}</div>`:'';
+            const subHtml=pkg.sub?`<div class="sub" style="font-size:0.45rem;color:var(--text-secondary);opacity:0.5;">${pkg.sub}</div>`:'';
             return `
                 <div class="package-item" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})">
                     <div class="pkg-img-wrap">
                         <img src="${pkg.img}" alt="${pkg.name}" onerror="this.style.display='none'">
                     </div>
-                    <div class="info">
-                        <div class="name">${pkg.name}</div>
-                        ${subHtml}
-                        ${badgeHtml}
-                    </div>
                     <div class="right">
-                        <span class="price">${pkg.price.toLocaleString()} ${d.currency}</span>
+                        <div class="diamonds">💎 ${pkg.name}</div>
+                        ${subHtml}
+                        <div class="price">${pkg.price.toLocaleString()} ${d.currency}</div>
                         <span class="action-btn ${isSelected?'topup':''}" onclick="event.stopPropagation(); ${isSelected ? `openCheckoutModal('${pkg.id}','${pkg.name}',${pkg.price})` : `handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})`}">
                             ${isSelected ? d.topUp : d.select}
                         </span>
+                        ${badgeHtml}
                     </div>
                 </div>
             `;
