@@ -104,7 +104,21 @@
             box-shadow:0 4px 20px var(--cyan-glow)
         }
         .header .left .auth-btn.logged-in:active{transform:scale(0.92)!important}
-        .header .left .auth-btn.logged-in img{width:22px;height:22px;border-radius:50%;object-fit:cover;margin-right:4px}
+        /* Profile Avatar */
+        .header .left .auth-btn .avatar{
+            width:22px;
+            height:22px;
+            border-radius:50%;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            font-size:0.6rem;
+            font-weight:700;
+            color:#fff;
+            background:linear-gradient(135deg,var(--cyan),var(--purple));
+            flex-shrink:0;
+            text-transform:uppercase
+        }
         
         .header .right .top{display:flex;gap:6px;align-items:center}
         .header .right .top .lang-switcher{
@@ -393,7 +407,7 @@
         .telegram-contact .arrow{color:var(--text-secondary);font-size:0.9rem;transition:all 0.3s ease}
         .telegram-contact:hover .arrow{color:var(--cyan);transform:translateX(3px)}
 
-        /* ===== BOTTOM NAV - GLASS (Shop page အတိုင်း) ===== */
+        /* ===== BOTTOM NAV - GLASS BOX (ပိုထင်ရှားအောင်) ===== */
         .bottom-nav {
             position:fixed;
             bottom:16px;
@@ -409,10 +423,14 @@
             border-radius:18px;
             display:flex;
             justify-content:space-around;
-            padding:8px 4px;
+            padding:10px 4px;
             z-index:100;
-            box-shadow:0 4px 30px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.08);
+            box-shadow:0 8px 40px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.15);
             animation:navSlideUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)
+        }
+        .night-mode .bottom-nav {
+            box-shadow:0 8px 40px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.05);
+            border-color:rgba(255,255,255,0.08);
         }
         @keyframes navSlideUp {
             from{opacity:0;transform:translateY(30px)}
@@ -426,12 +444,12 @@
             right:0;
             bottom:0;
             border-radius:18px;
-            background:linear-gradient(180deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+            background:linear-gradient(180deg, rgba(255,255,255,0.2) 0%, transparent 50%);
             pointer-events:none;
             z-index:0
         }
         .night-mode .bottom-nav::before {
-            background:linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 50%)
+            background:linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 50%)
         }
         .bottom-nav .nav-item {
             text-align:center;
@@ -454,7 +472,6 @@
         .bottom-nav .nav-item:nth-child(2){animation-delay:0.2s}
         .bottom-nav .nav-item:nth-child(3){animation-delay:0.4s}
         .bottom-nav .nav-item:nth-child(4){animation-delay:0.6s}
-        /* နှိပ်လိုက်တဲ့အခါ ညင်သာတဲ့ animation */
         .bottom-nav .nav-item:active{
             transform:scale(0.92)!important;
             transition:transform 0.15s cubic-bezier(0.34, 1.2, 0.64, 1)!important;
@@ -463,9 +480,9 @@
         .bottom-nav .nav-item .icon{font-size:1.2rem;display:block}
         .bottom-nav .nav-item .label{font-size:0.4rem;letter-spacing:0.5px;opacity:0.5;font-weight:400}
         .bottom-nav .nav-item.active{
-            background:rgba(0,180,216,0.08);
-            border:1px solid rgba(0,180,216,0.12);
-            box-shadow:0 0 30px rgba(0,180,216,0.05)
+            background:rgba(0,180,216,0.12);
+            border:1px solid rgba(0,180,216,0.15);
+            box-shadow:0 0 30px rgba(0,180,216,0.08)
         }
         .bottom-nav .nav-item.active .icon{
             transform:translateY(-2px) scale(1.1);
@@ -859,7 +876,6 @@
         document.getElementById('modalTitle').textContent=isLogin?d.modalLogin:d.modalRegister;
         document.querySelector('.modal-box .sub').textContent=isLogin?d.modalLoginSub:d.modalRegisterSub;
         
-        // Login form
         document.getElementById('emailLabel').textContent=d.email;
         document.getElementById('passLabel').textContent=d.password;
         document.getElementById('loginBtn').textContent=d.login;
@@ -868,7 +884,6 @@
         document.getElementById('loginInput').placeholder=d.enterEmail;
         document.getElementById('loginPassword').placeholder=d.enterPassword;
         
-        // Register form - ALL FIELDS
         document.getElementById('regUsernameLabel').innerHTML=d.regUsername+' <span style="color:var(--red);">*</span>';
         document.getElementById('regEmailLabel').textContent=d.regEmail;
         document.getElementById('regPhoneLabel').textContent=d.regPhone;
@@ -877,7 +892,6 @@
         document.getElementById('registerBtn').textContent=d.register;
         document.getElementById('switchToLogin').textContent=d.switchRegister;
         
-        // Register placeholders
         document.getElementById('regUsername').placeholder=d.regUsernamePlace;
         document.getElementById('regEmail').placeholder=d.regEmailPlace;
         document.getElementById('regPhone').placeholder=d.regPhonePlace;
@@ -914,7 +928,9 @@
     function updateAuthUI(){
         const btn=document.getElementById('authBtn');
         if(currentUser){
-            btn.innerHTML='<i class="fas fa-user-circle"></i> '+currentUser.username;
+            // နာမည်ရဲ့ ပထမစာလုံး
+            const firstChar = (currentUser.displayName || currentUser.username || 'U').charAt(0).toUpperCase();
+            btn.innerHTML='<span class="avatar">'+firstChar+'</span> '+(currentUser.displayName || currentUser.username);
             btn.className='auth-btn logged-in';
         }else{
             btn.innerHTML='<i class="fas fa-key"></i> Login';
@@ -1087,14 +1103,11 @@
     document.querySelector('.telegram-card').addEventListener('click', ()=>window.open('https://t.me/Premium_GameShop', '_blank'));
     document.querySelector('.telegram-contact').addEventListener('click', ()=>window.open('https://t.me/PremEnergy', '_blank'));
 
-    // ===== NAV BAR CLICK (ညင်သာတဲ့ animation) =====
+    // ===== NAV BAR =====
     document.querySelectorAll('.bottom-nav .nav-item').forEach(item=>{
         item.addEventListener('click', function(e){
-            // Remove active from all
             document.querySelectorAll('.bottom-nav .nav-item').forEach(n=>n.classList.remove('active'));
             this.classList.add('active');
-            
-            // ညင်သာတဲ့ icon animation
             const icon = this.querySelector('.icon');
             icon.style.animation = 'none';
             void icon.offsetWidth;
@@ -1132,7 +1145,6 @@
         updateAuthUI();
         updateBadge();
 
-        // Language switcher
         document.querySelectorAll('.lang-btn').forEach(btn=>{
             btn.addEventListener('click', function(){
                 const lang=this.dataset.lang;
@@ -1143,12 +1155,10 @@
             });
         });
 
-        // Modal overlay click to close
         document.getElementById('authModal').addEventListener('click', function(e){
             if(e.target===this) closeModal();
         });
 
-        // ESC key
         document.addEventListener('keydown', function(e){
             if(e.key==='Escape') closeModal();
             if(e.key==='Enter'){
@@ -1164,7 +1174,6 @@
             }
         });
 
-        // Shop status interval
         setInterval(()=>{
             const isOpen=isShopOpen();
             const d=LANG_DATA[currentLang];
