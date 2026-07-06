@@ -68,64 +68,6 @@
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        .click-pop { animation: pop 0.3s cubic-bezier(0.34,1.56,0.64,1); }
-        @keyframes pop {
-            0% { transform: scale(1); }
-            30% { transform: scale(0.92); }
-            60% { transform: scale(1.03); }
-            100% { transform: scale(1); }
-        }
-
-        .btn-click {
-            transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-click:active {
-            transform: scale(0.92) !important;
-            opacity: 0.7 !important;
-        }
-
-        .card-click {
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-            cursor: pointer;
-        }
-        .card-click:active {
-            transform: scale(0.96) !important;
-        }
-
-        .nav-click {
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-            cursor: pointer;
-        }
-        .nav-click:active {
-            transform: scale(0.88) !important;
-        }
-
-        .ripple {
-            position: relative;
-            overflow: hidden;
-        }
-        .ripple::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.3);
-            transform: translate(-50%, -50%);
-            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-            pointer-events: none;
-        }
-        .ripple:active::after {
-            width: 300px;
-            height: 300px;
-            opacity: 0;
-        }
-
         .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
         .header .left{display:flex;flex-direction:column;gap:8px}
         .header .left .logo-wrap{display:flex;align-items:center;gap:10px}
@@ -178,12 +120,11 @@
             overflow: hidden;
             min-height: 72px;
         }
-        /* နှိပ်လိုက်တဲ့အခါ နူးညံ့တဲ့ animation */
+        /* နှိပ်လိုက်တဲ့အခါ နူးညံ့တဲ့ animation - အပေါ်မတက်တော့ဘူး */
         .game-item:active {
             transform: scale(0.96) !important;
             transition: transform 0.12s cubic-bezier(0.34, 1.2, 0.64, 1) !important;
         }
-        /* hover ဖယ်ထားတယ် - အပေါ်မတက်တော့ဘူး */
         
         /* ===== SOFT CLICK RIPPLE ===== */
         .game-item .ripple-effect{position:absolute;border-radius:50%;background:rgba(245,166,35,0.15);transform:scale(0);animation:rippleAnim 0.6s ease-out;pointer-events:none}
@@ -212,7 +153,7 @@
             background: linear-gradient(135deg, var(--cyan), var(--purple));
             box-shadow: 0 2px 15px var(--cyan-glow);
         }
-        /* အောက်ခြေမှာ ထားတဲ့ badge (sub အောက်မှာ) */
+        /* အောက်ခြေမှာ ထားတဲ့ badge */
         .game-item .badge-sub {
             display: inline-block;
             background: linear-gradient(135deg, var(--gold), var(--orange));
@@ -256,7 +197,7 @@
         .game-item:active .glow{opacity:1}
         .game-item.hidden{display:none}
 
-        /* ===== SOFT BOUNCE (နှိပ်လိုက်တဲ့အခါ) ===== */
+        /* ===== SOFT BOUNCE ===== */
         .game-item.bounce-click{animation:bounceSoft 0.35s cubic-bezier(0.34, 1.2, 0.64, 1)}
         @keyframes bounceSoft{0%{transform:scale(1)}35%{transform:scale(0.94)}70%{transform:scale(1.02)}100%{transform:scale(1)}}
 
@@ -313,16 +254,11 @@
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
         @keyframes floatIcon {0%,100%{transform:translateY(0px)}50%{transform:translateY(-6px)}}
-        @keyframes glowPulse {0%,100%{box-shadow:0 0 10px var(--gold-glow)}50%{box-shadow:0 0 30px var(--gold-glow)}}
 
-        /* ===== PREMIUM GRADIENT COLORS ===== */
         .gradient-text {
             background: linear-gradient(135deg, var(--gold), var(--orange), var(--pink));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-        .gradient-border {
-            border-image: linear-gradient(135deg, var(--gold), var(--orange), var(--pink)) 1;
         }
         .premium-icon {
             filter: drop-shadow(0 0 8px var(--gold-glow));
@@ -369,7 +305,6 @@
         <!-- Mobile Legends: Bang Bang -->
         <div class="game-item glass-box" data-name="mobile legends bang bang mlbb" onclick="selectGame('Mobile Legends: Bang Bang', 'mlbb', event)">
             <span class="glow"></span>
-            <!-- Corner Badge (စောင်းစောင်းလေး) -->
             <span class="badge-corner" id="popularBadge">🔥 POPULAR</span>
             <img src="https://i.ibb.co/cKsDX2Nt/x.jpg" alt="Mobile Legends" class="game-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="game-img-placeholder" style="display:none;">⚔️</span>
@@ -377,7 +312,6 @@
                 <div class="name">Mobile Legends: <span style="background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Bang Bang</span></div>
                 <div class="sub">
                     <span>💎 Diamond Top Up</span>
-                    <!-- Sub Badge (အောက်ခြေမှာ) -->
                     <span class="badge-sub" id="popularSubBadge">🔥 Popular</span>
                 </div>
             </div>
@@ -386,7 +320,6 @@
         <!-- Magic Chess: Go Go -->
         <div class="game-item glass-box" data-name="magic chess go go mcgg" onclick="selectGame('Magic Chess: Go Go', 'mcgg', event)">
             <span class="glow"></span>
-            <!-- Corner Badge (စောင်းစောင်းလေး) -->
             <span class="badge-corner new" id="mcggBadge">✨ NEW</span>
             <img src="https://files.catbox.moe/8lxv1s.jpg" alt="MCGG" class="game-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="game-img-placeholder" style="display:none;">♟️</span>
@@ -394,7 +327,6 @@
                 <div class="name">Magic Chess: <span style="background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Go Go</span></div>
                 <div class="sub">
                     <span>💎 Diamond Top Up</span>
-                    <!-- Sub Badge (အောက်ခြေမှာ) -->
                     <span class="badge-sub new" id="mcggSubBadge">✨ New</span>
                 </div>
             </div>
@@ -433,50 +365,65 @@
 <div class="toast" id="toast"></div>
 
 <script>
+    // ===== LANGUAGE DATA =====
     const LANG_DATA = {
         my: {
-            appName: 'Premium', appSub: 'Game Shop',
-            home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
-            pageTitle: 'Game Shop', pageSub: '✨ ဂိမ်းတစ်ခုရွေးပြီး စိန်ဖြည့်လိုက်ပါ',
+            appName: 'Premium',
+            appSub: 'Game Shop',
+            home: 'ပင်မ',
+            shop: 'ဆိုင်',
+            payment: 'ငွေပေးချေ',
+            profile: 'ပရိုဖိုင်',
+            pageTitle: 'Game Shop',
+            pageSub: '✨ ဂိမ်းတစ်ခုရွေးပြီး စိန်ဖြည့်လိုက်ပါ',
             gamesTitle: 'ဂိမ်းများ',
             popular: '🔥 POPULAR',
             popularSub: '🔥 Popular',
             mcggBadge: '✨ NEW',
             mcggSubBadge: '✨ New',
-            mcggName: 'Magic Chess: Go Go',
-            mcggSub: '💎 Diamond Top Up',
-            comingSoon: 'Coming Soon', comingSoonSub: '⏳ အသစ်ထွက်ရှိမည်',
-            mlbbName: 'Mobile Legends: Bang Bang',
-            mlbbSub: '💎 Diamond Top Up',
+            comingSoon: 'Coming Soon',
+            comingSoonSub: '⏳ အသစ်ထွက်ရှိမည်',
             searchPlaceholder: '🔍 ဂိမ်းနာမည်ရှာပါ...',
             noGames: '❌ ဂိမ်းမတွေ့ပါ',
             selectGame: 'ရွေးချယ်လိုက်ပါ',
-            comingSoonMsg: '🎮 ဤဂိမ်းကို မကြာမီ ထည့်သွင်းပေးပါမည်။'
+            comingSoonMsg: '🎮 ဤဂိမ်းကို မကြာမီ ထည့်သွင်းပေးပါမည်။',
+            mlbbName: 'Mobile Legends: Bang Bang',
+            mlbbSub: '💎 Diamond Top Up',
+            mcggName: 'Magic Chess: Go Go',
+            mcggSub: '💎 Diamond Top Up'
         },
         en: {
-            appName: 'Premium', appSub: 'Game Shop',
-            home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
-            pageTitle: 'Game Shop', pageSub: '✨ Choose a game and top up diamonds',
+            appName: 'Premium',
+            appSub: 'Game Shop',
+            home: 'Home',
+            shop: 'Shop',
+            payment: 'Payment',
+            profile: 'Profile',
+            pageTitle: 'Game Shop',
+            pageSub: '✨ Choose a game and top up diamonds',
             gamesTitle: 'Games',
             popular: '🔥 POPULAR',
             popularSub: '🔥 Popular',
             mcggBadge: '✨ NEW',
             mcggSubBadge: '✨ New',
-            mcggName: 'Magic Chess: Go Go',
-            mcggSub: '💎 Diamond Top Up',
-            comingSoon: 'Coming Soon', comingSoonSub: '⏳ Coming Soon',
-            mlbbName: 'Mobile Legends: Bang Bang',
-            mlbbSub: '💎 Diamond Top Up',
+            comingSoon: 'Coming Soon',
+            comingSoonSub: '⏳ Coming Soon',
             searchPlaceholder: '🔍 Search game name...',
             noGames: '❌ No games found',
             selectGame: 'Selected',
-            comingSoonMsg: '🎮 This game will be added soon.'
+            comingSoonMsg: '🎮 This game will be added soon.',
+            mlbbName: 'Mobile Legends: Bang Bang',
+            mlbbSub: '💎 Diamond Top Up',
+            mcggName: 'Magic Chess: Go Go',
+            mcggSub: '💎 Diamond Top Up'
         }
     };
 
     let currentLang = localStorage.getItem('lang') || 'my';
 
-    function getText(key) { return LANG_DATA[currentLang]?.[key] || key; }
+    function getText(key) {
+        return LANG_DATA[currentLang]?.[key] || key;
+    }
 
     function showToast(msg) {
         const t = document.getElementById('toast');
@@ -490,23 +437,34 @@
         currentLang = lang;
         localStorage.setItem('lang', lang);
         updateLanguage();
-        document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+        document.querySelectorAll('.lang-btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.lang === lang);
+        });
     }
 
     function updateLanguage() {
         const d = LANG_DATA[currentLang];
         if (!d) return;
+        
+        // Header
         document.getElementById('appName').textContent = d.appName;
         document.getElementById('appSub').textContent = d.appSub;
+        
+        // Page
         document.getElementById('pageTitle').textContent = d.pageTitle;
         document.getElementById('pageSub').textContent = d.pageSub;
         document.getElementById('gamesTitle').textContent = d.gamesTitle;
         
-        // Badge texts
-        document.getElementById('popularBadge').textContent = d.popular;
-        document.getElementById('popularSubBadge').textContent = d.popularSub;
-        document.getElementById('mcggBadge').textContent = d.mcggBadge;
-        document.getElementById('mcggSubBadge').textContent = d.mcggSubBadge;
+        // Badges - အခုမှ ID မှန်အောင်ပြင်ထား
+        const popularBadge = document.getElementById('popularBadge');
+        const popularSubBadge = document.getElementById('popularSubBadge');
+        const mcggBadge = document.getElementById('mcggBadge');
+        const mcggSubBadge = document.getElementById('mcggSubBadge');
+        
+        if (popularBadge) popularBadge.textContent = d.popular;
+        if (popularSubBadge) popularSubBadge.textContent = d.popularSub;
+        if (mcggBadge) mcggBadge.textContent = d.mcggBadge;
+        if (mcggSubBadge) mcggSubBadge.textContent = d.mcggSubBadge;
         
         // Coming Soon
         document.getElementById('cs1').textContent = d.comingSoon;
@@ -514,7 +472,10 @@
         document.getElementById('cs2').textContent = d.comingSoon;
         document.getElementById('cs2sub').textContent = d.comingSoonSub;
         
+        // Search
         document.getElementById('searchInput').placeholder = d.searchPlaceholder;
+        
+        // Nav
         document.getElementById('navHome').textContent = d.home;
         document.getElementById('navShop').textContent = d.shop;
         document.getElementById('navPayment').textContent = d.payment;
@@ -614,7 +575,7 @@
         item.appendChild(ripple);
         setTimeout(() => ripple.remove(), 600);
         
-        // Soft bounce animation (နူးညံ့ပြီး ပေါ့ပါးတယ်)
+        // Soft bounce
         item.classList.remove('bounce-click');
         void item.offsetWidth;
         item.classList.add('bounce-click');
@@ -633,14 +594,19 @@
         showToast(getText('comingSoonMsg'));
     }
 
+    // ===== INIT =====
     document.addEventListener('DOMContentLoaded', function() {
+        // Set language
         const savedLang = localStorage.getItem('lang') || 'my';
         setLang(savedLang);
+        
+        // Set night mode
         const nightMode = localStorage.getItem('nightMode') === 'true';
         if (nightMode) {
             document.body.classList.add('night-mode');
             document.querySelector('.night-toggle i').className = 'fas fa-sun';
         }
+        
         updateBadge();
 
         window.addEventListener('storage', function(e) {
