@@ -231,15 +231,15 @@
             box-shadow:0 0 30px var(--gold-glow)
         }
         
-        /* Double items - border bigger */
+        /* ===== DOUBLE ITEMS - border bigger on top ===== */
         .package-grid.double-grid .package-item{
-            border-width:2px;
+            border-width:2px 1px 1px 1px;
             padding:12px 14px;
             min-height:80px
         }
         .package-grid.double-grid .package-item .pkg-img-wrap{
-            width:70px;
-            height:70px
+            width:55px;
+            height:55px
         }
         
         /* ===== IMAGE LEFT - 1:1 ===== */
@@ -288,9 +288,9 @@
             opacity:0.6;
             line-height:1.1
         }
-        /* Normal name (တစ်လိုင်းတည်း) */
+        /* Normal name (တစ်လိုင်းတည်း) - ပိုကြီးအောင် */
         .package-item .right .diamonds{
-            font-size:0.85rem;
+            font-size:0.95rem;
             font-weight:800;
             background:linear-gradient(135deg, var(--cyan), var(--purple), var(--violet), var(--pink));
             -webkit-background-clip:text;
@@ -298,31 +298,33 @@
             background-size:300% 300%;
             animation:gradientMove 1.5s ease-in-out infinite
         }
+        /* Price - ပိုကြီးအောင် နဲ့ သေချာမြင်ရအောင် */
         .package-item .right .price{
-            font-size:0.6rem;
-            font-weight:600;
-            color:var(--text-secondary);
-            opacity:0.7
+            font-size:0.7rem;
+            font-weight:700;
+            color:var(--text-primary);
+            opacity:0.8
         }
-        /* 2x Bonus badge - Top Up အပေါ်မှာ */
+        /* 2x Bonus badge - ကြယ်မပါ */
         .package-item .right .bonus-badge{
             display:inline-block;
-            font-size:0.45rem;
+            font-size:0.5rem;
             font-weight:700;
             color:var(--gold);
             background:rgba(245,166,35,0.12);
-            padding:1px 10px;
+            padding:2px 12px;
             border-radius:10px;
             border:1px solid rgba(245,166,35,0.15);
-            margin-bottom:1px
+            margin-bottom:2px
         }
+        /* Top Up - တစ်လိုင်းတည်း */
         .package-item .right .action-btn{
             background:var(--bg-input);
             border:1px solid var(--border-color);
             color:var(--text-secondary);
             padding:4px 16px;
             border-radius:8px;
-            font-size:0.65rem;
+            font-size:0.7rem;
             font-weight:700;
             cursor:pointer;
             transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -629,7 +631,7 @@
             home:'ပင်မ',shop:'ဆိုင်',payment:'ငွေပေးချေ',profile:'ပရိုဖိုင်',
             pageTitle:'MLBB Global Packages',pageSub:'ပက်ကေ့ချ်တစ်ခုရွေးပြီး ဝယ်ယူပါ',
             bundlesTitle:'ပက်ကေ့ချ်များ',diamondsTitle:'စိန်များ',doubleTitle:'နှစ်ဆဖြည့်မှု',
-            select:'Select',topUp:'Top Up',currency:'Ks',doubleBadge:'⭐ 2x Bonus',
+            select:'Select',topUp:'Top Up',currency:'Ks',
             modalTitle:'🛒 အော်ဒါတင်ရန်',modalSub:'အချက်အလက်များကို မှန်ကန်စွာဖြည့်သွင်းပါ',
             gameId:'ဂိမ်းအိုင်ဒီ',serverId:'ဆာဗာအိုင်ဒီ',
             gameIdHint:'နံပါတ်သာ ထည့်ပါ',serverIdHint:'နံပါတ်သာ ထည့်ပါ',
@@ -650,7 +652,7 @@
             home:'Home',shop:'Shop',payment:'Payment',profile:'Profile',
             pageTitle:'MLBB Global Packages',pageSub:'Select a package and buy',
             bundlesTitle:'Packages',diamondsTitle:'Diamonds',doubleTitle:'Double Top Up',
-            select:'Select',topUp:'Top Up',currency:'Ks',doubleBadge:'⭐ 2x Bonus',
+            select:'Select',topUp:'Top Up',currency:'Ks',
             modalTitle:'🛒 Submit Order',modalSub:'Fill in your details correctly',
             gameId:'Game ID',serverId:'Server ID',
             gameIdHint:'Numbers only',serverIdHint:'Numbers only',
@@ -816,7 +818,7 @@
             `;
         }).join('');
         
-        // Double render (ဘောင်ဒါပိုကျယ် + 2x Bonus)
+        // Double render (2x Bonus - ကြယ်မပါ)
         const renderDouble = () => PACKAGES.double.map(pkg => {
             const isSelected = selectedPackage && selectedPackage.id === pkg.id;
             return `
@@ -827,7 +829,7 @@
                     <div class="right">
                         <div class="diamonds">${pkg.name}</div>
                         <div class="price">${pkg.price.toLocaleString()} ${d.currency}</div>
-                        <span class="bonus-badge">${d.doubleBadge}</span>
+                        <span class="bonus-badge">2x Bonus</span>
                         <span class="action-btn ${isSelected?'topup':''}" onclick="event.stopPropagation(); ${isSelected ? `openCheckoutModal('${pkg.id}','${pkg.name}',${pkg.price})` : `handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})`}">
                             ${isSelected ? d.topUp : d.select}
                         </span>
