@@ -3,29 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>⚡ Premium Shop - Payment</title>
+    <title>💳 Payment - Premium Shop</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
         
         :root {
-            --bg-primary: #e8eaf0;
+            --bg-primary: #f0f2f5;
             --bg-secondary: #ffffff;
-            --bg-card: rgba(255,255,255,0.35);
+            --bg-card: rgba(255,255,255,0.6);
             --bg-input: rgba(255,255,255,0.7);
             --text-primary: #1a1a2e;
             --text-secondary: #6b7280;
-            --border-color: rgba(0,0,0,0.08);
+            --border-color: rgba(0,0,0,0.06);
             --shadow: rgba(0,0,0,0.06);
             --shadow-hover: rgba(0,0,0,0.1);
-            --primary: #6c5ce7;
-            --gold: #f5a623;
-            --gold-glow: rgba(245,166,35,0.2);
             --cyan: #00b4d8;
-            --cyan-glow: rgba(0,180,216,0.15);
+            --cyan-glow: rgba(0,180,216,0.2);
+            --purple: #7c3aed;
+            --violet: #8b5cf6;
+            --pink: #ec4899;
+            --gold: #f5a623;
+            --gold-glow: rgba(245,166,35,0.25);
             --orange: #ff6a00;
-            --green: #00c853;
             --red: #ff0044;
+            --green: #00c853;
+            --green-glow: rgba(0,200,83,0.2);
         }
 
         .night-mode {
@@ -37,6 +40,7 @@
             --text-secondary: #a8a8c8;
             --border-color: rgba(255,255,255,0.06);
             --shadow: rgba(0,0,0,0.3);
+            --shadow-hover: rgba(0,0,0,0.4);
             --gold: #ffd700;
             --gold-glow: rgba(255,215,0,0.2);
         }
@@ -50,200 +54,350 @@
             transition: all 0.4s ease;
         }
 
-        ::-webkit-scrollbar{width:3px}
-        ::-webkit-scrollbar-track{background:transparent}
-        ::-webkit-scrollbar-thumb{background:var(--primary);border-radius:10px}
-
         .container{max-width:480px;margin:0 auto}
-
-        .glass-box {
-            background: var(--bg-card);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            box-shadow: 0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        .glass-box:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 30px var(--shadow-hover), inset 0 1px 0 rgba(255,255,255,0.15);
-        }
-
-        .click-pop { animation: pop 0.3s cubic-bezier(0.34,1.56,0.64,1); }
-        @keyframes pop {
-            0% { transform: scale(1); }
-            30% { transform: scale(0.92); }
-            60% { transform: scale(1.03); }
-            100% { transform: scale(1); }
-        }
-
-        .btn-click {
-            transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-click:active {
-            transform: scale(0.92) !important;
-            opacity: 0.7 !important;
-        }
-
-        .card-click {
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-            cursor: pointer;
-        }
-        .card-click:active {
-            transform: scale(0.96) translateY(2px) !important;
-        }
-
-        .nav-click {
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-            cursor: pointer;
-        }
-        .nav-click:active {
-            transform: scale(0.88) !important;
-        }
-
-        .ripple {
-            position: relative;
-            overflow: hidden;
-        }
-        .ripple::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.3);
-            transform: translate(-50%, -50%);
-            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-            pointer-events: none;
-        }
-        .ripple:active::after {
-            width: 300px;
-            height: 300px;
-            opacity: 0;
-        }
 
         .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
         .header .left{display:flex;flex-direction:column;gap:8px}
         .header .left .logo-wrap{display:flex;align-items:center;gap:10px}
         .header .left .logo-wrap img{height:38px;width:auto;border-radius:10px}
         .header .left .logo-wrap .text-group{display:flex;flex-direction:column;line-height:1.1}
-        .header .left .logo-wrap .text-group .premium{font-size:1rem;font-weight:800;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .header .left .logo-wrap .text-group .premium{
+            font-size:1rem;
+            font-weight:800;
+            background:linear-gradient(135deg, var(--cyan), var(--purple), var(--violet), var(--pink));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            background-size:300% 300%;
+            animation:colorShift 2s ease-in-out infinite
+        }
+        @keyframes colorShift {
+            0%{background-position:0% 50%}
+            50%{background-position:100% 50%}
+            100%{background-position:0% 50%}
+        }
         .header .left .logo-wrap .text-group .shop{font-size:0.55rem;font-weight:600;color:var(--text-secondary);opacity:0.6;margin-top:-2px}
         
-        .header .left .auth-btn{display:none}
+        .header .left .auth-btn{
+            background:var(--bg-card);
+            border:1px solid var(--border-color);
+            color:var(--text-secondary);
+            padding:6px 16px;
+            border-radius:10px;
+            font-size:0.6rem;
+            font-weight:600;
+            cursor:pointer;
+            display:inline-flex;
+            align-items:center;
+            gap:6px;
+            height:32px;
+            width:fit-content;
+            box-shadow:0 2px 10px var(--shadow);
+            transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            backdrop-filter:blur(20px);
+        }
+        .header .left .auth-btn:active{transform:scale(0.92)!important}
+        .header .left .auth-btn:hover{border-color:var(--cyan);color:var(--cyan)}
+        .header .left .auth-btn.logged-in{
+            background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));
+            color:#fff;
+            border-color:var(--cyan);
+            box-shadow:0 4px 20px var(--cyan-glow)
+        }
+        .header .left .auth-btn.logged-in:active{transform:scale(0.92)!important}
+        .header .left .auth-btn .avatar{
+            width:22px;
+            height:22px;
+            border-radius:50%;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            font-size:0.6rem;
+            font-weight:700;
+            color:#fff;
+            background:linear-gradient(135deg,var(--cyan),var(--purple));
+            flex-shrink:0;
+            text-transform:uppercase
+        }
         
         .header .right .top{display:flex;gap:6px;align-items:center}
-        .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:10px;border:1px solid var(--border-color);box-shadow:0 2px 10px var(--shadow)}
-        .header .right .top .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;text-transform:uppercase}
-        .header .right .top .lang-switcher .lang-btn.active{background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;box-shadow:0 4px 15px var(--gold-glow)}
-        .header .right .top .night-toggle{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;color:var(--text-secondary);box-shadow:0 2px 10px var(--shadow);transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1)}
-        .header .right .top .night-toggle:active{transform:scale(0.92)}
+        .header .right .top .lang-switcher{
+            display:flex;
+            gap:2px;
+            background:var(--bg-card);
+            padding:3px;
+            border-radius:10px;
+            border:1px solid var(--border-color);
+            backdrop-filter:blur(20px)
+        }
+        .header .right .top .lang-switcher .lang-btn{
+            background:transparent;
+            border:none;
+            color:var(--text-secondary);
+            padding:3px 10px;
+            border-radius:6px;
+            font-size:0.5rem;
+            font-weight:700;
+            cursor:pointer;
+            text-transform:uppercase;
+            transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)
+        }
+        .header .right .top .lang-switcher .lang-btn:active{transform:scale(0.92)!important}
+        .header .right .top .lang-switcher .lang-btn.active{
+            background:linear-gradient(135deg,var(--cyan),var(--purple));
+            color:#fff;
+            box-shadow:0 4px 15px rgba(0,180,216,0.3)
+        }
+        .header .right .top .night-toggle{
+            background:var(--bg-card);
+            border:1px solid var(--border-color);
+            border-radius:10px;
+            width:34px;
+            height:34px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            cursor:pointer;
+            font-size:1.1rem;
+            color:var(--text-secondary);
+            backdrop-filter:blur(20px);
+            transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)
+        }
+        .header .right .top .night-toggle:active{transform:scale(0.92)!important}
         .night-mode .header .right .top .night-toggle .fa-sun{color:#ffd700}
-        .header .right .top .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;box-shadow:0 2px 10px var(--shadow)}
-        .header .right .top .noti-btn:active{transform:scale(0.92)}
-        .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none;box-shadow:0 0 15px var(--red-glow)}
+        .header .right .top .noti-btn{
+            background:var(--bg-card);
+            border:1px solid var(--border-color);
+            border-radius:10px;
+            width:34px;
+            height:34px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            cursor:pointer;
+            font-size:1rem;
+            color:var(--text-secondary);
+            position:relative;
+            text-decoration:none;
+            backdrop-filter:blur(20px);
+            transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)
+        }
+        .header .right .top .noti-btn:active{transform:scale(0.92)!important}
+        .header .right .top .noti-btn .badge{
+            position:absolute;
+            top:-4px;
+            right:-4px;
+            background:var(--red);
+            color:#fff;
+            font-size:0.4rem;
+            font-weight:700;
+            padding:1px 6px;
+            border-radius:50%;
+            display:none
+        }
 
-        .page-header{margin-bottom:16px;animation:slideUp 0.6s ease}
+        .page-header{margin-bottom:16px}
         .page-header h1{font-size:1.3rem;font-weight:800;color:var(--text-primary)}
-        .page-header h1 span{background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-        .page-header h1 i{color:var(--cyan);-webkit-text-fill-color:initial;margin-right:6px}
+        .page-header h1 span{
+            background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet),var(--pink));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            background-size:300% 300%;
+            animation:gradientMove 2s ease-in-out infinite
+        }
+        @keyframes gradientMove{
+            0%{background-position:0% 50%}
+            50%{background-position:100% 50%}
+            100%{background-position:0% 50%}
+        }
+        .page-header h1 i{color:var(--cyan);margin-right:6px}
         .page-header p{color:var(--text-secondary);font-size:0.7rem;margin-top:2px}
 
-        .section-title{font-size:0.65rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;display:flex;align-items:center;gap:10px;opacity:0.5}
+        .payment-methods{display:flex;flex-direction:column;gap:12px;margin-bottom:20px}
+        .payment-method{
+            background:var(--bg-card);
+            backdrop-filter:blur(20px);
+            border:1px solid var(--border-color);
+            border-radius:16px;
+            padding:16px 18px;
+            display:flex;
+            align-items:center;
+            gap:14px;
+            cursor:pointer;
+            transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow:0 4px 20px var(--shadow)
+        }
+        .payment-method:hover{transform:translateY(-4px);box-shadow:0 8px 30px var(--shadow-hover)}
+        .payment-method:active{transform:scale(0.96)!important}
+        .payment-method .icon{font-size:2rem;flex-shrink:0;width:48px;text-align:center}
+        .payment-method .icon i{background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .payment-method .info{flex:1}
+        .payment-method .info .name{font-size:0.85rem;font-weight:700;color:var(--text-primary)}
+        .payment-method .info .desc{font-size:0.55rem;color:var(--text-secondary);opacity:0.6;margin-top:2px}
+        .payment-method .arrow{color:var(--text-secondary);font-size:1.2rem;transition:all 0.3s ease}
+        .payment-method:hover .arrow{color:var(--cyan);transform:translateX(4px)}
+
+        .payment-summary{
+            background:var(--bg-card);
+            backdrop-filter:blur(20px);
+            border:1px solid var(--border-color);
+            border-radius:16px;
+            padding:16px 18px;
+            margin-bottom:16px;
+            box-shadow:0 4px 20px var(--shadow)
+        }
+        .payment-summary .row{display:flex;justify-content:space-between;padding:6px 0;font-size:0.75rem}
+        .payment-summary .row .label{color:var(--text-secondary);opacity:0.6}
+        .payment-summary .row .value{color:var(--text-primary);font-weight:600}
+        .payment-summary .row.total{border-top:1px solid var(--border-color);padding-top:10px;margin-top:4px}
+        .payment-summary .row.total .value{
+            font-size:1rem;
+            background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent
+        }
+
+        .section-title{
+            font-size:.65rem;
+            font-weight:700;
+            color:var(--text-secondary);
+            text-transform:uppercase;
+            letter-spacing:2px;
+            margin-bottom:12px;
+            display:flex;
+            align-items:center;
+            gap:10px;
+            opacity:.5
+        }
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
-        .section-title i{color:var(--cyan);text-shadow:0 0 20px var(--cyan-glow)}
+        .section-title i{
+            background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet),var(--pink));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            background-size:300% 300%;
+            animation:iconGradient 1.5s ease-in-out infinite;
+            font-size:0.8rem
+        }
+        @keyframes iconGradient{
+            0%{background-position:0% 50%}
+            50%{background-position:100% 50%}
+            100%{background-position:0% 50%}
+        }
+        .section-title span{color:var(--text-secondary);opacity:0.5}
 
-        .payment-account{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:12px;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1)}
-        .payment-account:active{transform:scale(0.96)}
-        .payment-account:hover{transform:translateY(-4px);border-color:rgba(245,166,35,0.3);box-shadow:0 8px 30px var(--shadow-hover), inset 0 1px 0 rgba(255,255,255,0.15)}
-        .payment-account .icon-box{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;border:1px solid var(--border-color);background:var(--bg-input)}
-        .payment-account .icon-box img{width:100%;height:100%;object-fit:cover;border-radius:10px}
-        .payment-account .icon-box .icon{font-size:1.3rem;color:var(--text-secondary)}
-        .payment-account .info{flex:1}
-        .payment-account .info .name{font-size:0.8rem;font-weight:700;color:var(--text-primary)}
-        .payment-account .info .number{font-size:0.7rem;color:var(--text-secondary);margin-top:2px}
-        .payment-account .info .number i{margin-right:4px;color:var(--green)}
+        .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.3}
 
-        .copy-btn{background:var(--bg-card);border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 14px;border-radius:10px;font-size:0.55rem;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);font-weight:600}
-        .copy-btn:active{transform:scale(0.88);background:var(--gold);color:#fff}
-        .copy-btn.copied{background:rgba(0,200,83,0.1);border-color:var(--green);color:var(--green)}
-
-        .instruction-list{display:flex;flex-direction:column;gap:8px}
-        .instruction-item{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:12px;box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1)}
-        .instruction-item .step{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.55rem;flex-shrink:0}
-        .instruction-item .text{font-size:0.65rem;color:var(--text-secondary)}
-        .instruction-item .text strong{color:var(--text-primary)}
-
-        .support-card{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:14px;margin-top:4px;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1)}
-        .support-card:active{transform:scale(0.96)}
-        .support-card:hover{transform:translateY(-4px);border-color:rgba(0,180,216,0.3);box-shadow:0 8px 30px var(--shadow-hover), inset 0 1px 0 rgba(255,255,255,0.15)}
-        .support-card .icon{font-size:1.6rem;color:#0088cc;flex-shrink:0}
-        .support-card .info{flex:1}
-        .support-card .info .title{font-size:0.75rem;font-weight:600;color:var(--text-primary)}
-        .support-card .info .desc{font-size:0.5rem;color:var(--text-secondary);margin-top:1px}
-        .support-card .arrow{color:var(--text-secondary);font-size:1rem;transition:all 0.3s ease}
-        .support-card:hover .arrow{color:var(--gold);transform:translateX(4px)}
-
+        /* ===== BOTTOM NAV - SHOP PAGE STYLE ===== */
         .bottom-nav {
-            position: fixed;
-            bottom: 16px;
-            left: 16px;
-            right: 16px;
-            width: auto;
-            max-width: 480px;
-            margin: 0 auto;
+            position:fixed;
+            bottom:16px;
+            left:16px;
+            right:16px;
+            width:auto;
+            max-width:480px;
+            margin:0 auto;
             background: var(--bg-card);
             backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             border: 1px solid var(--border-color);
-            border-radius: 18px;
-            display: flex;
-            justify-content: space-around;
-            padding: 8px 4px;
-            z-index: 100;
-            box-shadow: 0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);
+            border-radius:18px;
+            display:flex;
+            justify-content:space-around;
+            padding:8px 4px;
+            z-index:100;
+            box-shadow: 0 4px 30px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.08);
+            animation:navSlideUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)
+        }
+        @keyframes navSlideUp {
+            from{opacity:0;transform:translateY(30px)}
+            to{opacity:1;transform:translateY(0)}
+        }
+        .bottom-nav::before {
+            content:'';
+            position:absolute;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            border-radius:18px;
+            background:linear-gradient(180deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+            pointer-events:none;
+            z-index:0
+        }
+        .night-mode .bottom-nav::before {
+            background:linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 50%)
         }
         .bottom-nav .nav-item {
-            text-align: center;
-            cursor: pointer;
-            text-decoration: none;
-            color: var(--text-secondary);
-            transition: all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
-            padding: 6px 12px;
-            border-radius: 12px;
-            min-width: 48px;
-            border: 1px solid transparent;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1px;
+            text-align:center;
+            cursor:pointer;
+            text-decoration:none;
+            color:var(--text-secondary);
+            transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            padding:6px 12px;
+            border-radius:12px;
+            min-width:48px;
+            border:1px solid transparent;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            gap:1px;
+            animation:floatIcon 3s ease-in-out infinite;
+            position:relative;
+            z-index:1
         }
-        .bottom-nav .nav-item:active { transform: scale(0.88); transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1); }
-        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;animation:floatIcon 3s ease-in-out infinite}
+        .bottom-nav .nav-item:nth-child(2){animation-delay:0.2s}
+        .bottom-nav .nav-item:nth-child(3){animation-delay:0.4s}
+        .bottom-nav .nav-item:nth-child(4){animation-delay:0.6s}
+        .bottom-nav .nav-item:active{transform:scale(0.88)!important;animation:none}
+        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block}
         .bottom-nav .nav-item .label{font-size:0.4rem;letter-spacing:0.5px;opacity:0.5;font-weight:400}
-        .bottom-nav .nav-item.active { background:rgba(108,92,231,0.06); border:1px solid rgba(108,92,231,0.08); box-shadow:0 0 30px rgba(108,92,231,0.02); color:var(--text-primary); }
-        .bottom-nav .nav-item.active .icon{transform:translateY(-2px) scale(1.1); color:var(--gold); text-shadow:0 0 30px var(--gold-glow); animation:selectBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) }
-        .bottom-nav .nav-item.active .label{color:var(--gold);opacity:1;font-weight:400}
-        .bottom-nav .nav-item:not(.active):hover { border-color:rgba(108,92,231,0.06); background:rgba(108,92,231,0.02); }
-        @keyframes selectBounce { 0%{transform:scale(1)} 30%{transform:scale(1.3) rotate(-8deg)} 60%{transform:scale(0.9) rotate(4deg)} 100%{transform:scale(1.1) rotate(0deg)} }
+        .bottom-nav .nav-item.active{
+            background:rgba(0,180,216,0.08);
+            border:1px solid rgba(0,180,216,0.12);
+            box-shadow:0 0 30px rgba(0,180,216,0.05)
+        }
+        .bottom-nav .nav-item.active .icon{
+            transform:translateY(-2px) scale(1.1);
+            background:linear-gradient(135deg,var(--cyan),var(--purple));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent
+        }
+        .bottom-nav .nav-item.active .label{
+            background:linear-gradient(135deg,var(--cyan),var(--purple));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            opacity:1;
+            font-weight:600
+        }
 
-        .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.3;letter-spacing:1px}
-
-        .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-secondary);padding:10px 20px;border-radius:12px;border:1px solid var(--border-color);color:var(--primary);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 4px 20px var(--shadow);animation:toastPop 0.4s cubic-bezier(0.34,1.56,0.64,1)}
-        .toast.show{display:block}
+        .toast{
+            position:fixed;
+            bottom:85px;
+            left:50%;
+            transform:translateX(-50%);
+            background:var(--bg-secondary);
+            padding:10px 20px;
+            border-radius:12px;
+            border:1px solid var(--border-color);
+            color:var(--cyan);
+            font-weight:600;
+            font-size:0.75rem;
+            display:none;
+            z-index:200;
+            text-align:center;
+            max-width:90%;
+            box-shadow:0 4px 20px var(--shadow)
+        }
+        .toast.show{display:block;animation:toastPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
         @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-        @keyframes floatIcon {0%,100%{transform:translateY(0px)}50%{transform:translateY(-6px)}}
+        @keyframes floatIcon{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+        .glass-box{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:16px}
     </style>
 </head>
 <body>
 <div class="container">
+    <!-- HEADER -->
     <div class="header">
         <div class="left">
             <div class="logo-wrap">
@@ -253,250 +407,311 @@
                     <span class="shop" id="appSub">Game Shop</span>
                 </div>
             </div>
+            <div class="auth-btn" id="authBtn"><i class="fas fa-key"></i> Login</div>
         </div>
         <div class="right">
             <div class="top">
                 <div class="lang-switcher">
-                    <button class="lang-btn active" data-lang="my" onclick="setLang('my')">မြန်မာ</button>
-                    <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+                    <button class="lang-btn active" data-lang="my">မြန်မာ</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
                 </div>
-                <button class="night-toggle" onclick="toggleNightMode()"><i class="fas fa-moon"></i></button>
+                <button class="night-toggle"><i class="fas fa-moon"></i></button>
                 <a href="notifications.html" class="noti-btn" id="notiBtn"><i class="fas fa-bell"></i><span class="badge" id="notiBadge">0</span></a>
             </div>
         </div>
     </div>
 
+    <!-- PAGE HEADER -->
     <div class="page-header">
-        <h1><i class="fas fa-credit-card"></i> <span id="paymentTitle">ငွေပေးချေရန်</span></h1>
-        <p id="paymentSub">အောက်ပါအကောင့်များထဲမှ တစ်ခုခုသို့ ငွေပို့ပါ</p>
+        <h1><i class="fas fa-credit-card"></i> <span id="pageTitle">ငွေပေးချေမှု</span></h1>
+        <p id="pageSub">သင့်အော်ဒါအတွက် ငွေပေးချေနည်းလမ်းရွေးပါ</p>
     </div>
 
-    <div class="section-title"><i class="fas fa-university"></i> <span id="accountsTitle">ငွေလက်ခံမည့်အကောင့်များ</span></div>
-    
-    <div class="payment-account card-click" onclick="copyNumber('09682506493', document.getElementById('copyBtn1'))">
-        <div class="icon-box">
-            <img src="https://i.ibb.co/GvstPZx4/x.jpg" alt="Wave Pay">
-        </div>
-        <div class="info">
-            <div class="name" id="waveName">Wave Pay</div>
-            <div class="number"><i class="fas fa-phone"></i> 09682506493</div>
-        </div>
-        <button class="copy-btn" id="copyBtn1" onclick="event.stopPropagation(); copyNumber('09682506493', this)">ကူးယူမည်</button>
+    <!-- PAYMENT SUMMARY -->
+    <div class="section-title"><i class="fas fa-receipt"></i> <span id="summaryTitle">အော်ဒါအကျဉ်းချုပ်</span></div>
+    <div class="payment-summary glass-box">
+        <div class="row"><span class="label" id="itemLabel">ပစ္စည်း</span><span class="value" id="itemValue">Mobile Legends - 100 Diamonds</span></div>
+        <div class="row"><span class="label" id="qtyLabel">အရေအတွက်</span><span class="value" id="qtyValue">1</span></div>
+        <div class="row"><span class="label" id="priceLabel">ဈေးနှုန်း</span><span class="value" id="priceValue">4,500 MMK</span></div>
+        <div class="row total"><span class="label" id="totalLabel">စုစုပေါင်း</span><span class="value" id="totalValue">4,500 MMK</span></div>
     </div>
 
-    <div class="payment-account card-click" onclick="copyNumber('09682506493', document.getElementById('copyBtn2'))">
-        <div class="icon-box">
-            <img src="https://i.ibb.co/fdWfXwVC/x.jpg" alt="KBZ Pay">
+    <!-- PAYMENT METHODS -->
+    <div class="section-title"><i class="fas fa-wallet"></i> <span id="methodsTitle">ငွေပေးချေနည်းလမ်းများ</span></div>
+    <div class="payment-methods">
+        <div class="payment-method glass-box" onclick="selectPayment('KBZ Pay')">
+            <span class="icon"><i class="fas fa-university"></i></span>
+            <div class="info">
+                <div class="name" id="kbzName">KBZ Pay</div>
+                <div class="desc" id="kbzDesc">မြန်မာ့လူထုဘဏ် မိုဘိုင်းဘဏ်လုပ်ငန်း</div>
+            </div>
+            <span class="arrow"><i class="fas fa-chevron-right"></i></span>
         </div>
-        <div class="info">
-            <div class="name" id="kpayName">KBZ Pay</div>
-            <div class="number"><i class="fas fa-phone"></i> 09682506493</div>
-        </div>
-        <button class="copy-btn" id="copyBtn2" onclick="event.stopPropagation(); copyNumber('09682506493', this)">ကူးယူမည်</button>
-    </div>
 
-    <div class="section-title"><i class="fas fa-list"></i> <span id="howToTitle">ငွေပေးချေနည်း</span></div>
-    <div class="instruction-list">
-        <div class="instruction-item">
-            <span class="step">၁</span>
-            <span class="text" id="step1"><strong>Wave Pay</strong> သို့မဟုတ် <strong>KBZ Pay</strong> ရွေးပါ</span>
+        <div class="payment-method glass-box" onclick="selectPayment('Wave Pay')">
+            <span class="icon"><i class="fas fa-mobile-alt"></i></span>
+            <div class="info">
+                <div class="name" id="waveName">Wave Pay</div>
+                <div class="desc" id="waveDesc">မြန်မာနိုင်ငံ၏ ထိပ်တန်းမိုဘိုင်းငွေကြေးဝန်ဆောင်မှု</div>
+            </div>
+            <span class="arrow"><i class="fas fa-chevron-right"></i></span>
         </div>
-        <div class="instruction-item">
-            <span class="step">၂</span>
-            <span class="text" id="step2">အပေါ်က <strong>ဖုန်းနံပါတ်</strong> ကိုကူးယူပါ</span>
-        </div>
-        <div class="instruction-item">
-            <span class="step">၃</span>
-            <span class="text" id="step3">အတိအကျငွေပို့ပြီး <strong>Screenshot</strong> ရိုက်ပါ</span>
-        </div>
-        <div class="instruction-item">
-            <span class="step">၄</span>
-            <span class="text" id="step4"><strong>ဆိုင်</strong> သို့သွားပြီး အော်ဒါအပြီးသတ်ပါ</span>
-        </div>
-    </div>
 
-    <div class="section-title" style="margin-top:18px;"><i class="fas fa-headset"></i> <span id="supportTitle">အကူအညီ</span></div>
-    <div class="support-card card-click" onclick="window.open('https://t.me/Energypremiumhub', '_blank')">
-        <span class="icon"><i class="fab fa-telegram-plane"></i></span>
-        <div class="info">
-            <div class="title" id="supportLabel">Telegram မှ ဆက်သွယ်ပါ</div>
-            <div class="desc" id="supportDesc">@Energypremiumhub • ၂၄/၇ ဝန်ဆောင်မှု</div>
+        <div class="payment-method glass-box" onclick="selectPayment('CB Pay')">
+            <span class="icon"><i class="fas fa-building"></i></span>
+            <div class="info">
+                <div class="name" id="cbName">CB Pay</div>
+                <div class="desc" id="cbDesc">ဆီဘီဘဏ် မိုဘိုင်းဘဏ်လုပ်ငန်း</div>
+            </div>
+            <span class="arrow"><i class="fas fa-chevron-right"></i></span>
         </div>
-        <span class="arrow"><i class="fas fa-chevron-right"></i></span>
+
+        <div class="payment-method glass-box" onclick="selectPayment('AYA Pay')">
+            <span class="icon"><i class="fas fa-piggy-bank"></i></span>
+            <div class="info">
+                <div class="name" id="ayaName">AYA Pay</div>
+                <div class="desc" id="ayaDesc">အာယာဘဏ် မိုဘိုင်းငွေကြေးဝန်ဆောင်မှု</div>
+            </div>
+            <span class="arrow"><i class="fas fa-chevron-right"></i></span>
+        </div>
+
+        <div class="payment-method glass-box" onclick="selectPayment('TrueMoney')">
+            <span class="icon"><i class="fas fa-coins"></i></span>
+            <div class="info">
+                <div class="name" id="trueName">TrueMoney</div>
+                <div class="desc" id="trueDesc">အီးဝေါ်လက်ငွေကြေးဝန်ဆောင်မှု</div>
+            </div>
+            <span class="arrow"><i class="fas fa-chevron-right"></i></span>
+        </div>
     </div>
 
     <div class="footer-text">&copy; 2026 Premium Game Shop</div>
 </div>
 
+<!-- BOTTOM NAV -->
 <div class="bottom-nav">
-    <a href="index.html" class="nav-item" onclick="handleNavClick(this, event)"><span class="icon"><i class="fas fa-home"></i></span><span class="label" id="navHome">ပင်မ</span></a>
-    <a href="shop.html" class="nav-item" onclick="handleNavClick(this, event)"><span class="icon"><i class="fas fa-shopping-bag"></i></span><span class="label" id="navShop">ဆိုင်</span></a>
-    <a href="payment.html" class="nav-item active" onclick="handleNavClick(this, event)"><span class="icon"><i class="fas fa-credit-card"></i></span><span class="label" id="navPayment">ငွေပေးချေ</span></a>
-    <a href="profile.html" class="nav-item" onclick="handleNavClick(this, event)"><span class="icon"><i class="fas fa-user"></i></span><span class="label" id="navProfile">ပရိုဖိုင်</span></a>
+    <a href="index.html" class="nav-item"><span class="icon"><i class="fas fa-home"></i></span><span class="label" id="navHome">ပင်မ</span></a>
+    <a href="shop.html" class="nav-item"><span class="icon"><i class="fas fa-shopping-bag"></i></span><span class="label" id="navShop">ဆိုင်</span></a>
+    <a href="payment.html" class="nav-item active"><span class="icon"><i class="fas fa-credit-card"></i></span><span class="label" id="navPayment">ငွေပေးချေ</span></a>
+    <a href="profile.html" class="nav-item"><span class="icon"><i class="fas fa-user"></i></span><span class="label" id="navProfile">ပရိုဖိုင်</span></a>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
+    // ===== LANGUAGE DATA =====
     const LANG_DATA = {
         my: {
-            appName: 'Premium', appSub: 'Game Shop',
-            home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
-            paymentTitle: 'ငွေပေးချေရန်', paymentSub: 'အောက်ပါအကောင့်များထဲမှ တစ်ခုခုသို့ ငွေပို့ပါ',
-            accountsTitle: 'ငွေလက်ခံမည့်အကောင့်များ',
-            wave: 'Wave Pay', kpay: 'KBZ Pay',
-            howToTitle: 'ငွေပေးချေနည်း',
-            step1: '<strong>Wave Pay</strong> သို့မဟုတ် <strong>KBZ Pay</strong> ရွေးပါ',
-            step2: 'အပေါ်က <strong>ဖုန်းနံပါတ်</strong> ကိုကူးယူပါ',
-            step3: 'အတိအကျငွေပို့ပြီး <strong>Screenshot</strong> ရိုက်ပါ',
-            step4: '<strong>ဆိုင်</strong> သို့သွားပြီး အော်ဒါအပြီးသတ်ပါ',
-            supportTitle: 'အကူအညီ', supportLabel: 'Telegram မှ ဆက်သွယ်ပါ',
-            supportDesc: '@Energypremiumhub • ၂၄/၇ ဝန်ဆောင်မှု',
-            copy: 'ကူးယူမည်', copied: '✅ ကူးပြီး'
+            appName:'Premium',appSub:'Game Shop',
+            pageTitle:'ငွေပေးချေမှု',
+            pageSub:'သင့်အော်ဒါအတွက် ငွေပေးချေနည်းလမ်းရွေးပါ',
+            summaryTitle:'အော်ဒါအကျဉ်းချုပ်',
+            methodsTitle:'ငွေပေးချေနည်းလမ်းများ',
+            itemLabel:'ပစ္စည်း',
+            qtyLabel:'အရေအတွက်',
+            priceLabel:'ဈေးနှုန်း',
+            totalLabel:'စုစုပေါင်း',
+            itemValue:'Mobile Legends - 100 Diamonds',
+            qtyValue:'1',
+            priceValue:'4,500 MMK',
+            totalValue:'4,500 MMK',
+            kbzName:'KBZ Pay',
+            kbzDesc:'မြန်မာ့လူထုဘဏ် မိုဘိုင်းဘဏ်လုပ်ငန်း',
+            waveName:'Wave Pay',
+            waveDesc:'မြန်မာနိုင်ငံ၏ ထိပ်တန်းမိုဘိုင်းငွေကြေးဝန်ဆောင်မှု',
+            cbName:'CB Pay',
+            cbDesc:'ဆီဘီဘဏ် မိုဘိုင်းဘဏ်လုပ်ငန်း',
+            ayaName:'AYA Pay',
+            ayaDesc:'အာယာဘဏ် မိုဘိုင်းငွေကြေးဝန်ဆောင်မှု',
+            trueName:'TrueMoney',
+            trueDesc:'အီးဝေါ်လက်ငွေကြေးဝန်ဆောင်မှု',
+            home:'ပင်မ',shop:'ဆိုင်',payment:'ငွေပေးချေ',profile:'ပရိုဖိုင်',
+            selectMethod:'ရွေးချယ်လိုက်ပါ',
+            paymentSuccess:'✅ ငွေပေးချေမှုအောင်မြင်ပါပြီ!',
+            paymentCancel:'❌ ငွေပေးချေမှုကိုဖျက်သိမ်းလိုက်ပါပြီ'
         },
         en: {
-            appName: 'Premium', appSub: 'Game Shop',
-            home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
-            paymentTitle: 'Payment', paymentSub: 'Send payment to one of the following accounts',
-            accountsTitle: 'Payment Accounts',
-            wave: 'Wave Pay', kpay: 'KBZ Pay',
-            howToTitle: 'How to Pay',
-            step1: 'Choose <strong>Wave Pay</strong> or <strong>KBZ Pay</strong>',
-            step2: 'Copy the <strong>phone number</strong> above',
-            step3: 'Send the exact amount and <strong>take a screenshot</strong>',
-            step4: 'Go to <strong>Shop</strong> and complete your order',
-            supportTitle: 'Support', supportLabel: 'Contact us on Telegram',
-            supportDesc: '@Energypremiumhub • 24/7 Support',
-            copy: 'Copy', copied: '✅ Copied!'
+            appName:'Premium',appSub:'Game Shop',
+            pageTitle:'Payment',
+            pageSub:'Choose a payment method for your order',
+            summaryTitle:'Order Summary',
+            methodsTitle:'Payment Methods',
+            itemLabel:'Item',
+            qtyLabel:'Quantity',
+            priceLabel:'Price',
+            totalLabel:'Total',
+            itemValue:'Mobile Legends - 100 Diamonds',
+            qtyValue:'1',
+            priceValue:'4,500 MMK',
+            totalValue:'4,500 MMK',
+            kbzName:'KBZ Pay',
+            kbzDesc:'KBZ Bank Mobile Banking',
+            waveName:'Wave Pay',
+            waveDesc:'Myanmar\'s Leading Mobile Financial Service',
+            cbName:'CB Pay',
+            cbDesc:'CB Bank Mobile Banking',
+            ayaName:'AYA Pay',
+            ayaDesc:'AYA Bank Mobile Financial Service',
+            trueName:'TrueMoney',
+            trueDesc:'E-wallet Financial Service',
+            home:'Home',shop:'Shop',payment:'Payment',profile:'Profile',
+            selectMethod:'Selected',
+            paymentSuccess:'✅ Payment successful!',
+            paymentCancel:'❌ Payment cancelled'
         }
     };
 
     let currentLang = localStorage.getItem('lang') || 'my';
+    let currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
 
-    function getText(key) { return LANG_DATA[currentLang]?.[key] || key; }
+    function getText(key){return LANG_DATA[currentLang]?.[key]||key}
 
-    function showToast(msg) {
-        const t = document.getElementById('toast');
-        t.textContent = msg;
+    function showToast(msg){
+        const t=document.getElementById('toast');
+        t.textContent=msg;
         t.classList.add('show');
         clearTimeout(t._timer);
-        t._timer = setTimeout(() => t.classList.remove('show'), 3000);
+        t._timer=setTimeout(()=>t.classList.remove('show'),3000);
     }
 
-    function setLang(lang) {
-        currentLang = lang;
-        localStorage.setItem('lang', lang);
-        updateLanguage();
-        document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
-    }
-
-    function updateLanguage() {
-        const d = LANG_DATA[currentLang];
-        if (!d) return;
-        document.getElementById('appName').textContent = d.appName;
-        document.getElementById('appSub').textContent = d.appSub;
-        document.getElementById('paymentTitle').textContent = d.paymentTitle;
-        document.getElementById('paymentSub').textContent = d.paymentSub;
-        document.getElementById('accountsTitle').textContent = d.accountsTitle;
-        document.getElementById('waveName').textContent = d.wave;
-        document.getElementById('kpayName').textContent = d.kpay;
-        document.getElementById('howToTitle').textContent = d.howToTitle;
-        document.getElementById('step1').innerHTML = d.step1;
-        document.getElementById('step2').innerHTML = d.step2;
-        document.getElementById('step3').innerHTML = d.step3;
-        document.getElementById('step4').innerHTML = d.step4;
-        document.getElementById('supportTitle').textContent = d.supportTitle;
-        document.getElementById('supportLabel').textContent = d.supportLabel;
-        document.getElementById('supportDesc').textContent = d.supportDesc;
-        document.getElementById('navHome').textContent = d.home;
-        document.getElementById('navShop').textContent = d.shop;
-        document.getElementById('navPayment').textContent = d.payment;
-        document.getElementById('navProfile').textContent = d.profile;
-        document.getElementById('copyBtn1').textContent = d.copy;
-        document.getElementById('copyBtn2').textContent = d.copy;
+    function updateLanguage(){
+        const d=LANG_DATA[currentLang];
+        if(!d)return;
+        document.getElementById('appName').textContent=d.appName;
+        document.getElementById('appSub').textContent=d.appSub;
+        document.getElementById('pageTitle').textContent=d.pageTitle;
+        document.getElementById('pageSub').textContent=d.pageSub;
+        document.getElementById('summaryTitle').textContent=d.summaryTitle;
+        document.getElementById('methodsTitle').textContent=d.methodsTitle;
+        document.getElementById('itemLabel').textContent=d.itemLabel;
+        document.getElementById('qtyLabel').textContent=d.qtyLabel;
+        document.getElementById('priceLabel').textContent=d.priceLabel;
+        document.getElementById('totalLabel').textContent=d.totalLabel;
+        document.getElementById('itemValue').textContent=d.itemValue;
+        document.getElementById('qtyValue').textContent=d.qtyValue;
+        document.getElementById('priceValue').textContent=d.priceValue;
+        document.getElementById('totalValue').textContent=d.totalValue;
+        document.getElementById('kbzName').textContent=d.kbzName;
+        document.getElementById('kbzDesc').textContent=d.kbzDesc;
+        document.getElementById('waveName').textContent=d.waveName;
+        document.getElementById('waveDesc').textContent=d.waveDesc;
+        document.getElementById('cbName').textContent=d.cbName;
+        document.getElementById('cbDesc').textContent=d.cbDesc;
+        document.getElementById('ayaName').textContent=d.ayaName;
+        document.getElementById('ayaDesc').textContent=d.ayaDesc;
+        document.getElementById('trueName').textContent=d.trueName;
+        document.getElementById('trueDesc').textContent=d.trueDesc;
+        document.getElementById('navHome').textContent=d.home;
+        document.getElementById('navShop').textContent=d.shop;
+        document.getElementById('navPayment').textContent=d.payment;
+        document.getElementById('navProfile').textContent=d.profile;
+        updateAuthUI();
         updateBadge();
     }
 
-    function toggleNightMode() {
+    function toggleNightMode(){
         document.body.classList.toggle('night-mode');
-        const icon = document.querySelector('.night-toggle i');
-        icon.className = document.body.classList.contains('night-mode') ? 'fas fa-sun' : 'fas fa-moon';
-        localStorage.setItem('nightMode', document.body.classList.contains('night-mode') ? 'true' : 'false');
+        const icon=document.querySelector('.night-toggle i');
+        icon.className=document.body.classList.contains('night-mode')?'fas fa-sun':'fas fa-moon';
+        localStorage.setItem('nightMode',document.body.classList.contains('night-mode')?'true':'false');
     }
 
-    function handleNavClick(el, e) {
-        e.preventDefault();
-        const icon = el.querySelector('.icon');
-        if (icon) {
+    function updateBadge(){
+        const notis=JSON.parse(localStorage.getItem('notifications')||'[]');
+        const count=notis.filter(n=>n.status==='pending').length;
+        const badge=document.getElementById('notiBadge');
+        if(badge){
+            badge.style.display=count>0?'block':'none';
+            if(count>0)badge.textContent=count;
+        }
+    }
+
+    function updateAuthUI(){
+        const btn=document.getElementById('authBtn');
+        if(currentUser){
+            const firstChar = (currentUser.displayName || currentUser.username || 'U').charAt(0).toUpperCase();
+            btn.innerHTML='<span class="avatar">'+firstChar+'</span> '+(currentUser.displayName || currentUser.username);
+            btn.className='auth-btn logged-in';
+        }else{
+            btn.innerHTML='<i class="fas fa-key"></i> Login';
+            btn.className='auth-btn';
+        }
+    }
+
+    function selectPayment(method){
+        const d=LANG_DATA[currentLang];
+        // Click effect
+        const items=document.querySelectorAll('.payment-method');
+        items.forEach(el=>{
+            el.style.transition='all 0.12s cubic-bezier(0.34, 1.2, 0.64, 1)';
+            el.style.transform='scale(0.96)';
+            setTimeout(()=>{
+                el.style.transform='';
+                el.style.transition='all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            }, 150);
+        });
+        
+        // Confirm payment
+        if(confirm(method+' ကိုရွေးချယ်လိုက်ပါပြီ။ ငွေပေးချေမှုကိုဆက်လက်လုပ်ဆောင်မလား?')){
+            showToast(d.paymentSuccess || '✅ Payment successful!');
+            setTimeout(()=>{
+                window.location.href = 'index.html';
+            }, 2000);
+        }else{
+            showToast(d.paymentCancel || '❌ Payment cancelled');
+        }
+    }
+
+    // ===== CLICK EFFECTS =====
+    document.querySelectorAll('.payment-method, .shop-card, .service').forEach(el=>{
+        el.addEventListener('click', function(e){
+            if(!this.classList.contains('payment-method')) return;
+        });
+    });
+
+    // ===== NAV BAR CLICK =====
+    document.querySelectorAll('.bottom-nav .nav-item').forEach(item=>{
+        item.addEventListener('click', function(e){
+            document.querySelectorAll('.bottom-nav .nav-item').forEach(n=>n.classList.remove('active'));
+            this.classList.add('active');
+            const icon = this.querySelector('.icon');
             icon.style.animation = 'none';
             void icon.offsetWidth;
-            icon.style.animation = 'selectBounce 0.5s cubic-bezier(0.34,1.56,0.64,1)';
-        }
-        setTimeout(() => { window.location.href = el.getAttribute('href'); }, 400);
-    }
-
-    // ===== BADGE FUNCTIONS =====
-    function getPendingCount() {
-        const notis = JSON.parse(localStorage.getItem('notifications') || '[]');
-        return notis.filter(n => n.status === 'pending').length;
-    }
-
-    function updateBadge() {
-        const count = getPendingCount();
-        const badge = document.getElementById('notiBadge');
-        if (badge) {
-            if (count > 0) {
-                badge.style.display = 'block';
-                badge.textContent = count;
-            } else {
-                badge.style.display = 'none';
-            }
-        }
-    }
-
-    function copyNumber(number, btn) {
-        const d = LANG_DATA[currentLang] || {};
-        navigator.clipboard.writeText(number).then(() => {
-            btn.textContent = d.copied || '✅ Copied!';
-            btn.classList.add('copied');
-            showToast('✅ ' + number + ' ' + (d.copied || 'Copied!'));
-            setTimeout(() => { 
-                btn.textContent = d.copy || 'Copy'; 
-                btn.classList.remove('copied'); 
-            }, 2500);
-        }).catch(() => {
-            const input = document.createElement('input');
-            input.value = number;
-            document.body.appendChild(input);
-            input.select();
-            document.execCommand('copy');
-            document.body.removeChild(input);
-            btn.textContent = d.copied || '✅ Copied!';
-            btn.classList.add('copied');
-            showToast('✅ ' + number + ' ' + (d.copied || 'Copied!'));
-            setTimeout(() => { 
-                btn.textContent = d.copy || 'Copy'; 
-                btn.classList.remove('copied'); 
-            }, 2500);
+            icon.style.animation = 'selectBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
         });
-    }
+    });
+
+    // ===== EVENT LISTENERS =====
+    document.querySelector('.night-toggle').addEventListener('click', toggleNightMode);
+    document.getElementById('authBtn').addEventListener('click', ()=>{
+        if(currentUser) window.location.href='profile.html';
+        else window.location.href='index.html';
+    });
+
+    // Language switcher
+    document.querySelectorAll('.lang-btn').forEach(btn=>{
+        btn.addEventListener('click', function(){
+            const lang=this.dataset.lang;
+            currentLang=lang;
+            localStorage.setItem('lang',lang);
+            document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
+            updateLanguage();
+        });
+    });
 
     // ===== INIT =====
-    document.addEventListener('DOMContentLoaded', function() {
-        const savedLang = localStorage.getItem('lang') || 'my';
-        setLang(savedLang);
-        const nightMode = localStorage.getItem('nightMode') === 'true';
-        if (nightMode) {
+    document.addEventListener('DOMContentLoaded', function(){
+        const savedLang=localStorage.getItem('lang')||'my';
+        currentLang=savedLang;
+        document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===savedLang));
+        updateLanguage();
+        
+        if(localStorage.getItem('nightMode')==='true'){
             document.body.classList.add('night-mode');
-            document.querySelector('.night-toggle i').className = 'fas fa-sun';
+            document.querySelector('.night-toggle i').className='fas fa-sun';
         }
+        updateAuthUI();
         updateBadge();
-
-        window.addEventListener('storage', function(e) {
-            if (e.key === 'newOrderNotification' || e.key === 'notifications') {
-                updateBadge();
-            }
-        });
     });
 </script>
 </body>
