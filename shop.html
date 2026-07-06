@@ -127,65 +127,39 @@
         .game-item .ripple-effect{position:absolute;border-radius:50%;background:rgba(245,166,35,0.15);transform:scale(0);animation:rippleAnim 0.6s ease-out;pointer-events:none}
         @keyframes rippleAnim{to{transform:scale(3);opacity:0}}
         
-        .game-item .badge-corner {
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            background: linear-gradient(135deg, var(--gold), var(--orange));
-            color: #fff;
-            font-size: 0.4rem;
-            font-weight: 800;
-            padding: 2px 12px 2px 10px;
-            border-radius: 0 0 12px 0;
-            box-shadow: 0 2px 15px var(--gold-glow);
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            z-index: 2;
-            transform: rotate(-2deg);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        .game-item .badge-corner.new {
-            background: linear-gradient(135deg, var(--cyan), var(--purple));
-            box-shadow: 0 2px 15px var(--cyan-glow);
-        }
-        .game-item .badge-sub {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--gold), var(--orange));
-            color: #fff;
-            font-size: 0.35rem;
-            font-weight: 700;
-            padding: 1px 8px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px var(--gold-glow);
-            letter-spacing: 0.3px;
-            margin-top: 2px;
-        }
-        .game-item .badge-sub.new {
-            background: linear-gradient(135deg, var(--cyan), var(--purple));
-            box-shadow: 0 2px 10px var(--cyan-glow);
-        }
-        
         .game-item .game-img{width:44px;height:44px;border-radius:12px;object-fit:cover;flex-shrink:0;border:2px solid var(--border-color);transition:all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);position:relative;z-index:1}
         .game-item .game-img-placeholder{font-size:1.8rem;flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:12px;border:2px solid var(--border-color);background:var(--bg-input);transition:all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);position:relative;z-index:1}
         .game-item .info{flex:1;min-width:0;position:relative;z-index:1}
         .game-item .info .name{
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 700;
             color: var(--text-primary);
             display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 4px;
+            flex-direction: column;
             line-height: 1.2;
+        }
+        .game-item .info .name .line1{
+            font-size: 0.75rem;
+        }
+        .game-item .info .name .line2{
+            font-size: 0.85rem;
+            font-weight: 800;
+        }
+        .game-item .info .name .line2.mlbb{
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .game-item .info .name .line2.mcgg{
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .game-item .info .sub{
             font-size: 0.5rem;
             color: var(--text-secondary);
-            margin-top: 2px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-wrap: wrap;
+            margin-top: 3px;
+            opacity: 0.6;
         }
         .game-item .glow{position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(245,166,35,0.04) 0%,transparent 70%);opacity:0;transition:all 0.6s ease;pointer-events:none}
         .game-item:active .glow{opacity:1}
@@ -297,30 +271,28 @@
         <!-- Mobile Legends: Bang Bang -->
         <div class="game-item glass-box" data-name="mobile legends bang bang mlbb" onclick="selectGame('Mobile Legends: Bang Bang', 'mlbb', event)">
             <span class="glow"></span>
-            <span class="badge-corner" id="popularBadge">🔥 POPULAR</span>
             <img src="https://i.ibb.co/cKsDX2Nt/x.jpg" alt="Mobile Legends" class="game-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="game-img-placeholder" style="display:none;">⚔️</span>
             <div class="info">
-                <div class="name">Mobile Legends: <span style="background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Bang Bang</span></div>
-                <div class="sub">
-                    <span>💎 Diamond Top Up</span>
-                    <span class="badge-sub" id="popularSubBadge">🔥 Popular</span>
+                <div class="name">
+                    <span class="line1">Mobile Legends:</span>
+                    <span class="line2 mlbb">Bang Bang</span>
                 </div>
+                <div class="sub" id="mlbbSub">Diamond Top Up</div>
             </div>
         </div>
 
         <!-- Magic Chess: Go Go -->
         <div class="game-item glass-box" data-name="magic chess go go mcgg" onclick="selectGame('Magic Chess: Go Go', 'mcgg', event)">
             <span class="glow"></span>
-            <span class="badge-corner new" id="mcggBadge">✨ NEW</span>
             <img src="https://files.catbox.moe/8lxv1s.jpg" alt="MCGG" class="game-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="game-img-placeholder" style="display:none;">♟️</span>
             <div class="info">
-                <div class="name">Magic Chess: <span style="background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Go Go</span></div>
-                <div class="sub">
-                    <span>💎 Diamond Top Up</span>
-                    <span class="badge-sub new" id="mcggSubBadge">✨ New</span>
+                <div class="name">
+                    <span class="line1">Magic Chess:</span>
+                    <span class="line2 mcgg">Go Go</span>
                 </div>
+                <div class="sub" id="mcggSub">Diamond Top Up</div>
             </div>
         </div>
 
@@ -329,7 +301,9 @@
             <span class="glow"></span>
             <span class="game-img-placeholder">🎮</span>
             <div class="info">
-                <div class="name" id="cs1">Coming Soon</div>
+                <div class="name">
+                    <span class="line1" id="cs1">Coming Soon</span>
+                </div>
                 <div class="sub" id="cs1sub">⏳ အသစ်ထွက်ရှိမည်</div>
             </div>
         </div>
@@ -338,7 +312,9 @@
             <span class="glow"></span>
             <span class="game-img-placeholder">🎯</span>
             <div class="info">
-                <div class="name" id="cs2">Coming Soon</div>
+                <div class="name">
+                    <span class="line1" id="cs2">Coming Soon</span>
+                </div>
                 <div class="sub" id="cs2sub">⏳ အသစ်ထွက်ရှိမည်</div>
             </div>
         </div>
@@ -357,7 +333,7 @@
 <div class="toast" id="toast"></div>
 
 <script>
-    // ===== GLOBAL LANGUAGE DATA (တစ်နေရာတည်းမှာ သိမ်းထား) =====
+    // ===== LANGUAGE DATA =====
     const LANG_DATA = {
         my: {
             appName: 'Premium',
@@ -369,16 +345,14 @@
             pageTitle: 'Game Shop',
             pageSub: '✨ ဂိမ်းတစ်ခုရွေးပြီး စိန်ဖြည့်လိုက်ပါ',
             gamesTitle: 'ဂိမ်းများ',
-            popular: '🔥 POPULAR',
-            popularSub: '🔥 Popular',
-            mcggBadge: '✨ NEW',
-            mcggSubBadge: '✨ New',
             comingSoon: 'Coming Soon',
             comingSoonSub: '⏳ အသစ်ထွက်ရှိမည်',
             searchPlaceholder: '🔍 ဂိမ်းနာမည်ရှာပါ...',
             noGames: '❌ ဂိမ်းမတွေ့ပါ',
             selectGame: 'ရွေးချယ်လိုက်ပါ',
-            comingSoonMsg: '🎮 ဤဂိမ်းကို မကြာမီ ထည့်သွင်းပေးပါမည်။'
+            comingSoonMsg: '🎮 ဤဂိမ်းကို မကြာမီ ထည့်သွင်းပေးပါမည်။',
+            mlbbSub: 'Diamond Top Up',
+            mcggSub: 'Diamond Top Up'
         },
         en: {
             appName: 'Premium',
@@ -390,20 +364,17 @@
             pageTitle: 'Game Shop',
             pageSub: '✨ Choose a game and top up diamonds',
             gamesTitle: 'Games',
-            popular: '🔥 POPULAR',
-            popularSub: '🔥 Popular',
-            mcggBadge: '✨ NEW',
-            mcggSubBadge: '✨ New',
             comingSoon: 'Coming Soon',
             comingSoonSub: '⏳ Coming Soon',
             searchPlaceholder: '🔍 Search game name...',
             noGames: '❌ No games found',
             selectGame: 'Selected',
-            comingSoonMsg: '🎮 This game will be added soon.'
+            comingSoonMsg: '🎮 This game will be added soon.',
+            mlbbSub: 'Diamond Top Up',
+            mcggSub: 'Diamond Top Up'
         }
     };
 
-    // ===== GLOBAL FUNCTIONS (အကုန်လုံးအတွက် တစ်ပုံစံတည်း) =====
     let currentLang = localStorage.getItem('lang') || 'my';
 
     function getText(key) {
@@ -426,7 +397,6 @@
         document.querySelectorAll('.lang-btn').forEach(b => {
             b.classList.toggle('active', b.dataset.lang === lang);
         });
-        // တခြား page တွေကိုလည်း ပြောင်းဖို့ storage event လွှတ်မယ်
         localStorage.setItem('langChanged', Date.now().toString());
     }
 
@@ -440,10 +410,6 @@
             pageTitle: document.getElementById('pageTitle'),
             pageSub: document.getElementById('pageSub'),
             gamesTitle: document.getElementById('gamesTitle'),
-            popularBadge: document.getElementById('popularBadge'),
-            popularSubBadge: document.getElementById('popularSubBadge'),
-            mcggBadge: document.getElementById('mcggBadge'),
-            mcggSubBadge: document.getElementById('mcggSubBadge'),
             cs1: document.getElementById('cs1'),
             cs1sub: document.getElementById('cs1sub'),
             cs2: document.getElementById('cs2'),
@@ -452,7 +418,9 @@
             navHome: document.getElementById('navHome'),
             navShop: document.getElementById('navShop'),
             navPayment: document.getElementById('navPayment'),
-            navProfile: document.getElementById('navProfile')
+            navProfile: document.getElementById('navProfile'),
+            mlbbSub: document.getElementById('mlbbSub'),
+            mcggSub: document.getElementById('mcggSub')
         };
 
         if (elements.appName) elements.appName.textContent = d.appName;
@@ -460,10 +428,6 @@
         if (elements.pageTitle) elements.pageTitle.textContent = d.pageTitle;
         if (elements.pageSub) elements.pageSub.textContent = d.pageSub;
         if (elements.gamesTitle) elements.gamesTitle.textContent = d.gamesTitle;
-        if (elements.popularBadge) elements.popularBadge.textContent = d.popular;
-        if (elements.popularSubBadge) elements.popularSubBadge.textContent = d.popularSub;
-        if (elements.mcggBadge) elements.mcggBadge.textContent = d.mcggBadge;
-        if (elements.mcggSubBadge) elements.mcggSubBadge.textContent = d.mcggSubBadge;
         if (elements.cs1) elements.cs1.textContent = d.comingSoon;
         if (elements.cs1sub) elements.cs1sub.textContent = d.comingSoonSub;
         if (elements.cs2) elements.cs2.textContent = d.comingSoon;
@@ -473,6 +437,8 @@
         if (elements.navShop) elements.navShop.textContent = d.shop;
         if (elements.navPayment) elements.navPayment.textContent = d.payment;
         if (elements.navProfile) elements.navProfile.textContent = d.profile;
+        if (elements.mlbbSub) elements.mlbbSub.textContent = d.mlbbSub;
+        if (elements.mcggSub) elements.mcggSub.textContent = d.mcggSub;
         
         updateBadge();
     }
@@ -567,7 +533,6 @@
     function selectGame(gameName, gameId, event) {
         const item = event.currentTarget;
         
-        // Ripple
         const rect = item.getBoundingClientRect();
         const ripple = document.createElement('span');
         ripple.className = 'ripple-effect';
@@ -578,7 +543,6 @@
         item.appendChild(ripple);
         setTimeout(() => ripple.remove(), 600);
         
-        // Bounce
         item.classList.remove('bounce-click');
         void item.offsetWidth;
         item.classList.add('bounce-click');
@@ -599,11 +563,9 @@
 
     // ===== INIT =====
     document.addEventListener('DOMContentLoaded', function() {
-        // Language
         const savedLang = localStorage.getItem('lang') || 'my';
         setLang(savedLang);
         
-        // Night mode
         const nightMode = localStorage.getItem('nightMode') === 'true';
         if (nightMode) {
             document.body.classList.add('night-mode');
@@ -613,7 +575,6 @@
         
         updateBadge();
 
-        // တခြား page ကနေ ဘာသာစကားပြောင်းရင် ဒီ page ကိုပါ update လုပ်မယ်
         window.addEventListener('storage', function(e) {
             if (e.key === 'langChanged') {
                 const newLang = localStorage.getItem('lang') || 'my';
@@ -636,7 +597,6 @@
             }
         });
 
-        // Keyboard shortcuts
         document.addEventListener('keydown', function(e) {
             if (e.key === '/' && !e.ctrlKey && !e.metaKey && !e.target.matches('input')) {
                 e.preventDefault();
