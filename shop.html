@@ -17,7 +17,6 @@
             --text-secondary: #6b7280;
             --border-color: rgba(0,0,0,0.06);
             --shadow: rgba(0,0,0,0.06);
-            --shadow-hover: rgba(0,0,0,0.1);
             --primary: #6c5ce7;
             --gold: #f5a623;
             --gold-glow: rgba(245,166,35,0.25);
@@ -27,7 +26,6 @@
             --rose: #f43f5e;
             --purple: #7c3aed;
             --indigo: #4f46e5;
-            --pink: #ec4899;
             --red: #ff0044;
         }
 
@@ -55,7 +53,6 @@
 
         .container{max-width:480px;margin:0 auto}
 
-        /* ===== HEADER ===== */
         .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
         .header .left{display:flex;flex-direction:column;gap:8px}
         .header .left .logo-wrap{display:flex;align-items:center;gap:10px}
@@ -75,47 +72,40 @@
         .header .right .top .noti-btn:active{transform:scale(0.92)}
         .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none}
 
-        /* ===== PAGE HEADER ===== */
         .page-header{margin-bottom:16px}
         .page-header h1{font-size:1.3rem;font-weight:800;color:var(--text-primary)}
         .page-header h1 span{
-            background: linear-gradient(135deg, var(--gold), var(--orange), var(--rose), var(--purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 300% 300%;
-            animation: grad 4s ease-in-out infinite;
+            background:linear-gradient(135deg,var(--gold),var(--orange),var(--rose),var(--purple));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            background-size:300% 300%;
+            animation:grad 4s ease-in-out infinite
         }
-        @keyframes grad {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+        @keyframes grad{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
         .page-header h1 i{color:var(--cyan);margin-right:6px}
         .page-header p{color:var(--text-secondary);font-size:0.7rem;margin-top:2px}
 
-        /* ===== SEARCH ===== */
         .search-box{
-            background: var(--bg-card);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 10px 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
+            background:var(--bg-card);
+            backdrop-filter:blur(20px);
+            border:1px solid var(--border-color);
+            border-radius:14px;
+            padding:10px 16px;
+            display:flex;
+            align-items:center;
+            gap:12px;
+            margin-bottom:20px;
+            transition:all .3s ease
         }
         .search-box:focus-within{border-color:var(--gold);box-shadow:0 0 40px var(--gold-glow)}
         .search-box .icon{color:var(--text-secondary);font-size:1rem}
-        .search-box input{background:transparent;border:none;color:var(--text-primary);font-size:0.85rem;flex:1;outline:none;padding:4px 0}
-        .search-box input::placeholder{color:var(--text-secondary);font-size:0.75rem}
-        .search-box .clear-btn{color:var(--text-secondary);font-size:0.8rem;cursor:pointer;padding:4px;display:none}
+        .search-box input{background:transparent;border:none;color:var(--text-primary);font-size:.85rem;flex:1;outline:none;padding:4px 0}
+        .search-box input::placeholder{color:var(--text-secondary);font-size:.75rem}
+        .search-box .clear-btn{color:var(--text-secondary);font-size:.8rem;cursor:pointer;padding:4px;display:none}
         .search-box .clear-btn.show{display:block}
 
-        /* ===== SECTION TITLE ===== */
         .section-title{
-            font-size:0.65rem;
+            font-size:.65rem;
             font-weight:700;
             color:var(--text-secondary);
             text-transform:uppercase;
@@ -124,7 +114,7 @@
             display:flex;
             align-items:center;
             gap:10px;
-            opacity:0.5
+            opacity:.5
         }
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
         .section-title i{
@@ -133,54 +123,48 @@
             -webkit-text-fill-color:transparent
         }
 
-        /* ===== GAME GRID ===== */
         .game-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
         .game-item{
-            background: var(--bg-card);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 12px 14px;
-            cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.34, 1.2, 0.64, 1);
-            box-shadow: 0 4px 20px var(--shadow);
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            position: relative;
-            overflow: hidden;
-            min-height: 72px;
+            background:var(--bg-card);
+            backdrop-filter:blur(20px);
+            border:1px solid var(--border-color);
+            border-radius:14px;
+            padding:12px 14px;
+            cursor:pointer;
+            transition:all .2s cubic-bezier(.34,1.2,.64,1);
+            box-shadow:0 4px 20px var(--shadow);
+            display:flex;
+            align-items:center;
+            gap:14px;
+            position:relative;
+            overflow:hidden;
+            min-height:72px
         }
-        .game-item:active {
-            transform: scale(0.96) !important;
-        }
+        .game-item:active{transform:scale(.96)!important}
         
-        /* Ripple */
         .game-item .ripple-effect{
             position:absolute;
             border-radius:50%;
-            background:rgba(245,166,35,0.15);
+            background:rgba(245,166,35,.15);
             transform:scale(0);
-            animation:rippleAnim 0.6s ease-out;
+            animation:rippleAnim .6s ease-out;
             pointer-events:none
         }
         @keyframes rippleAnim{to{transform:scale(3);opacity:0}}
         
-        /* Glow */
         .game-item .glow{
             position:absolute;
             top:-50%;
             left:-50%;
             width:200%;
             height:200%;
-            background:radial-gradient(circle,rgba(245,166,35,0.05) 0%,transparent 70%);
+            background:radial-gradient(circle,rgba(245,166,35,.05),transparent 70%);
             pointer-events:none;
             opacity:0;
-            transition:opacity 0.6s ease
+            transition:opacity .6s ease
         }
         .game-item:active .glow{opacity:1}
 
-        /* Image */
         .game-item .game-img{
             width:44px;
             height:44px;
@@ -206,35 +190,42 @@
             z-index:1
         }
 
-        /* Info */
         .game-item .info{flex:1;min-width:0;position:relative;z-index:1}
         .game-item .info .name{
-            font-size:0.7rem;
-            font-weight:700;
-            color:var(--text-primary);
             display:flex;
             flex-direction:column;
             line-height:1.2
         }
+        /* Mobile Legends: ကြီးကြီး + အရောင် */
         .game-item .info .name .line1{
-            font-size:0.6rem;
-            opacity:0.6;
-            font-weight:600
-        }
-        .game-item .info .name .line2{
             font-size:0.85rem;
             font-weight:800;
-            margin-top:1px
-        }
-        .game-item .info .name .line2.mlbb{
             background:linear-gradient(135deg,var(--gold),var(--orange),var(--rose));
             -webkit-background-clip:text;
             -webkit-text-fill-color:transparent
         }
-        .game-item .info .name .line2.mcgg{
+        /* Bang Bang: သေးသေး + အရောင်မပါ */
+        .game-item .info .name .line2{
+            font-size:0.6rem;
+            font-weight:600;
+            color:var(--text-secondary);
+            opacity:0.7;
+            margin-top:-1px
+        }
+        /* Magic Chess: Go Go အတွက် */
+        .game-item .info .name .line1.mcgg{
+            font-size:0.85rem;
+            font-weight:800;
             background:linear-gradient(135deg,var(--cyan),var(--purple),var(--indigo));
             -webkit-background-clip:text;
             -webkit-text-fill-color:transparent
+        }
+        .game-item .info .name .line2.mcgg{
+            font-size:0.6rem;
+            font-weight:600;
+            color:var(--text-secondary);
+            opacity:0.7;
+            margin-top:-1px
         }
         .game-item .info .sub{
             font-size:0.5rem;
@@ -244,54 +235,47 @@
             font-weight:500
         }
 
-        /* Hidden */
         .game-item.hidden{display:none}
+        .game-item.bounce-click{animation:bounceSoft .35s cubic-bezier(.34,1.2,.64,1)}
+        @keyframes bounceSoft{0%{transform:scale(1)}35%{transform:scale(.94)}70%{transform:scale(1.02)}100%{transform:scale(1)}}
 
-        /* Bounce */
-        .game-item.bounce-click{animation:bounceSoft 0.35s cubic-bezier(0.34,1.2,0.64,1)}
-        @keyframes bounceSoft{0%{transform:scale(1)}35%{transform:scale(0.94)}70%{transform:scale(1.02)}100%{transform:scale(1)}}
-
-        /* ===== BOTTOM NAV ===== */
         .bottom-nav {
-            position: fixed;
-            bottom: 16px;
-            left: 16px;
-            right: 16px;
-            width: auto;
-            max-width: 480px;
-            margin: 0 auto;
-            background: var(--bg-card);
-            backdrop-filter: blur(24px);
-            border: 1px solid var(--border-color);
-            border-radius: 18px;
-            display: flex;
-            justify-content: space-around;
-            padding: 8px 4px;
-            z-index: 100;
-            box-shadow: 0 4px 20px var(--shadow);
+            position:fixed;
+            bottom:16px;
+            left:16px;
+            right:16px;
+            width:auto;
+            max-width:480px;
+            margin:0 auto;
+            background:var(--bg-card);
+            backdrop-filter:blur(24px);
+            border:1px solid var(--border-color);
+            border-radius:18px;
+            display:flex;
+            justify-content:space-around;
+            padding:8px 4px;
+            z-index:100;
+            box-shadow:0 4px 20px var(--shadow)
         }
         .bottom-nav .nav-item {
-            text-align: center;
-            cursor: pointer;
-            text-decoration: none;
-            color: var(--text-secondary);
-            transition: all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
-            padding: 6px 12px;
-            border-radius: 12px;
-            min-width: 48px;
-            border: 1px solid transparent;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1px;
+            text-align:center;
+            cursor:pointer;
+            text-decoration:none;
+            color:var(--text-secondary);
+            transition:all .3s cubic-bezier(.34,1.2,.64,1);
+            padding:6px 12px;
+            border-radius:12px;
+            min-width:48px;
+            border:1px solid transparent;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            gap:1px
         }
-        .bottom-nav .nav-item:active { transform: scale(0.88); }
+        .bottom-nav .nav-item:active{transform:scale(.88)}
         .bottom-nav .nav-item .icon{font-size:1.2rem;display:block}
-        .bottom-nav .nav-item .label{font-size:0.4rem;letter-spacing:0.5px;opacity:0.5;font-weight:400}
-        .bottom-nav .nav-item.active {
-            background: rgba(108,92,231,0.06);
-            border: 1px solid rgba(108,92,231,0.08);
-        }
+        .bottom-nav .nav-item .label{font-size:.4rem;letter-spacing:.5px;opacity:.5;font-weight:400}
+        .bottom-nav .nav-item.active{background:rgba(108,92,231,.06);border:1px solid rgba(108,92,231,.08)}
         .bottom-nav .nav-item.active .icon{
             transform:translateY(-2px) scale(1.1);
             background:linear-gradient(135deg,var(--gold),var(--orange),var(--rose));
@@ -306,10 +290,8 @@
             font-weight:600
         }
 
-        /* ===== FOOTER ===== */
-        .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.3;letter-spacing:1px}
+        .footer-text{text-align:center;color:var(--text-secondary);font-size:.45rem;margin-top:10px;opacity:.3;letter-spacing:1px}
 
-        /* ===== TOAST ===== */
         .toast{
             position:fixed;
             bottom:85px;
@@ -321,28 +303,21 @@
             border:1px solid var(--border-color);
             color:var(--primary);
             font-weight:600;
-            font-size:0.75rem;
+            font-size:.75rem;
             display:none;
             z-index:200;
             text-align:center;
             max-width:90%;
             box-shadow:0 4px 20px var(--shadow)
         }
-        .toast.show{display:block;animation:toastPop 0.4s cubic-bezier(0.34,1.56,0.64,1)}
-        @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
+        .toast.show{display:block;animation:toastPop .4s cubic-bezier(.34,1.56,.64,1)}
+        @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
 
-        .glass-box {
-            background: var(--bg-card);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-        }
+        .glass-box{background:var(--bg-card);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:16px}
     </style>
 </head>
 <body>
 <div class="container">
-    <!-- HEADER -->
     <div class="header">
         <div class="left">
             <div class="logo-wrap">
@@ -365,23 +340,19 @@
         </div>
     </div>
 
-    <!-- PAGE HEADER -->
     <div class="page-header">
         <h1><i class="fas fa-store"></i> <span id="pageTitle">Game Shop</span></h1>
         <p id="pageSub">✨ ဂိမ်းတစ်ခုရွေးပြီး စိန်ဖြည့်လိုက်ပါ</p>
     </div>
 
-    <!-- SEARCH -->
     <div class="search-box">
         <span class="icon"><i class="fas fa-search"></i></span>
         <input type="text" id="searchInput" placeholder="🔍 ဂိမ်းနာမည်ရှာပါ..." oninput="searchGames(this.value)">
         <span class="clear-btn" id="clearBtn" onclick="clearSearch()"><i class="fas fa-times-circle"></i></span>
     </div>
 
-    <!-- GAMES TITLE -->
     <div class="section-title"><i class="fas fa-gamepad"></i> <span id="gamesTitle">ဂိမ်းများ</span></div>
 
-    <!-- GAME GRID -->
     <div class="game-grid" id="gameGrid">
         <!-- Mobile Legends: Bang Bang -->
         <div class="game-item glass-box" data-name="mobile legends bang bang mlbb" onclick="selectGame('Mobile Legends: Bang Bang', 'mlbb', event)">
@@ -390,8 +361,8 @@
             <span class="game-img-placeholder" style="display:none;">⚔️</span>
             <div class="info">
                 <div class="name">
-                    <span class="line1">Mobile Legends:</span>
-                    <span class="line2 mlbb">Bang Bang</span>
+                    <span class="line1">Mobile Legends</span>
+                    <span class="line2">Bang Bang</span>
                 </div>
                 <div class="sub" id="mlbbSub">Diamond Top Up</div>
             </div>
@@ -404,7 +375,7 @@
             <span class="game-img-placeholder" style="display:none;">♟️</span>
             <div class="info">
                 <div class="name">
-                    <span class="line1">Magic Chess:</span>
+                    <span class="line1 mcgg">Magic Chess</span>
                     <span class="line2 mcgg">Go Go</span>
                 </div>
                 <div class="sub" id="mcggSub">Diamond Top Up</div>
@@ -417,7 +388,7 @@
             <span class="game-img-placeholder">🎮</span>
             <div class="info">
                 <div class="name">
-                    <span class="line1" id="cs1">Coming Soon</span>
+                    <span class="line1" id="cs1" style="font-size:0.8rem;background:var(--text-secondary);-webkit-background-clip:text;-webkit-text-fill-color:var(--text-secondary)">Coming Soon</span>
                 </div>
                 <div class="sub" id="cs1sub">⏳ အသစ်ထွက်ရှိမည်</div>
             </div>
@@ -429,7 +400,7 @@
             <span class="game-img-placeholder">🎯</span>
             <div class="info">
                 <div class="name">
-                    <span class="line1" id="cs2">Coming Soon</span>
+                    <span class="line1" id="cs2" style="font-size:0.8rem;background:var(--text-secondary);-webkit-background-clip:text;-webkit-text-fill-color:var(--text-secondary)">Coming Soon</span>
                 </div>
                 <div class="sub" id="cs2sub">⏳ အသစ်ထွက်ရှိမည်</div>
             </div>
@@ -439,7 +410,6 @@
     <div class="footer-text">&copy; 2026 Premium Game Shop</div>
 </div>
 
-<!-- BOTTOM NAV -->
 <div class="bottom-nav">
     <a href="index.html" class="nav-item" onclick="handleNavClick(this, event)"><span class="icon"><i class="fas fa-home"></i></span><span class="label" id="navHome">ပင်မ</span></a>
     <a href="shop.html" class="nav-item active" onclick="handleNavClick(this, event)"><span class="icon"><i class="fas fa-shopping-bag"></i></span><span class="label" id="navShop">ဆိုင်</span></a>
@@ -450,268 +420,156 @@
 <div class="toast" id="toast"></div>
 
 <script>
-    // ===== LANGUAGE DATA =====
     const LANG_DATA = {
         my: {
-            appName: 'Premium',
-            appSub: 'Game Shop',
-            home: 'ပင်မ',
-            shop: 'ဆိုင်',
-            payment: 'ငွေပေးချေ',
-            profile: 'ပရိုဖိုင်',
-            pageTitle: 'Game Shop',
-            pageSub: '✨ ဂိမ်းတစ်ခုရွေးပြီး စိန်ဖြည့်လိုက်ပါ',
-            gamesTitle: 'ဂိမ်းများ',
-            comingSoon: 'Coming Soon',
-            comingSoonSub: '⏳ အသစ်ထွက်ရှိမည်',
-            searchPlaceholder: '🔍 ဂိမ်းနာမည်ရှာပါ...',
-            noGames: '❌ ဂိမ်းမတွေ့ပါ',
-            selectGame: 'ရွေးချယ်လိုက်ပါ',
-            comingSoonMsg: '🎮 ဤဂိမ်းကို မကြာမီ ထည့်သွင်းပေးပါမည်။',
-            mlbbSub: 'Diamond Top Up',
-            mcggSub: 'Diamond Top Up'
+            appName:'Premium',appSub:'Game Shop',
+            home:'ပင်မ',shop:'ဆိုင်',payment:'ငွေပေးချေ',profile:'ပရိုဖိုင်',
+            pageTitle:'Game Shop',pageSub:'✨ ဂိမ်းတစ်ခုရွေးပြီး စိန်ဖြည့်လိုက်ပါ',
+            gamesTitle:'ဂိမ်းများ',
+            comingSoon:'Coming Soon',comingSoonSub:'⏳ အသစ်ထွက်ရှိမည်',
+            searchPlaceholder:'🔍 ဂိမ်းနာမည်ရှာပါ...',
+            noGames:'❌ ဂိမ်းမတွေ့ပါ',
+            selectGame:'ရွေးချယ်လိုက်ပါ',
+            comingSoonMsg:'🎮 ဤဂိမ်းကို မကြာမီ ထည့်သွင်းပေးပါမည်။',
+            mlbbSub:'Diamond Top Up',
+            mcggSub:'Diamond Top Up'
         },
         en: {
-            appName: 'Premium',
-            appSub: 'Game Shop',
-            home: 'Home',
-            shop: 'Shop',
-            payment: 'Payment',
-            profile: 'Profile',
-            pageTitle: 'Game Shop',
-            pageSub: '✨ Choose a game and top up diamonds',
-            gamesTitle: 'Games',
-            comingSoon: 'Coming Soon',
-            comingSoonSub: '⏳ Coming Soon',
-            searchPlaceholder: '🔍 Search game name...',
-            noGames: '❌ No games found',
-            selectGame: 'Selected',
-            comingSoonMsg: '🎮 This game will be added soon.',
-            mlbbSub: 'Diamond Top Up',
-            mcggSub: 'Diamond Top Up'
+            appName:'Premium',appSub:'Game Shop',
+            home:'Home',shop:'Shop',payment:'Payment',profile:'Profile',
+            pageTitle:'Game Shop',pageSub:'✨ Choose a game and top up diamonds',
+            gamesTitle:'Games',
+            comingSoon:'Coming Soon',comingSoonSub:'⏳ Coming Soon',
+            searchPlaceholder:'🔍 Search game name...',
+            noGames:'❌ No games found',
+            selectGame:'Selected',
+            comingSoonMsg:'🎮 This game will be added soon.',
+            mlbbSub:'Diamond Top Up',
+            mcggSub:'Diamond Top Up'
         }
     };
 
     let currentLang = localStorage.getItem('lang') || 'my';
 
-    function getText(key) {
-        return LANG_DATA[currentLang]?.[key] || key;
-    }
-
-    function showToast(msg) {
-        const t = document.getElementById('toast');
-        if (!t) return;
-        t.textContent = msg;
+    function getText(k){return LANG_DATA[currentLang]?.[k]||k}
+    function showToast(m){
+        const t=document.getElementById('toast');
+        if(!t)return;
+        t.textContent=m;
         t.classList.add('show');
         clearTimeout(t._timer);
-        t._timer = setTimeout(() => t.classList.remove('show'), 3000);
+        t._timer=setTimeout(()=>t.classList.remove('show'),3000);
     }
-
-    function setLang(lang) {
-        currentLang = lang;
-        localStorage.setItem('lang', lang);
+    function setLang(l){
+        currentLang=l;
+        localStorage.setItem('lang',l);
         updateLanguage();
-        document.querySelectorAll('.lang-btn').forEach(b => {
-            b.classList.toggle('active', b.dataset.lang === lang);
-        });
-        localStorage.setItem('langChanged', Date.now().toString());
+        document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
+        localStorage.setItem('langChanged',Date.now().toString());
     }
-
-    function updateLanguage() {
-        const d = LANG_DATA[currentLang];
-        if (!d) return;
-        
-        const ids = ['appName','appSub','pageTitle','pageSub','gamesTitle','cs1','cs1sub','cs2','cs2sub','searchInput','navHome','navShop','navPayment','navProfile','mlbbSub','mcggSub'];
-        const map = {
-            appName: d.appName,
-            appSub: d.appSub,
-            pageTitle: d.pageTitle,
-            pageSub: d.pageSub,
-            gamesTitle: d.gamesTitle,
-            cs1: d.comingSoon,
-            cs1sub: d.comingSoonSub,
-            cs2: d.comingSoon,
-            cs2sub: d.comingSoonSub,
-            searchInput: d.searchPlaceholder,
-            navHome: d.home,
-            navShop: d.shop,
-            navPayment: d.payment,
-            navProfile: d.profile,
-            mlbbSub: d.mlbbSub,
-            mcggSub: d.mcggSub
+    function updateLanguage(){
+        const d=LANG_DATA[currentLang];
+        if(!d)return;
+        const map={
+            appName:d.appName,appSub:d.appSub,pageTitle:d.pageTitle,pageSub:d.pageSub,
+            gamesTitle:d.gamesTitle,cs1:d.comingSoon,cs1sub:d.comingSoonSub,
+            cs2:d.comingSoon,cs2sub:d.comingSoonSub,
+            searchInput:d.searchPlaceholder,
+            navHome:d.home,navShop:d.shop,navPayment:d.payment,navProfile:d.profile,
+            mlbbSub:d.mlbbSub,mcggSub:d.mcggSub
         };
-        
-        ids.forEach(id => {
-            const el = document.getElementById(id);
-            if (el) {
-                if (id === 'searchInput') {
-                    el.placeholder = map[id];
-                } else {
-                    el.textContent = map[id];
-                }
+        Object.keys(map).forEach(id=>{
+            const el=document.getElementById(id);
+            if(el){
+                if(id==='searchInput')el.placeholder=map[id];
+                else el.textContent=map[id];
             }
         });
-        
         updateBadge();
     }
-
-    function toggleNightMode() {
+    function toggleNightMode(){
         document.body.classList.toggle('night-mode');
-        const icon = document.querySelector('.night-toggle i');
-        if (icon) {
-            icon.className = document.body.classList.contains('night-mode') ? 'fas fa-sun' : 'fas fa-moon';
-        }
-        localStorage.setItem('nightMode', document.body.classList.contains('night-mode') ? 'true' : 'false');
+        const icon=document.querySelector('.night-toggle i');
+        if(icon)icon.className=document.body.classList.contains('night-mode')?'fas fa-sun':'fas fa-moon';
+        localStorage.setItem('nightMode',document.body.classList.contains('night-mode')?'true':'false');
     }
-
-    function handleNavClick(el, e) {
-        e.preventDefault();
-        setTimeout(() => { window.location.href = el.getAttribute('href'); }, 300);
+    function handleNavClick(el,e){e.preventDefault();setTimeout(()=>{window.location.href=el.getAttribute('href')},300)}
+    function getPendingCount(){
+        try{return JSON.parse(localStorage.getItem('notifications')||'[]').filter(n=>n.status==='pending').length}catch{return 0}
     }
-
-    function getPendingCount() {
-        try {
-            const notis = JSON.parse(localStorage.getItem('notifications') || '[]');
-            return notis.filter(n => n.status === 'pending').length;
-        } catch {
-            return 0;
-        }
+    function updateBadge(){
+        const c=getPendingCount(),b=document.getElementById('notiBadge');
+        if(b){b.style.display=c>0?'block':'none';if(c>0)b.textContent=c}
     }
-
-    function updateBadge() {
-        const count = getPendingCount();
-        const badge = document.getElementById('notiBadge');
-        if (badge) {
-            badge.style.display = count > 0 ? 'block' : 'none';
-            if (count > 0) badge.textContent = count;
-        }
-    }
-
-    function searchGames(query) {
-        const q = query.toLowerCase().trim();
-        const items = document.querySelectorAll('.game-item');
-        const clearBtn = document.getElementById('clearBtn');
-        let found = false;
-
-        items.forEach(item => {
-            const name = item.dataset.name || '';
-            if (name.includes(q) || q === '') {
-                item.classList.remove('hidden');
-                found = true;
-            } else {
-                item.classList.add('hidden');
-            }
+    function searchGames(q){
+        const query=q.toLowerCase().trim(),items=document.querySelectorAll('.game-item'),clearBtn=document.getElementById('clearBtn');
+        let found=false;
+        items.forEach(item=>{
+            const name=item.dataset.name||'';
+            if(name.includes(query)||query===''){item.classList.remove('hidden');found=true}
+            else item.classList.add('hidden');
         });
-
-        if (q.length > 0 && clearBtn) clearBtn.classList.add('show');
-        else if (clearBtn) clearBtn.classList.remove('show');
-
-        let noMsg = document.getElementById('noGamesMsg');
-        if (!found && q.length > 0) {
-            if (!noMsg) {
-                noMsg = document.createElement('div');
-                noMsg.id = 'noGamesMsg';
-                noMsg.style.cssText = 'text-align:center;padding:40px 0;color:var(--text-secondary);font-size:0.85rem;grid-column:1/-1';
-                document.getElementById('gameGrid').appendChild(noMsg);
-            }
-            noMsg.textContent = getText('noGames');
-            noMsg.style.display = 'block';
-        } else if (noMsg) {
-            noMsg.style.display = 'none';
-        }
+        if(query.length>0&&clearBtn)clearBtn.classList.add('show');
+        else if(clearBtn)clearBtn.classList.remove('show');
+        let noMsg=document.getElementById('noGamesMsg');
+        if(!found&&query.length>0){
+            if(!noMsg){noMsg=document.createElement('div');noMsg.id='noGamesMsg';noMsg.style.cssText='text-align:center;padding:40px 0;color:var(--text-secondary);font-size:0.85rem;grid-column:1/-1';document.getElementById('gameGrid').appendChild(noMsg)}
+            noMsg.textContent=getText('noGames');noMsg.style.display='block';
+        }else if(noMsg)noMsg.style.display='none';
     }
-
-    function clearSearch() {
-        const input = document.getElementById('searchInput');
-        if (input) {
-            input.value = '';
-            searchGames('');
-        }
-        const clearBtn = document.getElementById('clearBtn');
-        if (clearBtn) clearBtn.classList.remove('show');
-        if (input) input.focus();
+    function clearSearch(){
+        const input=document.getElementById('searchInput');
+        if(input){input.value='';searchGames('')}
+        const clearBtn=document.getElementById('clearBtn');
+        if(clearBtn)clearBtn.classList.remove('show');
+        if(input)input.focus();
     }
-
-    function selectGame(gameName, gameId, event) {
-        const item = event.currentTarget;
-        
-        // Ripple
-        const rect = item.getBoundingClientRect();
-        const ripple = document.createElement('span');
-        ripple.className = 'ripple-effect';
-        const size = Math.max(rect.width, rect.height) * 0.5;
-        ripple.style.width = ripple.style.height = size + 'px';
-        ripple.style.left = (event.clientX - rect.left - size/2) + 'px';
-        ripple.style.top = (event.clientY - rect.top - size/2) + 'px';
+    function selectGame(gameName,gameId,event){
+        const item=event.currentTarget;
+        const rect=item.getBoundingClientRect();
+        const ripple=document.createElement('span');
+        ripple.className='ripple-effect';
+        const size=Math.max(rect.width,rect.height)*0.5;
+        ripple.style.width=ripple.style.height=size+'px';
+        ripple.style.left=(event.clientX-rect.left-size/2)+'px';
+        ripple.style.top=(event.clientY-rect.top-size/2)+'px';
         item.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 600);
-        
-        // Bounce
+        setTimeout(()=>ripple.remove(),600);
         item.classList.remove('bounce-click');
         void item.offsetWidth;
         item.classList.add('bounce-click');
-        
-        showToast('🎮 ' + gameName + ' ' + getText('selectGame') + '!');
-        localStorage.setItem('selectedGame', JSON.stringify({ name: gameName, id: gameId }));
-        
-        if (gameId === 'mlbb') {
-            setTimeout(() => { window.location.href = 'mlbb-packages.html'; }, 500);
-        } else if (gameId === 'mcgg') {
-            setTimeout(() => { window.location.href = 'mcgg-packages.html'; }, 500);
-        }
+        showToast('🎮 '+gameName+' '+getText('selectGame')+'!');
+        localStorage.setItem('selectedGame',JSON.stringify({name:gameName,id:gameId}));
+        if(gameId==='mlbb')setTimeout(()=>{window.location.href='mlbb-packages.html'},500);
+        else if(gameId==='mcgg')setTimeout(()=>{window.location.href='mcgg-packages.html'},500);
     }
+    function showComingSoon(){showToast(getText('comingSoonMsg'))}
 
-    function showComingSoon() {
-        showToast(getText('comingSoonMsg'));
-    }
-
-    // ===== INIT =====
-    document.addEventListener('DOMContentLoaded', function() {
-        const savedLang = localStorage.getItem('lang') || 'my';
+    document.addEventListener('DOMContentLoaded',function(){
+        const savedLang=localStorage.getItem('lang')||'my';
         setLang(savedLang);
-        
-        const nightMode = localStorage.getItem('nightMode') === 'true';
-        if (nightMode) {
+        if(localStorage.getItem('nightMode')==='true'){
             document.body.classList.add('night-mode');
-            const icon = document.querySelector('.night-toggle i');
-            if (icon) icon.className = 'fas fa-sun';
+            const icon=document.querySelector('.night-toggle i');
+            if(icon)icon.className='fas fa-sun';
         }
-        
         updateBadge();
-
-        window.addEventListener('storage', function(e) {
-            if (e.key === 'langChanged') {
-                const newLang = localStorage.getItem('lang') || 'my';
-                if (newLang !== currentLang) {
-                    currentLang = newLang;
-                    updateLanguage();
-                    document.querySelectorAll('.lang-btn').forEach(b => {
-                        b.classList.toggle('active', b.dataset.lang === currentLang);
-                    });
-                }
+        window.addEventListener('storage',function(e){
+            if(e.key==='langChanged'){
+                const nl=localStorage.getItem('lang')||'my';
+                if(nl!==currentLang){currentLang=nl;updateLanguage();document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===currentLang))}
             }
-            if (e.key === 'newOrderNotification' || e.key === 'notifications') {
-                updateBadge();
-            }
-            if (e.key === 'nightMode') {
-                const isNight = localStorage.getItem('nightMode') === 'true';
-                document.body.classList.toggle('night-mode', isNight);
-                const icon = document.querySelector('.night-toggle i');
-                if (icon) icon.className = isNight ? 'fas fa-sun' : 'fas fa-moon';
+            if(e.key==='newOrderNotification'||e.key==='notifications')updateBadge();
+            if(e.key==='nightMode'){
+                const isNight=localStorage.getItem('nightMode')==='true';
+                document.body.classList.toggle('night-mode',isNight);
+                const icon=document.querySelector('.night-toggle i');
+                if(icon)icon.className=isNight?'fas fa-sun':'fas fa-moon';
             }
         });
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === '/' && !e.ctrlKey && !e.metaKey && !e.target.matches('input')) {
-                e.preventDefault();
-                const input = document.getElementById('searchInput');
-                if (input) input.focus();
-            }
-            if (e.key === 'Escape') {
-                clearSearch();
-                const input = document.getElementById('searchInput');
-                if (input) input.blur();
-            }
+        document.addEventListener('keydown',function(e){
+            if(e.key==='/'&&!e.ctrlKey&&!e.metaKey&&!e.target.matches('input')){e.preventDefault();const input=document.getElementById('searchInput');if(input)input.focus()}
+            if(e.key==='Escape'){clearSearch();const input=document.getElementById('searchInput');if(input)input.blur()}
         });
     });
 </script>
