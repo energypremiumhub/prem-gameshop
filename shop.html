@@ -102,7 +102,6 @@
         .search-box .clear-btn:active{transform:scale(0.85)}
         .search-box .clear-btn.show{display:block}
 
-        /* ===== GAME GRID ===== */
         .game-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
         .game-item{
             background: var(--bg-card);
@@ -120,18 +119,14 @@
             overflow: hidden;
             min-height: 72px;
         }
-        /* နှိပ်လိုက်တဲ့အခါ နူးညံ့တဲ့ animation - အပေါ်မတက်တော့ဘူး */
         .game-item:active {
             transform: scale(0.96) !important;
             transition: transform 0.12s cubic-bezier(0.34, 1.2, 0.64, 1) !important;
         }
         
-        /* ===== SOFT CLICK RIPPLE ===== */
         .game-item .ripple-effect{position:absolute;border-radius:50%;background:rgba(245,166,35,0.15);transform:scale(0);animation:rippleAnim 0.6s ease-out;pointer-events:none}
         @keyframes rippleAnim{to{transform:scale(3);opacity:0}}
         
-        /* ===== BADGE STYLES ===== */
-        /* စောင်းစောင်းလေးထားတဲ့ badge - ဘယ်ဘက်အပေါ် */
         .game-item .badge-corner {
             position: absolute;
             top: -2px;
@@ -153,7 +148,6 @@
             background: linear-gradient(135deg, var(--cyan), var(--purple));
             box-shadow: 0 2px 15px var(--cyan-glow);
         }
-        /* အောက်ခြေမှာ ထားတဲ့ badge */
         .game-item .badge-sub {
             display: inline-block;
             background: linear-gradient(135deg, var(--gold), var(--orange));
@@ -197,7 +191,6 @@
         .game-item:active .glow{opacity:1}
         .game-item.hidden{display:none}
 
-        /* ===== SOFT BOUNCE ===== */
         .game-item.bounce-click{animation:bounceSoft 0.35s cubic-bezier(0.34, 1.2, 0.64, 1)}
         @keyframes bounceSoft{0%{transform:scale(1)}35%{transform:scale(0.94)}70%{transform:scale(1.02)}100%{transform:scale(1)}}
 
@@ -252,7 +245,6 @@
         .toast.show{display:block}
         @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
         @keyframes floatIcon {0%,100%{transform:translateY(0px)}50%{transform:translateY(-6px)}}
 
         .gradient-text {
@@ -365,7 +357,7 @@
 <div class="toast" id="toast"></div>
 
 <script>
-    // ===== LANGUAGE DATA =====
+    // ===== GLOBAL LANGUAGE DATA (တစ်နေရာတည်းမှာ သိမ်းထား) =====
     const LANG_DATA = {
         my: {
             appName: 'Premium',
@@ -386,11 +378,7 @@
             searchPlaceholder: '🔍 ဂိမ်းနာမည်ရှာပါ...',
             noGames: '❌ ဂိမ်းမတွေ့ပါ',
             selectGame: 'ရွေးချယ်လိုက်ပါ',
-            comingSoonMsg: '🎮 ဤဂိမ်းကို မကြာမီ ထည့်သွင်းပေးပါမည်။',
-            mlbbName: 'Mobile Legends: Bang Bang',
-            mlbbSub: '💎 Diamond Top Up',
-            mcggName: 'Magic Chess: Go Go',
-            mcggSub: '💎 Diamond Top Up'
+            comingSoonMsg: '🎮 ဤဂိမ်းကို မကြာမီ ထည့်သွင်းပေးပါမည်။'
         },
         en: {
             appName: 'Premium',
@@ -411,14 +399,11 @@
             searchPlaceholder: '🔍 Search game name...',
             noGames: '❌ No games found',
             selectGame: 'Selected',
-            comingSoonMsg: '🎮 This game will be added soon.',
-            mlbbName: 'Mobile Legends: Bang Bang',
-            mlbbSub: '💎 Diamond Top Up',
-            mcggName: 'Magic Chess: Go Go',
-            mcggSub: '💎 Diamond Top Up'
+            comingSoonMsg: '🎮 This game will be added soon.'
         }
     };
 
+    // ===== GLOBAL FUNCTIONS (အကုန်လုံးအတွက် တစ်ပုံစံတည်း) =====
     let currentLang = localStorage.getItem('lang') || 'my';
 
     function getText(key) {
@@ -427,6 +412,7 @@
 
     function showToast(msg) {
         const t = document.getElementById('toast');
+        if (!t) return;
         t.textContent = msg;
         t.classList.add('show');
         clearTimeout(t._timer);
@@ -440,46 +426,53 @@
         document.querySelectorAll('.lang-btn').forEach(b => {
             b.classList.toggle('active', b.dataset.lang === lang);
         });
+        // တခြား page တွေကိုလည်း ပြောင်းဖို့ storage event လွှတ်မယ်
+        localStorage.setItem('langChanged', Date.now().toString());
     }
 
     function updateLanguage() {
         const d = LANG_DATA[currentLang];
         if (!d) return;
         
-        // Header
-        document.getElementById('appName').textContent = d.appName;
-        document.getElementById('appSub').textContent = d.appSub;
-        
-        // Page
-        document.getElementById('pageTitle').textContent = d.pageTitle;
-        document.getElementById('pageSub').textContent = d.pageSub;
-        document.getElementById('gamesTitle').textContent = d.gamesTitle;
-        
-        // Badges - အခုမှ ID မှန်အောင်ပြင်ထား
-        const popularBadge = document.getElementById('popularBadge');
-        const popularSubBadge = document.getElementById('popularSubBadge');
-        const mcggBadge = document.getElementById('mcggBadge');
-        const mcggSubBadge = document.getElementById('mcggSubBadge');
-        
-        if (popularBadge) popularBadge.textContent = d.popular;
-        if (popularSubBadge) popularSubBadge.textContent = d.popularSub;
-        if (mcggBadge) mcggBadge.textContent = d.mcggBadge;
-        if (mcggSubBadge) mcggSubBadge.textContent = d.mcggSubBadge;
-        
-        // Coming Soon
-        document.getElementById('cs1').textContent = d.comingSoon;
-        document.getElementById('cs1sub').textContent = d.comingSoonSub;
-        document.getElementById('cs2').textContent = d.comingSoon;
-        document.getElementById('cs2sub').textContent = d.comingSoonSub;
-        
-        // Search
-        document.getElementById('searchInput').placeholder = d.searchPlaceholder;
-        
-        // Nav
-        document.getElementById('navHome').textContent = d.home;
-        document.getElementById('navShop').textContent = d.shop;
-        document.getElementById('navPayment').textContent = d.payment;
-        document.getElementById('navProfile').textContent = d.profile;
+        const elements = {
+            appName: document.getElementById('appName'),
+            appSub: document.getElementById('appSub'),
+            pageTitle: document.getElementById('pageTitle'),
+            pageSub: document.getElementById('pageSub'),
+            gamesTitle: document.getElementById('gamesTitle'),
+            popularBadge: document.getElementById('popularBadge'),
+            popularSubBadge: document.getElementById('popularSubBadge'),
+            mcggBadge: document.getElementById('mcggBadge'),
+            mcggSubBadge: document.getElementById('mcggSubBadge'),
+            cs1: document.getElementById('cs1'),
+            cs1sub: document.getElementById('cs1sub'),
+            cs2: document.getElementById('cs2'),
+            cs2sub: document.getElementById('cs2sub'),
+            searchInput: document.getElementById('searchInput'),
+            navHome: document.getElementById('navHome'),
+            navShop: document.getElementById('navShop'),
+            navPayment: document.getElementById('navPayment'),
+            navProfile: document.getElementById('navProfile')
+        };
+
+        if (elements.appName) elements.appName.textContent = d.appName;
+        if (elements.appSub) elements.appSub.textContent = d.appSub;
+        if (elements.pageTitle) elements.pageTitle.textContent = d.pageTitle;
+        if (elements.pageSub) elements.pageSub.textContent = d.pageSub;
+        if (elements.gamesTitle) elements.gamesTitle.textContent = d.gamesTitle;
+        if (elements.popularBadge) elements.popularBadge.textContent = d.popular;
+        if (elements.popularSubBadge) elements.popularSubBadge.textContent = d.popularSub;
+        if (elements.mcggBadge) elements.mcggBadge.textContent = d.mcggBadge;
+        if (elements.mcggSubBadge) elements.mcggSubBadge.textContent = d.mcggSubBadge;
+        if (elements.cs1) elements.cs1.textContent = d.comingSoon;
+        if (elements.cs1sub) elements.cs1sub.textContent = d.comingSoonSub;
+        if (elements.cs2) elements.cs2.textContent = d.comingSoon;
+        if (elements.cs2sub) elements.cs2sub.textContent = d.comingSoonSub;
+        if (elements.searchInput) elements.searchInput.placeholder = d.searchPlaceholder;
+        if (elements.navHome) elements.navHome.textContent = d.home;
+        if (elements.navShop) elements.navShop.textContent = d.shop;
+        if (elements.navPayment) elements.navPayment.textContent = d.payment;
+        if (elements.navProfile) elements.navProfile.textContent = d.profile;
         
         updateBadge();
     }
@@ -487,7 +480,9 @@
     function toggleNightMode() {
         document.body.classList.toggle('night-mode');
         const icon = document.querySelector('.night-toggle i');
-        icon.className = document.body.classList.contains('night-mode') ? 'fas fa-sun' : 'fas fa-moon';
+        if (icon) {
+            icon.className = document.body.classList.contains('night-mode') ? 'fas fa-sun' : 'fas fa-moon';
+        }
         localStorage.setItem('nightMode', document.body.classList.contains('night-mode') ? 'true' : 'false');
     }
 
@@ -503,8 +498,12 @@
     }
 
     function getPendingCount() {
-        const notis = JSON.parse(localStorage.getItem('notifications') || '[]');
-        return notis.filter(n => n.status === 'pending').length;
+        try {
+            const notis = JSON.parse(localStorage.getItem('notifications') || '[]');
+            return notis.filter(n => n.status === 'pending').length;
+        } catch {
+            return 0;
+        }
     }
 
     function updateBadge() {
@@ -536,8 +535,8 @@
             }
         });
 
-        if (q.length > 0) clearBtn.classList.add('show');
-        else clearBtn.classList.remove('show');
+        if (q.length > 0 && clearBtn) clearBtn.classList.add('show');
+        else if (clearBtn) clearBtn.classList.remove('show');
 
         let noMsg = document.getElementById('noGamesMsg');
         if (!found && q.length > 0) {
@@ -555,16 +554,20 @@
     }
 
     function clearSearch() {
-        document.getElementById('searchInput').value = '';
-        searchGames('');
-        document.getElementById('clearBtn').classList.remove('show');
-        document.getElementById('searchInput').focus();
+        const input = document.getElementById('searchInput');
+        if (input) {
+            input.value = '';
+            searchGames('');
+        }
+        const clearBtn = document.getElementById('clearBtn');
+        if (clearBtn) clearBtn.classList.remove('show');
+        if (input) input.focus();
     }
 
     function selectGame(gameName, gameId, event) {
         const item = event.currentTarget;
         
-        // Ripple effect
+        // Ripple
         const rect = item.getBoundingClientRect();
         const ripple = document.createElement('span');
         ripple.className = 'ripple-effect';
@@ -575,7 +578,7 @@
         item.appendChild(ripple);
         setTimeout(() => ripple.remove(), 600);
         
-        // Soft bounce
+        // Bounce
         item.classList.remove('bounce-click');
         void item.offsetWidth;
         item.classList.add('bounce-click');
@@ -596,33 +599,54 @@
 
     // ===== INIT =====
     document.addEventListener('DOMContentLoaded', function() {
-        // Set language
+        // Language
         const savedLang = localStorage.getItem('lang') || 'my';
         setLang(savedLang);
         
-        // Set night mode
+        // Night mode
         const nightMode = localStorage.getItem('nightMode') === 'true';
         if (nightMode) {
             document.body.classList.add('night-mode');
-            document.querySelector('.night-toggle i').className = 'fas fa-sun';
+            const icon = document.querySelector('.night-toggle i');
+            if (icon) icon.className = 'fas fa-sun';
         }
         
         updateBadge();
 
+        // တခြား page ကနေ ဘာသာစကားပြောင်းရင် ဒီ page ကိုပါ update လုပ်မယ်
         window.addEventListener('storage', function(e) {
+            if (e.key === 'langChanged') {
+                const newLang = localStorage.getItem('lang') || 'my';
+                if (newLang !== currentLang) {
+                    currentLang = newLang;
+                    updateLanguage();
+                    document.querySelectorAll('.lang-btn').forEach(b => {
+                        b.classList.toggle('active', b.dataset.lang === currentLang);
+                    });
+                }
+            }
             if (e.key === 'newOrderNotification' || e.key === 'notifications') {
                 updateBadge();
             }
+            if (e.key === 'nightMode') {
+                const isNight = localStorage.getItem('nightMode') === 'true';
+                document.body.classList.toggle('night-mode', isNight);
+                const icon = document.querySelector('.night-toggle i');
+                if (icon) icon.className = isNight ? 'fas fa-sun' : 'fas fa-moon';
+            }
         });
 
+        // Keyboard shortcuts
         document.addEventListener('keydown', function(e) {
             if (e.key === '/' && !e.ctrlKey && !e.metaKey && !e.target.matches('input')) {
                 e.preventDefault();
-                document.getElementById('searchInput').focus();
+                const input = document.getElementById('searchInput');
+                if (input) input.focus();
             }
             if (e.key === 'Escape') {
                 clearSearch();
-                document.getElementById('searchInput').blur();
+                const input = document.getElementById('searchInput');
+                if (input) input.blur();
             }
         });
     });
