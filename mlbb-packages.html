@@ -3,239 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>⚡ MLBB Global Packages</title>
+    <title>🌍 MLBB Global</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
-        
-        :root {
-            --bg-primary: #e8eaf0;
-            --bg-secondary: #ffffff;
-            --bg-card: rgba(255,255,255,0.35);
-            --bg-input: rgba(255,255,255,0.7);
-            --text-primary: #1a1a2e;
-            --text-secondary: #6b7280;
-            --border-color: rgba(0,0,0,0.08);
-            --shadow: rgba(0,0,0,0.06);
-            --shadow-hover: rgba(0,0,0,0.1);
-            --primary: #6c5ce7;
-            --gold: #f5a623;
-            --gold-glow: rgba(245,166,35,0.2);
-            --cyan: #00b4d8;
-            --orange: #ff6a00;
-            --green: #00c853;
-            --red: #ff0044;
-            --pink: #ff2d78;
-        }
-
-        .night-mode {
-            --bg-primary: #0d0d1a;
-            --bg-secondary: #1a1a2e;
-            --bg-card: rgba(30,30,60,0.5);
-            --bg-input: rgba(40,40,80,0.5);
-            --text-primary: #e8eaf0;
-            --text-secondary: #a8a8c8;
-            --border-color: rgba(255,255,255,0.06);
-            --shadow: rgba(0,0,0,0.3);
-            --gold: #ffd700;
-            --gold-glow: rgba(255,215,0,0.2);
-        }
-
-        body {
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            min-height: 100vh;
-            padding: 16px;
-            padding-bottom: 90px;
-            transition: all 0.4s ease;
-        }
-
+        :root{--bg-primary:#f0f2f5;--bg-secondary:#ffffff;--bg-card:rgba(255,255,255,0.6);--bg-input:rgba(255,255,255,0.7);--text-primary:#1a1a2e;--text-secondary:#6b7280;--border-color:rgba(0,0,0,0.06);--shadow:rgba(0,0,0,0.06);--shadow-hover:rgba(0,0,0,0.1);--cyan:#00b4d8;--cyan-glow:rgba(0,180,216,0.2);--purple:#7c3aed;--violet:#8b5cf6;--pink:#ec4899;--gold:#f5a623;--gold-glow:rgba(245,166,35,0.25);--orange:#ff6a00;--red:#ff0044;--green:#00c853;--green-glow:rgba(0,200,83,0.2)}
+        .night-mode{--bg-primary:#0d0d1a;--bg-secondary:#1a1a2e;--bg-card:rgba(30,30,60,0.5);--bg-input:rgba(40,40,80,0.5);--text-primary:#e8eaf0;--text-secondary:#a8a8c8;--border-color:rgba(255,255,255,0.06);--shadow:rgba(0,0,0,0.3);--shadow-hover:rgba(0,0,0,0.4);--gold:#ffd700;--gold-glow:rgba(255,215,0,0.2)}
+        body{background:var(--bg-primary);color:var(--text-primary);min-height:100vh;padding:16px;padding-bottom:90px;transition:all 0.4s ease}
         .container{max-width:480px;margin:0 auto}
-
-        .glass-box {
-            background: var(--bg-card);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            box-shadow: 0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        .glass-box:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 30px var(--shadow-hover), inset 0 1px 0 rgba(255,255,255,0.15);
-        }
-
         .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
         .header .left{display:flex;flex-direction:column;gap:8px}
         .header .left .logo-wrap{display:flex;align-items:center;gap:10px}
         .header .left .logo-wrap img{height:38px;width:auto;border-radius:10px}
         .header .left .logo-wrap .text-group{display:flex;flex-direction:column;line-height:1.1}
-        .header .left .logo-wrap .text-group .premium{font-size:1rem;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 20px var(--gold-glow)}
+        .header .left .logo-wrap .text-group .premium{font-size:1rem;font-weight:800;background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:300% 300%;animation:colorShift 2s ease-in-out infinite}
+        @keyframes colorShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
         .header .left .logo-wrap .text-group .shop{font-size:0.55rem;font-weight:600;color:var(--text-secondary);opacity:0.6;margin-top:-2px}
-        .header .left .auth-btn{display:none}
-        
         .header .right .top{display:flex;gap:6px;align-items:center}
-        .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:10px;border:1px solid var(--border-color);box-shadow:0 2px 10px var(--shadow)}
-        .header .right .top .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;text-transform:uppercase}
-        .header .right .top .lang-switcher .lang-btn.active{background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;box-shadow:0 4px 15px var(--gold-glow)}
-        .header .right .top .night-toggle{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;color:var(--text-secondary);box-shadow:0 2px 10px var(--shadow);transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1)}
-        .header .right .top .night-toggle:active{transform:scale(0.92)}
+        .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:10px;border:1px solid var(--border-color);backdrop-filter:blur(20px)}
+        .header .right .top .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;text-transform:uppercase;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)}
+        .header .right .top .lang-switcher .lang-btn:active{transform:scale(0.92)!important}
+        .header .right .top .lang-switcher .lang-btn.active{background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;box-shadow:0 4px 15px rgba(0,180,216,0.3)}
+        .header .right .top .night-toggle{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;color:var(--text-secondary);backdrop-filter:blur(20px);transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)}
+        .header .right .top .night-toggle:active{transform:scale(0.92)!important}
         .night-mode .header .right .top .night-toggle .fa-sun{color:#ffd700}
-        .header .right .top .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;box-shadow:0 2px 10px var(--shadow)}
-        .header .right .top .noti-btn:active{transform:scale(0.92)}
+        .header .right .top .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;backdrop-filter:blur(20px);transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)}
+        .header .right .top .noti-btn:active{transform:scale(0.92)!important}
         .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none}
-
         .page-header{margin-bottom:16px;animation:slideUp 0.6s ease}
         .page-header h1{font-size:1.3rem;font-weight:800;color:var(--text-primary)}
-        .page-header h1 span{background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-        .page-header h1 i{color:var(--cyan);-webkit-text-fill-color:initial;margin-right:6px}
+        .page-header h1 span{background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:300% 300%;animation:gradientMove 2s ease-in-out infinite}
+        @keyframes gradientMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+        .page-header h1 i{color:var(--cyan);margin-right:6px}
         .page-header p{color:var(--text-secondary);font-size:0.7rem;margin-top:2px}
-
-        .server-selector{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:14px;padding:10px 14px;display:flex;align-items:center;gap:12px;margin-bottom:16px;box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1)}
+        .section-title{font-size:.65rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;display:flex;align-items:center;gap:10px;opacity:.5}
+        .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
+        .section-title i{background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:300% 300%;animation:iconGradient 1.5s ease-in-out infinite;font-size:0.8rem}
+        @keyframes iconGradient{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+        .section-title span{color:var(--text-secondary);opacity:0.5}
+        .bottom-nav{position:fixed;bottom:16px;left:16px;right:16px;width:auto;max-width:480px;margin:0 auto;background:var(--bg-card);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--border-color);border-radius:18px;display:flex;justify-content:space-around;padding:8px 4px;z-index:100;box-shadow:0 4px 30px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.08);animation:navSlideUp 0.5s cubic-bezier(0.34,1.56,0.64,1)}
+        @keyframes navSlideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+        .bottom-nav::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,0.15) 0%, transparent 50%);pointer-events:none;z-index:0}
+        .night-mode .bottom-nav::before{background:linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 50%)}
+        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);padding:6px 12px;border-radius:12px;min-width:48px;border:1px solid transparent;display:flex;flex-direction:column;align-items:center;gap:1px;animation:floatIcon 3s ease-in-out infinite;position:relative;z-index:1}
+        .bottom-nav .nav-item:nth-child(2){animation-delay:0.2s}
+        .bottom-nav .nav-item:nth-child(3){animation-delay:0.4s}
+        .bottom-nav .nav-item:nth-child(4){animation-delay:0.6s}
+        .bottom-nav .nav-item:active{transform:scale(0.88)!important;animation:none}
+        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block}
+        .bottom-nav .nav-item .label{font-size:0.4rem;letter-spacing:0.5px;opacity:0.5;font-weight:400}
+        .bottom-nav .nav-item.active{background:rgba(0,180,216,0.08);border:1px solid rgba(0,180,216,0.12);box-shadow:0 0 30px rgba(0,180,216,0.05)}
+        .bottom-nav .nav-item.active .icon{transform:translateY(-2px) scale(1.1);background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .bottom-nav .nav-item.active .label{background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:1;font-weight:600}
+        @keyframes floatIcon{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+        .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.3}
+        .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-secondary);padding:10px 20px;border-radius:12px;border:1px solid var(--border-color);color:var(--cyan);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 4px 20px var(--shadow)}
+        .toast.show{display:block;animation:toastPop 0.4s cubic-bezier(0.34,1.56,0.64,1)}
+        @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
+        @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+        .glass-box{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:16px}
+        .server-selector{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:14px;padding:10px 14px;display:flex;align-items:center;gap:12px;margin-bottom:16px;box-shadow:0 4px 20px var(--shadow)}
         .server-selector .label{font-size:0.55rem;color:var(--text-secondary);font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
         .server-selector .options{display:flex;gap:6px;flex-wrap:wrap}
         .server-selector .options .opt{background:var(--bg-input);border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 14px;border-radius:8px;font-size:0.55rem;font-weight:600;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)}
-        .server-selector .options .opt:active{transform:scale(0.92)}
-        .server-selector .options .opt.active{background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;border-color:var(--gold);box-shadow:0 0 20px var(--gold-glow)}
-
+        .server-selector .options .opt:active{transform:scale(0.92)!important}
+        .server-selector .options .opt.active{background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));color:#fff;border-color:var(--cyan);box-shadow:0 0 20px var(--cyan-glow)}
+        /* ===== 3 Column Grid ===== */
         .package-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
-        .package-item{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:14px;padding:12px 8px;text-align:center;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);position:relative;overflow:hidden}
-        .package-item:active{transform:scale(0.94)}
+        .package-item{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:14px;padding:12px 8px;text-align:center;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 20px var(--shadow);position:relative;overflow:hidden}
+        .package-item:active{transform:scale(0.94)!important}
         .package-item:hover{transform:translateY(-4px);border-color:rgba(245,166,35,0.3)}
         .package-item.selected{border-color:var(--gold);background:rgba(245,166,35,0.06);box-shadow:0 0 12px var(--gold-glow)}
         .package-item.selected .price{color:var(--gold)}
-        
         .package-item .pkg-img{width:100%;height:auto;border-radius:8px;display:block;margin-bottom:4px;transition:all 0.3s ease;animation:floatIcon 3s ease-in-out infinite}
         .package-item:hover .pkg-img{transform:scale(1.04)}
         .package-item.selected .pkg-img{box-shadow:0 0 8px var(--gold-glow)}
-        
         .package-item .info{display:flex;flex-direction:column;gap:1px;position:relative;z-index:1}
         .package-item .info .name{font-size:0.65rem;font-weight:700;color:var(--text-primary)}
         .package-item .info .sub{font-size:0.4rem;color:var(--text-secondary);line-height:1.2}
-        .package-item .info .badge{display:inline-block;font-size:0.35rem;color:var(--gold);background:rgba(245,166,35,0.1);padding:1px 8px;border-radius:8px;border:1px solid rgba(245,166,35,0.08);font-weight:600;margin-top:2px;width:fit-content;margin-left:auto;margin-right:auto}
         .package-item .right{display:flex;flex-direction:column;align-items:center;gap:4px;position:relative;z-index:1;margin-top:4px}
         .package-item .right .price{font-size:0.65rem;font-weight:700;color:var(--text-secondary);transition:all 0.4s ease}
         .package-item .right .btn-label{font-size:0.45rem;color:var(--text-secondary);font-weight:500;opacity:0.6;letter-spacing:0.3px}
         .package-item .right .buy-btn{display:none;background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;border:none;padding:4px 12px;border-radius:8px;font-size:0.45rem;font-weight:700;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 15px var(--gold-glow)}
-        .package-item .right .buy-btn:active{transform:scale(0.88)}
+        .package-item .right .buy-btn:active{transform:scale(0.88)!important}
         .package-item.selected .right .buy-btn{display:block}
         .package-item.selected .right .btn-label{display:none}
-
-        .section-title{font-size:0.65rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;display:flex;align-items:center;gap:10px;opacity:0.5}
-        .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
-        .section-title i{color:var(--cyan)}
-
-        .bottom-nav {
-            position: fixed;
-            bottom: 16px;
-            left: 16px;
-            right: 16px;
-            max-width: 480px;
-            margin: 0 auto;
-            background: var(--bg-card);
-            backdrop-filter: blur(24px);
-            border: 1px solid var(--border-color);
-            border-radius: 18px;
-            display: flex;
-            justify-content: space-around;
-            padding: 8px 4px;
-            z-index: 100;
-            box-shadow: 0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);
-        }
-        .bottom-nav .nav-item {
-            text-align: center;
-            cursor: pointer;
-            text-decoration: none;
-            color: var(--text-secondary);
-            transition: all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
-            padding: 6px 12px;
-            border-radius: 12px;
-            min-width: 48px;
-            border: 1px solid transparent;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1px;
-        }
-        .bottom-nav .nav-item:active { transform: scale(0.88); }
-        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block;animation:floatIcon 3s ease-in-out infinite}
-        .bottom-nav .nav-item .label{font-size:0.4rem;letter-spacing:0.5px;opacity:0.5;font-weight:400}
-        .bottom-nav .nav-item.active { 
-            background: transparent !important; 
-            border-color: transparent !important; 
-            box-shadow: none !important; 
-            color: var(--text-secondary) !important; 
-        }
-        .bottom-nav .nav-item.active .icon{
-            transform: none !important; 
-            color: var(--text-secondary) !important; 
-            text-shadow: none !important; 
-            animation: floatIcon 3s ease-in-out infinite !important; 
-        }
-        .bottom-nav .nav-item.active .label{
-            color: var(--text-secondary) !important; 
-            opacity: 0.5 !important; 
-        }
-
-        .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.3;letter-spacing:1px}
-
-        .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-secondary);padding:10px 20px;border-radius:12px;border:1px solid var(--border-color);color:var(--primary);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 4px 20px var(--shadow)}
-        .toast.show{display:block}
-        .toast.success{color:var(--green)}
-        .toast.error{color:var(--red)}
-        @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
-        @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-        @keyframes floatIcon {0%,100%{transform:translateY(0px)}50%{transform:translateY(-6px)}}
-
-        .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(12px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px}
-        .modal-overlay.show{display:flex}
-        .modal{background:var(--bg-secondary);backdrop-filter:blur(24px);border:1px solid var(--border-color);border-radius:16px;padding:24px 20px;max-width:420px;width:100%;box-shadow:0 4px 30px var(--shadow),0 20px 60px rgba(0,0,0,0.06);position:relative;max-height:90vh;overflow-y:auto}
-        .modal::before{display:none}
-        .modal .close-btn{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--text-secondary);font-size:1.1rem;cursor:pointer}
-        .modal .close-btn:active{transform:scale(0.88)}
-        .modal h2{font-size:1.2rem;color:var(--text-primary);text-align:center;margin-bottom:4px}
-        .modal .sub{color:var(--text-secondary);font-size:0.75rem;text-align:center;margin-bottom:16px}
-        .modal .form-group{margin-bottom:12px}
-        .modal .form-group label{display:block;color:var(--text-secondary);font-size:0.6rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px}
-        .modal .form-group input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border-color);background:var(--bg-input);color:var(--text-primary);font-size:0.85rem;outline:none;transition:all 0.3s ease}
-        .modal .form-group input:focus{border-color:var(--primary);box-shadow:0 0 20px var(--primary-glow)}
-        .modal .form-group input::placeholder{color:var(--text-secondary);font-size:0.7rem}
-        .modal .form-group .input-hint{font-size:0.5rem;color:var(--text-secondary);margin-top:3px;opacity:0.5}
-        .modal .selected-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg-input);border-radius:10px;border:1px solid var(--border-color);margin-bottom:12px}
-        .modal .selected-row .pkg{font-size:0.85rem;font-weight:600;color:var(--text-primary)}
-        .modal .selected-row .price{font-size:0.9rem;font-weight:700;color:var(--gold)}
-
-        .payment-options{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
-        .payment-option{background:var(--bg-input);border:1px solid var(--border-color);border-radius:10px;padding:10px;text-align:center;cursor:pointer;transition:all 0.3s ease}
-        .payment-option:active{transform:scale(0.95)}
-        .payment-option.selected{border-color:var(--gold);background:rgba(245,166,35,0.06);box-shadow:0 0 30px var(--gold-glow)}
-        .payment-option .icon-box{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;border:1px solid var(--border-color);background:var(--bg-input);margin:0 auto 4px}
-        .payment-option .icon-box img{width:100%;height:100%;object-fit:cover;border-radius:10px}
-        .payment-option .icon-box .icon{font-size:1.3rem;color:var(--text-secondary)}
-        .payment-option .name{font-size:0.7rem;font-weight:600;color:var(--text-primary);display:block;margin-top:2px}
-
-        .account-info{background:rgba(0,180,216,0.04);border:1px solid rgba(0,180,216,0.08);border-radius:10px;padding:10px 14px;margin-top:8px;display:none}
-        .account-info.show{display:block}
-        .account-info .acc-name{font-size:0.8rem;font-weight:600;color:var(--text-primary)}
-        .account-info .acc-number{font-size:0.75rem;color:var(--green);font-weight:500;margin-top:2px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-        .account-info .acc-number .copy-btn{background:var(--bg-card);border:1px solid var(--border-color);color:var(--text-secondary);padding:2px 10px;border-radius:10px;font-size:0.45rem;cursor:pointer;transition:all 0.3s ease;font-weight:600}
-        .account-info .acc-number .copy-btn:active{transform:scale(0.85)}
-
-        .file-upload{border:2px dashed var(--border-color);border-radius:10px;padding:14px;text-align:center;cursor:pointer;transition:all 0.3s ease;position:relative}
-        .file-upload:active{transform:scale(0.97)}
-        .file-upload.has-file{border-color:var(--green);background:rgba(0,200,83,0.04)}
-        .file-upload .icon{font-size:1.5rem;display:block;margin-bottom:2px;color:var(--text-secondary)}
-        .file-upload .text{font-size:0.6rem;color:var(--text-secondary)}
-        .file-upload input[type="file"]{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}
-        .file-upload .file-name{font-size:0.5rem;color:var(--green);margin-top:3px;display:none}
-        .file-upload .file-name.show{display:block}
-
-        .btn-primary{width:100%;padding:11px;background:var(--bg-input);color:var(--text-secondary);border:1px solid var(--border-color);border-radius:10px;font-size:0.85rem;font-weight:700;cursor:not-allowed;transition:all 0.3s ease;margin-top:6px;opacity:0.4}
-        .btn-primary:active{transform:scale(0.96)}
-        .btn-primary.enabled{background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;border-color:var(--gold);box-shadow:0 4px 20px var(--gold-glow);cursor:pointer;opacity:1}
-        .btn-primary.loading{background:var(--bg-input);color:var(--text-secondary);border-color:var(--border-color);box-shadow:none;cursor:wait;opacity:0.6}
     </style>
 </head>
 <body>
@@ -253,24 +105,24 @@
         <div class="right">
             <div class="top">
                 <div class="lang-switcher">
-                    <button class="lang-btn active" data-lang="my" onclick="setLang('my')">မြန်မာ</button>
-                    <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+                    <button class="lang-btn active" data-lang="my">မြန်မာ</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
                 </div>
-                <button class="night-toggle" onclick="toggleNightMode()"><i class="fas fa-moon"></i></button>
+                <button class="night-toggle"><i class="fas fa-moon"></i></button>
                 <a href="notifications.html" class="noti-btn" id="notiBtn"><i class="fas fa-bell"></i><span class="badge" id="notiBadge">0</span></a>
             </div>
         </div>
     </div>
 
     <div class="page-header">
-        <h1><i class="fas fa-gem"></i> <span id="pageTitle">MLBB Global Packages</span></h1>
+        <h1><i class="fas fa-globe"></i> <span id="pageTitle">MLBB Global</span></h1>
         <p id="pageSub">ပက်ကေ့ချ်တစ်ခုရွေးပြီး ဝယ်ယူပါ</p>
     </div>
 
     <div class="server-selector">
         <span class="label"><i class="fas fa-server"></i> Server</span>
         <div class="options">
-            <span class="opt active" data-server="global">Global</span>
+            <span class="opt active">Global</span>
         </div>
     </div>
 
@@ -287,626 +139,37 @@
 </div>
 
 <div class="bottom-nav">
-    <a href="index.html" class="nav-item" onclick="handleNavClick(this, event)"><span class="icon"><i class="fas fa-home"></i></span><span class="label" id="navHome">ပင်မ</span></a>
-    <a href="shop.html" class="nav-item" onclick="handleNavClick(this, event)"><span class="icon"><i class="fas fa-shopping-bag"></i></span><span class="label" id="navShop">ဆိုင်</span></a>
-    <a href="payment.html" class="nav-item" onclick="handleNavClick(this, event)"><span class="icon"><i class="fas fa-credit-card"></i></span><span class="label" id="navPayment">ငွေပေးချေ</span></a>
-    <a href="profile.html" class="nav-item" onclick="handleNavClick(this, event)"><span class="icon"><i class="fas fa-user"></i></span><span class="label" id="navProfile">ပရိုဖိုင်</span></a>
+    <a href="index.html" class="nav-item"><span class="icon"><i class="fas fa-home"></i></span><span class="label" id="navHome">ပင်မ</span></a>
+    <a href="shop.html" class="nav-item"><span class="icon"><i class="fas fa-shopping-bag"></i></span><span class="label" id="navShop">ဆိုင်</span></a>
+    <a href="payment.html" class="nav-item"><span class="icon"><i class="fas fa-credit-card"></i></span><span class="label" id="navPayment">ငွေပေးချေ</span></a>
+    <a href="profile.html" class="nav-item"><span class="icon"><i class="fas fa-user"></i></span><span class="label" id="navProfile">ပရိုဖိုင်</span></a>
 </div>
 
 <div class="toast" id="toast"></div>
 
-<div class="modal-overlay" id="checkoutModal">
-    <div class="modal">
-        <button class="close-btn" onclick="closeCheckoutModal()">✕</button>
-        <h2 id="modalTitle">🛒 အော်ဒါတင်ရန်</h2>
-        <p class="sub" id="modalSub">အချက်အလက်များကို မှန်ကန်စွာဖြည့်သွင်းပါ</p>
-        
-        <div class="selected-row">
-            <span class="pkg" id="modalPackage">Loading...</span>
-            <span class="price" id="modalPrice">0 Ks</span>
-        </div>
-
-        <div class="form-group">
-            <label><i class="fas fa-gamepad"></i> <span id="gameIdLabel">ဂိမ်းအိုင်ဒီ</span></label>
-            <input type="text" id="gameId" placeholder="ဂိမ်းအိုင်ဒီ နံပါတ်ထည့်ပါ (e.g. 12345678)" inputmode="numeric" pattern="[0-9]*">
-            <div class="input-hint" id="gameIdHint">နံပါတ်သာ ထည့်ပါ</div>
-        </div>
-        
-        <div class="form-group">
-            <label><i class="fas fa-server"></i> <span id="serverIdLabel">ဆာဗာအိုင်ဒီ</span></label>
-            <input type="text" id="serverId" placeholder="ဆာဗာအိုင်ဒီ နံပါတ်ထည့်ပါ (e.g. 9876)" inputmode="numeric" pattern="[0-9]*">
-            <div class="input-hint" id="serverIdHint">နံပါတ်သာ ထည့်ပါ</div>
-        </div>
-
-        <div class="form-group">
-            <label><i class="fas fa-money-bill-wave"></i> <span id="paymentLabel">ငွေပေးချေရန်</span></label>
-            <div class="payment-options" id="paymentOptions">
-                <div class="payment-option" data-payment="wave">
-                    <div class="icon-box">
-                        <img src="https://i.ibb.co/GvstPZx4/x.jpg" alt="Wave Pay">
-                    </div>
-                    <span class="name" id="waveName">Wave Pay</span>
-                </div>
-                <div class="payment-option" data-payment="kpay">
-                    <div class="icon-box">
-                        <img src="https://i.ibb.co/fdWfXwVC/x.jpg" alt="KBZ Pay">
-                    </div>
-                    <span class="name" id="kpayName">KBZ Pay</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="account-info" id="waveInfo">
-            <div class="acc-name">🏦 Wave Pay</div>
-            <div class="acc-number">📞 09682506493 <button class="copy-btn" onclick="copyNumber('09682506493', this)">ကူးယူမည်</button></div>
-        </div>
-        <div class="account-info" id="kpayInfo">
-            <div class="acc-name">🏦 KBZ Pay</div>
-            <div class="acc-number">📞 09682506493 <button class="copy-btn" onclick="copyNumber('09682506493', this)">ကူးယူမည်</button></div>
-        </div>
-
-        <div class="form-group">
-            <label><i class="fas fa-image"></i> <span id="uploadLabel">ပြေစာတင်ပို့ရန်</span></label>
-            <div class="file-upload" id="fileUpload">
-                <span class="icon">📁</span>
-                <span class="text" id="uploadText">Screenshot ပို့ပေးပါ</span>
-                <span class="file-name" id="fileName">✅ image.png</span>
-                <input type="file" id="fileInput" accept="image/*">
-            </div>
-        </div>
-
-        <button class="btn-primary" id="submitBtn" disabled>✅ အော်ဒါတင်မည်</button>
-    </div>
-</div>
-
 <script>
-    // ============================================================
-    // 🔧 TELEGRAM BOT CONFIG
-    // ============================================================
-    const TELEGRAM_BOT_TOKEN = '8751360822:AAFQNiWhfGWgUsjD7Bd5DzfHMfpkR4COHY8';
-    const TELEGRAM_CHAT_ID = '8745522082';
-    // ============================================================
-
-    const LANG_DATA = {
-        my: {
-            appName: 'Premium', appSub: 'Game Shop',
-            home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
-            pageTitle: 'MLBB Global Packages', pageSub: 'ပက်ကေ့ချ်တစ်ခုရွေးပြီး ဝယ်ယူပါ',
-            bundlesTitle: 'ပက်ကေ့ချ်များ', diamondsTitle: 'စိန်များ', doubleTitle: 'နှစ်ဆဖြည့်မှု',
-            buy: 'ဝယ်ယူရန်', selectLabel: 'ရွေးရန်', currency: 'Ks', doubleBadge: '⭐ 2x Bonus',
-            modalTitle: '🛒 အော်ဒါတင်ရန်', modalSub: 'အချက်အလက်များကို မှန်ကန်စွာဖြည့်သွင်းပါ',
-            gameId: 'ဂိမ်းအိုင်ဒီ', serverId: 'ဆာဗာအိုင်ဒီ',
-            gameIdHint: 'နံပါတ်သာ ထည့်ပါ', serverIdHint: 'နံပါတ်သာ ထည့်ပါ',
-            paymentLabel: 'ငွေပေးချေရန်', wave: 'Wave Pay', kpay: 'KBZ Pay',
-            uploadLabel: 'ပြေစာတင်ပို့ရန်', uploadText: 'Screenshot ပို့ပေးပါ', 
-            submit: 'အော်ဒါတင်မည်', submitting: '⏳ အော်ဒါတင်နေသည်...',
-            enterGameId: 'ကျေးဇူးပြု၍ ဂိမ်းအိုင်ဒီ နံပါတ်ထည့်ပါ',
-            enterServerId: 'ကျေးဇူးပြု၍ ဆာဗာအိုင်ဒီ နံပါတ်ထည့်ပါ',
-            enterNumberOnly: 'နံပါတ်သာ ထည့်ပါ (အက္ခရာမထည့်ရ)',
-            selectPayment: 'ကျေးဇူးပြု၍ ငွေပေးချေနည်းရွေးပါ',
-            uploadSlip: 'ကျေးဇူးပြု၍ Screenshot ပို့ပေးပါ',
-            orderSuccess: '✅ အော်ဒါအောင်မြင်ပါသည်!',
-            orderFail: '❌ အော်ဒါမအောင်မြင်ပါ။ ထပ်မံကြိုးစားပါ။',
-            copy: 'ကူးယူမည်', copied: '✅ ကူးပြီး'
-        },
-        en: {
-            appName: 'Premium', appSub: 'Game Shop',
-            home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
-            pageTitle: 'MLBB Global Packages', pageSub: 'Select a package and buy',
-            bundlesTitle: 'Packages', diamondsTitle: 'Diamonds', doubleTitle: 'Double Top Up',
-            buy: 'Buy', selectLabel: 'Select', currency: 'Ks', doubleBadge: '⭐ 2x Bonus',
-            modalTitle: '🛒 Submit Order', modalSub: 'Fill in your details correctly',
-            gameId: 'Game ID', serverId: 'Server ID',
-            gameIdHint: 'Numbers only', serverIdHint: 'Numbers only',
-            paymentLabel: 'Payment Method', wave: 'Wave Pay', kpay: 'KBZ Pay',
-            uploadLabel: 'Upload Payment Slip', uploadText: 'Send Screenshot',
-            submit: 'Submit Order', submitting: '⏳ Submitting...',
-            enterGameId: 'Please enter your Game ID (numbers only)',
-            enterServerId: 'Please enter your Server ID (numbers only)',
-            enterNumberOnly: 'Please enter numbers only',
-            selectPayment: 'Please select a payment method',
-            uploadSlip: 'Please send your Screenshot',
-            orderSuccess: '✅ Order successful!',
-            orderFail: '❌ Order failed. Please try again.',
-            copy: 'Copy', copied: '✅ Copied!'
-        }
-    };
-
-    let currentLang = localStorage.getItem('lang') || 'my';
-    let selectedPackage = null;
-    let selectedPayment = null;
-    let isSubmitting = false;
-
-    // ===== UPDATED PACKAGES =====
-    const PACKAGES = {
-        bundles: [
-            { id: 'b1', name: 'Monthly Epic Bundle', price: 17300, img: 'https://files.catbox.moe/z2j5uo.png', sub: '💎275 + ⭐180' },
-            { id: 'b2', name: 'Weekly Elite Bundle', price: 3600, img: 'https://files.catbox.moe/i3uywg.png', sub: '💎55 + ⭐20' },
-            { id: 'b3', name: 'Weekly Pass', price: 6500, img: 'https://files.catbox.moe/zylral.png', sub: 'Weekly Pass' },
-            { id: 'b4', name: 'Twilight Pass', price: 34000, img: 'https://files.catbox.moe/jshuuy.png', sub: '🆕 New' }
-        ],
-        diamonds: [
-            { id: 'd1', name: '11', price: 750, img: 'https://files.catbox.moe/xaxejk.png' },
-            { id: 'd2', name: '22', price: 1500, img: 'https://files.catbox.moe/xaxejk.png' },
-            { id: 'd3', name: '33', price: 2250, img: 'https://files.catbox.moe/7bj50l.png' },
-            { id: 'd4', name: '44', price: 3100, img: 'https://files.catbox.moe/7bj50l.png' },
-            { id: 'd5', name: '56', price: 3800, img: 'https://files.catbox.moe/4mb7sd.png' },
-            { id: 'd6', name: '112', price: 7500, img: 'https://files.catbox.moe/4mb7sd.png' },
-            { id: 'd7', name: '172', price: 10300, img: 'https://files.catbox.moe/ogchrl.png' },
-            { id: 'd8', name: '257', price: 14850, img: 'https://files.catbox.moe/ogchrl.png' },
-            { id: 'd9', name: '343', price: 20000, img: 'https://files.catbox.moe/ocznqy.png' },
-            { id: 'd10', name: '429', price: 25000, img: 'https://files.catbox.moe/ocznqy.png' },
-            { id: 'd11', name: '514', price: 29600, img: 'https://files.catbox.moe/k23p6t.png' },
-            { id: 'd12', name: '600', price: 34800, img: 'https://files.catbox.moe/k23p6t.png' },
-            { id: 'd13', name: '706', price: 34000, img: 'https://files.catbox.moe/qwnqog.png' },
-            { id: 'd14', name: '878', price: 50000, img: 'https://files.catbox.moe/qwnqog.png' },
-            { id: 'd15', name: '963', price: 54700, img: 'https://files.catbox.moe/zjcnar.png' },
-            { id: 'd16', name: '1049', price: 59800, img: 'https://files.catbox.moe/zjcnar.png' },
-            { id: 'd17', name: '1135', price: 64800, img: 'https://files.catbox.moe/co1w7w.png' },
-            { id: 'd18', name: '1412', price: 79800, img: 'https://files.catbox.moe/co1w7w.png' },
-            { id: 'd19', name: '1500', price: 86100, img: 'https://files.catbox.moe/2c5tz4.png' },
-            { id: 'd20', name: '1584', price: 89800, img: 'https://files.catbox.moe/2c5tz4.png' },
-            { id: 'd21', name: '1755', price: 99500, img: 'https://files.catbox.moe/b5bg2m.png' },
-            { id: 'd22', name: '2195', price: 120500, img: 'https://files.catbox.moe/b5bg2m.png' },
-            { id: 'd23', name: '2367', price: 130700, img: 'https://files.catbox.moe/1xbg9h.png' },
-            { id: 'd24', name: '2538', price: 140400, img: 'https://files.catbox.moe/1xbg9h.png' },
-            { id: 'd25', name: '3224', price: 181000, img: 'https://files.catbox.moe/z0c6rj.png' },
-            { id: 'd26', name: '3688', price: 200800, img: 'https://files.catbox.moe/z0c6rj.png' },
-            { id: 'd27', name: '4394', price: 240500, img: 'https://files.catbox.moe/z0c6rj.png' },
-            { id: 'd28', name: '5100', price: 280100, img: 'https://files.catbox.moe/pn69zi.png' },
-            { id: 'd29', name: '5532', price: 302900, img: 'https://files.catbox.moe/pn69zi.png' },
-            { id: 'd30', name: '9288', price: 503000, img: 'https://files.catbox.moe/pn69zi.png' }
-        ],
-        double: [
-            { id: 'x1', name: '50+50', price: 3550, img: 'https://files.catbox.moe/z376wd.png', badge: true },
-            { id: 'x2', name: '150+150', price: 9900, img: 'https://files.catbox.moe/kf0960.png', badge: true },
-            { id: 'x3', name: '250+250', price: 15800, img: 'https://files.catbox.moe/jm3ty7.png', badge: true },
-            { id: 'x4', name: '500+500', price: 32100, img: 'https://files.catbox.moe/aprnoc.png', badge: true }
-        ]
-    };
-
-    function getText(key) { return LANG_DATA[currentLang][key] || key; }
-
-    function showToast(msg, type) {
-        const t = document.getElementById('toast');
-        t.textContent = msg;
-        t.className = 'toast show';
-        if (type === 'success') t.classList.add('success');
-        else if (type === 'error') t.classList.add('error');
-        clearTimeout(t._timer);
-        t._timer = setTimeout(() => t.classList.remove('show'), 3000);
-    }
-
-    function setLang(lang) {
-        currentLang = lang;
-        localStorage.setItem('lang', lang);
-        updateLanguage();
-        document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
-    }
-
-    function updateLanguage() {
-        const d = LANG_DATA[currentLang];
-        document.getElementById('appName').textContent = d.appName;
-        document.getElementById('appSub').textContent = d.appSub;
-        document.getElementById('pageTitle').textContent = d.pageTitle;
-        document.getElementById('pageSub').textContent = d.pageSub;
-        document.getElementById('bundlesTitle').textContent = d.bundlesTitle;
-        document.getElementById('diamondsTitle').textContent = d.diamondsTitle;
-        document.getElementById('doubleTitle').textContent = d.doubleTitle;
-        document.getElementById('navHome').textContent = d.home;
-        document.getElementById('navShop').textContent = d.shop;
-        document.getElementById('navPayment').textContent = d.payment;
-        document.getElementById('navProfile').textContent = d.profile;
-        document.getElementById('modalTitle').textContent = d.modalTitle;
-        document.getElementById('modalSub').textContent = d.modalSub;
-        document.getElementById('gameIdLabel').textContent = d.gameId;
-        document.getElementById('serverIdLabel').textContent = d.serverId;
-        document.getElementById('gameIdHint').textContent = d.gameIdHint;
-        document.getElementById('serverIdHint').textContent = d.serverIdHint;
-        document.getElementById('paymentLabel').textContent = d.paymentLabel;
-        document.getElementById('waveName').textContent = d.wave;
-        document.getElementById('kpayName').textContent = d.kpay;
-        document.getElementById('uploadLabel').textContent = d.uploadLabel;
-        document.getElementById('uploadText').textContent = d.uploadText;
-        document.getElementById('submitBtn').textContent = '✅ ' + d.submit;
-        renderPackages();
-        updateBadge();
-    }
-
-    function renderPackages() {
-        const d = LANG_DATA[currentLang];
-        const renderItems = (items, type) => items.map(pkg => {
-            const isSelected = selectedPackage && selectedPackage.id === pkg.id;
-            const badgeHtml = pkg.badge ? `<span class="badge">${d.doubleBadge}</span>` : '';
-            const subHtml = pkg.sub ? `<div class="sub">${pkg.sub}</div>` : '<div class="sub">MLBB</div>';
-            return `
-                <div class="package-item ${isSelected ? 'selected' : ''}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})">
-                    <div class="info">
-                        <img src="${pkg.img}" alt="${pkg.name}" class="pkg-img" onerror="this.style.display='none'">
-                        <div class="name">${pkg.name}</div>
-                        ${subHtml}
-                        ${badgeHtml}
-                    </div>
-                    <div class="right">
-                        <span class="price">${pkg.price.toLocaleString()} ${d.currency}</span>
-                        <span class="btn-label">${d.selectLabel}</span>
-                        <button class="buy-btn" onclick="event.stopPropagation(); handleBuyClick('${pkg.id}','${pkg.name}',${pkg.price})">${d.buy}</button>
-                    </div>
-                </div>
-            `;
-        }).join('');
-        document.getElementById('bundlesList').innerHTML = renderItems(PACKAGES.bundles, 'bundle');
-        document.getElementById('diamondsList').innerHTML = renderItems(PACKAGES.diamonds, 'diamond');
-        document.getElementById('doubleList').innerHTML = renderItems(PACKAGES.double, 'double');
-    }
-
-    function handlePackageClick(id, name, price) {
-        if (selectedPackage && selectedPackage.id === id) {
-            selectedPackage = null;
-        } else {
-            selectedPackage = { id, name, price };
-        }
-        renderPackages();
-    }
-
-    function handleBuyClick(id, name, price) {
-        if (!selectedPackage || selectedPackage.id !== id) {
-            selectedPackage = { id, name, price };
-            renderPackages();
-        }
-        openCheckoutModal(name, price);
-    }
-
-    function openCheckoutModal(name, price) {
-        document.getElementById('modalPackage').textContent = name;
-        document.getElementById('modalPrice').textContent = price.toLocaleString() + ' ' + getText('currency');
-        document.getElementById('checkoutModal').classList.add('show');
-        document.getElementById('gameId').value = '';
-        document.getElementById('serverId').value = '';
-        document.getElementById('fileInput').value = '';
-        document.getElementById('fileUpload').classList.remove('has-file');
-        document.getElementById('fileName').classList.remove('show');
-        document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
-        document.getElementById('waveInfo').classList.remove('show');
-        document.getElementById('kpayInfo').classList.remove('show');
-        selectedPayment = null;
-        document.getElementById('submitBtn').disabled = true;
-        document.getElementById('submitBtn').className = 'btn-primary';
-        document.getElementById('submitBtn').textContent = '✅ ' + getText('submit');
-        checkForm();
-    }
-
-    function closeCheckoutModal() {
-        if (isSubmitting) return;
-        document.getElementById('checkoutModal').classList.remove('show');
-    }
-
-    function isNumberOnly(value) {
-        return /^[0-9]+$/.test(value);
-    }
-
-    function checkForm() {
-        const gameId = document.getElementById('gameId').value.trim();
-        const serverId = document.getElementById('serverId').value.trim();
-        const hasFile = document.getElementById('fileInput').files && document.getElementById('fileInput').files[0];
-        const btn = document.getElementById('submitBtn');
-        
-        const isGameIdValid = gameId === '' || isNumberOnly(gameId);
-        const isServerIdValid = serverId === '' || isNumberOnly(serverId);
-        
-        if (gameId && serverId && selectedPayment && hasFile && isGameIdValid && isServerIdValid && !isSubmitting) {
-            btn.disabled = false;
-            btn.className = 'btn-primary enabled';
-        } else {
-            btn.disabled = true;
-            btn.className = 'btn-primary';
-        }
-    }
-
-    document.getElementById('gameId').addEventListener('input', function() {
-        const val = this.value.trim();
-        if (val && !isNumberOnly(val)) {
-            this.style.borderColor = 'var(--red)';
-            document.querySelector('#gameIdHint').style.color = 'var(--red)';
-            document.querySelector('#gameIdHint').textContent = '⚠️ ' + getText('enterNumberOnly');
-        } else {
-            this.style.borderColor = 'var(--border-color)';
-            document.querySelector('#gameIdHint').style.color = 'var(--text-secondary)';
-            document.querySelector('#gameIdHint').textContent = getText('gameIdHint');
-        }
-        checkForm();
-    });
-
-    document.getElementById('serverId').addEventListener('input', function() {
-        const val = this.value.trim();
-        if (val && !isNumberOnly(val)) {
-            this.style.borderColor = 'var(--red)';
-            document.querySelector('#serverIdHint').style.color = 'var(--red)';
-            document.querySelector('#serverIdHint').textContent = '⚠️ ' + getText('enterNumberOnly');
-        } else {
-            this.style.borderColor = 'var(--border-color)';
-            document.querySelector('#serverIdHint').style.color = 'var(--text-secondary)';
-            document.querySelector('#serverIdHint').textContent = getText('serverIdHint');
-        }
-        checkForm();
-    });
-
-    document.querySelectorAll('.payment-option').forEach(el => {
-        el.addEventListener('click', function() {
-            document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
-            this.classList.add('selected');
-            selectedPayment = this.dataset.payment;
-            document.getElementById('waveInfo').classList.remove('show');
-            document.getElementById('kpayInfo').classList.remove('show');
-            if (selectedPayment === 'wave') document.getElementById('waveInfo').classList.add('show');
-            else if (selectedPayment === 'kpay') document.getElementById('kpayInfo').classList.add('show');
-            checkForm();
-        });
-    });
-
-    const fileInput = document.getElementById('fileInput');
-    fileInput.addEventListener('change', function() {
-        if (this.files && this.files[0]) {
-            document.getElementById('fileUpload').classList.add('has-file');
-            document.getElementById('fileName').textContent = '✅ ' + this.files[0].name;
-            document.getElementById('fileName').classList.add('show');
-            checkForm();
-        }
-    });
-
-    function copyNumber(number, btn) {
-        const d = LANG_DATA[currentLang] || {};
-        navigator.clipboard.writeText(number).then(() => {
-            btn.textContent = d.copied || '✅ Copied!';
-            setTimeout(() => { btn.textContent = d.copy || 'Copy'; }, 2500);
-        }).catch(() => {
-            const input = document.createElement('input');
-            input.value = number;
-            document.body.appendChild(input);
-            input.select();
-            document.execCommand('copy');
-            document.body.removeChild(input);
-            btn.textContent = d.copied || '✅ Copied!';
-            setTimeout(() => { btn.textContent = d.copy || 'Copy'; }, 2500);
-        });
-    }
-
-    // ===== BADGE FUNCTIONS =====
-    function getPendingCount() {
-        const notis = JSON.parse(localStorage.getItem('notifications') || '[]');
-        return notis.filter(n => n.status === 'pending').length;
-    }
-
-    function updateBadge() {
-        const count = getPendingCount();
-        const badge = document.getElementById('notiBadge');
-        if (badge) {
-            if (count > 0) {
-                badge.style.display = 'block';
-                badge.textContent = count;
-            } else {
-                badge.style.display = 'none';
-            }
-        }
-    }
-
-    // ===== SEND TO TELEGRAM =====
-    async function sendOrderToTelegram(orderData) {
-        const message = `🛒 **New Order!**
-━━━━━━━━━━━━━━━━━
-📦 **Package:** ${orderData.package}
-💰 **Price:** ${orderData.price}
-━━━━━━━━━━━━━━━━━
-🎮 **Game ID:** ${orderData.gameId}
-🌐 **Server ID:** ${orderData.serverId}
-━━━━━━━━━━━━━━━━━
-📋 **Order ID:** ${orderData.orderId}
-🕐 **Time:** ${orderData.time}
-━━━━━━━━━━━━━━━━━
-👤 **User:** ${orderData.user}
-💳 **Payment:** ${orderData.payment}
-━━━━━━━━━━━━━━━━━
-⏳ *Status: Pending*`;
-
-        try {
-            const textResponse = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: TELEGRAM_CHAT_ID,
-                    text: message,
-                    parse_mode: 'Markdown',
-                    reply_markup: {
-                        inline_keyboard: [
-                            [
-                                { text: '✅ Done', callback_data: `done_${orderData.orderId}` },
-                                { text: '❌ Failed', callback_data: `fail_${orderData.orderId}` }
-                            ]
-                        ]
-                    }
-                })
-            });
-
-            if (!textResponse.ok) {
-                console.error('Telegram send error:', await textResponse.text());
-                return false;
-            }
-
-            if (orderData.photo) {
-                try {
-                    const photoBlob = await fetch(orderData.photo).then(res => res.blob());
-                    const formData = new FormData();
-                    formData.append('chat_id', TELEGRAM_CHAT_ID);
-                    formData.append('photo', photoBlob, 'payment_slip.jpg');
-                    formData.append('caption', `📸 Payment Slip\nOrder: ${orderData.orderId}`);
-
-                    await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`, {
-                        method: 'POST',
-                        body: formData
-                    });
-                } catch(e) {
-                    console.warn('Failed to send photo:', e);
-                }
-            }
-
-            return true;
-        } catch(error) {
-            console.error('Telegram error:', error);
-            return false;
-        }
-    }
-
-    // ===== SUBMIT ORDER =====
-    document.getElementById('submitBtn').addEventListener('click', async function() {
-        if (isSubmitting) return;
-
-        const d = LANG_DATA[currentLang] || {};
-        const gameId = document.getElementById('gameId').value.trim();
-        const serverId = document.getElementById('serverId').value.trim();
-        const hasFile = document.getElementById('fileInput').files && document.getElementById('fileInput').files[0];
-
-        if (!gameId) { showToast(d.enterGameId, 'error'); return; }
-        if (!isNumberOnly(gameId)) { showToast(d.enterNumberOnly, 'error'); return; }
-        if (!serverId) { showToast(d.enterServerId, 'error'); return; }
-        if (!isNumberOnly(serverId)) { showToast(d.enterNumberOnly, 'error'); return; }
-        if (!selectedPayment) { showToast(d.selectPayment, 'error'); return; }
-        if (!hasFile) { showToast(d.uploadSlip, 'error'); return; }
-
-        isSubmitting = true;
-        this.disabled = true;
-        this.className = 'btn-primary loading';
-        this.textContent = d.submitting || '⏳ အော်ဒါတင်နေသည်...';
-
-        const orderId = 'ORD-' + Date.now().toString().slice(-6);
-        const pkg = document.getElementById('modalPackage').textContent;
-        const price = document.getElementById('modalPrice').textContent;
-        const paymentName = selectedPayment === 'wave' ? 'Wave Pay' : 'KBZ Pay';
-        const user = JSON.parse(localStorage.getItem('currentUser'));
-        const userName = user ? user.username : 'Guest';
-        const time = new Date().toLocaleString();
-
-        let photoBase64 = null;
-        if (hasFile) {
-            try {
-                photoBase64 = await new Promise((resolve) => {
-                    const reader = new FileReader();
-                    reader.onload = (e) => resolve(e.target.result);
-                    reader.readAsDataURL(hasFile);
-                });
-            } catch(e) {
-                console.warn('Failed to read file:', e);
-            }
-        }
-
-        const orderData = {
-            orderId: orderId,
-            package: pkg,
-            price: price,
-            gameId: gameId,
-            serverId: serverId,
-            payment: paymentName,
-            user: userName,
-            time: time,
-            photo: photoBase64
-        };
-
-        try {
-            const telegramSuccess = await sendOrderToTelegram(orderData);
-
-            const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
-            orders.unshift({
-                id: orderId,
-                userId: user ? user.username : 'guest',
-                package: pkg,
-                price: price,
-                gameId: gameId,
-                serverId: serverId,
-                payment: paymentName,
-                date: new Date().toISOString(),
-                status: 'pending'
-            });
-            localStorage.setItem('orderHistory', JSON.stringify(orders));
-
-            const notifications = JSON.parse(localStorage.getItem('notifications') || '[]');
-            notifications.unshift({
-                id: 'noti_' + Date.now(),
-                orderId: orderId,
-                package: pkg,
-                price: price,
-                time: new Date().toLocaleString(),
-                status: 'pending',
-                message: `🛒 အော်ဒါအသစ် #${orderId}\n📦 ${pkg}\n💰 ${price}\n⏳ ဆောင်ရွက်နေဆဲ`
-            });
-            localStorage.setItem('notifications', JSON.stringify(notifications));
-
-            updateBadge();
-
-            localStorage.setItem('newOrderNotification', JSON.stringify({
-                show: true,
-                orderId: orderId,
-                count: getPendingCount()
-            }));
-            window.dispatchEvent(new Event('storage'));
-
-            if (telegramSuccess) {
-                showToast(d.orderSuccess || '✅ Order successful!', 'success');
-            } else {
-                showToast('⚠️ အော်ဒါသိမ်းပြီးသော်လည်း Telegram သို့မပို့နိုင်ပါ။', 'error');
-            }
-
-            closeCheckoutModal();
-            setTimeout(() => { window.location.href = 'profile.html'; }, 1500);
-
-        } catch (error) {
-            console.error('Order error:', error);
-            showToast(d.orderFail || '❌ Order failed. Please try again.', 'error');
-        } finally {
-            this.disabled = false;
-            this.className = 'btn-primary enabled';
-            this.textContent = '✅ ' + d.submit;
-            isSubmitting = false;
-        }
-    });
-
-    function toggleNightMode() {
-        document.body.classList.toggle('night-mode');
-        const icon = document.querySelector('.night-toggle i');
-        icon.className = document.body.classList.contains('night-mode') ? 'fas fa-sun' : 'fas fa-moon';
-        localStorage.setItem('nightMode', document.body.classList.contains('night-mode') ? 'true' : 'false');
-    }
-
-    function handleNavClick(el, e) {
-        e.preventDefault();
-        setTimeout(() => { window.location.href = el.getAttribute('href'); }, 300);
-    }
-
-    function checkNotification() {
-        const noti = JSON.parse(localStorage.getItem('newOrderNotification') || '{"show":false}');
-        if (noti.show) {
-            setTimeout(() => {
-                localStorage.setItem('newOrderNotification', JSON.stringify({show: false}));
-                updateBadge();
-            }, 5000);
-        }
-        updateBadge();
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const savedLang = localStorage.getItem('lang') || 'my';
-        setLang(savedLang);
-        const nightMode = localStorage.getItem('nightMode') === 'true';
-        if (nightMode) {
-            document.body.classList.add('night-mode');
-            document.querySelector('.night-toggle i').className = 'fas fa-sun';
-        }
-        checkNotification();
-
-        window.addEventListener('storage', function(e) {
-            if (e.key === 'newOrderNotification' || e.key === 'notifications') {
-                updateBadge();
-            }
-        });
-    });
+    const LANG_DATA={my:{appName:'Premium',appSub:'Game Shop',home:'ပင်မ',shop:'ဆိုင်',payment:'ငွေပေးချေ',profile:'ပရိုဖိုင်',pageTitle:'MLBB Global',pageSub:'ပက်ကေ့ချ်တစ်ခုရွေးပြီး ဝယ်ယူပါ',bundlesTitle:'ပက်ကေ့ချ်များ',diamondsTitle:'စိန်များ',doubleTitle:'နှစ်ဆဖြည့်မှု',select:'Select',topUp:'Top Up',currency:'Ks',doubleBadge:'⭐ 2x Bonus'},en:{appName:'Premium',appSub:'Game Shop',home:'Home',shop:'Shop',payment:'Payment',profile:'Profile',pageTitle:'MLBB Global',pageSub:'Select a package and buy',bundlesTitle:'Packages',diamondsTitle:'Diamonds',doubleTitle:'Double Top Up',select:'Select',topUp:'Top Up',currency:'Ks',doubleBadge:'⭐ 2x Bonus'}};
+    let currentLang=localStorage.getItem('lang')||'my';
+    let selectedPackage=null;
+    function getText(k){return LANG_DATA[currentLang]?.[k]||k}
+    function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._timer);t._timer=setTimeout(()=>t.classList.remove('show'),3000);}
+    function setLang(l){currentLang=l;localStorage.setItem('lang',l);updateLanguage();document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));}
+    function updateLanguage(){const d=LANG_DATA[currentLang];document.getElementById('appName').textContent=d.appName;document.getElementById('appSub').textContent=d.appSub;document.getElementById('pageTitle').textContent=d.pageTitle;document.getElementById('pageSub').textContent=d.pageSub;document.getElementById('bundlesTitle').textContent=d.bundlesTitle;document.getElementById('diamondsTitle').textContent=d.diamondsTitle;document.getElementById('doubleTitle').textContent=d.doubleTitle;document.getElementById('navHome').textContent=d.home;document.getElementById('navShop').textContent=d.shop;document.getElementById('navPayment').textContent=d.payment;document.getElementById('navProfile').textContent=d.profile;renderPackages();updateBadge();}
+    function toggleNightMode(){document.body.classList.toggle('night-mode');const icon=document.querySelector('.night-toggle i');icon.className=document.body.classList.contains('night-mode')?'fas fa-sun':'fas fa-moon';localStorage.setItem('nightMode',document.body.classList.contains('night-mode')?'true':'false');}
+    function handleNavClick(el,e){e.preventDefault();setTimeout(()=>{window.location.href=el.getAttribute('href')},300);}
+    function updateBadge(){const notis=JSON.parse(localStorage.getItem('notifications')||'[]');const count=notis.filter(n=>n.status==='pending').length;const badge=document.getElementById('notiBadge');if(badge){badge.style.display=count>0?'block':'none';if(count>0)badge.textContent=count;}}
+    
+    // ===== Global Packages (မူရင်းအတိုင်း) =====
+    const PACKAGES={bundles:[{id:'b1',name:'Monthly Epic Bundle',price:17300,img:'https://files.catbox.moe/z2j5uo.png',sub:'💎275 + ⭐180'},{id:'b2',name:'Weekly Elite Bundle',price:3600,img:'https://files.catbox.moe/i3uywg.png',sub:'💎55 + ⭐20'},{id:'b3',name:'Weekly Pass',price:6500,img:'https://files.catbox.moe/zylral.png',sub:'Weekly Pass'},{id:'b4',name:'Twilight Pass',price:34000,img:'https://files.catbox.moe/jshuuy.png',sub:'🆕 New'}],diamonds:[{id:'d1',name:'11',price:750,img:'https://files.catbox.moe/xaxejk.png'},{id:'d2',name:'22',price:1500,img:'https://files.catbox.moe/xaxejk.png'},{id:'d3',name:'33',price:2250,img:'https://files.catbox.moe/7bj50l.png'},{id:'d4',name:'44',price:3100,img:'https://files.catbox.moe/7bj50l.png'},{id:'d5',name:'56',price:3800,img:'https://files.catbox.moe/4mb7sd.png'},{id:'d6',name:'112',price:7500,img:'https://files.catbox.moe/4mb7sd.png'},{id:'d7',name:'172',price:10300,img:'https://files.catbox.moe/ogchrl.png'},{id:'d8',name:'257',price:14850,img:'https://files.catbox.moe/ogchrl.png'},{id:'d9',name:'343',price:20000,img:'https://files.catbox.moe/ocznqy.png'},{id:'d10',name:'429',price:25000,img:'https://files.catbox.moe/ocznqy.png'},{id:'d11',name:'514',price:29600,img:'https://files.catbox.moe/k23p6t.png'},{id:'d12',name:'600',price:34800,img:'https://files.catbox.moe/k23p6t.png'},{id:'d13',name:'706',price:34000,img:'https://files.catbox.moe/qwnqog.png'},{id:'d14',name:'878',price:50000,img:'https://files.catbox.moe/qwnqog.png'},{id:'d15',name:'963',price:54700,img:'https://files.catbox.moe/zjcnar.png'},{id:'d16',name:'1049',price:59800,img:'https://files.catbox.moe/zjcnar.png'},{id:'d17',name:'1135',price:64800,img:'https://files.catbox.moe/co1w7w.png'},{id:'d18',name:'1412',price:79800,img:'https://files.catbox.moe/co1w7w.png'},{id:'d19',name:'1500',price:86100,img:'https://files.catbox.moe/2c5tz4.png'},{id:'d20',name:'1584',price:89800,img:'https://files.catbox.moe/2c5tz4.png'},{id:'d21',name:'1755',price:99500,img:'https://files.catbox.moe/b5bg2m.png'},{id:'d22',name:'2195',price:120500,img:'https://files.catbox.moe/b5bg2m.png'},{id:'d23',name:'2367',price:130700,img:'https://files.catbox.moe/1xbg9h.png'},{id:'d24',name:'2538',price:140400,img:'https://files.catbox.moe/1xbg9h.png'},{id:'d25',name:'3224',price:181000,img:'https://files.catbox.moe/z0c6rj.png'},{id:'d26',name:'3688',price:200800,img:'https://files.catbox.moe/z0c6rj.png'},{id:'d27',name:'4394',price:240500,img:'https://files.catbox.moe/z0c6rj.png'},{id:'d28',name:'5100',price:280100,img:'https://files.catbox.moe/pn69zi.png'},{id:'d29',name:'5532',price:302900,img:'https://files.catbox.moe/pn69zi.png'},{id:'d30',name:'9288',price:503000,img:'https://files.catbox.moe/pn69zi.png'}],double:[{id:'x1',name:'50+50',price:3550,img:'https://files.catbox.moe/z376wd.png',badge:true},{id:'x2',name:'150+150',price:9900,img:'https://files.catbox.moe/kf0960.png',badge:true},{id:'x3',name:'250+250',price:15800,img:'https://files.catbox.moe/jm3ty7.png',badge:true},{id:'x4',name:'500+500',price:32100,img:'https://files.catbox.moe/aprnoc.png',badge:true}]};
+    
+    function renderPackages(){const d=LANG_DATA[currentLang];const renderItems=(items,type)=>items.map(pkg=>{const isSelected=selectedPackage&&selectedPackage.id===pkg.id;const badgeHtml=pkg.badge?`<span class="badge">${d.doubleBadge}</span>`:'';const subHtml=pkg.sub?`<div class="sub">${pkg.sub}</div>`:'<div class="sub">MLBB</div>';return `<div class="package-item ${isSelected?'selected':''}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})"><div class="info"><img src="${pkg.img}" alt="${pkg.name}" class="pkg-img" onerror="this.style.display='none'"><div class="name">${pkg.name}</div>${subHtml}${badgeHtml}</div><div class="right"><span class="price">${pkg.price.toLocaleString()} ${d.currency}</span><span class="btn-label">${d.selectLabel}</span><button class="buy-btn" onclick="event.stopPropagation(); handleBuyClick('${pkg.id}','${pkg.name}',${pkg.price})">${d.buy}</button></div></div>`;}).join('');document.getElementById('bundlesList').innerHTML=renderItems(PACKAGES.bundles,'bundle');document.getElementById('diamondsList').innerHTML=renderItems(PACKAGES.diamonds,'diamond');document.getElementById('doubleList').innerHTML=renderItems(PACKAGES.double,'double');}
+    function handlePackageClick(id,name,price){if(selectedPackage&&selectedPackage.id===id){selectedPackage=null;}else{selectedPackage={id,name,price};}renderPackages();}
+    function handleBuyClick(id,name,price){if(!selectedPackage||selectedPackage.id!==id){selectedPackage={id,name,price};renderPackages();}showToast('🛒 '+name+' selected!');}
+    
+    document.querySelectorAll('.lang-btn').forEach(b=>{b.addEventListener('click',function(){const lang=this.dataset.lang;currentLang=lang;localStorage.setItem('lang',lang);document.querySelectorAll('.lang-btn').forEach(b2=>b2.classList.toggle('active',b2.dataset.lang===lang));updateLanguage();});});
+    document.querySelector('.night-toggle').addEventListener('click',toggleNightMode);
+    document.querySelectorAll('.bottom-nav .nav-item').forEach(item=>{item.addEventListener('click',function(e){document.querySelectorAll('.bottom-nav .nav-item').forEach(n=>n.classList.remove('active'));this.classList.add('active');const icon=this.querySelector('.icon');icon.style.animation='none';void icon.offsetWidth;icon.style.animation='selectBounce 0.5s cubic-bezier(0.34,1.56,0.64,1)';});});
+    document.addEventListener('DOMContentLoaded',function(){const savedLang=localStorage.getItem('lang')||'my';currentLang=savedLang;document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===savedLang));updateLanguage();if(localStorage.getItem('nightMode')==='true'){document.body.classList.add('night-mode');document.querySelector('.night-toggle i').className='fas fa-sun';}updateBadge();});
 </script>
 </body>
 </html>
