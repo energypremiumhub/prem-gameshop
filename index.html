@@ -217,6 +217,7 @@
         .welcome h2 i{color:var(--cyan);-webkit-text-fill-color:initial}
         .welcome p{color:var(--text-secondary);font-size:0.75rem;margin-top:2px;opacity:0.6}
 
+        /* ===== SHOP STATUS BANNER ===== */
         .shop-status-banner{
             background:var(--bg-card);
             backdrop-filter:blur(20px);
@@ -274,6 +275,7 @@
         @keyframes pulseDotRed{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.2;transform:scale(0.5)}}
         .shop-status-text{font-size:0.6rem;color:var(--text-secondary);text-align:center;opacity:0.6}
 
+        /* ===== SHOP CARD ===== */
         .shop-card{
             background:var(--bg-card);
             backdrop-filter:blur(20px);
@@ -407,6 +409,7 @@
         .telegram-contact .arrow{color:var(--text-secondary);font-size:0.9rem;transition:all 0.3s ease}
         .telegram-contact:hover .arrow{color:var(--cyan);transform:translateX(3px)}
 
+        /* ===== BOTTOM NAV ===== */
         .bottom-nav {
             position:fixed;
             bottom:16px;
@@ -546,6 +549,7 @@
 </head>
 <body>
 <div class="container">
+    <!-- HEADER -->
     <div class="header">
         <div class="left">
             <div class="logo-wrap">
@@ -569,12 +573,14 @@
         </div>
     </div>
 
+    <!-- WELCOME -->
     <div class="welcome">
         <div class="greeting"><i class="fas fa-fire"></i> <span id="greeting">ဟေ့ကောင်လေး!</span></div>
         <h2><i class="fas fa-arrow-right"></i> ဂိမ်းကို <span>မြှင့်တင်လိုက်ပါ!</span></h2>
         <p id="subtitle">စိန်တွေဖြည့်ပြီး စစ်မြေပြင်ကို အနိုင်ယူလိုက်ပါ</p>
     </div>
 
+    <!-- SHOP STATUS BANNER -->
     <div class="shop-status-banner" id="shopStatusBanner">
         <div class="banner-content">
             <div class="banner-status open" id="statusBadge"><span class="status-dot"></span> OPEN</div>
@@ -582,12 +588,14 @@
         </div>
     </div>
 
+    <!-- SHOP CARD -->
     <a href="shop.html" class="shop-card open" id="shopCard">
         <span class="icon"><i class="fas fa-store-alt"></i></span>
         <div class="label" id="goToShop">⚡ GO TO SHOP</div>
         <div class="sub" id="shopSubText">ပက်ကေ့ခ်ျအားလုံးကိုကြည့်ပါ</div>
     </a>
 
+    <!-- SERVICES -->
     <div class="section-title"><i class="fas fa-bolt"></i> <span id="servicesTitle">ဘာကြောင့် ကျွန်ုပ်တို့ကိုရွေးမလဲ?</span></div>
     <div class="services-grid">
         <div class="service"><span class="icon"><i class="fas fa-bolt"></i></span><span class="label" id="s1">၁၀ မိနစ်အတွင်း အော်ဒါပြီးမြောက်</span></div>
@@ -598,6 +606,7 @@
         <div class="service"><span class="icon"><i class="fas fa-star"></i></span><span class="label" id="s6">Coming Soon</span></div>
     </div>
 
+    <!-- TELEGRAM -->
     <div class="telegram-card">
         <span class="icon"><i class="fab fa-telegram-plane"></i></span>
         <div class="info">
@@ -619,6 +628,7 @@
     <div class="footer-text">&copy; 2026 Premium Game Shop</div>
 </div>
 
+<!-- BOTTOM NAV -->
 <div class="bottom-nav">
     <a href="index.html" class="nav-item active"><span class="icon"><i class="fas fa-home"></i></span><span class="label" id="navHome">ပင်မ</span></a>
     <a href="shop.html" class="nav-item"><span class="icon"><i class="fas fa-shopping-bag"></i></span><span class="label" id="navShop">ဆိုင်</span></a>
@@ -884,8 +894,13 @@
     function updateAuthUI(){
         const btn=document.getElementById('authBtn');
         if(currentUser){
-            const firstChar=(currentUser.displayName||currentUser.username||'U').charAt(0).toUpperCase();
-            btn.innerHTML='<span class="avatar-small">'+firstChar+'</span> '+(currentUser.displayName||currentUser.username);
+            const avatar = localStorage.getItem('userAvatar_' + currentUser.username);
+            if(avatar){
+                btn.innerHTML='<img src="'+avatar+'" style="width:22px;height:22px;border-radius:50%;object-fit:cover;flex-shrink:0;"> '+(currentUser.displayName||currentUser.username);
+            }else{
+                const firstChar=(currentUser.displayName||currentUser.username||'U').charAt(0).toUpperCase();
+                btn.innerHTML='<span class="avatar-small">'+firstChar+'</span> '+(currentUser.displayName||currentUser.username);
+            }
             btn.className='auth-btn logged-in';
         }else{
             btn.innerHTML='<i class="fas fa-key"></i> Login';
@@ -978,7 +993,6 @@
         let found=null;
         for(const key in users){
             const user=users[key];
-            // Check by username, email, or phone
             if(key===input || user.email===input || user.username===input || user.phone===input){
                 if(user.password===password){
                     found=user;
@@ -1029,7 +1043,6 @@
         }
 
         const users=JSON.parse(localStorage.getItem('users')||'{}');
-        // Check if username, email or phone already exists
         for(const key in users){
             if(key===username || (email && users[key].email===email) || (phone && users[key].phone===phone)){
                 err.textContent=d.userExists || '❌ Username, email or phone already exists';
