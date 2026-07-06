@@ -98,11 +98,12 @@
         .header .left .auth-btn:active{transform:scale(0.92)!important}
         .header .left .auth-btn:hover{border-color:var(--cyan);color:var(--cyan)}
         .header .left .auth-btn.logged-in{
-            background:linear-gradient(135deg,var(--gold),var(--orange));
+            background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));
             color:#fff;
-            border-color:var(--gold);
-            box-shadow:0 4px 20px var(--gold-glow)
+            border-color:var(--cyan);
+            box-shadow:0 4px 20px var(--cyan-glow)
         }
+        .header .left .auth-btn.logged-in:active{transform:scale(0.92)!important}
         .header .left .auth-btn.logged-in img{width:22px;height:22px;border-radius:50%;object-fit:cover;margin-right:4px}
         
         .header .right .top{display:flex;gap:6px;align-items:center}
@@ -465,8 +466,7 @@
             transform:translateY(-2px) scale(1.1);
             background:linear-gradient(135deg,var(--cyan),var(--purple));
             -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent;
-            animation:selectBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)
+            -webkit-text-fill-color:transparent
         }
         .bottom-nav .nav-item.active .label{
             background:linear-gradient(135deg,var(--cyan),var(--purple));
@@ -475,7 +475,6 @@
             opacity:1;
             font-weight:600
         }
-        @keyframes selectBounce{0%{transform:scale(1)}30%{transform:scale(1.3) rotate(-8deg)}60%{transform:scale(0.9) rotate(4deg)}100%{transform:scale(1.1) rotate(0deg)}}
 
         .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.3}
 
@@ -615,10 +614,10 @@
 
 <!-- BOTTOM NAV -->
 <div class="bottom-nav">
-    <a href="index.html" class="nav-item active"><span class="icon"><i class="fas fa-home"></i></span><span class="label" id="navHome">ပင်မ</span></a>
-    <a href="shop.html" class="nav-item"><span class="icon"><i class="fas fa-shopping-bag"></i></span><span class="label" id="navShop">ဆိုင်</span></a>
-    <a href="payment.html" class="nav-item"><span class="icon"><i class="fas fa-credit-card"></i></span><span class="label" id="navPayment">ငွေပေးချေ</span></a>
-    <a href="profile.html" class="nav-item"><span class="icon"><i class="fas fa-user"></i></span><span class="label" id="navProfile">ပရိုဖိုင်</span></a>
+    <a href="index.html" class="nav-item active" id="navHomeBtn"><span class="icon"><i class="fas fa-home"></i></span><span class="label" id="navHome">ပင်မ</span></a>
+    <a href="shop.html" class="nav-item" id="navShopBtn"><span class="icon"><i class="fas fa-shopping-bag"></i></span><span class="label" id="navShop">ဆိုင်</span></a>
+    <a href="payment.html" class="nav-item" id="navPaymentBtn"><span class="icon"><i class="fas fa-credit-card"></i></span><span class="label" id="navPayment">ငွေပေးချေ</span></a>
+    <a href="profile.html" class="nav-item" id="navProfileBtn"><span class="icon"><i class="fas fa-user"></i></span><span class="label" id="navProfile">ပရိုဖိုင်</span></a>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -641,30 +640,30 @@
                 <label id="passLabel">စကားဝှက်</label>
                 <input type="password" id="loginPassword" placeholder="သင့်စကားဝှက်ထည့်ပါ">
             </div>
-            <span class="forgot-link">စကားဝှက်မေ့နေပါသလား?</span>
+            <span class="forgot-link" id="forgotLink">စကားဝှက်မေ့နေပါသလား?</span>
             <button class="btn-primary" id="loginBtn">ဝင်ရန်</button>
             <span class="switch-link" id="switchToRegister">အကောင့်မရှိသေးဘူး? မှတ်ပုံတင်ရန်</span>
         </div>
         
         <div id="registerForm" style="display:none;">
             <div class="form-group">
-                <label>အသုံးပြုသူအမည် <span style="color:var(--red);">*</span></label>
+                <label id="regUsernameLabel">အသုံးပြုသူအမည် <span style="color:var(--red);">*</span></label>
                 <input type="text" id="regUsername" placeholder="အသုံးပြုသူအမည်ရွေးပါ">
             </div>
             <div class="form-group">
-                <label>အီးမေးလ်</label>
+                <label id="regEmailLabel">အီးမေးလ်</label>
                 <input type="email" id="regEmail" placeholder="သင့်အီးမေးလ်ထည့်ပါ (optional)">
             </div>
             <div class="form-group">
-                <label>ဖုန်းနံပါတ်</label>
+                <label id="regPhoneLabel">ဖုန်းနံပါတ်</label>
                 <input type="tel" id="regPhone" placeholder="သင့်ဖုန်းနံပါတ်ထည့်ပါ (optional)">
             </div>
             <div class="form-group">
-                <label>စကားဝှက် <span style="color:var(--red);">*</span></label>
+                <label id="regPassLabel">စကားဝှက် <span style="color:var(--red);">*</span></label>
                 <input type="password" id="regPassword" placeholder="အနည်းဆုံး ၄ လုံး">
             </div>
             <div class="form-group">
-                <label>စကားဝှက်အတည်ပြုရန် <span style="color:var(--red);">*</span></label>
+                <label id="regConfirmLabel">စကားဝှက်အတည်ပြုရန် <span style="color:var(--red);">*</span></label>
                 <input type="password" id="regConfirmPassword" placeholder="စကားဝှက်ပြန်ထည့်ပါ">
             </div>
             <button class="btn-primary" id="registerBtn">မှတ်ပုံတင်ရန်</button>
@@ -700,6 +699,7 @@
             shopClosed:'CLOSED',
             shopOpenText:'မနက် ၉:၃၀ မှ ည ၉:၃၀ အတွင်းသာ ဆိုင်ဖွင့်မည် (မြန်မာစံတော်ချိန်)',
             shopClosedText:'မနက် ၉:၃၀ မှသာ ဆိုင်ဖွင့်ပါမည် (မြန်မာစံတော်ချိန်)',
+            // MODAL - MYANMAR
             modalLogin:'ဝင်ရန်',
             modalRegister:'မှတ်ပုံတင်ရန်',
             modalLoginSub:'ပြန်လည်ကြိုဆိုပါတယ်!',
@@ -718,7 +718,13 @@
             passwordMin:'စကားဝှက်သည် အနည်းဆုံး ၄ လုံးရှိရမယ်',
             passwordMatch:'စကားဝှက်များ မတူညီပါ',
             userExists:'❌ အသုံးပြုသူအမည်၊ အီးမေးလ် သို့မဟုတ် ဖုန်းနံပါတ် ရှိပြီးသားပါ',
-            invalidCredentials:'❌ အီးမေးလ်/အသုံးပြုသူအမည်/ဖုန်းနံပါတ် သို့မဟုတ် စကားဝှက် မှားနေပါသည်'
+            invalidCredentials:'❌ အီးမေးလ်/အသုံးပြုသူအမည်/ဖုန်းနံပါတ် သို့မဟုတ် စကားဝှက် မှားနေပါသည်',
+            forgot:'စကားဝှက်မေ့နေပါသလား?',
+            regUsername:'အသုံးပြုသူအမည်',
+            regEmail:'အီးမေးလ်',
+            regPhone:'ဖုန်းနံပါတ်',
+            regPass:'စကားဝှက်',
+            regConfirm:'စကားဝှက်အတည်ပြုရန်'
         },
         en: {
             appName:'Premium',appSub:'Game Shop',
@@ -744,6 +750,7 @@
             shopClosed:'CLOSED',
             shopOpenText:'Open from 9:30 AM to 9:30 PM (Myanmar Time)',
             shopClosedText:'Will open at 9:30 AM (Myanmar Time)',
+            // MODAL - ENGLISH
             modalLogin:'Login',
             modalRegister:'Register',
             modalLoginSub:'Welcome back!',
@@ -762,7 +769,13 @@
             passwordMin:'Password must be at least 4 characters',
             passwordMatch:'Passwords do not match',
             userExists:'❌ Username, email or phone already exists',
-            invalidCredentials:'❌ Invalid email/username/phone or password'
+            invalidCredentials:'❌ Invalid email/username/phone or password',
+            forgot:'Forgot password?',
+            regUsername:'Username',
+            regEmail:'Email',
+            regPhone:'Phone Number',
+            regPass:'Password',
+            regConfirm:'Confirm Password'
         }
     };
 
@@ -830,16 +843,27 @@
         const d=LANG_DATA[currentLang];
         if(!d)return;
         const isLogin=document.getElementById('registerForm').style.display==='none';
+        
         document.getElementById('modalTitle').textContent=isLogin?d.modalLogin:d.modalRegister;
         document.querySelector('.modal-box .sub').textContent=isLogin?d.modalLoginSub:d.modalRegisterSub;
+        
+        // Login form
         document.getElementById('emailLabel').textContent=d.email;
         document.getElementById('passLabel').textContent=d.password;
         document.getElementById('loginBtn').textContent=d.login;
-        document.getElementById('registerBtn').textContent=d.register;
         document.getElementById('switchToRegister').textContent=d.switchLogin;
-        document.getElementById('switchToLogin').textContent=d.switchRegister;
+        document.getElementById('forgotLink').textContent=d.forgot;
         document.getElementById('loginInput').placeholder=d.enterEmail;
         document.getElementById('loginPassword').placeholder=d.enterPassword;
+        
+        // Register form
+        document.getElementById('regUsernameLabel').innerHTML=d.regUsername+' <span style="color:var(--red);">*</span>';
+        document.getElementById('regEmailLabel').textContent=d.regEmail;
+        document.getElementById('regPhoneLabel').textContent=d.regPhone;
+        document.getElementById('regPassLabel').innerHTML=d.regPass+' <span style="color:var(--red);">*</span>';
+        document.getElementById('regConfirmLabel').innerHTML=d.regConfirm+' <span style="color:var(--red);">*</span>';
+        document.getElementById('registerBtn').textContent=d.register;
+        document.getElementById('switchToLogin').textContent=d.switchRegister;
         document.getElementById('regUsername').placeholder=d.enterUsername;
         document.getElementById('regPassword').placeholder=d.passwordMin;
         document.getElementById('regConfirmPassword').placeholder=d.passwordMatch;
@@ -874,7 +898,7 @@
     function updateAuthUI(){
         const btn=document.getElementById('authBtn');
         if(currentUser){
-            btn.innerHTML='<i class="fas fa-user"></i> '+currentUser.username;
+            btn.innerHTML='<i class="fas fa-user-circle"></i> '+currentUser.username;
             btn.className='auth-btn logged-in';
         }else{
             btn.innerHTML='<i class="fas fa-key"></i> Login';
@@ -1031,6 +1055,22 @@
         updateBadge();
     }
 
+    // ===== CLICK EFFECTS =====
+    document.querySelectorAll('.service, .telegram-card, .telegram-contact, .shop-status-banner, .shop-card').forEach(el=>{
+        el.addEventListener('click', function(e){
+            this.style.transition='all 0.12s cubic-bezier(0.34, 1.2, 0.64, 1)';
+            this.style.transform='scale(0.96)';
+            setTimeout(()=>{
+                this.style.transform='';
+                this.style.transition='all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            }, 150);
+        });
+    });
+
+    // Telegram links
+    document.querySelector('.telegram-card').addEventListener('click', ()=>window.open('https://t.me/Premium_GameShop', '_blank'));
+    document.querySelector('.telegram-contact').addEventListener('click', ()=>window.open('https://t.me/PremEnergy', '_blank'));
+
     // ===== EVENT LISTENERS =====
     document.getElementById('loginInput').addEventListener('input', checkLoginForm);
     document.getElementById('loginPassword').addEventListener('input', checkLoginForm);
@@ -1047,21 +1087,20 @@
         else openModal('login');
     });
 
-    // ===== CLICK EFFECTS (Shop page အတိုင်း) =====
-    document.querySelectorAll('.service, .telegram-card, .telegram-contact, .shop-status-banner, .shop-card').forEach(el=>{
-        el.addEventListener('click', function(e){
-            this.style.transition='all 0.12s cubic-bezier(0.34, 1.2, 0.64, 1)';
-            this.style.transform='scale(0.96)';
-            setTimeout(()=>{
-                this.style.transform='';
-                this.style.transition='all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
-            }, 150);
+    // ===== NAV BAR CLICK EFFECT (Home vs Shop တူအောင်) =====
+    document.querySelectorAll('.bottom-nav .nav-item').forEach(item=>{
+        item.addEventListener('click', function(e){
+            // Remove active from all
+            document.querySelectorAll('.bottom-nav .nav-item').forEach(n=>n.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Icon animation
+            const icon = this.querySelector('.icon');
+            icon.style.animation = 'none';
+            void icon.offsetWidth;
+            icon.style.animation = 'selectBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
         });
     });
-
-    // Telegram links
-    document.querySelector('.telegram-card').addEventListener('click', ()=>window.open('https://t.me/Premium_GameShop', '_blank'));
-    document.querySelector('.telegram-contact').addEventListener('click', ()=>window.open('https://t.me/PremEnergy', '_blank'));
 
     // ===== INIT =====
     document.addEventListener('DOMContentLoaded', function(){
