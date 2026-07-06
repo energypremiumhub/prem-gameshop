@@ -26,6 +26,8 @@
             --orange: #ff6a00;
             --green: #00c853;
             --red: #ff0044;
+            --purple: #7c3aed;
+            --pink: #ec4899;
         }
 
         .night-mode {
@@ -65,10 +67,6 @@
             box-shadow: 0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        .glass-box:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 30px var(--shadow-hover), inset 0 1px 0 rgba(255,255,255,0.15);
-        }
 
         .click-pop { animation: pop 0.3s cubic-bezier(0.34,1.56,0.64,1); }
         @keyframes pop {
@@ -94,7 +92,7 @@
             cursor: pointer;
         }
         .card-click:active {
-            transform: scale(0.96) translateY(2px) !important;
+            transform: scale(0.96) !important;
         }
 
         .nav-click {
@@ -135,7 +133,6 @@
         .header .left .logo-wrap .text-group{display:flex;flex-direction:column;line-height:1.1}
         .header .left .logo-wrap .text-group .premium{font-size:1rem;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 20px var(--gold-glow)}
         .header .left .logo-wrap .text-group .shop{font-size:0.55rem;font-weight:600;color:var(--text-secondary);opacity:0.6;margin-top:-2px}
-        .header .left .auth-btn{display:none}
         
         .header .right .top{display:flex;gap:6px;align-items:center}
         .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:10px;border:1px solid var(--border-color);box-shadow:0 2px 10px var(--shadow)}
@@ -165,31 +162,103 @@
 
         /* ===== GAME GRID ===== */
         .game-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
-        .game-item{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:14px;padding:12px 14px;cursor:pointer;transition:all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;min-height:72px}
-        .game-item:active{transform:scale(0.97);transition:transform 0.12s ease}
-        .game-item:hover{transform:translateY(-3px);border-color:rgba(245,166,35,0.3);box-shadow:0 8px 30px var(--shadow-hover), inset 0 1px 0 rgba(255,255,255,0.15)}
+        .game-item{
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 12px 14px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.34, 1.2, 0.64, 1);
+            box-shadow: 0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            position: relative;
+            overflow: hidden;
+            min-height: 72px;
+        }
+        /* နှိပ်လိုက်တဲ့အခါ နူးညံ့တဲ့ animation */
+        .game-item:active {
+            transform: scale(0.96) !important;
+            transition: transform 0.12s cubic-bezier(0.34, 1.2, 0.64, 1) !important;
+        }
+        /* hover ဖယ်ထားတယ် - အပေါ်မတက်တော့ဘူး */
         
         /* ===== SOFT CLICK RIPPLE ===== */
-        .game-item .ripple-effect{position:absolute;border-radius:50%;background:rgba(245,166,35,0.12);transform:scale(0);animation:rippleAnim 0.5s ease-out;pointer-events:none}
+        .game-item .ripple-effect{position:absolute;border-radius:50%;background:rgba(245,166,35,0.15);transform:scale(0);animation:rippleAnim 0.6s ease-out;pointer-events:none}
         @keyframes rippleAnim{to{transform:scale(3);opacity:0}}
         
-        /* ===== BADGE (ဘောင်ထဲမှာ ထည့်ထား) ===== */
-        .game-item .badge{display:inline-block;background:var(--gold);color:#fff;font-size:0.45rem;font-weight:700;padding:1px 10px;border-radius:10px;box-shadow:0 0 15px var(--gold-glow);margin-left:4px;vertical-align:middle;position:relative;top:-1px;letter-spacing:0.3px}
+        /* ===== BADGE STYLES ===== */
+        /* စောင်းစောင်းလေးထားတဲ့ badge - ဘယ်ဘက်အပေါ် */
+        .game-item .badge-corner {
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+            color: #fff;
+            font-size: 0.4rem;
+            font-weight: 800;
+            padding: 2px 12px 2px 10px;
+            border-radius: 0 0 12px 0;
+            box-shadow: 0 2px 15px var(--gold-glow);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            z-index: 2;
+            transform: rotate(-2deg);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .game-item .badge-corner.new {
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            box-shadow: 0 2px 15px var(--cyan-glow);
+        }
+        /* အောက်ခြေမှာ ထားတဲ့ badge (sub အောက်မှာ) */
+        .game-item .badge-sub {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+            color: #fff;
+            font-size: 0.35rem;
+            font-weight: 700;
+            padding: 1px 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px var(--gold-glow);
+            letter-spacing: 0.3px;
+            margin-top: 2px;
+        }
+        .game-item .badge-sub.new {
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            box-shadow: 0 2px 10px var(--cyan-glow);
+        }
         
         .game-item .game-img{width:44px;height:44px;border-radius:12px;object-fit:cover;flex-shrink:0;border:2px solid var(--border-color);transition:all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);position:relative;z-index:1}
-        .game-item:hover .game-img{transform:scale(1.05) rotate(-3deg);border-color:var(--gold);box-shadow:0 0 20px var(--gold-glow)}
         .game-item .game-img-placeholder{font-size:1.8rem;flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:12px;border:2px solid var(--border-color);background:var(--bg-input);transition:all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);position:relative;z-index:1}
-        .game-item:hover .game-img-placeholder{transform:scale(1.05) rotate(-3deg);border-color:var(--gold);box-shadow:0 0 20px var(--gold-glow)}
         .game-item .info{flex:1;min-width:0;position:relative;z-index:1}
-        .game-item .info .name{font-size:0.8rem;font-weight:700;color:var(--text-primary);display:flex;align-items:center;flex-wrap:wrap;gap:2px}
-        .game-item .info .sub{font-size:0.5rem;color:var(--text-secondary);margin-top:2px}
+        .game-item .info .name{
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 4px;
+            line-height: 1.2;
+        }
+        .game-item .info .sub{
+            font-size: 0.5rem;
+            color: var(--text-secondary);
+            margin-top: 2px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
         .game-item .glow{position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(245,166,35,0.04) 0%,transparent 70%);opacity:0;transition:all 0.6s ease;pointer-events:none}
-        .game-item:hover .glow{opacity:1}
+        .game-item:active .glow{opacity:1}
         .game-item.hidden{display:none}
 
-        /* ===== SOFT BOUNCE ===== */
-        .game-item.bounce-click{animation:bounceSoft 0.3s cubic-bezier(0.34, 1.2, 0.64, 1)}
-        @keyframes bounceSoft{0%{transform:scale(1)}35%{transform:scale(0.97)}70%{transform:scale(1.015)}100%{transform:scale(1)}}
+        /* ===== SOFT BOUNCE (နှိပ်လိုက်တဲ့အခါ) ===== */
+        .game-item.bounce-click{animation:bounceSoft 0.35s cubic-bezier(0.34, 1.2, 0.64, 1)}
+        @keyframes bounceSoft{0%{transform:scale(1)}35%{transform:scale(0.94)}70%{transform:scale(1.02)}100%{transform:scale(1)}}
 
         .section-title{font-size:0.65rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;display:flex;align-items:center;gap:10px;opacity:0.5}
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
@@ -234,7 +303,6 @@
         .bottom-nav .nav-item.active { background:rgba(108,92,231,0.06); border:1px solid rgba(108,92,231,0.08); box-shadow:0 0 30px rgba(108,92,231,0.02); color:var(--text-primary); }
         .bottom-nav .nav-item.active .icon{transform:translateY(-2px) scale(1.1); color:var(--gold); text-shadow:0 0 30px var(--gold-glow); animation:selectBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) }
         .bottom-nav .nav-item.active .label{color:var(--gold);opacity:1;font-weight:400}
-        .bottom-nav .nav-item:not(.active):hover { border-color:rgba(108,92,231,0.06); background:rgba(108,92,231,0.02); }
         @keyframes selectBounce { 0%{transform:scale(1)} 30%{transform:scale(1.3) rotate(-8deg)} 60%{transform:scale(0.9) rotate(4deg)} 100%{transform:scale(1.1) rotate(0deg)} }
 
         .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.3;letter-spacing:1px}
@@ -246,6 +314,19 @@
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
         @keyframes floatIcon {0%,100%{transform:translateY(0px)}50%{transform:translateY(-6px)}}
         @keyframes glowPulse {0%,100%{box-shadow:0 0 10px var(--gold-glow)}50%{box-shadow:0 0 30px var(--gold-glow)}}
+
+        /* ===== PREMIUM GRADIENT COLORS ===== */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--gold), var(--orange), var(--pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-border {
+            border-image: linear-gradient(135deg, var(--gold), var(--orange), var(--pink)) 1;
+        }
+        .premium-icon {
+            filter: drop-shadow(0 0 8px var(--gold-glow));
+        }
     </style>
 </head>
 <body>
@@ -273,8 +354,8 @@
     </div>
 
     <div class="page-header">
-        <h1><i class="fas fa-store"></i> <span id="pageTitle">Game Shop</span></h1>
-        <p id="pageSub">ဂိမ်းတစ်ခုရွေးပြီး စိန်ဖြည့်လိုက်ပါ</p>
+        <h1><i class="fas fa-store"></i> <span id="pageTitle" class="gradient-text">Game Shop</span></h1>
+        <p id="pageSub">✨ ဂိမ်းတစ်ခုရွေးပြီး စိန်ဖြည့်လိုက်ပါ</p>
     </div>
 
     <div class="search-box">
@@ -283,45 +364,58 @@
         <span class="clear-btn" id="clearBtn" onclick="clearSearch()"><i class="fas fa-times-circle"></i></span>
     </div>
 
-    <div class="section-title"><i class="fas fa-gamepad"></i> <span id="gamesTitle">ဂိမ်းများ</span></div>
+    <div class="section-title"><i class="fas fa-gamepad premium-icon"></i> <span id="gamesTitle">ဂိမ်းများ</span></div>
     <div class="game-grid" id="gameGrid">
-        <!-- Mobile Legends -->
-        <div class="game-item glass-box" data-name="mobile legends mlbb" onclick="selectGame('Mobile Legends', 'mlbb', event)">
+        <!-- Mobile Legends: Bang Bang -->
+        <div class="game-item glass-box" data-name="mobile legends bang bang mlbb" onclick="selectGame('Mobile Legends: Bang Bang', 'mlbb', event)">
             <span class="glow"></span>
+            <!-- Corner Badge (စောင်းစောင်းလေး) -->
+            <span class="badge-corner" id="popularBadge">🔥 POPULAR</span>
             <img src="https://i.ibb.co/cKsDX2Nt/x.jpg" alt="Mobile Legends" class="game-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="game-img-placeholder" style="display:none;">⚔️</span>
             <div class="info">
-                <div class="name">Mobile Legends <span class="badge" id="popularBadge">🔥 Popular</span></div>
-                <div class="sub" id="mlbbSub">Diamond Top Up</div>
+                <div class="name">Mobile Legends: <span style="background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Bang Bang</span></div>
+                <div class="sub">
+                    <span>💎 Diamond Top Up</span>
+                    <!-- Sub Badge (အောက်ခြေမှာ) -->
+                    <span class="badge-sub" id="popularSubBadge">🔥 Popular</span>
+                </div>
             </div>
         </div>
 
-        <!-- MCGG (Magic Chess) -->
-        <div class="game-item glass-box" data-name="mcgg magic chess" onclick="selectGame('Magic Chess', 'mcgg', event)">
+        <!-- Magic Chess: Go Go -->
+        <div class="game-item glass-box" data-name="magic chess go go mcgg" onclick="selectGame('Magic Chess: Go Go', 'mcgg', event)">
             <span class="glow"></span>
+            <!-- Corner Badge (စောင်းစောင်းလေး) -->
+            <span class="badge-corner new" id="mcggBadge">✨ NEW</span>
             <img src="https://files.catbox.moe/8lxv1s.jpg" alt="MCGG" class="game-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="game-img-placeholder" style="display:none;">♟️</span>
             <div class="info">
-                <div class="name">Magic Chess <span class="badge" id="mcggBadge">🆕 New</span></div>
-                <div class="sub" id="mcggSub">Diamond Top Up</div>
+                <div class="name">Magic Chess: <span style="background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Go Go</span></div>
+                <div class="sub">
+                    <span>💎 Diamond Top Up</span>
+                    <!-- Sub Badge (အောက်ခြေမှာ) -->
+                    <span class="badge-sub new" id="mcggSubBadge">✨ New</span>
+                </div>
             </div>
         </div>
 
-        <!-- Coming Soon -->
+        <!-- Coming Soon 1 -->
         <div class="game-item glass-box" data-name="coming soon" onclick="showComingSoon()">
             <span class="glow"></span>
             <span class="game-img-placeholder">🎮</span>
             <div class="info">
                 <div class="name" id="cs1">Coming Soon</div>
-                <div class="sub" id="cs1sub">အသစ်ထွက်ရှိမည်</div>
+                <div class="sub" id="cs1sub">⏳ အသစ်ထွက်ရှိမည်</div>
             </div>
         </div>
+        <!-- Coming Soon 2 -->
         <div class="game-item glass-box" data-name="coming soon" onclick="showComingSoon()">
             <span class="glow"></span>
             <span class="game-img-placeholder">🎯</span>
             <div class="info">
                 <div class="name" id="cs2">Coming Soon</div>
-                <div class="sub" id="cs2sub">အသစ်ထွက်ရှိမည်</div>
+                <div class="sub" id="cs2sub">⏳ အသစ်ထွက်ရှိမည်</div>
             </div>
         </div>
     </div>
@@ -343,30 +437,40 @@
         my: {
             appName: 'Premium', appSub: 'Game Shop',
             home: 'ပင်မ', shop: 'ဆိုင်', payment: 'ငွေပေးချေ', profile: 'ပရိုဖိုင်',
-            pageTitle: 'Game Shop', pageSub: 'ဂိမ်းတစ်ခုရွေးပြီး စိန်ဖြည့်လိုက်ပါ',
-            gamesTitle: 'ဂိမ်းများ', popular: '🔥 Popular',
-            mcggBadge: '🆕 New',
-            mcggName: 'Magic Chess',
-            mcggSub: 'Diamond Top Up',
-            comingSoon: 'Coming Soon', comingSoonSub: 'အသစ်ထွက်ရှိမည်',
-            mlbbSub: 'Diamond Top Up',
+            pageTitle: 'Game Shop', pageSub: '✨ ဂိမ်းတစ်ခုရွေးပြီး စိန်ဖြည့်လိုက်ပါ',
+            gamesTitle: 'ဂိမ်းများ',
+            popular: '🔥 POPULAR',
+            popularSub: '🔥 Popular',
+            mcggBadge: '✨ NEW',
+            mcggSubBadge: '✨ New',
+            mcggName: 'Magic Chess: Go Go',
+            mcggSub: '💎 Diamond Top Up',
+            comingSoon: 'Coming Soon', comingSoonSub: '⏳ အသစ်ထွက်ရှိမည်',
+            mlbbName: 'Mobile Legends: Bang Bang',
+            mlbbSub: '💎 Diamond Top Up',
             searchPlaceholder: '🔍 ဂိမ်းနာမည်ရှာပါ...',
             noGames: '❌ ဂိမ်းမတွေ့ပါ',
-            selectGame: 'ဂိမ်းရွေးပါ', comingSoonMsg: '🎮 ဤဂိမ်းကို မကြာမီ ထည့်သွင်းပေးပါမည်။'
+            selectGame: 'ရွေးချယ်လိုက်ပါ',
+            comingSoonMsg: '🎮 ဤဂိမ်းကို မကြာမီ ထည့်သွင်းပေးပါမည်။'
         },
         en: {
             appName: 'Premium', appSub: 'Game Shop',
             home: 'Home', shop: 'Shop', payment: 'Payment', profile: 'Profile',
-            pageTitle: 'Game Shop', pageSub: 'Choose a game and top up diamonds',
-            gamesTitle: 'Games', popular: '🔥 Popular',
-            mcggBadge: '🆕 New',
-            mcggName: 'Magic Chess',
-            mcggSub: 'Diamond Top Up',
-            comingSoon: 'Coming Soon', comingSoonSub: 'Coming Soon',
-            mlbbSub: 'Diamond Top Up',
+            pageTitle: 'Game Shop', pageSub: '✨ Choose a game and top up diamonds',
+            gamesTitle: 'Games',
+            popular: '🔥 POPULAR',
+            popularSub: '🔥 Popular',
+            mcggBadge: '✨ NEW',
+            mcggSubBadge: '✨ New',
+            mcggName: 'Magic Chess: Go Go',
+            mcggSub: '💎 Diamond Top Up',
+            comingSoon: 'Coming Soon', comingSoonSub: '⏳ Coming Soon',
+            mlbbName: 'Mobile Legends: Bang Bang',
+            mlbbSub: '💎 Diamond Top Up',
             searchPlaceholder: '🔍 Search game name...',
             noGames: '❌ No games found',
-            selectGame: 'Select Game', comingSoonMsg: '🎮 This game will be added soon.'
+            selectGame: 'Selected',
+            comingSoonMsg: '🎮 This game will be added soon.'
         }
     };
 
@@ -397,20 +501,25 @@
         document.getElementById('pageTitle').textContent = d.pageTitle;
         document.getElementById('pageSub').textContent = d.pageSub;
         document.getElementById('gamesTitle').textContent = d.gamesTitle;
+        
+        // Badge texts
         document.getElementById('popularBadge').textContent = d.popular;
+        document.getElementById('popularSubBadge').textContent = d.popularSub;
         document.getElementById('mcggBadge').textContent = d.mcggBadge;
-        document.getElementById('mcggName').textContent = d.mcggName;
-        document.getElementById('mcggSub').textContent = d.mcggSub;
-        document.getElementById('mlbbSub').textContent = d.mlbbSub;
+        document.getElementById('mcggSubBadge').textContent = d.mcggSubBadge;
+        
+        // Coming Soon
         document.getElementById('cs1').textContent = d.comingSoon;
         document.getElementById('cs1sub').textContent = d.comingSoonSub;
         document.getElementById('cs2').textContent = d.comingSoon;
         document.getElementById('cs2sub').textContent = d.comingSoonSub;
+        
         document.getElementById('searchInput').placeholder = d.searchPlaceholder;
         document.getElementById('navHome').textContent = d.home;
         document.getElementById('navShop').textContent = d.shop;
         document.getElementById('navPayment').textContent = d.payment;
         document.getElementById('navProfile').textContent = d.profile;
+        
         updateBadge();
     }
 
@@ -432,7 +541,6 @@
         setTimeout(() => { window.location.href = el.getAttribute('href'); }, 400);
     }
 
-    // ===== BADGE FUNCTIONS =====
     function getPendingCount() {
         const notis = JSON.parse(localStorage.getItem('notifications') || '[]');
         return notis.filter(n => n.status === 'pending').length;
@@ -492,10 +600,10 @@
         document.getElementById('searchInput').focus();
     }
 
-    // ===== SELECT GAME WITH SOFT EFFECTS =====
     function selectGame(gameName, gameId, event) {
-        // Soft ripple effect
         const item = event.currentTarget;
+        
+        // Ripple effect
         const rect = item.getBoundingClientRect();
         const ripple = document.createElement('span');
         ripple.className = 'ripple-effect';
@@ -504,9 +612,9 @@
         ripple.style.left = (event.clientX - rect.left - size/2) + 'px';
         ripple.style.top = (event.clientY - rect.top - size/2) + 'px';
         item.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 500);
+        setTimeout(() => ripple.remove(), 600);
         
-        // Soft bounce animation (ဘောင်ကိုမတိုးစေရန်)
+        // Soft bounce animation (နူးညံ့ပြီး ပေါ့ပါးတယ်)
         item.classList.remove('bounce-click');
         void item.offsetWidth;
         item.classList.add('bounce-click');
@@ -525,7 +633,6 @@
         showToast(getText('comingSoonMsg'));
     }
 
-    // ===== INIT =====
     document.addEventListener('DOMContentLoaded', function() {
         const savedLang = localStorage.getItem('lang') || 'my';
         setLang(savedLang);
