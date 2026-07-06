@@ -9,29 +9,26 @@
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
         
         :root {
-            --bg-primary: #e8eaf0;
+            --bg-primary: #f0f2f5;
             --bg-secondary: #ffffff;
-            --bg-card: rgba(255,255,255,0.35);
+            --bg-card: rgba(255,255,255,0.6);
             --bg-input: rgba(255,255,255,0.7);
             --text-primary: #1a1a2e;
             --text-secondary: #6b7280;
-            --border-color: rgba(0,0,0,0.08);
+            --border-color: rgba(0,0,0,0.06);
             --shadow: rgba(0,0,0,0.06);
             --shadow-hover: rgba(0,0,0,0.1);
             --primary: #6c5ce7;
             --gold: #f5a623;
-            --gold-glow: rgba(245,166,35,0.2);
+            --gold-glow: rgba(245,166,35,0.25);
             --cyan: #00b4d8;
-            --cyan-glow: rgba(0,180,216,0.15);
+            --cyan-glow: rgba(0,180,216,0.2);
             --orange: #ff6a00;
-            --green: #00c853;
-            --red: #ff0044;
-            --purple: #7c3aed;
-            --pink: #ec4899;
-            --indigo: #4f46e5;
             --rose: #f43f5e;
-            --amber: #f59e0b;
-            --emerald: #10b981;
+            --purple: #7c3aed;
+            --indigo: #4f46e5;
+            --pink: #ec4899;
+            --red: #ff0044;
         }
 
         .night-mode {
@@ -56,56 +53,87 @@
             transition: all 0.4s ease;
         }
 
-        ::-webkit-scrollbar{width:3px}
-        ::-webkit-scrollbar-track{background:transparent}
-        ::-webkit-scrollbar-thumb{background:var(--primary);border-radius:10px}
-
         .container{max-width:480px;margin:0 auto}
 
-        .glass-box {
-            background: var(--bg-card);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            box-shadow: 0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
+        /* ===== HEADER ===== */
         .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
         .header .left{display:flex;flex-direction:column;gap:8px}
         .header .left .logo-wrap{display:flex;align-items:center;gap:10px}
         .header .left .logo-wrap img{height:38px;width:auto;border-radius:10px}
         .header .left .logo-wrap .text-group{display:flex;flex-direction:column;line-height:1.1}
-        .header .left .logo-wrap .text-group .premium{font-size:1rem;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 20px var(--gold-glow)}
+        .header .left .logo-wrap .text-group .premium{font-size:1rem;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
         .header .left .logo-wrap .text-group .shop{font-size:0.55rem;font-weight:600;color:var(--text-secondary);opacity:0.6;margin-top:-2px}
         
         .header .right .top{display:flex;gap:6px;align-items:center}
-        .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:10px;border:1px solid var(--border-color);box-shadow:0 2px 10px var(--shadow)}
+        .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:10px;border:1px solid var(--border-color);backdrop-filter:blur(20px)}
         .header .right .top .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;text-transform:uppercase}
         .header .right .top .lang-switcher .lang-btn.active{background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;box-shadow:0 4px 15px var(--gold-glow)}
-        .header .right .top .night-toggle{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;color:var(--text-secondary);box-shadow:0 2px 10px var(--shadow);transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1)}
+        .header .right .top .night-toggle{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;color:var(--text-secondary);backdrop-filter:blur(20px)}
         .header .right .top .night-toggle:active{transform:scale(0.92)}
         .night-mode .header .right .top .night-toggle .fa-sun{color:#ffd700}
-        .header .right .top .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;box-shadow:0 2px 10px var(--shadow)}
+        .header .right .top .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;backdrop-filter:blur(20px)}
         .header .right .top .noti-btn:active{transform:scale(0.92)}
         .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none}
 
-        .page-header{margin-bottom:16px;animation:slideUp 0.6s ease}
+        /* ===== PAGE HEADER ===== */
+        .page-header{margin-bottom:16px}
         .page-header h1{font-size:1.3rem;font-weight:800;color:var(--text-primary)}
-        .page-header h1 span{background:linear-gradient(135deg,var(--gold),var(--orange),var(--rose),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-        .page-header h1 i{color:var(--cyan);-webkit-text-fill-color:initial;margin-right:6px}
+        .page-header h1 span{
+            background: linear-gradient(135deg, var(--gold), var(--orange), var(--rose), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 300% 300%;
+            animation: grad 4s ease-in-out infinite;
+        }
+        @keyframes grad {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .page-header h1 i{color:var(--cyan);margin-right:6px}
         .page-header p{color:var(--text-secondary);font-size:0.7rem;margin-top:2px}
 
-        .search-box{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:14px;padding:10px 16px;display:flex;align-items:center;gap:12px;margin-bottom:20px;transition:all 0.3s ease;box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1)}
+        /* ===== SEARCH ===== */
+        .search-box{
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
         .search-box:focus-within{border-color:var(--gold);box-shadow:0 0 40px var(--gold-glow)}
         .search-box .icon{color:var(--text-secondary);font-size:1rem}
         .search-box input{background:transparent;border:none;color:var(--text-primary);font-size:0.85rem;flex:1;outline:none;padding:4px 0}
         .search-box input::placeholder{color:var(--text-secondary);font-size:0.75rem}
-        .search-box .clear-btn{color:var(--text-secondary);font-size:0.8rem;cursor:pointer;padding:4px;display:none;transition:all 0.2s ease}
-        .search-box .clear-btn:active{transform:scale(0.85)}
+        .search-box .clear-btn{color:var(--text-secondary);font-size:0.8rem;cursor:pointer;padding:4px;display:none}
         .search-box .clear-btn.show{display:block}
 
+        /* ===== SECTION TITLE ===== */
+        .section-title{
+            font-size:0.65rem;
+            font-weight:700;
+            color:var(--text-secondary);
+            text-transform:uppercase;
+            letter-spacing:2px;
+            margin-bottom:12px;
+            display:flex;
+            align-items:center;
+            gap:10px;
+            opacity:0.5
+        }
+        .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
+        .section-title i{
+            background:linear-gradient(135deg,var(--gold),var(--orange),var(--rose));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent
+        }
+
+        /* ===== GAME GRID ===== */
         .game-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
         .game-item{
             background: var(--bg-card);
@@ -115,7 +143,7 @@
             padding: 12px 14px;
             cursor: pointer;
             transition: all 0.2s cubic-bezier(0.34, 1.2, 0.64, 1);
-            box-shadow: 0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);
+            box-shadow: 0 4px 20px var(--shadow);
             display: flex;
             align-items: center;
             gap: 14px;
@@ -125,82 +153,105 @@
         }
         .game-item:active {
             transform: scale(0.96) !important;
-            transition: transform 0.12s cubic-bezier(0.34, 1.2, 0.64, 1) !important;
         }
         
-        .game-item .ripple-effect{position:absolute;border-radius:50%;background:rgba(245,166,35,0.15);transform:scale(0);animation:rippleAnim 0.6s ease-out;pointer-events:none}
+        /* Ripple */
+        .game-item .ripple-effect{
+            position:absolute;
+            border-radius:50%;
+            background:rgba(245,166,35,0.15);
+            transform:scale(0);
+            animation:rippleAnim 0.6s ease-out;
+            pointer-events:none
+        }
         @keyframes rippleAnim{to{transform:scale(3);opacity:0}}
         
-        .game-item .game-img{width:44px;height:44px;border-radius:12px;object-fit:cover;flex-shrink:0;border:2px solid var(--border-color);transition:all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);position:relative;z-index:1}
-        .game-item .game-img-placeholder{font-size:1.8rem;flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:12px;border:2px solid var(--border-color);background:var(--bg-input);transition:all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);position:relative;z-index:1}
+        /* Glow */
+        .game-item .glow{
+            position:absolute;
+            top:-50%;
+            left:-50%;
+            width:200%;
+            height:200%;
+            background:radial-gradient(circle,rgba(245,166,35,0.05) 0%,transparent 70%);
+            pointer-events:none;
+            opacity:0;
+            transition:opacity 0.6s ease
+        }
+        .game-item:active .glow{opacity:1}
+
+        /* Image */
+        .game-item .game-img{
+            width:44px;
+            height:44px;
+            border-radius:12px;
+            object-fit:cover;
+            flex-shrink:0;
+            border:2px solid var(--border-color);
+            position:relative;
+            z-index:1
+        }
+        .game-item .game-img-placeholder{
+            font-size:1.8rem;
+            flex-shrink:0;
+            width:44px;
+            height:44px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            border-radius:12px;
+            border:2px solid var(--border-color);
+            background:var(--bg-input);
+            position:relative;
+            z-index:1
+        }
+
+        /* Info */
         .game-item .info{flex:1;min-width:0;position:relative;z-index:1}
         .game-item .info .name{
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            display: flex;
-            flex-direction: column;
-            line-height: 1.2;
+            font-size:0.7rem;
+            font-weight:700;
+            color:var(--text-primary);
+            display:flex;
+            flex-direction:column;
+            line-height:1.2
         }
         .game-item .info .name .line1{
-            font-size: 0.65rem;
-            opacity: 0.7;
-            font-weight: 600;
+            font-size:0.6rem;
+            opacity:0.6;
+            font-weight:600
         }
         .game-item .info .name .line2{
-            font-size: 0.9rem;
-            font-weight: 800;
-            margin-top: 1px;
+            font-size:0.85rem;
+            font-weight:800;
+            margin-top:1px
         }
         .game-item .info .name .line2.mlbb{
-            background: linear-gradient(135deg, var(--gold), var(--orange), var(--rose));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            background:linear-gradient(135deg,var(--gold),var(--orange),var(--rose));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent
         }
         .game-item .info .name .line2.mcgg{
-            background: linear-gradient(135deg, var(--cyan), var(--purple), var(--indigo));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            background:linear-gradient(135deg,var(--cyan),var(--purple),var(--indigo));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent
         }
         .game-item .info .sub{
-            font-size: 0.5rem;
-            color: var(--text-secondary);
-            margin-top: 3px;
-            opacity: 0.6;
-            font-weight: 500;
+            font-size:0.5rem;
+            color:var(--text-secondary);
+            margin-top:3px;
+            opacity:0.6;
+            font-weight:500
         }
-        .game-item .glow{position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(245,166,35,0.04) 0%,transparent 70%);opacity:0;transition:all 0.6s ease;pointer-events:none}
-        .game-item:active .glow{opacity:1}
+
+        /* Hidden */
         .game-item.hidden{display:none}
 
-        .game-item.bounce-click{animation:bounceSoft 0.35s cubic-bezier(0.34, 1.2, 0.64, 1)}
+        /* Bounce */
+        .game-item.bounce-click{animation:bounceSoft 0.35s cubic-bezier(0.34,1.2,0.64,1)}
         @keyframes bounceSoft{0%{transform:scale(1)}35%{transform:scale(0.94)}70%{transform:scale(1.02)}100%{transform:scale(1)}}
 
-        .section-title{
-            font-size: 0.65rem;
-            font-weight: 700;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            opacity: 0.5;
-        }
-        .section-title::after{
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(90deg, var(--border-color), transparent);
-        }
-        .section-title i{
-            background: linear-gradient(135deg, var(--gold), var(--orange), var(--rose));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 8px var(--gold-glow));
-        }
-
+        /* ===== BOTTOM NAV ===== */
         .bottom-nav {
             position: fixed;
             bottom: 16px;
@@ -217,7 +268,7 @@
             justify-content: space-around;
             padding: 8px 4px;
             z-index: 100;
-            box-shadow: 0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);
+            box-shadow: 0 4px 20px var(--shadow);
         }
         .bottom-nav .nav-item {
             text-align: center;
@@ -234,79 +285,64 @@
             align-items: center;
             gap: 1px;
         }
-        .bottom-nav .nav-item:active { transform: scale(0.88); transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1); }
-        .bottom-nav .nav-item .icon{
-            font-size: 1.2rem;
-            display: block;
-            animation: floatIcon 3s ease-in-out infinite;
-        }
+        .bottom-nav .nav-item:active { transform: scale(0.88); }
+        .bottom-nav .nav-item .icon{font-size:1.2rem;display:block}
         .bottom-nav .nav-item .label{font-size:0.4rem;letter-spacing:0.5px;opacity:0.5;font-weight:400}
         .bottom-nav .nav-item.active {
             background: rgba(108,92,231,0.06);
             border: 1px solid rgba(108,92,231,0.08);
-            box-shadow: 0 0 30px rgba(108,92,231,0.02);
-            color: var(--text-primary);
         }
         .bottom-nav .nav-item.active .icon{
-            transform: translateY(-2px) scale(1.1);
-            background: linear-gradient(135deg, var(--gold), var(--orange), var(--rose));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 20px var(--gold-glow));
-            animation: selectBounce 0.5s cubic-bezier(0.34,1.56,0.64,1);
+            transform:translateY(-2px) scale(1.1);
+            background:linear-gradient(135deg,var(--gold),var(--orange),var(--rose));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent
         }
         .bottom-nav .nav-item.active .label{
-            background: linear-gradient(135deg, var(--gold), var(--orange));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            opacity: 1;
-            font-weight: 600;
+            background:linear-gradient(135deg,var(--gold),var(--orange));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            opacity:1;
+            font-weight:600
         }
-        @keyframes selectBounce { 0%{transform:scale(1)} 30%{transform:scale(1.3) rotate(-8deg)} 60%{transform:scale(0.9) rotate(4deg)} 100%{transform:scale(1.1) rotate(0deg)} }
 
+        /* ===== FOOTER ===== */
         .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.3;letter-spacing:1px}
 
-        .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-secondary);padding:10px 20px;border-radius:12px;border:1px solid var(--border-color);color:var(--primary);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 4px 20px var(--shadow);animation:toastPop 0.4s cubic-bezier(0.34,1.56,0.64,1)}
-        .toast.show{display:block}
+        /* ===== TOAST ===== */
+        .toast{
+            position:fixed;
+            bottom:85px;
+            left:50%;
+            transform:translateX(-50%);
+            background:var(--bg-secondary);
+            padding:10px 20px;
+            border-radius:12px;
+            border:1px solid var(--border-color);
+            color:var(--primary);
+            font-weight:600;
+            font-size:0.75rem;
+            display:none;
+            z-index:200;
+            text-align:center;
+            max-width:90%;
+            box-shadow:0 4px 20px var(--shadow)
+        }
+        .toast.show{display:block;animation:toastPop 0.4s cubic-bezier(0.34,1.56,0.64,1)}
         @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
-        @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes floatIcon {0%,100%{transform:translateY(0px)}50%{transform:translateY(-6px)}}
 
-        .gradient-text {
-            background: linear-gradient(135deg, var(--gold), var(--orange), var(--rose), var(--purple), var(--cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 300% 300%;
-            animation: gradientMove 4s ease-in-out infinite;
-        }
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .premium-icon {
-            filter: drop-shadow(0 0 8px var(--gold-glow));
-        }
-
-        .game-item .gradient-glow {
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(245,166,35,0.05) 0%, transparent 70%);
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.6s ease;
-        }
-        .game-item:active .gradient-glow {
-            opacity: 1;
+        .glass-box {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
         }
     </style>
 </head>
 <body>
 <div class="container">
+    <!-- HEADER -->
     <div class="header">
         <div class="left">
             <div class="logo-wrap">
@@ -329,22 +365,27 @@
         </div>
     </div>
 
+    <!-- PAGE HEADER -->
     <div class="page-header">
-        <h1><i class="fas fa-store"></i> <span id="pageTitle" class="gradient-text">Game Shop</span></h1>
+        <h1><i class="fas fa-store"></i> <span id="pageTitle">Game Shop</span></h1>
         <p id="pageSub">✨ ဂိမ်းတစ်ခုရွေးပြီး စိန်ဖြည့်လိုက်ပါ</p>
     </div>
 
+    <!-- SEARCH -->
     <div class="search-box">
         <span class="icon"><i class="fas fa-search"></i></span>
         <input type="text" id="searchInput" placeholder="🔍 ဂိမ်းနာမည်ရှာပါ..." oninput="searchGames(this.value)">
         <span class="clear-btn" id="clearBtn" onclick="clearSearch()"><i class="fas fa-times-circle"></i></span>
     </div>
 
-    <div class="section-title"><i class="fas fa-gamepad premium-icon"></i> <span id="gamesTitle">ဂိမ်းများ</span></div>
+    <!-- GAMES TITLE -->
+    <div class="section-title"><i class="fas fa-gamepad"></i> <span id="gamesTitle">ဂိမ်းများ</span></div>
+
+    <!-- GAME GRID -->
     <div class="game-grid" id="gameGrid">
         <!-- Mobile Legends: Bang Bang -->
         <div class="game-item glass-box" data-name="mobile legends bang bang mlbb" onclick="selectGame('Mobile Legends: Bang Bang', 'mlbb', event)">
-            <span class="gradient-glow"></span>
+            <span class="glow"></span>
             <img src="https://i.ibb.co/cKsDX2Nt/x.jpg" alt="Mobile Legends" class="game-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="game-img-placeholder" style="display:none;">⚔️</span>
             <div class="info">
@@ -358,7 +399,7 @@
 
         <!-- Magic Chess: Go Go -->
         <div class="game-item glass-box" data-name="magic chess go go mcgg" onclick="selectGame('Magic Chess: Go Go', 'mcgg', event)">
-            <span class="gradient-glow"></span>
+            <span class="glow"></span>
             <img src="https://files.catbox.moe/8lxv1s.jpg" alt="MCGG" class="game-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="game-img-placeholder" style="display:none;">♟️</span>
             <div class="info">
@@ -372,7 +413,7 @@
 
         <!-- Coming Soon 1 -->
         <div class="game-item glass-box" data-name="coming soon" onclick="showComingSoon()">
-            <span class="gradient-glow"></span>
+            <span class="glow"></span>
             <span class="game-img-placeholder">🎮</span>
             <div class="info">
                 <div class="name">
@@ -381,9 +422,10 @@
                 <div class="sub" id="cs1sub">⏳ အသစ်ထွက်ရှိမည်</div>
             </div>
         </div>
+
         <!-- Coming Soon 2 -->
         <div class="game-item glass-box" data-name="coming soon" onclick="showComingSoon()">
-            <span class="gradient-glow"></span>
+            <span class="glow"></span>
             <span class="game-img-placeholder">🎯</span>
             <div class="info">
                 <div class="name">
@@ -397,6 +439,7 @@
     <div class="footer-text">&copy; 2026 Premium Game Shop</div>
 </div>
 
+<!-- BOTTOM NAV -->
 <div class="bottom-nav">
     <a href="index.html" class="nav-item" onclick="handleNavClick(this, event)"><span class="icon"><i class="fas fa-home"></i></span><span class="label" id="navHome">ပင်မ</span></a>
     <a href="shop.html" class="nav-item active" onclick="handleNavClick(this, event)"><span class="icon"><i class="fas fa-shopping-bag"></i></span><span class="label" id="navShop">ဆိုင်</span></a>
@@ -478,41 +521,36 @@
         const d = LANG_DATA[currentLang];
         if (!d) return;
         
-        const elements = {
-            appName: document.getElementById('appName'),
-            appSub: document.getElementById('appSub'),
-            pageTitle: document.getElementById('pageTitle'),
-            pageSub: document.getElementById('pageSub'),
-            gamesTitle: document.getElementById('gamesTitle'),
-            cs1: document.getElementById('cs1'),
-            cs1sub: document.getElementById('cs1sub'),
-            cs2: document.getElementById('cs2'),
-            cs2sub: document.getElementById('cs2sub'),
-            searchInput: document.getElementById('searchInput'),
-            navHome: document.getElementById('navHome'),
-            navShop: document.getElementById('navShop'),
-            navPayment: document.getElementById('navPayment'),
-            navProfile: document.getElementById('navProfile'),
-            mlbbSub: document.getElementById('mlbbSub'),
-            mcggSub: document.getElementById('mcggSub')
+        const ids = ['appName','appSub','pageTitle','pageSub','gamesTitle','cs1','cs1sub','cs2','cs2sub','searchInput','navHome','navShop','navPayment','navProfile','mlbbSub','mcggSub'];
+        const map = {
+            appName: d.appName,
+            appSub: d.appSub,
+            pageTitle: d.pageTitle,
+            pageSub: d.pageSub,
+            gamesTitle: d.gamesTitle,
+            cs1: d.comingSoon,
+            cs1sub: d.comingSoonSub,
+            cs2: d.comingSoon,
+            cs2sub: d.comingSoonSub,
+            searchInput: d.searchPlaceholder,
+            navHome: d.home,
+            navShop: d.shop,
+            navPayment: d.payment,
+            navProfile: d.profile,
+            mlbbSub: d.mlbbSub,
+            mcggSub: d.mcggSub
         };
-
-        if (elements.appName) elements.appName.textContent = d.appName;
-        if (elements.appSub) elements.appSub.textContent = d.appSub;
-        if (elements.pageTitle) elements.pageTitle.textContent = d.pageTitle;
-        if (elements.pageSub) elements.pageSub.textContent = d.pageSub;
-        if (elements.gamesTitle) elements.gamesTitle.textContent = d.gamesTitle;
-        if (elements.cs1) elements.cs1.textContent = d.comingSoon;
-        if (elements.cs1sub) elements.cs1sub.textContent = d.comingSoonSub;
-        if (elements.cs2) elements.cs2.textContent = d.comingSoon;
-        if (elements.cs2sub) elements.cs2sub.textContent = d.comingSoonSub;
-        if (elements.searchInput) elements.searchInput.placeholder = d.searchPlaceholder;
-        if (elements.navHome) elements.navHome.textContent = d.home;
-        if (elements.navShop) elements.navShop.textContent = d.shop;
-        if (elements.navPayment) elements.navPayment.textContent = d.payment;
-        if (elements.navProfile) elements.navProfile.textContent = d.profile;
-        if (elements.mlbbSub) elements.mlbbSub.textContent = d.mlbbSub;
-        if (elements.mcggSub) elements.mcggSub.textContent = d.mcggSub;
+        
+        ids.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                if (id === 'searchInput') {
+                    el.placeholder = map[id];
+                } else {
+                    el.textContent = map[id];
+                }
+            }
+        });
         
         updateBadge();
     }
@@ -528,13 +566,7 @@
 
     function handleNavClick(el, e) {
         e.preventDefault();
-        const icon = el.querySelector('.icon');
-        if (icon) {
-            icon.style.animation = 'none';
-            void icon.offsetWidth;
-            icon.style.animation = 'selectBounce 0.5s cubic-bezier(0.34,1.56,0.64,1)';
-        }
-        setTimeout(() => { window.location.href = el.getAttribute('href'); }, 400);
+        setTimeout(() => { window.location.href = el.getAttribute('href'); }, 300);
     }
 
     function getPendingCount() {
@@ -550,12 +582,8 @@
         const count = getPendingCount();
         const badge = document.getElementById('notiBadge');
         if (badge) {
-            if (count > 0) {
-                badge.style.display = 'block';
-                badge.textContent = count;
-            } else {
-                badge.style.display = 'none';
-            }
+            badge.style.display = count > 0 ? 'block' : 'none';
+            if (count > 0) badge.textContent = count;
         }
     }
 
@@ -607,6 +635,7 @@
     function selectGame(gameName, gameId, event) {
         const item = event.currentTarget;
         
+        // Ripple
         const rect = item.getBoundingClientRect();
         const ripple = document.createElement('span');
         ripple.className = 'ripple-effect';
@@ -617,6 +646,7 @@
         item.appendChild(ripple);
         setTimeout(() => ripple.remove(), 600);
         
+        // Bounce
         item.classList.remove('bounce-click');
         void item.offsetWidth;
         item.classList.add('bounce-click');
