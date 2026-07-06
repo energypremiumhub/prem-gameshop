@@ -166,30 +166,30 @@
         /* ===== GAME GRID ===== */
         .game-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
         .game-item{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:14px;padding:12px 14px;cursor:pointer;transition:all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);box-shadow:0 4px 20px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1);display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;min-height:72px}
-        .game-item:active{transform:scale(0.97);transition:transform 0.15s ease}
+        .game-item:active{transform:scale(0.97);transition:transform 0.12s ease}
         .game-item:hover{transform:translateY(-3px);border-color:rgba(245,166,35,0.3);box-shadow:0 8px 30px var(--shadow-hover), inset 0 1px 0 rgba(255,255,255,0.15)}
         
         /* ===== SOFT CLICK RIPPLE ===== */
-        .game-item .ripple-effect{position:absolute;border-radius:50%;background:rgba(245,166,35,0.15);transform:scale(0);animation:rippleAnim 0.5s ease-out;pointer-events:none}
+        .game-item .ripple-effect{position:absolute;border-radius:50%;background:rgba(245,166,35,0.12);transform:scale(0);animation:rippleAnim 0.5s ease-out;pointer-events:none}
         @keyframes rippleAnim{to{transform:scale(3);opacity:0}}
         
         /* ===== BADGE (ဘောင်ထဲမှာ ထည့်ထား) ===== */
-        .game-item .badge{display:inline-block;background:var(--gold);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 8px;border-radius:10px;box-shadow:0 0 15px var(--gold-glow);margin-left:6px;vertical-align:middle;position:relative;top:-1px}
+        .game-item .badge{display:inline-block;background:var(--gold);color:#fff;font-size:0.45rem;font-weight:700;padding:1px 10px;border-radius:10px;box-shadow:0 0 15px var(--gold-glow);margin-left:4px;vertical-align:middle;position:relative;top:-1px;letter-spacing:0.3px}
         
         .game-item .game-img{width:44px;height:44px;border-radius:12px;object-fit:cover;flex-shrink:0;border:2px solid var(--border-color);transition:all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);position:relative;z-index:1}
         .game-item:hover .game-img{transform:scale(1.05) rotate(-3deg);border-color:var(--gold);box-shadow:0 0 20px var(--gold-glow)}
         .game-item .game-img-placeholder{font-size:1.8rem;flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:12px;border:2px solid var(--border-color);background:var(--bg-input);transition:all 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);position:relative;z-index:1}
         .game-item:hover .game-img-placeholder{transform:scale(1.05) rotate(-3deg);border-color:var(--gold);box-shadow:0 0 20px var(--gold-glow)}
         .game-item .info{flex:1;min-width:0;position:relative;z-index:1}
-        .game-item .info .name{font-size:0.8rem;font-weight:700;color:var(--text-primary)}
-        .game-item .info .sub{font-size:0.5rem;color:var(--text-secondary);margin-top:1px}
+        .game-item .info .name{font-size:0.8rem;font-weight:700;color:var(--text-primary);display:flex;align-items:center;flex-wrap:wrap;gap:2px}
+        .game-item .info .sub{font-size:0.5rem;color:var(--text-secondary);margin-top:2px}
         .game-item .glow{position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(245,166,35,0.04) 0%,transparent 70%);opacity:0;transition:all 0.6s ease;pointer-events:none}
         .game-item:hover .glow{opacity:1}
         .game-item.hidden{display:none}
 
         /* ===== SOFT BOUNCE ===== */
-        .game-item.bounce-click{animation:bounceSoft 0.35s cubic-bezier(0.34, 1.2, 0.64, 1)}
-        @keyframes bounceSoft{0%{transform:scale(1)}35%{transform:scale(0.96)}70%{transform:scale(1.02)}100%{transform:scale(1)}}
+        .game-item.bounce-click{animation:bounceSoft 0.3s cubic-bezier(0.34, 1.2, 0.64, 1)}
+        @keyframes bounceSoft{0%{transform:scale(1)}35%{transform:scale(0.97)}70%{transform:scale(1.015)}100%{transform:scale(1)}}
 
         .section-title{font-size:0.65rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;display:flex;align-items:center;gap:10px;opacity:0.5}
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
@@ -297,12 +297,12 @@
         </div>
 
         <!-- MCGG (Magic Chess) -->
-        <div class="game-item glass-box" data-name="mcgg magic chess" onclick="selectGame('MCGG', 'mcgg', event)">
+        <div class="game-item glass-box" data-name="mcgg magic chess" onclick="selectGame('Magic Chess', 'mcgg', event)">
             <span class="glow"></span>
             <img src="https://files.catbox.moe/8lxv1s.jpg" alt="MCGG" class="game-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="game-img-placeholder" style="display:none;">♟️</span>
             <div class="info">
-                <div class="name" id="mcggName">Magic Chess <span class="badge" id="mcggBadge">🆕 New</span></div>
+                <div class="name">Magic Chess <span class="badge" id="mcggBadge">🆕 New</span></div>
                 <div class="sub" id="mcggSub">Diamond Top Up</div>
             </div>
         </div>
@@ -499,14 +499,14 @@
         const rect = item.getBoundingClientRect();
         const ripple = document.createElement('span');
         ripple.className = 'ripple-effect';
-        const size = Math.max(rect.width, rect.height) * 0.6;
+        const size = Math.max(rect.width, rect.height) * 0.5;
         ripple.style.width = ripple.style.height = size + 'px';
         ripple.style.left = (event.clientX - rect.left - size/2) + 'px';
         ripple.style.top = (event.clientY - rect.top - size/2) + 'px';
         item.appendChild(ripple);
         setTimeout(() => ripple.remove(), 500);
         
-        // Soft bounce animation
+        // Soft bounce animation (ဘောင်ကိုမတိုးစေရန်)
         item.classList.remove('bounce-click');
         void item.offsetWidth;
         item.classList.add('bounce-click');
