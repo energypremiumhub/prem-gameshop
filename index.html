@@ -406,7 +406,7 @@
         .telegram-contact .arrow{color:var(--text-secondary);font-size:0.9rem;transition:all 0.3s ease}
         .telegram-contact:hover .arrow{color:var(--cyan);transform:translateX(3px)}
 
-        /* ===== BOTTOM NAV - SHOP PAGE STYLE ===== */
+        /* ===== BOTTOM NAV - SHOP PAGE STYLE (အတိအကျ) ===== */
         .bottom-nav {
             position:fixed;
             bottom:16px;
@@ -625,7 +625,7 @@
     <div class="footer-text">&copy; 2026 Premium Game Shop</div>
 </div>
 
-<!-- BOTTOM NAV - SHOP PAGE STYLE -->
+<!-- ===== BOTTOM NAV - SHOP PAGE STYLE (အတိအကျ) ===== -->
 <div class="bottom-nav">
     <a href="index.html" class="nav-item active"><span class="icon"><i class="fas fa-home"></i></span><span class="label" id="navHome">ပင်မ</span></a>
     <a href="shop.html" class="nav-item"><span class="icon"><i class="fas fa-shopping-bag"></i></span><span class="label" id="navShop">ဆိုင်</span></a>
@@ -1093,6 +1093,18 @@
     document.querySelector('.telegram-card').addEventListener('click', ()=>window.open('https://t.me/Premium_GameShop', '_blank'));
     document.querySelector('.telegram-contact').addEventListener('click', ()=>window.open('https://t.me/PremEnergy', '_blank'));
 
+    // ===== NAV BAR CLICK (Shop page အတိုင်း) =====
+    document.querySelectorAll('.bottom-nav .nav-item').forEach(item=>{
+        item.addEventListener('click', function(e){
+            document.querySelectorAll('.bottom-nav .nav-item').forEach(n=>n.classList.remove('active'));
+            this.classList.add('active');
+            const icon = this.querySelector('.icon');
+            icon.style.animation = 'none';
+            void icon.offsetWidth;
+            icon.style.animation = 'selectBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        });
+    });
+
     // ===== EVENT LISTENERS =====
     document.getElementById('loginInput').addEventListener('input', checkLoginForm);
     document.getElementById('loginPassword').addEventListener('input', checkLoginForm);
@@ -1107,18 +1119,6 @@
     document.getElementById('authBtn').addEventListener('click', ()=>{
         if(currentUser) window.location.href='profile.html';
         else openModal('login');
-    });
-
-    // ===== NAV BAR CLICK (Shop page အတိုင်း) =====
-    document.querySelectorAll('.bottom-nav .nav-item').forEach(item=>{
-        item.addEventListener('click', function(e){
-            document.querySelectorAll('.bottom-nav .nav-item').forEach(n=>n.classList.remove('active'));
-            this.classList.add('active');
-            const icon = this.querySelector('.icon');
-            icon.style.animation = 'none';
-            void icon.offsetWidth;
-            icon.style.animation = 'selectBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
-        });
     });
 
     // ===== INIT =====
