@@ -198,7 +198,7 @@
         }
         .section-title span{color:var(--text-secondary);opacity:0.5}
 
-        /* ===== SERVER SELECTOR - အောက်ကိုချဲ့လို့ရ ===== */
+        /* ===== SERVER SELECTOR ===== */
         .server-selector{
             background:var(--bg-card);
             backdrop-filter:blur(20px);
@@ -247,6 +247,7 @@
             box-shadow:0 0 20px var(--cyan-glow)
         }
         .server-selector .options .opt .flag{margin-right:4px}
+        /* Ban Server - အထူးအရောင် */
         .server-selector .options .opt.ban{
             border-color:rgba(255,0,68,0.2);
             color:var(--red)
@@ -258,34 +259,41 @@
             box-shadow:0 0 20px rgba(255,0,68,0.2)
         }
 
-        /* ===== PACKAGE GRID ===== */
-        .package-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px}
+        /* ===== PACKAGE GRID - 3 per row (အရင်ပုံစံ) ===== */
+        .package-grid{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:8px;
+            margin-bottom:20px
+        }
         .package-item{
             background:var(--bg-card);
             backdrop-filter:blur(20px);
             border:1px solid var(--border-color);
             border-radius:14px;
-            padding:10px 12px;
+            padding:12px 8px;
+            text-align:center;
             cursor:pointer;
-            transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);
             box-shadow:0 4px 20px var(--shadow);
+            position:relative;
+            overflow:hidden;
             display:flex;
-            align-items:center;
-            gap:12px;
-            min-height:70px
+            flex-direction:column;
+            align-items:center
         }
-        .package-item:active{transform:scale(0.96)!important}
-        .package-item:hover{transform:translateY(-3px);box-shadow:0 8px 30px var(--shadow-hover)}
-        .package-item.selected{border:2px solid var(--gold);box-shadow:0 0 30px var(--gold-glow)}
+        .package-item:active{transform:scale(0.94)!important}
+        .package-item:hover{transform:translateY(-4px);border-color:rgba(245,166,35,0.3)}
+        .package-item.selected{border-color:var(--gold);background:rgba(245,166,35,0.06);box-shadow:0 0 12px var(--gold-glow)}
+        .package-item.selected .price{color:var(--gold)}
         
         .package-item .pkg-img-wrap{
-            width:50px;
-            height:50px;
-            flex-shrink:0;
-            border-radius:10px;
+            width:100%;
+            aspect-ratio:1;
+            border-radius:8px;
             overflow:hidden;
             background:transparent;
-            border:none
+            margin-bottom:4px
         }
         .package-item .pkg-img-wrap img{
             width:100%;
@@ -299,31 +307,25 @@
             50%{transform:translateY(-5px)}
         }
         .package-item:hover .pkg-img-wrap img{animation:floatPkg 1.5s ease-in-out infinite}
+        .package-item.selected .pkg-img-wrap img{box-shadow:0 0 8px var(--gold-glow)}
         
-        .package-item .right{
-            flex:1;
-            min-width:0;
+        .package-item .info{
             display:flex;
             flex-direction:column;
-            align-items:flex-start;
-            gap:2px
+            gap:1px;
+            width:100%
         }
-        .package-item .right .name{
-            font-size:0.8rem;
-            font-weight:800;
-            background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet),var(--pink));
-            -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent;
-            background-size:300% 300%;
-            animation:gradientMove 1.5s ease-in-out infinite
+        .package-item .info .name{
+            font-size:0.65rem;
+            font-weight:700;
+            color:var(--text-primary)
         }
-        .package-item .right .price{
-            font-size:0.6rem;
-            font-weight:600;
+        .package-item .info .sub{
+            font-size:0.4rem;
             color:var(--text-secondary);
-            opacity:0.7
+            line-height:1.2
         }
-        .package-item .right .badge{
+        .package-item .info .badge{
             display:inline-block;
             font-size:0.35rem;
             color:var(--gold);
@@ -332,29 +334,48 @@
             border-radius:8px;
             border:1px solid rgba(245,166,35,0.08);
             font-weight:600;
-            margin-top:1px
+            margin-top:2px;
+            width:fit-content;
+            margin-left:auto;
+            margin-right:auto
         }
-        .package-item .right .action-btn{
-            background:var(--bg-input);
-            border:1px solid var(--border-color);
+        .package-item .bottom{
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            gap:4px;
+            margin-top:4px;
+            width:100%
+        }
+        .package-item .bottom .price{
+            font-size:0.65rem;
+            font-weight:700;
             color:var(--text-secondary);
-            padding:4px 14px;
-            border-radius:8px;
-            font-size:0.55rem;
-            font-weight:600;
-            cursor:pointer;
-            transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            min-width:50px;
-            text-align:center;
-            margin-top:2px
+            transition:all 0.4s ease
         }
-        .package-item .right .action-btn:active{transform:scale(0.88)!important}
-        .package-item .right .action-btn.topup{
-            background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));
+        .package-item .bottom .btn-label{
+            font-size:0.45rem;
+            color:var(--text-secondary);
+            font-weight:500;
+            opacity:0.6;
+            letter-spacing:0.3px
+        }
+        .package-item .bottom .buy-btn{
+            display:none;
+            background:linear-gradient(135deg,var(--gold),var(--orange));
             color:#fff;
-            border-color:var(--cyan);
-            box-shadow:0 4px 15px var(--cyan-glow)
+            border:none;
+            padding:4px 12px;
+            border-radius:8px;
+            font-size:0.45rem;
+            font-weight:700;
+            cursor:pointer;
+            transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+            box-shadow:0 4px 15px var(--gold-glow)
         }
+        .package-item .bottom .buy-btn:active{transform:scale(0.88)!important}
+        .package-item.selected .bottom .buy-btn{display:block}
+        .package-item.selected .bottom .btn-label{display:none}
 
         .bottom-nav {
             position:fixed;
@@ -501,12 +522,12 @@
         <p id="pageSub">ပက်ကေ့ချ်တစ်ခုရွေးပြီး ဝယ်ယူပါ</p>
     </div>
 
-    <!-- SERVER SELECTOR - အောက်ကိုချဲ့လို့ရ -->
+    <!-- SERVER SELECTOR -->
     <div class="server-selector">
         <span class="label"><i class="fas fa-server"></i> Server</span>
         <div class="options" id="serverOptions">
             <span class="opt active" data-server="global" onclick="switchServer('global')"><span class="flag">🌍</span>Global</span>
-            <span class="opt ban" data-server="ban" onclick="switchServer('ban')"><span class="flag">🚫</span>Ban Server</span>
+            <span class="opt ban" data-server="ban" onclick="switchServer('ban')"><span class="flag">🇲🇾🇸🇬🇵🇭</span>Ban Server</span>
             <span class="opt" data-server="indo" onclick="switchServer('indo')"><span class="flag">🇮🇩</span>Indo</span>
             <span class="opt" data-server="russia" onclick="switchServer('russia')"><span class="flag">🇷🇺</span>Russia</span>
         </div>
@@ -524,7 +545,7 @@
         <div class="package-grid" id="globalDiamonds"></div>
     </div>
 
-    <!-- ===== BAN SERVER ===== -->
+    <!-- ===== BAN SERVER (Malay/Sin/Php) ===== -->
     <div class="section-wrapper hidden" id="banSection">
         <div class="section-title"><i class="fas fa-gift"></i> <span id="banBundlesTitle">ပက်ကေ့ချ်များ</span></div>
         <div class="package-grid" id="banBundles"></div>
@@ -661,16 +682,16 @@
     const PACKAGES = {
         global: {
             bundles: [
-                { id: 'g_b1', name: 'Monthly Epic Bundle', price: 17300, img: 'https://files.catbox.moe/z2j5uo.png' },
-                { id: 'g_b2', name: 'Weekly Elite Bundle', price: 3600, img: 'https://files.catbox.moe/i3uywg.png' },
-                { id: 'g_b3', name: 'Weekly Pass', price: 6500, img: 'https://files.catbox.moe/zylral.png' },
-                { id: 'g_b4', name: 'Twilight Pass', price: 34000, img: 'https://files.catbox.moe/jshuuy.png' }
+                { id: 'g_b1', name: 'Monthly Epic Bundle', price: 17300, img: 'https://files.catbox.moe/z2j5uo.png', sub: '💎275 + ⭐180' },
+                { id: 'g_b2', name: 'Weekly Elite Bundle', price: 3600, img: 'https://files.catbox.moe/i3uywg.png', sub: '💎55 + ⭐20' },
+                { id: 'g_b3', name: 'Weekly Pass', price: 6500, img: 'https://files.catbox.moe/zylral.png', sub: 'Weekly Pass' },
+                { id: 'g_b4', name: 'Twilight Pass', price: 34000, img: 'https://files.catbox.moe/jshuuy.png', sub: '🆕 New' }
             ],
             double: [
-                { id: 'g_x1', name: '50+50', price: 3550, img: 'https://files.catbox.moe/z376wd.png' },
-                { id: 'g_x2', name: '150+150', price: 9900, img: 'https://files.catbox.moe/kf0960.png' },
-                { id: 'g_x3', name: '250+250', price: 15800, img: 'https://files.catbox.moe/jm3ty7.png' },
-                { id: 'g_x4', name: '500+500', price: 32100, img: 'https://files.catbox.moe/aprnoc.png' }
+                { id: 'g_x1', name: '50+50', price: 3550, img: 'https://files.catbox.moe/z376wd.png', badge: true },
+                { id: 'g_x2', name: '150+150', price: 9900, img: 'https://files.catbox.moe/kf0960.png', badge: true },
+                { id: 'g_x3', name: '250+250', price: 15800, img: 'https://files.catbox.moe/jm3ty7.png', badge: true },
+                { id: 'g_x4', name: '500+500', price: 32100, img: 'https://files.catbox.moe/aprnoc.png', badge: true }
             ],
             diamonds: [
                 { id: 'g_d1', name: '11', price: 750, img: 'https://files.catbox.moe/xaxejk.png' },
@@ -707,13 +728,13 @@
         },
         ban: {
             bundles: [
-                { id: 'b_b1', name: 'Weekly Pass', price: 9400, img: 'https://files.catbox.moe/zylral.png' }
+                { id: 'b_b1', name: 'Weekly Pass', price: 9400, img: 'https://files.catbox.moe/zylral.png', sub: 'Malay/Sin/Php' }
             ],
             double: [
-                { id: 'b_x1', name: '55', price: 4500, img: 'https://files.catbox.moe/z376wd.png' },
-                { id: 'b_x2', name: '165', price: 12800, img: 'https://files.catbox.moe/kf0960.png' },
-                { id: 'b_x3', name: '275', price: 21100, img: 'https://files.catbox.moe/jm3ty7.png' },
-                { id: 'b_x4', name: '656', price: 42800, img: 'https://files.catbox.moe/aprnoc.png' }
+                { id: 'b_x1', name: '55', price: 4500, img: 'https://files.catbox.moe/z376wd.png', badge: true },
+                { id: 'b_x2', name: '165', price: 12800, img: 'https://files.catbox.moe/kf0960.png', badge: true },
+                { id: 'b_x3', name: '275', price: 21100, img: 'https://files.catbox.moe/jm3ty7.png', badge: true },
+                { id: 'b_x4', name: '656', price: 42800, img: 'https://files.catbox.moe/aprnoc.png', badge: true }
             ],
             diamonds: [
                 { id: 'b_d1', name: '14', price: 1300, img: 'https://files.catbox.moe/xaxejk.png' },
@@ -749,7 +770,7 @@
         },
         indo: {
             bundles: [
-                { id: 'i_b1', name: 'Weekly Pass', price: 8700, img: 'https://files.catbox.moe/zylral.png' }
+                { id: 'i_b1', name: 'Weekly Pass', price: 8700, img: 'https://files.catbox.moe/zylral.png', sub: 'Indo Server' }
             ],
             diamonds: [
                 { id: 'i_d1', name: '5', price: 700, img: 'https://files.catbox.moe/xaxejk.png' },
@@ -771,7 +792,7 @@
         },
         russia: {
             bundles: [
-                { id: 'r_b1', name: 'Weekly Pass', price: 9750, img: 'https://files.catbox.moe/zylral.png' }
+                { id: 'r_b1', name: 'Weekly Pass', price: 9750, img: 'https://files.catbox.moe/zylral.png', sub: 'Russia Server' }
             ],
             diamonds: [
                 { id: 'r_d1', name: '35', price: 3100, img: 'https://files.catbox.moe/xaxejk.png' },
@@ -788,7 +809,7 @@
     };
 
     // ============================================================
-    // RENDER FUNCTIONS
+    // RENDER FUNCTIONS (အရင်ပုံစံအတိုင်း)
     // ============================================================
     function renderItems(items, containerId) {
         const d = LANG_DATA[currentLang];
@@ -802,17 +823,23 @@
         
         container.innerHTML = items.map(pkg => {
             const isSelected = selectedPackage && selectedPackage.id === pkg.id;
+            const subHtml = pkg.sub ? `<div class="sub">${pkg.sub}</div>` : '';
+            const badgeHtml = pkg.badge ? `<span class="badge">${d.doubleBadge}</span>` : '';
+            
             return `
                 <div class="package-item ${isSelected?'selected':''}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})">
                     <div class="pkg-img-wrap">
                         <img src="${pkg.img}" alt="${pkg.name}" onerror="this.style.display='none'">
                     </div>
-                    <div class="right">
+                    <div class="info">
                         <div class="name">${pkg.name}</div>
-                        <div class="price">${pkg.price.toLocaleString()} ${d.currency}</div>
-                        <span class="action-btn ${isSelected?'topup':''}" onclick="event.stopPropagation(); ${isSelected ? `alert('🛒 ${pkg.name} selected!')` : `handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})`}">
-                            ${isSelected ? d.topUp : d.select}
-                        </span>
+                        ${subHtml}
+                        ${badgeHtml}
+                    </div>
+                    <div class="bottom">
+                        <span class="price">${pkg.price.toLocaleString()} ${d.currency}</span>
+                        <span class="btn-label">${d.select}</span>
+                        <button class="buy-btn" onclick="event.stopPropagation(); handleBuyClick('${pkg.id}','${pkg.name}',${pkg.price})">${d.topUp}</button>
                     </div>
                 </div>
             `;
@@ -842,6 +869,14 @@
             selectedPackage = { id, name, price };
         }
         renderAllPackages();
+    }
+
+    function handleBuyClick(id, name, price) {
+        if (!selectedPackage || selectedPackage.id !== id) {
+            selectedPackage = { id, name, price };
+            renderAllPackages();
+        }
+        showToast('🛒 ' + name + ' selected!');
     }
 
     // ============================================================
