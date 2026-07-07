@@ -341,6 +341,13 @@
         }
         .package-item:hover .pkg-img-wrap img{animation:floatPkg 1.5s ease-in-out infinite}
         
+        /* Double items - ပုံသေး */
+        .package-item.double-item .pkg-img-wrap{
+            max-width:80%;
+            margin-left:auto;
+            margin-right:auto
+        }
+        
         .package-item .info{
             display:flex;
             flex-direction:column;
@@ -538,7 +545,7 @@
         .section-wrapper{display:block}
         .section-wrapper.hidden{display:none}
 
-        /* ===== MODAL - ပြင်ထားတယ် ===== */
+        /* ===== MODAL ===== */
         .modal-overlay{
             position:fixed;
             top:0;left:0;right:0;bottom:0;
@@ -555,6 +562,7 @@
             animation:fadeIn 0.3s ease
         }
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+        
         .modal{
             background:var(--bg-secondary);
             backdrop-filter:blur(24px);
@@ -616,6 +624,62 @@
         .modal .btn-primary:active{transform:scale(0.96)!important}
         .modal .btn-primary.enabled{background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;border-color:var(--gold);box-shadow:0 4px 20px var(--gold-glow);cursor:pointer;opacity:1}
         .modal .btn-primary.loading{background:var(--bg-input);color:var(--text-secondary);border-color:var(--border-color);box-shadow:none;cursor:wait;opacity:0.6}
+
+        /* ===== SUCCESS MODAL ===== */
+        .success-modal-overlay{
+            position:fixed;
+            top:0;left:0;right:0;bottom:0;
+            background:rgba(0,0,0,0.6);
+            backdrop-filter:blur(12px);
+            display:none;
+            z-index:1000;
+            align-items:center;
+            justify-content:center;
+            padding:20px
+        }
+        .success-modal-overlay.show{
+            display:flex;
+            animation:fadeIn 0.3s ease
+        }
+        .success-modal{
+            background:var(--bg-secondary);
+            backdrop-filter:blur(24px);
+            border:2px solid var(--green);
+            border-radius:16px;
+            padding:30px 24px;
+            max-width:400px;
+            width:100%;
+            text-align:center;
+            box-shadow:0 0 40px var(--green-glow)
+        }
+        .success-modal .icon{font-size:3.5rem;color:var(--green);margin-bottom:8px}
+        .success-modal h2{font-size:1.3rem;color:var(--text-primary);margin-bottom:4px}
+        .success-modal .sub{font-size:0.75rem;color:var(--text-secondary);margin-bottom:12px}
+        .success-modal .order-details{
+            background:var(--bg-input);
+            border-radius:10px;
+            padding:12px 16px;
+            text-align:left;
+            font-size:0.65rem;
+            margin-bottom:12px
+        }
+        .success-modal .order-details .row{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--border-color)}
+        .success-modal .order-details .row:last-child{border-bottom:none}
+        .success-modal .order-details .label{color:var(--text-secondary)}
+        .success-modal .order-details .value{color:var(--text-primary);font-weight:600}
+        .success-modal .btn-close-success{
+            background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));
+            color:#fff;
+            border:none;
+            padding:10px 30px;
+            border-radius:10px;
+            font-size:0.85rem;
+            font-weight:700;
+            cursor:pointer;
+            transition:all 0.3s ease;
+            box-shadow:0 4px 15px var(--cyan-glow)
+        }
+        .success-modal .btn-close-success:active{transform:scale(0.95)!important}
     </style>
 </head>
 <body>
@@ -722,7 +786,7 @@
 
 <div class="toast" id="toast"></div>
 
-<!-- ===== MODAL - ပြင်ထားတယ် ===== -->
+<!-- ===== CHECKOUT MODAL ===== -->
 <div class="modal-overlay" id="checkoutModal">
     <div class="modal">
         <button class="close-btn" onclick="closeCheckoutModal()">✕</button>
@@ -735,13 +799,13 @@
         </div>
 
         <div class="form-group">
-            <label><i class="fas fa-gamepad"></i> <span id="gameIdLabel">ဂိမ်းအိုင်ဒီ</span></label>
+            <label><i class="fas fa-gamepad"></i> <span id="gameIdLabel">ဂိမ်းအိုင်ဒီနံပါတ်</span></label>
             <input type="text" id="gameId" placeholder="ဂိမ်းအိုင်ဒီ နံပါတ်ထည့်ပါ" inputmode="numeric" pattern="[0-9]*">
             <div class="input-hint" id="gameIdHint">နံပါတ်သာ ထည့်ပါ</div>
         </div>
         
         <div class="form-group">
-            <label><i class="fas fa-server"></i> <span id="serverIdLabel">ဆာဗာအိုင်ဒီ</span></label>
+            <label><i class="fas fa-server"></i> <span id="serverIdLabel">ဆာဗာအိုင်ဒီနံပါတ်</span></label>
             <input type="text" id="serverId" placeholder="ဆာဗာအိုင်ဒီ နံပါတ်ထည့်ပါ" inputmode="numeric" pattern="[0-9]*">
             <div class="input-hint" id="serverIdHint">နံပါတ်သာ ထည့်ပါ</div>
         </div>
@@ -785,6 +849,25 @@
     </div>
 </div>
 
+<!-- ===== SUCCESS MODAL ===== -->
+<div class="success-modal-overlay" id="successModal">
+    <div class="success-modal">
+        <div class="icon">✅</div>
+        <h2>အော်ဒါတင်ခြင်းအောင်မြင်ပါသည်!</h2>
+        <p class="sub">သင့်အော်ဒါကို အတည်ပြုပြီးပါပြီ။ ကျေးဇူးတင်ပါတယ်။</p>
+        <div class="order-details" id="successOrderDetails">
+            <div class="row"><span class="label">အော်ဒါအမှတ်</span><span class="value" id="sOrderId">-</span></div>
+            <div class="row"><span class="label">ပက်ကေ့ချ်</span><span class="value" id="sPackage">-</span></div>
+            <div class="row"><span class="label">ဈေးနှုန်း</span><span class="value" id="sPrice">-</span></div>
+            <div class="row"><span class="label">ဂိမ်းအိုင်ဒီ</span><span class="value" id="sGameId">-</span></div>
+            <div class="row"><span class="label">ဆာဗာအိုင်ဒီ</span><span class="value" id="sServerId">-</span></div>
+            <div class="row"><span class="label">ငွေပေးချေမှု</span><span class="value" id="sPayment">-</span></div>
+            <div class="row"><span class="label">အချိန်</span><span class="value" id="sTime">-</span></div>
+        </div>
+        <button class="btn-close-success" onclick="closeSuccessModal()"><i class="fas fa-check"></i> အိုကေပါပြီ</button>
+    </div>
+</div>
+
 <script>
     // ============================================================
     // 🔧 TELEGRAM BOT CONFIG
@@ -805,7 +888,7 @@
             select:'Select',topUp:'Top Up',currency:'Ks',doubleBadge:'⭐ 2x Bonus',
             itemSearchPlaceholder:'🔍 ပက်ကေ့ချ်ရှာပါ...',
             modalTitle:'🛒 အော်ဒါတင်ရန်',modalSub:'အချက်အလက်များကို မှန်ကန်စွာဖြည့်သွင်းပါ',
-            gameId:'ဂိမ်းအိုင်ဒီ',serverId:'ဆာဗာအိုင်ဒီ',
+            gameId:'ဂိမ်းအိုင်ဒီနံပါတ်',serverId:'ဆာဗာအိုင်ဒီနံပါတ်',
             gameIdHint:'နံပါတ်သာ ထည့်ပါ',serverIdHint:'နံပါတ်သာ ထည့်ပါ',
             paymentLabel:'ငွေပေးချေရန်',wave:'Wave Pay',kpay:'KBZ Pay',
             uploadLabel:'ပြေစာတင်ပို့ရန်',uploadText:'Screenshot ပို့ပေးပါ',
@@ -817,7 +900,10 @@
             uploadSlip:'ကျေးဇူးပြု၍ Screenshot ပို့ပေးပါ',
             orderSuccess:'✅ အော်ဒါအောင်မြင်ပါသည်!',
             orderFail:'❌ အော်ဒါမအောင်မြင်ပါ။ ထပ်မံကြိုးစားပါ။',
-            copy:'ကူးယူမည်',copied:'✅ ကူးပြီး'
+            copy:'ကူးယူမည်',copied:'✅ ကူးပြီး',
+            successTitle:'အော်ဒါတင်ခြင်းအောင်မြင်ပါသည်!',
+            successSub:'သင့်အော်ဒါကို အတည်ပြုပြီးပါပြီ။ ကျေးဇူးတင်ပါတယ်။',
+            successClose:'အိုကေပါပြီ'
         },
         en: {
             appName:'Premium',appSub:'Game Shop',
@@ -830,7 +916,7 @@
             select:'Select',topUp:'Top Up',currency:'Ks',doubleBadge:'⭐ 2x Bonus',
             itemSearchPlaceholder:'🔍 Search packages...',
             modalTitle:'🛒 Submit Order',modalSub:'Fill in your details correctly',
-            gameId:'Game ID',serverId:'Server ID',
+            gameId:'Game ID Number',serverId:'Server ID Number',
             gameIdHint:'Numbers only',serverIdHint:'Numbers only',
             paymentLabel:'Payment Method',wave:'Wave Pay',kpay:'KBZ Pay',
             uploadLabel:'Upload Payment Slip',uploadText:'Send Screenshot',
@@ -842,7 +928,10 @@
             uploadSlip:'Please send your Screenshot',
             orderSuccess:'✅ Order successful!',
             orderFail:'❌ Order failed. Please try again.',
-            copy:'Copy',copied:'✅ Copied!'
+            copy:'Copy',copied:'✅ Copied!',
+            successTitle:'Order Submitted Successfully!',
+            successSub:'Your order has been confirmed. Thank you!',
+            successClose:'OK'
         }
     };
 
@@ -905,6 +994,9 @@
         document.getElementById('uploadLabel').textContent=d.uploadLabel;
         document.getElementById('uploadText').textContent=d.uploadText;
         document.getElementById('submitBtn').textContent='✅ '+d.submit;
+        document.querySelector('.success-modal h2').textContent=d.successTitle;
+        document.querySelector('.success-modal .sub').textContent=d.successSub;
+        document.querySelector('.success-modal .btn-close-success').textContent='✅ '+d.successClose;
         renderAllPackages();
         updateBadge();
     }
@@ -929,6 +1021,7 @@
     // ===== PACKAGES DATA =====
     const PACKAGES = {
         global: {
+            name: 'Global',
             bundles: [
                 { id: 'g_b1', name: 'Monthly Epic Bundle', price: 17300, img: 'https://files.catbox.moe/z2j5uo.png', sub: '🌍 Global' },
                 { id: 'g_b2', name: 'Weekly Elite Bundle', price: 3600, img: 'https://files.catbox.moe/i3uywg.png', sub: '🌍 Global' },
@@ -975,6 +1068,7 @@
             ]
         },
         ban: {
+            name: 'Ban Server (Malay, Sin, Php)',
             bundles: [
                 { id: 'b_b1', name: 'Weekly', price: 9400, img: 'https://files.catbox.moe/zylral.png', sub: '🇲🇾🇸🇬🇵🇭 Ban', isWeekly: true }
             ],
@@ -1017,6 +1111,7 @@
             ]
         },
         indo: {
+            name: 'Indo Server',
             bundles: [
                 { id: 'i_b1', name: 'Weekly', price: 8700, img: 'https://files.catbox.moe/zylral.png', sub: '🇮🇩 Indo', isWeekly: true }
             ],
@@ -1039,6 +1134,7 @@
             ]
         },
         russia: {
+            name: 'Russia Server',
             bundles: [
                 { id: 'r_b1', name: 'Weekly', price: 9750, img: 'https://files.catbox.moe/zylral.png', sub: '🇷🇺 Russia', isWeekly: true }
             ],
@@ -1057,7 +1153,7 @@
     };
 
     // ===== RENDER FUNCTIONS =====
-    function renderItems(items, containerId) {
+    function renderItems(items, containerId, isDouble) {
         const d = LANG_DATA[currentLang];
         const container = document.getElementById(containerId);
         if (!container) return;
@@ -1067,10 +1163,19 @@
             return;
         }
         
+        const serverNames = {
+            global: 'Global',
+            ban: 'Ban',
+            indo: 'Indo',
+            russia: 'Russia'
+        };
+        const serverName = serverNames[currentServer] || '';
+        
         container.innerHTML = items.map(pkg => {
             const isSelected = selectedPackage && selectedPackage.id === pkg.id;
             const subHtml = pkg.sub ? `<div class="sub">${pkg.sub}</div>` : '';
             const badgeHtml = pkg.badge ? `<span class="badge">${d.doubleBadge}</span>` : '';
+            const doubleClass = isDouble ? 'double-item' : '';
             
             let nameHtml = pkg.name;
             if (pkg.isWeekly) {
@@ -1078,7 +1183,7 @@
             }
             
             return `
-                <div class="package-item ${isSelected?'selected':''}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})">
+                <div class="package-item ${isSelected?'selected':''} ${doubleClass}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})">
                     <div class="pkg-img-wrap">
                         <img src="${pkg.img}" alt="${pkg.name}" onerror="this.style.display='none'">
                     </div>
@@ -1099,11 +1204,11 @@
 
     function renderAllPackages() {
         renderItems(PACKAGES.global.bundles, 'globalBundles');
-        renderItems(PACKAGES.global.double, 'globalDouble');
+        renderItems(PACKAGES.global.double, 'globalDouble', true);
         renderItems(PACKAGES.global.diamonds, 'globalDiamonds');
         
         renderItems(PACKAGES.ban.bundles, 'banBundles');
-        renderItems(PACKAGES.ban.double, 'banDouble');
+        renderItems(PACKAGES.ban.double, 'banDouble', true);
         renderItems(PACKAGES.ban.diamonds, 'banDiamonds');
         
         renderItems(PACKAGES.indo.bundles, 'indoBundles');
@@ -1202,6 +1307,22 @@
         document.getElementById('checkoutModal').classList.remove('show');
     }
 
+    // ===== SUCCESS MODAL =====
+    function showSuccessModal(orderData) {
+        document.getElementById('sOrderId').textContent = orderData.orderId;
+        document.getElementById('sPackage').textContent = orderData.package;
+        document.getElementById('sPrice').textContent = orderData.price;
+        document.getElementById('sGameId').textContent = orderData.gameId;
+        document.getElementById('sServerId').textContent = orderData.serverId;
+        document.getElementById('sPayment').textContent = orderData.payment;
+        document.getElementById('sTime').textContent = orderData.time;
+        document.getElementById('successModal').classList.add('show');
+    }
+
+    function closeSuccessModal() {
+        document.getElementById('successModal').classList.remove('show');
+    }
+
     function isNumberOnly(value) { return /^[0-9]+$/.test(value) }
 
     function checkForm() {
@@ -1293,17 +1414,16 @@
     async function sendOrderToTelegram(orderData) {
         const message = `🛒 **New Order!**
 ━━━━━━━━━━━━━━━━━
+📋 **Order ID:** ${orderData.orderId}
 📦 **Package:** ${orderData.package}
 💰 **Price:** ${orderData.price}
 ━━━━━━━━━━━━━━━━━
 🎮 **Game ID:** ${orderData.gameId}
 🌐 **Server ID:** ${orderData.serverId}
 ━━━━━━━━━━━━━━━━━
-📋 **Order ID:** ${orderData.orderId}
-🕐 **Time:** ${orderData.time}
-━━━━━━━━━━━━━━━━━
-👤 **User:** ${orderData.user}
 💳 **Payment:** ${orderData.payment}
+👤 **User:** ${orderData.user}
+🕐 **Time:** ${orderData.time}
 ━━━━━━━━━━━━━━━━━
 ⏳ *Status: Pending*`;
 
@@ -1416,13 +1536,14 @@
             localStorage.setItem('newOrderNotification', JSON.stringify({ show: true, orderId: orderId, count: getPendingCount() }));
             window.dispatchEvent(new Event('storage'));
 
+            closeCheckoutModal();
+            showSuccessModal(orderData);
+
             if (telegramSuccess) {
                 showToast(d.orderSuccess || '✅ Order successful!', 'success');
             } else {
                 showToast('⚠️ အော်ဒါသိမ်းပြီးသော်လည်း Telegram သို့မပို့နိုင်ပါ။', 'error');
             }
-            closeCheckoutModal();
-            setTimeout(() => { window.location.href = 'profile.html'; }, 1500);
         } catch (error) {
             console.error('Order error:', error);
             showToast(d.orderFail || '❌ Order failed. Please try again.', 'error');
@@ -1433,6 +1554,35 @@
             isSubmitting = false;
         }
     });
+
+    // ============================================================
+    // TELEGRAM WEBHOOK HANDLER (Done/Failed)
+    // ============================================================
+    // ဒီအပိုင်းက Telegram Bot က callback_data ကို လက်ခံဖို့ပါ
+    // လက်ရှိတွင် ဒီ function ကို ခေါ်ဖို့ webhook endpoint လိုအပ်ပါတယ်
+    // ဒါပေမယ့် local storage ထဲမှာ သိမ်းထားတဲ့ အော်ဒါတွေကို update လုပ်ဖို့ အောက်ပါ function ကိုသုံးပါ
+    function updateOrderStatus(orderId, status) {
+        const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+        const index = orders.findIndex(o => o.id === orderId);
+        if (index !== -1) {
+            orders[index].status = status;
+            localStorage.setItem('orderHistory', JSON.stringify(orders));
+            
+            const notifications = JSON.parse(localStorage.getItem('notifications') || '[]');
+            const notiIndex = notifications.findIndex(n => n.orderId === orderId);
+            if (notiIndex !== -1) {
+                notifications[notiIndex].status = status;
+                notifications[notiIndex].message = status === 'completed' ? 
+                    `✅ အော်ဒါ #${orderId} ပြီးပါပြီ!` : 
+                    `❌ အော်ဒါ #${orderId} ပယ်ဖျက်လိုက်ပါပြီ။`;
+                localStorage.setItem('notifications', JSON.stringify(notifications));
+            }
+            
+            updateBadge();
+            window.dispatchEvent(new Event('storage'));
+            showToast(`✅ အော်ဒါ #${orderId} ${status === 'completed' ? 'ပြီးပါပြီ!' : 'ပယ်ဖျက်လိုက်ပါပြီ။'}`, 'success');
+        }
+    }
 
     // ============================================================
     // EVENT LISTENERS
@@ -1464,8 +1614,15 @@
         if (e.target === this) closeCheckoutModal();
     });
 
+    document.getElementById('successModal').addEventListener('click', function(e) {
+        if (e.target === this) closeSuccessModal();
+    });
+
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') closeCheckoutModal();
+        if (e.key === 'Escape') {
+            closeCheckoutModal();
+            closeSuccessModal();
+        }
     });
 
     // ============================================================
