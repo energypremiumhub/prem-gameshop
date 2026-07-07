@@ -171,7 +171,7 @@
         .page-header h1 i{color:var(--cyan);margin-right:6px}
         .page-header p{color:var(--text-secondary);font-size:0.7rem;margin-top:2px}
 
-        /* ===== SEARCH BAR ===== */
+        /* ===== SEARCH BAR - မှန်ဘီလူးဖျောက် ===== */
         .search-bar{
             background:var(--bg-card);
             backdrop-filter:blur(20px);
@@ -184,6 +184,7 @@
             margin-bottom:12px;
             box-shadow:0 2px 10px var(--shadow)
         }
+        .search-bar .icon{display:none} /* မှန်ဘီလူးဖျောက် */
         .search-bar input{
             background:transparent;
             border:none;
@@ -196,10 +197,6 @@
         .search-bar input::placeholder{
             color:var(--text-secondary);
             font-size:0.65rem
-        }
-        .search-bar .icon{
-            color:var(--text-secondary);
-            font-size:0.9rem
         }
         .search-bar .clear-btn{
             color:var(--text-secondary);
@@ -291,8 +288,18 @@
             box-shadow:0 0 20px var(--cyan-glow)
         }
         .server-selector .top-row .options .opt .flag{margin-right:4px}
+        .server-selector .top-row .options .opt.ban-label{
+            font-size:0.5rem;
+            color:var(--text-secondary);
+            opacity:0.7;
+            background:transparent;
+            border:none;
+            padding:4px 6px;
+            cursor:default
+        }
         
-        .server-selector .server-search{
+        /* ===== SERVER SEARCH (Game ID / Server ID) ===== */
+        .server-search{
             display:flex;
             align-items:center;
             gap:8px;
@@ -301,7 +308,8 @@
             padding:4px 12px;
             border:1px solid var(--border-color)
         }
-        .server-selector .server-search input{
+        .server-search .icon{display:none} /* မှန်ဘီလူးဖျောက် */
+        .server-search input{
             background:transparent;
             border:none;
             color:var(--text-primary);
@@ -310,14 +318,22 @@
             outline:none;
             padding:4px 0
         }
-        .server-selector .server-search input::placeholder{
+        .server-search input::placeholder{
             color:var(--text-secondary);
             font-size:0.55rem
         }
-        .server-selector .server-search .icon{
-            color:var(--text-secondary);
-            font-size:0.7rem
+        .server-search .search-btn{
+            background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));
+            color:#fff;
+            border:none;
+            padding:4px 12px;
+            border-radius:8px;
+            font-size:0.5rem;
+            font-weight:600;
+            cursor:pointer;
+            transition:all 0.3s ease
         }
+        .server-search .search-btn:active{transform:scale(0.92)!important}
 
         /* ===== PACKAGE GRID - 3 per row ===== */
         .package-grid{
@@ -334,7 +350,7 @@
             padding:12px 8px;
             text-align:center;
             cursor:pointer;
-            transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+            transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow:0 4px 20px var(--shadow);
             position:relative;
             overflow:hidden;
@@ -342,9 +358,18 @@
             flex-direction:column;
             align-items:center
         }
+        /* ဘောင်ဒါတစ်ခုလုံး အပေါ်အောက်လှုပ်တဲ့ Animation */
+        .package-item:hover{
+            transform:translateY(-8px) scale(1.02);
+            border-color:rgba(245,166,35,0.3);
+            box-shadow:0 12px 40px var(--shadow-hover)
+        }
         .package-item:active{transform:scale(0.94)!important}
-        .package-item:hover{transform:translateY(-4px);border-color:rgba(245,166,35,0.3)}
-        .package-item.selected{border-color:var(--gold);background:rgba(245,166,35,0.06);box-shadow:0 0 12px var(--gold-glow)}
+        .package-item.selected{
+            border-color:var(--gold);
+            background:rgba(245,166,35,0.06);
+            box-shadow:0 0 12px var(--gold-glow)
+        }
         .package-item.selected .price{color:var(--gold)}
         .package-item.hidden{display:none}
         
@@ -360,22 +385,8 @@
             width:100%;
             height:100%;
             object-fit:contain;
-            display:block;
-            animation:floatPkg 3s ease-in-out infinite
+            display:block
         }
-        /* Double items - ပုံသေးအောင် */
-        .package-item.double-item .pkg-img-wrap{
-            max-width:70%;
-            margin-left:auto;
-            margin-right:auto
-        }
-        @keyframes floatPkg{
-            0%,100%{transform:translateY(0)}
-            50%{transform:translateY(-5px)}
-        }
-        .package-item:hover .pkg-img-wrap img{animation:floatPkg 1.5s ease-in-out infinite}
-        .package-item.selected .pkg-img-wrap img{box-shadow:0 0 8px var(--gold-glow)}
-        
         .package-item .info{
             display:flex;
             flex-direction:column;
@@ -633,7 +644,7 @@
         <p id="pageSub">ပက်ကေ့ချ်တစ်ခုရွေးပြီး ဝယ်ယူပါ</p>
     </div>
 
-    <!-- SEARCH BAR (Items) -->
+    <!-- SEARCH BAR (Items) - မှန်ဘီလူးဖျောက် -->
     <div class="search-bar">
         <span class="icon"><i class="fas fa-search"></i></span>
         <input type="text" id="itemSearch" placeholder="🔍 ပက်ကေ့ချ်ရှာပါ..." oninput="searchItems(this.value)">
@@ -646,14 +657,17 @@
             <span class="label"><i class="fas fa-server"></i> Server</span>
             <div class="options" id="serverOptions">
                 <span class="opt active" data-server="global" onclick="switchServer('global')"><span class="flag">🌍</span>Global</span>
-                <span class="opt" data-server="ban" onclick="switchServer('ban')"><span class="flag">🇲🇾🇸🇬🇵🇭</span>Ban Server</span>
+                <span class="opt ban-label">|</span>
+                <span class="opt" data-server="ban" onclick="switchServer('ban')"><span class="flag">🇲🇾🇸🇬🇵🇭</span>Ban: Malay, Sin, Php</span>
                 <span class="opt" data-server="indo" onclick="switchServer('indo')"><span class="flag">🇮🇩</span>Indo</span>
                 <span class="opt" data-server="russia" onclick="switchServer('russia')"><span class="flag">🇷🇺</span>Russia</span>
             </div>
         </div>
+        <!-- Server Search - Game ID / Server ID -->
         <div class="server-search">
             <span class="icon"><i class="fas fa-search"></i></span>
-            <input type="text" id="serverSearch" placeholder="🔍 ဆာဗာရှာပါ..." oninput="filterServers(this.value)">
+            <input type="text" id="serverSearch" placeholder="🔍 Game ID or Server ID..." oninput="filterServersByID(this.value)">
+            <button class="search-btn" onclick="searchServerByID()"><i class="fas fa-arrow-right"></i> ရှာမည်</button>
         </div>
     </div>
 
@@ -1052,7 +1066,7 @@
     // ============================================================
     // RENDER FUNCTIONS
     // ============================================================
-    function renderItems(items, containerId, isDouble) {
+    function renderItems(items, containerId) {
         const d = LANG_DATA[currentLang];
         const container = document.getElementById(containerId);
         if (!container) return;
@@ -1066,10 +1080,9 @@
             const isSelected = selectedPackage && selectedPackage.id === pkg.id;
             const subHtml = pkg.sub ? `<div class="sub">${pkg.sub}</div>` : '';
             const badgeHtml = pkg.badge ? `<span class="badge">${d.doubleBadge}</span>` : '';
-            const doubleClass = isDouble ? 'double-item' : '';
             
             return `
-                <div class="package-item ${isSelected?'selected':''} ${doubleClass}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})">
+                <div class="package-item ${isSelected?'selected':''}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})">
                     <div class="pkg-img-wrap">
                         <img src="${pkg.img}" alt="${pkg.name}" onerror="this.style.display='none'">
                     </div>
@@ -1090,11 +1103,11 @@
 
     function renderAllPackages() {
         renderItems(PACKAGES.global.bundles, 'globalBundles');
-        renderItems(PACKAGES.global.double, 'globalDouble', true);
+        renderItems(PACKAGES.global.double, 'globalDouble');
         renderItems(PACKAGES.global.diamonds, 'globalDiamonds');
         
         renderItems(PACKAGES.ban.bundles, 'banBundles');
-        renderItems(PACKAGES.ban.double, 'banDouble', true);
+        renderItems(PACKAGES.ban.double, 'banDouble');
         renderItems(PACKAGES.ban.diamonds, 'banDiamonds');
         
         renderItems(PACKAGES.indo.bundles, 'indoBundles');
@@ -1151,18 +1164,44 @@
         document.getElementById('itemSearch').focus();
     }
 
-    function filterServers(query) {
+    // Server Search by Game ID / Server ID
+    function filterServersByID(query) {
+        // Show all servers if query is empty
         const q = query.toLowerCase().trim();
-        const opts = document.querySelectorAll('.server-selector .opt');
+        const opts = document.querySelectorAll('.server-selector .opt:not(.ban-label)');
+        
+        if (q === '') {
+            opts.forEach(opt => opt.style.display = '');
+            return;
+        }
+        
+        // Check if query matches any server name or ID
+        const serverMap = {
+            'global': ['global', '🌍', '1'],
+            'ban': ['ban', 'malay', 'sin', 'php', '🇲🇾', '🇸🇬', '🇵🇭', '2'],
+            'indo': ['indo', 'indonesia', '🇮🇩', '3'],
+            'russia': ['russia', '🇷🇺', '4']
+        };
         
         opts.forEach(opt => {
+            const server = opt.dataset.server;
             const text = opt.textContent.toLowerCase();
-            if (text.includes(q) || q === '') {
-                opt.style.display = '';
-            } else {
-                opt.style.display = 'none';
-            }
+            const keywords = serverMap[server] || [];
+            const match = keywords.some(k => text.includes(k) || q.includes(k));
+            opt.style.display = match ? '' : 'none';
         });
+    }
+
+    function searchServerByID() {
+        const query = document.getElementById('serverSearch').value.trim();
+        if (!query) {
+            // Show all servers
+            document.querySelectorAll('.server-selector .opt:not(.ban-label)').forEach(opt => opt.style.display = '');
+            showToast('🔍 ဆာဗာအားလုံးကိုပြမယ်', '');
+            return;
+        }
+        filterServersByID(query);
+        showToast('🔍 ဆာဗာရှာဖွေပြီးပါပြီ', '');
     }
 
     // ============================================================
@@ -1171,7 +1210,7 @@
     function switchServer(server) {
         currentServer = server;
         
-        document.querySelectorAll('.server-selector .opt').forEach(opt => {
+        document.querySelectorAll('.server-selector .opt:not(.ban-label)').forEach(opt => {
             opt.classList.toggle('active', opt.dataset.server === server);
         });
         
@@ -1183,7 +1222,7 @@
         selectedPackage = null;
         renderAllPackages();
         
-        // Clear item search when switching server
+        // Clear item search
         document.getElementById('itemSearch').value = '';
         searchItems('');
     }
