@@ -198,7 +198,7 @@
         }
         .section-title span{color:var(--text-secondary);opacity:0.5}
 
-        /* ===== SERVER SELECTOR ===== */
+        /* ===== SERVER SELECTOR - အောက်ကိုချဲ့လို့ရ ===== */
         .server-selector{
             background:var(--bg-card);
             backdrop-filter:blur(20px);
@@ -210,8 +210,8 @@
             gap:12px;
             margin-bottom:16px;
             box-shadow:0 4px 20px var(--shadow);
-            overflow-x:auto;
-            flex-wrap:nowrap
+            flex-wrap:wrap;
+            overflow:visible
         }
         .server-selector .label{
             font-size:0.55rem;
@@ -224,12 +224,9 @@
         .server-selector .options{
             display:flex;
             gap:6px;
-            flex-wrap:nowrap;
-            overflow-x:auto;
-            padding:2px 0
+            flex-wrap:wrap;
+            flex:1
         }
-        .server-selector .options::-webkit-scrollbar{height:2px}
-        .server-selector .options::-webkit-scrollbar-thumb{background:var(--cyan);border-radius:10px}
         .server-selector .options .opt{
             background:var(--bg-input);
             border:1px solid var(--border-color);
@@ -240,8 +237,7 @@
             font-weight:600;
             cursor:pointer;
             transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            white-space:nowrap;
-            flex-shrink:0
+            white-space:nowrap
         }
         .server-selector .options .opt:active{transform:scale(0.92)!important}
         .server-selector .options .opt.active{
@@ -251,6 +247,16 @@
             box-shadow:0 0 20px var(--cyan-glow)
         }
         .server-selector .options .opt .flag{margin-right:4px}
+        .server-selector .options .opt.ban{
+            border-color:rgba(255,0,68,0.2);
+            color:var(--red)
+        }
+        .server-selector .options .opt.ban.active{
+            background:linear-gradient(135deg,var(--red),var(--orange));
+            border-color:var(--red);
+            color:#fff;
+            box-shadow:0 0 20px rgba(255,0,68,0.2)
+        }
 
         /* ===== PACKAGE GRID ===== */
         .package-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px}
@@ -495,12 +501,12 @@
         <p id="pageSub">ပက်ကေ့ချ်တစ်ခုရွေးပြီး ဝယ်ယူပါ</p>
     </div>
 
-    <!-- SERVER SELECTOR -->
+    <!-- SERVER SELECTOR - အောက်ကိုချဲ့လို့ရ -->
     <div class="server-selector">
         <span class="label"><i class="fas fa-server"></i> Server</span>
         <div class="options" id="serverOptions">
             <span class="opt active" data-server="global" onclick="switchServer('global')"><span class="flag">🌍</span>Global</span>
-            <span class="opt" data-server="malay" onclick="switchServer('malay')"><span class="flag">🇲🇾🇸🇬🇵🇭</span>Malay/Sin/Php</span>
+            <span class="opt ban" data-server="ban" onclick="switchServer('ban')"><span class="flag">🚫</span>Ban Server</span>
             <span class="opt" data-server="indo" onclick="switchServer('indo')"><span class="flag">🇮🇩</span>Indo</span>
             <span class="opt" data-server="russia" onclick="switchServer('russia')"><span class="flag">🇷🇺</span>Russia</span>
         </div>
@@ -518,16 +524,16 @@
         <div class="package-grid" id="globalDiamonds"></div>
     </div>
 
-    <!-- ===== MALAY/SIN/PHP SERVER ===== -->
-    <div class="section-wrapper hidden" id="malaySection">
-        <div class="section-title"><i class="fas fa-gift"></i> <span id="malayBundlesTitle">ပက်ကေ့ချ်များ</span></div>
-        <div class="package-grid" id="malayBundles"></div>
+    <!-- ===== BAN SERVER ===== -->
+    <div class="section-wrapper hidden" id="banSection">
+        <div class="section-title"><i class="fas fa-gift"></i> <span id="banBundlesTitle">ပက်ကေ့ချ်များ</span></div>
+        <div class="package-grid" id="banBundles"></div>
         
-        <div class="section-title"><i class="fas fa-star"></i> <span id="malayDoubleTitle">နှစ်ဆဖြည့်မှု</span></div>
-        <div class="package-grid" id="malayDouble"></div>
+        <div class="section-title"><i class="fas fa-star"></i> <span id="banDoubleTitle">နှစ်ဆဖြည့်မှု</span></div>
+        <div class="package-grid" id="banDouble"></div>
         
-        <div class="section-title"><i class="fas fa-diamond"></i> <span id="malayDiamondsTitle">စိန်များ</span></div>
-        <div class="package-grid" id="malayDiamonds"></div>
+        <div class="section-title"><i class="fas fa-diamond"></i> <span id="banDiamondsTitle">စိန်များ</span></div>
+        <div class="package-grid" id="banDiamonds"></div>
     </div>
 
     <!-- ===== INDO SERVER ===== -->
@@ -569,7 +575,7 @@
             home:'ပင်မ',shop:'ဆိုင်',payment:'ငွေပေးချေ',profile:'ပရိုဖိုင်',
             pageTitle:'MLBB Packages',pageSub:'ပက်ကေ့ချ်တစ်ခုရွေးပြီး ဝယ်ယူပါ',
             bundlesTitle:'ပက်ကေ့ချ်များ',diamondsTitle:'စိန်များ',doubleTitle:'နှစ်ဆဖြည့်မှု',
-            malayBundlesTitle:'ပက်ကေ့ချ်များ',malayDiamondsTitle:'စိန်များ',malayDoubleTitle:'နှစ်ဆဖြည့်မှု',
+            banBundlesTitle:'ပက်ကေ့ချ်များ',banDiamondsTitle:'စိန်များ',banDoubleTitle:'နှစ်ဆဖြည့်မှု',
             indoBundlesTitle:'ပက်ကေ့ချ်များ',indoDiamondsTitle:'စိန်များ',
             russiaBundlesTitle:'ပက်ကေ့ချ်များ',russiaDiamondsTitle:'စိန်များ',
             select:'Select',topUp:'Top Up',currency:'Ks',doubleBadge:'⭐ 2x Bonus'
@@ -579,7 +585,7 @@
             home:'Home',shop:'Shop',payment:'Payment',profile:'Profile',
             pageTitle:'MLBB Packages',pageSub:'Select a package and buy',
             bundlesTitle:'Packages',diamondsTitle:'Diamonds',doubleTitle:'Double Top Up',
-            malayBundlesTitle:'Packages',malayDiamondsTitle:'Diamonds',malayDoubleTitle:'Double Top Up',
+            banBundlesTitle:'Packages',banDiamondsTitle:'Diamonds',banDoubleTitle:'Double Top Up',
             indoBundlesTitle:'Packages',indoDiamondsTitle:'Diamonds',
             russiaBundlesTitle:'Packages',russiaDiamondsTitle:'Diamonds',
             select:'Select',topUp:'Top Up',currency:'Ks',doubleBadge:'⭐ 2x Bonus'
@@ -617,9 +623,9 @@
         document.getElementById('bundlesTitle').textContent=d.bundlesTitle;
         document.getElementById('diamondsTitle').textContent=d.diamondsTitle;
         document.getElementById('doubleTitle').textContent=d.doubleTitle;
-        document.getElementById('malayBundlesTitle').textContent=d.malayBundlesTitle;
-        document.getElementById('malayDiamondsTitle').textContent=d.malayDiamondsTitle;
-        document.getElementById('malayDoubleTitle').textContent=d.malayDoubleTitle;
+        document.getElementById('banBundlesTitle').textContent=d.banBundlesTitle;
+        document.getElementById('banDiamondsTitle').textContent=d.banDiamondsTitle;
+        document.getElementById('banDoubleTitle').textContent=d.banDoubleTitle;
         document.getElementById('indoBundlesTitle').textContent=d.indoBundlesTitle;
         document.getElementById('indoDiamondsTitle').textContent=d.indoDiamondsTitle;
         document.getElementById('russiaBundlesTitle').textContent=d.russiaBundlesTitle;
@@ -655,7 +661,10 @@
     const PACKAGES = {
         global: {
             bundles: [
-                { id: 'g_b1', name: 'Weekly Pass', price: 6500, img: 'https://files.catbox.moe/zylral.png' }
+                { id: 'g_b1', name: 'Monthly Epic Bundle', price: 17300, img: 'https://files.catbox.moe/z2j5uo.png' },
+                { id: 'g_b2', name: 'Weekly Elite Bundle', price: 3600, img: 'https://files.catbox.moe/i3uywg.png' },
+                { id: 'g_b3', name: 'Weekly Pass', price: 6500, img: 'https://files.catbox.moe/zylral.png' },
+                { id: 'g_b4', name: 'Twilight Pass', price: 34000, img: 'https://files.catbox.moe/jshuuy.png' }
             ],
             double: [
                 { id: 'g_x1', name: '50+50', price: 3550, img: 'https://files.catbox.moe/z376wd.png' },
@@ -696,46 +705,46 @@
                 { id: 'g_d30', name: '9288', price: 503000, img: 'https://files.catbox.moe/pn69zi.png' }
             ]
         },
-        malay: {
+        ban: {
             bundles: [
-                { id: 'm_b1', name: 'Weekly Pass', price: 9400, img: 'https://files.catbox.moe/zylral.png' }
+                { id: 'b_b1', name: 'Weekly Pass', price: 9400, img: 'https://files.catbox.moe/zylral.png' }
             ],
             double: [
-                { id: 'm_x1', name: '55', price: 4500, img: 'https://files.catbox.moe/z376wd.png' },
-                { id: 'm_x2', name: '165', price: 12800, img: 'https://files.catbox.moe/kf0960.png' },
-                { id: 'm_x3', name: '275', price: 21100, img: 'https://files.catbox.moe/jm3ty7.png' },
-                { id: 'm_x4', name: '656', price: 42800, img: 'https://files.catbox.moe/aprnoc.png' }
+                { id: 'b_x1', name: '55', price: 4500, img: 'https://files.catbox.moe/z376wd.png' },
+                { id: 'b_x2', name: '165', price: 12800, img: 'https://files.catbox.moe/kf0960.png' },
+                { id: 'b_x3', name: '275', price: 21100, img: 'https://files.catbox.moe/jm3ty7.png' },
+                { id: 'b_x4', name: '656', price: 42800, img: 'https://files.catbox.moe/aprnoc.png' }
             ],
             diamonds: [
-                { id: 'm_d1', name: '14', price: 1300, img: 'https://files.catbox.moe/xaxejk.png' },
-                { id: 'm_d2', name: '28', price: 2400, img: 'https://files.catbox.moe/xaxejk.png' },
-                { id: 'm_d3', name: '42', price: 3500, img: 'https://files.catbox.moe/7bj50l.png' },
-                { id: 'm_d4', name: '70', price: 5700, img: 'https://files.catbox.moe/7bj50l.png' },
-                { id: 'm_d5', name: '84', price: 6800, img: 'https://files.catbox.moe/4mb7sd.png' },
-                { id: 'm_d6', name: '140', price: 11000, img: 'https://files.catbox.moe/4mb7sd.png' },
-                { id: 'm_d7', name: '182', price: 14400, img: 'https://files.catbox.moe/ogchrl.png' },
-                { id: 'm_d8', name: '210', price: 16400, img: 'https://files.catbox.moe/ogchrl.png' },
-                { id: 'm_d9', name: '284', price: 21800, img: 'https://files.catbox.moe/ocznqy.png' },
-                { id: 'm_d10', name: '355', price: 27400, img: 'https://files.catbox.moe/ocznqy.png' },
-                { id: 'm_d11', name: '429', price: 32700, img: 'https://files.catbox.moe/k23p6t.png' },
-                { id: 'm_d12', name: '513', price: 39100, img: 'https://files.catbox.moe/k23p6t.png' },
-                { id: 'm_d13', name: '639', price: 48800, img: 'https://files.catbox.moe/qwnqog.png' },
-                { id: 'm_d14', name: '716', price: 54200, img: 'https://files.catbox.moe/qwnqog.png' },
-                { id: 'm_d15', name: '1084', price: 80600, img: 'https://files.catbox.moe/zjcnar.png' },
-                { id: 'm_d16', name: '1159', price: 87500, img: 'https://files.catbox.moe/zjcnar.png' },
-                { id: 'm_d17', name: '1586', price: 118200, img: 'https://files.catbox.moe/co1w7w.png' },
-                { id: 'm_d18', name: '2162', price: 161200, img: 'https://files.catbox.moe/co1w7w.png' },
-                { id: 'm_d19', name: '3032', price: 219800, img: 'https://files.catbox.moe/2c5tz4.png' },
-                { id: 'm_d20', name: '3846', price: 279800, img: 'https://files.catbox.moe/2c5tz4.png' },
-                { id: 'm_d21', name: '4047', price: 295200, img: 'https://files.catbox.moe/b5bg2m.png' },
-                { id: 'm_d22', name: '4851', price: 353900, img: 'https://files.catbox.moe/b5bg2m.png' },
-                { id: 'm_d23', name: '5138', price: 374900, img: 'https://files.catbox.moe/1xbg9h.png' },
-                { id: 'm_d24', name: '6012', price: 403900, img: 'https://files.catbox.moe/1xbg9h.png' },
-                { id: 'm_d25', name: '7502', price: 536000, img: 'https://files.catbox.moe/z0c6rj.png' },
-                { id: 'm_d26', name: '8218', price: 591000, img: 'https://files.catbox.moe/z0c6rj.png' },
-                { id: 'm_d27', name: '9377', price: 674000, img: 'https://files.catbox.moe/z0c6rj.png' },
-                { id: 'm_d28', name: '10907', price: 7802100, img: 'https://files.catbox.moe/pn69zi.png' },
-                { id: 'm_d29', name: '16004', price: 1151100, img: 'https://files.catbox.moe/pn69zi.png' }
+                { id: 'b_d1', name: '14', price: 1300, img: 'https://files.catbox.moe/xaxejk.png' },
+                { id: 'b_d2', name: '28', price: 2400, img: 'https://files.catbox.moe/xaxejk.png' },
+                { id: 'b_d3', name: '42', price: 3500, img: 'https://files.catbox.moe/7bj50l.png' },
+                { id: 'b_d4', name: '70', price: 5700, img: 'https://files.catbox.moe/7bj50l.png' },
+                { id: 'b_d5', name: '84', price: 6800, img: 'https://files.catbox.moe/4mb7sd.png' },
+                { id: 'b_d6', name: '140', price: 11000, img: 'https://files.catbox.moe/4mb7sd.png' },
+                { id: 'b_d7', name: '182', price: 14400, img: 'https://files.catbox.moe/ogchrl.png' },
+                { id: 'b_d8', name: '210', price: 16400, img: 'https://files.catbox.moe/ogchrl.png' },
+                { id: 'b_d9', name: '284', price: 21800, img: 'https://files.catbox.moe/ocznqy.png' },
+                { id: 'b_d10', name: '355', price: 27400, img: 'https://files.catbox.moe/ocznqy.png' },
+                { id: 'b_d11', name: '429', price: 32700, img: 'https://files.catbox.moe/k23p6t.png' },
+                { id: 'b_d12', name: '513', price: 39100, img: 'https://files.catbox.moe/k23p6t.png' },
+                { id: 'b_d13', name: '639', price: 48800, img: 'https://files.catbox.moe/qwnqog.png' },
+                { id: 'b_d14', name: '716', price: 54200, img: 'https://files.catbox.moe/qwnqog.png' },
+                { id: 'b_d15', name: '1084', price: 80600, img: 'https://files.catbox.moe/zjcnar.png' },
+                { id: 'b_d16', name: '1159', price: 87500, img: 'https://files.catbox.moe/zjcnar.png' },
+                { id: 'b_d17', name: '1586', price: 118200, img: 'https://files.catbox.moe/co1w7w.png' },
+                { id: 'b_d18', name: '2162', price: 161200, img: 'https://files.catbox.moe/co1w7w.png' },
+                { id: 'b_d19', name: '3032', price: 219800, img: 'https://files.catbox.moe/2c5tz4.png' },
+                { id: 'b_d20', name: '3846', price: 279800, img: 'https://files.catbox.moe/2c5tz4.png' },
+                { id: 'b_d21', name: '4047', price: 295200, img: 'https://files.catbox.moe/b5bg2m.png' },
+                { id: 'b_d22', name: '4851', price: 353900, img: 'https://files.catbox.moe/b5bg2m.png' },
+                { id: 'b_d23', name: '5138', price: 374900, img: 'https://files.catbox.moe/1xbg9h.png' },
+                { id: 'b_d24', name: '6012', price: 403900, img: 'https://files.catbox.moe/1xbg9h.png' },
+                { id: 'b_d25', name: '7502', price: 536000, img: 'https://files.catbox.moe/z0c6rj.png' },
+                { id: 'b_d26', name: '8218', price: 591000, img: 'https://files.catbox.moe/z0c6rj.png' },
+                { id: 'b_d27', name: '9377', price: 674000, img: 'https://files.catbox.moe/z0c6rj.png' },
+                { id: 'b_d28', name: '10907', price: 7802100, img: 'https://files.catbox.moe/pn69zi.png' },
+                { id: 'b_d29', name: '16004', price: 1151100, img: 'https://files.catbox.moe/pn69zi.png' }
             ]
         },
         indo: {
@@ -815,9 +824,9 @@
         renderItems(PACKAGES.global.double, 'globalDouble');
         renderItems(PACKAGES.global.diamonds, 'globalDiamonds');
         
-        renderItems(PACKAGES.malay.bundles, 'malayBundles');
-        renderItems(PACKAGES.malay.double, 'malayDouble');
-        renderItems(PACKAGES.malay.diamonds, 'malayDiamonds');
+        renderItems(PACKAGES.ban.bundles, 'banBundles');
+        renderItems(PACKAGES.ban.double, 'banDouble');
+        renderItems(PACKAGES.ban.diamonds, 'banDiamonds');
         
         renderItems(PACKAGES.indo.bundles, 'indoBundles');
         renderItems(PACKAGES.indo.diamonds, 'indoDiamonds');
@@ -841,18 +850,15 @@
     function switchServer(server) {
         currentServer = server;
         
-        // Update active button
         document.querySelectorAll('.server-selector .opt').forEach(opt => {
             opt.classList.toggle('active', opt.dataset.server === server);
         });
         
-        // Show/Hide sections
         document.getElementById('globalSection').classList.toggle('hidden', server !== 'global');
-        document.getElementById('malaySection').classList.toggle('hidden', server !== 'malay');
+        document.getElementById('banSection').classList.toggle('hidden', server !== 'ban');
         document.getElementById('indoSektion').classList.toggle('hidden', server !== 'indo');
         document.getElementById('russiaSection').classList.toggle('hidden', server !== 'russia');
         
-        // Reset selected package
         selectedPackage = null;
         renderAllPackages();
     }
