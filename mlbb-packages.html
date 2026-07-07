@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>⚡ MLBB Packages</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
         
@@ -170,6 +171,45 @@
         .page-header h1 i{color:var(--cyan);margin-right:6px}
         .page-header p{color:var(--text-secondary);font-size:0.7rem;margin-top:2px}
 
+        /* ===== SEARCH BAR ===== */
+        .search-bar{
+            background:var(--bg-card);
+            backdrop-filter:blur(20px);
+            border:1px solid var(--border-color);
+            border-radius:14px;
+            padding:8px 14px;
+            display:flex;
+            align-items:center;
+            gap:10px;
+            margin-bottom:12px;
+            box-shadow:0 2px 10px var(--shadow)
+        }
+        .search-bar input{
+            background:transparent;
+            border:none;
+            color:var(--text-primary);
+            font-size:0.75rem;
+            flex:1;
+            outline:none;
+            padding:4px 0
+        }
+        .search-bar input::placeholder{
+            color:var(--text-secondary);
+            font-size:0.65rem
+        }
+        .search-bar .icon{
+            color:var(--text-secondary);
+            font-size:0.9rem
+        }
+        .search-bar .clear-btn{
+            color:var(--text-secondary);
+            font-size:0.7rem;
+            cursor:pointer;
+            padding:4px;
+            display:none
+        }
+        .search-bar .clear-btn.show{display:block}
+
         .section-title{
             font-size:.65rem;
             font-weight:700;
@@ -206,14 +246,18 @@
             border-radius:14px;
             padding:10px 14px;
             display:flex;
-            align-items:center;
-            gap:12px;
+            flex-direction:column;
+            gap:8px;
             margin-bottom:16px;
-            box-shadow:0 4px 20px var(--shadow);
-            flex-wrap:wrap;
-            overflow:visible
+            box-shadow:0 4px 20px var(--shadow)
         }
-        .server-selector .label{
+        .server-selector .top-row{
+            display:flex;
+            align-items:center;
+            gap:10px;
+            flex-wrap:wrap
+        }
+        .server-selector .top-row .label{
             font-size:0.55rem;
             color:var(--text-secondary);
             font-weight:600;
@@ -221,13 +265,13 @@
             letter-spacing:0.5px;
             flex-shrink:0
         }
-        .server-selector .options{
+        .server-selector .top-row .options{
             display:flex;
             gap:6px;
             flex-wrap:wrap;
             flex:1
         }
-        .server-selector .options .opt{
+        .server-selector .top-row .options .opt{
             background:var(--bg-input);
             border:1px solid var(--border-color);
             color:var(--text-secondary);
@@ -239,27 +283,43 @@
             transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             white-space:nowrap
         }
-        .server-selector .options .opt:active{transform:scale(0.92)!important}
-        .server-selector .options .opt.active{
+        .server-selector .top-row .options .opt:active{transform:scale(0.92)!important}
+        .server-selector .top-row .options .opt.active{
             background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));
             color:#fff;
             border-color:var(--cyan);
             box-shadow:0 0 20px var(--cyan-glow)
         }
-        .server-selector .options .opt .flag{margin-right:4px}
-        /* Ban Server - အထူးအရောင် */
-        .server-selector .options .opt.ban{
-            border-color:rgba(255,0,68,0.2);
-            color:var(--red)
+        .server-selector .top-row .options .opt .flag{margin-right:4px}
+        
+        .server-selector .server-search{
+            display:flex;
+            align-items:center;
+            gap:8px;
+            background:var(--bg-input);
+            border-radius:10px;
+            padding:4px 12px;
+            border:1px solid var(--border-color)
         }
-        .server-selector .options .opt.ban.active{
-            background:linear-gradient(135deg,var(--red),var(--orange));
-            border-color:var(--red);
-            color:#fff;
-            box-shadow:0 0 20px rgba(255,0,68,0.2)
+        .server-selector .server-search input{
+            background:transparent;
+            border:none;
+            color:var(--text-primary);
+            font-size:0.65rem;
+            flex:1;
+            outline:none;
+            padding:4px 0
+        }
+        .server-selector .server-search input::placeholder{
+            color:var(--text-secondary);
+            font-size:0.55rem
+        }
+        .server-selector .server-search .icon{
+            color:var(--text-secondary);
+            font-size:0.7rem
         }
 
-        /* ===== PACKAGE GRID - 3 per row (အရင်ပုံစံ) ===== */
+        /* ===== PACKAGE GRID - 3 per row ===== */
         .package-grid{
             display:grid;
             grid-template-columns:repeat(3,1fr);
@@ -286,6 +346,7 @@
         .package-item:hover{transform:translateY(-4px);border-color:rgba(245,166,35,0.3)}
         .package-item.selected{border-color:var(--gold);background:rgba(245,166,35,0.06);box-shadow:0 0 12px var(--gold-glow)}
         .package-item.selected .price{color:var(--gold)}
+        .package-item.hidden{display:none}
         
         .package-item .pkg-img-wrap{
             width:100%;
@@ -301,6 +362,12 @@
             object-fit:contain;
             display:block;
             animation:floatPkg 3s ease-in-out infinite
+        }
+        /* Double items - ပုံသေးအောင် */
+        .package-item.double-item .pkg-img-wrap{
+            max-width:70%;
+            margin-left:auto;
+            margin-right:auto
         }
         @keyframes floatPkg{
             0%,100%{transform:translateY(0)}
@@ -489,6 +556,50 @@
         /* ===== SECTION HIDE/SHOW ===== */
         .section-wrapper{display:block}
         .section-wrapper.hidden{display:none}
+
+        /* ===== MODAL ===== */
+        .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(12px);display:none;z-index:300;align-items:center;justify-content:center;padding:20px}
+        .modal-overlay.show{display:flex;animation:fadeIn 0.3s ease}
+        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+        .modal{background:var(--bg-secondary);backdrop-filter:blur(24px);border:1px solid var(--border-color);border-radius:16px;padding:24px 20px;max-width:420px;width:100%;box-shadow:0 4px 30px var(--shadow);position:relative;max-height:90vh;overflow-y:auto}
+        .modal .close-btn{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--text-secondary);font-size:1.1rem;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)}
+        .modal .close-btn:active{transform:scale(0.88)!important}
+        .modal .close-btn:hover{color:var(--cyan)}
+        .modal h2{font-size:1.2rem;color:var(--text-primary);text-align:center;margin-bottom:4px}
+        .modal .sub{color:var(--text-secondary);font-size:0.75rem;text-align:center;margin-bottom:16px}
+        .modal .form-group{margin-bottom:12px}
+        .modal .form-group label{display:block;color:var(--text-secondary);font-size:0.6rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px}
+        .modal .form-group input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border-color);background:var(--bg-input);color:var(--text-primary);font-size:0.85rem;outline:none;transition:all 0.3s ease}
+        .modal .form-group input:focus{border-color:var(--cyan);box-shadow:0 0 20px var(--cyan-glow)}
+        .modal .form-group input::placeholder{color:var(--text-secondary);font-size:0.7rem}
+        .modal .form-group .input-hint{font-size:0.5rem;color:var(--text-secondary);margin-top:3px;opacity:0.5}
+        .modal .selected-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg-input);border-radius:10px;border:1px solid var(--border-color);margin-bottom:12px}
+        .modal .selected-row .pkg{font-size:0.85rem;font-weight:600;color:var(--text-primary)}
+        .modal .selected-row .price{font-size:0.9rem;font-weight:700;color:var(--gold)}
+        .modal .payment-options{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
+        .modal .payment-option{background:var(--bg-input);border:1px solid var(--border-color);border-radius:10px;padding:10px;text-align:center;cursor:pointer;transition:all 0.3s ease}
+        .modal .payment-option:active{transform:scale(0.95)!important}
+        .modal .payment-option.selected{border-color:var(--gold);background:rgba(245,166,35,0.06);box-shadow:0 0 30px var(--gold-glow)}
+        .modal .payment-option .icon-box{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin:0 auto 4px;overflow:hidden;border:1px solid var(--border-color);background:var(--bg-input)}
+        .modal .payment-option .icon-box img{width:100%;height:100%;object-fit:cover}
+        .modal .payment-option .name{font-size:0.65rem;font-weight:600;color:var(--text-primary)}
+        .modal .account-info{background:rgba(0,180,216,0.04);border:1px solid rgba(0,180,216,0.08);border-radius:10px;padding:10px 14px;margin-top:8px;display:none}
+        .modal .account-info.show{display:block}
+        .modal .account-info .acc-number{font-size:0.75rem;color:var(--green);font-weight:500;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+        .modal .account-info .acc-number .copy-btn{background:var(--bg-card);border:1px solid var(--border-color);color:var(--text-secondary);padding:2px 10px;border-radius:10px;font-size:0.45rem;cursor:pointer;transition:all 0.3s ease;font-weight:600}
+        .modal .account-info .acc-number .copy-btn:active{transform:scale(0.85)!important}
+        .modal .file-upload{border:2px dashed var(--border-color);border-radius:10px;padding:14px;text-align:center;cursor:pointer;transition:all 0.3s ease;position:relative}
+        .modal .file-upload:active{transform:scale(0.97)!important}
+        .modal .file-upload.has-file{border-color:var(--green);background:rgba(0,200,83,0.04)}
+        .modal .file-upload .icon{font-size:1.5rem;display:block;margin-bottom:2px;color:var(--text-secondary)}
+        .modal .file-upload .text{font-size:0.6rem;color:var(--text-secondary)}
+        .modal .file-upload input[type="file"]{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}
+        .modal .file-upload .file-name{font-size:0.5rem;color:var(--green);margin-top:3px;display:none}
+        .modal .file-upload .file-name.show{display:block}
+        .modal .btn-primary{width:100%;padding:11px;background:var(--bg-input);color:var(--text-secondary);border:1px solid var(--border-color);border-radius:10px;font-size:0.85rem;font-weight:700;cursor:not-allowed;transition:all 0.3s ease;margin-top:6px;opacity:0.4}
+        .modal .btn-primary:active{transform:scale(0.96)!important}
+        .modal .btn-primary.enabled{background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;border-color:var(--gold);box-shadow:0 4px 20px var(--gold-glow);cursor:pointer;opacity:1}
+        .modal .btn-primary.loading{background:var(--bg-input);color:var(--text-secondary);border-color:var(--border-color);box-shadow:none;cursor:wait;opacity:0.6}
     </style>
 </head>
 <body>
@@ -522,14 +633,27 @@
         <p id="pageSub">ပက်ကေ့ချ်တစ်ခုရွေးပြီး ဝယ်ယူပါ</p>
     </div>
 
+    <!-- SEARCH BAR (Items) -->
+    <div class="search-bar">
+        <span class="icon"><i class="fas fa-search"></i></span>
+        <input type="text" id="itemSearch" placeholder="🔍 ပက်ကေ့ချ်ရှာပါ..." oninput="searchItems(this.value)">
+        <span class="clear-btn" id="clearSearch" onclick="clearItemSearch()"><i class="fas fa-times-circle"></i></span>
+    </div>
+
     <!-- SERVER SELECTOR -->
     <div class="server-selector">
-        <span class="label"><i class="fas fa-server"></i> Server</span>
-        <div class="options" id="serverOptions">
-            <span class="opt active" data-server="global" onclick="switchServer('global')"><span class="flag">🌍</span>Global</span>
-            <span class="opt ban" data-server="ban" onclick="switchServer('ban')"><span class="flag">🇲🇾🇸🇬🇵🇭</span>Ban Server</span>
-            <span class="opt" data-server="indo" onclick="switchServer('indo')"><span class="flag">🇮🇩</span>Indo</span>
-            <span class="opt" data-server="russia" onclick="switchServer('russia')"><span class="flag">🇷🇺</span>Russia</span>
+        <div class="top-row">
+            <span class="label"><i class="fas fa-server"></i> Server</span>
+            <div class="options" id="serverOptions">
+                <span class="opt active" data-server="global" onclick="switchServer('global')"><span class="flag">🌍</span>Global</span>
+                <span class="opt" data-server="ban" onclick="switchServer('ban')"><span class="flag">🇲🇾🇸🇬🇵🇭</span>Ban Server</span>
+                <span class="opt" data-server="indo" onclick="switchServer('indo')"><span class="flag">🇮🇩</span>Indo</span>
+                <span class="opt" data-server="russia" onclick="switchServer('russia')"><span class="flag">🇷🇺</span>Russia</span>
+            </div>
+        </div>
+        <div class="server-search">
+            <span class="icon"><i class="fas fa-search"></i></span>
+            <input type="text" id="serverSearch" placeholder="🔍 ဆာဗာရှာပါ..." oninput="filterServers(this.value)">
         </div>
     </div>
 
@@ -588,8 +712,77 @@
 
 <div class="toast" id="toast"></div>
 
+<!-- ===== MODAL ===== -->
+<div class="modal-overlay" id="checkoutModal">
+    <div class="modal">
+        <button class="close-btn" onclick="closeCheckoutModal()">✕</button>
+        <h2 id="modalTitle">🛒 အော်ဒါတင်ရန်</h2>
+        <p class="sub" id="modalSub">အချက်အလက်များကို မှန်ကန်စွာဖြည့်သွင်းပါ</p>
+        
+        <div class="selected-row">
+            <span class="pkg" id="modalPackage">Loading...</span>
+            <span class="price" id="modalPrice">0 Ks</span>
+        </div>
+
+        <div class="form-group">
+            <label><i class="fas fa-gamepad"></i> <span id="gameIdLabel">ဂိမ်းအိုင်ဒီ</span></label>
+            <input type="text" id="gameId" placeholder="ဂိမ်းအိုင်ဒီ နံပါတ်ထည့်ပါ" inputmode="numeric" pattern="[0-9]*">
+            <div class="input-hint" id="gameIdHint">နံပါတ်သာ ထည့်ပါ</div>
+        </div>
+        
+        <div class="form-group">
+            <label><i class="fas fa-server"></i> <span id="serverIdLabel">ဆာဗာအိုင်ဒီ</span></label>
+            <input type="text" id="serverId" placeholder="ဆာဗာအိုင်ဒီ နံပါတ်ထည့်ပါ" inputmode="numeric" pattern="[0-9]*">
+            <div class="input-hint" id="serverIdHint">နံပါတ်သာ ထည့်ပါ</div>
+        </div>
+
+        <div class="form-group">
+            <label><i class="fas fa-money-bill-wave"></i> <span id="paymentLabel">ငွေပေးချေရန်</span></label>
+            <div class="payment-options" id="paymentOptions">
+                <div class="payment-option" data-payment="wave">
+                    <div class="icon-box">
+                        <img src="https://i.ibb.co/GvstPZx4/x.jpg" alt="Wave Pay">
+                    </div>
+                    <span class="name" id="waveName">Wave Pay</span>
+                </div>
+                <div class="payment-option" data-payment="kpay">
+                    <div class="icon-box">
+                        <img src="https://i.ibb.co/fdWfXwVC/x.jpg" alt="KBZ Pay">
+                    </div>
+                    <span class="name" id="kpayName">KBZ Pay</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="account-info" id="waveInfo">
+            <div class="acc-number">📞 09682506493 <button class="copy-btn" onclick="copyNumber('09682506493', this)">ကူးယူမည်</button></div>
+        </div>
+        <div class="account-info" id="kpayInfo">
+            <div class="acc-number">📞 09682506493 <button class="copy-btn" onclick="copyNumber('09682506493', this)">ကူးယူမည်</button></div>
+        </div>
+
+        <div class="form-group">
+            <label><i class="fas fa-image"></i> <span id="uploadLabel">ပြေစာတင်ပို့ရန်</span></label>
+            <div class="file-upload" id="fileUpload">
+                <span class="icon">📁</span>
+                <span class="text" id="uploadText">Screenshot ပို့ပေးပါ</span>
+                <span class="file-name" id="fileName">✅ image.png</span>
+                <input type="file" id="fileInput" accept="image/*">
+            </div>
+        </div>
+
+        <button class="btn-primary" id="submitBtn" disabled>✅ အော်ဒါတင်မည်</button>
+    </div>
+</div>
+
 <script>
-    // ===== LANGUAGE DATA =====
+    // ============================================================
+    // 🔧 TELEGRAM BOT CONFIG
+    // ============================================================
+    const TELEGRAM_BOT_TOKEN = '8751360822:AAFQNiWhfGWgUsjD7Bd5DzfHMfpkR4COHY8';
+    const TELEGRAM_CHAT_ID = '8745522082';
+    // ============================================================
+
     const LANG_DATA = {
         my: {
             appName:'Premium',appSub:'Game Shop',
@@ -599,7 +792,21 @@
             banBundlesTitle:'ပက်ကေ့ချ်များ',banDiamondsTitle:'စိန်များ',banDoubleTitle:'နှစ်ဆဖြည့်မှု',
             indoBundlesTitle:'ပက်ကေ့ချ်များ',indoDiamondsTitle:'စိန်များ',
             russiaBundlesTitle:'ပက်ကေ့ချ်များ',russiaDiamondsTitle:'စိန်များ',
-            select:'Select',topUp:'Top Up',currency:'Ks',doubleBadge:'⭐ 2x Bonus'
+            select:'Select',topUp:'Top Up',currency:'Ks',doubleBadge:'⭐ 2x Bonus',
+            modalTitle:'🛒 အော်ဒါတင်ရန်',modalSub:'အချက်အလက်များကို မှန်ကန်စွာဖြည့်သွင်းပါ',
+            gameId:'ဂိမ်းအိုင်ဒီ',serverId:'ဆာဗာအိုင်ဒီ',
+            gameIdHint:'နံပါတ်သာ ထည့်ပါ',serverIdHint:'နံပါတ်သာ ထည့်ပါ',
+            paymentLabel:'ငွေပေးချေရန်',wave:'Wave Pay',kpay:'KBZ Pay',
+            uploadLabel:'ပြေစာတင်ပို့ရန်',uploadText:'Screenshot ပို့ပေးပါ',
+            submit:'အော်ဒါတင်မည်',submitting:'⏳ အော်ဒါတင်နေသည်...',
+            enterGameId:'ကျေးဇူးပြု၍ ဂိမ်းအိုင်ဒီ နံပါတ်ထည့်ပါ',
+            enterServerId:'ကျေးဇူးပြု၍ ဆာဗာအိုင်ဒီ နံပါတ်ထည့်ပါ',
+            enterNumberOnly:'နံပါတ်သာ ထည့်ပါ',
+            selectPayment:'ကျေးဇူးပြု၍ ငွေပေးချေနည်းရွေးပါ',
+            uploadSlip:'ကျေးဇူးပြု၍ Screenshot ပို့ပေးပါ',
+            orderSuccess:'✅ အော်ဒါအောင်မြင်ပါသည်!',
+            orderFail:'❌ အော်ဒါမအောင်မြင်ပါ။ ထပ်မံကြိုးစားပါ။',
+            copy:'ကူးယူမည်',copied:'✅ ကူးပြီး'
         },
         en: {
             appName:'Premium',appSub:'Game Shop',
@@ -609,20 +816,38 @@
             banBundlesTitle:'Packages',banDiamondsTitle:'Diamonds',banDoubleTitle:'Double Top Up',
             indoBundlesTitle:'Packages',indoDiamondsTitle:'Diamonds',
             russiaBundlesTitle:'Packages',russiaDiamondsTitle:'Diamonds',
-            select:'Select',topUp:'Top Up',currency:'Ks',doubleBadge:'⭐ 2x Bonus'
+            select:'Select',topUp:'Top Up',currency:'Ks',doubleBadge:'⭐ 2x Bonus',
+            modalTitle:'🛒 Submit Order',modalSub:'Fill in your details correctly',
+            gameId:'Game ID',serverId:'Server ID',
+            gameIdHint:'Numbers only',serverIdHint:'Numbers only',
+            paymentLabel:'Payment Method',wave:'Wave Pay',kpay:'KBZ Pay',
+            uploadLabel:'Upload Payment Slip',uploadText:'Send Screenshot',
+            submit:'Submit Order',submitting:'⏳ Submitting...',
+            enterGameId:'Please enter your Game ID (numbers only)',
+            enterServerId:'Please enter your Server ID (numbers only)',
+            enterNumberOnly:'Please enter numbers only',
+            selectPayment:'Please select a payment method',
+            uploadSlip:'Please send your Screenshot',
+            orderSuccess:'✅ Order successful!',
+            orderFail:'❌ Order failed. Please try again.',
+            copy:'Copy',copied:'✅ Copied!'
         }
     };
 
     let currentLang = localStorage.getItem('lang') || 'my';
     let selectedPackage = null;
     let currentServer = 'global';
+    let selectedPayment = null;
+    let isSubmitting = false;
 
     function getText(key){return LANG_DATA[currentLang]?.[key]||key}
 
-    function showToast(msg){
+    function showToast(msg, type){
         const t=document.getElementById('toast');
         t.textContent=msg;
-        t.classList.add('show');
+        t.className='toast show';
+        if(type==='success') t.classList.add('success');
+        else if(type==='error') t.classList.add('error');
         clearTimeout(t._timer);
         t._timer=setTimeout(()=>t.classList.remove('show'),3000);
     }
@@ -655,6 +880,18 @@
         document.getElementById('navShop').textContent=d.shop;
         document.getElementById('navPayment').textContent=d.payment;
         document.getElementById('navProfile').textContent=d.profile;
+        document.getElementById('modalTitle').textContent=d.modalTitle;
+        document.getElementById('modalSub').textContent=d.modalSub;
+        document.getElementById('gameIdLabel').textContent=d.gameId;
+        document.getElementById('serverIdLabel').textContent=d.serverId;
+        document.getElementById('gameIdHint').textContent=d.gameIdHint;
+        document.getElementById('serverIdHint').textContent=d.serverIdHint;
+        document.getElementById('paymentLabel').textContent=d.paymentLabel;
+        document.getElementById('waveName').textContent=d.wave;
+        document.getElementById('kpayName').textContent=d.kpay;
+        document.getElementById('uploadLabel').textContent=d.uploadLabel;
+        document.getElementById('uploadText').textContent=d.uploadText;
+        document.getElementById('submitBtn').textContent='✅ '+d.submit;
         renderAllPackages();
         updateBadge();
     }
@@ -681,11 +918,12 @@
     // ============================================================
     const PACKAGES = {
         global: {
+            name: 'Global',
             bundles: [
-                { id: 'g_b1', name: 'Monthly Epic Bundle', price: 17300, img: 'https://files.catbox.moe/z2j5uo.png', sub: '💎275 + ⭐180' },
-                { id: 'g_b2', name: 'Weekly Elite Bundle', price: 3600, img: 'https://files.catbox.moe/i3uywg.png', sub: '💎55 + ⭐20' },
-                { id: 'g_b3', name: 'Weekly Pass', price: 6500, img: 'https://files.catbox.moe/zylral.png', sub: 'Weekly Pass' },
-                { id: 'g_b4', name: 'Twilight Pass', price: 34000, img: 'https://files.catbox.moe/jshuuy.png', sub: '🆕 New' }
+                { id: 'g_b1', name: 'Monthly Epic Bundle', price: 17300, img: 'https://files.catbox.moe/z2j5uo.png', sub: '🌍 Global Server' },
+                { id: 'g_b2', name: 'Weekly Elite Bundle', price: 3600, img: 'https://files.catbox.moe/i3uywg.png', sub: '🌍 Global Server' },
+                { id: 'g_b3', name: 'Weekly Pass', price: 6500, img: 'https://files.catbox.moe/zylral.png', sub: '🌍 Global Server' },
+                { id: 'g_b4', name: 'Twilight Pass', price: 34000, img: 'https://files.catbox.moe/jshuuy.png', sub: '🌍 Global Server' }
             ],
             double: [
                 { id: 'g_x1', name: '50+50', price: 3550, img: 'https://files.catbox.moe/z376wd.png', badge: true },
@@ -727,8 +965,9 @@
             ]
         },
         ban: {
+            name: 'Ban Server (Malay, Sin, Php)',
             bundles: [
-                { id: 'b_b1', name: 'Weekly Pass', price: 9400, img: 'https://files.catbox.moe/zylral.png', sub: 'Malay/Sin/Php' }
+                { id: 'b_b1', name: 'Weekly Pass', price: 9400, img: 'https://files.catbox.moe/zylral.png', sub: '🇲🇾🇸🇬🇵🇭 Ban Server' }
             ],
             double: [
                 { id: 'b_x1', name: '55', price: 4500, img: 'https://files.catbox.moe/z376wd.png', badge: true },
@@ -769,8 +1008,9 @@
             ]
         },
         indo: {
+            name: 'Indo Server',
             bundles: [
-                { id: 'i_b1', name: 'Weekly Pass', price: 8700, img: 'https://files.catbox.moe/zylral.png', sub: 'Indo Server' }
+                { id: 'i_b1', name: 'Weekly Pass', price: 8700, img: 'https://files.catbox.moe/zylral.png', sub: '🇮🇩 Indo Server' }
             ],
             diamonds: [
                 { id: 'i_d1', name: '5', price: 700, img: 'https://files.catbox.moe/xaxejk.png' },
@@ -791,8 +1031,9 @@
             ]
         },
         russia: {
+            name: 'Russia Server',
             bundles: [
-                { id: 'r_b1', name: 'Weekly Pass', price: 9750, img: 'https://files.catbox.moe/zylral.png', sub: 'Russia Server' }
+                { id: 'r_b1', name: 'Weekly Pass', price: 9750, img: 'https://files.catbox.moe/zylral.png', sub: '🇷🇺 Russia Server' }
             ],
             diamonds: [
                 { id: 'r_d1', name: '35', price: 3100, img: 'https://files.catbox.moe/xaxejk.png' },
@@ -809,9 +1050,9 @@
     };
 
     // ============================================================
-    // RENDER FUNCTIONS (အရင်ပုံစံအတိုင်း)
+    // RENDER FUNCTIONS
     // ============================================================
-    function renderItems(items, containerId) {
+    function renderItems(items, containerId, isDouble) {
         const d = LANG_DATA[currentLang];
         const container = document.getElementById(containerId);
         if (!container) return;
@@ -825,9 +1066,10 @@
             const isSelected = selectedPackage && selectedPackage.id === pkg.id;
             const subHtml = pkg.sub ? `<div class="sub">${pkg.sub}</div>` : '';
             const badgeHtml = pkg.badge ? `<span class="badge">${d.doubleBadge}</span>` : '';
+            const doubleClass = isDouble ? 'double-item' : '';
             
             return `
-                <div class="package-item ${isSelected?'selected':''}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})">
+                <div class="package-item ${isSelected?'selected':''} ${doubleClass}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})">
                     <div class="pkg-img-wrap">
                         <img src="${pkg.img}" alt="${pkg.name}" onerror="this.style.display='none'">
                     </div>
@@ -848,11 +1090,11 @@
 
     function renderAllPackages() {
         renderItems(PACKAGES.global.bundles, 'globalBundles');
-        renderItems(PACKAGES.global.double, 'globalDouble');
+        renderItems(PACKAGES.global.double, 'globalDouble', true);
         renderItems(PACKAGES.global.diamonds, 'globalDiamonds');
         
         renderItems(PACKAGES.ban.bundles, 'banBundles');
-        renderItems(PACKAGES.ban.double, 'banDouble');
+        renderItems(PACKAGES.ban.double, 'banDouble', true);
         renderItems(PACKAGES.ban.diamonds, 'banDiamonds');
         
         renderItems(PACKAGES.indo.bundles, 'indoBundles');
@@ -876,7 +1118,51 @@
             selectedPackage = { id, name, price };
             renderAllPackages();
         }
-        showToast('🛒 ' + name + ' selected!');
+        openCheckoutModal(name, price);
+    }
+
+    // ============================================================
+    // SEARCH FUNCTIONS
+    // ============================================================
+    function searchItems(query) {
+        const q = query.toLowerCase().trim();
+        const items = document.querySelectorAll('.package-item');
+        const clearBtn = document.getElementById('clearSearch');
+        let found = false;
+        
+        items.forEach(item => {
+            const name = item.querySelector('.name')?.textContent?.toLowerCase() || '';
+            if (name.includes(q) || q === '') {
+                item.classList.remove('hidden');
+                found = true;
+            } else {
+                item.classList.add('hidden');
+            }
+        });
+        
+        if (q.length > 0) clearBtn.classList.add('show');
+        else clearBtn.classList.remove('show');
+    }
+
+    function clearItemSearch() {
+        document.getElementById('itemSearch').value = '';
+        searchItems('');
+        document.getElementById('clearSearch').classList.remove('show');
+        document.getElementById('itemSearch').focus();
+    }
+
+    function filterServers(query) {
+        const q = query.toLowerCase().trim();
+        const opts = document.querySelectorAll('.server-selector .opt');
+        
+        opts.forEach(opt => {
+            const text = opt.textContent.toLowerCase();
+            if (text.includes(q) || q === '') {
+                opt.style.display = '';
+            } else {
+                opt.style.display = 'none';
+            }
+        });
     }
 
     // ============================================================
@@ -896,7 +1182,274 @@
         
         selectedPackage = null;
         renderAllPackages();
+        
+        // Clear item search when switching server
+        document.getElementById('itemSearch').value = '';
+        searchItems('');
     }
+
+    // ============================================================
+    // MODAL FUNCTIONS
+    // ============================================================
+    function openCheckoutModal(name, price) {
+        document.getElementById('modalPackage').textContent = name;
+        document.getElementById('modalPrice').textContent = price.toLocaleString() + ' ' + getText('currency');
+        document.getElementById('checkoutModal').classList.add('show');
+        document.getElementById('gameId').value = '';
+        document.getElementById('serverId').value = '';
+        document.getElementById('fileInput').value = '';
+        document.getElementById('fileUpload').classList.remove('has-file');
+        document.getElementById('fileName').classList.remove('show');
+        document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+        document.getElementById('waveInfo').classList.remove('show');
+        document.getElementById('kpayInfo').classList.remove('show');
+        selectedPayment = null;
+        document.getElementById('submitBtn').disabled = true;
+        document.getElementById('submitBtn').className = 'btn-primary';
+        document.getElementById('submitBtn').textContent = '✅ ' + getText('submit');
+        checkForm();
+    }
+
+    function closeCheckoutModal() {
+        if (isSubmitting) return;
+        document.getElementById('checkoutModal').classList.remove('show');
+    }
+
+    function isNumberOnly(value) { return /^[0-9]+$/.test(value) }
+
+    function checkForm() {
+        const gameId = document.getElementById('gameId').value.trim();
+        const serverId = document.getElementById('serverId').value.trim();
+        const hasFile = document.getElementById('fileInput').files && document.getElementById('fileInput').files[0];
+        const btn = document.getElementById('submitBtn');
+        
+        const isGameIdValid = gameId === '' || isNumberOnly(gameId);
+        const isServerIdValid = serverId === '' || isNumberOnly(serverId);
+        
+        if (gameId && serverId && selectedPayment && hasFile && isGameIdValid && isServerIdValid && !isSubmitting) {
+            btn.disabled = false;
+            btn.className = 'btn-primary enabled';
+        } else {
+            btn.disabled = true;
+            btn.className = 'btn-primary';
+        }
+    }
+
+    document.getElementById('gameId').addEventListener('input', function() {
+        const val = this.value.trim();
+        if (val && !isNumberOnly(val)) {
+            this.style.borderColor = 'var(--red)';
+            document.querySelector('#gameIdHint').style.color = 'var(--red)';
+            document.querySelector('#gameIdHint').textContent = '⚠️ ' + getText('enterNumberOnly');
+        } else {
+            this.style.borderColor = 'var(--border-color)';
+            document.querySelector('#gameIdHint').style.color = 'var(--text-secondary)';
+            document.querySelector('#gameIdHint').textContent = getText('gameIdHint');
+        }
+        checkForm();
+    });
+
+    document.getElementById('serverId').addEventListener('input', function() {
+        const val = this.value.trim();
+        if (val && !isNumberOnly(val)) {
+            this.style.borderColor = 'var(--red)';
+            document.querySelector('#serverIdHint').style.color = 'var(--red)';
+            document.querySelector('#serverIdHint').textContent = '⚠️ ' + getText('enterNumberOnly');
+        } else {
+            this.style.borderColor = 'var(--border-color)';
+            document.querySelector('#serverIdHint').style.color = 'var(--text-secondary)';
+            document.querySelector('#serverIdHint').textContent = getText('serverIdHint');
+        }
+        checkForm();
+    });
+
+    document.querySelectorAll('.payment-option').forEach(el => {
+        el.addEventListener('click', function() {
+            document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedPayment = this.dataset.payment;
+            document.getElementById('waveInfo').classList.remove('show');
+            document.getElementById('kpayInfo').classList.remove('show');
+            if (selectedPayment === 'wave') document.getElementById('waveInfo').classList.add('show');
+            else if (selectedPayment === 'kpay') document.getElementById('kpayInfo').classList.add('show');
+            checkForm();
+        });
+    });
+
+    document.getElementById('fileInput').addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+            document.getElementById('fileUpload').classList.add('has-file');
+            document.getElementById('fileName').textContent = '✅ ' + this.files[0].name;
+            document.getElementById('fileName').classList.add('show');
+            checkForm();
+        }
+    });
+
+    function copyNumber(number, btn) {
+        const d = LANG_DATA[currentLang] || {};
+        navigator.clipboard.writeText(number).then(() => {
+            btn.textContent = d.copied || '✅ Copied!';
+            setTimeout(() => { btn.textContent = d.copy || 'Copy'; }, 2500);
+        }).catch(() => {
+            const input = document.createElement('input');
+            input.value = number;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+            btn.textContent = d.copied || '✅ Copied!';
+            setTimeout(() => { btn.textContent = d.copy || 'Copy'; }, 2500);
+        });
+    }
+
+    // ============================================================
+    // SEND TO TELEGRAM
+    // ============================================================
+    async function sendOrderToTelegram(orderData) {
+        const message = `🛒 **New Order!**
+━━━━━━━━━━━━━━━━━
+📦 **Package:** ${orderData.package}
+💰 **Price:** ${orderData.price}
+━━━━━━━━━━━━━━━━━
+🎮 **Game ID:** ${orderData.gameId}
+🌐 **Server ID:** ${orderData.serverId}
+━━━━━━━━━━━━━━━━━
+📋 **Order ID:** ${orderData.orderId}
+🕐 **Time:** ${orderData.time}
+━━━━━━━━━━━━━━━━━
+👤 **User:** ${orderData.user}
+💳 **Payment:** ${orderData.payment}
+━━━━━━━━━━━━━━━━━
+⏳ *Status: Pending*`;
+
+        try {
+            const textResponse = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CHAT_ID,
+                    text: message,
+                    parse_mode: 'Markdown',
+                    reply_markup: {
+                        inline_keyboard: [[
+                            { text: '✅ Done', callback_data: `done_${orderData.orderId}` },
+                            { text: '❌ Failed', callback_data: `fail_${orderData.orderId}` }
+                        ]]
+                    }
+                })
+            });
+
+            if (!textResponse.ok) return false;
+
+            if (orderData.photo) {
+                try {
+                    const photoBlob = await fetch(orderData.photo).then(res => res.blob());
+                    const formData = new FormData();
+                    formData.append('chat_id', TELEGRAM_CHAT_ID);
+                    formData.append('photo', photoBlob, 'payment_slip.jpg');
+                    formData.append('caption', `📸 Payment Slip\nOrder: ${orderData.orderId}`);
+                    await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`, {
+                        method: 'POST',
+                        body: formData
+                    });
+                } catch(e) { console.warn('Failed to send photo:', e); }
+            }
+            return true;
+        } catch(error) { console.error('Telegram error:', error); return false; }
+    }
+
+    // ============================================================
+    // SUBMIT ORDER
+    // ============================================================
+    document.getElementById('submitBtn').addEventListener('click', async function() {
+        if (isSubmitting) return;
+        const d = LANG_DATA[currentLang] || {};
+        const gameId = document.getElementById('gameId').value.trim();
+        const serverId = document.getElementById('serverId').value.trim();
+        const hasFile = document.getElementById('fileInput').files && document.getElementById('fileInput').files[0];
+
+        if (!gameId) { showToast(d.enterGameId, 'error'); return; }
+        if (!isNumberOnly(gameId)) { showToast(d.enterNumberOnly, 'error'); return; }
+        if (!serverId) { showToast(d.enterServerId, 'error'); return; }
+        if (!isNumberOnly(serverId)) { showToast(d.enterNumberOnly, 'error'); return; }
+        if (!selectedPayment) { showToast(d.selectPayment, 'error'); return; }
+        if (!hasFile) { showToast(d.uploadSlip, 'error'); return; }
+
+        isSubmitting = true;
+        this.disabled = true;
+        this.className = 'btn-primary loading';
+        this.textContent = d.submitting || '⏳ အော်ဒါတင်နေသည်...';
+
+        const orderId = 'ORD-' + Date.now().toString().slice(-6);
+        const pkg = document.getElementById('modalPackage').textContent;
+        const price = document.getElementById('modalPrice').textContent;
+        const paymentName = selectedPayment === 'wave' ? 'Wave Pay' : 'KBZ Pay';
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        const userName = user ? user.username : 'Guest';
+        const time = new Date().toLocaleString();
+
+        let photoBase64 = null;
+        if (hasFile) {
+            try {
+                photoBase64 = await new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onload = (e) => resolve(e.target.result);
+                    reader.readAsDataURL(hasFile);
+                });
+            } catch(e) { console.warn('Failed to read file:', e); }
+        }
+
+        const orderData = { orderId, package: pkg, price, gameId, serverId, payment: paymentName, user: userName, time, photo: photoBase64 };
+
+        try {
+            const telegramSuccess = await sendOrderToTelegram(orderData);
+
+            const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+            orders.unshift({
+                id: orderId,
+                userId: user ? user.username : 'guest',
+                package: pkg,
+                price: price,
+                gameId: gameId,
+                serverId: serverId,
+                payment: paymentName,
+                date: new Date().toISOString(),
+                status: 'pending'
+            });
+            localStorage.setItem('orderHistory', JSON.stringify(orders));
+
+            const notifications = JSON.parse(localStorage.getItem('notifications') || '[]');
+            notifications.unshift({
+                id: 'noti_' + Date.now(),
+                orderId: orderId,
+                package: pkg,
+                price: price,
+                time: new Date().toLocaleString(),
+                status: 'pending',
+                message: `🛒 အော်ဒါအသစ် #${orderId}\n📦 ${pkg}\n💰 ${price}\n⏳ ဆောင်ရွက်နေဆဲ`
+            });
+            localStorage.setItem('notifications', JSON.stringify(notifications));
+            updateBadge();
+            localStorage.setItem('newOrderNotification', JSON.stringify({ show: true, orderId: orderId, count: getPendingCount() }));
+            window.dispatchEvent(new Event('storage'));
+
+            if (telegramSuccess) {
+                showToast(d.orderSuccess || '✅ Order successful!', 'success');
+            } else {
+                showToast('⚠️ အော်ဒါသိမ်းပြီးသော်လည်း Telegram သို့မပို့နိုင်ပါ။', 'error');
+            }
+            closeCheckoutModal();
+            setTimeout(() => { window.location.href = 'profile.html'; }, 1500);
+        } catch (error) {
+            console.error('Order error:', error);
+            showToast(d.orderFail || '❌ Order failed. Please try again.', 'error');
+        } finally {
+            this.disabled = false;
+            this.className = 'btn-primary enabled';
+            this.textContent = '✅ ' + d.submit;
+            isSubmitting = false;
+        }
+    });
 
     // ============================================================
     // EVENT LISTENERS
@@ -922,6 +1475,14 @@
             void icon.offsetWidth;
             icon.style.animation = 'selectBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
         });
+    });
+
+    document.getElementById('checkoutModal').addEventListener('click', function(e) {
+        if (e.target === this) closeCheckoutModal();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeCheckoutModal();
     });
 
     // ============================================================
