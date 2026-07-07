@@ -3,95 +3,470 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🌍 MLBB Global</title>
+    <title>⚡ MLBB Packages</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
-        :root{--bg-primary:#f0f2f5;--bg-secondary:#ffffff;--bg-card:rgba(255,255,255,0.6);--bg-input:rgba(255,255,255,0.7);--text-primary:#1a1a2e;--text-secondary:#6b7280;--border-color:rgba(0,0,0,0.06);--shadow:rgba(0,0,0,0.06);--shadow-hover:rgba(0,0,0,0.1);--cyan:#00b4d8;--cyan-glow:rgba(0,180,216,0.2);--purple:#7c3aed;--violet:#8b5cf6;--pink:#ec4899;--gold:#f5a623;--gold-glow:rgba(245,166,35,0.25);--orange:#ff6a00;--red:#ff0044;--green:#00c853;--green-glow:rgba(0,200,83,0.2)}
-        .night-mode{--bg-primary:#0d0d1a;--bg-secondary:#1a1a2e;--bg-card:rgba(30,30,60,0.5);--bg-input:rgba(40,40,80,0.5);--text-primary:#e8eaf0;--text-secondary:#a8a8c8;--border-color:rgba(255,255,255,0.06);--shadow:rgba(0,0,0,0.3);--shadow-hover:rgba(0,0,0,0.4);--gold:#ffd700;--gold-glow:rgba(255,215,0,0.2)}
-        body{background:var(--bg-primary);color:var(--text-primary);min-height:100vh;padding:16px;padding-bottom:90px;transition:all 0.4s ease}
+        
+        :root {
+            --bg-primary: #f0f2f5;
+            --bg-secondary: #ffffff;
+            --bg-card: rgba(255,255,255,0.6);
+            --bg-input: rgba(255,255,255,0.7);
+            --text-primary: #1a1a2e;
+            --text-secondary: #6b7280;
+            --border-color: rgba(0,0,0,0.06);
+            --shadow: rgba(0,0,0,0.06);
+            --shadow-hover: rgba(0,0,0,0.1);
+            --cyan: #00b4d8;
+            --cyan-glow: rgba(0,180,216,0.2);
+            --purple: #7c3aed;
+            --violet: #8b5cf6;
+            --pink: #ec4899;
+            --gold: #f5a623;
+            --gold-glow: rgba(245,166,35,0.25);
+            --orange: #ff6a00;
+            --red: #ff0044;
+            --green: #00c853;
+            --green-glow: rgba(0,200,83,0.2);
+        }
+
+        .night-mode {
+            --bg-primary: #0d0d1a;
+            --bg-secondary: #1a1a2e;
+            --bg-card: rgba(30,30,60,0.5);
+            --bg-input: rgba(40,40,80,0.5);
+            --text-primary: #e8eaf0;
+            --text-secondary: #a8a8c8;
+            --border-color: rgba(255,255,255,0.06);
+            --shadow: rgba(0,0,0,0.3);
+            --shadow-hover: rgba(0,0,0,0.4);
+            --gold: #ffd700;
+            --gold-glow: rgba(255,215,0,0.2);
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 16px;
+            padding-bottom: 90px;
+            transition: all 0.4s ease;
+        }
+
         .container{max-width:480px;margin:0 auto}
+
         .header{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0 14px;flex-wrap:wrap;gap:6px}
         .header .left{display:flex;flex-direction:column;gap:8px}
         .header .left .logo-wrap{display:flex;align-items:center;gap:10px}
         .header .left .logo-wrap img{height:38px;width:auto;border-radius:10px}
         .header .left .logo-wrap .text-group{display:flex;flex-direction:column;line-height:1.1}
-        .header .left .logo-wrap .text-group .premium{font-size:1rem;font-weight:800;background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:300% 300%;animation:colorShift 2s ease-in-out infinite}
-        @keyframes colorShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+        .header .left .logo-wrap .text-group .premium{
+            font-size:1rem;
+            font-weight:800;
+            background:linear-gradient(135deg, var(--cyan), var(--purple), var(--violet), var(--pink));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            background-size:300% 300%;
+            animation:colorShift 2s ease-in-out infinite
+        }
+        @keyframes colorShift {
+            0%{background-position:0% 50%}
+            50%{background-position:100% 50%}
+            100%{background-position:0% 50%}
+        }
         .header .left .logo-wrap .text-group .shop{font-size:0.55rem;font-weight:600;color:var(--text-secondary);opacity:0.6;margin-top:-2px}
+        
         .header .right .top{display:flex;gap:6px;align-items:center}
-        .header .right .top .lang-switcher{display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:10px;border:1px solid var(--border-color);backdrop-filter:blur(20px)}
-        .header .right .top .lang-switcher .lang-btn{background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;text-transform:uppercase;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)}
+        .header .right .top .lang-switcher{
+            display:flex;
+            gap:2px;
+            background:var(--bg-card);
+            padding:3px;
+            border-radius:10px;
+            border:1px solid var(--border-color);
+            backdrop-filter:blur(20px)
+        }
+        .header .right .top .lang-switcher .lang-btn{
+            background:transparent;
+            border:none;
+            color:var(--text-secondary);
+            padding:3px 10px;
+            border-radius:6px;
+            font-size:0.5rem;
+            font-weight:700;
+            cursor:pointer;
+            text-transform:uppercase;
+            transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)
+        }
         .header .right .top .lang-switcher .lang-btn:active{transform:scale(0.92)!important}
-        .header .right .top .lang-switcher .lang-btn.active{background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;box-shadow:0 4px 15px rgba(0,180,216,0.3)}
-        .header .right .top .night-toggle{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;color:var(--text-secondary);backdrop-filter:blur(20px);transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)}
+        .header .right .top .lang-switcher .lang-btn.active{
+            background:linear-gradient(135deg,var(--cyan),var(--purple));
+            color:#fff;
+            box-shadow:0 4px 15px rgba(0,180,216,0.3)
+        }
+        .header .right .top .night-toggle{
+            background:var(--bg-card);
+            border:1px solid var(--border-color);
+            border-radius:10px;
+            width:34px;
+            height:34px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            cursor:pointer;
+            font-size:1.1rem;
+            color:var(--text-secondary);
+            backdrop-filter:blur(20px);
+            transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)
+        }
         .header .right .top .night-toggle:active{transform:scale(0.92)!important}
         .night-mode .header .right .top .night-toggle .fa-sun{color:#ffd700}
-        .header .right .top .noti-btn{background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--text-secondary);position:relative;text-decoration:none;backdrop-filter:blur(20px);transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)}
+        .header .right .top .noti-btn{
+            background:var(--bg-card);
+            border:1px solid var(--border-color);
+            border-radius:10px;
+            width:34px;
+            height:34px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            cursor:pointer;
+            font-size:1rem;
+            color:var(--text-secondary);
+            position:relative;
+            text-decoration:none;
+            backdrop-filter:blur(20px);
+            transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)
+        }
         .header .right .top .noti-btn:active{transform:scale(0.92)!important}
-        .header .right .top .noti-btn .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none}
+        .header .right .top .noti-btn .badge{
+            position:absolute;
+            top:-4px;
+            right:-4px;
+            background:var(--red);
+            color:#fff;
+            font-size:0.4rem;
+            font-weight:700;
+            padding:1px 6px;
+            border-radius:50%;
+            display:none
+        }
+
         .page-header{margin-bottom:16px;animation:slideUp 0.6s ease}
         .page-header h1{font-size:1.3rem;font-weight:800;color:var(--text-primary)}
-        .page-header h1 span{background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:300% 300%;animation:gradientMove 2s ease-in-out infinite}
-        @keyframes gradientMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+        .page-header h1 span{
+            background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet),var(--pink));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            background-size:300% 300%;
+            animation:gradientMove 2s ease-in-out infinite
+        }
+        @keyframes gradientMove{
+            0%{background-position:0% 50%}
+            50%{background-position:100% 50%}
+            100%{background-position:0% 50%}
+        }
         .page-header h1 i{color:var(--cyan);margin-right:6px}
         .page-header p{color:var(--text-secondary);font-size:0.7rem;margin-top:2px}
-        .section-title{font-size:.65rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;display:flex;align-items:center;gap:10px;opacity:.5}
+
+        .section-title{
+            font-size:.65rem;
+            font-weight:700;
+            color:var(--text-secondary);
+            text-transform:uppercase;
+            letter-spacing:2px;
+            margin-bottom:12px;
+            display:flex;
+            align-items:center;
+            gap:10px;
+            opacity:.5
+        }
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
-        .section-title i{background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:300% 300%;animation:iconGradient 1.5s ease-in-out infinite;font-size:0.8rem}
-        @keyframes iconGradient{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+        .section-title i{
+            background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet),var(--pink));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            background-size:300% 300%;
+            animation:iconGradient 1.5s ease-in-out infinite;
+            font-size:0.8rem
+        }
+        @keyframes iconGradient{
+            0%{background-position:0% 50%}
+            50%{background-position:100% 50%}
+            100%{background-position:0% 50%}
+        }
         .section-title span{color:var(--text-secondary);opacity:0.5}
-        .bottom-nav{position:fixed;bottom:16px;left:16px;right:16px;width:auto;max-width:480px;margin:0 auto;background:var(--bg-card);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--border-color);border-radius:18px;display:flex;justify-content:space-around;padding:8px 4px;z-index:100;box-shadow:0 4px 30px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.08);animation:navSlideUp 0.5s cubic-bezier(0.34,1.56,0.64,1)}
-        @keyframes navSlideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-        .bottom-nav::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,0.15) 0%, transparent 50%);pointer-events:none;z-index:0}
-        .night-mode .bottom-nav::before{background:linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 50%)}
-        .bottom-nav .nav-item{text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);padding:6px 12px;border-radius:12px;min-width:48px;border:1px solid transparent;display:flex;flex-direction:column;align-items:center;gap:1px;animation:floatIcon 3s ease-in-out infinite;position:relative;z-index:1}
+
+        /* ===== SERVER SELECTOR ===== */
+        .server-selector{
+            background:var(--bg-card);
+            backdrop-filter:blur(20px);
+            border:1px solid var(--border-color);
+            border-radius:14px;
+            padding:10px 14px;
+            display:flex;
+            align-items:center;
+            gap:12px;
+            margin-bottom:16px;
+            box-shadow:0 4px 20px var(--shadow);
+            overflow-x:auto;
+            flex-wrap:nowrap
+        }
+        .server-selector .label{
+            font-size:0.55rem;
+            color:var(--text-secondary);
+            font-weight:600;
+            text-transform:uppercase;
+            letter-spacing:0.5px;
+            flex-shrink:0
+        }
+        .server-selector .options{
+            display:flex;
+            gap:6px;
+            flex-wrap:nowrap;
+            overflow-x:auto;
+            padding:2px 0
+        }
+        .server-selector .options::-webkit-scrollbar{height:2px}
+        .server-selector .options::-webkit-scrollbar-thumb{background:var(--cyan);border-radius:10px}
+        .server-selector .options .opt{
+            background:var(--bg-input);
+            border:1px solid var(--border-color);
+            color:var(--text-secondary);
+            padding:4px 14px;
+            border-radius:8px;
+            font-size:0.55rem;
+            font-weight:600;
+            cursor:pointer;
+            transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            white-space:nowrap;
+            flex-shrink:0
+        }
+        .server-selector .options .opt:active{transform:scale(0.92)!important}
+        .server-selector .options .opt.active{
+            background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));
+            color:#fff;
+            border-color:var(--cyan);
+            box-shadow:0 0 20px var(--cyan-glow)
+        }
+        .server-selector .options .opt .flag{margin-right:4px}
+
+        /* ===== PACKAGE GRID ===== */
+        .package-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px}
+        .package-item{
+            background:var(--bg-card);
+            backdrop-filter:blur(20px);
+            border:1px solid var(--border-color);
+            border-radius:14px;
+            padding:10px 12px;
+            cursor:pointer;
+            transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow:0 4px 20px var(--shadow);
+            display:flex;
+            align-items:center;
+            gap:12px;
+            min-height:70px
+        }
+        .package-item:active{transform:scale(0.96)!important}
+        .package-item:hover{transform:translateY(-3px);box-shadow:0 8px 30px var(--shadow-hover)}
+        .package-item.selected{border:2px solid var(--gold);box-shadow:0 0 30px var(--gold-glow)}
+        
+        .package-item .pkg-img-wrap{
+            width:50px;
+            height:50px;
+            flex-shrink:0;
+            border-radius:10px;
+            overflow:hidden;
+            background:transparent;
+            border:none
+        }
+        .package-item .pkg-img-wrap img{
+            width:100%;
+            height:100%;
+            object-fit:contain;
+            display:block;
+            animation:floatPkg 3s ease-in-out infinite
+        }
+        @keyframes floatPkg{
+            0%,100%{transform:translateY(0)}
+            50%{transform:translateY(-5px)}
+        }
+        .package-item:hover .pkg-img-wrap img{animation:floatPkg 1.5s ease-in-out infinite}
+        
+        .package-item .right{
+            flex:1;
+            min-width:0;
+            display:flex;
+            flex-direction:column;
+            align-items:flex-start;
+            gap:2px
+        }
+        .package-item .right .name{
+            font-size:0.8rem;
+            font-weight:800;
+            background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet),var(--pink));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            background-size:300% 300%;
+            animation:gradientMove 1.5s ease-in-out infinite
+        }
+        .package-item .right .price{
+            font-size:0.6rem;
+            font-weight:600;
+            color:var(--text-secondary);
+            opacity:0.7
+        }
+        .package-item .right .badge{
+            display:inline-block;
+            font-size:0.35rem;
+            color:var(--gold);
+            background:rgba(245,166,35,0.1);
+            padding:1px 8px;
+            border-radius:8px;
+            border:1px solid rgba(245,166,35,0.08);
+            font-weight:600;
+            margin-top:1px
+        }
+        .package-item .right .action-btn{
+            background:var(--bg-input);
+            border:1px solid var(--border-color);
+            color:var(--text-secondary);
+            padding:4px 14px;
+            border-radius:8px;
+            font-size:0.55rem;
+            font-weight:600;
+            cursor:pointer;
+            transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            min-width:50px;
+            text-align:center;
+            margin-top:2px
+        }
+        .package-item .right .action-btn:active{transform:scale(0.88)!important}
+        .package-item .right .action-btn.topup{
+            background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));
+            color:#fff;
+            border-color:var(--cyan);
+            box-shadow:0 4px 15px var(--cyan-glow)
+        }
+
+        .bottom-nav {
+            position:fixed;
+            bottom:16px;
+            left:16px;
+            right:16px;
+            width:auto;
+            max-width:480px;
+            margin:0 auto;
+            background: var(--bg-card);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border-color);
+            border-radius:18px;
+            display:flex;
+            justify-content:space-around;
+            padding:8px 4px;
+            z-index:100;
+            box-shadow: 0 4px 30px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.08);
+            animation:navSlideUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)
+        }
+        @keyframes navSlideUp {
+            from{opacity:0;transform:translateY(30px)}
+            to{opacity:1;transform:translateY(0)}
+        }
+        .bottom-nav::before {
+            content:'';
+            position:absolute;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            border-radius:18px;
+            background:linear-gradient(180deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+            pointer-events:none;
+            z-index:0
+        }
+        .night-mode .bottom-nav::before {
+            background:linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 50%)
+        }
+        .bottom-nav .nav-item {
+            text-align:center;
+            cursor:pointer;
+            text-decoration:none;
+            color:var(--text-secondary);
+            transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            padding:6px 12px;
+            border-radius:12px;
+            min-width:48px;
+            border:1px solid transparent;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            gap:1px;
+            animation:floatIcon 3s ease-in-out infinite;
+            position:relative;
+            z-index:1
+        }
         .bottom-nav .nav-item:nth-child(2){animation-delay:0.2s}
         .bottom-nav .nav-item:nth-child(3){animation-delay:0.4s}
         .bottom-nav .nav-item:nth-child(4){animation-delay:0.6s}
         .bottom-nav .nav-item:active{transform:scale(0.88)!important;animation:none}
         .bottom-nav .nav-item .icon{font-size:1.2rem;display:block}
         .bottom-nav .nav-item .label{font-size:0.4rem;letter-spacing:0.5px;opacity:0.5;font-weight:400}
-        .bottom-nav .nav-item.active{background:rgba(0,180,216,0.08);border:1px solid rgba(0,180,216,0.12);box-shadow:0 0 30px rgba(0,180,216,0.05)}
-        .bottom-nav .nav-item.active .icon{transform:translateY(-2px) scale(1.1);background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-        .bottom-nav .nav-item.active .label{background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:1;font-weight:600}
-        @keyframes floatIcon{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+        .bottom-nav .nav-item.active{
+            background:rgba(0,180,216,0.08);
+            border:1px solid rgba(0,180,216,0.12);
+            box-shadow:0 0 30px rgba(0,180,216,0.05)
+        }
+        .bottom-nav .nav-item.active .icon{
+            transform:translateY(-2px) scale(1.1);
+            background:linear-gradient(135deg,var(--cyan),var(--purple));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent
+        }
+        .bottom-nav .nav-item.active .label{
+            background:linear-gradient(135deg,var(--cyan),var(--purple));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            opacity:1;
+            font-weight:600
+        }
+
         .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.3}
-        .toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-secondary);padding:10px 20px;border-radius:12px;border:1px solid var(--border-color);color:var(--cyan);font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;box-shadow:0 4px 20px var(--shadow)}
-        .toast.show{display:block;animation:toastPop 0.4s cubic-bezier(0.34,1.56,0.64,1)}
+
+        .toast{
+            position:fixed;
+            bottom:85px;
+            left:50%;
+            transform:translateX(-50%);
+            background:var(--bg-secondary);
+            padding:10px 20px;
+            border-radius:12px;
+            border:1px solid var(--border-color);
+            color:var(--cyan);
+            font-weight:600;
+            font-size:0.75rem;
+            display:none;
+            z-index:200;
+            text-align:center;
+            max-width:90%;
+            box-shadow:0 4px 20px var(--shadow)
+        }
+        .toast.show{display:block;animation:toastPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
         @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes floatIcon{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
         .glass-box{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:16px}
-        .server-selector{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:14px;padding:10px 14px;display:flex;align-items:center;gap:12px;margin-bottom:16px;box-shadow:0 4px 20px var(--shadow)}
-        .server-selector .label{font-size:0.55rem;color:var(--text-secondary);font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
-        .server-selector .options{display:flex;gap:6px;flex-wrap:wrap}
-        .server-selector .options .opt{background:var(--bg-input);border:1px solid var(--border-color);color:var(--text-secondary);padding:4px 14px;border-radius:8px;font-size:0.55rem;font-weight:600;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)}
-        .server-selector .options .opt:active{transform:scale(0.92)!important}
-        .server-selector .options .opt.active{background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));color:#fff;border-color:var(--cyan);box-shadow:0 0 20px var(--cyan-glow)}
-        /* ===== 3 Column Grid ===== */
-        .package-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
-        .package-item{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:14px;padding:12px 8px;text-align:center;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 20px var(--shadow);position:relative;overflow:hidden}
-        .package-item:active{transform:scale(0.94)!important}
-        .package-item:hover{transform:translateY(-4px);border-color:rgba(245,166,35,0.3)}
-        .package-item.selected{border-color:var(--gold);background:rgba(245,166,35,0.06);box-shadow:0 0 12px var(--gold-glow)}
-        .package-item.selected .price{color:var(--gold)}
-        .package-item .pkg-img{width:100%;height:auto;border-radius:8px;display:block;margin-bottom:4px;transition:all 0.3s ease;animation:floatIcon 3s ease-in-out infinite}
-        .package-item:hover .pkg-img{transform:scale(1.04)}
-        .package-item.selected .pkg-img{box-shadow:0 0 8px var(--gold-glow)}
-        .package-item .info{display:flex;flex-direction:column;gap:1px;position:relative;z-index:1}
-        .package-item .info .name{font-size:0.65rem;font-weight:700;color:var(--text-primary)}
-        .package-item .info .sub{font-size:0.4rem;color:var(--text-secondary);line-height:1.2}
-        .package-item .right{display:flex;flex-direction:column;align-items:center;gap:4px;position:relative;z-index:1;margin-top:4px}
-        .package-item .right .price{font-size:0.65rem;font-weight:700;color:var(--text-secondary);transition:all 0.4s ease}
-        .package-item .right .btn-label{font-size:0.45rem;color:var(--text-secondary);font-weight:500;opacity:0.6;letter-spacing:0.3px}
-        .package-item .right .buy-btn{display:none;background:linear-gradient(135deg,var(--gold),var(--orange));color:#fff;border:none;padding:4px 12px;border-radius:8px;font-size:0.45rem;font-weight:700;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 4px 15px var(--gold-glow)}
-        .package-item .right .buy-btn:active{transform:scale(0.88)!important}
-        .package-item.selected .right .buy-btn{display:block}
-        .package-item.selected .right .btn-label{display:none}
+        
+        /* ===== SECTION HIDE/SHOW ===== */
+        .section-wrapper{display:block}
+        .section-wrapper.hidden{display:none}
     </style>
 </head>
 <body>
 <div class="container">
+    <!-- HEADER -->
     <div class="header">
         <div class="left">
             <div class="logo-wrap">
@@ -114,30 +489,69 @@
         </div>
     </div>
 
+    <!-- PAGE HEADER -->
     <div class="page-header">
-        <h1><i class="fas fa-globe"></i> <span id="pageTitle">MLBB Global</span></h1>
+        <h1><i class="fas fa-gem"></i> <span id="pageTitle">MLBB Packages</span></h1>
         <p id="pageSub">ပက်ကေ့ချ်တစ်ခုရွေးပြီး ဝယ်ယူပါ</p>
     </div>
 
+    <!-- SERVER SELECTOR -->
     <div class="server-selector">
         <span class="label"><i class="fas fa-server"></i> Server</span>
-        <div class="options">
-            <span class="opt active">Global</span>
+        <div class="options" id="serverOptions">
+            <span class="opt active" data-server="global" onclick="switchServer('global')"><span class="flag">🌍</span>Global</span>
+            <span class="opt" data-server="malay" onclick="switchServer('malay')"><span class="flag">🇲🇾🇸🇬🇵🇭</span>Malay/Sin/Php</span>
+            <span class="opt" data-server="indo" onclick="switchServer('indo')"><span class="flag">🇮🇩</span>Indo</span>
+            <span class="opt" data-server="russia" onclick="switchServer('russia')"><span class="flag">🇷🇺</span>Russia</span>
         </div>
     </div>
 
-    <div class="section-title"><i class="fas fa-gift"></i> <span id="bundlesTitle">ပက်ကေ့ချ်များ</span></div>
-    <div class="package-grid" id="bundlesList"></div>
-    
-    <div class="section-title"><i class="fas fa-star"></i> <span id="doubleTitle">နှစ်ဆဖြည့်မှု</span></div>
-    <div class="package-grid" id="doubleList"></div>
-    
-    <div class="section-title"><i class="fas fa-diamond"></i> <span id="diamondsTitle">စိန်များ</span></div>
-    <div class="package-grid" id="diamondsList"></div>
+    <!-- ===== GLOBAL SERVER ===== -->
+    <div class="section-wrapper" id="globalSection">
+        <div class="section-title"><i class="fas fa-gift"></i> <span id="bundlesTitle">ပက်ကေ့ချ်များ</span></div>
+        <div class="package-grid" id="globalBundles"></div>
+        
+        <div class="section-title"><i class="fas fa-star"></i> <span id="doubleTitle">နှစ်ဆဖြည့်မှု</span></div>
+        <div class="package-grid" id="globalDouble"></div>
+        
+        <div class="section-title"><i class="fas fa-diamond"></i> <span id="diamondsTitle">စိန်များ</span></div>
+        <div class="package-grid" id="globalDiamonds"></div>
+    </div>
+
+    <!-- ===== MALAY/SIN/PHP SERVER ===== -->
+    <div class="section-wrapper hidden" id="malaySection">
+        <div class="section-title"><i class="fas fa-gift"></i> <span id="malayBundlesTitle">ပက်ကေ့ချ်များ</span></div>
+        <div class="package-grid" id="malayBundles"></div>
+        
+        <div class="section-title"><i class="fas fa-star"></i> <span id="malayDoubleTitle">နှစ်ဆဖြည့်မှု</span></div>
+        <div class="package-grid" id="malayDouble"></div>
+        
+        <div class="section-title"><i class="fas fa-diamond"></i> <span id="malayDiamondsTitle">စိန်များ</span></div>
+        <div class="package-grid" id="malayDiamonds"></div>
+    </div>
+
+    <!-- ===== INDO SERVER ===== -->
+    <div class="section-wrapper hidden" id="indoSektion">
+        <div class="section-title"><i class="fas fa-gift"></i> <span id="indoBundlesTitle">ပက်ကေ့ချ်များ</span></div>
+        <div class="package-grid" id="indoBundles"></div>
+        
+        <div class="section-title"><i class="fas fa-diamond"></i> <span id="indoDiamondsTitle">စိန်များ</span></div>
+        <div class="package-grid" id="indoDiamonds"></div>
+    </div>
+
+    <!-- ===== RUSSIA SERVER ===== -->
+    <div class="section-wrapper hidden" id="russiaSection">
+        <div class="section-title"><i class="fas fa-gift"></i> <span id="russiaBundlesTitle">ပက်ကေ့ချ်များ</span></div>
+        <div class="package-grid" id="russiaBundles"></div>
+        
+        <div class="section-title"><i class="fas fa-diamond"></i> <span id="russiaDiamondsTitle">စိန်များ</span></div>
+        <div class="package-grid" id="russiaDiamonds"></div>
+    </div>
 
     <div class="footer-text">&copy; 2026 Premium Game Shop</div>
 </div>
 
+<!-- BOTTOM NAV -->
 <div class="bottom-nav">
     <a href="index.html" class="nav-item"><span class="icon"><i class="fas fa-home"></i></span><span class="label" id="navHome">ပင်မ</span></a>
     <a href="shop.html" class="nav-item"><span class="icon"><i class="fas fa-shopping-bag"></i></span><span class="label" id="navShop">ဆိုင်</span></a>
@@ -148,28 +562,348 @@
 <div class="toast" id="toast"></div>
 
 <script>
-    const LANG_DATA={my:{appName:'Premium',appSub:'Game Shop',home:'ပင်မ',shop:'ဆိုင်',payment:'ငွေပေးချေ',profile:'ပရိုဖိုင်',pageTitle:'MLBB Global',pageSub:'ပက်ကေ့ချ်တစ်ခုရွေးပြီး ဝယ်ယူပါ',bundlesTitle:'ပက်ကေ့ချ်များ',diamondsTitle:'စိန်များ',doubleTitle:'နှစ်ဆဖြည့်မှု',select:'Select',topUp:'Top Up',currency:'Ks',doubleBadge:'⭐ 2x Bonus'},en:{appName:'Premium',appSub:'Game Shop',home:'Home',shop:'Shop',payment:'Payment',profile:'Profile',pageTitle:'MLBB Global',pageSub:'Select a package and buy',bundlesTitle:'Packages',diamondsTitle:'Diamonds',doubleTitle:'Double Top Up',select:'Select',topUp:'Top Up',currency:'Ks',doubleBadge:'⭐ 2x Bonus'}};
-    let currentLang=localStorage.getItem('lang')||'my';
-    let selectedPackage=null;
-    function getText(k){return LANG_DATA[currentLang]?.[k]||k}
-    function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._timer);t._timer=setTimeout(()=>t.classList.remove('show'),3000);}
-    function setLang(l){currentLang=l;localStorage.setItem('lang',l);updateLanguage();document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));}
-    function updateLanguage(){const d=LANG_DATA[currentLang];document.getElementById('appName').textContent=d.appName;document.getElementById('appSub').textContent=d.appSub;document.getElementById('pageTitle').textContent=d.pageTitle;document.getElementById('pageSub').textContent=d.pageSub;document.getElementById('bundlesTitle').textContent=d.bundlesTitle;document.getElementById('diamondsTitle').textContent=d.diamondsTitle;document.getElementById('doubleTitle').textContent=d.doubleTitle;document.getElementById('navHome').textContent=d.home;document.getElementById('navShop').textContent=d.shop;document.getElementById('navPayment').textContent=d.payment;document.getElementById('navProfile').textContent=d.profile;renderPackages();updateBadge();}
-    function toggleNightMode(){document.body.classList.toggle('night-mode');const icon=document.querySelector('.night-toggle i');icon.className=document.body.classList.contains('night-mode')?'fas fa-sun':'fas fa-moon';localStorage.setItem('nightMode',document.body.classList.contains('night-mode')?'true':'false');}
-    function handleNavClick(el,e){e.preventDefault();setTimeout(()=>{window.location.href=el.getAttribute('href')},300);}
-    function updateBadge(){const notis=JSON.parse(localStorage.getItem('notifications')||'[]');const count=notis.filter(n=>n.status==='pending').length;const badge=document.getElementById('notiBadge');if(badge){badge.style.display=count>0?'block':'none';if(count>0)badge.textContent=count;}}
-    
-    // ===== Global Packages (မူရင်းအတိုင်း) =====
-    const PACKAGES={bundles:[{id:'b1',name:'Monthly Epic Bundle',price:17300,img:'https://files.catbox.moe/z2j5uo.png',sub:'💎275 + ⭐180'},{id:'b2',name:'Weekly Elite Bundle',price:3600,img:'https://files.catbox.moe/i3uywg.png',sub:'💎55 + ⭐20'},{id:'b3',name:'Weekly Pass',price:6500,img:'https://files.catbox.moe/zylral.png',sub:'Weekly Pass'},{id:'b4',name:'Twilight Pass',price:34000,img:'https://files.catbox.moe/jshuuy.png',sub:'🆕 New'}],diamonds:[{id:'d1',name:'11',price:750,img:'https://files.catbox.moe/xaxejk.png'},{id:'d2',name:'22',price:1500,img:'https://files.catbox.moe/xaxejk.png'},{id:'d3',name:'33',price:2250,img:'https://files.catbox.moe/7bj50l.png'},{id:'d4',name:'44',price:3100,img:'https://files.catbox.moe/7bj50l.png'},{id:'d5',name:'56',price:3800,img:'https://files.catbox.moe/4mb7sd.png'},{id:'d6',name:'112',price:7500,img:'https://files.catbox.moe/4mb7sd.png'},{id:'d7',name:'172',price:10300,img:'https://files.catbox.moe/ogchrl.png'},{id:'d8',name:'257',price:14850,img:'https://files.catbox.moe/ogchrl.png'},{id:'d9',name:'343',price:20000,img:'https://files.catbox.moe/ocznqy.png'},{id:'d10',name:'429',price:25000,img:'https://files.catbox.moe/ocznqy.png'},{id:'d11',name:'514',price:29600,img:'https://files.catbox.moe/k23p6t.png'},{id:'d12',name:'600',price:34800,img:'https://files.catbox.moe/k23p6t.png'},{id:'d13',name:'706',price:34000,img:'https://files.catbox.moe/qwnqog.png'},{id:'d14',name:'878',price:50000,img:'https://files.catbox.moe/qwnqog.png'},{id:'d15',name:'963',price:54700,img:'https://files.catbox.moe/zjcnar.png'},{id:'d16',name:'1049',price:59800,img:'https://files.catbox.moe/zjcnar.png'},{id:'d17',name:'1135',price:64800,img:'https://files.catbox.moe/co1w7w.png'},{id:'d18',name:'1412',price:79800,img:'https://files.catbox.moe/co1w7w.png'},{id:'d19',name:'1500',price:86100,img:'https://files.catbox.moe/2c5tz4.png'},{id:'d20',name:'1584',price:89800,img:'https://files.catbox.moe/2c5tz4.png'},{id:'d21',name:'1755',price:99500,img:'https://files.catbox.moe/b5bg2m.png'},{id:'d22',name:'2195',price:120500,img:'https://files.catbox.moe/b5bg2m.png'},{id:'d23',name:'2367',price:130700,img:'https://files.catbox.moe/1xbg9h.png'},{id:'d24',name:'2538',price:140400,img:'https://files.catbox.moe/1xbg9h.png'},{id:'d25',name:'3224',price:181000,img:'https://files.catbox.moe/z0c6rj.png'},{id:'d26',name:'3688',price:200800,img:'https://files.catbox.moe/z0c6rj.png'},{id:'d27',name:'4394',price:240500,img:'https://files.catbox.moe/z0c6rj.png'},{id:'d28',name:'5100',price:280100,img:'https://files.catbox.moe/pn69zi.png'},{id:'d29',name:'5532',price:302900,img:'https://files.catbox.moe/pn69zi.png'},{id:'d30',name:'9288',price:503000,img:'https://files.catbox.moe/pn69zi.png'}],double:[{id:'x1',name:'50+50',price:3550,img:'https://files.catbox.moe/z376wd.png',badge:true},{id:'x2',name:'150+150',price:9900,img:'https://files.catbox.moe/kf0960.png',badge:true},{id:'x3',name:'250+250',price:15800,img:'https://files.catbox.moe/jm3ty7.png',badge:true},{id:'x4',name:'500+500',price:32100,img:'https://files.catbox.moe/aprnoc.png',badge:true}]};
-    
-    function renderPackages(){const d=LANG_DATA[currentLang];const renderItems=(items,type)=>items.map(pkg=>{const isSelected=selectedPackage&&selectedPackage.id===pkg.id;const badgeHtml=pkg.badge?`<span class="badge">${d.doubleBadge}</span>`:'';const subHtml=pkg.sub?`<div class="sub">${pkg.sub}</div>`:'<div class="sub">MLBB</div>';return `<div class="package-item ${isSelected?'selected':''}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})"><div class="info"><img src="${pkg.img}" alt="${pkg.name}" class="pkg-img" onerror="this.style.display='none'"><div class="name">${pkg.name}</div>${subHtml}${badgeHtml}</div><div class="right"><span class="price">${pkg.price.toLocaleString()} ${d.currency}</span><span class="btn-label">${d.selectLabel}</span><button class="buy-btn" onclick="event.stopPropagation(); handleBuyClick('${pkg.id}','${pkg.name}',${pkg.price})">${d.buy}</button></div></div>`;}).join('');document.getElementById('bundlesList').innerHTML=renderItems(PACKAGES.bundles,'bundle');document.getElementById('diamondsList').innerHTML=renderItems(PACKAGES.diamonds,'diamond');document.getElementById('doubleList').innerHTML=renderItems(PACKAGES.double,'double');}
-    function handlePackageClick(id,name,price){if(selectedPackage&&selectedPackage.id===id){selectedPackage=null;}else{selectedPackage={id,name,price};}renderPackages();}
-    function handleBuyClick(id,name,price){if(!selectedPackage||selectedPackage.id!==id){selectedPackage={id,name,price};renderPackages();}showToast('🛒 '+name+' selected!');}
-    
-    document.querySelectorAll('.lang-btn').forEach(b=>{b.addEventListener('click',function(){const lang=this.dataset.lang;currentLang=lang;localStorage.setItem('lang',lang);document.querySelectorAll('.lang-btn').forEach(b2=>b2.classList.toggle('active',b2.dataset.lang===lang));updateLanguage();});});
-    document.querySelector('.night-toggle').addEventListener('click',toggleNightMode);
-    document.querySelectorAll('.bottom-nav .nav-item').forEach(item=>{item.addEventListener('click',function(e){document.querySelectorAll('.bottom-nav .nav-item').forEach(n=>n.classList.remove('active'));this.classList.add('active');const icon=this.querySelector('.icon');icon.style.animation='none';void icon.offsetWidth;icon.style.animation='selectBounce 0.5s cubic-bezier(0.34,1.56,0.64,1)';});});
-    document.addEventListener('DOMContentLoaded',function(){const savedLang=localStorage.getItem('lang')||'my';currentLang=savedLang;document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===savedLang));updateLanguage();if(localStorage.getItem('nightMode')==='true'){document.body.classList.add('night-mode');document.querySelector('.night-toggle i').className='fas fa-sun';}updateBadge();});
+    // ===== LANGUAGE DATA =====
+    const LANG_DATA = {
+        my: {
+            appName:'Premium',appSub:'Game Shop',
+            home:'ပင်မ',shop:'ဆိုင်',payment:'ငွေပေးချေ',profile:'ပရိုဖိုင်',
+            pageTitle:'MLBB Packages',pageSub:'ပက်ကေ့ချ်တစ်ခုရွေးပြီး ဝယ်ယူပါ',
+            bundlesTitle:'ပက်ကေ့ချ်များ',diamondsTitle:'စိန်များ',doubleTitle:'နှစ်ဆဖြည့်မှု',
+            malayBundlesTitle:'ပက်ကေ့ချ်များ',malayDiamondsTitle:'စိန်များ',malayDoubleTitle:'နှစ်ဆဖြည့်မှု',
+            indoBundlesTitle:'ပက်ကေ့ချ်များ',indoDiamondsTitle:'စိန်များ',
+            russiaBundlesTitle:'ပက်ကေ့ချ်များ',russiaDiamondsTitle:'စိန်များ',
+            select:'Select',topUp:'Top Up',currency:'Ks',doubleBadge:'⭐ 2x Bonus'
+        },
+        en: {
+            appName:'Premium',appSub:'Game Shop',
+            home:'Home',shop:'Shop',payment:'Payment',profile:'Profile',
+            pageTitle:'MLBB Packages',pageSub:'Select a package and buy',
+            bundlesTitle:'Packages',diamondsTitle:'Diamonds',doubleTitle:'Double Top Up',
+            malayBundlesTitle:'Packages',malayDiamondsTitle:'Diamonds',malayDoubleTitle:'Double Top Up',
+            indoBundlesTitle:'Packages',indoDiamondsTitle:'Diamonds',
+            russiaBundlesTitle:'Packages',russiaDiamondsTitle:'Diamonds',
+            select:'Select',topUp:'Top Up',currency:'Ks',doubleBadge:'⭐ 2x Bonus'
+        }
+    };
+
+    let currentLang = localStorage.getItem('lang') || 'my';
+    let selectedPackage = null;
+    let currentServer = 'global';
+
+    function getText(key){return LANG_DATA[currentLang]?.[key]||key}
+
+    function showToast(msg){
+        const t=document.getElementById('toast');
+        t.textContent=msg;
+        t.classList.add('show');
+        clearTimeout(t._timer);
+        t._timer=setTimeout(()=>t.classList.remove('show'),3000);
+    }
+
+    function setLang(lang){
+        currentLang=lang;
+        localStorage.setItem('lang',lang);
+        updateLanguage();
+        document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
+    }
+
+    function updateLanguage(){
+        const d=LANG_DATA[currentLang];
+        if(!d)return;
+        document.getElementById('appName').textContent=d.appName;
+        document.getElementById('appSub').textContent=d.appSub;
+        document.getElementById('pageTitle').textContent=d.pageTitle;
+        document.getElementById('pageSub').textContent=d.pageSub;
+        document.getElementById('bundlesTitle').textContent=d.bundlesTitle;
+        document.getElementById('diamondsTitle').textContent=d.diamondsTitle;
+        document.getElementById('doubleTitle').textContent=d.doubleTitle;
+        document.getElementById('malayBundlesTitle').textContent=d.malayBundlesTitle;
+        document.getElementById('malayDiamondsTitle').textContent=d.malayDiamondsTitle;
+        document.getElementById('malayDoubleTitle').textContent=d.malayDoubleTitle;
+        document.getElementById('indoBundlesTitle').textContent=d.indoBundlesTitle;
+        document.getElementById('indoDiamondsTitle').textContent=d.indoDiamondsTitle;
+        document.getElementById('russiaBundlesTitle').textContent=d.russiaBundlesTitle;
+        document.getElementById('russiaDiamondsTitle').textContent=d.russiaDiamondsTitle;
+        document.getElementById('navHome').textContent=d.home;
+        document.getElementById('navShop').textContent=d.shop;
+        document.getElementById('navPayment').textContent=d.payment;
+        document.getElementById('navProfile').textContent=d.profile;
+        renderAllPackages();
+        updateBadge();
+    }
+
+    function toggleNightMode(){
+        document.body.classList.toggle('night-mode');
+        const icon=document.querySelector('.night-toggle i');
+        icon.className=document.body.classList.contains('night-mode')?'fas fa-sun':'fas fa-moon';
+        localStorage.setItem('nightMode',document.body.classList.contains('night-mode')?'true':'false');
+    }
+
+    function updateBadge(){
+        const notis=JSON.parse(localStorage.getItem('notifications')||'[]');
+        const count=notis.filter(n=>n.status==='pending').length;
+        const badge=document.getElementById('notiBadge');
+        if(badge){
+            badge.style.display=count>0?'block':'none';
+            if(count>0)badge.textContent=count;
+        }
+    }
+
+    // ============================================================
+    // PACKAGES DATA
+    // ============================================================
+    const PACKAGES = {
+        global: {
+            bundles: [
+                { id: 'g_b1', name: 'Weekly Pass', price: 6500, img: 'https://files.catbox.moe/zylral.png' }
+            ],
+            double: [
+                { id: 'g_x1', name: '50+50', price: 3550, img: 'https://files.catbox.moe/z376wd.png' },
+                { id: 'g_x2', name: '150+150', price: 9900, img: 'https://files.catbox.moe/kf0960.png' },
+                { id: 'g_x3', name: '250+250', price: 15800, img: 'https://files.catbox.moe/jm3ty7.png' },
+                { id: 'g_x4', name: '500+500', price: 32100, img: 'https://files.catbox.moe/aprnoc.png' }
+            ],
+            diamonds: [
+                { id: 'g_d1', name: '11', price: 750, img: 'https://files.catbox.moe/xaxejk.png' },
+                { id: 'g_d2', name: '22', price: 1500, img: 'https://files.catbox.moe/xaxejk.png' },
+                { id: 'g_d3', name: '33', price: 2250, img: 'https://files.catbox.moe/7bj50l.png' },
+                { id: 'g_d4', name: '44', price: 3100, img: 'https://files.catbox.moe/7bj50l.png' },
+                { id: 'g_d5', name: '56', price: 3800, img: 'https://files.catbox.moe/4mb7sd.png' },
+                { id: 'g_d6', name: '112', price: 7500, img: 'https://files.catbox.moe/4mb7sd.png' },
+                { id: 'g_d7', name: '172', price: 10300, img: 'https://files.catbox.moe/ogchrl.png' },
+                { id: 'g_d8', name: '257', price: 14850, img: 'https://files.catbox.moe/ogchrl.png' },
+                { id: 'g_d9', name: '343', price: 20000, img: 'https://files.catbox.moe/ocznqy.png' },
+                { id: 'g_d10', name: '429', price: 25000, img: 'https://files.catbox.moe/ocznqy.png' },
+                { id: 'g_d11', name: '514', price: 29600, img: 'https://files.catbox.moe/k23p6t.png' },
+                { id: 'g_d12', name: '600', price: 34800, img: 'https://files.catbox.moe/k23p6t.png' },
+                { id: 'g_d13', name: '706', price: 34000, img: 'https://files.catbox.moe/qwnqog.png' },
+                { id: 'g_d14', name: '878', price: 50000, img: 'https://files.catbox.moe/qwnqog.png' },
+                { id: 'g_d15', name: '963', price: 54700, img: 'https://files.catbox.moe/zjcnar.png' },
+                { id: 'g_d16', name: '1049', price: 59800, img: 'https://files.catbox.moe/zjcnar.png' },
+                { id: 'g_d17', name: '1135', price: 64800, img: 'https://files.catbox.moe/co1w7w.png' },
+                { id: 'g_d18', name: '1412', price: 79800, img: 'https://files.catbox.moe/co1w7w.png' },
+                { id: 'g_d19', name: '1500', price: 86100, img: 'https://files.catbox.moe/2c5tz4.png' },
+                { id: 'g_d20', name: '1584', price: 89800, img: 'https://files.catbox.moe/2c5tz4.png' },
+                { id: 'g_d21', name: '1755', price: 99500, img: 'https://files.catbox.moe/b5bg2m.png' },
+                { id: 'g_d22', name: '2195', price: 120500, img: 'https://files.catbox.moe/b5bg2m.png' },
+                { id: 'g_d23', name: '2367', price: 130700, img: 'https://files.catbox.moe/1xbg9h.png' },
+                { id: 'g_d24', name: '2538', price: 140400, img: 'https://files.catbox.moe/1xbg9h.png' },
+                { id: 'g_d25', name: '3224', price: 181000, img: 'https://files.catbox.moe/z0c6rj.png' },
+                { id: 'g_d26', name: '3688', price: 200800, img: 'https://files.catbox.moe/z0c6rj.png' },
+                { id: 'g_d27', name: '4394', price: 240500, img: 'https://files.catbox.moe/z0c6rj.png' },
+                { id: 'g_d28', name: '5100', price: 280100, img: 'https://files.catbox.moe/pn69zi.png' },
+                { id: 'g_d29', name: '5532', price: 302900, img: 'https://files.catbox.moe/pn69zi.png' },
+                { id: 'g_d30', name: '9288', price: 503000, img: 'https://files.catbox.moe/pn69zi.png' }
+            ]
+        },
+        malay: {
+            bundles: [
+                { id: 'm_b1', name: 'Weekly Pass', price: 9400, img: 'https://files.catbox.moe/zylral.png' }
+            ],
+            double: [
+                { id: 'm_x1', name: '55', price: 4500, img: 'https://files.catbox.moe/z376wd.png' },
+                { id: 'm_x2', name: '165', price: 12800, img: 'https://files.catbox.moe/kf0960.png' },
+                { id: 'm_x3', name: '275', price: 21100, img: 'https://files.catbox.moe/jm3ty7.png' },
+                { id: 'm_x4', name: '656', price: 42800, img: 'https://files.catbox.moe/aprnoc.png' }
+            ],
+            diamonds: [
+                { id: 'm_d1', name: '14', price: 1300, img: 'https://files.catbox.moe/xaxejk.png' },
+                { id: 'm_d2', name: '28', price: 2400, img: 'https://files.catbox.moe/xaxejk.png' },
+                { id: 'm_d3', name: '42', price: 3500, img: 'https://files.catbox.moe/7bj50l.png' },
+                { id: 'm_d4', name: '70', price: 5700, img: 'https://files.catbox.moe/7bj50l.png' },
+                { id: 'm_d5', name: '84', price: 6800, img: 'https://files.catbox.moe/4mb7sd.png' },
+                { id: 'm_d6', name: '140', price: 11000, img: 'https://files.catbox.moe/4mb7sd.png' },
+                { id: 'm_d7', name: '182', price: 14400, img: 'https://files.catbox.moe/ogchrl.png' },
+                { id: 'm_d8', name: '210', price: 16400, img: 'https://files.catbox.moe/ogchrl.png' },
+                { id: 'm_d9', name: '284', price: 21800, img: 'https://files.catbox.moe/ocznqy.png' },
+                { id: 'm_d10', name: '355', price: 27400, img: 'https://files.catbox.moe/ocznqy.png' },
+                { id: 'm_d11', name: '429', price: 32700, img: 'https://files.catbox.moe/k23p6t.png' },
+                { id: 'm_d12', name: '513', price: 39100, img: 'https://files.catbox.moe/k23p6t.png' },
+                { id: 'm_d13', name: '639', price: 48800, img: 'https://files.catbox.moe/qwnqog.png' },
+                { id: 'm_d14', name: '716', price: 54200, img: 'https://files.catbox.moe/qwnqog.png' },
+                { id: 'm_d15', name: '1084', price: 80600, img: 'https://files.catbox.moe/zjcnar.png' },
+                { id: 'm_d16', name: '1159', price: 87500, img: 'https://files.catbox.moe/zjcnar.png' },
+                { id: 'm_d17', name: '1586', price: 118200, img: 'https://files.catbox.moe/co1w7w.png' },
+                { id: 'm_d18', name: '2162', price: 161200, img: 'https://files.catbox.moe/co1w7w.png' },
+                { id: 'm_d19', name: '3032', price: 219800, img: 'https://files.catbox.moe/2c5tz4.png' },
+                { id: 'm_d20', name: '3846', price: 279800, img: 'https://files.catbox.moe/2c5tz4.png' },
+                { id: 'm_d21', name: '4047', price: 295200, img: 'https://files.catbox.moe/b5bg2m.png' },
+                { id: 'm_d22', name: '4851', price: 353900, img: 'https://files.catbox.moe/b5bg2m.png' },
+                { id: 'm_d23', name: '5138', price: 374900, img: 'https://files.catbox.moe/1xbg9h.png' },
+                { id: 'm_d24', name: '6012', price: 403900, img: 'https://files.catbox.moe/1xbg9h.png' },
+                { id: 'm_d25', name: '7502', price: 536000, img: 'https://files.catbox.moe/z0c6rj.png' },
+                { id: 'm_d26', name: '8218', price: 591000, img: 'https://files.catbox.moe/z0c6rj.png' },
+                { id: 'm_d27', name: '9377', price: 674000, img: 'https://files.catbox.moe/z0c6rj.png' },
+                { id: 'm_d28', name: '10907', price: 7802100, img: 'https://files.catbox.moe/pn69zi.png' },
+                { id: 'm_d29', name: '16004', price: 1151100, img: 'https://files.catbox.moe/pn69zi.png' }
+            ]
+        },
+        indo: {
+            bundles: [
+                { id: 'i_b1', name: 'Weekly Pass', price: 8700, img: 'https://files.catbox.moe/zylral.png' }
+            ],
+            diamonds: [
+                { id: 'i_d1', name: '5', price: 700, img: 'https://files.catbox.moe/xaxejk.png' },
+                { id: 'i_d2', name: '12', price: 1400, img: 'https://files.catbox.moe/xaxejk.png' },
+                { id: 'i_d3', name: '19', price: 1900, img: 'https://files.catbox.moe/7bj50l.png' },
+                { id: 'i_d4', name: '28', price: 2700, img: 'https://files.catbox.moe/7bj50l.png' },
+                { id: 'i_d5', name: '44', price: 3900, img: 'https://files.catbox.moe/4mb7sd.png' },
+                { id: 'i_d6', name: '59', price: 5100, img: 'https://files.catbox.moe/4mb7sd.png' },
+                { id: 'i_d7', name: '85', price: 6800, img: 'https://files.catbox.moe/ogchrl.png' },
+                { id: 'i_d8', name: '170', price: 13000, img: 'https://files.catbox.moe/ogchrl.png' },
+                { id: 'i_d9', name: '240', price: 18100, img: 'https://files.catbox.moe/ocznqy.png' },
+                { id: 'i_d10', name: '296', price: 22000, img: 'https://files.catbox.moe/ocznqy.png' },
+                { id: 'i_d11', name: '408', price: 30400, img: 'https://files.catbox.moe/k23p6t.png' },
+                { id: 'i_d12', name: '568', price: 41400, img: 'https://files.catbox.moe/k23p6t.png' },
+                { id: 'i_d13', name: '875', price: 62500, img: 'https://files.catbox.moe/qwnqog.png' },
+                { id: 'i_d14', name: '2010', price: 134500, img: 'https://files.catbox.moe/qwnqog.png' },
+                { id: 'i_d15', name: '4830', price: 328500, img: 'https://files.catbox.moe/zjcnar.png' }
+            ]
+        },
+        russia: {
+            bundles: [
+                { id: 'r_b1', name: 'Weekly Pass', price: 9750, img: 'https://files.catbox.moe/zylral.png' }
+            ],
+            diamonds: [
+                { id: 'r_d1', name: '35', price: 3100, img: 'https://files.catbox.moe/xaxejk.png' },
+                { id: 'r_d2', name: '55', price: 5000, img: 'https://files.catbox.moe/xaxejk.png' },
+                { id: 'r_d3', name: '165', price: 14100, img: 'https://files.catbox.moe/7bj50l.png' },
+                { id: 'r_d4', name: '275', price: 22900, img: 'https://files.catbox.moe/7bj50l.png' },
+                { id: 'r_d5', name: '565', price: 44900, img: 'https://files.catbox.moe/4mb7sd.png' },
+                { id: 'r_d6', name: '1155', price: 87700, img: 'https://files.catbox.moe/4mb7sd.png' },
+                { id: 'r_d7', name: '1765', price: 125300, img: 'https://files.catbox.moe/ogchrl.png' },
+                { id: 'r_d8', name: '2975', price: 208300, img: 'https://files.catbox.moe/ogchrl.png' },
+                { id: 'r_d9', name: '6000', price: 420300, img: 'https://files.catbox.moe/ocznqy.png' }
+            ]
+        }
+    };
+
+    // ============================================================
+    // RENDER FUNCTIONS
+    // ============================================================
+    function renderItems(items, containerId) {
+        const d = LANG_DATA[currentLang];
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        
+        if (!items || items.length === 0) {
+            container.innerHTML = '';
+            return;
+        }
+        
+        container.innerHTML = items.map(pkg => {
+            const isSelected = selectedPackage && selectedPackage.id === pkg.id;
+            return `
+                <div class="package-item ${isSelected?'selected':''}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})">
+                    <div class="pkg-img-wrap">
+                        <img src="${pkg.img}" alt="${pkg.name}" onerror="this.style.display='none'">
+                    </div>
+                    <div class="right">
+                        <div class="name">${pkg.name}</div>
+                        <div class="price">${pkg.price.toLocaleString()} ${d.currency}</div>
+                        <span class="action-btn ${isSelected?'topup':''}" onclick="event.stopPropagation(); ${isSelected ? `alert('🛒 ${pkg.name} selected!')` : `handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})`}">
+                            ${isSelected ? d.topUp : d.select}
+                        </span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function renderAllPackages() {
+        renderItems(PACKAGES.global.bundles, 'globalBundles');
+        renderItems(PACKAGES.global.double, 'globalDouble');
+        renderItems(PACKAGES.global.diamonds, 'globalDiamonds');
+        
+        renderItems(PACKAGES.malay.bundles, 'malayBundles');
+        renderItems(PACKAGES.malay.double, 'malayDouble');
+        renderItems(PACKAGES.malay.diamonds, 'malayDiamonds');
+        
+        renderItems(PACKAGES.indo.bundles, 'indoBundles');
+        renderItems(PACKAGES.indo.diamonds, 'indoDiamonds');
+        
+        renderItems(PACKAGES.russia.bundles, 'russiaBundles');
+        renderItems(PACKAGES.russia.diamonds, 'russiaDiamonds');
+    }
+
+    function handlePackageClick(id, name, price) {
+        if (selectedPackage && selectedPackage.id === id) {
+            selectedPackage = null;
+        } else {
+            selectedPackage = { id, name, price };
+        }
+        renderAllPackages();
+    }
+
+    // ============================================================
+    // SERVER SWITCHER
+    // ============================================================
+    function switchServer(server) {
+        currentServer = server;
+        
+        // Update active button
+        document.querySelectorAll('.server-selector .opt').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.server === server);
+        });
+        
+        // Show/Hide sections
+        document.getElementById('globalSection').classList.toggle('hidden', server !== 'global');
+        document.getElementById('malaySection').classList.toggle('hidden', server !== 'malay');
+        document.getElementById('indoSektion').classList.toggle('hidden', server !== 'indo');
+        document.getElementById('russiaSection').classList.toggle('hidden', server !== 'russia');
+        
+        // Reset selected package
+        selectedPackage = null;
+        renderAllPackages();
+    }
+
+    // ============================================================
+    // EVENT LISTENERS
+    // ============================================================
+    document.querySelectorAll('.lang-btn').forEach(b => {
+        b.addEventListener('click', function() {
+            const lang = this.dataset.lang;
+            currentLang = lang;
+            localStorage.setItem('lang', lang);
+            document.querySelectorAll('.lang-btn').forEach(b2 => b2.classList.toggle('active', b2.dataset.lang === lang));
+            updateLanguage();
+        });
+    });
+
+    document.querySelector('.night-toggle').addEventListener('click', toggleNightMode);
+
+    document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
+        item.addEventListener('click', function(e) {
+            document.querySelectorAll('.bottom-nav .nav-item').forEach(n => n.classList.remove('active'));
+            this.classList.add('active');
+            const icon = this.querySelector('.icon');
+            icon.style.animation = 'none';
+            void icon.offsetWidth;
+            icon.style.animation = 'selectBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        });
+    });
+
+    // ============================================================
+    // INIT
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', function() {
+        const savedLang = localStorage.getItem('lang') || 'my';
+        currentLang = savedLang;
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === savedLang));
+        updateLanguage();
+        
+        if (localStorage.getItem('nightMode') === 'true') {
+            document.body.classList.add('night-mode');
+            document.querySelector('.night-toggle i').className = 'fas fa-sun';
+        }
+        updateBadge();
+
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'newOrderNotification' || e.key === 'notifications') {
+                updateBadge();
+            }
+        });
+    });
 </script>
 </body>
 </html>
