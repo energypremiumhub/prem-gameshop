@@ -234,7 +234,7 @@
         }
         .section-title span{color:var(--text-secondary);opacity:0.5}
 
-        /* ===== SERVER SELECTOR - ဘောင်ဒါဖျောက် ===== */
+        /* ===== SERVER SELECTOR ===== */
         .server-selector{
             background:var(--bg-card);
             backdrop-filter:blur(20px);
@@ -245,7 +245,14 @@
             align-items:center;
             gap:12px;
             margin-bottom:16px;
-            box-shadow:0 4px 20px var(--shadow)
+            box-shadow:0 4px 20px var(--shadow);
+            outline:none
+        }
+        .server-selector:focus,
+        .server-selector:focus-visible,
+        .server-selector *:focus,
+        .server-selector *:focus-visible {
+            outline: none !important;
         }
         .server-selector .label{
             font-size:0.55rem;
@@ -262,7 +269,7 @@
             flex:1
         }
         .server-selector .options .opt{
-            background:var(--bg-input);
+            background:transparent;
             border:1px solid var(--border-color);
             color:var(--text-secondary);
             padding:4px 14px;
@@ -277,8 +284,8 @@
         .server-selector .options .opt.active{
             background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));
             color:#fff;
-            border-color:var(--cyan);
-            box-shadow:0 0 20px var(--cyan-glow)
+            border:none;
+            box-shadow:0 4px 15px rgba(0,180,216,0.3)
         }
         .server-selector .options .opt .flag{margin-right:4px}
 
@@ -310,7 +317,7 @@
             box-shadow:0 8px 30px var(--shadow-hover)
         }
         .package-item:active{
-            transform:scale(0.95)!important;
+            transform:scale(0.92)!important;
             transition:transform 0.12s cubic-bezier(0.34, 1.2, 0.64, 1)!important
         }
         .package-item.selected{
@@ -318,7 +325,6 @@
             box-shadow:0 0 20px var(--cyan-glow);
             background:var(--bg-card)
         }
-        .package-item.selected .price{color:var(--cyan)}
         .package-item.hidden{display:none}
         
         .package-item .pkg-img{
@@ -354,13 +360,6 @@
             line-height:1.2
         }
         .package-item .info .name .line1{display:block}
-        .package-item .info .name .line2{display:block;font-size:0.6rem}
-        .package-item .info .sub{
-            font-size:0.4rem;
-            color:var(--text-secondary);
-            line-height:1.2;
-            margin-top:1px
-        }
         .package-item .info .badge{
             display:inline-block;
             font-size:0.35rem;
@@ -375,28 +374,34 @@
             margin-left:auto;
             margin-right:auto
         }
-        .package-item .bottom{
-            display:flex;
-            flex-direction:column;
-            align-items:center;
-            gap:4px;
-            margin-top:4px;
-            width:100%
-        }
-        .package-item .bottom .price{
+
+        /* ဈေးနှုန်း - ဒုတိယလိုင်း */
+        .package-item .price-text{
             font-size:0.65rem;
             font-weight:700;
             color:var(--text-secondary);
+            margin:4px 0;
             transition:all 0.4s ease
         }
-        .package-item .bottom .btn-label{
+        .package-item.selected .price-text{
+            color:var(--cyan)
+        }
+
+        /* Server Name + Buy Button Container - တတိယလိုင်း */
+        .package-item .server-name{
+            margin-top:4px;
+            width:100%;
+            display:flex;
+            justify-content:center
+        }
+        .package-item .server-name .btn-label{
             font-size:0.45rem;
             color:var(--text-secondary);
             font-weight:500;
             opacity:0.6;
             letter-spacing:0.3px
         }
-        .package-item .bottom .buy-btn{
+        .package-item .server-name .buy-btn{
             display:none;
             background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));
             color:#fff;
@@ -407,23 +412,18 @@
             font-weight:700;
             cursor:pointer;
             transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow:0 4px 15px var(--cyan-glow);
+            box-shadow:0 4px 15px rgba(0,180,216,0.3);
             width:100%;
             max-width:120px;
             letter-spacing:0.5px
         }
-        .package-item .bottom .buy-btn:active{
-            transform:scale(0.88)!important;
-            animation:btnPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)
+        .package-item .server-name .buy-btn:active{
+            transform:scale(0.92)!important
         }
-        @keyframes btnPop{
-            0%{transform:scale(1)}
-            30%{transform:scale(1.15)}
-            60%{transform:scale(0.95)}
-            100%{transform:scale(1)}
-        }
-        .package-item.selected .bottom .buy-btn{display:block}
-        .package-item.selected .bottom .btn-label{display:none}
+
+        /* Selected State - Server Name ဖျောက် / Buy Button ပြ */
+        .package-item.selected .server-name .buy-btn{display:block}
+        .package-item.selected .server-name .btn-label{display:none}
 
         .bottom-nav {
             position:fixed;
@@ -580,7 +580,7 @@
             cursor:pointer;
             transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)
         }
-        .modal .close-btn:active{transform:scale(0.88)!important}
+        .modal .close-btn:active{transform:scale(0.92)!important}
         .modal .close-btn:hover{color:var(--cyan)}
         .modal h2{font-size:1.2rem;color:var(--text-primary);text-align:center;margin-bottom:4px}
         .modal .sub{color:var(--text-secondary);font-size:0.75rem;text-align:center;margin-bottom:16px}
@@ -609,7 +609,7 @@
             cursor:pointer;
             transition:all 0.3s ease
         }
-        .modal .payment-option:active{transform:scale(0.95)!important}
+        .modal .payment-option:active{transform:scale(0.92)!important}
         .modal .payment-option.selected{
             border:1px solid var(--cyan);
             background:rgba(0,180,216,0.06);
@@ -649,17 +649,18 @@
             flex-wrap:wrap
         }
         .modal .account-info .acc-number .copy-btn{
-            background:var(--bg-card);
-            border:1px solid var(--border-color);
-            color:var(--text-secondary);
+            background:linear-gradient(135deg, var(--cyan), var(--purple));
+            border:none;
+            color:#fff;
             padding:2px 10px;
             border-radius:10px;
             font-size:0.45rem;
             cursor:pointer;
-            transition:all 0.3s ease;
-            font-weight:600
+            font-weight:600;
+            box-shadow:0 2px 8px rgba(0,180,216,0.2);
+            transition:all 0.3s ease
         }
-        .modal .account-info .acc-number .copy-btn:active{transform:scale(0.85)!important}
+        .modal .account-info .acc-number .copy-btn:active{transform:scale(0.92)!important}
         
         .modal .file-upload{
             border:2px dashed var(--border-color);
@@ -670,7 +671,7 @@
             transition:all 0.3s ease;
             position:relative
         }
-        .modal .file-upload:active{transform:scale(0.97)!important}
+        .modal .file-upload:active{transform:scale(0.92)!important}
         .modal .file-upload.has-file{border-color:var(--green);background:rgba(0,200,83,0.04)}
         .modal .file-upload .icon{font-size:1.5rem;display:block;margin-bottom:2px;color:var(--text-secondary)}
         .modal .file-upload .text{font-size:0.6rem;color:var(--text-secondary)}
@@ -692,12 +693,12 @@
             margin-top:6px;
             opacity:0.4
         }
-        .modal .btn-primary:active{transform:scale(0.96)!important}
+        .modal .btn-primary:active{transform:scale(0.92)!important}
         .modal .btn-primary.enabled{
-            background:linear-gradient(135deg,var(--gold),var(--orange));
+            background:linear-gradient(135deg, var(--cyan), var(--purple), var(--violet));
             color:#fff;
-            border-color:var(--gold);
-            box-shadow:0 4px 20px var(--gold-glow);
+            border:none;
+            box-shadow:0 4px 15px rgba(0,180,216,0.3);
             cursor:pointer;
             opacity:1
         }
@@ -759,7 +760,7 @@
         .success-modal .order-details .label{color:var(--text-secondary)}
         .success-modal .order-details .value{color:var(--text-primary);font-weight:600}
         .success-modal .btn-close-success{
-            background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));
+            background:linear-gradient(135deg, var(--cyan), var(--purple), var(--violet));
             color:#fff;
             border:none;
             padding:10px 30px;
@@ -768,9 +769,9 @@
             font-weight:700;
             cursor:pointer;
             transition:all 0.3s ease;
-            box-shadow:0 4px 15px var(--cyan-glow)
+            box-shadow:0 4px 15px rgba(0,180,216,0.3)
         }
-        .success-modal .btn-close-success:active{transform:scale(0.95)!important}
+        .success-modal .btn-close-success:active{transform:scale(0.92)!important}
     </style>
 </head>
 <body>
@@ -811,7 +812,7 @@
         <span class="clear-btn" id="clearSearch" onclick="clearItemSearch()"><i class="fas fa-times-circle"></i></span>
     </div>
 
-    <!-- SERVER SELECTOR - ဘောင်ဒါဖျောက် -->
+    <!-- SERVER SELECTOR -->
     <div class="server-selector">
         <span class="label"><i class="fas fa-earth-asia"></i> Server</span>
         <div class="options" id="serverOptions">
@@ -1032,7 +1033,6 @@
     let selectedPayment = null;
     let isSubmitting = false;
 
-    // Server name mapping
     const SERVER_NAMES = {
         global: 'Global',
         indo: 'Indo',
@@ -1275,7 +1275,6 @@
         
         const serverName = getServerName();
         const serverEmoji = getServerEmoji();
-        const title = `MLBB ${serverName}`;
         
         container.innerHTML = items.map(pkg => {
             const isSelected = selectedPackage && selectedPackage.id === pkg.id;
@@ -1287,14 +1286,13 @@
                     <img src="${pkg.img}" alt="${pkg.name}" class="pkg-img" onerror="this.style.display='none'">
                     <div class="info">
                         <div class="name">
-                            <span class="line1">${title}</span>
-                            <span class="line2">${pkg.name}</span>
+                            <span class="line1">${pkg.name}</span>
                         </div>
                         ${badgeHtml}
                     </div>
-                    <div class="bottom">
-                        <span class="price">${pkg.price.toLocaleString()} ${d.currency}</span>
-                        <span class="btn-label">${d.select}</span>
+                    <div class="price-text">${pkg.price.toLocaleString()} ${d.currency}</div>
+                    <div class="server-name">
+                        <span class="btn-label">${serverEmoji} ${serverName}</span>
                         <button class="buy-btn" onclick="event.stopPropagation(); handleBuyClick('${pkg.id}','${pkg.name}',${pkg.price})">${d.topUp}</button>
                     </div>
                 </div>
@@ -1340,13 +1338,11 @@
         const q = query.toLowerCase().trim();
         const items = document.querySelectorAll('.package-item');
         const clearBtn = document.getElementById('clearSearch');
-        let found = false;
         
         items.forEach(item => {
             const name = item.querySelector('.name')?.textContent?.toLowerCase() || '';
             if (name.includes(q) || q === '') {
                 item.classList.remove('hidden');
-                found = true;
             } else {
                 item.classList.add('hidden');
             }
@@ -1376,7 +1372,6 @@
         document.getElementById('indoSektion').classList.toggle('hidden', server !== 'indo');
         document.getElementById('russiaSection').classList.toggle('hidden', server !== 'russia');
         
-        // Update page title
         const serverName = getServerName();
         document.getElementById('pageTitle').textContent = `MLBB ${serverName} Packages`;
         
@@ -1411,7 +1406,6 @@
         document.getElementById('checkoutModal').classList.remove('show');
     }
 
-    // ===== SUCCESS MODAL =====
     function showSuccessModal(orderData) {
         document.getElementById('sOrderId').textContent = orderData.orderId;
         document.getElementById('sPackage').textContent = orderData.package;
@@ -1514,7 +1508,6 @@
         });
     }
 
-    // ===== SEND TO TELEGRAM =====
     async function sendOrderToTelegram(orderData) {
         const message = `🛒 **New Order!**
 ━━━━━━━━━━━━━━━━━
@@ -1567,7 +1560,6 @@
         } catch(error) { console.error('Telegram error:', error); return false; }
     }
 
-    // ===== SUBMIT ORDER =====
     document.getElementById('submitBtn').addEventListener('click', async function() {
         if (isSubmitting) return;
         const d = LANG_DATA[currentLang] || {};
@@ -1659,6 +1651,11 @@
         }
     });
 
+    function getPendingCount() {
+        const notifications = JSON.parse(localStorage.getItem('notifications') || '[]');
+        return notifications.filter(n => n.status === 'pending').length;
+    }
+
     // ============================================================
     // EVENT LISTENERS
     // ============================================================
@@ -1678,10 +1675,6 @@
         item.addEventListener('click', function(e) {
             document.querySelectorAll('.bottom-nav .nav-item').forEach(n => n.classList.remove('active'));
             this.classList.add('active');
-            const icon = this.querySelector('.icon');
-            icon.style.animation = 'none';
-            void icon.offsetWidth;
-            icon.style.animation = 'selectBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
         });
     });
 
