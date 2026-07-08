@@ -320,32 +320,25 @@
         .package-item.selected .price{color:var(--cyan)}
         .package-item.hidden{display:none}
         
-        .package-item .pkg-img-wrap{
+        /* ===== IMAGE ANIMATION (MCGG အတိုင်း) ===== */
+        .package-item .pkg-img{
             width:100%;
-            aspect-ratio:1;
-            border-radius:8px;
-            overflow:hidden;
-            background:transparent;
-            margin-bottom:4px
-        }
-        .package-item .pkg-img-wrap img{
-            width:100%;
-            height:100%;
-            object-fit:contain;
+            height:auto;
             display:block;
-            animation:floatPkg 3s ease-in-out infinite
+            border-radius:8px;
+            margin-bottom:4px;
+            animation:floatIcon 3s ease-in-out infinite
         }
-        @keyframes floatPkg{
-            0%,100%{transform:translateY(0)}
-            50%{transform:translateY(-5px)}
+        @keyframes floatIcon{
+            0%,100%{transform:translateY(0px)}
+            50%{transform:translateY(-6px)}
         }
-        .package-item:hover .pkg-img-wrap img{animation:floatPkg 1.5s ease-in-out infinite}
-        
-        /* Double items - ပုံသေး */
-        .package-item.double-item .pkg-img-wrap{
-            max-width:80%;
-            margin-left:auto;
-            margin-right:auto
+        .package-item:hover .pkg-img{
+            transform:scale(1.04);
+            transition:transform 0.3s ease
+        }
+        .package-item.selected .pkg-img{
+            box-shadow:0 0 8px var(--gold-glow)
         }
         
         .package-item .info{
@@ -537,7 +530,6 @@
         .toast.show{display:block;animation:toastPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
         @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes floatIcon{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 
         .glass-box{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:16px}
         
@@ -1021,11 +1013,10 @@
     // ===== PACKAGES DATA =====
     const PACKAGES = {
         global: {
-            name: 'Global',
             bundles: [
                 { id: 'g_b1', name: 'Monthly Epic Bundle', price: 17300, img: 'https://files.catbox.moe/z2j5uo.png', sub: '🌍 Global' },
                 { id: 'g_b2', name: 'Weekly Elite Bundle', price: 3600, img: 'https://files.catbox.moe/i3uywg.png', sub: '🌍 Global' },
-                { id: 'g_b3', name: 'Weekly', price: 6500, img: 'https://files.catbox.moe/zylral.png', sub: '🌍 Global', isWeekly: true },
+                { id: 'g_b3', name: 'Weekly Pass', price: 6500, img: 'https://files.catbox.moe/zylral.png', sub: '🌍 Global' },
                 { id: 'g_b4', name: 'Twilight Pass', price: 34000, img: 'https://files.catbox.moe/jshuuy.png', sub: '🌍 Global' }
             ],
             double: [
@@ -1068,9 +1059,8 @@
             ]
         },
         ban: {
-            name: 'Ban Server (Malay, Sin, Php)',
             bundles: [
-                { id: 'b_b1', name: 'Weekly', price: 9400, img: 'https://files.catbox.moe/zylral.png', sub: '🇲🇾🇸🇬🇵🇭 Ban', isWeekly: true }
+                { id: 'b_b1', name: 'Weekly Pass', price: 9400, img: 'https://files.catbox.moe/zylral.png', sub: '🇲🇾🇸🇬🇵🇭 Ban' }
             ],
             double: [
                 { id: 'b_x1', name: '55', price: 4500, img: 'https://files.catbox.moe/z376wd.png', badge: true },
@@ -1111,9 +1101,8 @@
             ]
         },
         indo: {
-            name: 'Indo Server',
             bundles: [
-                { id: 'i_b1', name: 'Weekly', price: 8700, img: 'https://files.catbox.moe/zylral.png', sub: '🇮🇩 Indo', isWeekly: true }
+                { id: 'i_b1', name: 'Weekly Pass', price: 8700, img: 'https://files.catbox.moe/zylral.png', sub: '🇮🇩 Indo' }
             ],
             diamonds: [
                 { id: 'i_d1', name: '5', price: 700, img: 'https://files.catbox.moe/xaxejk.png' },
@@ -1134,9 +1123,8 @@
             ]
         },
         russia: {
-            name: 'Russia Server',
             bundles: [
-                { id: 'r_b1', name: 'Weekly', price: 9750, img: 'https://files.catbox.moe/zylral.png', sub: '🇷🇺 Russia', isWeekly: true }
+                { id: 'r_b1', name: 'Weekly Pass', price: 9750, img: 'https://files.catbox.moe/zylral.png', sub: '🇷🇺 Russia' }
             ],
             diamonds: [
                 { id: 'r_d1', name: '35', price: 3100, img: 'https://files.catbox.moe/xaxejk.png' },
@@ -1169,7 +1157,6 @@
             indo: 'Indo',
             russia: 'Russia'
         };
-        const serverName = serverNames[currentServer] || '';
         
         container.innerHTML = items.map(pkg => {
             const isSelected = selectedPackage && selectedPackage.id === pkg.id;
@@ -1177,18 +1164,11 @@
             const badgeHtml = pkg.badge ? `<span class="badge">${d.doubleBadge}</span>` : '';
             const doubleClass = isDouble ? 'double-item' : '';
             
-            let nameHtml = pkg.name;
-            if (pkg.isWeekly) {
-                nameHtml = `<span class="line1">Weekly</span><span class="line2">Pass</span>`;
-            }
-            
             return `
                 <div class="package-item ${isSelected?'selected':''} ${doubleClass}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})">
-                    <div class="pkg-img-wrap">
-                        <img src="${pkg.img}" alt="${pkg.name}" onerror="this.style.display='none'">
-                    </div>
+                    <img src="${pkg.img}" alt="${pkg.name}" class="pkg-img" onerror="this.style.display='none'">
                     <div class="info">
-                        <div class="name">${nameHtml}</div>
+                        <div class="name">${pkg.name}</div>
                         ${subHtml}
                         ${badgeHtml}
                     </div>
@@ -1204,11 +1184,11 @@
 
     function renderAllPackages() {
         renderItems(PACKAGES.global.bundles, 'globalBundles');
-        renderItems(PACKAGES.global.double, 'globalDouble', true);
+        renderItems(PACKAGES.global.double, 'globalDouble');
         renderItems(PACKAGES.global.diamonds, 'globalDiamonds');
         
         renderItems(PACKAGES.ban.bundles, 'banBundles');
-        renderItems(PACKAGES.ban.double, 'banDouble', true);
+        renderItems(PACKAGES.ban.double, 'banDouble');
         renderItems(PACKAGES.ban.diamonds, 'banDiamonds');
         
         renderItems(PACKAGES.indo.bundles, 'indoBundles');
@@ -1554,35 +1534,6 @@
             isSubmitting = false;
         }
     });
-
-    // ============================================================
-    // TELEGRAM WEBHOOK HANDLER (Done/Failed)
-    // ============================================================
-    // ဒီအပိုင်းက Telegram Bot က callback_data ကို လက်ခံဖို့ပါ
-    // လက်ရှိတွင် ဒီ function ကို ခေါ်ဖို့ webhook endpoint လိုအပ်ပါတယ်
-    // ဒါပေမယ့် local storage ထဲမှာ သိမ်းထားတဲ့ အော်ဒါတွေကို update လုပ်ဖို့ အောက်ပါ function ကိုသုံးပါ
-    function updateOrderStatus(orderId, status) {
-        const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
-        const index = orders.findIndex(o => o.id === orderId);
-        if (index !== -1) {
-            orders[index].status = status;
-            localStorage.setItem('orderHistory', JSON.stringify(orders));
-            
-            const notifications = JSON.parse(localStorage.getItem('notifications') || '[]');
-            const notiIndex = notifications.findIndex(n => n.orderId === orderId);
-            if (notiIndex !== -1) {
-                notifications[notiIndex].status = status;
-                notifications[notiIndex].message = status === 'completed' ? 
-                    `✅ အော်ဒါ #${orderId} ပြီးပါပြီ!` : 
-                    `❌ အော်ဒါ #${orderId} ပယ်ဖျက်လိုက်ပါပြီ။`;
-                localStorage.setItem('notifications', JSON.stringify(notifications));
-            }
-            
-            updateBadge();
-            window.dispatchEvent(new Event('storage'));
-            showToast(`✅ အော်ဒါ #${orderId} ${status === 'completed' ? 'ပြီးပါပြီ!' : 'ပယ်ဖျက်လိုက်ပါပြီ။'}`, 'success');
-        }
-    }
 
     // ============================================================
     // EVENT LISTENERS
