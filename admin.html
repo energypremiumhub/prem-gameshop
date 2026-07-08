@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔧 Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
+        body{background:#f0f2f5;padding:16px;min-height:100vh}
+        .container{max-width:700px;margin:0 auto}
+        h1{font-size:1.5rem;margin-bottom:16px;color:#1a1a2e}
+        h1 i{color:#00b4d8}
+        h2{font-size:1.1rem;margin:20px 0 10px;color:#1a1a2e}
+        .status-bar{
+            background:#fff;border-radius:12px;padding:12px 16px;margin-bottom:16px;
+            display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,0.06)
+        }
+        .status-bar .dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px}
+        .status-bar .dot.active{background:#00c853;animation:pulse 2s infinite}
+        @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+
+        .order-card{
+            background:#fff;border-radius:12px;padding:14px 16px;margin-bottom:10px;
+            box-shadow:0 2px 10px rgba(0,0,0,0.06);border-left:4px solid #f5a623
+        }
+        .order-card.completed{border-left-color:#00c853;opacity:0.8}
+        .order-card.failed{border-left-color:#ff0044;opacity:0.8}
+        .order-card .top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+        .order-card .order-id{font-weight:700;font-size:0.85rem;color:#1a1a2e}
+        .order-card .status{
+            padding:4px 10px;border-radius:8px;font-size:0.6rem;font-weight:700;text-transform:uppercase
+        }
+        .status.pending{background:rgba(245,166,35,0.15);color:#f5a623}
+        .status.completed{background:rgba(0,200,83,0.15);color:#00c853}
+        .status.failed{background:rgba(255,0,68,0.15);color:#ff0044}
+        .order-card .details{font-size:0.7rem;color:#6b7280;margin-top:6px;line-height:1.6}
+        .order-card .details span{font-weight:600;color:#1a1a2e}
+        .order-card .reply-box{
+            margin-top:8px;padding:8px;background:#f8f9fa;border-radius:8px;font-size:0.65rem;
+            color:#555;max-height:80px;overflow-y:auto
+        }
+        .order-card .reply-box .reply-item{padding:3px 0;border-bottom:1px solid #ddd}
+        .order-card .reply-box .reply-item:last-child{border:none}
+
+        .refresh-btn{
+            background:linear-gradient(135deg,#00b4d8,#7c3aed);color:#fff;border:none;
+            padding:10px 20px;border-radius:10px;font-size:0.8rem;font-weight:700;
+            cursor:pointer;box-shadow:0 4px 15px rgba(0,180,216,0.3);width:100%
+        }
+        .reply-form{
+            background:#fff;border-radius:12px;padding:14px;margin-bottom:16px;box-shadow:0 2px 10px rgba(0,0,0,0.06)
+        }
+        .reply-form input,.reply-form textarea{
+            width:100%;padding:10px;margin:6px 0;border:1px solid #ddd;border-radius:8px;
+            font-size:0.8rem;resize:vertical
+        }
+        .reply-form button{
+            background:linear-gradient(135deg,#7c3aed,#ec4899);color:#fff;border:none;
+            padding:10px 20px;border-radius:8px;font-weight:700;cursor:pointer
+        }
+        .empty{text-align:center;color:#6b7280;padding:40px;font-size:0.9rem}
+        .log{font-size:0.7rem;color:#888;margin-top:10px;background:#fff;padding:10px;border-radius:8px;max-height:100px;overflow-y:auto}
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1><i class="fas fa-cog"></i> Admin Panel</h1>
+    
+    <div class="status-bar">
+        <span><span class="dot active"></span> Bot ချိတ်ဆက်ထားသည်</span>
+        <span id="lastCheck">စစ်ဆေးနေသည်...</span>
+    </div>
+
+    <!-- Reply Form -->
+    <div class="reply-form">
+        <h3><i class="fas fa-reply"></i> Order ကို စာပြန်ရန်</h3>
+        <input type="text" id="replyOrderId" placeholder="Order ID (ဥပမာ ORD-123456)">
+        <textarea id="replyMessage" rows="2" placeholder="ပြန်စာ ရေးပါ..."></textarea>
+        <button onclick="sendReply()"><i class="fas fa-paper-plane"></i> ပို့မည်</button>
+        <div class="log" id="replyLog"></div>
+    </div>
+
+    <h2>📋 အော်ဒါများ</h2>
+    <div id="ordersContainer"><div class="empty">အော်ဒါများ မရှိသေးပါ</div></div>
+
+    <button class="refresh-btn" onclick="loadOrders()"><i class="fas fa-sync-alt"></i> ပြန်စစ်မည်</button>
+    <div class="log" id="updateLog"></div>
+</div>
+
+<script>
+const BOT_TOKEN = '8751360822:AAFQNiWhfGWgUsjD7Bd5DzfHMfpkR4COHY8';
+const CHAT_ID = '8745522082';
+let lastUpdateId = 0;
+
+function log(msg) {
+    const logEl = document.getElementById('updateLog');
+    logEl.innerHTML += `<div>${new Date().toLocaleTimeString()} - ${msg}</div>`;
+    logEl.scrollTop = logEl.scrollHeight;
+}
+
+function replyLog(msg) {
+    const logEl = document.getElementById('replyLog');
+    logEl.innerHTML += `<div>${new Date().toLocaleTimeString()} - ${msg}</div>`;
+    logEl.scrollTop = logEl.scrollHeight;
+}
+
+async function checkBotUpdates() {
+    try {
+        const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?offset=${lastUpdateId+1}`);
+        const data = await res.json();
+        
+        if(data.ok && data.result.length > 0) {
+            for (const update of data.result) {
+                lastUpdateId = update.update_id;
+                
+                if(update.callback_query) {
+                    const cb = update.callback_query;
+                    const [action, orderId] = cb.data.split('_');
+                    const chatId = cb.message.chat.id;
+                    const messageId = cb.message.message_id;
+                    const isPhoto = cb.message.photo ? true : false;
+                    
+                    // Step 1: Answer callback query
+                    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/answerCallbackQuery`, {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({ callback_query_id: cb.id })
+                    });
+                    
+                    // Step 2: Edit message to show "Processing..."
+                    const processingText = action === 'done' ? '⏳ အော်ဒါပြီးမြောက်ကြောင်း တင်ပြနေသည်...' : '⏳ အော်ဒါမအောင်မြင်ကြောင်း တင်ပြနေသည်...';
+                    if (isPhoto) {
+                        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/editMessageCaption`, {
+                            method: 'POST',
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify({
+                                chat_id: chatId,
+                                message_id: messageId,
+                                caption: processingText,
+                                reply_markup: { inline_keyboard: [] }  // remove buttons while processing
+                            })
+                        });
+                    } else {
+                        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/editMessageText`, {
+                            method: 'POST',
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify({
+                                chat_id: chatId,
+                                message_id: messageId,
+                                text: processingText,
+                                reply_markup: { inline_keyboard: [] }
+                            })
+                        });
+                    }
+                    
+                    // Step 3: Update localStorage order status
+                    const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+                    const order = orders.find(o => o.id === orderId);
+                    if (order) {
+                        order.status = action === 'done' ? 'completed' : 'failed';
+                        localStorage.setItem('orderHistory', JSON.stringify(orders));
+                        
+                        // Update notifications
+                        const notis = JSON.parse(localStorage.getItem('notifications') || '[]');
+                        const noti = notis.find(n => n.orderId === orderId);
+                        if (noti) {
+                            noti.status = action === 'done' ? 'completed' : 'failed';
+                            noti.message = action === 'done' 
+                                ? `✅ အောင်မြင်ပါသည် #${orderId}\n📦 ${order.package}\n💰 ${order.price}`
+                                : `❌ မအောင်မြင်ပါ #${orderId}\n📦 ${order.package}\n💰 ${order.price}`;
+                            localStorage.setItem('notifications', JSON.stringify(notis));
+                        }
+                        window.dispatchEvent(new Event('storage'));
+                    }
+                    
+                    // Step 4: Edit message to final status
+                    const finalText = action === 'done' 
+                        ? '✅ အော်ဒါပြီးမြောက်ပါပြီ။ (Completed)' 
+                        : '❌ အော်ဒါမအောင်မြင်ပါ။ (Failed)';
+                    if (isPhoto) {
+                        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/editMessageCaption`, {
+                            method: 'POST',
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify({
+                                chat_id: chatId,
+                                message_id: messageId,
+                                caption: finalText
+                            })
+                        });
+                    } else {
+                        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/editMessageText`, {
+                            method: 'POST',
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify({
+                                chat_id: chatId,
+                                message_id: messageId,
+                                text: finalText
+                            })
+                        });
+                    }
+                    
+                    log(`✅ Order ${orderId} → ${action}`);
+                }
+            }
+        }
+    } catch(e) { console.error('Update check error:', e); }
+    
+    document.getElementById('lastCheck').textContent = 'နောက်ဆုံးစစ်: ' + new Date().toLocaleTimeString();
+}
+
+function loadOrders() {
+    const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+    const container = document.getElementById('ordersContainer');
+    
+    if(orders.length === 0) {
+        container.innerHTML = '<div class="empty">အော်ဒါများ မရှိသေးပါ</div>';
+        return;
+    }
+    
+    container.innerHTML = orders.map(order => `
+        <div class="order-card ${order.status}">
+            <div class="top">
+                <span class="order-id">📋 ${order.id}</span>
+                <span class="status ${order.status}">
+                    ${order.status === 'pending' ? '⏳ ဆောင်ရွက်ဆဲ' : order.status === 'completed' ? '✅ အောင်မြင်' : '❌ မအောင်မြင်'}
+                </span>
+            </div>
+            <div class="details">
+                <span>Package:</span> ${order.package}<br>
+                <span>Server:</span> ${order.server}<br>
+                <span>Price:</span> ${order.price}<br>
+                <span>Game ID:</span> ${order.gameId} | <span>Server ID:</span> ${order.serverId}<br>
+                <span>Payment:</span> ${order.payment}<br>
+                <span>User:</span> ${order.userId}<br>
+                <span>Time:</span> ${new Date(order.date).toLocaleString()}
+                ${order.message ? `<br><span>Message:</span> ${order.message}` : ''}
+            </div>
+            ${order.replies && order.replies.length ? `
+            <div class="reply-box">
+                <strong>📨 ပြန်စာများ</strong>
+                ${order.replies.map(r => `<div class="reply-item">🕐 ${new Date(r.time).toLocaleString()} - ${r.text}</div>`).join('')}
+            </div>` : ''}
+        </div>
+    `).join('');
+}
+
+function sendReply() {
+    const orderId = document.getElementById('replyOrderId').value.trim();
+    const message = document.getElementById('replyMessage').value.trim();
+    if(!orderId || !message) {
+        replyLog('Order ID နှင့် စာ ထည့်ပါ။');
+        return;
+    }
+    
+    const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+    const order = orders.find(o => o.id === orderId);
+    if (!order) {
+        replyLog('Order မတွေ့ပါ။');
+        return;
+    }
+    
+    // Add reply to order
+    if (!order.replies) order.replies = [];
+    order.replies.push({ text: message, time: new Date().toISOString() });
+    localStorage.setItem('orderHistory', JSON.stringify(orders));
+    
+    // Add notification for the user
+    const notis = JSON.parse(localStorage.getItem('notifications') || '[]');
+    notis.unshift({
+        id: 'reply_' + Date.now(),
+        orderId: orderId,
+        type: 'reply',
+        message: `📨 အော်ဒါ #${orderId} အတွက် ပြန်စာ: ${message}`,
+        time: new Date().toLocaleString(),
+        status: 'info'
+    });
+    localStorage.setItem('notifications', JSON.stringify(notis));
+    window.dispatchEvent(new Event('storage'));
+    
+    replyLog(`✅ Order ${orderId} သို့ စာပြန်ပြီး`);
+    document.getElementById('replyMessage').value = '';
+    loadOrders();
+}
+
+setInterval(() => { checkBotUpdates(); loadOrders(); }, 3000);
+document.addEventListener('DOMContentLoaded', () => { loadOrders(); checkBotUpdates(); });
+</script>
+</body>
+</html>
