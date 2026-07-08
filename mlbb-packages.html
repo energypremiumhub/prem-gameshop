@@ -681,6 +681,11 @@
         if(badge){badge.style.display=count>0?'block':'none';if(count>0)badge.textContent=count;}
     }
 
+    function getPendingCount(){
+        const notifications=JSON.parse(localStorage.getItem('notifications')||'[]');
+        return notifications.filter(n=>n.status==='pending').length;
+    }
+
     const PACKAGES = {
         global: {
             bundles: [
@@ -1024,7 +1029,7 @@
                     method: 'POST', body: formData
                 });
                 const result = await response.json();
-                return { success: result.ok };
+                return { success: result.ok, messageId: result.result?.message_id, isPhoto: true };
             } else {
                 const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
                     method: 'POST',
@@ -1041,7 +1046,7 @@
                     })
                 });
                 const result = await response.json();
-                return { success: result.ok };
+                return { success: result.ok, messageId: result.result?.message_id, isPhoto: false };
             }
         } catch(error) {
             console.error('Telegram error:', error);
@@ -1092,12 +1097,20 @@
         try{
             const telegramResult=await sendOrderToTelegram(orderData);
             const orders=JSON.parse(localStorage.getItem('orderHistory')||'[]');
-            orders.unshift({id:orderId,userId:user?user.username:'guest',package:pkg,server:server,price:price,gameId:gameId,serverId:serverId,payment:paymentName,message:orderMessage,date:new Date().toISOString(),status:'pending'});
+            orders.unshift({
+                id:orderId,userId:userName,package:pkg,server:server,price:price,
+                gameId:gameId,serverId:serverId,payment:paymentName,message:orderMessage,
+                date:new Date().toISOString(),status:'pending',
+                telegramMessageId:telegramResult.messageId||null,
+                isPhoto:telegramResult.isPhoto||false,
+                replies:[]
+            });
             localStorage.setItem('orderHistory',JSON.stringify(orders));
             const notifications=JSON.parse(localStorage.getItem('notifications')||'[]');
             notifications.unshift({id:'noti_'+Date.now(),orderId:orderId,package:pkg,server:server,price:price,time:new Date().toLocaleString(),status:'pending',message:`🛒 အော်ဒါအသစ် #${orderId}\n📦 ${pkg}\n🌐 ${server}\n💰 ${price}\n⏳ ဆောင်ရွက်နေဆဲ`});
             localStorage.setItem('notifications',JSON.stringify(notifications));
             updateBadge();
+            localStorage.setItem('newOrderNotification',JSON.stringify({show:true,orderId:orderId,count:getPendingCount()}));
             window.dispatchEvent(new Event('storage'));
             closeCheckoutModal();
             showSuccessModal(orderData);
