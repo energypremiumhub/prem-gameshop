@@ -38,7 +38,7 @@
         .order-card .details span{font-weight:600;color:#1a1a2e}
         .order-card .reply-box{
             margin-top:8px;padding:8px;background:#f8f9fa;border-radius:8px;font-size:0.65rem;
-            color:#555;max-height:80px;overflow-y:auto
+            color:#555;max-height:100px;overflow-y:auto
         }
         .order-card .reply-box .reply-item{padding:3px 0;border-bottom:1px solid #ddd}
         .order-card .reply-box .reply-item:last-child{border:none}
@@ -60,7 +60,7 @@
             padding:10px 20px;border-radius:8px;font-weight:700;cursor:pointer
         }
         .empty{text-align:center;color:#6b7280;padding:40px;font-size:0.9rem}
-        .log{font-size:0.7rem;color:#888;margin-top:10px;background:#fff;padding:10px;border-radius:8px;max-height:100px;overflow-y:auto}
+        .log{font-size:0.7rem;color:#888;margin-top:10px;background:#fff;padding:10px;border-radius:8px;max-height:120px;overflow-y:auto}
     </style>
 </head>
 <body>
@@ -72,7 +72,6 @@
         <span id="lastCheck">စစ်ဆေးနေသည်...</span>
     </div>
 
-    <!-- Reply Form -->
     <div class="reply-form">
         <h3><i class="fas fa-reply"></i> Order ကို စာပြန်ရန်</h3>
         <input type="text" id="replyOrderId" placeholder="Order ID (ဥပမာ ORD-123456)">
@@ -114,6 +113,7 @@ async function checkBotUpdates() {
             for (const update of data.result) {
                 lastUpdateId = update.update_id;
                 
+                // Callback Query (Done/Failed ခလုတ်)
                 if(update.callback_query) {
                     const cb = update.callback_query;
                     const [action, orderId] = cb.data.split('_');
@@ -121,86 +121,102 @@ async function checkBotUpdates() {
                     const messageId = cb.message.message_id;
                     const isPhoto = cb.message.photo ? true : false;
                     
-                    // Step 1: Answer callback query
+                    // Answer callback
                     await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/answerCallbackQuery`, {
                         method: 'POST',
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify({ callback_query_id: cb.id })
                     });
                     
-                    // Step 2: Edit message to show "Processing..."
+                    // Processing...
                     const processingText = action === 'done' ? '⏳ အော်ဒါပြီးမြောက်ကြောင်း တင်ပြနေသည်...' : '⏳ အော်ဒါမအောင်မြင်ကြောင်း တင်ပြနေသည်...';
                     if (isPhoto) {
                         await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/editMessageCaption`, {
                             method: 'POST',
                             headers: {'Content-Type': 'application/json'},
-                            body: JSON.stringify({
-                                chat_id: chatId,
-                                message_id: messageId,
-                                caption: processingText,
-                                reply_markup: { inline_keyboard: [] }  // remove buttons while processing
-                            })
+                            body: JSON.stringify({ chat_id: chatId, message_id: messageId, caption: processingText, reply_markup: { inline_keyboard: [] } })
                         });
                     } else {
                         await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/editMessageText`, {
                             method: 'POST',
                             headers: {'Content-Type': 'application/json'},
-                            body: JSON.stringify({
-                                chat_id: chatId,
-                                message_id: messageId,
-                                text: processingText,
-                                reply_markup: { inline_keyboard: [] }
-                            })
+                            body: JSON.stringify({ chat_id: chatId, message_id: messageId, text: processingText, reply_markup: { inline_keyboard: [] } })
                         });
                     }
                     
-                    // Step 3: Update localStorage order status
+                    // Update localStorage
                     const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
                     const order = orders.find(o => o.id === orderId);
                     if (order) {
                         order.status = action === 'done' ? 'completed' : 'failed';
                         localStorage.setItem('orderHistory', JSON.stringify(orders));
                         
-                        // Update notifications
                         const notis = JSON.parse(localStorage.getItem('notifications') || '[]');
                         const noti = notis.find(n => n.orderId === orderId);
                         if (noti) {
                             noti.status = action === 'done' ? 'completed' : 'failed';
                             noti.message = action === 'done' 
                                 ? `✅ အောင်မြင်ပါသည် #${orderId}\n📦 ${order.package}\n💰 ${order.price}`
-                                : `❌ မအောင်မြင်ပါ #${orderId}\n📦 ${order.package}\n💰 ${order.price}`;
+                                : `❌ ကျရှုံးသည် #${orderId}\n📦 ${order.package}\n💰 ${order.price}`;
                             localStorage.setItem('notifications', JSON.stringify(notis));
                         }
                         window.dispatchEvent(new Event('storage'));
                     }
                     
-                    // Step 4: Edit message to final status
-                    const finalText = action === 'done' 
-                        ? '✅ အော်ဒါပြီးမြောက်ပါပြီ။ (Completed)' 
-                        : '❌ အော်ဒါမအောင်မြင်ပါ။ (Failed)';
+                    // Final status
+                    const finalText = action === 'done' ? '✅ Complete' : '❌ ကျရှုံးသည်';
                     if (isPhoto) {
                         await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/editMessageCaption`, {
                             method: 'POST',
                             headers: {'Content-Type': 'application/json'},
-                            body: JSON.stringify({
-                                chat_id: chatId,
-                                message_id: messageId,
-                                caption: finalText
-                            })
+                            body: JSON.stringify({ chat_id: chatId, message_id: messageId, caption: finalText })
                         });
                     } else {
                         await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/editMessageText`, {
                             method: 'POST',
                             headers: {'Content-Type': 'application/json'},
-                            body: JSON.stringify({
-                                chat_id: chatId,
-                                message_id: messageId,
-                                text: finalText
-                            })
+                            body: JSON.stringify({ chat_id: chatId, message_id: messageId, text: finalText })
                         });
                     }
                     
                     log(`✅ Order ${orderId} → ${action}`);
+                }
+                
+                // Admin Reply (message ကို reply လုပ်ရင်)
+                if(update.message && update.message.reply_to_message) {
+                    const repliedMsg = update.message.reply_to_message;
+                    const replyText = update.message.text || update.message.caption || '';
+                    
+                    const orderIdMatch = (repliedMsg.caption || '').match(/📋 (ORD-\d+)/) || 
+                                         (repliedMsg.text || '').match(/📋 (ORD-\d+)/);
+                    
+                    if(orderIdMatch) {
+                        const orderId = orderIdMatch[1];
+                        
+                        const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+                        const order = orders.find(o => o.id === orderId);
+                        if(order) {
+                            if(!order.replies) order.replies = [];
+                            order.replies.push({
+                                text: replyText,
+                                time: new Date().toISOString(),
+                                from: 'Admin'
+                            });
+                            localStorage.setItem('orderHistory', JSON.stringify(orders));
+                            
+                            // Update existing notification (not create new)
+                            const notis = JSON.parse(localStorage.getItem('notifications') || '[]');
+                            const noti = notis.find(n => n.orderId === orderId);
+                            if(noti) {
+                                noti.replyCount = (noti.replyCount || 0) + 1;
+                                noti.time = new Date().toLocaleString();
+                            }
+                            localStorage.setItem('notifications', JSON.stringify(notis));
+                            window.dispatchEvent(new Event('storage'));
+                            
+                            log(`📨 Admin replied to ${orderId}`);
+                        }
+                    }
                 }
             }
         }
@@ -223,7 +239,7 @@ function loadOrders() {
             <div class="top">
                 <span class="order-id">📋 ${order.id}</span>
                 <span class="status ${order.status}">
-                    ${order.status === 'pending' ? '⏳ ဆောင်ရွက်ဆဲ' : order.status === 'completed' ? '✅ အောင်မြင်' : '❌ မအောင်မြင်'}
+                    ${order.status === 'pending' ? '⏳ ဆောင်ရွက်ဆဲ' : order.status === 'completed' ? '✅ အောင်မြင်' : '❌ ကျရှုံးသည်'}
                 </span>
             </div>
             <div class="details">
@@ -239,7 +255,7 @@ function loadOrders() {
             ${order.replies && order.replies.length ? `
             <div class="reply-box">
                 <strong>📨 ပြန်စာများ</strong>
-                ${order.replies.map(r => `<div class="reply-item">🕐 ${new Date(r.time).toLocaleString()} - ${r.text}</div>`).join('')}
+                ${order.replies.map(r => `<div class="reply-item">👤 ${r.from||'Admin'} - ${r.text} <small>(${new Date(r.time).toLocaleString()})</small></div>`).join('')}
             </div>` : ''}
         </div>
     `).join('');
@@ -260,22 +276,18 @@ function sendReply() {
         return;
     }
     
-    // Add reply to order
     if (!order.replies) order.replies = [];
-    order.replies.push({ text: message, time: new Date().toISOString() });
+    order.replies.push({ text: message, time: new Date().toISOString(), from: 'Admin' });
     localStorage.setItem('orderHistory', JSON.stringify(orders));
     
-    // Add notification for the user
+    // Update notification (not new)
     const notis = JSON.parse(localStorage.getItem('notifications') || '[]');
-    notis.unshift({
-        id: 'reply_' + Date.now(),
-        orderId: orderId,
-        type: 'reply',
-        message: `📨 အော်ဒါ #${orderId} အတွက် ပြန်စာ: ${message}`,
-        time: new Date().toLocaleString(),
-        status: 'info'
-    });
-    localStorage.setItem('notifications', JSON.stringify(notis));
+    const noti = notis.find(n => n.orderId === orderId);
+    if(noti) {
+        noti.replyCount = (noti.replyCount || 0) + 1;
+        noti.time = new Date().toLocaleString();
+        localStorage.setItem('notifications', JSON.stringify(notis));
+    }
     window.dispatchEvent(new Event('storage'));
     
     replyLog(`✅ Order ${orderId} သို့ စာပြန်ပြီး`);
