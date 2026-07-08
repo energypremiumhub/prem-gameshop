@@ -234,7 +234,7 @@
         }
         .section-title span{color:var(--text-secondary);opacity:0.5}
 
-        /* ===== SERVER SELECTOR - Ban Server အောက် ===== */
+        /* ===== SERVER SELECTOR - ဘောင်ဒါဖျောက် ===== */
         .server-selector{
             background:var(--bg-card);
             backdrop-filter:blur(20px);
@@ -594,7 +594,6 @@
         .modal .selected-row .pkg{font-size:0.85rem;font-weight:600;color:var(--text-primary)}
         .modal .selected-row .price{font-size:0.9rem;font-weight:700;color:var(--gold)}
         
-        /* Payment Option - Cyan border (စိန်ကဒ်အရောင်အတိုင်း) */
         .modal .payment-options{
             display:grid;
             grid-template-columns:1fr 1fr;
@@ -711,7 +710,7 @@
             opacity:0.6
         }
 
-        /* ===== SUCCESS MODAL (အကြီးကြီး) ===== */
+        /* ===== SUCCESS MODAL ===== */
         .success-modal-overlay{
             position:fixed;
             top:0;left:0;right:0;bottom:0;
@@ -732,11 +731,11 @@
             backdrop-filter:blur(24px);
             border:2px solid var(--green);
             border-radius:20px;
-            padding:35px 28px;
-            max-width:440px;
+            padding:30px 24px;
+            max-width:400px;
             width:100%;
             text-align:center;
-            box-shadow:0 0 60px var(--green-glow);
+            box-shadow:0 0 40px var(--green-glow);
             animation:successPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)
         }
         @keyframes successPop{
@@ -744,22 +743,18 @@
             50%{transform:scale(1.05)}
             100%{transform:scale(1);opacity:1}
         }
-        .success-modal .icon{font-size:4rem;color:var(--green);margin-bottom:8px;animation:successIcon 1s ease-in-out infinite}
-        @keyframes successIcon{
-            0%,100%{transform:scale(1)}
-            50%{transform:scale(1.1)}
-        }
-        .success-modal h2{font-size:1.4rem;color:var(--text-primary);margin-bottom:4px}
-        .success-modal .sub{font-size:0.8rem;color:var(--text-secondary);margin-bottom:12px}
+        .success-modal .icon{font-size:3.5rem;color:var(--green);margin-bottom:8px}
+        .success-modal h2{font-size:1.3rem;color:var(--text-primary);margin-bottom:4px}
+        .success-modal .sub{font-size:0.75rem;color:var(--text-secondary);margin-bottom:12px}
         .success-modal .order-details{
             background:var(--bg-input);
-            border-radius:12px;
-            padding:14px 18px;
+            border-radius:10px;
+            padding:12px 16px;
             text-align:left;
-            font-size:0.7rem;
-            margin-bottom:14px
+            font-size:0.65rem;
+            margin-bottom:12px
         }
-        .success-modal .order-details .row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border-color)}
+        .success-modal .order-details .row{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--border-color)}
         .success-modal .order-details .row:last-child{border-bottom:none}
         .success-modal .order-details .label{color:var(--text-secondary)}
         .success-modal .order-details .value{color:var(--text-primary);font-weight:600}
@@ -767,16 +762,15 @@
             background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));
             color:#fff;
             border:none;
-            padding:12px 35px;
-            border-radius:12px;
-            font-size:0.9rem;
+            padding:10px 30px;
+            border-radius:10px;
+            font-size:0.85rem;
             font-weight:700;
             cursor:pointer;
             transition:all 0.3s ease;
-            box-shadow:0 4px 20px var(--cyan-glow)
+            box-shadow:0 4px 15px var(--cyan-glow)
         }
         .success-modal .btn-close-success:active{transform:scale(0.95)!important}
-        .success-modal .btn-close-success:hover{box-shadow:0 4px 30px var(--cyan-glow)}
     </style>
 </head>
 <body>
@@ -806,7 +800,7 @@
 
     <!-- PAGE HEADER -->
     <div class="page-header">
-        <h1><i class="fas fa-gem"></i> <span id="pageTitle">MLBB Packages</span></h1>
+        <h1><i class="fas fa-earth-asia"></i> <span id="pageTitle">MLBB Packages</span></h1>
         <p id="pageSub">ပက်ကေ့ချ်တစ်ခုရွေးပြီး ဝယ်ယူပါ</p>
     </div>
 
@@ -817,14 +811,14 @@
         <span class="clear-btn" id="clearSearch" onclick="clearItemSearch()"><i class="fas fa-times-circle"></i></span>
     </div>
 
-    <!-- SERVER SELECTOR - Ban Server အောက် -->
+    <!-- SERVER SELECTOR - ဘောင်ဒါဖျောက် -->
     <div class="server-selector">
-        <span class="label"><i class="fas fa-server"></i> Server</span>
+        <span class="label"><i class="fas fa-earth-asia"></i> Server</span>
         <div class="options" id="serverOptions">
             <span class="opt active" data-server="global" onclick="switchServer('global')"><span class="flag">🌍</span>Global</span>
             <span class="opt" data-server="indo" onclick="switchServer('indo')"><span class="flag">🇮🇩</span>Indo</span>
             <span class="opt" data-server="russia" onclick="switchServer('russia')"><span class="flag">🇷🇺</span>Russia</span>
-            <span class="opt" data-server="ban" onclick="switchServer('ban')"><span class="flag">🇲🇾🇸🇬🇵🇭</span>Ban: Malay, Sin, Php</span>
+            <span class="opt" data-server="ban" onclick="switchServer('ban')"><span class="flag">🇲🇾🇸🇬🇵🇭</span>Ban</span>
         </div>
     </div>
 
@@ -946,12 +940,12 @@
     </div>
 </div>
 
-<!-- ===== SUCCESS MODAL (အကြီးကြီး) ===== -->
+<!-- ===== SUCCESS MODAL ===== -->
 <div class="success-modal-overlay" id="successModal">
     <div class="success-modal">
         <div class="icon">✅</div>
         <h2>အော်ဒါတင်ခြင်းအောင်မြင်ပါသည်!</h2>
-        <p class="sub">သင့်အော်ဒါကို အတည်ပြုပြီးပါပြီ။ ကျေးဇူးတင်ပါတယ်။<br>ရေးချင်တာရှိရင်ရေးပါ။</p>
+        <p class="sub">သင့်အော်ဒါကို အတည်ပြုပြီးပါပြီ။ ကျေးဇူးတင်ပါတယ်။</p>
         <div class="order-details" id="successOrderDetails">
             <div class="row"><span class="label">အော်ဒါအမှတ်</span><span class="value" id="sOrderId">-</span></div>
             <div class="row"><span class="label">ပက်ကေ့ချ်</span><span class="value" id="sPackage">-</span></div>
@@ -1038,6 +1032,29 @@
     let selectedPayment = null;
     let isSubmitting = false;
 
+    // Server name mapping
+    const SERVER_NAMES = {
+        global: 'Global',
+        indo: 'Indo',
+        russia: 'Russia',
+        ban: 'Ban'
+    };
+
+    const SERVER_EMOJIS = {
+        global: '🌍',
+        indo: '🇮🇩',
+        russia: '🇷🇺',
+        ban: '🇲🇾🇸🇬🇵🇭'
+    };
+
+    function getServerName() {
+        return SERVER_NAMES[currentServer] || 'Global';
+    }
+
+    function getServerEmoji() {
+        return SERVER_EMOJIS[currentServer] || '🌍';
+    }
+
     function getText(key){return LANG_DATA[currentLang]?.[key]||key}
 
     function showToast(msg, type){
@@ -1119,10 +1136,10 @@
     const PACKAGES = {
         global: {
             bundles: [
-                { id: 'g_b1', name: 'Monthly Epic Bundle', price: 17300, img: 'https://files.catbox.moe/z2j5uo.png', sub: '🌍 Global' },
-                { id: 'g_b2', name: 'Weekly Elite Bundle', price: 3600, img: 'https://files.catbox.moe/i3uywg.png', sub: '🌍 Global' },
-                { id: 'g_b3', name: 'Weekly Pass', price: 6500, img: 'https://files.catbox.moe/zylral.png', sub: '🌍 Global' },
-                { id: 'g_b4', name: 'Twilight Pass', price: 34000, img: 'https://files.catbox.moe/jshuuy.png', sub: '🌍 Global' }
+                { id: 'g_b1', name: 'Monthly Epic Bundle', price: 17300, img: 'https://files.catbox.moe/z2j5uo.png' },
+                { id: 'g_b2', name: 'Weekly Elite Bundle', price: 3600, img: 'https://files.catbox.moe/i3uywg.png' },
+                { id: 'g_b3', name: 'Weekly Pass', price: 6500, img: 'https://files.catbox.moe/zylral.png' },
+                { id: 'g_b4', name: 'Twilight Pass', price: 34000, img: 'https://files.catbox.moe/jshuuy.png' }
             ],
             double: [
                 { id: 'g_x1', name: '50+50', price: 3550, img: 'https://files.catbox.moe/z376wd.png', badge: true },
@@ -1165,7 +1182,7 @@
         },
         ban: {
             bundles: [
-                { id: 'b_b1', name: 'Weekly Pass', price: 9400, img: 'https://files.catbox.moe/zylral.png', sub: '🇲🇾🇸🇬🇵🇭 Ban' }
+                { id: 'b_b1', name: 'Weekly Pass', price: 9400, img: 'https://files.catbox.moe/zylral.png' }
             ],
             double: [
                 { id: 'b_x1', name: '55', price: 4500, img: 'https://files.catbox.moe/z376wd.png', badge: true },
@@ -1207,7 +1224,7 @@
         },
         indo: {
             bundles: [
-                { id: 'i_b1', name: 'Weekly Pass', price: 8700, img: 'https://files.catbox.moe/zylral.png', sub: '🇮🇩 Indo' }
+                { id: 'i_b1', name: 'Weekly Pass', price: 8700, img: 'https://files.catbox.moe/zylral.png' }
             ],
             diamonds: [
                 { id: 'i_d1', name: '5', price: 700, img: 'https://files.catbox.moe/xaxejk.png' },
@@ -1229,7 +1246,7 @@
         },
         russia: {
             bundles: [
-                { id: 'r_b1', name: 'Weekly Pass', price: 9750, img: 'https://files.catbox.moe/zylral.png', sub: '🇷🇺 Russia' }
+                { id: 'r_b1', name: 'Weekly Pass', price: 9750, img: 'https://files.catbox.moe/zylral.png' }
             ],
             diamonds: [
                 { id: 'r_d1', name: '35', price: 3100, img: 'https://files.catbox.moe/xaxejk.png' },
@@ -1256,17 +1273,23 @@
             return;
         }
         
+        const serverName = getServerName();
+        const serverEmoji = getServerEmoji();
+        const title = `MLBB ${serverName}`;
+        
         container.innerHTML = items.map(pkg => {
             const isSelected = selectedPackage && selectedPackage.id === pkg.id;
-            const subHtml = pkg.sub ? `<div class="sub">${pkg.sub}</div>` : '';
             const badgeHtml = pkg.badge ? `<span class="badge">${d.doubleBadge}</span>` : '';
+            const doubleClass = isDouble ? 'double-item' : '';
             
             return `
-                <div class="package-item ${isSelected?'selected':''}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})">
+                <div class="package-item ${isSelected?'selected':''} ${doubleClass}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})">
                     <img src="${pkg.img}" alt="${pkg.name}" class="pkg-img" onerror="this.style.display='none'">
                     <div class="info">
-                        <div class="name">${pkg.name}</div>
-                        ${subHtml}
+                        <div class="name">
+                            <span class="line1">${title}</span>
+                            <span class="line2">${pkg.name}</span>
+                        </div>
                         ${badgeHtml}
                     </div>
                     <div class="bottom">
@@ -1301,18 +1324,6 @@
         } else {
             selectedPackage = { id, name, price };
         }
-        // Click animation
-        const items = document.querySelectorAll('.package-item');
-        items.forEach(item => {
-            if (item.querySelector('.name')?.textContent === name) {
-                item.style.transition = 'transform 0.12s cubic-bezier(0.34, 1.2, 0.64, 1)';
-                item.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    item.style.transform = '';
-                    item.style.transition = 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
-                }, 150);
-            }
-        });
         renderAllPackages();
     }
 
@@ -1364,6 +1375,10 @@
         document.getElementById('banSection').classList.toggle('hidden', server !== 'ban');
         document.getElementById('indoSektion').classList.toggle('hidden', server !== 'indo');
         document.getElementById('russiaSection').classList.toggle('hidden', server !== 'russia');
+        
+        // Update page title
+        const serverName = getServerName();
+        document.getElementById('pageTitle').textContent = `MLBB ${serverName} Packages`;
         
         selectedPackage = null;
         renderAllPackages();
