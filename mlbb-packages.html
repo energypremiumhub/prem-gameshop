@@ -170,7 +170,6 @@
         .page-header h1 i{color:var(--cyan);margin-right:6px}
         .page-header p{color:var(--text-secondary);font-size:0.7rem;margin-top:2px}
 
-        /* ===== SEARCH BAR ===== */
         .search-bar{
             background:var(--bg-card);
             backdrop-filter:blur(20px);
@@ -192,17 +191,8 @@
             outline:none;
             padding:4px 0
         }
-        .search-bar input::placeholder{
-            color:var(--text-secondary);
-            font-size:0.65rem
-        }
-        .search-bar .clear-btn{
-            color:var(--text-secondary);
-            font-size:0.7rem;
-            cursor:pointer;
-            padding:4px;
-            display:none
-        }
+        .search-bar input::placeholder{color:var(--text-secondary);font-size:0.65rem}
+        .search-bar .clear-btn{color:var(--text-secondary);font-size:0.7rem;cursor:pointer;padding:4px;display:none}
         .search-bar .clear-btn.show{display:block}
         .search-bar .icon{color:var(--text-secondary);font-size:0.9rem}
 
@@ -232,9 +222,7 @@
             50%{background-position:100% 50%}
             100%{background-position:0% 50%}
         }
-        .section-title span{color:var(--text-secondary);opacity:0.5}
 
-        /* ===== SERVER SELECTOR ===== */
         .server-selector{
             background:var(--bg-card);
             backdrop-filter:blur(20px);
@@ -248,26 +236,19 @@
             box-shadow:0 4px 20px var(--shadow);
             outline:none
         }
-        .server-selector:focus,
-        .server-selector:focus-visible,
-        .server-selector *:focus,
-        .server-selector *:focus-visible {
-            outline: none !important;
-        }
+        .server-selector:focus,.server-selector:focus-visible,.server-selector *:focus,.server-selector *:focus-visible{outline:none!important}
         .server-selector .label{
             font-size:0.55rem;
             color:var(--text-secondary);
             font-weight:600;
             text-transform:uppercase;
             letter-spacing:0.5px;
-            flex-shrink:0
-        }
-        .server-selector .options{
+            flex-shrink:0;
             display:flex;
-            gap:6px;
-            flex-wrap:wrap;
-            flex:1
+            align-items:center;
+            gap:4px
         }
+        .server-selector .options{display:flex;gap:6px;flex-wrap:wrap;flex:1}
         .server-selector .options .opt{
             background:transparent;
             border:1px solid var(--border-color);
@@ -287,15 +268,8 @@
             border:none;
             box-shadow:0 4px 15px rgba(0,180,216,0.3)
         }
-        .server-selector .options .opt .flag{margin-right:4px}
 
-        /* ===== PACKAGE GRID - 3 per row ===== */
-        .package-grid{
-            display:grid;
-            grid-template-columns:repeat(3,1fr);
-            gap:8px;
-            margin-bottom:20px
-        }
+        .package-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
         .package-item{
             background:var(--bg-card);
             backdrop-filter:blur(20px);
@@ -306,101 +280,33 @@
             cursor:pointer;
             transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow:0 4px 20px var(--shadow);
-            position:relative;
-            overflow:hidden;
             display:flex;
             flex-direction:column;
             align-items:center
         }
-        .package-item:hover{
-            transform:translateY(-6px);
-            box-shadow:0 8px 30px var(--shadow-hover)
-        }
-        .package-item:active{
-            transform:scale(0.92)!important;
-            transition:transform 0.12s cubic-bezier(0.34, 1.2, 0.64, 1)!important
-        }
-        .package-item.selected{
-            border:1px solid var(--cyan);
-            box-shadow:0 0 20px var(--cyan-glow);
-            background:var(--bg-card)
-        }
+        .package-item:hover{transform:translateY(-6px);box-shadow:0 8px 30px var(--shadow-hover)}
+        .package-item:active{transform:scale(0.92)!important;transition:transform 0.12s cubic-bezier(0.34, 1.2, 0.64, 1)!important}
+        .package-item.selected{border:1px solid var(--cyan);box-shadow:0 0 20px var(--cyan-glow);background:var(--bg-card)}
         .package-item.hidden{display:none}
         
-        .package-item .pkg-img{
-            width:100%;
-            height:auto;
-            display:block;
-            border-radius:8px;
-            margin-bottom:4px;
-            animation:floatIcon 3s ease-in-out infinite
-        }
-        @keyframes floatIcon{
-            0%,100%{transform:translateY(0px)}
-            50%{transform:translateY(-6px)}
-        }
-        .package-item:hover .pkg-img{
-            transform:scale(1.04);
-            transition:transform 0.3s ease
-        }
-        .package-item.selected .pkg-img{
-            box-shadow:0 0 8px var(--gold-glow)
-        }
-        
-        .package-item .info{
-            display:flex;
-            flex-direction:column;
-            gap:1px;
-            width:100%
-        }
-        .package-item .info .name{
-            font-size:0.65rem;
-            font-weight:700;
-            color:var(--text-primary);
-            line-height:1.2
-        }
+        .package-item .pkg-img{width:100%;height:auto;display:block;border-radius:8px;margin-bottom:4px;animation:floatIcon 3s ease-in-out infinite}
+        @keyframes floatIcon{0%,100%{transform:translateY(0px)}50%{transform:translateY(-6px)}}
+        .package-item:hover .pkg-img{transform:scale(1.04);transition:transform 0.3s ease}
+        .package-item.selected .pkg-img{box-shadow:0 0 8px var(--gold-glow)}
+
+        /* Double Item - Smaller Image */
+        .package-item.double-item .pkg-img{max-width:65%;margin:0 auto}
+
+        .package-item .info{display:flex;flex-direction:column;gap:1px;width:100%}
+        .package-item .info .name{font-size:0.65rem;font-weight:700;color:var(--text-primary);line-height:1.2}
         .package-item .info .name .line1{display:block}
-        .package-item .info .badge{
-            display:inline-block;
-            font-size:0.35rem;
-            color:var(--gold);
-            background:rgba(245,166,35,0.1);
-            padding:1px 8px;
-            border-radius:8px;
-            border:1px solid rgba(245,166,35,0.08);
-            font-weight:600;
-            margin-top:2px;
-            width:fit-content;
-            margin-left:auto;
-            margin-right:auto
-        }
+        .package-item .info .name .line2{display:block;font-size:0.55rem;color:var(--text-secondary);font-weight:500}
 
-        /* ဈေးနှုန်း - ဒုတိယလိုင်း */
-        .package-item .price-text{
-            font-size:0.65rem;
-            font-weight:700;
-            color:var(--text-secondary);
-            margin:4px 0;
-            transition:all 0.4s ease
-        }
-        .package-item.selected .price-text{
-            color:var(--cyan)
-        }
+        .package-item .price-text{font-size:0.65rem;font-weight:700;color:var(--text-secondary);margin:4px 0;transition:all 0.4s ease}
+        .package-item.selected .price-text{color:var(--cyan)}
 
-        /* Server Name + Buy Button Container - တတိယလိုင်း */
-        .package-item .server-name{
-            margin-top:4px;
-            width:100%;
-            display:flex;
-            justify-content:center
-        }
-        .package-item .server-name .btn-label{
-            font-size:0.45rem;
-            color:var(--text-secondary);
-            font-weight:500;
-            opacity:0.6;
-            letter-spacing:0.3px
-        }
+        .package-item .server-name{margin-top:4px;width:100%;display:flex;justify-content:center}
+        .package-item .server-name .btn-label{font-size:0.45rem;color:var(--text-secondary);font-weight:500;opacity:0.6;letter-spacing:0.3px}
         .package-item .server-name .buy-btn{
             display:none;
             background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));
@@ -411,265 +317,136 @@
             font-size:0.55rem;
             font-weight:700;
             cursor:pointer;
-            transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow:0 4px 15px rgba(0,180,216,0.3);
             width:100%;
             max-width:120px;
             letter-spacing:0.5px
         }
-        .package-item .server-name .buy-btn:active{
-            transform:scale(0.92)!important
-        }
-
-        /* Selected State - Server Name ဖျောက် / Buy Button ပြ */
+        .package-item .server-name .buy-btn:active{transform:scale(0.92)!important}
         .package-item.selected .server-name .buy-btn{display:block}
         .package-item.selected .server-name .btn-label{display:none}
 
         .bottom-nav {
-            position:fixed;
-            bottom:16px;
-            left:16px;
-            right:16px;
-            width:auto;
-            max-width:480px;
-            margin:0 auto;
-            background: var(--bg-card);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--border-color);
-            border-radius:18px;
-            display:flex;
-            justify-content:space-around;
-            padding:8px 4px;
-            z-index:100;
-            box-shadow: 0 4px 30px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.08);
+            position:fixed;bottom:16px;left:16px;right:16px;width:auto;max-width:480px;margin:0 auto;
+            background:var(--bg-card);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+            border:1px solid var(--border-color);border-radius:18px;display:flex;justify-content:space-around;
+            padding:8px 4px;z-index:100;box-shadow:0 4px 30px var(--shadow),inset 0 1px 0 rgba(255,255,255,0.08);
             animation:navSlideUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)
         }
-        @keyframes navSlideUp {
-            from{opacity:0;transform:translateY(30px)}
-            to{opacity:1;transform:translateY(0)}
+        @keyframes navSlideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+        .bottom-nav .nav-item{
+            text-align:center;cursor:pointer;text-decoration:none;color:var(--text-secondary);
+            transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);padding:6px 12px;border-radius:12px;
+            min-width:48px;border:1px solid transparent;display:flex;flex-direction:column;align-items:center;
+            gap:1px;position:relative;z-index:1
         }
-        .bottom-nav::before {
-            content:'';
-            position:absolute;
-            top:0;
-            left:0;
-            right:0;
-            bottom:0;
-            border-radius:18px;
-            background:linear-gradient(180deg, rgba(255,255,255,0.15) 0%, transparent 50%);
-            pointer-events:none;
-            z-index:0
-        }
-        .night-mode .bottom-nav::before {
-            background:linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 50%)
-        }
-        .bottom-nav .nav-item {
-            text-align:center;
-            cursor:pointer;
-            text-decoration:none;
-            color:var(--text-secondary);
-            transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            padding:6px 12px;
-            border-radius:12px;
-            min-width:48px;
-            border:1px solid transparent;
-            display:flex;
-            flex-direction:column;
-            align-items:center;
-            gap:1px;
-            animation:floatIcon 3s ease-in-out infinite;
-            position:relative;
-            z-index:1
-        }
-        .bottom-nav .nav-item:nth-child(2){animation-delay:0.2s}
-        .bottom-nav .nav-item:nth-child(3){animation-delay:0.4s}
-        .bottom-nav .nav-item:nth-child(4){animation-delay:0.6s}
-        .bottom-nav .nav-item:active{transform:scale(0.88)!important;animation:none}
+        .bottom-nav .nav-item:active{transform:scale(0.88)!important}
         .bottom-nav .nav-item .icon{font-size:1.2rem;display:block}
         .bottom-nav .nav-item .label{font-size:0.4rem;letter-spacing:0.5px;opacity:0.5;font-weight:400}
         .bottom-nav .nav-item.active{
-            background:rgba(0,180,216,0.08);
-            border:1px solid rgba(0,180,216,0.12);
+            background:rgba(0,180,216,0.08);border:1px solid rgba(0,180,216,0.12);
             box-shadow:0 0 30px rgba(0,180,216,0.05)
         }
         .bottom-nav .nav-item.active .icon{
             transform:translateY(-2px) scale(1.1);
             background:linear-gradient(135deg,var(--cyan),var(--purple));
-            -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent
         }
         .bottom-nav .nav-item.active .label{
             background:linear-gradient(135deg,var(--cyan),var(--purple));
-            -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent;
-            opacity:1;
-            font-weight:600
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:1;font-weight:600
         }
 
         .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.3}
 
         .toast{
-            position:fixed;
-            bottom:85px;
-            left:50%;
-            transform:translateX(-50%);
-            background:var(--bg-secondary);
-            padding:10px 20px;
-            border-radius:12px;
-            border:1px solid var(--border-color);
-            color:var(--cyan);
-            font-weight:600;
-            font-size:0.75rem;
-            display:none;
-            z-index:200;
-            text-align:center;
-            max-width:90%;
+            position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-secondary);
+            padding:10px 20px;border-radius:12px;border:1px solid var(--border-color);color:var(--cyan);
+            font-weight:600;font-size:0.75rem;display:none;z-index:200;text-align:center;max-width:90%;
             box-shadow:0 4px 20px var(--shadow)
         }
         .toast.show{display:block;animation:toastPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)}
         @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes floatIcon{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 
-        .glass-box{background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);border-radius:16px}
-        
-        /* ===== SECTION HIDE/SHOW ===== */
         .section-wrapper{display:block}
         .section-wrapper.hidden{display:none}
 
         /* ===== MODAL ===== */
         .modal-overlay{
-            position:fixed;
-            top:0;left:0;right:0;bottom:0;
-            background:rgba(0,0,0,0.6);
-            backdrop-filter:blur(12px);
-            display:none;
-            z-index:999;
-            align-items:center;
-            justify-content:center;
-            padding:20px
+            position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);
+            backdrop-filter:blur(12px);display:none;z-index:999;align-items:center;justify-content:center;padding:20px
         }
-        .modal-overlay.show{
-            display:flex;
-            animation:fadeIn 0.3s ease
-        }
+        .modal-overlay.show{display:flex;animation:fadeIn 0.3s ease}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
         
         .modal{
-            background:var(--bg-secondary);
-            backdrop-filter:blur(24px);
-            border:1px solid var(--border-color);
-            border-radius:16px;
-            padding:24px 20px;
-            max-width:420px;
-            width:100%;
-            box-shadow:0 4px 30px var(--shadow);
-            position:relative;
-            max-height:90vh;
-            overflow-y:auto
+            background:var(--bg-secondary);backdrop-filter:blur(24px);
+            border:1px solid var(--border-color);border-radius:16px;padding:24px 20px;
+            max-width:420px;width:100%;box-shadow:0 4px 30px var(--shadow);
+            max-height:90vh;overflow-y:auto
         }
         .modal .close-btn{
-            position:absolute;
-            top:10px;
-            right:14px;
-            background:none;
-            border:none;
-            color:var(--text-secondary);
-            font-size:1.1rem;
-            cursor:pointer;
-            transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)
+            position:absolute;top:10px;right:14px;background:none;border:none;
+            color:var(--text-secondary);font-size:1.1rem;cursor:pointer
         }
         .modal .close-btn:active{transform:scale(0.92)!important}
-        .modal .close-btn:hover{color:var(--cyan)}
-        .modal h2{font-size:1.2rem;color:var(--text-primary);text-align:center;margin-bottom:4px}
-        .modal .sub{color:var(--text-secondary);font-size:0.75rem;text-align:center;margin-bottom:16px}
-        .modal .form-group{margin-bottom:12px}
-        .modal .form-group label{display:block;color:var(--text-secondary);font-size:0.6rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px}
-        .modal .form-group input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border-color);background:var(--bg-input);color:var(--text-primary);font-size:0.85rem;outline:none;transition:all 0.3s ease}
-        .modal .form-group input:focus{border-color:var(--cyan);box-shadow:0 0 20px var(--cyan-glow)}
-        .modal .form-group input::placeholder{color:var(--text-secondary);font-size:0.7rem}
-        .modal .form-group .input-hint{font-size:0.5rem;color:var(--text-secondary);margin-top:3px;opacity:0.5}
-        .modal .selected-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg-input);border-radius:10px;border:1px solid var(--border-color);margin-bottom:12px}
-        .modal .selected-row .pkg{font-size:0.85rem;font-weight:600;color:var(--text-primary)}
-        .modal .selected-row .price{font-size:0.9rem;font-weight:700;color:var(--gold)}
-        
-        .modal .payment-options{
-            display:grid;
-            grid-template-columns:1fr 1fr;
-            gap:8px;
-            margin-top:4px
+        .modal h2{font-size:1.1rem;color:var(--text-primary);text-align:center;margin-bottom:2px}
+        .modal .sub{color:var(--text-secondary);font-size:0.65rem;text-align:center;margin-bottom:14px}
+        .modal .form-group{margin-bottom:10px}
+        .modal .form-group label{display:block;color:var(--text-secondary);font-size:0.55rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px}
+        .modal .form-group input{
+            width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border-color);
+            background:var(--bg-input);color:var(--text-primary);font-size:0.8rem;outline:none
         }
+        .modal .form-group input:focus{border-color:var(--cyan);box-shadow:0 0 20px var(--cyan-glow)}
+        .modal .form-group .input-hint{font-size:0.45rem;color:var(--text-secondary);margin-top:2px;opacity:0.5}
+
+        .modal .selected-row{
+            display:flex;justify-content:space-between;align-items:center;padding:10px 14px;
+            background:var(--bg-input);border-radius:10px;border:1px solid var(--border-color);margin-bottom:10px;
+            flex-wrap:wrap;gap:4px
+        }
+        .modal .selected-row .pkg-info{display:flex;flex-direction:column;gap:1px}
+        .modal .selected-row .pkg{font-size:0.75rem;font-weight:600;color:var(--text-primary)}
+        .modal .selected-row .server-tag{font-size:0.5rem;color:var(--cyan);font-weight:500}
+        .modal .selected-row .price{font-size:0.8rem;font-weight:700;color:var(--gold)}
+
+        .modal .payment-options{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
         .modal .payment-option{
-            background:var(--bg-input);
-            border:1px solid var(--border-color);
-            border-radius:10px;
-            padding:10px;
-            text-align:center;
-            cursor:pointer;
-            transition:all 0.3s ease
+            background:var(--bg-input);border:1px solid var(--border-color);border-radius:10px;
+            padding:10px;text-align:center;cursor:pointer;transition:all 0.3s ease
         }
         .modal .payment-option:active{transform:scale(0.92)!important}
         .modal .payment-option.selected{
-            border:1px solid var(--cyan);
-            background:rgba(0,180,216,0.06);
-            box-shadow:0 0 20px var(--cyan-glow)
+            border:1px solid var(--cyan);background:rgba(0,180,216,0.06);box-shadow:0 0 20px var(--cyan-glow)
         }
         .modal .payment-option .icon-box{
-            width:40px;
-            height:40px;
-            border-radius:10px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            margin:0 auto 4px;
-            overflow:hidden;
-            border:1px solid var(--border-color);
-            background:var(--bg-input)
+            width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+            margin:0 auto 4px;overflow:hidden;border:1px solid var(--border-color);background:var(--bg-input)
         }
         .modal .payment-option .icon-box img{width:100%;height:100%;object-fit:cover}
-        .modal .payment-option .name{font-size:0.65rem;font-weight:600;color:var(--text-primary)}
-        
+        .modal .payment-option .name{font-size:0.6rem;font-weight:600;color:var(--text-primary)}
+
         .modal .account-info{
-            background:rgba(0,180,216,0.04);
-            border:1px solid rgba(0,180,216,0.08);
-            border-radius:10px;
-            padding:10px 14px;
-            margin-top:8px;
-            display:none
+            background:rgba(0,180,216,0.04);border:1px solid rgba(0,180,216,0.08);
+            border-radius:10px;padding:10px 14px;margin-top:6px;display:none
         }
         .modal .account-info.show{display:block}
         .modal .account-info .acc-number{
-            font-size:0.75rem;
-            color:var(--green);
-            font-weight:500;
-            display:flex;
-            align-items:center;
-            gap:8px;
-            flex-wrap:wrap
+            font-size:0.7rem;color:var(--green);font-weight:500;
+            display:flex;align-items:center;gap:8px;flex-wrap:wrap
         }
         .modal .account-info .acc-number .copy-btn{
-            background:linear-gradient(135deg, var(--cyan), var(--purple));
-            border:none;
-            color:#fff;
-            padding:2px 10px;
-            border-radius:10px;
-            font-size:0.45rem;
-            cursor:pointer;
-            font-weight:600;
-            box-shadow:0 2px 8px rgba(0,180,216,0.2);
-            transition:all 0.3s ease
+            background:linear-gradient(135deg,var(--cyan),var(--purple));border:none;color:#fff;
+            padding:2px 10px;border-radius:10px;font-size:0.45rem;cursor:pointer;font-weight:600;
+            box-shadow:0 2px 8px rgba(0,180,216,0.2)
         }
         .modal .account-info .acc-number .copy-btn:active{transform:scale(0.92)!important}
-        
+
         .modal .file-upload{
-            border:2px dashed var(--border-color);
-            border-radius:10px;
-            padding:14px;
-            text-align:center;
-            cursor:pointer;
-            transition:all 0.3s ease;
-            position:relative
+            border:2px dashed var(--border-color);border-radius:10px;padding:14px;
+            text-align:center;cursor:pointer;transition:all 0.3s ease;position:relative
         }
         .modal .file-upload:active{transform:scale(0.92)!important}
         .modal .file-upload.has-file{border-color:var(--green);background:rgba(0,200,83,0.04)}
@@ -678,105 +455,60 @@
         .modal .file-upload input[type="file"]{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}
         .modal .file-upload .file-name{font-size:0.5rem;color:var(--green);margin-top:3px;display:none}
         .modal .file-upload .file-name.show{display:block}
-        
+
+        /* Message Box */
+        .modal .form-group textarea{
+            width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border-color);
+            background:var(--bg-input);color:var(--text-primary);font-size:0.75rem;outline:none;
+            resize:vertical;min-height:60px;font-family:inherit
+        }
+        .modal .form-group textarea:focus{border-color:var(--cyan);box-shadow:0 0 20px var(--cyan-glow)}
+
         .modal .btn-primary{
-            width:100%;
-            padding:11px;
-            background:var(--bg-input);
-            color:var(--text-secondary);
-            border:1px solid var(--border-color);
-            border-radius:10px;
-            font-size:0.85rem;
-            font-weight:700;
-            cursor:not-allowed;
-            transition:all 0.3s ease;
-            margin-top:6px;
-            opacity:0.4
+            width:100%;padding:11px;background:var(--bg-input);color:var(--text-secondary);
+            border:1px solid var(--border-color);border-radius:10px;font-size:0.8rem;font-weight:700;
+            cursor:not-allowed;margin-top:6px;opacity:0.4
         }
         .modal .btn-primary:active{transform:scale(0.92)!important}
         .modal .btn-primary.enabled{
-            background:linear-gradient(135deg, var(--cyan), var(--purple), var(--violet));
-            color:#fff;
-            border:none;
-            box-shadow:0 4px 15px rgba(0,180,216,0.3);
-            cursor:pointer;
-            opacity:1
+            background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));
+            color:#fff;border:none;box-shadow:0 4px 15px rgba(0,180,216,0.3);cursor:pointer;opacity:1
         }
-        .modal .btn-primary.loading{
-            background:var(--bg-input);
-            color:var(--text-secondary);
-            border-color:var(--border-color);
-            box-shadow:none;
-            cursor:wait;
-            opacity:0.6
-        }
+        .modal .btn-primary.loading{background:var(--bg-input);color:var(--text-secondary);border-color:var(--border-color);box-shadow:none;cursor:wait;opacity:0.6}
 
         /* ===== SUCCESS MODAL ===== */
         .success-modal-overlay{
-            position:fixed;
-            top:0;left:0;right:0;bottom:0;
-            background:rgba(0,0,0,0.6);
-            backdrop-filter:blur(12px);
-            display:none;
-            z-index:1000;
-            align-items:center;
-            justify-content:center;
-            padding:20px
+            position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);
+            backdrop-filter:blur(12px);display:none;z-index:1000;align-items:center;justify-content:center;padding:20px
         }
-        .success-modal-overlay.show{
-            display:flex;
-            animation:fadeIn 0.3s ease
-        }
+        .success-modal-overlay.show{display:flex;animation:fadeIn 0.3s ease}
         .success-modal{
-            background:var(--bg-secondary);
-            backdrop-filter:blur(24px);
-            border:2px solid var(--green);
-            border-radius:20px;
-            padding:30px 24px;
-            max-width:400px;
-            width:100%;
-            text-align:center;
-            box-shadow:0 0 40px var(--green-glow);
-            animation:successPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)
+            background:var(--bg-secondary);backdrop-filter:blur(24px);border:2px solid var(--green);
+            border-radius:20px;padding:24px 20px;max-width:400px;width:100%;text-align:center;
+            box-shadow:0 0 40px var(--green-glow);animation:successPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)
         }
-        @keyframes successPop{
-            0%{transform:scale(0.8);opacity:0}
-            50%{transform:scale(1.05)}
-            100%{transform:scale(1);opacity:1}
-        }
-        .success-modal .icon{font-size:3.5rem;color:var(--green);margin-bottom:8px}
-        .success-modal h2{font-size:1.3rem;color:var(--text-primary);margin-bottom:4px}
-        .success-modal .sub{font-size:0.75rem;color:var(--text-secondary);margin-bottom:12px}
+        @keyframes successPop{0%{transform:scale(0.8);opacity:0}50%{transform:scale(1.05)}100%{transform:scale(1);opacity:1}}
+        .success-modal .icon{font-size:3rem;color:var(--green);margin-bottom:6px}
+        .success-modal h2{font-size:1.1rem;color:var(--text-primary);margin-bottom:3px}
+        .success-modal .sub{font-size:0.7rem;color:var(--text-secondary);margin-bottom:10px}
         .success-modal .order-details{
-            background:var(--bg-input);
-            border-radius:10px;
-            padding:12px 16px;
-            text-align:left;
-            font-size:0.65rem;
-            margin-bottom:12px
+            background:var(--bg-input);border-radius:10px;padding:10px 14px;text-align:left;
+            font-size:0.6rem;margin-bottom:10px
         }
-        .success-modal .order-details .row{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--border-color)}
+        .success-modal .order-details .row{display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px solid var(--border-color)}
         .success-modal .order-details .row:last-child{border-bottom:none}
         .success-modal .order-details .label{color:var(--text-secondary)}
         .success-modal .order-details .value{color:var(--text-primary);font-weight:600}
         .success-modal .btn-close-success{
-            background:linear-gradient(135deg, var(--cyan), var(--purple), var(--violet));
-            color:#fff;
-            border:none;
-            padding:10px 30px;
-            border-radius:10px;
-            font-size:0.85rem;
-            font-weight:700;
-            cursor:pointer;
-            transition:all 0.3s ease;
-            box-shadow:0 4px 15px rgba(0,180,216,0.3)
+            background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));
+            color:#fff;border:none;padding:10px 30px;border-radius:10px;font-size:0.8rem;
+            font-weight:700;cursor:pointer;box-shadow:0 4px 15px rgba(0,180,216,0.3)
         }
         .success-modal .btn-close-success:active{transform:scale(0.92)!important}
     </style>
 </head>
 <body>
 <div class="container">
-    <!-- HEADER -->
     <div class="header">
         <div class="left">
             <div class="logo-wrap">
@@ -799,68 +531,55 @@
         </div>
     </div>
 
-    <!-- PAGE HEADER -->
     <div class="page-header">
-        <h1><i class="fas fa-earth-asia"></i> <span id="pageTitle">MLBB Packages</span></h1>
+        <h1><i class="fas fa-gamepad"></i> <span id="pageTitle">MLBB Packages</span></h1>
         <p id="pageSub">ပက်ကေ့ချ်တစ်ခုရွေးပြီး ဝယ်ယူပါ</p>
     </div>
 
-    <!-- SEARCH BAR -->
     <div class="search-bar">
         <span class="icon"><i class="fas fa-search"></i></span>
         <input type="text" id="itemSearch" placeholder="🔍 ပက်ကေ့ချ်ရှာပါ..." oninput="searchItems(this.value)">
         <span class="clear-btn" id="clearSearch" onclick="clearItemSearch()"><i class="fas fa-times-circle"></i></span>
     </div>
 
-    <!-- SERVER SELECTOR -->
-    <div class="server-selector">
-        <span class="label"><i class="fas fa-earth-asia"></i> Server</span>
+    <div class="server-selector" id="serverSelectorContainer">
+        <span class="label"><i class="fas fa-server"></i> <span id="serverLabelText">Server</span></span>
         <div class="options" id="serverOptions">
-            <span class="opt active" data-server="global" onclick="switchServer('global')"><span class="flag">🌍</span>Global</span>
-            <span class="opt" data-server="indo" onclick="switchServer('indo')"><span class="flag">🇮🇩</span>Indo</span>
-            <span class="opt" data-server="russia" onclick="switchServer('russia')"><span class="flag">🇷🇺</span>Russia</span>
-            <span class="opt" data-server="ban" onclick="switchServer('ban')"><span class="flag">🇲🇾🇸🇬🇵🇭</span>Ban</span>
+            <span class="opt active" data-server="global" onclick="switchServer('global')">🌍 Global</span>
+            <span class="opt" data-server="indo" onclick="switchServer('indo')">🇮🇩 Indo</span>
+            <span class="opt" data-server="russia" onclick="switchServer('russia')">🇷🇺 Russia</span>
+            <span class="opt" data-server="ban" onclick="switchServer('ban')">🇲🇾🇸🇬🇵🇭 Ban</span>
         </div>
     </div>
 
-    <!-- ===== GLOBAL SERVER ===== -->
     <div class="section-wrapper" id="globalSection">
         <div class="section-title"><i class="fas fa-gift"></i> <span id="bundlesTitle">ပက်ကေ့ချ်များ</span></div>
         <div class="package-grid" id="globalBundles"></div>
-        
         <div class="section-title"><i class="fas fa-star"></i> <span id="doubleTitle">နှစ်ဆဖြည့်မှု</span></div>
         <div class="package-grid" id="globalDouble"></div>
-        
         <div class="section-title"><i class="fas fa-diamond"></i> <span id="diamondsTitle">စိန်များ</span></div>
         <div class="package-grid" id="globalDiamonds"></div>
     </div>
 
-    <!-- ===== INDO SERVER ===== -->
     <div class="section-wrapper hidden" id="indoSektion">
         <div class="section-title"><i class="fas fa-gift"></i> <span id="indoBundlesTitle">ပက်ကေ့ချ်များ</span></div>
         <div class="package-grid" id="indoBundles"></div>
-        
         <div class="section-title"><i class="fas fa-diamond"></i> <span id="indoDiamondsTitle">စိန်များ</span></div>
         <div class="package-grid" id="indoDiamonds"></div>
     </div>
 
-    <!-- ===== RUSSIA SERVER ===== -->
     <div class="section-wrapper hidden" id="russiaSection">
         <div class="section-title"><i class="fas fa-gift"></i> <span id="russiaBundlesTitle">ပက်ကေ့ချ်များ</span></div>
         <div class="package-grid" id="russiaBundles"></div>
-        
         <div class="section-title"><i class="fas fa-diamond"></i> <span id="russiaDiamondsTitle">စိန်များ</span></div>
         <div class="package-grid" id="russiaDiamonds"></div>
     </div>
 
-    <!-- ===== BAN SERVER ===== -->
     <div class="section-wrapper hidden" id="banSection">
         <div class="section-title"><i class="fas fa-gift"></i> <span id="banBundlesTitle">ပက်ကေ့ချ်များ</span></div>
         <div class="package-grid" id="banBundles"></div>
-        
         <div class="section-title"><i class="fas fa-star"></i> <span id="banDoubleTitle">နှစ်ဆဖြည့်မှု</span></div>
         <div class="package-grid" id="banDouble"></div>
-        
         <div class="section-title"><i class="fas fa-diamond"></i> <span id="banDiamondsTitle">စိန်များ</span></div>
         <div class="package-grid" id="banDiamonds"></div>
     </div>
@@ -868,7 +587,6 @@
     <div class="footer-text">&copy; 2026 Premium Game Shop</div>
 </div>
 
-<!-- BOTTOM NAV -->
 <div class="bottom-nav">
     <a href="index.html" class="nav-item"><span class="icon"><i class="fas fa-home"></i></span><span class="label" id="navHome">ပင်မ</span></a>
     <a href="shop.html" class="nav-item"><span class="icon"><i class="fas fa-shopping-bag"></i></span><span class="label" id="navShop">ဆိုင်</span></a>
@@ -878,7 +596,7 @@
 
 <div class="toast" id="toast"></div>
 
-<!-- ===== CHECKOUT MODAL ===== -->
+<!-- CHECKOUT MODAL -->
 <div class="modal-overlay" id="checkoutModal">
     <div class="modal">
         <button class="close-btn" onclick="closeCheckoutModal()">✕</button>
@@ -886,35 +604,39 @@
         <p class="sub" id="modalSub">အချက်အလက်များကို မှန်ကန်စွာဖြည့်သွင်းပါ</p>
         
         <div class="selected-row">
-            <span class="pkg" id="modalPackage">Loading...</span>
+            <div class="pkg-info">
+                <span class="pkg" id="modalPackage">Loading...</span>
+                <span class="server-tag" id="modalServer">🌍 Global</span>
+            </div>
             <span class="price" id="modalPrice">0 Ks</span>
         </div>
 
         <div class="form-group">
-            <label><i class="fas fa-gamepad"></i> <span id="gameIdLabel">ဂိမ်းအိုင်ဒီနံပါတ်</span></label>
-            <input type="text" id="gameId" placeholder="ဂိမ်းအိုင်ဒီ နံပါတ်ထည့်ပါ" inputmode="numeric" pattern="[0-9]*">
-            <div class="input-hint" id="gameIdHint">နံပါတ်သာ ထည့်ပါ</div>
+            <label><i class="fas fa-gamepad"></i> <span id="gameIdLabel">Game ID</span></label>
+            <input type="text" id="gameId" placeholder="Enter Game ID" inputmode="numeric" pattern="[0-9]*">
+            <div class="input-hint" id="gameIdHint">Numbers only</div>
         </div>
         
         <div class="form-group">
-            <label><i class="fas fa-server"></i> <span id="serverIdLabel">ဆာဗာအိုင်ဒီနံပါတ်</span></label>
-            <input type="text" id="serverId" placeholder="ဆာဗာအိုင်ဒီ နံပါတ်ထည့်ပါ" inputmode="numeric" pattern="[0-9]*">
-            <div class="input-hint" id="serverIdHint">နံပါတ်သာ ထည့်ပါ</div>
+            <label><i class="fas fa-server"></i> <span id="serverIdLabel">Server ID</span></label>
+            <input type="text" id="serverId" placeholder="Enter Server ID" inputmode="numeric" pattern="[0-9]*">
+            <div class="input-hint" id="serverIdHint">Numbers only</div>
+        </div>
+
+        <div class="form-group">
+            <label><i class="fas fa-comment"></i> <span id="messageLabel">မှာစာ (Optional)</span></label>
+            <textarea id="orderMessage" placeholder="ထပ်မံမှာကြားလိုသည်များ ရေးသားပါ..."></textarea>
         </div>
 
         <div class="form-group">
             <label><i class="fas fa-money-bill-wave"></i> <span id="paymentLabel">ငွေပေးချေရန်</span></label>
             <div class="payment-options" id="paymentOptions">
                 <div class="payment-option" data-payment="wave">
-                    <div class="icon-box">
-                        <img src="https://i.ibb.co/GvstPZx4/x.jpg" alt="Wave Pay">
-                    </div>
+                    <div class="icon-box"><img src="https://i.ibb.co/GvstPZx4/x.jpg" alt="Wave Pay"></div>
                     <span class="name" id="waveName">Wave Pay</span>
                 </div>
                 <div class="payment-option" data-payment="kpay">
-                    <div class="icon-box">
-                        <img src="https://i.ibb.co/fdWfXwVC/x.jpg" alt="KBZ Pay">
-                    </div>
+                    <div class="icon-box"><img src="https://i.ibb.co/fdWfXwVC/x.jpg" alt="KBZ Pay"></div>
                     <span class="name" id="kpayName">KBZ Pay</span>
                 </div>
             </div>
@@ -941,32 +663,29 @@
     </div>
 </div>
 
-<!-- ===== SUCCESS MODAL ===== -->
+<!-- SUCCESS MODAL -->
 <div class="success-modal-overlay" id="successModal">
     <div class="success-modal">
         <div class="icon">✅</div>
-        <h2>အော်ဒါတင်ခြင်းအောင်မြင်ပါသည်!</h2>
-        <p class="sub">သင့်အော်ဒါကို အတည်ပြုပြီးပါပြီ။ ကျေးဇူးတင်ပါတယ်။</p>
+        <h2 id="successTitle">အော်ဒါတင်ခြင်းအောင်မြင်ပါသည်!</h2>
+        <p class="sub" id="successSub">သင့်အော်ဒါကို အတည်ပြုပြီးပါပြီ။ ကျေးဇူးတင်ပါတယ်။</p>
         <div class="order-details" id="successOrderDetails">
             <div class="row"><span class="label">အော်ဒါအမှတ်</span><span class="value" id="sOrderId">-</span></div>
             <div class="row"><span class="label">ပက်ကေ့ချ်</span><span class="value" id="sPackage">-</span></div>
+            <div class="row"><span class="label">ဆာဗာ</span><span class="value" id="sServer">-</span></div>
             <div class="row"><span class="label">ဈေးနှုန်း</span><span class="value" id="sPrice">-</span></div>
             <div class="row"><span class="label">ဂိမ်းအိုင်ဒီ</span><span class="value" id="sGameId">-</span></div>
             <div class="row"><span class="label">ဆာဗာအိုင်ဒီ</span><span class="value" id="sServerId">-</span></div>
             <div class="row"><span class="label">ငွေပေးချေမှု</span><span class="value" id="sPayment">-</span></div>
             <div class="row"><span class="label">အချိန်</span><span class="value" id="sTime">-</span></div>
         </div>
-        <button class="btn-close-success" onclick="closeSuccessModal()"><i class="fas fa-check"></i> အိုကေပါပြီ</button>
+        <button class="btn-close-success" onclick="closeSuccessModal()">✅ အိုကေပါပြီ</button>
     </div>
 </div>
 
 <script>
-    // ============================================================
-    // 🔧 TELEGRAM BOT CONFIG
-    // ============================================================
     const TELEGRAM_BOT_TOKEN = '8751360822:AAFQNiWhfGWgUsjD7Bd5DzfHMfpkR4COHY8';
     const TELEGRAM_CHAT_ID = '8745522082';
-    // ============================================================
 
     const LANG_DATA = {
         my: {
@@ -977,16 +696,19 @@
             banBundlesTitle:'ပက်ကေ့ချ်များ',banDiamondsTitle:'စိန်များ',banDoubleTitle:'နှစ်ဆဖြည့်မှု',
             indoBundlesTitle:'ပက်ကေ့ချ်များ',indoDiamondsTitle:'စိန်များ',
             russiaBundlesTitle:'ပက်ကေ့ချ်များ',russiaDiamondsTitle:'စိန်များ',
-            select:'Select',topUp:'Top Up',currency:'Ks',doubleBadge:'⭐ 2x Bonus',
+            select:'Select',topUp:'Top Up',currency:'Ks',
+            serverLabel:'Server',
             itemSearchPlaceholder:'🔍 ပက်ကေ့ချ်ရှာပါ...',
             modalTitle:'🛒 အော်ဒါတင်ရန်',modalSub:'အချက်အလက်များကို မှန်ကန်စွာဖြည့်သွင်းပါ',
-            gameId:'ဂိမ်းအိုင်ဒီနံပါတ်',serverId:'ဆာဗာအိုင်ဒီနံပါတ်',
+            gameId:'Game ID',serverId:'Server ID',
+            gameIdPlaceholder:'Game ID ထည့်ပါ',serverIdPlaceholder:'Server ID ထည့်ပါ',
             gameIdHint:'နံပါတ်သာ ထည့်ပါ',serverIdHint:'နံပါတ်သာ ထည့်ပါ',
+            messageLabel:'မှာစာ (Optional)',messagePlaceholder:'ထပ်မံမှာကြားလိုသည်များ ရေးသားပါ...',
             paymentLabel:'ငွေပေးချေရန်',wave:'Wave Pay',kpay:'KBZ Pay',
             uploadLabel:'ပြေစာတင်ပို့ရန်',uploadText:'Screenshot ပို့ပေးပါ',
             submit:'အော်ဒါတင်မည်',submitting:'⏳ အော်ဒါတင်နေသည်...',
-            enterGameId:'ကျေးဇူးပြု၍ ဂိမ်းအိုင်ဒီ နံပါတ်ထည့်ပါ',
-            enterServerId:'ကျေးဇူးပြု၍ ဆာဗာအိုင်ဒီ နံပါတ်ထည့်ပါ',
+            enterGameId:'ကျေးဇူးပြု၍ Game ID ထည့်ပါ',
+            enterServerId:'ကျေးဇူးပြု၍ Server ID ထည့်ပါ',
             enterNumberOnly:'နံပါတ်သာ ထည့်ပါ',
             selectPayment:'ကျေးဇူးပြု၍ ငွေပေးချေနည်းရွေးပါ',
             uploadSlip:'ကျေးဇူးပြု၍ Screenshot ပို့ပေးပါ',
@@ -1005,17 +727,20 @@
             banBundlesTitle:'Packages',banDiamondsTitle:'Diamonds',banDoubleTitle:'Double Top Up',
             indoBundlesTitle:'Packages',indoDiamondsTitle:'Diamonds',
             russiaBundlesTitle:'Packages',russiaDiamondsTitle:'Diamonds',
-            select:'Select',topUp:'Top Up',currency:'Ks',doubleBadge:'⭐ 2x Bonus',
+            select:'Select',topUp:'Top Up',currency:'Ks',
+            serverLabel:'Server',
             itemSearchPlaceholder:'🔍 Search packages...',
             modalTitle:'🛒 Submit Order',modalSub:'Fill in your details correctly',
-            gameId:'Game ID Number',serverId:'Server ID Number',
+            gameId:'Game ID',serverId:'Server ID',
+            gameIdPlaceholder:'Enter Game ID',serverIdPlaceholder:'Enter Server ID',
             gameIdHint:'Numbers only',serverIdHint:'Numbers only',
+            messageLabel:'Message (Optional)',messagePlaceholder:'Write any additional notes...',
             paymentLabel:'Payment Method',wave:'Wave Pay',kpay:'KBZ Pay',
             uploadLabel:'Upload Payment Slip',uploadText:'Send Screenshot',
             submit:'Submit Order',submitting:'⏳ Submitting...',
-            enterGameId:'Please enter your Game ID (numbers only)',
-            enterServerId:'Please enter your Server ID (numbers only)',
-            enterNumberOnly:'Please enter numbers only',
+            enterGameId:'Please enter your Game ID',
+            enterServerId:'Please enter your Server ID',
+            enterNumberOnly:'Numbers only',
             selectPayment:'Please select a payment method',
             uploadSlip:'Please send your Screenshot',
             orderSuccess:'✅ Order successful!',
@@ -1033,50 +758,20 @@
     let selectedPayment = null;
     let isSubmitting = false;
 
-    const SERVER_NAMES = {
-        global: 'Global',
-        indo: 'Indo',
-        russia: 'Russia',
-        ban: 'Ban'
-    };
+    const SERVER_NAMES = { global:'Global', indo:'Indo', russia:'Russia', ban:'Ban' };
+    const SERVER_EMOJIS = { global:'🌍', indo:'🇮🇩', russia:'🇷🇺', ban:'🇲🇾🇸🇬🇵🇭' };
 
-    const SERVER_EMOJIS = {
-        global: '🌍',
-        indo: '🇮🇩',
-        russia: '🇷🇺',
-        ban: '🇲🇾🇸🇬🇵🇭'
-    };
-
-    function getServerName() {
-        return SERVER_NAMES[currentServer] || 'Global';
-    }
-
-    function getServerEmoji() {
-        return SERVER_EMOJIS[currentServer] || '🌍';
-    }
-
+    function getServerName(){return SERVER_NAMES[currentServer]||'Global'}
+    function getServerEmoji(){return SERVER_EMOJIS[currentServer]||'🌍'}
     function getText(key){return LANG_DATA[currentLang]?.[key]||key}
 
-    function showToast(msg, type){
-        const t=document.getElementById('toast');
-        t.textContent=msg;
-        t.className='toast show';
-        if(type==='success') t.classList.add('success');
-        else if(type==='error') t.classList.add('error');
-        clearTimeout(t._timer);
-        t._timer=setTimeout(()=>t.classList.remove('show'),3000);
-    }
-
-    function setLang(lang){
-        currentLang=lang;
-        localStorage.setItem('lang',lang);
-        updateLanguage();
-        document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
+    function showToast(msg){
+        const t=document.getElementById('toast');t.textContent=msg;t.className='toast show';
+        clearTimeout(t._timer);t._timer=setTimeout(()=>t.classList.remove('show'),3000);
     }
 
     function updateLanguage(){
-        const d=LANG_DATA[currentLang];
-        if(!d)return;
+        const d=LANG_DATA[currentLang];if(!d)return;
         document.getElementById('appName').textContent=d.appName;
         document.getElementById('appSub').textContent=d.appSub;
         document.getElementById('pageTitle').textContent=d.pageTitle;
@@ -1095,21 +790,26 @@
         document.getElementById('navShop').textContent=d.shop;
         document.getElementById('navPayment').textContent=d.payment;
         document.getElementById('navProfile').textContent=d.profile;
+        document.getElementById('serverLabelText').textContent=d.serverLabel;
         document.getElementById('itemSearch').placeholder=d.itemSearchPlaceholder;
         document.getElementById('modalTitle').textContent=d.modalTitle;
         document.getElementById('modalSub').textContent=d.modalSub;
         document.getElementById('gameIdLabel').textContent=d.gameId;
         document.getElementById('serverIdLabel').textContent=d.serverId;
+        document.getElementById('gameId').placeholder=d.gameIdPlaceholder;
+        document.getElementById('serverId').placeholder=d.serverIdPlaceholder;
         document.getElementById('gameIdHint').textContent=d.gameIdHint;
         document.getElementById('serverIdHint').textContent=d.serverIdHint;
+        document.getElementById('messageLabel').textContent=d.messageLabel;
+        document.getElementById('orderMessage').placeholder=d.messagePlaceholder;
         document.getElementById('paymentLabel').textContent=d.paymentLabel;
         document.getElementById('waveName').textContent=d.wave;
         document.getElementById('kpayName').textContent=d.kpay;
         document.getElementById('uploadLabel').textContent=d.uploadLabel;
         document.getElementById('uploadText').textContent=d.uploadText;
         document.getElementById('submitBtn').textContent='✅ '+d.submit;
-        document.querySelector('.success-modal h2').textContent=d.successTitle;
-        document.querySelector('.success-modal .sub').textContent=d.successSub;
+        document.getElementById('successTitle').textContent=d.successTitle;
+        document.getElementById('successSub').textContent=d.successSub;
         document.querySelector('.success-modal .btn-close-success').textContent='✅ '+d.successClose;
         renderAllPackages();
         updateBadge();
@@ -1126,593 +826,450 @@
         const notis=JSON.parse(localStorage.getItem('notifications')||'[]');
         const count=notis.filter(n=>n.status==='pending').length;
         const badge=document.getElementById('notiBadge');
-        if(badge){
-            badge.style.display=count>0?'block':'none';
-            if(count>0)badge.textContent=count;
-        }
+        if(badge){badge.style.display=count>0?'block':'none';if(count>0)badge.textContent=count;}
     }
 
-    // ===== PACKAGES DATA =====
     const PACKAGES = {
         global: {
             bundles: [
-                { id: 'g_b1', name: 'Monthly Epic Bundle', price: 17300, img: 'https://files.catbox.moe/z2j5uo.png' },
-                { id: 'g_b2', name: 'Weekly Elite Bundle', price: 3600, img: 'https://files.catbox.moe/i3uywg.png' },
-                { id: 'g_b3', name: 'Weekly Pass', price: 6500, img: 'https://files.catbox.moe/zylral.png' },
-                { id: 'g_b4', name: 'Twilight Pass', price: 34000, img: 'https://files.catbox.moe/jshuuy.png' }
+                { id:'g_b1', name:'Monthly Epic Bundle', price:17300, img:'https://files.catbox.moe/z2j5uo.png' },
+                { id:'g_b2', name:'Weekly Elite Bundle', price:3600, img:'https://files.catbox.moe/i3uywg.png' },
+                { id:'g_b3', name:'Weekly Pass', price:6500, img:'https://files.catbox.moe/zylral.png', twoLine:true, line2:'Pass' },
+                { id:'g_b4', name:'Twilight Pass', price:34000, img:'https://files.catbox.moe/jshuuy.png' }
             ],
             double: [
-                { id: 'g_x1', name: '50+50', price: 3550, img: 'https://files.catbox.moe/z376wd.png', badge: true },
-                { id: 'g_x2', name: '150+150', price: 9900, img: 'https://files.catbox.moe/kf0960.png', badge: true },
-                { id: 'g_x3', name: '250+250', price: 15800, img: 'https://files.catbox.moe/jm3ty7.png', badge: true },
-                { id: 'g_x4', name: '500+500', price: 32100, img: 'https://files.catbox.moe/aprnoc.png', badge: true }
+                { id:'g_x1', name:'50+50', price:3550, img:'https://files.catbox.moe/z376wd.png' },
+                { id:'g_x2', name:'150+150', price:9900, img:'https://files.catbox.moe/kf0960.png' },
+                { id:'g_x3', name:'250+250', price:15800, img:'https://files.catbox.moe/jm3ty7.png' },
+                { id:'g_x4', name:'500+500', price:32100, img:'https://files.catbox.moe/aprnoc.png' }
             ],
             diamonds: [
-                { id: 'g_d1', name: '11', price: 750, img: 'https://files.catbox.moe/xaxejk.png' },
-                { id: 'g_d2', name: '22', price: 1500, img: 'https://files.catbox.moe/xaxejk.png' },
-                { id: 'g_d3', name: '33', price: 2250, img: 'https://files.catbox.moe/7bj50l.png' },
-                { id: 'g_d4', name: '44', price: 3100, img: 'https://files.catbox.moe/7bj50l.png' },
-                { id: 'g_d5', name: '56', price: 3800, img: 'https://files.catbox.moe/4mb7sd.png' },
-                { id: 'g_d6', name: '112', price: 7500, img: 'https://files.catbox.moe/4mb7sd.png' },
-                { id: 'g_d7', name: '172', price: 10300, img: 'https://files.catbox.moe/ogchrl.png' },
-                { id: 'g_d8', name: '257', price: 14850, img: 'https://files.catbox.moe/ogchrl.png' },
-                { id: 'g_d9', name: '343', price: 20000, img: 'https://files.catbox.moe/ocznqy.png' },
-                { id: 'g_d10', name: '429', price: 25000, img: 'https://files.catbox.moe/ocznqy.png' },
-                { id: 'g_d11', name: '514', price: 29600, img: 'https://files.catbox.moe/k23p6t.png' },
-                { id: 'g_d12', name: '600', price: 34800, img: 'https://files.catbox.moe/k23p6t.png' },
-                { id: 'g_d13', name: '706', price: 34000, img: 'https://files.catbox.moe/qwnqog.png' },
-                { id: 'g_d14', name: '878', price: 50000, img: 'https://files.catbox.moe/qwnqog.png' },
-                { id: 'g_d15', name: '963', price: 54700, img: 'https://files.catbox.moe/zjcnar.png' },
-                { id: 'g_d16', name: '1049', price: 59800, img: 'https://files.catbox.moe/zjcnar.png' },
-                { id: 'g_d17', name: '1135', price: 64800, img: 'https://files.catbox.moe/co1w7w.png' },
-                { id: 'g_d18', name: '1412', price: 79800, img: 'https://files.catbox.moe/co1w7w.png' },
-                { id: 'g_d19', name: '1500', price: 86100, img: 'https://files.catbox.moe/2c5tz4.png' },
-                { id: 'g_d20', name: '1584', price: 89800, img: 'https://files.catbox.moe/2c5tz4.png' },
-                { id: 'g_d21', name: '1755', price: 99500, img: 'https://files.catbox.moe/b5bg2m.png' },
-                { id: 'g_d22', name: '2195', price: 120500, img: 'https://files.catbox.moe/b5bg2m.png' },
-                { id: 'g_d23', name: '2367', price: 130700, img: 'https://files.catbox.moe/1xbg9h.png' },
-                { id: 'g_d24', name: '2538', price: 140400, img: 'https://files.catbox.moe/1xbg9h.png' },
-                { id: 'g_d25', name: '3224', price: 181000, img: 'https://files.catbox.moe/z0c6rj.png' },
-                { id: 'g_d26', name: '3688', price: 200800, img: 'https://files.catbox.moe/z0c6rj.png' },
-                { id: 'g_d27', name: '4394', price: 240500, img: 'https://files.catbox.moe/z0c6rj.png' },
-                { id: 'g_d28', name: '5100', price: 280100, img: 'https://files.catbox.moe/pn69zi.png' },
-                { id: 'g_d29', name: '5532', price: 302900, img: 'https://files.catbox.moe/pn69zi.png' },
-                { id: 'g_d30', name: '9288', price: 503000, img: 'https://files.catbox.moe/pn69zi.png' }
+                { id:'g_d1', name:'11', price:750, img:'https://files.catbox.moe/xaxejk.png' },
+                { id:'g_d2', name:'22', price:1500, img:'https://files.catbox.moe/xaxejk.png' },
+                { id:'g_d3', name:'33', price:2250, img:'https://files.catbox.moe/7bj50l.png' },
+                { id:'g_d4', name:'44', price:3100, img:'https://files.catbox.moe/7bj50l.png' },
+                { id:'g_d5', name:'56', price:3800, img:'https://files.catbox.moe/4mb7sd.png' },
+                { id:'g_d6', name:'112', price:7500, img:'https://files.catbox.moe/4mb7sd.png' },
+                { id:'g_d7', name:'172', price:10300, img:'https://files.catbox.moe/ogchrl.png' },
+                { id:'g_d8', name:'257', price:14850, img:'https://files.catbox.moe/ogchrl.png' },
+                { id:'g_d9', name:'343', price:20000, img:'https://files.catbox.moe/ocznqy.png' },
+                { id:'g_d10', name:'429', price:25000, img:'https://files.catbox.moe/ocznqy.png' },
+                { id:'g_d11', name:'514', price:29600, img:'https://files.catbox.moe/k23p6t.png' },
+                { id:'g_d12', name:'600', price:34800, img:'https://files.catbox.moe/k23p6t.png' },
+                { id:'g_d13', name:'706', price:34000, img:'https://files.catbox.moe/qwnqog.png' },
+                { id:'g_d14', name:'878', price:50000, img:'https://files.catbox.moe/qwnqog.png' },
+                { id:'g_d15', name:'963', price:54700, img:'https://files.catbox.moe/zjcnar.png' },
+                { id:'g_d16', name:'1049', price:59800, img:'https://files.catbox.moe/zjcnar.png' },
+                { id:'g_d17', name:'1135', price:64800, img:'https://files.catbox.moe/co1w7w.png' },
+                { id:'g_d18', name:'1412', price:79800, img:'https://files.catbox.moe/co1w7w.png' },
+                { id:'g_d19', name:'1500', price:86100, img:'https://files.catbox.moe/2c5tz4.png' },
+                { id:'g_d20', name:'1584', price:89800, img:'https://files.catbox.moe/2c5tz4.png' },
+                { id:'g_d21', name:'1755', price:99500, img:'https://files.catbox.moe/b5bg2m.png' },
+                { id:'g_d22', name:'2195', price:120500, img:'https://files.catbox.moe/b5bg2m.png' },
+                { id:'g_d23', name:'2367', price:130700, img:'https://files.catbox.moe/1xbg9h.png' },
+                { id:'g_d24', name:'2538', price:140400, img:'https://files.catbox.moe/1xbg9h.png' },
+                { id:'g_d25', name:'3224', price:181000, img:'https://files.catbox.moe/z0c6rj.png' },
+                { id:'g_d26', name:'3688', price:200800, img:'https://files.catbox.moe/z0c6rj.png' },
+                { id:'g_d27', name:'4394', price:240500, img:'https://files.catbox.moe/z0c6rj.png' },
+                { id:'g_d28', name:'5100', price:280100, img:'https://files.catbox.moe/pn69zi.png' },
+                { id:'g_d29', name:'5532', price:302900, img:'https://files.catbox.moe/pn69zi.png' },
+                { id:'g_d30', name:'9288', price:503000, img:'https://files.catbox.moe/pn69zi.png' }
             ]
         },
         ban: {
             bundles: [
-                { id: 'b_b1', name: 'Weekly Pass', price: 9400, img: 'https://files.catbox.moe/zylral.png' }
+                { id:'b_b1', name:'Weekly Pass', price:9400, img:'https://files.catbox.moe/zylral.png', twoLine:true, line2:'Pass' }
             ],
             double: [
-                { id: 'b_x1', name: '55', price: 4500, img: 'https://files.catbox.moe/z376wd.png', badge: true },
-                { id: 'b_x2', name: '165', price: 12800, img: 'https://files.catbox.moe/kf0960.png', badge: true },
-                { id: 'b_x3', name: '275', price: 21100, img: 'https://files.catbox.moe/jm3ty7.png', badge: true },
-                { id: 'b_x4', name: '656', price: 42800, img: 'https://files.catbox.moe/aprnoc.png', badge: true }
+                { id:'b_x1', name:'55', price:4500, img:'https://files.catbox.moe/z376wd.png' },
+                { id:'b_x2', name:'165', price:12800, img:'https://files.catbox.moe/kf0960.png' },
+                { id:'b_x3', name:'275', price:21100, img:'https://files.catbox.moe/jm3ty7.png' },
+                { id:'b_x4', name:'656', price:42800, img:'https://files.catbox.moe/aprnoc.png' }
             ],
             diamonds: [
-                { id: 'b_d1', name: '14', price: 1300, img: 'https://files.catbox.moe/xaxejk.png' },
-                { id: 'b_d2', name: '28', price: 2400, img: 'https://files.catbox.moe/xaxejk.png' },
-                { id: 'b_d3', name: '42', price: 3500, img: 'https://files.catbox.moe/7bj50l.png' },
-                { id: 'b_d4', name: '70', price: 5700, img: 'https://files.catbox.moe/7bj50l.png' },
-                { id: 'b_d5', name: '84', price: 6800, img: 'https://files.catbox.moe/4mb7sd.png' },
-                { id: 'b_d6', name: '140', price: 11000, img: 'https://files.catbox.moe/4mb7sd.png' },
-                { id: 'b_d7', name: '182', price: 14400, img: 'https://files.catbox.moe/ogchrl.png' },
-                { id: 'b_d8', name: '210', price: 16400, img: 'https://files.catbox.moe/ogchrl.png' },
-                { id: 'b_d9', name: '284', price: 21800, img: 'https://files.catbox.moe/ocznqy.png' },
-                { id: 'b_d10', name: '355', price: 27400, img: 'https://files.catbox.moe/ocznqy.png' },
-                { id: 'b_d11', name: '429', price: 32700, img: 'https://files.catbox.moe/k23p6t.png' },
-                { id: 'b_d12', name: '513', price: 39100, img: 'https://files.catbox.moe/k23p6t.png' },
-                { id: 'b_d13', name: '639', price: 48800, img: 'https://files.catbox.moe/qwnqog.png' },
-                { id: 'b_d14', name: '716', price: 54200, img: 'https://files.catbox.moe/qwnqog.png' },
-                { id: 'b_d15', name: '1084', price: 80600, img: 'https://files.catbox.moe/zjcnar.png' },
-                { id: 'b_d16', name: '1159', price: 87500, img: 'https://files.catbox.moe/zjcnar.png' },
-                { id: 'b_d17', name: '1586', price: 118200, img: 'https://files.catbox.moe/co1w7w.png' },
-                { id: 'b_d18', name: '2162', price: 161200, img: 'https://files.catbox.moe/co1w7w.png' },
-                { id: 'b_d19', name: '3032', price: 219800, img: 'https://files.catbox.moe/2c5tz4.png' },
-                { id: 'b_d20', name: '3846', price: 279800, img: 'https://files.catbox.moe/2c5tz4.png' },
-                { id: 'b_d21', name: '4047', price: 295200, img: 'https://files.catbox.moe/b5bg2m.png' },
-                { id: 'b_d22', name: '4851', price: 353900, img: 'https://files.catbox.moe/b5bg2m.png' },
-                { id: 'b_d23', name: '5138', price: 374900, img: 'https://files.catbox.moe/1xbg9h.png' },
-                { id: 'b_d24', name: '6012', price: 403900, img: 'https://files.catbox.moe/1xbg9h.png' },
-                { id: 'b_d25', name: '7502', price: 536000, img: 'https://files.catbox.moe/z0c6rj.png' },
-                { id: 'b_d26', name: '8218', price: 591000, img: 'https://files.catbox.moe/z0c6rj.png' },
-                { id: 'b_d27', name: '9377', price: 674000, img: 'https://files.catbox.moe/z0c6rj.png' },
-                { id: 'b_d28', name: '10907', price: 7802100, img: 'https://files.catbox.moe/pn69zi.png' },
-                { id: 'b_d29', name: '16004', price: 1151100, img: 'https://files.catbox.moe/pn69zi.png' }
+                { id:'b_d1', name:'14', price:1300, img:'https://files.catbox.moe/xaxejk.png' },
+                { id:'b_d2', name:'28', price:2400, img:'https://files.catbox.moe/xaxejk.png' },
+                { id:'b_d3', name:'42', price:3500, img:'https://files.catbox.moe/7bj50l.png' },
+                { id:'b_d4', name:'70', price:5700, img:'https://files.catbox.moe/7bj50l.png' },
+                { id:'b_d5', name:'84', price:6800, img:'https://files.catbox.moe/4mb7sd.png' },
+                { id:'b_d6', name:'140', price:11000, img:'https://files.catbox.moe/4mb7sd.png' },
+                { id:'b_d7', name:'182', price:14400, img:'https://files.catbox.moe/ogchrl.png' },
+                { id:'b_d8', name:'210', price:16400, img:'https://files.catbox.moe/ogchrl.png' },
+                { id:'b_d9', name:'284', price:21800, img:'https://files.catbox.moe/ocznqy.png' },
+                { id:'b_d10', name:'355', price:27400, img:'https://files.catbox.moe/ocznqy.png' },
+                { id:'b_d11', name:'429', price:32700, img:'https://files.catbox.moe/k23p6t.png' },
+                { id:'b_d12', name:'513', price:39100, img:'https://files.catbox.moe/k23p6t.png' },
+                { id:'b_d13', name:'639', price:48800, img:'https://files.catbox.moe/qwnqog.png' },
+                { id:'b_d14', name:'716', price:54200, img:'https://files.catbox.moe/qwnqog.png' },
+                { id:'b_d15', name:'1084', price:80600, img:'https://files.catbox.moe/zjcnar.png' },
+                { id:'b_d16', name:'1159', price:87500, img:'https://files.catbox.moe/zjcnar.png' },
+                { id:'b_d17', name:'1586', price:118200, img:'https://files.catbox.moe/co1w7w.png' },
+                { id:'b_d18', name:'2162', price:161200, img:'https://files.catbox.moe/co1w7w.png' },
+                { id:'b_d19', name:'3032', price:219800, img:'https://files.catbox.moe/2c5tz4.png' },
+                { id:'b_d20', name:'3846', price:279800, img:'https://files.catbox.moe/2c5tz4.png' },
+                { id:'b_d21', name:'4047', price:295200, img:'https://files.catbox.moe/b5bg2m.png' },
+                { id:'b_d22', name:'4851', price:353900, img:'https://files.catbox.moe/b5bg2m.png' },
+                { id:'b_d23', name:'5138', price:374900, img:'https://files.catbox.moe/1xbg9h.png' },
+                { id:'b_d24', name:'6012', price:403900, img:'https://files.catbox.moe/1xbg9h.png' },
+                { id:'b_d25', name:'7502', price:536000, img:'https://files.catbox.moe/z0c6rj.png' },
+                { id:'b_d26', name:'8218', price:591000, img:'https://files.catbox.moe/z0c6rj.png' },
+                { id:'b_d27', name:'9377', price:674000, img:'https://files.catbox.moe/z0c6rj.png' },
+                { id:'b_d28', name:'10907', price:7802100, img:'https://files.catbox.moe/pn69zi.png' },
+                { id:'b_d29', name:'16004', price:1151100, img:'https://files.catbox.moe/pn69zi.png' }
             ]
         },
         indo: {
             bundles: [
-                { id: 'i_b1', name: 'Weekly Pass', price: 8700, img: 'https://files.catbox.moe/zylral.png' }
+                { id:'i_b1', name:'Weekly Pass', price:8700, img:'https://files.catbox.moe/zylral.png', twoLine:true, line2:'Pass' }
             ],
             diamonds: [
-                { id: 'i_d1', name: '5', price: 700, img: 'https://files.catbox.moe/xaxejk.png' },
-                { id: 'i_d2', name: '12', price: 1400, img: 'https://files.catbox.moe/xaxejk.png' },
-                { id: 'i_d3', name: '19', price: 1900, img: 'https://files.catbox.moe/7bj50l.png' },
-                { id: 'i_d4', name: '28', price: 2700, img: 'https://files.catbox.moe/7bj50l.png' },
-                { id: 'i_d5', name: '44', price: 3900, img: 'https://files.catbox.moe/4mb7sd.png' },
-                { id: 'i_d6', name: '59', price: 5100, img: 'https://files.catbox.moe/4mb7sd.png' },
-                { id: 'i_d7', name: '85', price: 6800, img: 'https://files.catbox.moe/ogchrl.png' },
-                { id: 'i_d8', name: '170', price: 13000, img: 'https://files.catbox.moe/ogchrl.png' },
-                { id: 'i_d9', name: '240', price: 18100, img: 'https://files.catbox.moe/ocznqy.png' },
-                { id: 'i_d10', name: '296', price: 22000, img: 'https://files.catbox.moe/ocznqy.png' },
-                { id: 'i_d11', name: '408', price: 30400, img: 'https://files.catbox.moe/k23p6t.png' },
-                { id: 'i_d12', name: '568', price: 41400, img: 'https://files.catbox.moe/k23p6t.png' },
-                { id: 'i_d13', name: '875', price: 62500, img: 'https://files.catbox.moe/qwnqog.png' },
-                { id: 'i_d14', name: '2010', price: 134500, img: 'https://files.catbox.moe/qwnqog.png' },
-                { id: 'i_d15', name: '4830', price: 328500, img: 'https://files.catbox.moe/zjcnar.png' }
+                { id:'i_d1', name:'5', price:700, img:'https://files.catbox.moe/xaxejk.png' },
+                { id:'i_d2', name:'12', price:1400, img:'https://files.catbox.moe/xaxejk.png' },
+                { id:'i_d3', name:'19', price:1900, img:'https://files.catbox.moe/7bj50l.png' },
+                { id:'i_d4', name:'28', price:2700, img:'https://files.catbox.moe/7bj50l.png' },
+                { id:'i_d5', name:'44', price:3900, img:'https://files.catbox.moe/4mb7sd.png' },
+                { id:'i_d6', name:'59', price:5100, img:'https://files.catbox.moe/4mb7sd.png' },
+                { id:'i_d7', name:'85', price:6800, img:'https://files.catbox.moe/ogchrl.png' },
+                { id:'i_d8', name:'170', price:13000, img:'https://files.catbox.moe/ogchrl.png' },
+                { id:'i_d9', name:'240', price:18100, img:'https://files.catbox.moe/ocznqy.png' },
+                { id:'i_d10', name:'296', price:22000, img:'https://files.catbox.moe/ocznqy.png' },
+                { id:'i_d11', name:'408', price:30400, img:'https://files.catbox.moe/k23p6t.png' },
+                { id:'i_d12', name:'568', price:41400, img:'https://files.catbox.moe/k23p6t.png' },
+                { id:'i_d13', name:'875', price:62500, img:'https://files.catbox.moe/qwnqog.png' },
+                { id:'i_d14', name:'2010', price:134500, img:'https://files.catbox.moe/qwnqog.png' },
+                { id:'i_d15', name:'4830', price:328500, img:'https://files.catbox.moe/zjcnar.png' }
             ]
         },
         russia: {
             bundles: [
-                { id: 'r_b1', name: 'Weekly Pass', price: 9750, img: 'https://files.catbox.moe/zylral.png' }
+                { id:'r_b1', name:'Weekly Pass', price:9750, img:'https://files.catbox.moe/zylral.png', twoLine:true, line2:'Pass' }
             ],
             diamonds: [
-                { id: 'r_d1', name: '35', price: 3100, img: 'https://files.catbox.moe/xaxejk.png' },
-                { id: 'r_d2', name: '55', price: 5000, img: 'https://files.catbox.moe/xaxejk.png' },
-                { id: 'r_d3', name: '165', price: 14100, img: 'https://files.catbox.moe/7bj50l.png' },
-                { id: 'r_d4', name: '275', price: 22900, img: 'https://files.catbox.moe/7bj50l.png' },
-                { id: 'r_d5', name: '565', price: 44900, img: 'https://files.catbox.moe/4mb7sd.png' },
-                { id: 'r_d6', name: '1155', price: 87700, img: 'https://files.catbox.moe/4mb7sd.png' },
-                { id: 'r_d7', name: '1765', price: 125300, img: 'https://files.catbox.moe/ogchrl.png' },
-                { id: 'r_d8', name: '2975', price: 208300, img: 'https://files.catbox.moe/ogchrl.png' },
-                { id: 'r_d9', name: '6000', price: 420300, img: 'https://files.catbox.moe/ocznqy.png' }
+                { id:'r_d1', name:'35', price:3100, img:'https://files.catbox.moe/xaxejk.png' },
+                { id:'r_d2', name:'55', price:5000, img:'https://files.catbox.moe/xaxejk.png' },
+                { id:'r_d3', name:'165', price:14100, img:'https://files.catbox.moe/7bj50l.png' },
+                { id:'r_d4', name:'275', price:22900, img:'https://files.catbox.moe/7bj50l.png' },
+                { id:'r_d5', name:'565', price:44900, img:'https://files.catbox.moe/4mb7sd.png' },
+                { id:'r_d6', name:'1155', price:87700, img:'https://files.catbox.moe/4mb7sd.png' },
+                { id:'r_d7', name:'1765', price:125300, img:'https://files.catbox.moe/ogchrl.png' },
+                { id:'r_d8', name:'2975', price:208300, img:'https://files.catbox.moe/ogchrl.png' },
+                { id:'r_d9', name:'6000', price:420300, img:'https://files.catbox.moe/ocznqy.png' }
             ]
         }
     };
 
-    // ===== RENDER FUNCTIONS =====
-    function renderItems(items, containerId, isDouble) {
-        const d = LANG_DATA[currentLang];
-        const container = document.getElementById(containerId);
-        if (!container) return;
-        
-        if (!items || items.length === 0) {
-            container.innerHTML = '';
-            return;
-        }
-        
-        const serverName = getServerName();
-        const serverEmoji = getServerEmoji();
-        
-        container.innerHTML = items.map(pkg => {
-            const isSelected = selectedPackage && selectedPackage.id === pkg.id;
-            const badgeHtml = pkg.badge ? `<span class="badge">${d.doubleBadge}</span>` : '';
-            const doubleClass = isDouble ? 'double-item' : '';
-            
+    function renderItems(items, containerId, isDouble){
+        const d=LANG_DATA[currentLang];
+        const container=document.getElementById(containerId);
+        if(!container)return;
+        if(!items||items.length===0){container.innerHTML='';return;}
+        const serverName=getServerName();
+        const serverEmoji=getServerEmoji();
+        container.innerHTML=items.map(pkg=>{
+            const isSelected=selectedPackage&&selectedPackage.id===pkg.id;
+            const doubleClass=isDouble?'double-item':'';
+            const nameHTML=pkg.twoLine?`<span class="line1">Weekly</span><span class="line2">${pkg.line2||'Pass'}</span>`:`<span class="line1">${pkg.name}</span>`;
             return `
                 <div class="package-item ${isSelected?'selected':''} ${doubleClass}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})">
                     <img src="${pkg.img}" alt="${pkg.name}" class="pkg-img" onerror="this.style.display='none'">
                     <div class="info">
-                        <div class="name">
-                            <span class="line1">${pkg.name}</span>
-                        </div>
-                        ${badgeHtml}
+                        <div class="name">${nameHTML}</div>
                     </div>
                     <div class="price-text">${pkg.price.toLocaleString()} ${d.currency}</div>
                     <div class="server-name">
                         <span class="btn-label">${serverEmoji} ${serverName}</span>
-                        <button class="buy-btn" onclick="event.stopPropagation(); handleBuyClick('${pkg.id}','${pkg.name}',${pkg.price})">${d.topUp}</button>
+                        <button class="buy-btn" onclick="event.stopPropagation();handleBuyClick('${pkg.id}','${pkg.name}',${pkg.price})">${d.topUp}</button>
                     </div>
                 </div>
             `;
         }).join('');
     }
 
-    function renderAllPackages() {
-        renderItems(PACKAGES.global.bundles, 'globalBundles');
-        renderItems(PACKAGES.global.double, 'globalDouble');
-        renderItems(PACKAGES.global.diamonds, 'globalDiamonds');
-        
-        renderItems(PACKAGES.ban.bundles, 'banBundles');
-        renderItems(PACKAGES.ban.double, 'banDouble');
-        renderItems(PACKAGES.ban.diamonds, 'banDiamonds');
-        
-        renderItems(PACKAGES.indo.bundles, 'indoBundles');
-        renderItems(PACKAGES.indo.diamonds, 'indoDiamonds');
-        
-        renderItems(PACKAGES.russia.bundles, 'russiaBundles');
-        renderItems(PACKAGES.russia.diamonds, 'russiaDiamonds');
+    function renderAllPackages(){
+        renderItems(PACKAGES.global.bundles,'globalBundles');
+        renderItems(PACKAGES.global.double,'globalDouble',true);
+        renderItems(PACKAGES.global.diamonds,'globalDiamonds');
+        renderItems(PACKAGES.ban.bundles,'banBundles');
+        renderItems(PACKAGES.ban.double,'banDouble',true);
+        renderItems(PACKAGES.ban.diamonds,'banDiamonds');
+        renderItems(PACKAGES.indo.bundles,'indoBundles');
+        renderItems(PACKAGES.indo.diamonds,'indoDiamonds');
+        renderItems(PACKAGES.russia.bundles,'russiaBundles');
+        renderItems(PACKAGES.russia.diamonds,'russiaDiamonds');
     }
 
-    function handlePackageClick(id, name, price) {
-        if (selectedPackage && selectedPackage.id === id) {
-            selectedPackage = null;
-        } else {
-            selectedPackage = { id, name, price };
-        }
+    function handlePackageClick(id,name,price){
+        if(selectedPackage&&selectedPackage.id===id){selectedPackage=null;}
+        else{selectedPackage={id,name,price};}
         renderAllPackages();
     }
 
-    function handleBuyClick(id, name, price) {
-        if (!selectedPackage || selectedPackage.id !== id) {
-            selectedPackage = { id, name, price };
-            renderAllPackages();
-        }
-        openCheckoutModal(name, price);
+    function handleBuyClick(id,name,price){
+        if(!selectedPackage||selectedPackage.id!==id){selectedPackage={id,name,price};renderAllPackages();}
+        openCheckoutModal(name,price);
     }
 
-    // ===== SEARCH FUNCTIONS =====
-    function searchItems(query) {
-        const q = query.toLowerCase().trim();
-        const items = document.querySelectorAll('.package-item');
-        const clearBtn = document.getElementById('clearSearch');
-        
-        items.forEach(item => {
-            const name = item.querySelector('.name')?.textContent?.toLowerCase() || '';
-            if (name.includes(q) || q === '') {
-                item.classList.remove('hidden');
-            } else {
-                item.classList.add('hidden');
-            }
+    function searchItems(query){
+        const q=query.toLowerCase().trim();
+        const items=document.querySelectorAll('.package-item');
+        const clearBtn=document.getElementById('clearSearch');
+        items.forEach(item=>{
+            const name=item.querySelector('.name')?.textContent?.toLowerCase()||'';
+            item.classList.toggle('hidden',!name.includes(q)&&q!=='');
         });
-        
-        if (q.length > 0) clearBtn.classList.add('show');
-        else clearBtn.classList.remove('show');
+        clearBtn.classList.toggle('show',q.length>0);
     }
 
-    function clearItemSearch() {
-        document.getElementById('itemSearch').value = '';
-        searchItems('');
+    function clearItemSearch(){
+        document.getElementById('itemSearch').value='';searchItems('');
         document.getElementById('clearSearch').classList.remove('show');
         document.getElementById('itemSearch').focus();
     }
 
-    // ===== SERVER SWITCHER =====
-    function switchServer(server) {
-        currentServer = server;
-        
-        document.querySelectorAll('.server-selector .opt').forEach(opt => {
-            opt.classList.toggle('active', opt.dataset.server === server);
+    function switchServer(server){
+        currentServer=server;
+        document.querySelectorAll('.server-selector .opt').forEach(opt=>{
+            opt.classList.toggle('active',opt.dataset.server===server);
         });
-        
-        document.getElementById('globalSection').classList.toggle('hidden', server !== 'global');
-        document.getElementById('banSection').classList.toggle('hidden', server !== 'ban');
-        document.getElementById('indoSektion').classList.toggle('hidden', server !== 'indo');
-        document.getElementById('russiaSection').classList.toggle('hidden', server !== 'russia');
-        
-        const serverName = getServerName();
-        document.getElementById('pageTitle').textContent = `MLBB ${serverName} Packages`;
-        
-        selectedPackage = null;
+        document.getElementById('globalSection').classList.toggle('hidden',server!=='global');
+        document.getElementById('banSection').classList.toggle('hidden',server!=='ban');
+        document.getElementById('indoSektion').classList.toggle('hidden',server!=='indo');
+        document.getElementById('russiaSection').classList.toggle('hidden',server!=='russia');
+        document.getElementById('pageTitle').textContent=`MLBB ${getServerName()} Packages`;
+        selectedPackage=null;
         renderAllPackages();
-        document.getElementById('itemSearch').value = '';
-        searchItems('');
+        document.getElementById('itemSearch').value='';searchItems('');
+        // Remove focus from server selector to prevent outline
+        document.activeElement.blur();
     }
 
-    // ===== MODAL FUNCTIONS =====
-    function openCheckoutModal(name, price) {
-        document.getElementById('modalPackage').textContent = name;
-        document.getElementById('modalPrice').textContent = price.toLocaleString() + ' ' + getText('currency');
+    function openCheckoutModal(name,price){
+        document.getElementById('modalPackage').textContent=name;
+        document.getElementById('modalServer').textContent=getServerEmoji()+' '+getServerName();
+        document.getElementById('modalPrice').textContent=price.toLocaleString()+' '+getText('currency');
         document.getElementById('checkoutModal').classList.add('show');
-        document.getElementById('gameId').value = '';
-        document.getElementById('serverId').value = '';
-        document.getElementById('fileInput').value = '';
+        document.getElementById('gameId').value='';
+        document.getElementById('serverId').value='';
+        document.getElementById('orderMessage').value='';
+        document.getElementById('fileInput').value='';
         document.getElementById('fileUpload').classList.remove('has-file');
         document.getElementById('fileName').classList.remove('show');
-        document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+        document.querySelectorAll('.payment-option').forEach(opt=>opt.classList.remove('selected'));
         document.getElementById('waveInfo').classList.remove('show');
         document.getElementById('kpayInfo').classList.remove('show');
-        selectedPayment = null;
-        document.getElementById('submitBtn').disabled = true;
-        document.getElementById('submitBtn').className = 'btn-primary';
-        document.getElementById('submitBtn').textContent = '✅ ' + getText('submit');
+        selectedPayment=null;
+        document.getElementById('submitBtn').disabled=true;
+        document.getElementById('submitBtn').className='btn-primary';
+        document.getElementById('submitBtn').textContent='✅ '+getText('submit');
         checkForm();
     }
 
-    function closeCheckoutModal() {
-        if (isSubmitting) return;
-        document.getElementById('checkoutModal').classList.remove('show');
-    }
+    function closeCheckoutModal(){if(!isSubmitting)document.getElementById('checkoutModal').classList.remove('show');}
 
-    function showSuccessModal(orderData) {
-        document.getElementById('sOrderId').textContent = orderData.orderId;
-        document.getElementById('sPackage').textContent = orderData.package;
-        document.getElementById('sPrice').textContent = orderData.price;
-        document.getElementById('sGameId').textContent = orderData.gameId;
-        document.getElementById('sServerId').textContent = orderData.serverId;
-        document.getElementById('sPayment').textContent = orderData.payment;
-        document.getElementById('sTime').textContent = orderData.time;
+    function showSuccessModal(orderData){
+        document.getElementById('sOrderId').textContent=orderData.orderId;
+        document.getElementById('sPackage').textContent=orderData.package;
+        document.getElementById('sServer').textContent=orderData.server;
+        document.getElementById('sPrice').textContent=orderData.price;
+        document.getElementById('sGameId').textContent=orderData.gameId;
+        document.getElementById('sServerId').textContent=orderData.serverId;
+        document.getElementById('sPayment').textContent=orderData.payment;
+        document.getElementById('sTime').textContent=orderData.time;
         document.getElementById('successModal').classList.add('show');
     }
 
-    function closeSuccessModal() {
-        document.getElementById('successModal').classList.remove('show');
+    function closeSuccessModal(){document.getElementById('successModal').classList.remove('show');}
+
+    function isNumberOnly(value){return/^[0-9]+$/.test(value)}
+
+    function checkForm(){
+        const gameId=document.getElementById('gameId').value.trim();
+        const serverId=document.getElementById('serverId').value.trim();
+        const hasFile=document.getElementById('fileInput').files&&document.getElementById('fileInput').files[0];
+        const btn=document.getElementById('submitBtn');
+        const isGameIdValid=gameId===''||isNumberOnly(gameId);
+        const isServerIdValid=serverId===''||isNumberOnly(serverId);
+        if(gameId&&serverId&&selectedPayment&&hasFile&&isGameIdValid&&isServerIdValid&&!isSubmitting){
+            btn.disabled=false;btn.className='btn-primary enabled';
+        }else{btn.disabled=true;btn.className='btn-primary';}
     }
 
-    function isNumberOnly(value) { return /^[0-9]+$/.test(value) }
-
-    function checkForm() {
-        const gameId = document.getElementById('gameId').value.trim();
-        const serverId = document.getElementById('serverId').value.trim();
-        const hasFile = document.getElementById('fileInput').files && document.getElementById('fileInput').files[0];
-        const btn = document.getElementById('submitBtn');
-        
-        const isGameIdValid = gameId === '' || isNumberOnly(gameId);
-        const isServerIdValid = serverId === '' || isNumberOnly(serverId);
-        
-        if (gameId && serverId && selectedPayment && hasFile && isGameIdValid && isServerIdValid && !isSubmitting) {
-            btn.disabled = false;
-            btn.className = 'btn-primary enabled';
-        } else {
-            btn.disabled = true;
-            btn.className = 'btn-primary';
-        }
-    }
-
-    document.getElementById('gameId').addEventListener('input', function() {
-        const val = this.value.trim();
-        if (val && !isNumberOnly(val)) {
-            this.style.borderColor = 'var(--red)';
-            document.querySelector('#gameIdHint').style.color = 'var(--red)';
-            document.querySelector('#gameIdHint').textContent = '⚠️ ' + getText('enterNumberOnly');
-        } else {
-            this.style.borderColor = 'var(--border-color)';
-            document.querySelector('#gameIdHint').style.color = 'var(--text-secondary)';
-            document.querySelector('#gameIdHint').textContent = getText('gameIdHint');
-        }
+    document.getElementById('gameId').addEventListener('input',function(){
+        const val=this.value.trim();
+        const hint=document.getElementById('gameIdHint');
+        if(val&&!isNumberOnly(val)){this.style.borderColor='var(--red)';hint.style.color='var(--red)';hint.textContent='⚠️ '+getText('enterNumberOnly');}
+        else{this.style.borderColor='var(--border-color)';hint.style.color='var(--text-secondary)';hint.textContent=getText('gameIdHint');}
         checkForm();
     });
 
-    document.getElementById('serverId').addEventListener('input', function() {
-        const val = this.value.trim();
-        if (val && !isNumberOnly(val)) {
-            this.style.borderColor = 'var(--red)';
-            document.querySelector('#serverIdHint').style.color = 'var(--red)';
-            document.querySelector('#serverIdHint').textContent = '⚠️ ' + getText('enterNumberOnly');
-        } else {
-            this.style.borderColor = 'var(--border-color)';
-            document.querySelector('#serverIdHint').style.color = 'var(--text-secondary)';
-            document.querySelector('#serverIdHint').textContent = getText('serverIdHint');
-        }
+    document.getElementById('serverId').addEventListener('input',function(){
+        const val=this.value.trim();
+        const hint=document.getElementById('serverIdHint');
+        if(val&&!isNumberOnly(val)){this.style.borderColor='var(--red)';hint.style.color='var(--red)';hint.textContent='⚠️ '+getText('enterNumberOnly');}
+        else{this.style.borderColor='var(--border-color)';hint.style.color='var(--text-secondary)';hint.textContent=getText('serverIdHint');}
         checkForm();
     });
 
-    document.querySelectorAll('.payment-option').forEach(el => {
-        el.addEventListener('click', function() {
-            document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
-            this.classList.add('selected');
-            selectedPayment = this.dataset.payment;
+    document.querySelectorAll('.payment-option').forEach(el=>{
+        el.addEventListener('click',function(){
+            document.querySelectorAll('.payment-option').forEach(opt=>opt.classList.remove('selected'));
+            this.classList.add('selected');selectedPayment=this.dataset.payment;
             document.getElementById('waveInfo').classList.remove('show');
             document.getElementById('kpayInfo').classList.remove('show');
-            if (selectedPayment === 'wave') document.getElementById('waveInfo').classList.add('show');
-            else if (selectedPayment === 'kpay') document.getElementById('kpayInfo').classList.add('show');
+            if(selectedPayment==='wave')document.getElementById('waveInfo').classList.add('show');
+            else if(selectedPayment==='kpay')document.getElementById('kpayInfo').classList.add('show');
             checkForm();
         });
     });
 
-    document.getElementById('fileInput').addEventListener('change', function() {
-        if (this.files && this.files[0]) {
+    document.getElementById('fileInput').addEventListener('change',function(){
+        if(this.files&&this.files[0]){
             document.getElementById('fileUpload').classList.add('has-file');
-            document.getElementById('fileName').textContent = '✅ ' + this.files[0].name;
-            document.getElementById('fileName').classList.add('show');
-            checkForm();
+            document.getElementById('fileName').textContent='✅ '+this.files[0].name;
+            document.getElementById('fileName').classList.add('show');checkForm();
         }
     });
 
-    function copyNumber(number, btn) {
-        const d = LANG_DATA[currentLang] || {};
-        navigator.clipboard.writeText(number).then(() => {
-            btn.textContent = d.copied || '✅ Copied!';
-            setTimeout(() => { btn.textContent = d.copy || 'Copy'; }, 2500);
-        }).catch(() => {
-            const input = document.createElement('input');
-            input.value = number;
-            document.body.appendChild(input);
-            input.select();
-            document.execCommand('copy');
-            document.body.removeChild(input);
-            btn.textContent = d.copied || '✅ Copied!';
-            setTimeout(() => { btn.textContent = d.copy || 'Copy'; }, 2500);
+    function copyNumber(number,btn){
+        const d=LANG_DATA[currentLang]||{};
+        navigator.clipboard.writeText(number).then(()=>{
+            btn.textContent=d.copied||'✅ Copied!';setTimeout(()=>{btn.textContent=d.copy||'Copy';},2500);
+        }).catch(()=>{
+            const input=document.createElement('input');input.value=number;document.body.appendChild(input);
+            input.select();document.execCommand('copy');document.body.removeChild(input);
+            btn.textContent=d.copied||'✅ Copied!';setTimeout(()=>{btn.textContent=d.copy||'Copy';},2500);
         });
     }
 
-    async function sendOrderToTelegram(orderData) {
-        const message = `🛒 **New Order!**
+    async function sendOrderToTelegram(orderData){
+        const message=`🛒 **New Order!**
 ━━━━━━━━━━━━━━━━━
 📋 **Order ID:** ${orderData.orderId}
+🎮 **Game:** Mobile Legends: Bang Bang
+🌐 **Server:** ${orderData.server}
 📦 **Package:** ${orderData.package}
 💰 **Price:** ${orderData.price}
 ━━━━━━━━━━━━━━━━━
-🎮 **Game ID:** ${orderData.gameId}
-🌐 **Server ID:** ${orderData.serverId}
+🆔 **Game ID:** ${orderData.gameId}
+🔢 **Server ID:** ${orderData.serverId}
 ━━━━━━━━━━━━━━━━━
 💳 **Payment:** ${orderData.payment}
 👤 **User:** ${orderData.user}
+📝 **Message:** ${orderData.message||'N/A'}
 🕐 **Time:** ${orderData.time}
 ━━━━━━━━━━━━━━━━━
 ⏳ *Status: Pending*`;
 
-        try {
-            const textResponse = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: TELEGRAM_CHAT_ID,
-                    text: message,
-                    parse_mode: 'Markdown',
-                    reply_markup: {
-                        inline_keyboard: [[
-                            { text: '✅ Done', callback_data: `done_${orderData.orderId}` },
-                            { text: '❌ Failed', callback_data: `fail_${orderData.orderId}` }
-                        ]]
-                    }
+        try{
+            const textResponse=await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,{
+                method:'POST',headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({
+                    chat_id:TELEGRAM_CHAT_ID,text:message,parse_mode:'Markdown',
+                    reply_markup:{inline_keyboard:[[
+                        {text:'✅ Done',callback_data:`done_${orderData.orderId}`},
+                        {text:'❌ Failed',callback_data:`fail_${orderData.orderId}`}
+                    ]]}
                 })
             });
-
-            if (!textResponse.ok) return false;
-
-            if (orderData.photo) {
-                try {
-                    const photoBlob = await fetch(orderData.photo).then(res => res.blob());
-                    const formData = new FormData();
-                    formData.append('chat_id', TELEGRAM_CHAT_ID);
-                    formData.append('photo', photoBlob, 'payment_slip.jpg');
-                    formData.append('caption', `📸 Payment Slip\nOrder: ${orderData.orderId}`);
-                    await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`, {
-                        method: 'POST',
-                        body: formData
-                    });
-                } catch(e) { console.warn('Failed to send photo:', e); }
+            if(!textResponse.ok)return false;
+            if(orderData.photo){
+                try{
+                    const photoBlob=await fetch(orderData.photo).then(res=>res.blob());
+                    const formData=new FormData();
+                    formData.append('chat_id',TELEGRAM_CHAT_ID);
+                    formData.append('photo',photoBlob,'payment_slip.jpg');
+                    formData.append('caption',`📸 Payment Slip\nOrder: ${orderData.orderId}`);
+                    await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`,{method:'POST',body:formData});
+                }catch(e){console.warn('Failed to send photo:',e);}
             }
             return true;
-        } catch(error) { console.error('Telegram error:', error); return false; }
+        }catch(error){console.error('Telegram error:',error);return false;}
     }
 
-    document.getElementById('submitBtn').addEventListener('click', async function() {
-        if (isSubmitting) return;
-        const d = LANG_DATA[currentLang] || {};
-        const gameId = document.getElementById('gameId').value.trim();
-        const serverId = document.getElementById('serverId').value.trim();
-        const hasFile = document.getElementById('fileInput').files && document.getElementById('fileInput').files[0];
+    document.getElementById('submitBtn').addEventListener('click',async function(){
+        if(isSubmitting)return;
+        const d=LANG_DATA[currentLang]||{};
+        const gameId=document.getElementById('gameId').value.trim();
+        const serverId=document.getElementById('serverId').value.trim();
+        const orderMessage=document.getElementById('orderMessage').value.trim();
+        const hasFile=document.getElementById('fileInput').files&&document.getElementById('fileInput').files[0];
 
-        if (!gameId) { showToast(d.enterGameId, 'error'); return; }
-        if (!isNumberOnly(gameId)) { showToast(d.enterNumberOnly, 'error'); return; }
-        if (!serverId) { showToast(d.enterServerId, 'error'); return; }
-        if (!isNumberOnly(serverId)) { showToast(d.enterNumberOnly, 'error'); return; }
-        if (!selectedPayment) { showToast(d.selectPayment, 'error'); return; }
-        if (!hasFile) { showToast(d.uploadSlip, 'error'); return; }
+        if(!gameId){showToast(d.enterGameId);return;}
+        if(!isNumberOnly(gameId)){showToast(d.enterNumberOnly);return;}
+        if(!serverId){showToast(d.enterServerId);return;}
+        if(!isNumberOnly(serverId)){showToast(d.enterNumberOnly);return;}
+        if(!selectedPayment){showToast(d.selectPayment);return;}
+        if(!hasFile){showToast(d.uploadSlip);return;}
 
-        isSubmitting = true;
-        this.disabled = true;
-        this.className = 'btn-primary loading';
-        this.textContent = d.submitting || '⏳ အော်ဒါတင်နေသည်...';
+        isSubmitting=true;this.disabled=true;this.className='btn-primary loading';
+        this.textContent=d.submitting||'⏳ အော်ဒါတင်နေသည်...';
 
-        const orderId = 'ORD-' + Date.now().toString().slice(-6);
-        const pkg = document.getElementById('modalPackage').textContent;
-        const price = document.getElementById('modalPrice').textContent;
-        const paymentName = selectedPayment === 'wave' ? 'Wave Pay' : 'KBZ Pay';
-        const user = JSON.parse(localStorage.getItem('currentUser'));
-        const userName = user ? user.username : 'Guest';
-        const time = new Date().toLocaleString();
+        const orderId='ORD-'+Date.now().toString().slice(-6);
+        const pkg=document.getElementById('modalPackage').textContent;
+        const server=getServerEmoji()+' '+getServerName();
+        const price=document.getElementById('modalPrice').textContent;
+        const paymentName=selectedPayment==='wave'?'Wave Pay':'KBZ Pay';
+        const user=JSON.parse(localStorage.getItem('currentUser'));
+        const userName=user?user.username:'Guest';
+        const time=new Date().toLocaleString();
 
-        let photoBase64 = null;
-        if (hasFile) {
-            try {
-                photoBase64 = await new Promise((resolve) => {
-                    const reader = new FileReader();
-                    reader.onload = (e) => resolve(e.target.result);
+        let photoBase64=null;
+        if(hasFile){
+            try{
+                photoBase64=await new Promise((resolve)=>{
+                    const reader=new FileReader();
+                    reader.onload=(e)=>resolve(e.target.result);
                     reader.readAsDataURL(hasFile);
                 });
-            } catch(e) { console.warn('Failed to read file:', e); }
+            }catch(e){console.warn('Failed to read file:',e);}
         }
 
-        const orderData = { orderId, package: pkg, price, gameId, serverId, payment: paymentName, user: userName, time, photo: photoBase64 };
+        const orderData={orderId,package:pkg,server,price,gameId,serverId,payment:paymentName,user:userName,message:orderMessage,time,photo:photoBase64};
 
-        try {
-            const telegramSuccess = await sendOrderToTelegram(orderData);
-
-            const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
-            orders.unshift({
-                id: orderId,
-                userId: user ? user.username : 'guest',
-                package: pkg,
-                price: price,
-                gameId: gameId,
-                serverId: serverId,
-                payment: paymentName,
-                date: new Date().toISOString(),
-                status: 'pending'
-            });
-            localStorage.setItem('orderHistory', JSON.stringify(orders));
-
-            const notifications = JSON.parse(localStorage.getItem('notifications') || '[]');
-            notifications.unshift({
-                id: 'noti_' + Date.now(),
-                orderId: orderId,
-                package: pkg,
-                price: price,
-                time: new Date().toLocaleString(),
-                status: 'pending',
-                message: `🛒 အော်ဒါအသစ် #${orderId}\n📦 ${pkg}\n💰 ${price}\n⏳ ဆောင်ရွက်နေဆဲ`
-            });
-            localStorage.setItem('notifications', JSON.stringify(notifications));
+        try{
+            const telegramSuccess=await sendOrderToTelegram(orderData);
+            const orders=JSON.parse(localStorage.getItem('orderHistory')||'[]');
+            orders.unshift({id:orderId,userId:user?user.username:'guest',package:pkg,server:server,price:price,gameId:gameId,serverId:serverId,payment:paymentName,message:orderMessage,date:new Date().toISOString(),status:'pending'});
+            localStorage.setItem('orderHistory',JSON.stringify(orders));
+            const notifications=JSON.parse(localStorage.getItem('notifications')||'[]');
+            notifications.unshift({id:'noti_'+Date.now(),orderId:orderId,package:pkg,server:server,price:price,time:new Date().toLocaleString(),status:'pending',message:`🛒 အော်ဒါအသစ် #${orderId}\n📦 ${pkg}\n🌐 ${server}\n💰 ${price}\n⏳ ဆောင်ရွက်နေဆဲ`});
+            localStorage.setItem('notifications',JSON.stringify(notifications));
             updateBadge();
-            localStorage.setItem('newOrderNotification', JSON.stringify({ show: true, orderId: orderId, count: getPendingCount() }));
             window.dispatchEvent(new Event('storage'));
-
             closeCheckoutModal();
             showSuccessModal(orderData);
-
-            if (telegramSuccess) {
-                showToast(d.orderSuccess || '✅ Order successful!', 'success');
-            } else {
-                showToast('⚠️ အော်ဒါသိမ်းပြီးသော်လည်း Telegram သို့မပို့နိုင်ပါ။', 'error');
-            }
-        } catch (error) {
-            console.error('Order error:', error);
-            showToast(d.orderFail || '❌ Order failed. Please try again.', 'error');
-        } finally {
-            this.disabled = false;
-            this.className = 'btn-primary enabled';
-            this.textContent = '✅ ' + d.submit;
-            isSubmitting = false;
+            if(telegramSuccess){showToast(d.orderSuccess||'✅ Order successful!');}
+            else{showToast('⚠️ အော်ဒါသိမ်းပြီးသော်လည်း Telegram သို့မပို့နိုင်ပါ။');}
+        }catch(error){
+            console.error('Order error:',error);showToast(d.orderFail||'❌ Order failed. Please try again.');
+        }finally{
+            this.disabled=false;this.className='btn-primary enabled';
+            this.textContent='✅ '+d.submit;isSubmitting=false;
         }
     });
 
-    function getPendingCount() {
-        const notifications = JSON.parse(localStorage.getItem('notifications') || '[]');
-        return notifications.filter(n => n.status === 'pending').length;
-    }
-
-    // ============================================================
-    // EVENT LISTENERS
-    // ============================================================
-    document.querySelectorAll('.lang-btn').forEach(b => {
-        b.addEventListener('click', function() {
-            const lang = this.dataset.lang;
-            currentLang = lang;
-            localStorage.setItem('lang', lang);
-            document.querySelectorAll('.lang-btn').forEach(b2 => b2.classList.toggle('active', b2.dataset.lang === lang));
+    document.querySelectorAll('.lang-btn').forEach(b=>{
+        b.addEventListener('click',function(){
+            const lang=this.dataset.lang;currentLang=lang;
+            localStorage.setItem('lang',lang);
+            document.querySelectorAll('.lang-btn').forEach(b2=>b2.classList.toggle('active',b2.dataset.lang===lang));
             updateLanguage();
         });
     });
 
-    document.querySelector('.night-toggle').addEventListener('click', toggleNightMode);
+    document.querySelector('.night-toggle').addEventListener('click',toggleNightMode);
 
-    document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
-        item.addEventListener('click', function(e) {
-            document.querySelectorAll('.bottom-nav .nav-item').forEach(n => n.classList.remove('active'));
-            this.classList.add('active');
-        });
-    });
+    document.getElementById('checkoutModal').addEventListener('click',function(e){if(e.target===this)closeCheckoutModal();});
+    document.getElementById('successModal').addEventListener('click',function(e){if(e.target===this)closeSuccessModal();});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeCheckoutModal();closeSuccessModal();}});
 
-    document.getElementById('checkoutModal').addEventListener('click', function(e) {
-        if (e.target === this) closeCheckoutModal();
-    });
-
-    document.getElementById('successModal').addEventListener('click', function(e) {
-        if (e.target === this) closeSuccessModal();
-    });
-
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closeCheckoutModal();
-            closeSuccessModal();
-        }
-    });
-
-    // ============================================================
-    // INIT
-    // ============================================================
-    document.addEventListener('DOMContentLoaded', function() {
-        const savedLang = localStorage.getItem('lang') || 'my';
-        currentLang = savedLang;
-        document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === savedLang));
+    document.addEventListener('DOMContentLoaded',function(){
+        const savedLang=localStorage.getItem('lang')||'my';currentLang=savedLang;
+        document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===savedLang));
         updateLanguage();
-        
-        if (localStorage.getItem('nightMode') === 'true') {
-            document.body.classList.add('night-mode');
-            document.querySelector('.night-toggle i').className = 'fas fa-sun';
-        }
+        if(localStorage.getItem('nightMode')==='true'){document.body.classList.add('night-mode');document.querySelector('.night-toggle i').className='fas fa-sun';}
         updateBadge();
-
-        window.addEventListener('storage', function(e) {
-            if (e.key === 'newOrderNotification' || e.key === 'notifications') {
-                updateBadge();
-            }
-        });
+        window.addEventListener('storage',function(e){if(e.key==='newOrderNotification'||e.key==='notifications'){updateBadge();}});
     });
 </script>
 </body>
