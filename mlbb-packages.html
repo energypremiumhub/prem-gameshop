@@ -62,227 +62,113 @@
         .header .left .logo-wrap img{height:38px;width:auto;border-radius:10px}
         .header .left .logo-wrap .text-group{display:flex;flex-direction:column;line-height:1.1}
         .header .left .logo-wrap .text-group .premium{
-            font-size:1rem;
-            font-weight:800;
+            font-size:1rem;font-weight:800;
             background:linear-gradient(135deg, var(--cyan), var(--purple), var(--violet), var(--pink));
-            -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent;
-            background-size:300% 300%;
-            animation:colorShift 2s ease-in-out infinite
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+            background-size:300% 300%;animation:colorShift 2s ease-in-out infinite
         }
-        @keyframes colorShift {
-            0%{background-position:0% 50%}
-            50%{background-position:100% 50%}
-            100%{background-position:0% 50%}
-        }
+        @keyframes colorShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
         .header .left .logo-wrap .text-group .shop{font-size:0.55rem;font-weight:600;color:var(--text-secondary);opacity:0.6;margin-top:-2px}
         
         .header .right .top{display:flex;gap:6px;align-items:center}
         .header .right .top .lang-switcher{
-            display:flex;
-            gap:2px;
-            background:var(--bg-card);
-            padding:3px;
-            border-radius:10px;
-            border:1px solid var(--border-color);
-            backdrop-filter:blur(20px)
+            display:flex;gap:2px;background:var(--bg-card);padding:3px;border-radius:10px;
+            border:1px solid var(--border-color);backdrop-filter:blur(20px)
         }
         .header .right .top .lang-switcher .lang-btn{
-            background:transparent;
-            border:none;
-            color:var(--text-secondary);
-            padding:3px 10px;
-            border-radius:6px;
-            font-size:0.5rem;
-            font-weight:700;
-            cursor:pointer;
-            text-transform:uppercase;
+            background:transparent;border:none;color:var(--text-secondary);padding:3px 10px;
+            border-radius:6px;font-size:0.5rem;font-weight:700;cursor:pointer;text-transform:uppercase;
             transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)
         }
         .header .right .top .lang-switcher .lang-btn:active{transform:scale(0.92)!important}
         .header .right .top .lang-switcher .lang-btn.active{
             background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));
-            color:#fff;
-            box-shadow:0 4px 15px rgba(0,180,216,0.3)
+            color:#fff;box-shadow:0 4px 15px rgba(0,180,216,0.3)
         }
         .header .right .top .night-toggle{
-            background:var(--bg-card);
-            border:1px solid var(--border-color);
-            border-radius:10px;
-            width:34px;
-            height:34px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            cursor:pointer;
-            font-size:1.1rem;
-            color:var(--text-secondary);
-            backdrop-filter:blur(20px);
+            background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;
+            width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+            cursor:pointer;font-size:1.1rem;color:var(--text-secondary);backdrop-filter:blur(20px);
             transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)
         }
         .header .right .top .night-toggle:active{transform:scale(0.92)!important}
         .night-mode .header .right .top .night-toggle .fa-sun{color:#ffd700}
         .header .right .top .noti-btn{
-            background:var(--bg-card);
-            border:1px solid var(--border-color);
-            border-radius:10px;
-            width:34px;
-            height:34px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            cursor:pointer;
-            font-size:1rem;
-            color:var(--text-secondary);
-            position:relative;
-            text-decoration:none;
-            backdrop-filter:blur(20px);
-            transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)
+            background:var(--bg-card);border:1px solid var(--border-color);border-radius:10px;
+            width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+            cursor:pointer;font-size:1rem;color:var(--text-secondary);position:relative;
+            text-decoration:none;backdrop-filter:blur(20px);transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)
         }
         .header .right .top .noti-btn:active{transform:scale(0.92)!important}
         .header .right .top .noti-btn .badge{
-            position:absolute;
-            top:-4px;
-            right:-4px;
-            background:var(--red);
-            color:#fff;
-            font-size:0.4rem;
-            font-weight:700;
-            padding:1px 6px;
-            border-radius:50%;
-            display:none
+            position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;
+            font-size:0.4rem;font-weight:700;padding:1px 6px;border-radius:50%;display:none
         }
 
         .page-header{margin-bottom:16px;animation:slideUp 0.6s ease}
         .page-header h1{font-size:1.3rem;font-weight:800;color:var(--text-primary)}
         .page-header h1 span{
             background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet),var(--pink));
-            -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent;
-            background-size:300% 300%;
-            animation:gradientMove 2s ease-in-out infinite
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+            background-size:300% 300%;animation:gradientMove 2s ease-in-out infinite
         }
-        @keyframes gradientMove{
-            0%{background-position:0% 50%}
-            50%{background-position:100% 50%}
-            100%{background-position:0% 50%}
-        }
+        @keyframes gradientMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
         .page-header h1 i{color:var(--cyan);margin-right:6px}
         .page-header p{color:var(--text-secondary);font-size:0.7rem;margin-top:2px}
 
         .search-bar{
-            background:var(--bg-card);
-            backdrop-filter:blur(20px);
-            border:1px solid var(--border-color);
-            border-radius:14px;
-            padding:8px 14px;
-            display:flex;
-            align-items:center;
-            gap:10px;
-            margin-bottom:12px;
-            box-shadow:0 2px 10px var(--shadow)
+            background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);
+            border-radius:14px;padding:8px 14px;display:flex;align-items:center;gap:10px;
+            margin-bottom:12px;box-shadow:0 2px 10px var(--shadow)
         }
-        .search-bar input{
-            background:transparent;
-            border:none;
-            color:var(--text-primary);
-            font-size:0.75rem;
-            flex:1;
-            outline:none;
-            padding:4px 0
-        }
+        .search-bar input{background:transparent;border:none;color:var(--text-primary);font-size:0.75rem;flex:1;outline:none;padding:4px 0}
         .search-bar input::placeholder{color:var(--text-secondary);font-size:0.65rem}
         .search-bar .clear-btn{color:var(--text-secondary);font-size:0.7rem;cursor:pointer;padding:4px;display:none}
         .search-bar .clear-btn.show{display:block}
         .search-bar .icon{color:var(--text-secondary);font-size:0.9rem}
 
         .section-title{
-            font-size:.65rem;
-            font-weight:700;
-            color:var(--text-secondary);
-            text-transform:uppercase;
-            letter-spacing:2px;
-            margin-bottom:12px;
-            display:flex;
-            align-items:center;
-            gap:10px;
-            opacity:.5
+            font-size:.65rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;
+            letter-spacing:2px;margin-bottom:12px;display:flex;align-items:center;gap:10px;opacity:.5
         }
         .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-color),transparent)}
         .section-title i{
             background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet),var(--pink));
-            -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent;
-            background-size:300% 300%;
-            animation:iconGradient 1.5s ease-in-out infinite;
-            font-size:0.8rem
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+            background-size:300% 300%;animation:iconGradient 1.5s ease-in-out infinite;font-size:0.8rem
         }
-        @keyframes iconGradient{
-            0%{background-position:0% 50%}
-            50%{background-position:100% 50%}
-            100%{background-position:0% 50%}
-        }
+        @keyframes iconGradient{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 
+        /* ===== SERVER SELECTOR ===== */
         .server-selector{
-            background:var(--bg-card);
-            backdrop-filter:blur(20px);
-            border:none;
-            border-radius:14px;
-            padding:10px 14px;
-            display:flex;
-            align-items:center;
-            gap:12px;
-            margin-bottom:16px;
-            box-shadow:0 4px 20px var(--shadow);
-            outline:none
+            background:var(--bg-card);backdrop-filter:blur(20px);border:none;border-radius:14px;
+            padding:10px 14px;display:flex;align-items:center;gap:12px;margin-bottom:16px;
+            box-shadow:0 4px 20px var(--shadow);outline:none
         }
         .server-selector:focus,.server-selector:focus-visible,.server-selector *:focus,.server-selector *:focus-visible{outline:none!important}
         .server-selector .label{
-            font-size:0.55rem;
-            color:var(--text-secondary);
-            font-weight:600;
-            text-transform:uppercase;
-            letter-spacing:0.5px;
-            flex-shrink:0;
-            display:flex;
-            align-items:center;
-            gap:4px
+            font-size:0.55rem;color:var(--text-secondary);font-weight:600;text-transform:uppercase;
+            letter-spacing:0.5px;flex-shrink:0;display:flex;align-items:center;gap:4px
         }
         .server-selector .options{display:flex;gap:6px;flex-wrap:wrap;flex:1}
         .server-selector .options .opt{
-            background:transparent;
-            border:1px solid var(--border-color);
-            color:var(--text-secondary);
-            padding:4px 14px;
-            border-radius:8px;
-            font-size:0.55rem;
-            font-weight:600;
-            cursor:pointer;
-            transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            white-space:nowrap
+            background:transparent;border:1px solid var(--border-color);color:var(--text-secondary);
+            padding:4px 14px;border-radius:8px;font-size:0.55rem;font-weight:600;cursor:pointer;
+            transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);white-space:nowrap
         }
         .server-selector .options .opt:active{transform:scale(0.92)!important}
         .server-selector .options .opt.active{
             background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));
-            color:#fff;
-            border:none;
-            box-shadow:0 4px 15px rgba(0,180,216,0.3)
+            color:#fff;border:none;box-shadow:0 4px 15px rgba(0,180,216,0.3)
         }
 
+        /* ===== PACKAGE GRID ===== */
         .package-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
         .package-item{
-            background:var(--bg-card);
-            backdrop-filter:blur(20px);
-            border:1px solid var(--border-color);
-            border-radius:14px;
-            padding:12px 8px;
-            text-align:center;
-            cursor:pointer;
+            background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--border-color);
+            border-radius:14px;padding:12px 8px;text-align:center;cursor:pointer;
             transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow:0 4px 20px var(--shadow);
-            display:flex;
-            flex-direction:column;
-            align-items:center
+            box-shadow:0 4px 20px var(--shadow);display:flex;flex-direction:column;align-items:center
         }
         .package-item:hover{transform:translateY(-6px);box-shadow:0 8px 30px var(--shadow-hover)}
         .package-item:active{transform:scale(0.92)!important;transition:transform 0.12s cubic-bezier(0.34, 1.2, 0.64, 1)!important}
@@ -292,15 +178,13 @@
         .package-item .pkg-img{width:100%;height:auto;display:block;border-radius:8px;margin-bottom:4px;animation:floatIcon 3s ease-in-out infinite}
         @keyframes floatIcon{0%,100%{transform:translateY(0px)}50%{transform:translateY(-6px)}}
         .package-item:hover .pkg-img{transform:scale(1.04);transition:transform 0.3s ease}
-        .package-item.selected .pkg-img{box-shadow:0 0 8px var(--gold-glow)}
-
-        /* Double Item - Smaller Image */
+        .package-item.selected .pkg-img{box-shadow:none}
         .package-item.double-item .pkg-img{max-width:65%;margin:0 auto}
 
         .package-item .info{display:flex;flex-direction:column;gap:1px;width:100%}
         .package-item .info .name{font-size:0.65rem;font-weight:700;color:var(--text-primary);line-height:1.2}
-        .package-item .info .name .line1{display:block}
-        .package-item .info .name .line2{display:block;font-size:0.55rem;color:var(--text-secondary);font-weight:500}
+        .package-item .info .name .line1{display:block;font-size:0.65rem;font-weight:700;color:var(--text-primary)}
+        .package-item .info .name .line2{display:block;font-size:0.65rem;font-weight:700;color:var(--text-primary)}
 
         .package-item .price-text{font-size:0.65rem;font-weight:700;color:var(--text-secondary);margin:4px 0;transition:all 0.4s ease}
         .package-item.selected .price-text{color:var(--cyan)}
@@ -308,25 +192,17 @@
         .package-item .server-name{margin-top:4px;width:100%;display:flex;justify-content:center}
         .package-item .server-name .btn-label{font-size:0.45rem;color:var(--text-secondary);font-weight:500;opacity:0.6;letter-spacing:0.3px}
         .package-item .server-name .buy-btn{
-            display:none;
-            background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));
-            color:#fff;
-            border:none;
-            padding:6px 20px;
-            border-radius:10px;
-            font-size:0.55rem;
-            font-weight:700;
-            cursor:pointer;
-            box-shadow:0 4px 15px rgba(0,180,216,0.3);
-            width:100%;
-            max-width:120px;
-            letter-spacing:0.5px
+            display:none;background:linear-gradient(135deg,var(--cyan),var(--purple),var(--violet));
+            color:#fff;border:none;padding:6px 20px;border-radius:10px;font-size:0.55rem;
+            font-weight:700;cursor:pointer;box-shadow:0 4px 15px rgba(0,180,216,0.3);
+            width:100%;max-width:120px;letter-spacing:0.5px
         }
         .package-item .server-name .buy-btn:active{transform:scale(0.92)!important}
         .package-item.selected .server-name .buy-btn{display:block}
         .package-item.selected .server-name .btn-label{display:none}
 
-        .bottom-nav {
+        /* ===== BOTTOM NAV ===== */
+        .bottom-nav{
             position:fixed;bottom:16px;left:16px;right:16px;width:auto;max-width:480px;margin:0 auto;
             background:var(--bg-card);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
             border:1px solid var(--border-color);border-radius:18px;display:flex;justify-content:space-around;
@@ -358,7 +234,6 @@
         }
 
         .footer-text{text-align:center;color:var(--text-secondary);font-size:0.45rem;margin-top:10px;opacity:0.3}
-
         .toast{
             position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:var(--bg-secondary);
             padding:10px 20px;border-radius:12px;border:1px solid var(--border-color);color:var(--cyan);
@@ -369,8 +244,7 @@
         @keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(30px) scale(0.85)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
         @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 
-        .section-wrapper{display:block}
-        .section-wrapper.hidden{display:none}
+        .section-wrapper{display:block}.section-wrapper.hidden{display:none}
 
         /* ===== MODAL ===== */
         .modal-overlay{
@@ -381,10 +255,9 @@
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
         
         .modal{
-            background:var(--bg-secondary);backdrop-filter:blur(24px);
-            border:1px solid var(--border-color);border-radius:16px;padding:24px 20px;
-            max-width:420px;width:100%;box-shadow:0 4px 30px var(--shadow);
-            max-height:90vh;overflow-y:auto
+            background:var(--bg-secondary);backdrop-filter:blur(24px);border:1px solid var(--border-color);
+            border-radius:16px;padding:24px 20px;max-width:420px;width:100%;
+            box-shadow:0 4px 30px var(--shadow);max-height:90vh;overflow-y:auto
         }
         .modal .close-btn{
             position:absolute;top:10px;right:14px;background:none;border:none;
@@ -401,33 +274,28 @@
         }
         .modal .form-group input:focus{border-color:var(--cyan);box-shadow:0 0 20px var(--cyan-glow)}
         .modal .form-group .input-hint{font-size:0.45rem;color:var(--text-secondary);margin-top:2px;opacity:0.5}
-
         .modal .selected-row{
             display:flex;justify-content:space-between;align-items:center;padding:10px 14px;
-            background:var(--bg-input);border-radius:10px;border:1px solid var(--border-color);margin-bottom:10px;
-            flex-wrap:wrap;gap:4px
+            background:var(--bg-input);border-radius:10px;border:1px solid var(--border-color);
+            margin-bottom:10px;flex-wrap:wrap;gap:4px
         }
         .modal .selected-row .pkg-info{display:flex;flex-direction:column;gap:1px}
         .modal .selected-row .pkg{font-size:0.75rem;font-weight:600;color:var(--text-primary)}
         .modal .selected-row .server-tag{font-size:0.5rem;color:var(--cyan);font-weight:500}
         .modal .selected-row .price{font-size:0.8rem;font-weight:700;color:var(--gold)}
-
         .modal .payment-options{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
         .modal .payment-option{
             background:var(--bg-input);border:1px solid var(--border-color);border-radius:10px;
             padding:10px;text-align:center;cursor:pointer;transition:all 0.3s ease
         }
         .modal .payment-option:active{transform:scale(0.92)!important}
-        .modal .payment-option.selected{
-            border:1px solid var(--cyan);background:rgba(0,180,216,0.06);box-shadow:0 0 20px var(--cyan-glow)
-        }
+        .modal .payment-option.selected{border:1px solid var(--cyan);background:rgba(0,180,216,0.06);box-shadow:0 0 20px var(--cyan-glow)}
         .modal .payment-option .icon-box{
             width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;
             margin:0 auto 4px;overflow:hidden;border:1px solid var(--border-color);background:var(--bg-input)
         }
         .modal .payment-option .icon-box img{width:100%;height:100%;object-fit:cover}
         .modal .payment-option .name{font-size:0.6rem;font-weight:600;color:var(--text-primary)}
-
         .modal .account-info{
             background:rgba(0,180,216,0.04);border:1px solid rgba(0,180,216,0.08);
             border-radius:10px;padding:10px 14px;margin-top:6px;display:none
@@ -443,7 +311,6 @@
             box-shadow:0 2px 8px rgba(0,180,216,0.2)
         }
         .modal .account-info .acc-number .copy-btn:active{transform:scale(0.92)!important}
-
         .modal .file-upload{
             border:2px dashed var(--border-color);border-radius:10px;padding:14px;
             text-align:center;cursor:pointer;transition:all 0.3s ease;position:relative
@@ -455,15 +322,12 @@
         .modal .file-upload input[type="file"]{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}
         .modal .file-upload .file-name{font-size:0.5rem;color:var(--green);margin-top:3px;display:none}
         .modal .file-upload .file-name.show{display:block}
-
-        /* Message Box */
         .modal .form-group textarea{
             width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border-color);
             background:var(--bg-input);color:var(--text-primary);font-size:0.75rem;outline:none;
             resize:vertical;min-height:60px;font-family:inherit
         }
         .modal .form-group textarea:focus{border-color:var(--cyan);box-shadow:0 0 20px var(--cyan-glow)}
-
         .modal .btn-primary{
             width:100%;padding:11px;background:var(--bg-input);color:var(--text-secondary);
             border:1px solid var(--border-color);border-radius:10px;font-size:0.8rem;font-weight:700;
@@ -602,7 +466,6 @@
         <button class="close-btn" onclick="closeCheckoutModal()">✕</button>
         <h2 id="modalTitle">🛒 အော်ဒါတင်ရန်</h2>
         <p class="sub" id="modalSub">အချက်အလက်များကို မှန်ကန်စွာဖြည့်သွင်းပါ</p>
-        
         <div class="selected-row">
             <div class="pkg-info">
                 <span class="pkg" id="modalPackage">Loading...</span>
@@ -610,24 +473,20 @@
             </div>
             <span class="price" id="modalPrice">0 Ks</span>
         </div>
-
         <div class="form-group">
             <label><i class="fas fa-gamepad"></i> <span id="gameIdLabel">Game ID</span></label>
             <input type="text" id="gameId" placeholder="Enter Game ID" inputmode="numeric" pattern="[0-9]*">
             <div class="input-hint" id="gameIdHint">Numbers only</div>
         </div>
-        
         <div class="form-group">
             <label><i class="fas fa-server"></i> <span id="serverIdLabel">Server ID</span></label>
             <input type="text" id="serverId" placeholder="Enter Server ID" inputmode="numeric" pattern="[0-9]*">
             <div class="input-hint" id="serverIdHint">Numbers only</div>
         </div>
-
         <div class="form-group">
             <label><i class="fas fa-comment"></i> <span id="messageLabel">မှာစာ (Optional)</span></label>
             <textarea id="orderMessage" placeholder="ထပ်မံမှာကြားလိုသည်များ ရေးသားပါ..."></textarea>
         </div>
-
         <div class="form-group">
             <label><i class="fas fa-money-bill-wave"></i> <span id="paymentLabel">ငွေပေးချေရန်</span></label>
             <div class="payment-options" id="paymentOptions">
@@ -641,14 +500,12 @@
                 </div>
             </div>
         </div>
-
         <div class="account-info" id="waveInfo">
             <div class="acc-number">📞 09682506493 <button class="copy-btn" onclick="copyNumber('09682506493', this)">ကူးယူမည်</button></div>
         </div>
         <div class="account-info" id="kpayInfo">
             <div class="acc-number">📞 09682506493 <button class="copy-btn" onclick="copyNumber('09682506493', this)">ကူးယူမည်</button></div>
         </div>
-
         <div class="form-group">
             <label><i class="fas fa-image"></i> <span id="uploadLabel">ပြေစာတင်ပို့ရန်</span></label>
             <div class="file-upload" id="fileUpload">
@@ -658,7 +515,6 @@
                 <input type="file" id="fileInput" accept="image/*">
             </div>
         </div>
-
         <button class="btn-primary" id="submitBtn" disabled>✅ အော်ဒါတင်မည်</button>
     </div>
 </div>
@@ -832,9 +688,9 @@
     const PACKAGES = {
         global: {
             bundles: [
-                { id:'g_b1', name:'Monthly Epic Bundle', price:17300, img:'https://files.catbox.moe/z2j5uo.png' },
-                { id:'g_b2', name:'Weekly Elite Bundle', price:3600, img:'https://files.catbox.moe/i3uywg.png' },
-                { id:'g_b3', name:'Weekly Pass', price:6500, img:'https://files.catbox.moe/zylral.png', twoLine:true, line2:'Pass' },
+                { id:'g_b1', name:'Monthly Epic Bundle', price:17300, img:'https://files.catbox.moe/z2j5uo.png', twoLine:true, line1:'Monthly Epic', line2:'Bundle' },
+                { id:'g_b2', name:'Weekly Elite Bundle', price:3600, img:'https://files.catbox.moe/i3uywg.png', twoLine:true, line1:'Weekly Elite', line2:'Bundle' },
+                { id:'g_b3', name:'Weekly Pass', price:6500, img:'https://files.catbox.moe/zylral.png', twoLine:true, line1:'Weekly', line2:'Pass' },
                 { id:'g_b4', name:'Twilight Pass', price:34000, img:'https://files.catbox.moe/jshuuy.png' }
             ],
             double: [
@@ -878,7 +734,7 @@
         },
         ban: {
             bundles: [
-                { id:'b_b1', name:'Weekly Pass', price:9400, img:'https://files.catbox.moe/zylral.png', twoLine:true, line2:'Pass' }
+                { id:'b_b1', name:'Weekly Pass', price:9400, img:'https://files.catbox.moe/zylral.png', twoLine:true, line1:'Weekly', line2:'Pass' }
             ],
             double: [
                 { id:'b_x1', name:'55', price:4500, img:'https://files.catbox.moe/z376wd.png' },
@@ -920,7 +776,7 @@
         },
         indo: {
             bundles: [
-                { id:'i_b1', name:'Weekly Pass', price:8700, img:'https://files.catbox.moe/zylral.png', twoLine:true, line2:'Pass' }
+                { id:'i_b1', name:'Weekly Pass', price:8700, img:'https://files.catbox.moe/zylral.png', twoLine:true, line1:'Weekly', line2:'Pass' }
             ],
             diamonds: [
                 { id:'i_d1', name:'5', price:700, img:'https://files.catbox.moe/xaxejk.png' },
@@ -942,7 +798,7 @@
         },
         russia: {
             bundles: [
-                { id:'r_b1', name:'Weekly Pass', price:9750, img:'https://files.catbox.moe/zylral.png', twoLine:true, line2:'Pass' }
+                { id:'r_b1', name:'Weekly Pass', price:9750, img:'https://files.catbox.moe/zylral.png', twoLine:true, line1:'Weekly', line2:'Pass' }
             ],
             diamonds: [
                 { id:'r_d1', name:'35', price:3100, img:'https://files.catbox.moe/xaxejk.png' },
@@ -968,13 +824,11 @@
         container.innerHTML=items.map(pkg=>{
             const isSelected=selectedPackage&&selectedPackage.id===pkg.id;
             const doubleClass=isDouble?'double-item':'';
-            const nameHTML=pkg.twoLine?`<span class="line1">Weekly</span><span class="line2">${pkg.line2||'Pass'}</span>`:`<span class="line1">${pkg.name}</span>`;
+            const nameHTML=pkg.twoLine?`<span class="line1">${pkg.line1||pkg.name}</span><span class="line2">${pkg.line2||''}</span>`:`<span class="line1">${pkg.name}</span>`;
             return `
                 <div class="package-item ${isSelected?'selected':''} ${doubleClass}" onclick="handlePackageClick('${pkg.id}','${pkg.name}',${pkg.price})">
                     <img src="${pkg.img}" alt="${pkg.name}" class="pkg-img" onerror="this.style.display='none'">
-                    <div class="info">
-                        <div class="name">${nameHTML}</div>
-                    </div>
+                    <div class="info"><div class="name">${nameHTML}</div></div>
                     <div class="price-text">${pkg.price.toLocaleString()} ${d.currency}</div>
                     <div class="server-name">
                         <span class="btn-label">${serverEmoji} ${serverName}</span>
@@ -1039,7 +893,6 @@
         selectedPackage=null;
         renderAllPackages();
         document.getElementById('itemSearch').value='';searchItems('');
-        // Remove focus from server selector to prevent outline
         document.activeElement.blur();
     }
 
@@ -1258,7 +1111,6 @@
     });
 
     document.querySelector('.night-toggle').addEventListener('click',toggleNightMode);
-
     document.getElementById('checkoutModal').addEventListener('click',function(e){if(e.target===this)closeCheckoutModal();});
     document.getElementById('successModal').addEventListener('click',function(e){if(e.target===this)closeSuccessModal();});
     document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeCheckoutModal();closeSuccessModal();}});
