@@ -712,3 +712,943 @@ function logout() {
     const overlay = document.getElementById('logoutOverlay');
     if (overlay) overlay.classList.add('show');
 }
+/* ============================================
+   PREMIUM GAME SHOP - MAIN JAVASCRIPT (PART 3)
+   Copy this BELOW Part 2 in js/main.js
+   ============================================ */
+
+// ========== SHOP PAGE - GAME SELECTION ==========
+function searchGames(q) {
+    const query = q.toLowerCase().trim();
+    const items = document.querySelectorAll('.game-item');
+    const clearBtn = document.getElementById('clearBtn');
+    let found = false;
+    items.forEach(item => {
+        const name = item.dataset.name || '';
+        if (name.includes(query) || query === '') { item.classList.remove('hidden'); found = true; }
+        else item.classList.add('hidden');
+    });
+    if (clearBtn) {
+        if (query.length > 0) clearBtn.classList.add('show');
+        else clearBtn.classList.remove('show');
+    }
+    let noMsg = document.getElementById('noGamesMsg');
+    if (!found && query.length > 0) {
+        if (!noMsg) {
+            noMsg = document.createElement('div');
+            noMsg.id = 'noGamesMsg';
+            noMsg.style.cssText = 'text-align:center;padding:40px 0;color:var(--text-secondary);font-size:0.85rem;grid-column:1/-1';
+            const grid = document.getElementById('gameGrid');
+            if (grid) grid.appendChild(noMsg);
+        }
+        noMsg.textContent = getText('noGames');
+        noMsg.style.display = 'block';
+    } else if (noMsg) noMsg.style.display = 'none';
+}
+
+function clearSearch() {
+    const input = document.getElementById('searchInput');
+    if (input) { input.value = ''; searchGames(''); }
+    const clearBtn = document.getElementById('clearBtn');
+    if (clearBtn) clearBtn.classList.remove('show');
+    if (input) input.focus();
+}
+
+function selectGame(gameName, gameId, event) {
+    const item = event.currentTarget;
+    item.classList.remove('bounce-click');
+    void item.offsetWidth;
+    item.classList.add('bounce-click');
+    showToast('🎮 ' + gameName + ' ' + getText('selectGame') + '!', 'success');
+    localStorage.setItem('selectedGame', JSON.stringify({ name: gameName, id: gameId }));
+    if (gameId === 'mlbb') setTimeout(() => { window.location.href = 'mlbb-packages.html'; }, 500);
+    else if (gameId === 'mcgg') setTimeout(() => { window.location.href = 'mcgg-packages.html'; }, 500);
+}
+
+function showComingSoon() {
+    showToast(getText('comingSoonMsg'));
+}
+
+// ========== MLBB PACKAGES ==========
+const PACKAGES = {
+    global: {
+        bundles: [
+            { id: 'g_b1', name: 'Monthly Epic Bundle', price: 17300, img: 'https://files.catbox.moe/z2j5uo.png', twoLine: true, line1: 'Monthly Epic', line2: 'Bundle' },
+            { id: 'g_b2', name: 'Weekly Elite Bundle', price: 3600, img: 'https://files.catbox.moe/i3uywg.png', twoLine: true, line1: 'Weekly Elite', line2: 'Bundle' },
+            { id: 'g_b3', name: 'Weekly Pass', price: 6500, img: 'https://files.catbox.moe/zylral.png', twoLine: true, line1: 'Weekly', line2: 'Pass' },
+            { id: 'g_b4', name: 'Twilight Pass', price: 34000, img: 'https://files.catbox.moe/jshuuy.png' }
+        ],
+        double: [
+            { id: 'g_x1', name: '50+50', price: 3550, img: 'https://files.catbox.moe/z376wd.png' },
+            { id: 'g_x2', name: '150+150', price: 9900, img: 'https://files.catbox.moe/kf0960.png' },
+            { id: 'g_x3', name: '250+250', price: 15800, img: 'https://files.catbox.moe/jm3ty7.png' },
+            { id: 'g_x4', name: '500+500', price: 32100, img: 'https://files.catbox.moe/aprnoc.png' }
+        ],
+        diamonds: [
+            { id: 'g_d1', name: '11', price: 750, img: 'https://files.catbox.moe/xaxejk.png' },
+            { id: 'g_d5', name: '56', price: 3800, img: 'https://files.catbox.moe/4mb7sd.png' },
+            { id: 'g_d11', name: '514', price: 29600, img: 'https://files.catbox.moe/k23p6t.png' }
+        ]
+    },
+    ban: {
+        bundles: [{ id: 'b_b1', name: 'Weekly Pass', price: 9400, img: 'https://files.catbox.moe/zylral.png', twoLine: true, line1: 'Weekly', line2: 'Pass' }],
+        double: [{ id: 'b_x1', name: '55', price: 4500, img: 'https://files.catbox.moe/z376wd.png' }],
+        diamonds: [{ id: 'b_d1', name: '14', price: 1300, img: 'https://files.catbox.moe/xaxejk.png' }]
+    },
+    indo: {
+        bundles: [{ id: 'i_b1', name: 'Weekly Pass', price: 8700, img: 'https://files.catbox.moe/zylral.png', twoLine: true, line1: 'Weekly', line2: 'Pass' }],
+        diamonds: [{ id: 'i_d1', name: '5', price: 700, img: 'https://files.catbox.moe/xaxejk.png' }]
+    },
+    russia: {
+        bundles: [{ id: 'r_b1', name: 'Weekly Pass', price: 9750, img: 'https://files.catbox.moe/zylral.png', twoLine: true, line1: 'Weekly', line2: 'Pass' }],
+        diamonds: [{ id: 'r_d1', name: '35', price: 3100, img: 'https://files.catbox.moe/xaxejk.png' }]
+    }
+};
+
+const SERVER_NAMES = { global: 'Global', indo: 'Indo', russia: 'Russia', ban: 'Ban' };
+const SERVER_EMOJIS = { global: '🌍', indo: '🇮🇩', russia: '🇷🇺', ban: '🇲🇾🇸🇬🇵🇭' };
+
+let currentServer = 'global';
+let selectedPackage = null;
+let selectedPayment = null;
+let isSubmitting = false;
+let lastUpdateId = 0;
+
+function renderItems(items, containerId, isDouble) {
+    const container = document.getElementById(containerId);
+    if (!container || !items) return;
+    const sn = SERVER_NAMES[currentServer];
+    container.innerHTML = items.map(pkg => {
+        const sel = selectedPackage && selectedPackage.id === pkg.id;
+        const nh = pkg.twoLine ? `<span class="line1">${pkg.line1}</span><span class="line2">${pkg.line2}</span>` : `<span class="line1">${pkg.name}</span>`;
+        return `<div class="package-item ${sel ? 'selected' : ''} ${isDouble ? 'double-item' : ''}" onclick="selectMLBBPackage('${pkg.id}','${pkg.name}',${pkg.price})">
+            <img src="${pkg.img}" class="pkg-img" onerror="this.style.display='none'">
+            <div class="info"><div class="name">${nh}</div></div>
+            <div class="price-text">${pkg.price.toLocaleString()} Ks</div>
+            <div class="server-name">
+                <span class="btn-label">${SERVER_EMOJIS[currentServer]} ${sn}</span>
+                <button class="buy-btn" onclick="event.stopPropagation();buyMLBBPackage('${pkg.id}','${pkg.name}',${pkg.price})">Top Up</button>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function renderAllPackages() {
+    Object.keys(PACKAGES).forEach(s => {
+        if (PACKAGES[s].bundles) renderItems(PACKAGES[s].bundles, s + 'Bundles');
+        if (PACKAGES[s].double) renderItems(PACKAGES[s].double, s + 'Double', true);
+        if (PACKAGES[s].diamonds) renderItems(PACKAGES[s].diamonds, s + 'Diamonds');
+    });
+}
+
+function selectMLBBPackage(id, name, price) {
+    selectedPackage = selectedPackage && selectedPackage.id === id ? null : { id, name, price };
+    renderAllPackages();
+}
+
+function buyMLBBPackage(id, name, price) {
+    if (!selectedPackage || selectedPackage.id !== id) selectedPackage = { id, name, price };
+    renderAllPackages();
+    openCheckout(name, price);
+}
+
+function switchServer(s) {
+    currentServer = s;
+    document.querySelectorAll('.server-selector .opt').forEach(o => o.classList.toggle('active', o.dataset.server === s));
+    const sections = ['globalSection', 'banSection', 'indoSektion', 'russiaSection'];
+    sections.forEach(sec => {
+        const el = document.getElementById(sec);
+        if (el) el.style.display = 'none';
+    });
+    const activeMap = { global: 'globalSection', ban: 'banSection', indo: 'indoSektion', russia: 'russiaSection' };
+    const activeEl = document.getElementById(activeMap[s]);
+    if (activeEl) activeEl.style.display = 'block';
+    selectedPackage = null;
+    renderAllPackages();
+}
+
+function searchItems(q) {
+    document.querySelectorAll('.package-item').forEach(item => {
+        const n = item.querySelector('.name')?.textContent?.toLowerCase() || '';
+        item.classList.toggle('hidden', !n.includes(q.toLowerCase()) && q !== '');
+    });
+}
+
+// ========== MCGG PACKAGES ==========
+const MCGG_PACKAGES = {
+    bundles: [
+        { id: 'b1', name: 'MCGG Weekly Pass', price: 7400, img: 'https://files.catbox.moe/zylral.png', sub: '💎 Weekly Pass' }
+    ],
+    diamonds: [
+        { id: 'd1', name: '11', price: 1000, img: 'https://files.catbox.moe/xaxejk.png' },
+        { id: 'd2', name: '22', price: 1900, img: 'https://files.catbox.moe/xaxejk.png' },
+        { id: 'd3', name: '56', price: 3900, img: 'https://files.catbox.moe/4mb7sd.png' },
+        { id: 'd4', name: '86', price: 6000, img: 'https://files.catbox.moe/4mb7sd.png' },
+        { id: 'd5', name: '172', price: 11100, img: 'https://files.catbox.moe/ogchrl.png' },
+        { id: 'd6', name: '257', price: 16800, img: 'https://files.catbox.moe/ogchrl.png' },
+        { id: 'd7', name: '344', price: 23000, img: 'https://files.catbox.moe/ocznqy.png' },
+        { id: 'd8', name: '516', price: 33100, img: 'https://files.catbox.moe/k23p6t.png' },
+        { id: 'd9', name: '706', price: 44000, img: 'https://files.catbox.moe/qwnqog.png' },
+        { id: 'd10', name: '1346', price: 79500, img: 'https://files.catbox.moe/zjcnar.png' },
+        { id: 'd11', name: '1825', price: 107500, img: 'https://files.catbox.moe/co1w7w.png' },
+        { id: 'd12', name: '2195', price: 128500, img: 'https://files.catbox.moe/b5bg2m.png' },
+        { id: 'd13', name: '3688', price: 200400, img: 'https://files.catbox.moe/z0c6rj.png' },
+        { id: 'd14', name: '5532', price: 312600, img: 'https://files.catbox.moe/pn69zi.png' },
+        { id: 'd15', name: '9288', price: 510600, img: 'https://files.catbox.moe/pn69zi.png' }
+    ],
+    double: [
+        { id: 'x1', name: '50+50 (55)', price: 3800, img: 'https://files.catbox.moe/z376wd.png', badge: true },
+        { id: 'x2', name: '150+150 (165)', price: 11200, img: 'https://files.catbox.moe/kf0960.png', badge: true },
+        { id: 'x3', name: '250+250 (275)', price: 18800, img: 'https://files.catbox.moe/jm3ty7.png', badge: true },
+        { id: 'x4', name: '500+500 (565)', price: 35000, img: 'https://files.catbox.moe/aprnoc.png', badge: true }
+    ]
+};
+
+let selectedMCGGPackage = null;
+let selectedMCGGPayment = null;
+let isMCGGSubmitting = false;
+
+function renderPackages() {
+    const d = LANG_DATA[currentLang];
+    const renderItems = (items, type) => items.map(pkg => {
+        const isSelected = selectedMCGGPackage && selectedMCGGPackage.id === pkg.id;
+        const badgeHtml = pkg.badge ? `<span class="badge">${d.doubleBadge}</span>` : '';
+        const subHtml = pkg.sub ? `<div class="sub">${pkg.sub}</div>` : '<div class="sub">MCGG</div>';
+        return `
+            <div class="package-item ${isSelected ? 'selected' : ''}" onclick="handleMCGGPackageClick('${pkg.id}','${pkg.name}',${pkg.price})">
+                <div class="info">
+                    <img src="${pkg.img}" alt="${pkg.name}" class="pkg-img" onerror="this.style.display='none'">
+                    <div class="name">${pkg.name}</div>
+                    ${subHtml}
+                    ${badgeHtml}
+                </div>
+                <div class="right">
+                    <span class="price">${pkg.price.toLocaleString()} ${d.currency}</span>
+                    <span class="btn-label">${d.selectLabel}</span>
+                    <button class="buy-btn" onclick="event.stopPropagation(); handleMCGGBuyClick('${pkg.id}','${pkg.name}',${pkg.price})">${d.buy}</button>
+                </div>
+            </div>
+        `;
+    }).join('');
+    const bundlesList = document.getElementById('bundlesList');
+    const diamondsList = document.getElementById('diamondsList');
+    const doubleList = document.getElementById('doubleList');
+    if (bundlesList) bundlesList.innerHTML = renderItems(MCGG_PACKAGES.bundles, 'bundle');
+    if (diamondsList) diamondsList.innerHTML = renderItems(MCGG_PACKAGES.diamonds, 'diamond');
+    if (doubleList) doubleList.innerHTML = renderItems(MCGG_PACKAGES.double, 'double');
+}
+
+function handleMCGGPackageClick(id, name, price) {
+    selectedMCGGPackage = selectedMCGGPackage && selectedMCGGPackage.id === id ? null : { id, name, price };
+    renderPackages();
+}
+
+function handleMCGGBuyClick(id, name, price) {
+    if (!selectedMCGGPackage || selectedMCGGPackage.id !== id) {
+        selectedMCGGPackage = { id, name, price };
+        renderPackages();
+    }
+    openMCGGCheckoutModal(name, price);
+}
+
+function openMCGGCheckoutModal(name, price) {
+    const modal = document.getElementById('checkoutModal');
+    if (!modal) return;
+    document.getElementById('modalPackage').textContent = name;
+    document.getElementById('modalPrice').textContent = price.toLocaleString() + ' ' + getText('currency');
+    modal.classList.add('show');
+    document.getElementById('gameId').value = '';
+    document.getElementById('serverId').value = '';
+    const fileInput = document.getElementById('fileInput');
+    if (fileInput) fileInput.value = '';
+    const fileUpload = document.getElementById('fileUpload');
+    if (fileUpload) fileUpload.classList.remove('has-file');
+    const fileName = document.getElementById('fileName');
+    if (fileName) { fileName.classList.remove('show'); fileName.textContent = ''; }
+    document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+    document.getElementById('waveInfo').classList.remove('show');
+    document.getElementById('kpayInfo').classList.remove('show');
+    selectedMCGGPayment = null;
+    const submitBtn = document.getElementById('submitBtn');
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.className = 'btn-primary'; submitBtn.textContent = '✅ ' + getText('submit'); }
+    checkMCGGForm();
+}
+
+function closeCheckoutModal() {
+    if (isMCGGSubmitting) return;
+    const modal = document.getElementById('checkoutModal');
+    if (modal) modal.classList.remove('show');
+}
+
+function checkMCGGForm() {
+    const gameId = document.getElementById('gameId');
+    const serverId = document.getElementById('serverId');
+    const fileInput = document.getElementById('fileInput');
+    const submitBtn = document.getElementById('submitBtn');
+    if (!gameId || !serverId || !fileInput || !submitBtn) return;
+    const gid = gameId.value.trim();
+    const sid = serverId.value.trim();
+    const hasFile = fileInput.files && fileInput.files[0];
+    if (gid && sid && selectedMCGGPayment && hasFile && !isMCGGSubmitting) {
+        submitBtn.disabled = false;
+        submitBtn.className = 'btn-primary enabled';
+    } else {
+        submitBtn.disabled = true;
+        submitBtn.className = 'btn-primary';
+    }
+}
+
+// ========== CHECKOUT (MLBB) ==========
+function openCheckout(name, price) {
+    const modal = document.getElementById('checkoutModal');
+    if (!modal) return;
+    document.getElementById('modalPackage').textContent = name;
+    document.getElementById('modalPrice').textContent = price.toLocaleString() + ' Ks';
+    modal.classList.add('show');
+    document.getElementById('gameId').value = '';
+    document.getElementById('serverId').value = '';
+    const msgEl = document.getElementById('orderMessage');
+    if (msgEl) msgEl.value = '';
+    const fileInput = document.getElementById('fileInput');
+    if (fileInput) fileInput.value = '';
+    const fileUploadBox = document.getElementById('fileUploadBox');
+    if (fileUploadBox) fileUploadBox.classList.remove('has-file');
+    document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
+    document.getElementById('waveInfo').classList.remove('show');
+    document.getElementById('kpayInfo').classList.remove('show');
+    selectedPayment = null;
+    const submitBtn = document.getElementById('submitBtn');
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.className = 'btn-primary'; }
+}
+
+function closeCheckout() {
+    if (isSubmitting) return;
+    const modal = document.getElementById('checkoutModal');
+    if (modal) modal.classList.remove('show');
+}
+
+function selectPayment(type) {
+    // Used by both MLBB and MCGG
+    selectedPayment = type;
+    selectedMCGGPayment = type;
+    document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
+    const selectedEl = document.querySelector(`[data-payment="${type}"]`);
+    if (selectedEl) selectedEl.classList.add('selected');
+    document.getElementById('waveInfo').classList.toggle('show', type === 'wave');
+    document.getElementById('kpayInfo').classList.toggle('show', type === 'kpay');
+    if (typeof checkForm === 'function') checkForm();
+    if (typeof checkMCGGForm === 'function') checkMCGGForm();
+}
+
+function handleFileSelect() {
+    const fileInput = document.getElementById('fileInput');
+    if (fileInput && fileInput.files[0]) {
+        const fileUploadBox = document.getElementById('fileUploadBox');
+        const fileUpload = document.getElementById('fileUpload');
+        const fileName = document.getElementById('fileName');
+        if (fileUploadBox) fileUploadBox.classList.add('has-file');
+        if (fileUpload) fileUpload.classList.add('has-file');
+        if (fileName) { fileName.textContent = '✅ ' + fileInput.files[0].name; fileName.classList.add('show'); }
+    }
+    if (typeof checkForm === 'function') checkForm();
+    if (typeof checkMCGGForm === 'function') checkMCGGForm();
+}
+
+function checkForm() {
+    const gameId = document.getElementById('gameId');
+    const serverId = document.getElementById('serverId');
+    const fileInput = document.getElementById('fileInput');
+    const submitBtn = document.getElementById('submitBtn');
+    if (!gameId || !serverId || !fileInput || !submitBtn) return;
+    const g = gameId.value.trim();
+    const s = serverId.value.trim();
+    const f = fileInput.files[0];
+    if (g && s && (selectedPayment || selectedMCGGPayment) && f && !isSubmitting && !isMCGGSubmitting) {
+        submitBtn.disabled = false;
+        submitBtn.className = 'btn-primary enabled';
+    } else {
+        submitBtn.disabled = true;
+        submitBtn.className = 'btn-primary';
+    }
+}
+
+// ========== SUBMIT ORDER ==========
+async function submitOrder() {
+    if (isSubmitting || isMCGGSubmitting) return;
+    const gameId = document.getElementById('gameId');
+    const serverId = document.getElementById('serverId');
+    const fileInput = document.getElementById('fileInput');
+    const submitBtn = document.getElementById('submitBtn');
+    const msgEl = document.getElementById('orderMessage');
+    if (!gameId || !serverId || !fileInput || !submitBtn) return;
+
+    const gid = gameId.value.trim();
+    const sid = serverId.value.trim();
+    const msg = msgEl ? msgEl.value.trim() : '';
+    const file = fileInput.files[0];
+    const payment = selectedPayment || selectedMCGGPayment;
+    if (!gid || !sid || !payment || !file) return;
+
+    // Determine if this is MLBB or MCGG page
+    const isMCGG = window.location.href.includes('mcgg');
+    if (isMCGG) isMCGGSubmitting = true;
+    else isSubmitting = true;
+
+    submitBtn.disabled = true;
+    submitBtn.className = 'btn-primary loading';
+    submitBtn.textContent = getText('submitting');
+
+    const oid = 'ORD-' + Date.now().toString().slice(-6);
+    const pkg = document.getElementById('modalPackage').textContent;
+    const price = document.getElementById('modalPrice').textContent;
+    const server = isMCGG ? 'Global' : SERVER_EMOJIS[currentServer] + ' ' + SERVER_NAMES[currentServer];
+    const pname = payment === 'wave' ? 'Wave Pay' : 'KBZ Pay';
+    const un = currentUser ? currentUser.username : 'Guest';
+    const time = new Date().toLocaleString();
+
+    let pb = null;
+    try {
+        pb = await new Promise(r => {
+            const rd = new FileReader();
+            rd.onload = e => r(e.target.result);
+            rd.readAsDataURL(file);
+        });
+    } catch (e) {}
+
+    const caption = `🛒 New Order!\n━━━━━━━━━━━━━━━━━\n👤 User: ${un}\n🎮 ${isMCGG ? 'Magic Chess: Go Go' : 'Mobile Legends: Bang Bang'}\n🌐 ${server}\n📦 ${pkg}\n💰 ${price}\n━━━━━━━━━━━━━━━━━\n🆔 ${gid}\n🔢 ${sid}\n━━━━━━━━━━━━━━━━━\n📋 ${oid}\n🕐 ${time}\n━━━━━━━━━━━━━━━━━\n📝 ${msg || 'N/A'}\n━━━━━━━━━━━━━━━━━`;
+
+    try {
+        const blb = await fetch(pb).then(r => r.blob());
+        const fd = new FormData();
+        fd.append('chat_id', TELEGRAM_CHAT_ID);
+        fd.append('photo', blb, 'slip.jpg');
+        fd.append('caption', caption);
+        fd.append('reply_markup', JSON.stringify({
+            inline_keyboard: [[
+                { text: '✅ Done', callback_data: 'done_' + oid },
+                { text: '❌ Failed', callback_data: 'fail_' + oid }
+            ]]
+        }));
+        await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`, { method: 'POST', body: fd });
+    } catch (e) { console.error(e); }
+
+    const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+    orders.unshift({
+        id: oid, userId: un, package: pkg, server, price,
+        gameId: gid, serverId: sid, payment: pname, message: msg,
+        date: new Date().toISOString(), status: 'pending', replies: []
+    });
+    localStorage.setItem('orderHistory', JSON.stringify(orders));
+
+    const notis = JSON.parse(localStorage.getItem('notifications') || '[]');
+    notis.unshift({
+        id: 'noti_' + Date.now(), orderId: oid, type: 'order', status: 'pending',
+        message: `🛒 အော်ဒါအသစ် #${oid}\n👤 ${un}\n📦 ${pkg}\n🌐 ${server}\n💰 ${price}\n⏳ ဆောင်ရွက်နေဆဲ`,
+        time
+    });
+    localStorage.setItem('notifications', JSON.stringify(notis));
+
+    document.getElementById('checkoutModal').classList.remove('show');
+
+    const successDetails = document.getElementById('successDetails');
+    const successModal = document.getElementById('successModal');
+    if (successDetails) {
+        successDetails.innerHTML = `<div class="row"><span>အော်ဒါအမှတ်</span><span>${oid} <button class="copy-btn" onclick="copyTextValue('${oid}')">📋</button></span></div><div class="row"><span>ပက်ကေ့ချ်</span><span>${pkg}</span></div><div class="row"><span>ဆာဗာ</span><span>${server}</span></div><div class="row"><span>ဈေးနှုန်း</span><span>${price}</span></div><div class="row"><span>Game ID</span><span>${gid}</span></div><div class="row"><span>Server ID</span><span>${sid}</span></div><div class="row"><span>ငွေပေးချေမှု</span><span>${pname}</span></div><div class="row"><span>အသုံးပြုသူ</span><span>${un}</span></div><div class="row"><span>အချိန်</span><span>${time}</span></div>`;
+    }
+    if (successModal) successModal.classList.add('show');
+    updateBadge();
+
+    if (isMCGG) { isMCGGSubmitting = false; }
+    else { isSubmitting = false; }
+    submitBtn.disabled = false;
+    submitBtn.className = 'btn-primary enabled';
+    submitBtn.textContent = '✅ ' + getText('submit');
+}
+
+function goProfileFromSuccess() {
+    const successModal = document.getElementById('successModal');
+    if (successModal) successModal.classList.remove('show');
+    window.location.href = 'profile.html';
+}
+
+// ========== PROFILE - ORDER HISTORY ==========
+let currentFilter = 'all';
+let showAllOrders = false;
+
+function renderOrders() {
+    const container = document.getElementById('orderHistoryContainer');
+    if (!container) return;
+    const d = LANG_DATA[currentLang];
+    const searchTerm = document.getElementById('orderSearch') ? document.getElementById('orderSearch').value.toLowerCase().trim() : '';
+
+    if (!currentUser) {
+        container.innerHTML = '<div class="empty-orders"><span class="icon">🔒</span>Please login to view orders</div>';
+        return;
+    }
+
+    const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+    let userOrders = orders.filter(o => o.userId === currentUser.username);
+    if (currentFilter !== 'all') userOrders = userOrders.filter(o => o.status === currentFilter);
+    if (searchTerm) userOrders = userOrders.filter(o => o.id.toLowerCase().includes(searchTerm));
+
+    if (userOrders.length === 0) {
+        container.innerHTML = '<div class="empty-orders"><span class="icon">📭</span>' + d.noOrders + '</div>';
+        return;
+    }
+
+    const statusMap = {
+        'pending': { class: 'pending', text: d.orderStatusPending },
+        'completed': { class: 'completed', text: d.orderStatusCompleted },
+        'cancelled': { class: 'cancelled', text: d.orderStatusCancelled }
+    };
+
+    const displayOrders = showAllOrders ? userOrders : userOrders.slice(0, 3);
+    const hasMore = userOrders.length > 3;
+
+    container.innerHTML = '<div class="order-list">' + displayOrders.map(order => {
+        const status = statusMap[order.status] || statusMap.pending;
+        return `
+            <div class="order-item">
+                <div class="info">
+                    <span class="id">📋 ${order.id}</span>
+                    <span class="pkg">${order.package}</span>
+                    <span class="date">${new Date(order.date).toLocaleString()}</span>
+                </div>
+                <span class="status ${status.class}">${status.text}</span>
+            </div>
+        `;
+    }).join('') + '</div>';
+
+    if (hasMore) {
+        container.innerHTML += `
+            <div class="order-more" onclick="toggleOrders()">
+                <i class="fas ${showAllOrders ? 'fa-chevron-up' : 'fa-chevron-down'}"></i> 
+                ${showAllOrders ? d.showLess : d.showMore}
+            </div>
+        `;
+    }
+}
+
+function toggleOrders() {
+    showAllOrders = !showAllOrders;
+    renderOrders();
+}
+
+// ========== NOTIFICATIONS ==========
+function loadNotifications() {
+    const container = document.getElementById('notiContainer');
+    if (!container) return;
+    const notis = JSON.parse(localStorage.getItem('notifications') || '[]');
+    const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+    const d = LANG_DATA[currentLang];
+
+    if (notis.length === 0) {
+        container.innerHTML = '<div class="empty">' + d.emptyNoti + '</div>';
+        return;
+    }
+
+    container.innerHTML = notis.map(n => {
+        let typeClass = n.type === 'reply' ? 'reply' : (n.status || 'info');
+        let icon = '🔔';
+        switch (typeClass) {
+            case 'pending': icon = '⏳'; break;
+            case 'completed': icon = '✅'; break;
+            case 'failed': icon = '❌'; break;
+            case 'reply': icon = '💬'; break;
+            default: icon = '🔔';
+        }
+
+        const order = orders.find(o => o.id === n.orderId);
+        const replies = order?.replies || [];
+
+        let repliesHTML = '';
+        if (replies.length > 0) {
+            repliesHTML = '<div class="replies-list">' + replies.map(r => `
+                <div class="r-item">
+                    <span class="r-from">${r.from || 'Admin'}:</span> ${r.text}
+                    <small>(${new Date(r.time).toLocaleString()})</small>
+                </div>
+            `).join('') + '</div>';
+        }
+
+        let replyFormHTML = '';
+        if (n.orderId && (typeClass === 'pending' || typeClass === 'reply' || typeClass === 'info')) {
+            replyFormHTML = `
+                <div class="reply-form">
+                    <input type="text" placeholder="${d.replyPlaceholder}" id="reply-${n.orderId}">
+                    <button onclick="userReply('${n.orderId}')">${d.replyBtn}</button>
+                </div>`;
+        }
+
+        return `
+            <div class="noti-card ${typeClass}">
+                <div class="noti-header">
+                    <div class="noti-icon">${icon}</div>
+                    <div class="noti-content">
+                        <div class="noti-text">${n.message}</div>
+                        <div class="noti-time">🕐 ${n.time || ''}</div>
+                    </div>
+                </div>
+                ${repliesHTML}
+                ${replyFormHTML}
+            </div>
+        `;
+    }).join('');
+}
+
+async function userReply(orderId) {
+    const input = document.getElementById('reply-' + orderId);
+    if (!input) return;
+    const message = input.value.trim();
+    if (!message) return;
+
+    const userName = currentUser ? currentUser.username : 'Guest';
+
+    const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+    const order = orders.find(o => o.id === orderId);
+    if (order) {
+        if (!order.replies) order.replies = [];
+        order.replies.push({ text: message, time: new Date().toISOString(), from: userName });
+        localStorage.setItem('orderHistory', JSON.stringify(orders));
+    }
+
+    try {
+        const tgMessage = `💬 User Reply\n━━━━━━━━━━━━━━━━━\n👤 ${userName}\n📋 Order: ${orderId}\n📦 ${order?.package || 'N/A'}\n━━━━━━━━━━━━━━━━━\n📝 ${message}`;
+        await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: tgMessage })
+        });
+    } catch (e) { console.warn('Telegram error:', e); }
+
+    const notis = JSON.parse(localStorage.getItem('notifications') || '[]');
+    notis.unshift({
+        id: 'reply_' + Date.now(), orderId, type: 'reply', from: userName,
+        message: `💬 ${userName} မှ စာပြန်သည် #${orderId}: ${message}`,
+        time: new Date().toLocaleString(), status: 'info'
+    });
+    localStorage.setItem('notifications', JSON.stringify(notis));
+    input.value = '';
+    loadNotifications();
+}
+
+function clearAllNotifications() {
+    localStorage.setItem('notifications', '[]');
+    loadNotifications();
+    updateBadge();
+}
+
+// ========== TELEGRAM UPDATES ==========
+async function checkTelegramUpdates() {
+    try {
+        const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getUpdates?offset=${lastUpdateId + 1}`);
+        const data = await res.json();
+        if (!data.ok || !data.result.length) return;
+
+        for (const update of data.result) {
+            lastUpdateId = update.update_id;
+
+            if (update.callback_query) {
+                const cb = update.callback_query;
+                const [action, orderId] = cb.data.split('_');
+
+                await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/answerCallbackQuery`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ callback_query_id: cb.id, text: action === 'done' ? '✅ Complete' : '❌ Failed' })
+                });
+
+                const finalText = action === 'done' ? '✅ Complete' : '❌ ကျရှုံးသည်';
+                if (cb.message.photo) {
+                    await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/editMessageCaption`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ chat_id: cb.message.chat.id, message_id: cb.message.message_id, caption: finalText })
+                    });
+                }
+
+                const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+                const order = orders.find(o => o.id === orderId);
+                if (order) {
+                    order.status = action === 'done' ? 'completed' : 'failed';
+                    localStorage.setItem('orderHistory', JSON.stringify(orders));
+
+                    const notis = JSON.parse(localStorage.getItem('notifications') || '[]');
+                    const noti = notis.find(n => n.orderId === orderId);
+                    if (noti) {
+                        noti.status = action === 'done' ? 'completed' : 'failed';
+                        noti.message = action === 'done'
+                            ? `✅ အောင်မြင်ပါသည် #${orderId}\n📦 ${order.package}\n💰 ${order.price}`
+                            : `❌ ကျရှုံးသည် #${orderId}\n📦 ${order.package}\n💰 ${order.price}`;
+                        localStorage.setItem('notifications', JSON.stringify(notis));
+                    }
+                }
+                if (typeof loadNotifications === 'function') loadNotifications();
+                if (typeof renderOrders === 'function') renderOrders();
+                updateBadge();
+            }
+
+            if (update.message && update.message.reply_to_message) {
+                const repliedMsg = update.message.reply_to_message;
+                const replyText = update.message.text || update.message.caption || '';
+                const orderIdMatch = (repliedMsg.caption || '').match(/📋 (ORD-\d+)/) || (repliedMsg.text || '').match(/📋 (ORD-\d+)/);
+                if (orderIdMatch) {
+                    const orderId = orderIdMatch[1];
+                    const orders = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+                    const order = orders.find(o => o.id === orderId);
+                    if (order) {
+                        if (!order.replies) order.replies = [];
+                        order.replies.push({ text: replyText, time: new Date().toISOString(), from: 'Admin' });
+                        localStorage.setItem('orderHistory', JSON.stringify(orders));
+
+                        const notis = JSON.parse(localStorage.getItem('notifications') || '[]');
+                        const noti = notis.find(n => n.orderId === orderId);
+                        if (noti) {
+                            noti.replyCount = (noti.replyCount || 0) + 1;
+                            noti.time = new Date().toLocaleString();
+                            localStorage.setItem('notifications', JSON.stringify(notis));
+                        }
+                    }
+                    if (typeof loadNotifications === 'function') loadNotifications();
+                    if (typeof renderOrders === 'function') renderOrders();
+                    updateBadge();
+                }
+            }
+        }
+    } catch (e) { console.error(e); }
+}
+
+// ========== AVATAR UPLOAD ==========
+function handleAvatarUpload(event) {
+    const file = event.target.files[0];
+    if (!file || !currentUser) return;
+    const reader = new FileReader();
+    reader.onload = function (ev) {
+        const avatarDisplay = document.getElementById('avatarDisplay');
+        if (avatarDisplay) avatarDisplay.innerHTML = '<img src="' + ev.target.result + '" alt="avatar" style="width:100%;height:100%;object-fit:cover;">';
+        localStorage.setItem('userAvatar_' + currentUser.username, ev.target.result);
+        updateAuthUI();
+        showToast('✅ Avatar updated!', 'success');
+    };
+    reader.readAsDataURL(file);
+}
+
+// ========== NAV HANDLER ==========
+function handleNavClick(el, e) {
+    e.preventDefault();
+    setTimeout(() => { window.location.href = el.getAttribute('href'); }, 300);
+}
+
+// ========== INIT ==========
+document.addEventListener('DOMContentLoaded', function () {
+    // Load saved language
+    const savedLang = localStorage.getItem('lang') || 'my';
+    currentLang = savedLang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === savedLang));
+
+    // Load current user
+    const savedUser = localStorage.getItem('currentUser');
+    if (savedUser) currentUser = JSON.parse(savedUser);
+
+    // Load night mode
+    if (localStorage.getItem('nightMode') === 'true') {
+        document.body.classList.add('night-mode');
+        const icon = document.querySelector('.night-toggle i');
+        if (icon) icon.className = 'fas fa-sun';
+    }
+
+    updateLanguage();
+    updateBadge();
+
+    // Page-specific init
+    if (typeof renderAllPackages === 'function') renderAllPackages();
+    if (typeof renderPackages === 'function') renderPackages();
+    if (typeof loadNotifications === 'function') loadNotifications();
+    if (typeof renderOrders === 'function') renderOrders();
+
+    // Night toggle
+    const nightToggle = document.getElementById('nightToggle');
+    if (nightToggle) nightToggle.addEventListener('click', toggleNightMode);
+    else {
+        const toggle = document.querySelector('.night-toggle');
+        if (toggle) toggle.addEventListener('click', toggleNightMode);
+    }
+
+    // Auth button
+    const authBtn = document.getElementById('authBtn');
+    if (authBtn) {
+        authBtn.addEventListener('click', function () {
+            if (currentUser) {
+                window.location.href = 'profile.html';
+            } else {
+                openAuthModal('login');
+            }
+        });
+    }
+
+    // Auth modal close
+    const authModal = document.getElementById('authModal');
+    if (authModal) {
+        authModal.addEventListener('click', function (e) {
+            if (e.target === this) closeAuthModal();
+        });
+    }
+
+    // Settings modal close
+    const settingsModal = document.getElementById('settingsModal');
+    if (settingsModal) {
+        settingsModal.addEventListener('click', function (e) {
+            if (e.target === this) closeSettingsModal();
+        });
+    }
+
+    // Logout overlay close
+    const logoutOverlay = document.getElementById('logoutOverlay');
+    if (logoutOverlay) {
+        logoutOverlay.addEventListener('click', function (e) {
+            if (e.target === this) this.classList.remove('show');
+        });
+    }
+
+    // Checkout modal close
+    const checkoutModal = document.getElementById('checkoutModal');
+    if (checkoutModal) {
+        checkoutModal.addEventListener('click', function (e) {
+            if (e.target === this) {
+                if (typeof closeCheckout === 'function') closeCheckout();
+                if (typeof closeCheckoutModal === 'function') closeCheckoutModal();
+            }
+        });
+    }
+
+    // Success modal close
+    const successModal = document.getElementById('successModal');
+    if (successModal) {
+        successModal.addEventListener('click', function (e) {
+            if (e.target === this) successModal.classList.remove('show');
+        });
+    }
+
+    // Auth form switches
+    const switchToReg = document.getElementById('switchToRegister') || document.getElementById('authSwitchToRegister');
+    const switchToLog = document.getElementById('switchToLogin') || document.getElementById('authSwitchToLogin');
+    if (switchToReg) {
+        switchToReg.addEventListener('click', function () {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'block';
+            const error = document.getElementById('loginError') || document.getElementById('authError');
+            if (error) { error.style.display = 'none'; error.classList.remove('show'); }
+            updateAuthModalTexts();
+        });
+    }
+    if (switchToLog) {
+        switchToLog.addEventListener('click', function () {
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('registerForm').style.display = 'none';
+            const error = document.getElementById('loginError') || document.getElementById('authError');
+            if (error) { error.style.display = 'none'; error.classList.remove('show'); }
+            updateAuthModalTexts();
+        });
+    }
+
+    // Auth login button
+    const loginBtn = document.getElementById('loginBtn') || document.getElementById('authLoginBtn');
+    if (loginBtn) loginBtn.addEventListener('click', handleAuthLogin);
+
+    // Auth register button
+    const registerBtn = document.getElementById('registerBtn') || document.getElementById('authRegisterBtn');
+    if (registerBtn) registerBtn.addEventListener('click', handleAuthRegister);
+
+    // Logout buttons
+    const logoutConfirmBtn = document.getElementById('logoutConfirmBtn');
+    const logoutCancelBtn = document.getElementById('logoutCancelBtn');
+    if (logoutConfirmBtn) {
+        logoutConfirmBtn.addEventListener('click', function () {
+            document.getElementById('logoutOverlay').classList.remove('show');
+            localStorage.removeItem('currentUser');
+            currentUser = null;
+            updateAuthUI();
+            showToast(getText('logoutSuccess'), 'success');
+            setTimeout(() => { window.location.href = 'index.html'; }, 1500);
+        });
+    }
+    if (logoutCancelBtn) {
+        logoutCancelBtn.addEventListener('click', function () {
+            document.getElementById('logoutOverlay').classList.remove('show');
+        });
+    }
+
+    // Settings save button
+    const settingsSaveBtn = document.getElementById('settingsSaveBtn');
+    if (settingsSaveBtn) settingsSaveBtn.addEventListener('click', saveSettings);
+
+    // Filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+            currentFilter = this.dataset.filter;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === currentFilter));
+            renderOrders();
+        });
+    });
+
+    // Order search
+    const orderSearch = document.getElementById('orderSearch');
+    if (orderSearch) orderSearch.addEventListener('input', renderOrders);
+
+    // Game ID & Server ID input events (MCGG)
+    const gameIdInput = document.getElementById('gameId');
+    const serverIdInput = document.getElementById('serverId');
+    if (gameIdInput) gameIdInput.addEventListener('input', checkMCGGForm);
+    if (serverIdInput) serverIdInput.addEventListener('input', checkMCGGForm);
+
+    // File input change
+    const fileInput = document.getElementById('fileInput');
+    if (fileInput) fileInput.addEventListener('change', handleFileSelect);
+
+    // Payment option click
+    document.querySelectorAll('.payment-option').forEach(el => {
+        el.addEventListener('click', function () {
+            selectPayment(this.dataset.payment);
+        });
+    });
+
+    // Avatar upload
+    const avatarInput = document.getElementById('avatarInput');
+    if (avatarInput) avatarInput.addEventListener('change', handleAvatarUpload);
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            closeAuthModal();
+            closeSettingsModal();
+            const logoutOverlay = document.getElementById('logoutOverlay');
+            if (logoutOverlay) logoutOverlay.classList.remove('show');
+        }
+        if (e.key === 'Enter') {
+            const authModalOpen = document.getElementById('authModal');
+            if (authModalOpen && authModalOpen.classList.contains('show')) {
+                const registerForm = document.getElementById('registerForm');
+                if (registerForm && registerForm.style.display === 'block') {
+                    handleAuthRegister();
+                } else {
+                    handleAuthLogin();
+                }
+            }
+        }
+    });
+
+    // Telegram updates
+    setInterval(checkTelegramUpdates, 3000);
+
+    // Storage event
+    window.addEventListener('storage', function (e) {
+        if (e.key === 'newOrderNotification' || e.key === 'notifications') updateBadge();
+        if (e.key === 'currentUser') {
+            const user = localStorage.getItem('currentUser');
+            if (user) currentUser = JSON.parse(user);
+            else currentUser = null;
+            updateAuthUI();
+            if (typeof renderOrders === 'function') renderOrders();
+        }
+    });
+});
