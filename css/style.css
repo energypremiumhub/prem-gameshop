@@ -1,6 +1,5 @@
 /* ============================================
-   PREMIUM GAME SHOP - MAIN STYLESHEET
-   All 7 pages use this single CSS file
+   PREMIUM GAME SHOP - MAIN STYLESHEET (FIXED)
    ============================================ */
 
 * {
@@ -63,7 +62,6 @@ body {
     transition: all 0.4s ease;
     -webkit-tap-highlight-color: transparent;
 }
-
 .container {
     max-width: 480px;
     margin: 0 auto;
@@ -316,8 +314,6 @@ body {
     object-fit: cover;
     flex-shrink: 0;
 }
-
-/* Auth button in profile header */
 .auth-btn-profile {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -547,10 +543,6 @@ body {
 }
 .toast.success { color: var(--green); }
 .toast.error { color: var(--red); }
-/* ============================================
-   PREMIUM GAME SHOP - MAIN STYLESHEET (PART 2)
-   Copy this BELOW Part 1 in css/style.css
-   ============================================ */
 
 /* ========== HOME PAGE - WELCOME ========== */
 .welcome {
@@ -821,7 +813,6 @@ body {
     color: var(--cyan);
     transform: translateX(4px);
 }
-
 .telegram-contact {
     background: var(--bg-card);
     backdrop-filter: blur(20px);
@@ -919,7 +910,6 @@ body {
 .search-box .clear-btn.show {
     display: block;
 }
-
 .game-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1134,8 +1124,6 @@ body {
 .package-item.selected .server-name .btn-label {
     display: none;
 }
-
-/* MCGG Package sub & badge */
 .package-item .info .sub {
     font-size: 0.4rem;
     color: var(--text-secondary);
@@ -1235,6 +1223,13 @@ body {
     gap: 12px;
     margin-bottom: 16px;
     box-shadow: 0 4px 20px var(--shadow);
+    outline: none !important;
+}
+.server-selector:focus,
+.server-selector:focus-visible,
+.server-selector *:focus,
+.server-selector *:focus-visible {
+    outline: none !important;
 }
 .server-selector .label {
     font-size: 0.55rem;
@@ -1723,22 +1718,6 @@ body {
     margin-bottom: 10px;
     box-shadow: 0 4px 20px var(--shadow);
     animation: slideUp 0.6s ease;
-    border-left: 4px solid var(--cyan);
-}
-.noti-card.pending {
-    border-left-color: var(--gold);
-}
-.noti-card.completed {
-    border-left-color: var(--green);
-}
-.noti-card.failed {
-    border-left-color: var(--red);
-}
-.noti-card.reply {
-    border-left-color: var(--violet);
-}
-.noti-card.info {
-    border-left-color: var(--cyan);
 }
 .noti-card .noti-header {
     display: flex;
@@ -1783,41 +1762,6 @@ body {
     font-size: 0.55rem;
     color: var(--text-secondary);
     margin-top: 4px;
-}
-.reply-form {
-    display: flex;
-    gap: 6px;
-    margin-top: 8px;
-    padding-top: 8px;
-    border-top: 1px solid var(--border-color);
-}
-.reply-form input {
-    flex: 1;
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    background: var(--bg-input);
-    color: var(--text-primary);
-    font-size: 0.65rem;
-    outline: none;
-}
-.reply-form input:focus {
-    border-color: var(--cyan);
-    box-shadow: 0 0 10px var(--cyan-glow);
-}
-.reply-form button {
-    background: linear-gradient(135deg, var(--cyan), var(--purple));
-    color: #fff;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 8px;
-    font-size: 0.65rem;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0, 180, 216, 0.3);
-}
-.reply-form button:active {
-    transform: scale(0.92) !important;
 }
 .replies-list {
     margin-top: 6px;
@@ -2243,6 +2187,20 @@ body {
     transform: scale(0.92) !important;
 }
 
+/* ========== FORGOT PASSWORD ========== */
+.forgot-link {
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 0.55rem;
+    text-align: right;
+    display: block;
+    margin-top: 4px;
+    transition: var(--transition);
+}
+.forgot-link:hover {
+    color: var(--cyan);
+}
+
 /* ========== LOGOUT OVERLAY ========== */
 .logout-overlay {
     position: fixed;
@@ -2327,4 +2285,29 @@ body {
 }
 .logout-overlay .btn-cancel:active {
     transform: scale(0.95) !important;
+}
+
+/* ========== BACK BUTTON ========== */
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.6rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: var(--transition);
+    margin-bottom: 10px;
+}
+.back-btn:hover {
+    color: var(--cyan);
+    border-color: var(--cyan);
+}
+.back-btn:active {
+    transform: scale(0.92) !important;
 }
