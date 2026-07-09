@@ -280,3 +280,495 @@ function isShopOpen() {
     const time = hours * 60 + minutes;
     return time >= 570 && time < 1290;
 }
+/* ============================================
+   PREMIUM GAME SHOP - MAIN JAVASCRIPT (PART 2)
+   Copy this BELOW Part 1 in js/main.js
+   ============================================ */
+
+// ========== UPDATE LANGUAGE (ALL PAGES) ==========
+function updateLanguage() {
+    const d = LANG_DATA[currentLang];
+    if (!d) return;
+
+    // Common text elements
+    const textIds = [
+        'appName', 'appSub', 'greeting', 'subtitle', 'goToShop', 'shopSubText',
+        'servicesTitle', 's1', 's2', 's3', 's4', 's5', 's6',
+        'telegramTitle', 'telegramDesc', 'contactLabel',
+        'navHome', 'navShop', 'navPayment', 'navProfile', 'navNoti',
+        'pageTitle', 'pageSub', 'pageTitleShop', 'pageSubShop',
+        'pageTitleProfile', 'pageSubProfile',
+        'gamesTitle', 'mlbbSub', 'mcggSub', 'cs1', 'cs2', 'cs1sub', 'cs2sub',
+        'paymentTitle', 'paymentSub', 'accountsTitle', 'waveName', 'kpayName',
+        'supportTitle', 'supportLabel', 'supportDesc',
+        'orderHistoryLabel', 'settingsLabel',
+        'changeNameText', 'changeUsernameText', 'changeEmailText',
+        'changePhoneText', 'changePasswordText', 'logoutText',
+        'bundlesTitle', 'diamondsTitle', 'doubleTitle',
+        'clearAllText', 'emptyText', 'pageTitleNotiLabel',
+        'pageTitleMCGG', 'pageSubMCGG',
+        'modalTitle', 'modalSub', 'gameIdLabel', 'serverIdLabel',
+        'gameIdHint', 'serverIdHint', 'paymentLabel',
+        'uploadLabel', 'uploadText', 'waveLabel', 'kpayLabel',
+        'forgotLink'
+    ];
+    textIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            if (['step1', 'step2', 'step3', 'step4'].includes(id)) {
+                el.innerHTML = d[id] || '';
+            } else {
+                el.textContent = d[id] || '';
+            }
+        }
+    });
+
+    // HTML content elements
+    const stepIds = ['step1', 'step2', 'step3', 'step4'];
+    stepIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && d[id]) el.innerHTML = d[id];
+    });
+
+    // Update search placeholder
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) searchInput.placeholder = d.searchPlaceholder || '';
+
+    // Update shop status
+    const statusBadge = document.getElementById('statusBadge');
+    const statusText = document.getElementById('statusText');
+    const shopCard = document.getElementById('shopCard');
+    const goToShop = document.getElementById('goToShop');
+    const shopSubText = document.getElementById('shopSubText');
+    const isOpen = isShopOpen();
+
+    if (statusBadge) {
+        statusBadge.innerHTML = isOpen
+            ? '<span class="status-dot"></span> ' + d.shopOpen
+            : '<span class="status-dot"></span> ' + d.shopClosedStatus;
+        statusBadge.className = 'banner-status ' + (isOpen ? 'open' : 'closed');
+    }
+    if (statusText) statusText.textContent = isOpen ? d.shopOpenText : d.shopClosedText;
+    if (shopCard) {
+        shopCard.className = 'shop-card ' + (isOpen ? 'open' : 'closed');
+        if (goToShop) goToShop.textContent = isOpen ? d.goToShop : d.shopClosed;
+        if (shopSubText) shopSubText.textContent = isOpen ? d.shopSubText : d.shopClosedText;
+    }
+
+    // Update copy buttons
+    const copyBtn1 = document.getElementById('copyBtn1');
+    const copyBtn2 = document.getElementById('copyBtn2');
+    if (copyBtn1) copyBtn1.textContent = d.copy || 'Copy';
+    if (copyBtn2) copyBtn2.textContent = d.copy || 'Copy';
+
+    // Update submit button
+    const submitBtn = document.getElementById('submitBtn');
+    if (submitBtn && !submitBtn.disabled) submitBtn.textContent = '✅ ' + (d.submit || 'Submit');
+    else if (submitBtn) submitBtn.textContent = '✅ ' + (d.submit || 'Submit');
+
+    // Update MLBB page header based on server
+    updateMLBBHeader();
+
+    // Update how-to title
+    const howToTitle = document.getElementById('howToTitle');
+    if (howToTitle) howToTitle.textContent = d.howToTitle || 'How to Pay';
+
+    // Update back button
+    const backBtn = document.getElementById('backBtn');
+    if (backBtn) backBtn.textContent = d.backToShop || '← Back to Shop';
+
+    // Update forgot password link
+    const forgotLink = document.getElementById('forgotLink');
+    if (forgotLink) forgotLink.textContent = d.forgotPassword || 'Forgot Password?';
+
+    updateAuthUI();
+    if (typeof renderOrders === 'function') renderOrders();
+    if (typeof loadNotifications === 'function') loadNotifications();
+    if (typeof renderPackages === 'function') renderPackages();
+    updateBadge();
+}
+
+// ========== UPDATE MLBB HEADER ==========
+function updateMLBBHeader() {
+    const pageTitle = document.getElementById('pageTitle');
+    const banOpt = document.querySelector('.server-selector .opt[data-server="ban"]');
+    if (!pageTitle) return;
+
+    const d = LANG_DATA[currentLang];
+    const headerMap = {
+        'global': d.mlbbGlobalPackages || 'MLBB Global Packages',
+        'ban': d.mlbbBanPackages || 'MLBB Ban Packages',
+        'indo': d.mlbbIndoPackages || 'MLBB Indo Packages',
+        'russia': d.mlbbRussiaPackages || 'MLBB Russia Packages'
+    };
+    if (headerMap[currentServer]) {
+        pageTitle.textContent = headerMap[currentServer];
+    }
+
+    // Update Ban server label
+    if (banOpt && currentServer === 'ban') {
+        banOpt.textContent = '🇲🇾🇸🇬🇵🇭 ' + (d.banServerLabel || 'Ban Server: (Malay, Sin, Php)');
+    } else if (banOpt) {
+        banOpt.textContent = '🇲🇾🇸🇬🇵🇭 Ban';
+    }
+}
+
+// ========== AUTH UI UPDATE ==========
+function updateAuthUI() {
+    const authBtn = document.getElementById('authBtn');
+    if (!authBtn) return;
+
+    if (currentUser) {
+        const firstChar = (currentUser.displayName || currentUser.username || 'U').charAt(0).toUpperCase();
+        const avatarImg = localStorage.getItem('userAvatar_' + currentUser.username);
+        if (avatarImg) {
+            authBtn.innerHTML = '<img src="' + avatarImg + '" alt="avatar"> ' + (currentUser.displayName || currentUser.username);
+        } else {
+            authBtn.innerHTML = '<span class="avatar-small">' + firstChar + '</span> ' + (currentUser.displayName || currentUser.username);
+        }
+        authBtn.className = (authBtn.classList.contains('auth-btn-profile') ? 'auth-btn-profile' : 'auth-btn') + ' logged-in';
+    } else {
+        authBtn.innerHTML = '<i class="fas fa-key"></i> Login';
+        authBtn.className = authBtn.classList.contains('auth-btn-profile') ? 'auth-btn-profile' : 'auth-btn';
+    }
+
+    // Update profile section
+    const displayName = document.getElementById('displayName');
+    const displayUsername = document.getElementById('displayUsername');
+    const displayEmail = document.getElementById('displayEmail');
+    const displayPhone = document.getElementById('displayPhone');
+    const avatarDisplay = document.getElementById('avatarDisplay');
+
+    if (displayName) displayName.textContent = currentUser ? (currentUser.displayName || currentUser.username) : 'Guest';
+    if (displayUsername) displayUsername.innerHTML = '<i class="fas fa-user"></i> @' + (currentUser ? currentUser.username : 'guest');
+    if (displayEmail) displayEmail.innerHTML = '<i class="fas fa-envelope"></i> ' + (currentUser ? (currentUser.email || 'No email') : 'No email');
+    if (displayPhone) displayPhone.innerHTML = '<i class="fas fa-phone"></i> ' + (currentUser ? (currentUser.phone || 'No phone') : 'No phone');
+    if (avatarDisplay && currentUser) {
+        const avatar = localStorage.getItem('userAvatar_' + currentUser.username);
+        if (avatar) {
+            avatarDisplay.innerHTML = '<img src="' + avatar + '" alt="avatar" style="width:100%;height:100%;object-fit:cover;">';
+        } else {
+            avatarDisplay.textContent = '👤';
+        }
+    } else if (avatarDisplay) {
+        avatarDisplay.textContent = '👤';
+    }
+}
+
+// ========== AUTH MODAL FUNCTIONS ==========
+function openAuthModal(mode) {
+    const modal = document.getElementById('authModal');
+    if (!modal) return;
+    modal.classList.add('show');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const error = document.getElementById('loginError');
+    const success = document.getElementById('loginSuccess');
+    const authError = document.getElementById('authError');
+
+    if (mode === 'register') {
+        if (loginForm) loginForm.style.display = 'none';
+        if (registerForm) registerForm.style.display = 'block';
+    } else {
+        if (loginForm) loginForm.style.display = 'block';
+        if (registerForm) registerForm.style.display = 'none';
+    }
+    if (error) { error.classList.remove('show'); error.textContent = ''; }
+    if (success) { success.classList.remove('show'); success.textContent = ''; }
+    if (authError) { authError.style.display = 'none'; authError.textContent = ''; }
+    updateAuthModalTexts();
+}
+
+function closeAuthModal() {
+    const modal = document.getElementById('authModal');
+    if (!modal) return;
+    modal.classList.remove('show');
+    const inputs = ['loginInput', 'loginPassword', 'regUsername', 'regEmail', 'regPhone', 'regPassword', 'regConfirmPassword',
+        'authLoginInput', 'authLoginPassword', 'authRegUsername', 'authRegEmail', 'authRegPhone', 'authRegPassword', 'authRegConfirmPassword'];
+    inputs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+    });
+    const loginBtn = document.getElementById('loginBtn') || document.getElementById('authLoginBtn');
+    if (loginBtn) { loginBtn.disabled = true; loginBtn.className = 'btn-primary'; }
+    const registerBtn = document.getElementById('registerBtn') || document.getElementById('authRegisterBtn');
+    if (registerBtn) { registerBtn.disabled = true; registerBtn.className = 'btn-primary'; }
+}
+
+function updateAuthModalTexts() {
+    const d = LANG_DATA[currentLang];
+    const isLogin = document.getElementById('registerForm') ? document.getElementById('registerForm').style.display === 'none' : true;
+
+    const modalTitle = document.getElementById('modalTitle') || document.getElementById('authModalTitle');
+    const modalSubEl = document.getElementById('modalSub') || document.getElementById('authModalSub');
+    if (modalTitle) modalTitle.textContent = isLogin ? d.modalLogin : d.modalRegister;
+    if (modalSubEl) modalSubEl.textContent = isLogin ? d.modalLoginSub : d.modalRegisterSub;
+
+    const emailLabel = document.getElementById('emailLabel') || document.getElementById('authEmailLabel');
+    const passLabel = document.getElementById('passLabel') || document.getElementById('authPassLabel');
+    if (emailLabel) emailLabel.textContent = d.email;
+    if (passLabel) passLabel.textContent = d.password;
+
+    const loginBtn = document.getElementById('loginBtn') || document.getElementById('authLoginBtn');
+    const registerBtn = document.getElementById('registerBtn') || document.getElementById('authRegisterBtn');
+    if (loginBtn) loginBtn.textContent = d.login;
+    if (registerBtn) registerBtn.textContent = d.register;
+
+    const switchToReg = document.getElementById('switchToRegister') || document.getElementById('authSwitchToRegister');
+    const switchToLog = document.getElementById('switchToLogin') || document.getElementById('authSwitchToLogin');
+    if (switchToReg) switchToReg.textContent = d.switchLogin;
+    if (switchToLog) switchToLog.textContent = d.switchRegister;
+
+    const forgotLink = document.getElementById('forgotLink');
+    if (forgotLink) forgotLink.textContent = d.forgotPassword || 'Forgot Password?';
+}
+
+// ========== AUTH LOGIN FORM CHECK ==========
+function checkLoginForm() {
+    const loginInput = document.getElementById('loginInput') || document.getElementById('authLoginInput');
+    const loginPassword = document.getElementById('loginPassword') || document.getElementById('authLoginPassword');
+    const loginBtn = document.getElementById('loginBtn') || document.getElementById('authLoginBtn');
+    if (!loginInput || !loginPassword || !loginBtn) return;
+    const input = loginInput.value.trim();
+    const pass = loginPassword.value.trim();
+    if (input && pass) {
+        loginBtn.disabled = false;
+        loginBtn.className = 'btn-primary enabled';
+    } else {
+        loginBtn.disabled = true;
+        loginBtn.className = 'btn-primary';
+    }
+}
+
+// ========== AUTH REGISTER FORM CHECK ==========
+function checkRegisterForm() {
+    const regUsername = document.getElementById('regUsername') || document.getElementById('authRegUsername');
+    const regPassword = document.getElementById('regPassword') || document.getElementById('authRegPassword');
+    const regConfirm = document.getElementById('regConfirmPassword') || document.getElementById('authRegConfirmPassword');
+    const registerBtn = document.getElementById('registerBtn') || document.getElementById('authRegisterBtn');
+    if (!regUsername || !regPassword || !regConfirm || !registerBtn) return;
+    const username = regUsername.value.trim();
+    const pass = regPassword.value.trim();
+    const confirm = regConfirm.value.trim();
+    if (username && pass && confirm && pass === confirm) {
+        registerBtn.disabled = false;
+        registerBtn.className = 'btn-primary enabled';
+    } else {
+        registerBtn.disabled = true;
+        registerBtn.className = 'btn-primary';
+    }
+}
+
+// ========== AUTH LOGIN ==========
+function handleAuthLogin() {
+    const loginInput = document.getElementById('loginInput') || document.getElementById('authLoginInput');
+    const loginPassword = document.getElementById('loginPassword') || document.getElementById('authLoginPassword');
+    const error = document.getElementById('loginError') || document.getElementById('authError');
+    const d = LANG_DATA[currentLang];
+
+    if (!loginInput || !loginPassword) return;
+    const input = loginInput.value.trim();
+    const password = loginPassword.value.trim();
+    if (error) { error.style.display = 'none'; error.textContent = ''; error.classList.remove('show'); }
+
+    if (!input || !password) {
+        if (error) { error.textContent = d.enterEmail || 'Please enter all fields'; error.style.display = 'block'; error.classList.add('show'); }
+        return;
+    }
+
+    const users = JSON.parse(localStorage.getItem('users') || '{}');
+    let found = null;
+    for (const key in users) {
+        const user = users[key];
+        if (key === input || user.email === input || user.username === input || user.phone === input) {
+            if (user.password === password) { found = user; break; }
+        }
+    }
+
+    if (found) {
+        currentUser = found;
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        closeAuthModal();
+        showToast(d.loginSuccess || '✅ Welcome back!', 'success');
+        updateAuthUI();
+        updateBadge();
+        if (typeof renderOrders === 'function') renderOrders();
+    } else {
+        if (error) { error.textContent = d.invalidCredentials || '❌ Invalid credentials'; error.style.display = 'block'; error.classList.add('show'); }
+    }
+}
+
+// ========== AUTH REGISTER ==========
+function handleAuthRegister() {
+    const regUsername = document.getElementById('regUsername') || document.getElementById('authRegUsername');
+    const regEmail = document.getElementById('regEmail') || document.getElementById('authRegEmail');
+    const regPhone = document.getElementById('regPhone') || document.getElementById('authRegPhone');
+    const regPassword = document.getElementById('regPassword') || document.getElementById('authRegPassword');
+    const regConfirm = document.getElementById('regConfirmPassword') || document.getElementById('authRegConfirmPassword');
+    const error = document.getElementById('loginError') || document.getElementById('authError');
+    const d = LANG_DATA[currentLang];
+
+    if (!regUsername || !regPassword || !regConfirm) return;
+    const username = regUsername.value.trim();
+    const email = regEmail ? regEmail.value.trim() : '';
+    const phone = regPhone ? regPhone.value.trim() : '';
+    const password = regPassword.value.trim();
+    const confirm = regConfirm.value.trim();
+    if (error) { error.style.display = 'none'; error.textContent = ''; error.classList.remove('show'); }
+
+    if (!username || !password || !confirm) {
+        if (error) { error.textContent = 'Please fill all required fields'; error.style.display = 'block'; error.classList.add('show'); }
+        return;
+    }
+    if (password.length < 4) {
+        if (error) { error.textContent = d.passwordMin || 'Password must be at least 4 characters'; error.style.display = 'block'; error.classList.add('show'); }
+        return;
+    }
+    if (password !== confirm) {
+        if (error) { error.textContent = d.passwordMatch || 'Passwords do not match'; error.style.display = 'block'; error.classList.add('show'); }
+        return;
+    }
+
+    const users = JSON.parse(localStorage.getItem('users') || '{}');
+    for (const key in users) {
+        if (key === username || (email && users[key].email === email) || (phone && users[key].phone === phone)) {
+            if (error) { error.textContent = d.userExists || '❌ Username, email or phone already exists'; error.style.display = 'block'; error.classList.add('show'); }
+            return;
+        }
+    }
+
+    const newUser = {
+        username, email, phone, password,
+        displayName: username, diamonds: 100,
+        createdAt: new Date().toISOString()
+    };
+    users[username] = newUser;
+    localStorage.setItem('users', JSON.stringify(users));
+
+    currentUser = newUser;
+    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+    closeAuthModal();
+    showToast(d.registerSuccess || '✅ Account created!', 'success');
+    updateAuthUI();
+    updateBadge();
+    if (typeof renderOrders === 'function') renderOrders();
+}
+
+// ========== SETTINGS MODAL ==========
+let settingsModalMode = '';
+
+function openSettingsModal(mode) {
+    if (!currentUser) { showToast('❌ Please login first', 'error'); return; }
+    settingsModalMode = mode;
+    const modal = document.getElementById('settingsModal');
+    if (!modal) return;
+    modal.classList.add('show');
+
+    const d = LANG_DATA[currentLang];
+    const title = document.getElementById('settingsModalTitle');
+    const sub = document.getElementById('settingsModalSub');
+    const label = document.getElementById('settingsFieldLabel');
+    const input = document.getElementById('settingsInput');
+    const confirmGroup = document.getElementById('settingsConfirmGroup');
+    const confirmInput = document.getElementById('settingsConfirmInput');
+    const error = document.getElementById('settingsError');
+    const saveBtn = document.getElementById('settingsSaveBtn');
+
+    if (error) error.style.display = 'none';
+    if (input) input.value = '';
+    if (confirmInput) confirmInput.value = '';
+
+    const modeMap = {
+        name: { title: d.settingsNameTitle, sub: d.settingsNameSub, label: d.settingsNameLabel, type: 'text', placeholder: 'New name', confirm: false },
+        username: { title: d.settingsUsernameTitle, sub: d.settingsUsernameSub, label: d.settingsUsernameLabel, type: 'text', placeholder: 'New username', confirm: false },
+        email: { title: d.settingsEmailTitle, sub: d.settingsEmailSub, label: d.settingsEmailLabel, type: 'email', placeholder: 'example@email.com', confirm: false },
+        phone: { title: d.settingsPhoneTitle, sub: d.settingsPhoneSub, label: d.settingsPhoneLabel, type: 'tel', placeholder: '09xxxxxxxxx', confirm: false },
+        password: { title: d.settingsPassTitle, sub: d.settingsPassSub, label: d.settingsPassLabel, type: 'password', placeholder: 'Min 4 characters', confirm: true }
+    };
+
+    const config = modeMap[mode];
+    if (config) {
+        if (title) title.textContent = config.title;
+        if (sub) sub.textContent = config.sub;
+        if (label) label.textContent = config.label;
+        if (input) { input.type = config.type; input.placeholder = config.placeholder; }
+        if (confirmGroup) confirmGroup.style.display = config.confirm ? 'block' : 'none';
+        if (confirmInput && config.confirm) { confirmInput.type = 'password'; confirmInput.placeholder = 'Re-enter password'; }
+    }
+    if (saveBtn) saveBtn.textContent = d.settingsSave;
+}
+
+function closeSettingsModal() {
+    const modal = document.getElementById('settingsModal');
+    if (!modal) return;
+    modal.classList.remove('show');
+}
+
+function saveSettings() {
+    const input = document.getElementById('settingsInput');
+    const error = document.getElementById('settingsError');
+    const d = LANG_DATA[currentLang];
+    if (!input) return;
+
+    const value = input.value.trim();
+    if (error) error.style.display = 'none';
+
+    if (!value) {
+        if (error) { error.textContent = d.settingsError; error.style.display = 'block'; }
+        return;
+    }
+
+    if (settingsModalMode === 'password') {
+        const confirmInput = document.getElementById('settingsConfirmInput');
+        if (confirmInput && value !== confirmInput.value.trim()) {
+            if (error) { error.textContent = d.settingsPassError; error.style.display = 'block'; }
+            return;
+        }
+        if (value.length < 4) {
+            if (error) { error.textContent = 'Password must be at least 4 characters'; error.style.display = 'block'; }
+            return;
+        }
+    }
+
+    const users = JSON.parse(localStorage.getItem('users') || '{}');
+    const userData = users[currentUser.username];
+    if (!userData) { showToast('❌ User not found', 'error'); return; }
+
+    if (settingsModalMode === 'name') {
+        userData.displayName = value;
+        currentUser.displayName = value;
+    } else if (settingsModalMode === 'username') {
+        if (value !== currentUser.username && users[value]) {
+            if (error) { error.textContent = d.settingsUsernameExists; error.style.display = 'block'; }
+            return;
+        }
+        users[value] = userData;
+        delete users[currentUser.username];
+        currentUser.username = value;
+    } else if (settingsModalMode === 'email') {
+        userData.email = value;
+        currentUser.email = value;
+    } else if (settingsModalMode === 'phone') {
+        userData.phone = value;
+        currentUser.phone = value;
+    } else if (settingsModalMode === 'password') {
+        userData.password = value;
+    }
+
+    if (settingsModalMode !== 'username') {
+        users[currentUser.username] = userData;
+    }
+    localStorage.setItem('users', JSON.stringify(users));
+    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+    closeSettingsModal();
+    updateAuthUI();
+    showToast(d.saveSuccess, 'success');
+}
+
+// ========== LOGOUT ==========
+function logout() {
+    if (!currentUser) { showToast('❌ No user logged in', 'error'); return; }
+    const overlay = document.getElementById('logoutOverlay');
+    if (overlay) overlay.classList.add('show');
+}
